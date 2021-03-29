@@ -72,9 +72,9 @@ enum class AndesSnackbarType
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| NEUTRAL | Gives a gray color style to the component |
-| ERROR | Gives a red color red to the component |
-| SUCCESS | Gives a green color style to the component |
+| NEUTRAL | Gives a gray color style to the component<br/><img src="../resources/snackbar/neutralSnackbarExample.png" height="48"/> |
+| ERROR | Gives a red color red to the component<br/><img src="../resources/snackbar/errorSnackbarExample.png" height="48"/> |
+| SUCCESS | Gives a green color style to the component<br/><img src="../resources/snackbar/successSnackbarExample.png" height="48"/> |
 
 <br/>
 
@@ -124,4 +124,4 @@ class AndesSnackbarAction
 <br/>
 
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/58984116/111320872-2dd99900-8646-11eb-9883-662ae275db75.png" width="300">
+<img src="../resrouces/../resources/snackbar/snackbarExample.png" width="300">

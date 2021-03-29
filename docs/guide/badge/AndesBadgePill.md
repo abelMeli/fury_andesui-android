@@ -73,8 +73,8 @@ enum class AndesBadgePillHierarchy
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| QUIET | Gives main color to the displayed text and lighter color to the background |
-| LOUD | Gives white color to the displayed text and main color to the background |
+| QUIET | Gives main color to the displayed text and lighter color to the background<br/><img src="../resources/badge/pill/quietExample.png" height="30"/> |
+| LOUD | Gives white color to the displayed text and main color to the background<br/><img src="../resources/badge/pill/loudExample.png" height="30"/> |
 
 <br/>
 
@@ -92,11 +92,11 @@ enum class AndesBadgeType
 ```
 | Enum Values | Description |
 | --------- | ------------- |
-| NEUTRAL | Gives a gray color style to the component |
-| HIGHLIGHT | Gives a blue color style to the component |
-| SUCCESS | Gives a green color style to the component |
-| WARNING | Gives an orange color style to the component |
-| ERROR | Gives a red color style to the component |
+| NEUTRAL | Gives a gray color style to the component<br/><img src="../resources/badge/pill/loudExample.png" height="30"/> <img src="../resources/badge/pill/quietExample.png" height="30"/> |
+| HIGHLIGHT | Gives a blue color style to the component<br/><img src="../resources/badge/pill/highlightExample.png" height="30"/> <img src="../resources/badge/pill/highlightQuietExample.png" height="30"/> |
+| SUCCESS | Gives a green color style to the component<br/><img src="../resources/badge/pill/successExample.png" height="30"/> <img src="../resources/badge/pill/successQuietExample.png" height="30"/> |
+| WARNING | Gives an orange color style to the component<br/><img src="../resources/badge/pill/warningExample.png" height="30"/> <img src="../resources/badge/pill/warningQuietExample.png" height="30"/> |
+| ERROR | Gives a red color style to the component<br/><img src="../resources/badge/pill/errorExample.png" height="30"/> <img src="../resources/badge/pill/errorQuietExample.png" height="30"/> |
 
 <br/>
 
@@ -114,9 +114,9 @@ enum class AndesBadgePillBorder
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| CORNER | Top-left and bottom-right corners are square, top-right and bottom-left corners are rounded |
-| ROUNDED | Only bottom-left corner is rounded |
-| STANDARD | All badge corners are rounded |
+| CORNER | Top-left and bottom-right corners are square, top-right and bottom-left corners are rounded<br/><img src="../resources/badge/pill/cornerExample.png" height="30"/> |
+| ROUNDED | Only bottom-left corner is rounded<br/><img src="../resources/badge/pill/roundedExample.png" height="30"/> |
+| STANDARD | All badge corners are rounded<br/><img src="../resources/badge/pill/highlightExample.png" height="30"/> |
 
 <br/>
 
@@ -134,8 +134,8 @@ enum class AndesBadgePillSize
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| SMALL | Small badge size |
-| LARGE | Large badge size |
+| SMALL | Small badge size<br/><img src="../resources/badge/pill/smallExample.png" height="30"/> |
+| LARGE | Large badge size<br/><img src="../resources/badge/pill/quietExample.png" height="30"/> |
 
 <br/>
 
@@ -147,4 +147,4 @@ enum class AndesBadgePillSize
 <br/>
 
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/58984116/111320619-efdc7500-8645-11eb-99f8-bbd474709ca8.png" width="300">
+<img src="../resources/badge/pill/BadgeExamples.png" width="300">
