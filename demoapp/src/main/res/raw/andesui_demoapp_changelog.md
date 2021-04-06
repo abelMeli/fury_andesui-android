@@ -1,3 +1,7 @@
+# v3.13.0
+## 🚀 Feature
+- `AndesCarousel` supports onScrollListener
+
 # v3.12.0
 ## 🚀 Feature
 - `AndesThumbnail` supports `image_circle` & `image_square` types.

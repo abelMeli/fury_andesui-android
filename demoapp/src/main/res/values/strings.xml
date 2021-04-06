@@ -195,6 +195,7 @@
     <string name="andes_carousel_showcase">Andes Carousel</string>
     <string name="andes_carousel_margin">Margin</string>
     <string name="andes_carousel_center">Center</string>
+    <string name="andes_carousel_scrolling">Carousel started scrolling</string>
     <string-array name="andes_carousel_margin_spinner">
         <item>Default</item>
         <item>None</item>

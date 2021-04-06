@@ -72,6 +72,20 @@ class AndesCarousel : ConstraintLayout {
     }
 
     /**
+     * Method to add a scroll listener to recyclerView.
+     *
+     * @param listener listener that should be added to recyclerView.
+     */
+    fun addOnScrollListener(listener: RecyclerView.OnScrollListener) {
+        recyclerViewComponent.addOnScrollListener(listener)
+    }
+
+    override fun onDetachedFromWindow() {
+        recyclerViewComponent.clearOnScrollListeners()
+        super.onDetachedFromWindow()
+    }
+
+    /**
      * Sets the proper [config] for this component based on the [attrs] received via XML.
      *
      * @param attrs attributes from the XML.
