@@ -1,6 +1,7 @@
 # v3.13.0
 ## 🚀 Feature
-- `AndesCarousel` supports onScrollListener
+- `AndesCarousel` supports onScrollListener 
+- Added assets to Andes documentation
 
 # v3.12.0
 ## 🚀 Feature
