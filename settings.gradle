@@ -3,7 +3,7 @@ buildscript {
     apply from:"$rootDir/gradle/repositories.gradle", to:buildscript
 
     dependencies {
-        classpath "com.mercadolibre.android.gradle:base:10.+"
+        classpath "com.mercadolibre.android.gradle:base:$gradlePluginsVersion"
         classpath "com.gradle:gradle-enterprise-gradle-plugin:$buildScanPluginVersion"
     }
 }
