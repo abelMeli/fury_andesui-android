@@ -12,7 +12,6 @@ buildscript {
         classpath "com.google.gms:google-services:$googleServicesPlugin"
         classpath "com.android.tools.build:gradle:$gradleBuildToolsVersion"
         classpath "com.mercadolibre.android.gradle:base:$gradlePluginsVersion"
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$gradleBintrayPlugin"
         classpath "com.github.dcendents:android-maven-gradle-plugin:$androidMavenGradlePlugin"
         classpath "com.monits:static-code-analysis-plugin:$scaPluginVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
