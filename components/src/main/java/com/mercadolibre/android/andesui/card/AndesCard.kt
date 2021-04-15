@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.card
 
+import android.animation.LayoutTransition
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import androidx.constraintlayout.widget.Group
@@ -22,6 +23,7 @@ import com.mercadolibre.android.andesui.card.hierarchy.AndesCardHierarchy
 import com.mercadolibre.android.andesui.card.padding.AndesCardPadding
 import com.mercadolibre.android.andesui.card.style.AndesCardStyle
 import com.mercadolibre.android.andesui.card.type.AndesCardType
+import kotlinx.android.synthetic.main.andes_layout_card.view.*
 
 @Suppress("TooManyFunctions")
 class AndesCard : CardView {
@@ -167,6 +169,19 @@ class AndesCard : CardView {
         hierarchy: AndesCardHierarchy = HIERARCHY_DEFAULT
     ) : super(context) {
         initAttrs(view, type, padding, style, title, hierarchy)
+    }
+
+    /**
+     * Sets true or false animations when there is a transition
+     *
+     * @param animate true to enable animated transitions, false to disable them
+     */
+    fun setAnimateLayoutChanges(animate: Boolean) {
+        if (animate) {
+            andes_card_container.layoutTransition = LayoutTransition()
+        } else {
+            andes_card_container.layoutTransition = null
+        }
     }
 
     /**
