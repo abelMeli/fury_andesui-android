@@ -320,6 +320,6 @@ class AndesCardTest {
                 AndesCardHierarchy.SECONDARY
         )
         val config = configFactory.create(context, attrs)
-        assertEquals(config.pipeColor, R.color.andes_blue_ml_500.toAndesColor())
+        assertEquals(config.pipeColor, R.color.andes_accent_color_500.toAndesColor())
     }
 }
