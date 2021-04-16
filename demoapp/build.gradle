@@ -101,6 +101,7 @@ staticCodeAnalysis {
     // False is REQUIRED in order to make CI server fail the build on errors.
     ignoreErrors = false
 
+    androidLint = false
     androidLintConfig = "$rootDir/config/android/android-lint-demoapp.xml"
 }
 

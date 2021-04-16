@@ -6,9 +6,9 @@
     tools:parentTag="androidx.cardview.widget.CardView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/andes_card_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/andes_card_pipe"

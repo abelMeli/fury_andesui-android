@@ -25,7 +25,7 @@ internal object AndesCardTypeNone : AndesCardTypeInterface {
 
 internal object AndesCardTypeHighlight : AndesCardTypeInterface {
     override fun pipeVisibility() = View.VISIBLE
-    override fun primaryColor() = R.color.andes_blue_ml_500.toAndesColor()
+    override fun primaryColor() = R.color.andes_accent_color_500.toAndesColor()
 }
 
 internal object AndesCardTypeError : AndesCardTypeInterface {

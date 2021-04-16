@@ -1,7 +1,9 @@
 package com.mercadolibre.android.andesui.card
 
+import android.animation.LayoutTransition
 import android.os.Build
 import android.view.View
+import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.card.bodyPadding.AndesCardBodyPadding
@@ -12,11 +14,15 @@ import com.mercadolibre.android.andesui.card.padding.AndesCardPadding
 import com.mercadolibre.android.andesui.card.style.AndesCardStyle
 import com.mercadolibre.android.andesui.card.type.AndesCardType
 import com.mercadolibre.android.andesui.color.toAndesColor
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.spy
+import org.mockito.internal.util.reflection.FieldSetter
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
@@ -320,6 +326,44 @@ class AndesCardTest {
                 AndesCardHierarchy.SECONDARY
         )
         val config = configFactory.create(context, attrs)
-        assertEquals(config.pipeColor, R.color.andes_blue_ml_500.toAndesColor())
+        assertEquals(config.pipeColor, R.color.andes_accent_color_500.toAndesColor())
+    }
+
+    @Test
+    fun `set layout transition`() {
+        val layoutTransition = LayoutTransition()
+        val andesCard = AndesCard(context,
+                View(context),
+                AndesCardType.HIGHLIGHT,
+                AndesCardPadding.XLARGE,
+                "Title",
+                AndesCardStyle.OUTLINE,
+                AndesCardHierarchy.SECONDARY
+        )
+        val mockContainer = mock(ViewGroup::class.java)
+        FieldSetter.setField(andesCard, andesCard.javaClass.getDeclaredField("andesCardContainer"), mockContainer)
+
+        andesCard.setAnimateLayoutChanges(layoutTransition)
+
+        verify(mockContainer).setLayoutTransition(layoutTransition)
+    }
+
+    @Test
+    fun `set layout transition nullable`() {
+        val andesCard = AndesCard(context,
+                View(context),
+                AndesCardType.HIGHLIGHT,
+                AndesCardPadding.XLARGE,
+                "Title",
+                AndesCardStyle.OUTLINE,
+                AndesCardHierarchy.SECONDARY
+        )
+        val mockContainer = mock(ViewGroup::class.java)
+        FieldSetter.setField(andesCard, andesCard.javaClass.getDeclaredField("andesCardContainer"), mockContainer)
+
+        andesCard.setAnimateLayoutChanges(LayoutTransition())
+        andesCard.setAnimateLayoutChanges(null)
+
+        assertNull(mockContainer.layoutTransition)
     }
 }

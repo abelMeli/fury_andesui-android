@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.card
 
+import android.animation.LayoutTransition
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import androidx.constraintlayout.widget.Group
@@ -9,6 +10,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -140,6 +142,7 @@ class AndesCard : CardView {
         cardListener = null
     }
 
+    private lateinit var andesCardContainer: ViewGroup
     private lateinit var andesCardTitle: TextView
     private lateinit var andesCardPipe: View
     private lateinit var andesCardView: FrameLayout
@@ -167,6 +170,15 @@ class AndesCard : CardView {
         hierarchy: AndesCardHierarchy = HIERARCHY_DEFAULT
     ) : super(context) {
         initAttrs(view, type, padding, style, title, hierarchy)
+    }
+
+    /**
+     * Sets the layoutTransition to the card container
+     *
+     * @param layoutTransition the desired layout transition to be set on the card
+     */
+    fun setAnimateLayoutChanges(layoutTransition: LayoutTransition?) {
+        andesCardContainer.layoutTransition = layoutTransition
     }
 
     /**
@@ -215,6 +227,7 @@ class AndesCard : CardView {
      */
     private fun initComponents() {
         val layout = LayoutInflater.from(context).inflate(R.layout.andes_layout_card, this)
+        andesCardContainer = layout.findViewById(R.id.andes_card_container)
         andesCardTitle = layout.findViewById(R.id.andes_card_title)
         andesCardPipe = layout.findViewById(R.id.andes_card_pipe)
         andesCardView = layout.findViewById(R.id.andes_card_view)
