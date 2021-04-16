@@ -1,3 +1,7 @@
+# v3.13.2
+- Added method in `AndesCard` to disable animation on layout changes (fixes -> https://github.com/mercadolibre/fury_andesui-android/issues/278)
+- Changed `AndesCard` highlighted type color from ml to accent color, to support different flavours
+
 # v3.13.0
 ## 🚀 Feature
 - `AndesCarousel` supports onScrollListener 
