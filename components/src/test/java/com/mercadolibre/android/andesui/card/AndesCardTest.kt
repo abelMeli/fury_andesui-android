@@ -16,6 +16,7 @@ import com.mercadolibre.android.andesui.card.type.AndesCardType
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -345,5 +346,24 @@ class AndesCardTest {
         andesCard.setAnimateLayoutChanges(layoutTransition)
 
         verify(mockContainer).setLayoutTransition(layoutTransition)
+    }
+
+    @Test
+    fun `set layout transition nullable`() {
+        val andesCard = AndesCard(context,
+                View(context),
+                AndesCardType.HIGHLIGHT,
+                AndesCardPadding.XLARGE,
+                "Title",
+                AndesCardStyle.OUTLINE,
+                AndesCardHierarchy.SECONDARY
+        )
+        val mockContainer = mock(ViewGroup::class.java)
+        FieldSetter.setField(andesCard, andesCard.javaClass.getDeclaredField("andesCardContainer"), mockContainer)
+
+        andesCard.setAnimateLayoutChanges(LayoutTransition())
+        andesCard.setAnimateLayoutChanges(null)
+
+        assertNull(mockContainer.layoutTransition)
     }
 }

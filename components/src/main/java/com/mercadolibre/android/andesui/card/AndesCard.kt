@@ -177,7 +177,7 @@ class AndesCard : CardView {
      *
      * @param layoutTransition the desired layout transition to be set on the card
      */
-    fun setAnimateLayoutChanges(layoutTransition: LayoutTransition) {
+    fun setAnimateLayoutChanges(layoutTransition: LayoutTransition?) {
         andesCardContainer.layoutTransition = layoutTransition
     }
 
