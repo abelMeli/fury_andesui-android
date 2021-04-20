@@ -108,7 +108,6 @@ internal object AndesValidatedTextfieldContent : AndesTextfieldContentInterface(
 }
 
 internal object AndesClearTextfieldContent : AndesTextfieldContentInterface() {
-    private const val CLEAR_CONTENT_DESCRIPTION = "clear"
 
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int {
         return context.resources.getDimension(R.dimen.andes_textfield_clear_left_margin).toInt()
@@ -123,7 +122,7 @@ internal object AndesClearTextfieldContent : AndesTextfieldContentInterface() {
                 context,
                 color = R.color.andes_gray_450.toAndesColor())
         )
-        clear.contentDescription = CLEAR_CONTENT_DESCRIPTION
+        clear.contentDescription = context.getString(R.string.andes_textfield_right_content_clear)
         return clear
     }
 }

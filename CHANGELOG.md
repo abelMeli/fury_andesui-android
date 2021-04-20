@@ -1,3 +1,7 @@
+# v3.13.4
+## 🛠 Fixes
+- Changed content description for `AndesTextfield`rightContent CLEAR type | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v3.13.3
 ## 🛠 Fixes
 - Added method in `AndesCard` to disable animation on layout changes (fixes -> https://github.com/mercadolibre/fury_andesui-android/issues/278)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="andes_list_item_image">Imagen del item</string>
-    <string name="andes_list_item_icon">Icono del item</string>
+    <string name="andes_list_item_image" translatable="false">Imagen del item</string>
+    <string name="andes_list_item_icon" translatable="false">Icono del item</string>
 
 </resources>

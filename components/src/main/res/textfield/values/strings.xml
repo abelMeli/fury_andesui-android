@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="andes_textfield_label_text">Label</string>
-    <string name="andes_textfield_code_text">Text - Solo se tomaran números </string>
-    <string name="andes_textfield_helper_text">Helper text</string>
-    <string name="andes_textfield_counter_text">%1$d/%2$d</string>
-    <string name="andes_textfield_placeholder_text">Placeholder</string>
-    <string name="andes_suffix_hint">Suffix</string>
-    <string name="andes_prefix_hint">Prefix</string>
-    <string name="andes_tag_choice_selected">Seleccionado</string>
+    <string name="andes_textfield_label_text" translatable="false">Label</string>
+    <string name="andes_textfield_code_text" translatable="false">Text - Solo se tomaran números </string>
+    <string name="andes_textfield_helper_text" translatable="false">Helper text</string>
+    <string name="andes_textfield_counter_text" translatable="false">%1$d/%2$d</string>
+    <string name="andes_textfield_placeholder_text" translatable="false">Placeholder</string>
+    <string name="andes_suffix_hint" translatable="false">Suffix</string>
+    <string name="andes_prefix_hint" translatable="false">Prefix</string>
+    <string name="andes_tag_choice_selected" translatable="false">Seleccionado</string>
+    <string name="andes_textfield_right_content_clear">Borrar texto</string>
+
 </resources>

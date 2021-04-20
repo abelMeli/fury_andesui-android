@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="andesui_datepicker_button">Aplicar</string>
+    <string name="andesui_datepicker_button" translatable="false">Aplicar</string>
 </resources>
