@@ -65,7 +65,6 @@ internal object AndesTooltipConfigurationFactory {
                     linkActionIsUnderlined = resolveBodyLinkIsUnderlined(style),
                     tooltipLocation = tooltipLocation,
                     isDynamicWidth = mainAction == null
-
             )
         }
     }

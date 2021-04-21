@@ -1,4 +1,6 @@
-# v3.13.4
+# v3.14.0
+## 🚀 Feature
+- Highlight style in tooltip | Author: [@SantiagoLazzari](https://github.com/SantiagoLazzari)
 ## 🛠 Fixes
 - Changed content description for `AndesTextfield`rightContent CLEAR type | Author: [@juanunzu](https://github.com/juanunzu)
 

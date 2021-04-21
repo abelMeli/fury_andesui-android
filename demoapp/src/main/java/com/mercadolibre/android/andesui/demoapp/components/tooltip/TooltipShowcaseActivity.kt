@@ -178,7 +178,7 @@ class TooltipShowcaseActivity : AppCompatActivity() {
         andesTooltipToShow = AndesTooltip(
                 context = this,
                 isDismissible = false,
-                style = AndesTooltipStyle.LIGHT,
+                style = getStyleBySpinner(spinnerStyle),
                 title = title.text,
                 body = body.text!!,
                 tooltipLocation = getLocation(spinnerOrientation)
@@ -200,7 +200,7 @@ class TooltipShowcaseActivity : AppCompatActivity() {
             andesTooltipToShow = AndesTooltip(
                     context = this,
                     isDismissible = checkboxDismiss.status == AndesCheckboxStatus.UNSELECTED,
-                    style = AndesTooltipStyle.LIGHT,
+                    style = getStyleBySpinner(spinnerStyle),
                     title = title.text,
                     body = body.text!!,
                     tooltipLocation = getLocation(spinnerOrientation)
@@ -246,7 +246,7 @@ class TooltipShowcaseActivity : AppCompatActivity() {
             andesTooltipToShow = AndesTooltip(
                     context = this,
                     isDismissible = checkboxDismiss.status == AndesCheckboxStatus.SELECTED,
-                    style = AndesTooltipStyle.LIGHT,
+                    style = getStyleBySpinner(spinnerStyle),
                     title = title.text,
                     body = body.text!!,
                     tooltipLocation = getLocation(spinnerOrientation)
@@ -284,7 +284,7 @@ class TooltipShowcaseActivity : AppCompatActivity() {
         val tooltipTop = AndesTooltip(
                 context = this,
                 isDismissible = false,
-                style = AndesTooltipStyle.LIGHT,
+                style = AndesTooltipStyle.HIGHLIGHT,
                 title = "Tooltip bottom",
                 body = "This tooltip is shown bottom and without dismiss",
                 tooltipLocation = AndesTooltipLocation.BOTTOM
@@ -293,7 +293,7 @@ class TooltipShowcaseActivity : AppCompatActivity() {
         val tooltipBottom = AndesTooltip(
                 context = this,
                 isDismissible = true,
-                style = AndesTooltipStyle.LIGHT,
+                style = AndesTooltipStyle.HIGHLIGHT,
                 title = "Tooltip top",
                 body = "This tooltip is shown top, with link and dismiss",
                 tooltipLocation = AndesTooltipLocation.TOP
@@ -303,7 +303,7 @@ class TooltipShowcaseActivity : AppCompatActivity() {
         val tooltipLeft = AndesTooltip(
                 context = this,
                 isDismissible = true,
-                style = AndesTooltipStyle.LIGHT,
+                style = AndesTooltipStyle.HIGHLIGHT,
                 title = "Tooltip right",
                 body = "This tooltip is shown right, with main action and dismiss",
                 tooltipLocation = AndesTooltipLocation.RIGHT
@@ -313,7 +313,7 @@ class TooltipShowcaseActivity : AppCompatActivity() {
         val tooltipRight = AndesTooltip(
                 context = this,
                 isDismissible = false,
-                style = AndesTooltipStyle.LIGHT,
+                style = AndesTooltipStyle.HIGHLIGHT,
                 title = "Tooltip left",
                 body = "This tooltip is shown left, with main action, second action and without dismiss",
                 tooltipLocation = AndesTooltipLocation.LEFT
@@ -370,6 +370,14 @@ class TooltipShowcaseActivity : AppCompatActivity() {
     private fun buildLinkAction(text: String): AndesTooltipLinkAction {
         return AndesTooltipLinkAction(text) { _, _ ->
             Toast.makeText(this, "$text was clicked", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun getStyleBySpinner(spinner: Spinner): AndesTooltipStyle {
+        return when (spinner.selectedItem) {
+            "Light" -> AndesTooltipStyle.LIGHT
+            "Highlight" -> AndesTooltipStyle.HIGHLIGHT
+            else -> AndesTooltipStyle.LIGHT
         }
     }
 

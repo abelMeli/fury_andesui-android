@@ -19,6 +19,7 @@ import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
+@Suppress("TooManyFunctions")
 class AndesListAdapter(
     private val andesList: AndesList,
     private val delegate: AndesListDelegate,

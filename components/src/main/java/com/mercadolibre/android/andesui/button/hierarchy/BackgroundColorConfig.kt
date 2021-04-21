@@ -69,6 +69,19 @@ internal fun createBackgroundColorConfigLoud() =
                 otherColor = R.color.andes_green_500.toAndesColor())
 
 /**
+ * Returns the proper [BackgroundColorConfig] for the Highlight Hierarchy button.
+ *
+ */
+internal fun createBackgroundColorConfigTooltipHighlight() =
+        BackgroundColorConfig(
+                enabledColor = R.color.andes_accent_color_700.toAndesColor(),
+                pressedColor = R.color.andes_accent_color_700.toAndesColor(),
+                focusedColor = R.color.andes_accent_color_300.toAndesColor(),
+                hoveredColor = R.color.andes_accent_color_600.toAndesColor(),
+                disabledColor = R.color.andes_gray_100.toAndesColor(),
+                otherColor = R.color.andes_green_500.toAndesColor())
+
+/**
  * Returns the proper [BackgroundColorConfig] for the Quiet Hierarchy button.
  *
  */

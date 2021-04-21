@@ -500,6 +500,7 @@
     <string name="andes_tooltip_showcase">Andes Tooltip</string>
     <string-array name="andes_tooltip_style_spinner">
         <item>Light</item>
+        <item>Highlight</item>
     </string-array>
     <string-array name="andes_tooltip_location_spinner">
         <item>Bottom</item>

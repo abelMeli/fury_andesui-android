@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -334,11 +336,12 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         initializeAndesTooltipContent(config, locationConfig)
     }
 
-    private fun initializeArrow(locationConfig: AndesTooltipLocationConfig) {
+    private fun initializeArrow(locationConfig: AndesTooltipLocationConfig, configuration: AndesTooltipConfiguration) {
         with(arrowComponent) {
             layoutParams = FrameLayout.LayoutParams(arrowWidth, arrowHeight)
             rotation = locationConfig.getArrowRotation()
             alpha = context.resources.getDimensionPixelOffset(R.dimen.andes_tooltip_alpha).toFloat()
+            colorFilter = PorterDuffColorFilter(configuration.backgroundColor.colorInt(context), PorterDuff.Mode.SRC_IN)
             radiusLayout.post {
                 ViewCompat.setElevation(this, this@AndesTooltip.elevation.toFloat())
                 val arrowPoint = locationConfig.getArrowPoint()
@@ -503,7 +506,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         }
 
         val config = AndesTooltipConfigurationFactory.create(context, attrs)
-        initializeArrow(locationConfig)
+        initializeArrow(locationConfig, config)
         setupComponents(config, locationConfig)
         applyAndesTooltipAnimation()
     }
