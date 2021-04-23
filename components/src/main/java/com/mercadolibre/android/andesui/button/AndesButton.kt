@@ -10,6 +10,8 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
+import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.appcompat.widget.AppCompatButton
@@ -538,6 +540,25 @@ class AndesButton : ConstraintLayout {
             updateDynamicComponents(it)
             updateComponentsAlignment(it)
         }
+    }
+
+    /**
+     * returns the class name of this component. This value will be taken as the Role by
+     * accessibility services, therefore will be named after the content description
+     * and before the available actions for this component.
+     */
+    override fun getAccessibilityClassName(): CharSequence {
+        return Button::class.java.name
+    }
+
+    /**
+     * callback invoked when the accessibility service focus this component.
+     * @param info contains all the data needed for the service to work. If custom behaviour is
+     * needed, it should be overwritten here.
+     */
+    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo?) {
+        super.onInitializeAccessibilityNodeInfo(info)
+        info?.contentDescription = text
     }
 
     /**

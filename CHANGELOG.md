@@ -1,3 +1,7 @@
+# v3.14.1
+## 🛠 Fixes
+- Changed role description for `AndesButton` to "Button" | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v3.14.0
 ## 🚀 Feature
 - Highlight style in tooltip | Author: [@SantiagoLazzari](https://github.com/SantiagoLazzari)
