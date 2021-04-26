@@ -18,6 +18,7 @@ internal object AndesCarouselAttrParser {
 
     private const val ANDES_CAROUSEL_MARGIN_NONE = "100"
     private const val ANDES_CAROUSEL_MARGIN_DEFAULT = "101"
+    private const val ANDES_CAROUSEL_MARGIN_XSMALL = "102"
 
     fun parse(context: Context, attr: AttributeSet?): AndesCarouselAttrs {
 
@@ -26,6 +27,7 @@ internal object AndesCarouselAttrParser {
         val margin = when (typedArray.getString(R.styleable.AndesCarousel_andesCarouselMargin)) {
             ANDES_CAROUSEL_MARGIN_NONE -> AndesCarouselMargin.NONE
             ANDES_CAROUSEL_MARGIN_DEFAULT -> AndesCarouselMargin.DEFAULT
+            ANDES_CAROUSEL_MARGIN_XSMALL -> AndesCarouselMargin.XSMALL
             else -> AndesCarouselMargin.DEFAULT
         }
 

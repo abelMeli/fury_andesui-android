@@ -1,3 +1,7 @@
+# v3.15.0
+## 🚀 Feature
+- `AndesCarousel` supports XSmall margin and custom horizontal padding
+
 # v3.14.1
 ## 🛠 Fixes
 - Changed role description for `AndesButton` to "Button" | Author: [@juanunzu](https://github.com/juanunzu)

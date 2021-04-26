@@ -172,7 +172,7 @@ class AndesCarousel : ConstraintLayout {
         marginItemDecoration = AndesCarouselMarginItemDecoration(config.margin)
         recyclerViewComponent.addItemDecoration(marginItemDecoration)
 
-        val padding = getPaddingRecyclerView()
+        val padding = config.padding
         recyclerViewComponent.setPadding(padding, 0, padding, 0)
     }
 
@@ -186,21 +186,4 @@ class AndesCarousel : ConstraintLayout {
     }
 
     private fun createConfig() = AndesCarouselConfigurationFactory.create(context, andesCarouselAttrs)
-
-    /**
-     * Define percentage of padding
-     * NONE = 0.001 (to render the next view)
-     * DEFAULT = 0.10 (to show the next view)
-     */
-    private fun getPaddingRecyclerView() =
-        if (andesCarouselAttrs.andesCarouselMargin == AndesCarouselMargin.DEFAULT) {
-            (context.resources.displayMetrics.widthPixels * PERCENTAGE).toInt()
-        } else {
-            (context.resources.displayMetrics.widthPixels * ZERO).toInt()
-        }
-
-    companion object {
-        const val PERCENTAGE = 0.10
-        const val ZERO = 0.001
-    }
 }

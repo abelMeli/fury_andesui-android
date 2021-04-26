@@ -44,6 +44,17 @@ class AndesCarouselTest {
     }
 
     @Test
+    fun `test padding Xsmall`() {
+        attrs = AndesCarouselAttrs(
+                CENTER,
+                AndesCarouselMargin.XSMALL
+        )
+        val config = configFactory.create(context, attrs)
+        Assert.assertEquals(config.margin, context.resources.getDimension(R.dimen.andes_carousel_padding_xsmall).toInt())
+        Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_xsmall).toInt())
+    }
+
+    @Test
     fun `test center true`() {
         attrs = AndesCarouselAttrs(
                 CENTER,

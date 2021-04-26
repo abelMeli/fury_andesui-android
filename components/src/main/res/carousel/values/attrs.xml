@@ -5,6 +5,7 @@
         <attr name="andesCarouselMargin">
             <enum name="none" value="100" />
             <enum name="defaultMargin" value="101" />
+            <enum name="xsmall" value="102" />
         </attr>
     </declare-styleable>
 </resources>

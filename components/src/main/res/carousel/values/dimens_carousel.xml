@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="andes_carousel_padding_none">0dp</dimen>
+    <dimen name="andes_carousel_padding_xsmall">4dp</dimen>
     <dimen name="andes_carousel_padding_small">6dp</dimen>
     <dimen name="andes_carousel_padding_medium">8dp</dimen>
     <dimen name="andes_carousel_padding_large">12dp</dimen>
+
+
+    <dimen name="andes_carousel_recylcer_padding_xsmall">16dp</dimen>
 </resources>

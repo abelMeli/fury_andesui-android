@@ -198,6 +198,7 @@
     <string name="andes_carousel_scrolling">Carousel started scrolling</string>
     <string-array name="andes_carousel_margin_spinner">
         <item>Default</item>
+        <item>XSmall</item>
         <item>None</item>
     </string-array>
 

@@ -108,6 +108,7 @@ class CarouselShowcaseActivity : AppCompatActivity(), AndesCarouselDelegate {
         changeButton.setOnClickListener {
             val margin = when (marginSpinner.selectedItem) {
                 "None" -> AndesCarouselMargin.NONE
+                "XSmall" -> AndesCarouselMargin.XSMALL
                 "Default" -> AndesCarouselMargin.DEFAULT
                 else -> AndesCarouselMargin.DEFAULT
             }
