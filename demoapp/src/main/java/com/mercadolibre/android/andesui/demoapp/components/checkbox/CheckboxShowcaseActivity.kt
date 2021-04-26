@@ -88,6 +88,8 @@ class CheckboxShowcaseActivity : AppCompatActivity() {
                     spinnerStatus.adapter = adapter
                 }
 
+        val numberOfLinesTextField: AndesTextfield = container.findViewById(R.id.numberOfLinesTextField)
+
         val clearButton: AndesButton = container.findViewById(R.id.buttonClear)
         val changeButton: AndesButton = container.findViewById(R.id.buttonUpdate)
         val andesTextfield: AndesTextfield = container.findViewById(R.id.andesTextfield)
@@ -96,6 +98,7 @@ class CheckboxShowcaseActivity : AppCompatActivity() {
             spinnerType.setSelection(0)
             spinnerAlign.setSelection(0)
             spinnerStatus.setSelection(0)
+            numberOfLinesTextField.text = ""
 
             andesTextfield.text = ""
             andesTextfield.state = AndesTextfieldState.IDLE
@@ -105,6 +108,7 @@ class CheckboxShowcaseActivity : AppCompatActivity() {
             checkbox.type = AndesCheckboxType.IDLE
             checkbox.status = AndesCheckboxStatus.UNSELECTED
             checkbox.text = resources.getString(R.string.andes_checkbox_text)
+            checkbox.titleNumberOfLines = 1
         }
 
         changeButton.setOnClickListener {
@@ -138,6 +142,11 @@ class CheckboxShowcaseActivity : AppCompatActivity() {
             checkbox.type = type
             checkbox.status = status
             checkbox.text = andesTextfield.text
+            if (numberOfLinesTextField.text.isNullOrEmpty()) {
+                checkbox.titleNumberOfLines = 1
+            } else {
+                checkbox.titleNumberOfLines = numberOfLinesTextField.text!!.toInt()
+            }
         }
     }
 

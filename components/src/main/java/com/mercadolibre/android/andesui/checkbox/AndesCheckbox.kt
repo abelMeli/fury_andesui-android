@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.checkbox
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.text.TextUtils
 import androidx.annotation.Nullable
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
@@ -59,6 +60,16 @@ class AndesCheckbox : ConstraintLayout {
         set(value) {
             andesCheckboxAttrs = andesCheckboxAttrs.copy(andesCheckboxType = value)
             setupBackgroundComponent(createConfig())
+        }
+
+    /**
+     * Getter and setter for [titleNumberOfLines].
+     */
+    var titleNumberOfLines: Int
+        get() = andesCheckboxAttrs.andesCheckboxTitleNumberOfLine
+        set(value) {
+            andesCheckboxAttrs = andesCheckboxAttrs.copy(andesCheckboxTitleNumberOfLine = value)
+            setupTitleNumberLinesComponent(createConfig())
         }
 
     /**
@@ -120,6 +131,7 @@ class AndesCheckbox : ConstraintLayout {
         setupTitleComponent(config)
         setupAlignComponent(config)
         setupBackgroundComponent(config)
+        setupTitleNumberLinesComponent(config)
     }
 
     /**
@@ -159,9 +171,11 @@ class AndesCheckbox : ConstraintLayout {
      */
     private fun setupTitleComponent(config: AndesCheckboxConfiguration) {
         checkboxText.text = config.text
+        checkboxText.ellipsize = TextUtils.TruncateAt.END
         checkboxText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
         checkboxText.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.andes_checkbox_text_size))
         checkboxText.setTextColor(config.type.type.textColor(context).colorInt(context))
+        setupTitleNumberLinesComponent(config)
     }
 
     /**
@@ -201,11 +215,19 @@ class AndesCheckbox : ConstraintLayout {
         rightCheckbox.background = shape
     }
 
+    /**
+     * Gets data from the config and sets to the titleNumberOfLines component of this checkbox.
+     */
+    private fun setupTitleNumberLinesComponent(config: AndesCheckboxConfiguration) {
+        checkboxText.setLines(config.titleNumberOfLines)
+    }
+
     private fun createConfig() = AndesCheckboxConfigurationFactory.create(andesCheckboxAttrs)
 
     companion object {
         private val ANDES_ALIGN_DEFAULT_VALUE = AndesCheckboxAlign.LEFT
         private val ANDES_STATUS_DEFAULT_VALUE = AndesCheckboxStatus.UNSELECTED
         private val ANDES_TYPE_DEFAULT_VALUE = AndesCheckboxType.IDLE
+        internal const val DEFAULT_LINES = 1
     }
 }

@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/andes_checkbox_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,10 +21,6 @@
             android:id="@+id/leftCheckbox"
             android:layout_width="@dimen/andes_checkbox_size_icon"
             android:layout_height="@dimen/andes_checkbox_size_icon"
-            app:layout_constraintBottom_toBottomOf="@id/andes_checkbox_container"
-            app:layout_constraintEnd_toStartOf="@+id/checkboxText"
-            app:layout_constraintStart_toStartOf="@id/andes_checkbox_container"
-            app:layout_constraintTop_toTopOf="@+id/andes_checkbox_container"
             tools:ignore="UselessParent">
 
             <ImageView
@@ -41,23 +36,24 @@
 
     <TextView
         android:id="@+id/checkboxText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/andes_checkbox_text_margin"
         android:textSize="@dimen/andes_tag_small_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/containerRightCheckbox"
         app:layout_constraintStart_toEndOf="@+id/containerLeftCheckbox"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="wrap" />
 
     <FrameLayout
         android:id="@+id/containerRightCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:padding="@dimen/andes_checkbox_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <FrameLayout
             android:id="@+id/rightCheckbox"

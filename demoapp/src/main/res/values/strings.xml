@@ -211,6 +211,7 @@
     <string name="andes_checkbox_type">Type</string>
     <string name="andes_checkbox_status">Status</string>
     <string name="andes_checkbox_align">Align</string>
+    <string name="andes_checkbox_number_of_lines">Number of Lines</string>
     <string name="andes_checkbox_text_list_divider">Divider</string>
     <string name="andes_checkbox_text_list_selection">Selection</string>
     <string-array name="andes_checkbox_type_spinner">

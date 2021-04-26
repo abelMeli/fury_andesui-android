@@ -73,6 +73,15 @@
             app:layout_constraintStart_toStartOf="@+id/textView16"
             app:layout_constraintTop_toTopOf="@+id/spinnerAlign" />
 
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/andes_checkbox_number_of_lines"
+            app:layout_constraintBottom_toBottomOf="@+id/numberOfLinesTextField"
+            app:layout_constraintStart_toStartOf="@+id/textView17"
+            app:layout_constraintTop_toTopOf="@+id/numberOfLinesTextField" />
+
         <Spinner
             android:id="@+id/spinnerStatus"
             android:layout_width="wrap_content"
@@ -92,15 +101,24 @@
             app:layout_constraintTop_toBottomOf="@+id/spinnerStatus" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/numberOfLinesTextField"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="end"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/spinnerAlign"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerAlign" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/andesTextfield"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:andesTextfieldPlaceholder="@string/andes_radiobutton_placeholder_text"
-            app:andesTextfieldRightContent="clear"
-            app:layout_constraintEnd_toEndOf="@+id/spinnerAlign"
-            app:layout_constraintStart_toStartOf="@+id/textView17"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerAlign" />
+            app:layout_constraintEnd_toEndOf="@+id/numberOfLinesTextField"
+            app:layout_constraintStart_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/numberOfLinesTextField" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/buttonUpdate"

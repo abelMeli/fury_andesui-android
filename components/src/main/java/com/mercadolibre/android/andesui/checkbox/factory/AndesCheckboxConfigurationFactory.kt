@@ -9,7 +9,8 @@ internal data class AndesCheckboxConfiguration(
     val textSize: Int,
     val align: AndesCheckboxAlign,
     val status: AndesCheckboxStatus,
-    val type: AndesCheckboxType
+    val type: AndesCheckboxType,
+    val titleNumberOfLines: Int
 )
 
 internal object AndesCheckboxConfigurationFactory {
@@ -28,7 +29,8 @@ internal object AndesCheckboxConfigurationFactory {
                 textSize = DEFAULT_TEXT_SIZE,
                 align = andesCheckboxAttrs.andesCheckboxAlign,
                 status = validatedStatus,
-                type = andesCheckboxAttrs.andesCheckboxType
+                type = andesCheckboxAttrs.andesCheckboxType,
+                titleNumberOfLines = andesCheckboxAttrs.andesCheckboxTitleNumberOfLine
             )
         }
     }

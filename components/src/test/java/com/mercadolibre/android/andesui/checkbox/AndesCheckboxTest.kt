@@ -23,6 +23,7 @@ class AndesCheckboxTest {
     private var context = RuntimeEnvironment.application
     private val configFactory = spy(AndesCheckboxConfigurationFactory)
     private lateinit var attrs: AndesCheckboxAttrs
+    private lateinit var andesCheckbox: AndesCheckbox
 
     @Test
     fun `Checkbox, Idle, Unselected, Border`() {
@@ -292,5 +293,30 @@ class AndesCheckboxTest {
                 config.type.type.iconColor(context, config.status),
                 R.color.andes_white.toAndesColor()
         )
+    }
+
+    @Test
+    fun `Checkbox default title number of lines`() {
+        andesCheckbox = AndesCheckbox(
+                        context,
+                        "Andes checkbox",
+                        AndesCheckboxAlign.LEFT,
+                        AndesCheckboxStatus.SELECTED,
+                        AndesCheckboxType.IDLE)
+
+        assertEquals(andesCheckbox.titleNumberOfLines, 1)
+    }
+
+    @Test
+    fun `Checkbox title number of lines after set`() {
+        andesCheckbox = AndesCheckbox(
+                        context,
+                        "Andes checkbox",
+                        AndesCheckboxAlign.LEFT,
+                        AndesCheckboxStatus.SELECTED,
+                        AndesCheckboxType.IDLE)
+        andesCheckbox.titleNumberOfLines = 3
+
+        assertEquals(andesCheckbox.titleNumberOfLines, 3)
     }
 }
