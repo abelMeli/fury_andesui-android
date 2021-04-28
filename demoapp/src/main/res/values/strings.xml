@@ -79,6 +79,7 @@
     <string name="andes_badge_showcase">Andes Badge</string>
     <string name="andes_badge_loud_badges_text">Hierarchy: Loud</string>
     <string name="andes_badge_quiet_badges_text">Hierarchy: Quiet</string>
+    <string name="andes_badge_specs_default_text">Default Text in Badges</string>
     <string-array name="andes_badge_modifier_spinner">
         <item>Pill</item>
         <item>Dot</item>

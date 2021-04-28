@@ -14,6 +14,8 @@ import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgePillHierarchy
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
@@ -123,6 +125,8 @@ class BadgeShowcaseActivity : AppCompatActivity() {
         val andesBadgePill: AndesBadgePill = container.findViewById(R.id.andes_badge_pill)
         val andesBadgeDot: AndesBadgeDot = container.findViewById(R.id.andes_badge_dot)
 
+        val andesBadgeDefaultText: AndesCheckbox = container.findViewById(R.id.andesui_demoapp_defaul_text)
+
         modifierSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parentView: AdapterView<*>?,
@@ -213,6 +217,7 @@ class BadgeShowcaseActivity : AppCompatActivity() {
                     andesBadgePill.pillSize = size
                     andesBadgePill.pillBorder = border
                     andesBadgePill.text = textField.text
+                    andesBadgePill.textStyleDefault = andesBadgeDefaultText.status == AndesCheckboxStatus.SELECTED
                 }
                 "Dot" -> {
                     val type = when (typeSpinner.getItemAtPosition(typeSpinner.selectedItemPosition)) {

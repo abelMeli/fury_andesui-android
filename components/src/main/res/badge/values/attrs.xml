@@ -26,6 +26,7 @@
         </attr>
 
         <attr name="andesBadgePillText" format="reference" />
+        <attr name="andesBadgeTextStyleDefault" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="AndesBadgeDot" tools:ignore="ResourceName">

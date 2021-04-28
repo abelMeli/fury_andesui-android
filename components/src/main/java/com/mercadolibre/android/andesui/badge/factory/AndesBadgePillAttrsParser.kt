@@ -22,7 +22,8 @@ internal data class AndesBadgePillAttrs(
     val andesBadgeType: AndesBadgeType,
     val andesBadgePillBorder: AndesBadgePillBorder,
     val andesBadgePillSize: AndesBadgePillSize,
-    val andesBadgeText: String?
+    val andesBadgeText: String?,
+    val andesBadgeTextStyleDefault: Boolean = true
 )
 
 /**
@@ -53,7 +54,8 @@ internal object AndesBadgePillAttrsParser {
             andesBadgeType = type,
             andesBadgePillBorder = border,
             andesBadgePillSize = size,
-            andesBadgeText = typedArray.getString(R.styleable.AndesBadgePill_andesBadgePillText)
+            andesBadgeText = typedArray.getString(R.styleable.AndesBadgePill_andesBadgePillText),
+            andesBadgeTextStyleDefault = typedArray.getBoolean(R.styleable.AndesBadgePill_andesBadgeTextStyleDefault, true)
         ).also { typedArray.recycle() }
     }
 

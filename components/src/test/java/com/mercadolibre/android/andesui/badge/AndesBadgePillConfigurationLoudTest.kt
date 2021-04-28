@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.badge
 
 import android.os.Build
+import android.widget.TextView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.border.AndesBadgePillBorder
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgePillAttrs
@@ -16,6 +17,7 @@ import org.mockito.Mockito.spy
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
@@ -114,6 +116,53 @@ class AndesBadgePillConfigurationLoudTest {
         val config = configFactory.create(context, attrs)
         assertEquals(R.color.andes_orange_500.toAndesColor(), config.backgroundColor)
         assertEquals(LARGE_HEIGHT, config.height)
+    }
+
+    @Test
+    fun `Pill, Loud, Neutral, Standard, Large background color without default style`() {
+        attrs = AndesBadgePillAttrs(AndesBadgePillHierarchy.LOUD, AndesBadgeType.NEUTRAL,
+                AndesBadgePillBorder.STANDARD, AndesBadgePillSize.LARGE, "Title", false)
+        val andesBadgePill = AndesBadgePill(context)
+        andesBadgePill.text = attrs.andesBadgeText
+        andesBadgePill.textStyleDefault = attrs.andesBadgeTextStyleDefault
+        val config = configFactory.create(context, attrs)
+        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(LARGE_HEIGHT, config.height)
+        val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
+        assertEquals("Title", params.text)
+    }
+
+    @Test
+    fun `Pill, Loud, Neutral, Standard, Large background color without default style and all attributes`() {
+        attrs = AndesBadgePillAttrs(AndesBadgePillHierarchy.LOUD, AndesBadgeType.NEUTRAL,
+                AndesBadgePillBorder.STANDARD, AndesBadgePillSize.LARGE, "Title", false)
+        val andesBadgePill = AndesBadgePill(context,
+            AndesBadgePillHierarchy.LOUD,
+            AndesBadgeType.NEUTRAL,
+            AndesBadgePillBorder.ROUNDED,
+            AndesBadgePillSize.SMALL,
+            "Title",
+            false
+        )
+        val config = configFactory.create(context, attrs)
+        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(LARGE_HEIGHT, config.height)
+        val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
+        assertEquals("Title", params.text)
+    }
+
+    @Test
+    fun `Pill, Loud, Neutral, Standard, Large background color with default style`() {
+        attrs = AndesBadgePillAttrs(AndesBadgePillHierarchy.LOUD, AndesBadgeType.NEUTRAL,
+                AndesBadgePillBorder.STANDARD, AndesBadgePillSize.LARGE, "Title")
+        val andesBadgePill = AndesBadgePill(context)
+        andesBadgePill.text = attrs.andesBadgeText
+        andesBadgePill.textStyleDefault = attrs.andesBadgeTextStyleDefault
+        val config = configFactory.create(context, attrs)
+        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(LARGE_HEIGHT, config.height)
+        val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
+        assertEquals("TITLE", params.text)
     }
 
     companion object {

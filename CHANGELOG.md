@@ -1,3 +1,7 @@
+# v3.16.0
+## 🚀 Feature
+- `AndesBadgePill` support text without uppercase style default#
+
 # v3.15.0
 ## 🚀 Feature
 - `AndesCarousel` supports XSmall margin and custom horizontal padding

@@ -64,6 +64,16 @@ class AndesBadgePill : CardView {
         }
 
     /**
+     * Getter and setter for [textStyleDefault].
+     */
+    var textStyleDefault: Boolean
+        get() = andesBadgeAttrs.andesBadgeTextStyleDefault
+        set(value) {
+            andesBadgeAttrs = andesBadgeAttrs.copy(andesBadgeTextStyleDefault = value)
+            setupTitleComponent(createConfig())
+        }
+
+    /**
      * Getter and setter for [text].
      */
     var text: String?
@@ -94,9 +104,22 @@ class AndesBadgePill : CardView {
         type: AndesBadgeType = STATE_DEFAULT,
         pillBorder: AndesBadgePillBorder = BORDER_DEFAULT,
         pillSize: AndesBadgePillSize = SIZE_DEFAULT,
+        text: String? = TEXT_DEFAULT,
+        textStyleDefault: Boolean = true
+    ) : super(context) {
+        initAttrs(pillHierarchy, type, pillBorder, pillSize, text, textStyleDefault)
+    }
+
+    @Suppress("unused", "LongParameterList")
+    constructor(
+        context: Context,
+        pillHierarchy: AndesBadgePillHierarchy = HIERARCHY_DEFAULT,
+        type: AndesBadgeType = STATE_DEFAULT,
+        pillBorder: AndesBadgePillBorder = BORDER_DEFAULT,
+        pillSize: AndesBadgePillSize = SIZE_DEFAULT,
         text: String? = TEXT_DEFAULT
     ) : super(context) {
-        initAttrs(pillHierarchy, type, pillBorder, pillSize, text)
+        initAttrs(pillHierarchy, type, pillBorder, pillSize, text, true)
     }
 
     /**
@@ -110,14 +133,16 @@ class AndesBadgePill : CardView {
         setupComponents(config)
     }
 
+    @Suppress("LongParameterList")
     private fun initAttrs(
         pillHierarchy: AndesBadgePillHierarchy,
         type: AndesBadgeType,
         pillBorder: AndesBadgePillBorder,
         pillSize: AndesBadgePillSize,
-        title: String?
+        title: String?,
+        textStyleDefault: Boolean
     ) {
-        andesBadgeAttrs = AndesBadgePillAttrs(pillHierarchy, type, pillBorder, pillSize, title)
+        andesBadgeAttrs = AndesBadgePillAttrs(pillHierarchy, type, pillBorder, pillSize, title, textStyleDefault)
         val config = AndesBadgePillConfigurationFactory.create(context, andesBadgeAttrs)
         setupComponents(config)
     }
@@ -166,7 +191,7 @@ class AndesBadgePill : CardView {
             badgeTitle.visibility = View.GONE
         } else {
             badgeTitle.visibility = View.VISIBLE
-            badgeTitle.text = config.text.toUpperCase(Locale.getDefault())
+            badgeTitle.text = if (textStyleDefault) { config.text.toUpperCase(Locale.getDefault()) } else config.text
             badgeTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.textSize)
             badgeTitle.setTextColor(config.textColor.colorInt(context))
             val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)

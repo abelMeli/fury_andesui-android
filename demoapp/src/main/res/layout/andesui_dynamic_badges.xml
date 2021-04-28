@@ -167,11 +167,12 @@
             android:id="@+id/label_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
             android:inputType="textCapWords|textCapSentences"
             app:andesTextfieldPlaceholder="@string/andes_badge_text"
             app:andesTextfieldRightContent="clear"
             app:layout_constraintEnd_toEndOf="@+id/border_spinner"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -200,6 +201,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/change_button"
             app:layout_constraintEnd_toEndOf="@+id/modifier_spinner"
             app:layout_constraintTop_toTopOf="@+id/change_button" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/andesui_demoapp_defaul_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:andesCheckboxAlign="left"
+            app:andesCheckboxStatus="selected"
+            app:andesCheckboxText="@string/andes_badge_specs_default_text"
+            app:layout_constraintEnd_toEndOf="@+id/clear_button"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/label_text"
+            app:layout_constraintTop_toBottomOf="@+id/label_text" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group"
