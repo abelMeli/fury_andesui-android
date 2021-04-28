@@ -15,6 +15,8 @@ import android.widget.CheckBox
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
@@ -115,6 +117,13 @@ object InflateTextfieldHelper {
                             View.OnClickListener {
                                 Toast.makeText(context, "Right action pressed", Toast.LENGTH_LONG).show()
                             }
+                    )
+                } else if (textfield.rightContent == AndesTextfieldRightContent.CHECKBOX) {
+                    textfield.setCheckbox(
+                            "Checkbox", View.OnClickListener { v ->
+                        val checkbox = v as AndesCheckbox
+                        Toast.makeText(context, "Status: ${checkbox.status}", Toast.LENGTH_SHORT).show()
+                    }
                     )
                 }
             }

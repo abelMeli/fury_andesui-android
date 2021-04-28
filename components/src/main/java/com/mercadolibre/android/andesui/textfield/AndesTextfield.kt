@@ -17,6 +17,8 @@ import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.icons.IconProvider
@@ -205,6 +207,7 @@ class AndesTextfield : ConstraintLayout {
     private lateinit var leftComponent: FrameLayout
     private lateinit var rightComponent: FrameLayout
     private var maskWatcher: TextFieldMaskWatcher? = null
+    private var hiddenText: String? = EMPTY_STRING
 
     @Suppress("unused")
     constructor(context: Context) : super(context) {
@@ -590,6 +593,37 @@ class AndesTextfield : ConstraintLayout {
         action.text = text
         action.isEnabled = state != AndesTextfieldState.READONLY && state != AndesTextfieldState.DISABLED
         action.setOnClickListener(onClickListener)
+    }
+
+    /**
+     * Set the right content to checkbox and provides an optional callback listener and optional starting state.
+     */
+    fun setCheckbox(checkboxText: String, listener: OnClickListener? = null, startingState: AndesCheckboxStatus = AndesCheckboxStatus.UNSELECTED) {
+        rightContent = AndesTextfieldRightContent.CHECKBOX
+        (rightComponent.getChildAt(0) as? AndesCheckbox)?.apply {
+            text = checkboxText
+            status = startingState
+            updateTextfield(startingState)
+            setupCallback(OnClickListener {
+                updateTextfield(status)
+                listener?.onClick(it)
+            })
+        }
+    }
+
+    /**
+     * Updates the Textfield based on the AndesCheckboxStatus
+     */
+    private fun updateTextfield(checkboxStatus: AndesCheckboxStatus) {
+        if (checkboxStatus == AndesCheckboxStatus.SELECTED) {
+            state = AndesTextfieldState.DISABLED
+            hiddenText = text
+            text = EMPTY_STRING
+        } else {
+            state = AndesTextfieldState.IDLE
+            text = hiddenText
+            hiddenText = EMPTY_STRING
+        }
     }
 
     /**

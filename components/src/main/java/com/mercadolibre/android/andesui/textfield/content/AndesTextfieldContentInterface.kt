@@ -10,6 +10,8 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
+import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.color.toColor
 import com.mercadolibre.android.andesui.icons.IconProvider
@@ -150,11 +152,13 @@ internal object AndesIndeterminateTextfieldContent : AndesTextfieldContentInterf
 }
 
 internal object AndesCheckboxTextfieldContent : AndesTextfieldContentInterface() {
-    override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int = 0
+    override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int =
+            context.resources.getDimension(R.dimen.andes_textfield_checkbox_left_margin).toInt()
 
-    override fun rightMargin(context: Context): Int = 0
+    override fun rightMargin(context: Context): Int =
+            context.resources.getDimension(R.dimen.andes_textfield_checkbox_right_margin).toInt()
 
-    override fun component(context: Context): View {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override fun component(context: Context): AndesCheckbox {
+        return AndesCheckbox(context, "", AndesCheckboxAlign.RIGHT)
     }
 }

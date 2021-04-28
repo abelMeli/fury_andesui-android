@@ -1,6 +1,7 @@
 # v3.15.0
 ## 🚀 Feature
 - `AndesCarousel` supports XSmall margin and custom horizontal padding
+- Added Checkbox support to `AndesTextfield` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
 
 # v3.14.1
 ## 🛠 Fixes

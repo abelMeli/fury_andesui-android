@@ -46,6 +46,9 @@
     <dimen name="andes_textfield_indeterminate_left_margin">12dp</dimen>
     <dimen name="andes_textfield_indeterminate_right_margin">12dp</dimen>
 
+    <dimen name="andes_textfield_checkbox_left_margin">12dp</dimen>
+    <dimen name="andes_textfield_checkbox_right_margin">4dp</dimen>
+
     <dimen name="andes_textfield_corner_radius">6dp</dimen>
 
     <dimen name="andes_textfield_simple_stroke">1dp</dimen>

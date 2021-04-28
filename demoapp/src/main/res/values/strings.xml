@@ -441,6 +441,7 @@
         <item>Icon</item>
         <item>Suffix</item>
         <item>Validated</item>
+        <item>Checkbox</item>
     </string-array>
     <string-array name="andes_textfield_prefix_spinner">
         <item>None</item>

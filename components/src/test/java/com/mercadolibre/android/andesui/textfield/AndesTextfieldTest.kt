@@ -11,6 +11,7 @@ import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import junit.framework.Assert.assertEquals
@@ -121,6 +122,20 @@ class AndesTextfieldTest {
     fun `set action`() {
         textfield.setAction("action", View.OnClickListener { })
         assertEquals(textfield.rightContent, AndesTextfieldRightContent.ACTION)
+    }
+
+    @Test
+    fun `set checkbox`() {
+        textfield.setCheckbox("Checkbox", View.OnClickListener { /* IGNORE */ })
+        assertEquals(textfield.rightContent, AndesTextfieldRightContent.CHECKBOX)
+    }
+
+    @Test
+    fun `set checkbox default checked`() {
+        textfield.text = "Random text"
+        textfield.setCheckbox("Checkbox", startingState = AndesCheckboxStatus.SELECTED)
+        assertEquals(textfield.rightContent, AndesTextfieldRightContent.CHECKBOX)
+        assertEquals("", textfield.text)
     }
 
     @Test
