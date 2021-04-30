@@ -1,16 +1,10 @@
-# v3.16.0
-## 🚀 Feature
-- `AndesBadgePill` support text without uppercase style default#
-
 # v3.15.0
 ## 🚀 Feature
 - `AndesCarousel` supports XSmall margin and custom horizontal padding
 - Added Checkbox support to `AndesTextfield` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
+- `AndesBadgePill` support text without uppercase style default | Author: [@hruizml](https://https://github.com/hruizml)
 ## 🛠 Fixes
 - Fix `AndesCheckbox` overlap of layouts, set ellipsize end and the support of multi lines | Author: [@mingkao-meli](https://github.com/mingkao-meli)
-
-# v3.14.1
-## 🛠 Fixes
 - Changed role description for `AndesButton` to "Button" | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.14.0
