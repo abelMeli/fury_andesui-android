@@ -174,12 +174,12 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
     }
 
     /**
-     * Sets the list of item that the Dropdown will draw, with optional default first item value
+     * Sets the list of item that the Dropdown will draw, with optional pre-selected item
      */
-    fun setItems(listItems: List<AndesDropDownItem>, showFirstItem: Boolean = false) {
+    fun setItems(listItems: List<AndesDropDownItem>, defaultPosition: Int = -1) {
         this.listItems = listItems
-        if (this.listItems.isNotEmpty() && showFirstItem) {
-            selectItem(0)
+        if (this.listItems.isNotEmpty() && defaultPosition > -1 && defaultPosition < this.listItems.size) {
+            selectItem(defaultPosition)
         } else {
             andesTextfield.text = ""
         }

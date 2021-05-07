@@ -178,7 +178,7 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
         andesDropDownForm.placeholder = editTextPlaceHolder.text.toString()
         andesDropDownForm.helper = editTextHelper.text.toString()
         if (checkboxStarter.status == AndesCheckboxStatus.SELECTED) {
-            andesDropDownForm.setItems(getFakeList(), true)
+            andesDropDownForm.setItems(getFakeList(), 0)
         } else {
             andesDropDownForm.setItems(getFakeList())
         }
