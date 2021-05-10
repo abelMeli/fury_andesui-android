@@ -174,11 +174,21 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
     }
 
     /**
-     * Sets the list of item that the Dropdown will draw
+     * Sets the list of item that the Dropdown will draw, with optional pre-selected item
      */
-    fun setItems(listItems: List<AndesDropDownItem>) {
+    fun setItems(listItems: List<AndesDropDownItem>, defaultPosition: Int = -1) {
         this.listItems = listItems
+        if (this.listItems.isNotEmpty() && defaultPosition > -1 && defaultPosition < this.listItems.size) {
+            selectItem(defaultPosition)
+        } else {
+            andesTextfield.text = ""
+        }
     }
+
+    /**
+     * Gets the list of items
+     */
+    fun getItems(): List<AndesDropDownItem> = listItems
 
     private fun openBottomSheet() {
         bottomSheetDialog.show()

@@ -168,6 +168,11 @@ class AndesDropdownStandalone : ConstraintLayout, AndesListDelegate {
         }
     }
 
+    /**
+     * Gets the list of items
+     */
+    fun getItems(): List<AndesDropDownItem> = listItems
+
     private fun openBottomSheet() {
         bottomSheetDialog.show()
     }

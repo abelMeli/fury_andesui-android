@@ -75,6 +75,19 @@
             app:layout_constraintStart_toStartOf="@+id/guideLineStatusBar"
             app:layout_constraintTop_toTopOf="@+id/editTextDropdownLabel" />
 
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/checkboxDropdownStartingItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:textSize="@dimen/andes_body_font_size_m"
+            app:andesTextfieldLabel="@string/andes_dropdown_place_holder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buttonUpdate"
+            app:layout_constraintStart_toStartOf="@+id/guideLineStatusBar"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDropdownHelper" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideLineStatusBar"
             android:layout_width="match_parent"

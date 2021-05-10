@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
@@ -37,6 +39,7 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
     private lateinit var editTextPlaceHolder: AndesTextfield
     private lateinit var editTextHelper: AndesTextfield
     private lateinit var sizeSpinner: Spinner
+    private lateinit var checkboxStarter: AndesCheckbox
 
     private lateinit var viewPager: CustomViewPager
 
@@ -97,7 +100,8 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
         editTextTitle = container.findViewById(R.id.editTextDropdownLabel)
         editTextPlaceHolder = container.findViewById(R.id.editTextDropdownPlaceHolder)
         editTextHelper = container.findViewById(R.id.editTextDropdownHelper)
-
+        checkboxStarter = container.findViewById(R.id.checkboxDropdownStartingItem)
+        checkboxStarter.text = "Starting Item 0"
         buttonClear.setOnClickListener {
             clear()
         }
@@ -166,12 +170,18 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
         editTextTitle.text = andesDropDownLabel
         editTextPlaceHolder.text = andesDropDownPlaceHolder
         editTextHelper.text = andesDropDownHelper
+        andesDropDownForm.setItems(getFakeList())
     }
 
     private fun update() {
         andesDropDownForm.label = editTextTitle.text.toString()
         andesDropDownForm.placeholder = editTextPlaceHolder.text.toString()
         andesDropDownForm.helper = editTextHelper.text.toString()
+        if (checkboxStarter.status == AndesCheckboxStatus.SELECTED) {
+            andesDropDownForm.setItems(getFakeList(), 0)
+        } else {
+            andesDropDownForm.setItems(getFakeList())
+        }
     }
 
     private fun getFakeList(): List<AndesDropDownItem> {
