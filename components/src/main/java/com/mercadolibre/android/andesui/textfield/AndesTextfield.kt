@@ -22,6 +22,7 @@ import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.icons.IconProvider
+import com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldAttrs
@@ -624,6 +625,21 @@ class AndesTextfield : ConstraintLayout {
             text = hiddenText
             hiddenText = EMPTY_STRING
         }
+    }
+
+    /**
+     * Set the right content to indeterminate.
+     */
+    fun setIndeterminate() {
+        rightContent = AndesTextfieldRightContent.INDETERMINATE
+        startProgressAnimation((rightComponent.getChildAt(0) as AndesProgressIndicatorIndeterminate))
+    }
+
+    /**
+     * starts indeterminate animation
+     */
+    internal fun startProgressAnimation(andesProgressIndicatorIndeterminate: AndesProgressIndicatorIndeterminate) {
+        andesProgressIndicatorIndeterminate.start()
     }
 
     /**

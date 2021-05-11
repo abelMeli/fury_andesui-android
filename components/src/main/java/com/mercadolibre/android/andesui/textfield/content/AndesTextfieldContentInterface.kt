@@ -15,6 +15,7 @@ import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.color.toColor
 import com.mercadolibre.android.andesui.icons.IconProvider
+import com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldStateInterface
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 import com.mercadolibre.android.andesui.utils.buildColoredAndesBitmapDrawable
@@ -147,7 +148,7 @@ internal object AndesIndeterminateTextfieldContent : AndesTextfieldContentInterf
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_indeterminate_right_margin).toInt()
 
     override fun component(context: Context): View {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        return AndesProgressIndicatorIndeterminate(context)
     }
 }
 

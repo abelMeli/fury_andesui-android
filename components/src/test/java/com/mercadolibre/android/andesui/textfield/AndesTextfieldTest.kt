@@ -24,6 +24,9 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doNothing
+import com.nhaarman.mockitokotlin2.spy
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
@@ -136,6 +139,14 @@ class AndesTextfieldTest {
         textfield.setCheckbox("Checkbox", startingState = AndesCheckboxStatus.SELECTED)
         assertEquals(textfield.rightContent, AndesTextfieldRightContent.CHECKBOX)
         assertEquals("", textfield.text)
+    }
+
+    @Test
+    fun `set indeterminate`() {
+        val spyTextfield = spy(textfield)
+        doNothing().`when`(spyTextfield).startProgressAnimation(any())
+        spyTextfield.setIndeterminate()
+        assertEquals(AndesTextfieldRightContent.INDETERMINATE, spyTextfield.rightContent)
     }
 
     @Test

@@ -20,6 +20,7 @@ import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 import kotlinx.android.synthetic.main.andes_layout_checkbox.view.*
 
+@Suppress("TooManyFunctions")
 class AndesCheckbox : ConstraintLayout {
 
     /**

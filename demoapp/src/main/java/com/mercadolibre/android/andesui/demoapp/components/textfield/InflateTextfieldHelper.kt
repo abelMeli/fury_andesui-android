@@ -125,6 +125,8 @@ object InflateTextfieldHelper {
                         Toast.makeText(context, "Status: ${checkbox.status}", Toast.LENGTH_SHORT).show()
                     }
                     )
+                } else if (textfield.rightContent == AndesTextfieldRightContent.INDETERMINATE) {
+                    textfield.setIndeterminate()
                 }
             }
 
