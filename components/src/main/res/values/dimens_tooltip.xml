@@ -29,4 +29,6 @@
     <dimen name="andes_tooltip_elevation">8dp</dimen>
     <dimen name="andes_tooltip_corner_radius">4dp</dimen>
     <dimen name="andes_tooltip_alpha">1dp</dimen>
+
+    <dimen name="andes_tooltip_display_exceed">72dp</dimen>
 </resources>

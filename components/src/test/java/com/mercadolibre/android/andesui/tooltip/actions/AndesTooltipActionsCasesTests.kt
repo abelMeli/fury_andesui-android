@@ -9,6 +9,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.tooltip.AndesTooltip
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import org.junit.Assert
 import org.junit.Before
@@ -29,7 +30,8 @@ class AndesTooltipActionsCasesTests(
     private val tooltipLocation: AndesTooltipLocation,
     private val mainAction: AndesTooltipAction?,
     private val secondaryAction: AndesTooltipAction?,
-    private val linkAction: AndesTooltipLinkAction?
+    private val linkAction: AndesTooltipLinkAction?,
+    private val andesTooltipSize: AndesTooltipSize
 ) {
 
     private var context = RuntimeEnvironment.application
@@ -44,7 +46,8 @@ class AndesTooltipActionsCasesTests(
                     tooltipLoud,
                     tooltipLoudAndQuiet,
                     tooltipLoudAndTransparent,
-                    tooltipLink
+                    tooltipLink,
+                    tooltipFullSize
             )
         }
     }
@@ -73,6 +76,7 @@ class AndesTooltipActionsCasesTests(
         Assert.assertEquals(mainAction, tooltip.mainAction)
         Assert.assertEquals(secondaryAction, tooltip.secondaryAction)
         Assert.assertEquals(linkAction, tooltip.linkAction)
+        Assert.assertEquals(andesTooltipSize, tooltip.andesTooltipSize)
     }
 
     private fun buildTooltip(): AndesTooltip {
@@ -85,7 +89,8 @@ class AndesTooltipActionsCasesTests(
                     isDismissible = isDismissible,
                     tooltipLocation = tooltipLocation,
                     mainAction = mainAction,
-                    secondaryAction = secondaryAction
+                    secondaryAction = secondaryAction,
+                    andesTooltipSize = andesTooltipSize
             )
 
             linkAction != null -> AndesTooltip(

@@ -55,45 +55,8 @@ internal val tooltipHasRightSpace = fun (tooltip: AndesTooltipLocationInterface,
     return targetX + targetWidth + tooltipWidth < rightWall
 }
 
-internal fun getTooltipXOff(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
-
-    val targetX = target.getViewPointOnScreen().x
-    val targetWidth = target.measuredWidth
-    val targetHalfXPoint = targetX + (targetWidth / 2)
-
-    val tooltipWidth = tooltip.tooltipMeasuredWidth
-    val tooltipHalf = tooltipWidth / 2
-
-    val leftSpaceNeededForCenterArrow = targetHalfXPoint - tooltipHalf
-    val rightSpaceNeededForCenterArrow = targetHalfXPoint + tooltipHalf
-
-    val rightSpaceNeededForLeftArrow = tooltipWidth - tooltip.arrowWidth / 2 - tooltip.arrowBorder
-    val availableSpaceForLeftArrow = tooltip.displaySizeX - targetHalfXPoint
-
-    val canArrowCenter = leftSpaceNeededForCenterArrow > 0 && rightSpaceNeededForCenterArrow < tooltip.displaySizeX
-    val canArrowLeft = rightSpaceNeededForLeftArrow < availableSpaceForLeftArrow
-
-    return when {
-        (canArrowCenter) -> {
-            AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.MIDDLE,
-                    point = ((targetWidth / 2) - (tooltip.tooltipMeasuredWidth / 2))
-            )
-        }
-        (canArrowLeft) -> {
-            AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.LEFT,
-                    point = (targetWidth / 2 - tooltip.arrowWidth - tooltip.arrowBorder)
-            )
-        }
-        else -> {
-            AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.RIGHT,
-                    point = (-tooltip.tooltipMeasuredWidth + targetWidth / 2 + tooltip.arrowWidth + tooltip.arrowBorder)
-            )
-        }
-    }
-}
+internal fun getTooltipXOff(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData =
+    tooltip.andesTooltipSize.type.getTooltipXOffForSize(target, tooltip)
 
 internal fun getTooltipYOff(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
     val actionBarHeight = target.getActionBarHeight() + target.getStatusBarHeight(true)

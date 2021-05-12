@@ -3,9 +3,12 @@ package com.mercadolibre.android.andesui.tooltip.location
 import android.view.View
 import android.widget.FrameLayout
 import com.mercadolibre.android.andesui.tooltip.radius.RadiusLayout
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.nhaarman.mockitokotlin2.mock
 
 object AndesTooltipLocationInterfaceImplTest : AndesTooltipLocationInterface {
+    var andesTooltipSizeTest: AndesTooltipSize = AndesTooltipSize.DYNAMIC
+
     override val bodyWindowHeight: Int
         get() = 10
     override val bodyWindowWidth: Int
@@ -34,6 +37,8 @@ object AndesTooltipLocationInterfaceImplTest : AndesTooltipLocationInterface {
         get() = mock()
     override val radiusLayout: RadiusLayout
         get() = mock()
+    override val andesTooltipSize: AndesTooltipSize
+        get() = andesTooltipSizeTest
 
     override fun showDropDown(target: View, xOff: Int, yOff: Int, locationConfig: AndesTooltipLocationConfig) {
         target.width + xOff + yOff

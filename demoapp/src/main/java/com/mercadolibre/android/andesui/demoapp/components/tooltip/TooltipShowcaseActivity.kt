@@ -28,6 +28,7 @@ import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 
 @Suppress("TooManyFunctions")
 class TooltipShowcaseActivity : AppCompatActivity() {
@@ -155,6 +156,16 @@ class TooltipShowcaseActivity : AppCompatActivity() {
             }
         }
 
+        val spinnerSizeStyle = container.findViewById<Spinner>(R.id.size_style_spinner)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.andes_tooltip_size_style_spinner,
+            android.R.layout.simple_spinner_item
+        ).let { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerSizeStyle.adapter = adapter
+        }
+
         val primaryActionSpinner = container.findViewById<Spinner>(R.id.primary_action_spinner)
         ArrayAdapter.createFromResource(
                 this,
@@ -181,13 +192,15 @@ class TooltipShowcaseActivity : AppCompatActivity() {
                 style = getStyleBySpinner(spinnerStyle),
                 title = title.text,
                 body = body.text!!,
-                tooltipLocation = getLocation(spinnerOrientation)
+                tooltipLocation = getLocation(spinnerOrientation),
+                andesTooltipSize = getSizeStyle(spinnerSizeStyle)
         )
 
         clear.setOnClickListener {
             spinnerStyle.setSelection(0)
             spinnerOrientation.setSelection(0)
             spinnerActionType.setSelection(0)
+            spinnerSizeStyle.setSelection(0)
             primaryActionSpinner.setSelection(0)
             spinnerSecondAction.setSelection(0)
 
@@ -203,7 +216,8 @@ class TooltipShowcaseActivity : AppCompatActivity() {
                     style = getStyleBySpinner(spinnerStyle),
                     title = title.text,
                     body = body.text!!,
-                    tooltipLocation = getLocation(spinnerOrientation)
+                    tooltipLocation = getLocation(spinnerOrientation),
+                    andesTooltipSize = getSizeStyle(spinnerSizeStyle)
             )
         }
 
@@ -249,7 +263,8 @@ class TooltipShowcaseActivity : AppCompatActivity() {
                     style = getStyleBySpinner(spinnerStyle),
                     title = title.text,
                     body = body.text!!,
-                    tooltipLocation = getLocation(spinnerOrientation)
+                    tooltipLocation = getLocation(spinnerOrientation),
+                    andesTooltipSize = getSizeStyle(spinnerSizeStyle)
             )
 
             if (spinnerActionType.selectedItemPosition == TOOLTIP_WITH_LINK_ACTION) {
@@ -359,6 +374,12 @@ class TooltipShowcaseActivity : AppCompatActivity() {
             "Transparent" -> AndesButtonHierarchy.TRANSPARENT
             else -> AndesButtonHierarchy.QUIET
         }
+    }
+
+    private fun getSizeStyle(spinner: Spinner) = when (spinner.selectedItem) {
+        "Dynamic" -> AndesTooltipSize.DYNAMIC
+        "Full Size" -> AndesTooltipSize.FULL_SIZE
+        else -> AndesTooltipSize.DYNAMIC
     }
 
     private fun buildMainAction(text: String, hierarchy: AndesButtonHierarchy): AndesTooltipAction {

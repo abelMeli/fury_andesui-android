@@ -9,6 +9,9 @@ val arrowBottomMiddle: Array<Any?> = arrayOf(
 val arrowBottomRight: Array<Any?> = arrayOf(
         ArrowPositionId.BOTTOM, ArrowPositionId.RIGHT, AndesTooltipArrowBottomRight
 )
+val arrowBottomFree: Array<Any?> = arrayOf(
+    ArrowPositionId.BOTTOM, ArrowPositionId.FREE, AndesTooltipArrowBottomFree
+)
 
 val arrowTopLeft: Array<Any?> = arrayOf(
         ArrowPositionId.TOP, ArrowPositionId.LEFT, AndesTooltipArrowTopLeft
@@ -18,6 +21,9 @@ val arrowTopMiddle: Array<Any?> = arrayOf(
 )
 val arrowTopRight: Array<Any?> = arrayOf(
         ArrowPositionId.TOP, ArrowPositionId.RIGHT, AndesTooltipArrowTopRight
+)
+val arrowTopFree: Array<Any?> = arrayOf(
+    ArrowPositionId.TOP, ArrowPositionId.FREE, AndesTooltipArrowTopFree
 )
 
 val arrowRightTop: Array<Any?> = arrayOf(

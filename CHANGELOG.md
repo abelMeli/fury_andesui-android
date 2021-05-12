@@ -1,6 +1,7 @@
 # v3.16.0
 ## 🚀 Feature
 - Added GetItems to `AndesDropdownForm` and `AndesDropdownStandalone` and Default Item to `AndesDropdownForm` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
+- Added a SizeStyle to the Tooltip to show it as default or full screen.
 - Added Indeterminate support to `AndesTextfield` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
 
 # v3.15.0

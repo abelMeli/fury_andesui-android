@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.tooltip.location
 
+import com.mercadolibre.android.andesui.tooltip.factory.Constants.GENERIC_X_VALUE
+
 sealed class AndesTooltipArrowLocation {
     internal abstract fun getArrowPositionX(tooltip: AndesTooltipLocationInterface): Float
     internal abstract fun getArrowPositionY(tooltip: AndesTooltipLocationInterface): Float
@@ -117,23 +119,47 @@ internal object AndesTooltipArrowLeftBottom : AndesTooltipArrowLocation() {
     }
 }
 
+internal object AndesTooltipArrowTopFree : AndesTooltipArrowLocation() {
+    override fun getArrowPositionX(tooltip: AndesTooltipLocationInterface): Float {
+        return GENERIC_X_VALUE
+    }
+
+    override fun getArrowPositionY(tooltip: AndesTooltipLocationInterface): Float {
+        return tooltip.radiusLayout.y - tooltip.arrowBorder - tooltip.arrowImageInnerPadding / 2
+    }
+}
+
+internal object AndesTooltipArrowBottomFree : AndesTooltipArrowLocation() {
+    override fun getArrowPositionX(tooltip: AndesTooltipLocationInterface): Float {
+        return GENERIC_X_VALUE
+    }
+
+    override fun getArrowPositionY(tooltip: AndesTooltipLocationInterface): Float {
+        return tooltip.frameLayoutContainer.y + tooltip.radiusLayout.height + tooltip.elevation + tooltip.arrowImageInnerPadding
+    }
+}
+
 enum class ArrowPositionId {
     TOP,
     LEFT,
     RIGHT,
     BOTTOM,
-    MIDDLE
+    MIDDLE,
+    FREE
 }
 
+@Suppress("ComplexMethod")
 internal fun getAndesTooltipArrowLocation(tooltipSideId: ArrowPositionId, positionInSideId: ArrowPositionId): AndesTooltipArrowLocation =
         when (tooltipSideId to positionInSideId) {
             ArrowPositionId.BOTTOM to ArrowPositionId.LEFT -> AndesTooltipArrowBottomLeft
             ArrowPositionId.BOTTOM to ArrowPositionId.MIDDLE -> AndesTooltipArrowBottomMiddle
             ArrowPositionId.BOTTOM to ArrowPositionId.RIGHT -> AndesTooltipArrowBottomRight
+            ArrowPositionId.BOTTOM to ArrowPositionId.FREE -> AndesTooltipArrowBottomFree
 
             ArrowPositionId.TOP to ArrowPositionId.LEFT -> AndesTooltipArrowTopLeft
             ArrowPositionId.TOP to ArrowPositionId.MIDDLE -> AndesTooltipArrowTopMiddle
             ArrowPositionId.TOP to ArrowPositionId.RIGHT -> AndesTooltipArrowTopRight
+            ArrowPositionId.TOP to ArrowPositionId.FREE -> AndesTooltipArrowTopFree
 
             ArrowPositionId.RIGHT to ArrowPositionId.TOP -> AndesTooltipArrowRightTop
             ArrowPositionId.RIGHT to ArrowPositionId.MIDDLE -> AndesTooltipArrowRightMiddle

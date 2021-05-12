@@ -11,6 +11,7 @@ import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 
 internal data class AndesTooltipConfiguration(
     val backgroundColor: AndesColor,
@@ -18,9 +19,11 @@ internal data class AndesTooltipConfiguration(
     val titleText: String? = null,
     val titleTypeface: Typeface?,
     val titleTextSize: Float?,
+    val titleMaxWidth: Int,
     val bodyText: String,
     val bodyTypeface: Typeface?,
     val bodyTextSize: Float?,
+    val bodyMaxWidth: Int,
     val isDismissible: Boolean,
     val dismissibleIcon: Drawable?,
     val primaryAction: AndesTooltipAction?,
@@ -48,9 +51,11 @@ internal object AndesTooltipConfigurationFactory {
                     titleText = title,
                     titleTypeface = resolveTitleTypeface(style, context),
                     titleTextSize = resolveTitleSize(context),
+                    titleMaxWidth = resolveTitleMaxWidth(context, andesTooltipSize, isDismissible),
                     bodyText = body,
                     bodyTypeface = resolveBodyTypeface(style, context),
                     bodyTextSize = resolveBodySize(context),
+                    bodyMaxWidth = resolveBodyMaxWidth(context, andesTooltipSize),
                     isDismissible = isDismissible,
                     dismissibleIcon = resolveDismissibleIcon(style, context),
                     primaryAction = mainAction,
@@ -72,9 +77,13 @@ internal object AndesTooltipConfigurationFactory {
     private fun resolveBackgroundColor(style: AndesTooltipStyle) = style.type.backgroundColor()
     private fun resolveTextColor(style: AndesTooltipStyle) = style.type.textColor()
     private fun resolveTitleSize(context: Context) = context.resources.getDimension(R.dimen.andes_message_title)
+    private fun resolveTitleMaxWidth(context: Context, andesTooltipSize: AndesTooltipSize, dismissible: Boolean) =
+        andesTooltipSize.type.titleMaxWidth(context, dismissible)
     private fun resolveBodySize(context: Context) = context.resources.getDimension(R.dimen.andes_message_body)
     private fun resolveTitleTypeface(style: AndesTooltipStyle, context: Context) = style.type.titleTypeface(context)
     private fun resolveBodyTypeface(style: AndesTooltipStyle, context: Context) = style.type.bodyTypeface(context)
+    private fun resolveBodyMaxWidth(context: Context, andesTooltipSize: AndesTooltipSize) =
+        andesTooltipSize.type.bodyContentMaxWidth(context)
     private fun resolveDismissibleIcon(style: AndesTooltipStyle, context: Context) = style.type.dismissibleIcon(context)
 
     private fun resolvePrimaryActionBackgroundColor(style: AndesTooltipStyle, buttonHierarchy: AndesButtonHierarchy) =

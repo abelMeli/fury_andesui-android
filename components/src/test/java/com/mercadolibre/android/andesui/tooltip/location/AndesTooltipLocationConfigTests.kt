@@ -8,6 +8,8 @@ import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.tooltip.factory.Constants.GENERIC_X_VALUE
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.nhaarman.mockitokotlin2.mock
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertFalse
@@ -15,6 +17,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.`when`
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.validateMockitoUsage
@@ -66,20 +69,51 @@ class AndesTooltipLocationConfigTests(
         val tooltip: AndesTooltipLocationInterface = mock()
         val targetView = spy(AndesButton(context))
 
+        `when`(tooltip.andesTooltipSize).thenReturn(AndesTooltipSize.DYNAMIC)
+
         val testedLocationConfig = getAndesTooltipLocationConfig(tooltip, requiredLocation)
         testedLocationConfig.buildTooltip(targetView)
 
         verify(tooltip).showDropDown(targetView, 0, 0, testedLocationConfig)
     }
+
+    @Test
+    fun `should call tooltip showDropdown when buildTooltip with FULL_SIZE`() {
+        val tooltip: AndesTooltipLocationInterface = mock()
+        val targetView = spy(AndesButton(context))
+
+        `when`(tooltip.andesTooltipSize).thenReturn(AndesTooltipSize.FULL_SIZE)
+
+        val testedLocationConfig = getAndesTooltipLocationConfig(tooltip, requiredLocation)
+        testedLocationConfig.buildTooltip(targetView)
+
+        verify(tooltip).showDropDown(targetView, 0, 0, testedLocationConfig)
+    }
+
     @Test
     fun `should iterate other locations`() {
         val tooltip: AndesTooltipLocationInterface = mock()
         val targetView = spy(AndesButton(context))
         val locationSpy = spy(requiredLocation)
 
+        `when`(tooltip.andesTooltipSize).thenReturn(AndesTooltipSize.DYNAMIC)
+
         val testedLocationConfig = getAndesTooltipLocationConfig(tooltip, locationSpy)
         assertFalse(testedLocationConfig.iterateOtherLocations(targetView))
     }
+
+    @Test
+    fun `should iterate other locations when FULL_SIZE`() {
+        val tooltip: AndesTooltipLocationInterface = mock()
+        val targetView = spy(AndesButton(context))
+        val locationSpy = spy(requiredLocation)
+
+        `when`(tooltip.andesTooltipSize).thenReturn(AndesTooltipSize.FULL_SIZE)
+
+        val testedLocationConfig = getAndesTooltipLocationConfig(tooltip, locationSpy)
+        assertFalse(testedLocationConfig.iterateOtherLocations(targetView))
+    }
+
     @Test
     fun `should return arrowPoint`() {
         val tooltip: AndesTooltipLocationInterface = spy(AndesTooltipLocationInterfaceImplTest)
@@ -88,7 +122,7 @@ class AndesTooltipLocationConfigTests(
         val testedLocationConfig = getAndesTooltipLocationConfig(tooltip, requiredLocation)
         wantedConfig.buildTooltip(targetView)
         testedLocationConfig.buildTooltip(targetView)
-        assertEquals(wantedConfig.getArrowPoint().x, testedLocationConfig.getArrowPoint().x)
-        assertEquals(wantedConfig.getArrowPoint().y, testedLocationConfig.getArrowPoint().y)
+        assertEquals(wantedConfig.getArrowPoint(GENERIC_X_VALUE.toInt()).x, testedLocationConfig.getArrowPoint(GENERIC_X_VALUE.toInt()).x)
+        assertEquals(wantedConfig.getArrowPoint(GENERIC_X_VALUE.toInt()).y, testedLocationConfig.getArrowPoint(GENERIC_X_VALUE.toInt()).y)
     }
 }

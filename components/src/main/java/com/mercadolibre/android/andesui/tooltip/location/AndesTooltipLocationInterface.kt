@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.tooltip.location
 import android.view.View
 import android.widget.FrameLayout
 import com.mercadolibre.android.andesui.tooltip.radius.RadiusLayout
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 
 internal interface AndesTooltipLocationInterface {
 
@@ -20,6 +21,7 @@ internal interface AndesTooltipLocationInterface {
     val elevation: Int
     val frameLayoutContainer: FrameLayout
     val radiusLayout: RadiusLayout
+    val andesTooltipSize: AndesTooltipSize
 
     fun showDropDown(target: View, xOff: Int, yOff: Int, locationConfig: AndesTooltipLocationConfig)
 }

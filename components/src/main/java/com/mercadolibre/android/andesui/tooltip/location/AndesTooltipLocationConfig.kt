@@ -28,7 +28,7 @@ sealed class AndesTooltipLocationConfig(
     abstract fun buildTooltip(target: View)
     abstract fun canBuildTooltipInRequiredLocation(target: View): Boolean
     abstract fun iterateOtherLocations(target: View): Boolean
-    internal abstract fun getArrowPoint(): AndesTooltipArrowPoint
+    internal abstract fun getArrowPoint(fixedArrowXPosition: Int): AndesTooltipArrowPoint
     abstract fun getArrowRotation(): Float
 }
 
@@ -68,16 +68,13 @@ internal class TopAndesTooltipLocationConfig(private val andesTooltip: AndesTool
         }
     }
 
-    override fun getArrowPoint(): AndesTooltipArrowPoint {
+    override fun getArrowPoint(fixedArrowXPosition: Int): AndesTooltipArrowPoint {
         andesTooltip.run {
             val arrowLocation: AndesTooltipArrowLocation = getAndesTooltipArrowLocation(
                     tooltipSideId = ArrowPositionId.BOTTOM,
                     positionInSideId = arrowPositionInSide
             )
-            return AndesTooltipArrowPoint(
-                    x = arrowLocation.getArrowPositionX(this),
-                    y = arrowLocation.getArrowPositionY(this)
-            )
+            return andesTooltipSize.type.getArrowPoint(arrowLocation, this, fixedArrowXPosition)
         }
     }
 
@@ -119,16 +116,13 @@ internal class BottomAndesTooltipLocationConfig(private val andesTooltip: AndesT
         }
     }
 
-    override fun getArrowPoint(): AndesTooltipArrowPoint {
+    override fun getArrowPoint(fixedArrowXPosition: Int): AndesTooltipArrowPoint {
         andesTooltip.run {
             val arrowLocation: AndesTooltipArrowLocation = getAndesTooltipArrowLocation(
                     tooltipSideId = ArrowPositionId.TOP,
                     positionInSideId = arrowPositionInSide
             )
-            return AndesTooltipArrowPoint(
-                    x = arrowLocation.getArrowPositionX(this),
-                    y = arrowLocation.getArrowPositionY(this)
-            )
+            return andesTooltipSize.type.getArrowPoint(arrowLocation, this, fixedArrowXPosition)
         }
     }
 
@@ -170,7 +164,7 @@ internal class LeftAndesTooltipLocationConfig(private val andesTooltip: AndesToo
         }
     }
 
-    override fun getArrowPoint(): AndesTooltipArrowPoint {
+    override fun getArrowPoint(fixedArrowXPosition: Int): AndesTooltipArrowPoint {
         andesTooltip.run {
             val arrowLocation: AndesTooltipArrowLocation = getAndesTooltipArrowLocation(
                     tooltipSideId = ArrowPositionId.RIGHT,
@@ -222,7 +216,7 @@ internal class RightAndesTooltipLocationConfig(private val andesTooltip: AndesTo
         }
     }
 
-    override fun getArrowPoint(): AndesTooltipArrowPoint {
+    override fun getArrowPoint(fixedArrowXPosition: Int): AndesTooltipArrowPoint {
         andesTooltip.run {
             val arrowLocation: AndesTooltipArrowLocation = getAndesTooltipArrowLocation(
                     tooltipSideId = ArrowPositionId.LEFT,
@@ -238,11 +232,9 @@ internal class RightAndesTooltipLocationConfig(private val andesTooltip: AndesTo
     override fun getArrowRotation() = ARROW_POINTING_LEFT
 }
 
-internal fun getAndesTooltipLocationConfig(tooltip: AndesTooltipLocationInterface, location: AndesTooltipLocation): AndesTooltipLocationConfig {
-    return when (location) {
-        AndesTooltipLocation.TOP -> TopAndesTooltipLocationConfig(tooltip)
-        AndesTooltipLocation.BOTTOM -> BottomAndesTooltipLocationConfig(tooltip)
-        AndesTooltipLocation.LEFT -> LeftAndesTooltipLocationConfig(tooltip)
-        AndesTooltipLocation.RIGHT -> RightAndesTooltipLocationConfig(tooltip)
-    }
+internal fun getAndesTooltipLocationConfig(
+    tooltip: AndesTooltipLocationInterface,
+    location: AndesTooltipLocation
+): AndesTooltipLocationConfig = with(tooltip) {
+        andesTooltipSize.type.getLocationConfig(this, location)
 }

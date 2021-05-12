@@ -495,6 +495,7 @@
     <string name="andes_tooltip_style">Style</string>
     <string name="andes_tooltip_orientation">Orientation</string>
     <string name="andes_tooltip_action">Action type</string>
+    <string name="andes_tooltip_size_style">Size Style</string>
     <string name="andes_tooltip_change_primary">Primary action text</string>
     <string name="andes_tooltip_change_secondary">Secondary action text</string>
     <string name="andes_tooltip_change_link_button">Link action text</string>
@@ -525,6 +526,10 @@
     <string-array name="andes_tooltip_sec_action_style_spinner">
         <item>Quiet</item>
         <item>Transparent</item>
+    </string-array>
+    <string-array name="andes_tooltip_size_style_spinner">
+        <item>Dynamic</item>
+        <item>Full Size</item>
     </string-array>
 
 </resources>

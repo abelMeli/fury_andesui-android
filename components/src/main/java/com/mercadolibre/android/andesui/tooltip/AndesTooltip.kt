@@ -38,6 +38,7 @@ import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocationInt
 import com.mercadolibre.android.andesui.tooltip.location.getAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.radius.RadiusLayout
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
 @Suppress("TooManyFunctions")
@@ -163,7 +164,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         get() = context.displaySize().y
 
     override val tooltipMeasuredWidth: Int
-        get() = container.measuredWidth
+        get() = andesTooltipAttrs.andesTooltipSize.type.tooltipMeasureWidth(context, container)
 
     override val tooltipMeasuredHeight: Int
         get() = container.measuredHeight
@@ -185,6 +186,9 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
 
     override val elevation: Int
         get() = context.resources.getDimensionPixelOffset(R.dimen.andes_tooltip_elevation)
+
+    override val andesTooltipSize: AndesTooltipSize
+        get() = andesTooltipAttrs.andesTooltipSize
 
     @SuppressLint("InflateParams")
     private var container: ViewGroup = LayoutInflater.from(context).inflate(R.layout.andes_layout_tooltip, null) as ViewGroup
@@ -211,7 +215,8 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         isDismissible: Boolean = IS_DISMISSIBLE_DEFAULT,
         tooltipLocation: AndesTooltipLocation = TIP_ORIENTATION_DEFAULT,
         mainAction: AndesTooltipAction,
-        secondaryAction: AndesTooltipAction? = SECONDARY_ACTION_DEFAULT
+        secondaryAction: AndesTooltipAction? = SECONDARY_ACTION_DEFAULT,
+        andesTooltipSize: AndesTooltipSize = DEFAULT_SIZE_STYLE
     ) : this(context) {
         andesTooltipAttrs = AndesTooltipAttrs(
                 style = style,
@@ -220,7 +225,8 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
                 isDismissible = isDismissible,
                 tooltipLocation = tooltipLocation,
                 mainAction = mainAction,
-                secondaryAction = secondaryAction
+                secondaryAction = secondaryAction,
+                andesTooltipSize = andesTooltipSize
         )
         initComponents(andesTooltipAttrs)
     }
@@ -237,8 +243,8 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         body: String,
         isDismissible: Boolean = IS_DISMISSIBLE_DEFAULT,
         tooltipLocation: AndesTooltipLocation = TIP_ORIENTATION_DEFAULT,
-        linkAction: AndesTooltipLinkAction? = LINK_ACTION_DEFAULT
-
+        linkAction: AndesTooltipLinkAction? = LINK_ACTION_DEFAULT,
+        andesTooltipSize: AndesTooltipSize = DEFAULT_SIZE_STYLE
     ) : this(context) {
         andesTooltipAttrs = AndesTooltipAttrs(
                 style = style,
@@ -246,7 +252,8 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
                 body = body,
                 isDismissible = isDismissible,
                 tooltipLocation = tooltipLocation,
-                linkAction = linkAction
+                linkAction = linkAction,
+                andesTooltipSize = andesTooltipSize
         )
         initComponents(andesTooltipAttrs)
     }
@@ -332,11 +339,15 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
 
     private fun setupComponents(config: AndesTooltipConfiguration, locationConfig: AndesTooltipLocationConfig) {
         initializeBackground(config)
-        initializeAndesTooltipWindow()
+        initializeAndesTooltipWindow(config)
         initializeAndesTooltipContent(config, locationConfig)
     }
 
-    private fun initializeArrow(locationConfig: AndesTooltipLocationConfig, configuration: AndesTooltipConfiguration) {
+    private fun initializeArrow(
+        locationConfig: AndesTooltipLocationConfig,
+        configuration: AndesTooltipConfiguration,
+        fixedArrowXPosition: Int
+    ) {
         with(arrowComponent) {
             layoutParams = FrameLayout.LayoutParams(arrowWidth, arrowHeight)
             rotation = locationConfig.getArrowRotation()
@@ -344,7 +355,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
             colorFilter = PorterDuffColorFilter(configuration.backgroundColor.colorInt(context), PorterDuff.Mode.SRC_IN)
             radiusLayout.post {
                 ViewCompat.setElevation(this, this@AndesTooltip.elevation.toFloat())
-                val arrowPoint = locationConfig.getArrowPoint()
+                val arrowPoint = locationConfig.getArrowPoint(fixedArrowXPosition)
                 x = arrowPoint.x
                 y = arrowPoint.y
             }
@@ -365,7 +376,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         }
     }
 
-    private fun initializeAndesTooltipWindow() {
+    private fun initializeAndesTooltipWindow(config: AndesTooltipConfiguration) {
         with(bodyWindow) {
             isOutsideTouchable = true
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -403,6 +414,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
     private fun initTooltipTitle(config: AndesTooltipConfiguration) {
         with(titleComponent) {
             if (!config.titleText.isNullOrEmpty()) {
+                maxWidth = config.titleMaxWidth
                 text = config.titleText
                 typeface = config.titleTypeface
                 config.titleTextSize?.let { setTextSize(TypedValue.COMPLEX_UNIT_PX, it) }
@@ -416,6 +428,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
 
     private fun initTooltipBody(config: AndesTooltipConfiguration) {
         with(bodyComponent) {
+            maxWidth = config.bodyMaxWidth
             text = config.bodyText
             typeface = config.bodyTypeface
             setTextColor(config.textColor.colorInt(context))
@@ -506,7 +519,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         }
 
         val config = AndesTooltipConfigurationFactory.create(context, attrs)
-        initializeArrow(locationConfig, config)
+        initializeArrow(locationConfig, config, xOff)
         setupComponents(config, locationConfig)
         applyAndesTooltipAnimation()
     }
@@ -517,6 +530,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         private val TITLE_DEFAULT = null
         private val SECONDARY_ACTION_DEFAULT = null
         private val LINK_ACTION_DEFAULT = null
+        private val DEFAULT_SIZE_STYLE = AndesTooltipSize.DYNAMIC
         private const val IS_DISMISSIBLE_DEFAULT = true
     }
 }

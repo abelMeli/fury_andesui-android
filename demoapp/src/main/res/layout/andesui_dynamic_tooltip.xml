@@ -70,6 +70,17 @@
             app:layout_constraintStart_toStartOf="@+id/textView22"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/andes_tooltip_size_style"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/textView23"
+            app:layout_constraintTop_toBottomOf="@id/textView23"
+            app:layout_constraintEnd_toStartOf="@id/size_style_spinner"/>
+
         <Spinner
             android:id="@+id/style_spinner"
             android:layout_width="0dp"
@@ -105,6 +116,18 @@
             app:layout_constraintTop_toTopOf="@+id/textView23"
             app:layout_constraintVertical_bias="1.0" />
 
+        <Spinner
+            android:id="@+id/size_style_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintBottom_toBottomOf="@id/textView26"
+            app:layout_constraintEnd_toEndOf="@id/action_type_spinner"
+            app:layout_constraintStart_toEndOf="@id/textView26"
+            app:layout_constraintTop_toTopOf="@id/textView26"/>
+
         <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
             android:id="@+id/dismissable_checkbox"
             android:layout_width="0dp"
@@ -115,7 +138,7 @@
             app:andesCheckboxText="@string/dismissable"
             app:layout_constraintEnd_toEndOf="@+id/action_type_spinner"
             app:layout_constraintStart_toStartOf="@+id/textView23"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/title_text"

@@ -17,6 +17,7 @@ import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.location.BottomAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.nhaarman.mockitokotlin2.mock
 import junit.framework.Assert.assertNull
 import junit.framework.Assert.assertEquals
@@ -392,6 +393,22 @@ class AndesTooltipTest {
     @Test
     fun `should show tooltip by required location config`() {
         val tooltip = spy(AndesTooltip(context = context, body = body))
+        val mockTarget: View = AndesButton(context)
+        val locationConfig = mock<BottomAndesTooltipLocationConfig>()
+
+        ReflectionHelpers.setField(tooltip, "andesTooltipLocationConfigRequired", locationConfig)
+        `when`(tooltip.canShowTooltip(mockTarget)).thenReturn(true)
+        `when`(locationConfig.canBuildTooltipInRequiredLocation(mockTarget)).thenReturn(true)
+
+        tooltip.show(mockTarget)
+
+        verify(locationConfig, times(1)).canBuildTooltipInRequiredLocation(mockTarget)
+        verify(locationConfig, never()).iterateOtherLocations(mockTarget)
+    }
+
+    @Test
+    fun `should show tooltip by required location config and FULL_SIZE`() {
+        val tooltip = spy(AndesTooltip(context = context, title = title, body = body, andesTooltipSize = AndesTooltipSize.FULL_SIZE))
         val mockTarget: View = AndesButton(context)
         val locationConfig = mock<BottomAndesTooltipLocationConfig>()
 
