@@ -63,7 +63,9 @@ class DropdownBottomSheetDialog(
 
     private fun initBottomSheetBehavior() {
         val bottomSheet = findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
-        val behavior: BottomSheetBehavior<*> = BottomSheetBehavior.from(bottomSheet)
-        behavior.peekHeight = ScreenUtils.getScreenHeight() / 2
+        bottomSheet?.let {
+            val behavior = BottomSheetBehavior.from(it)
+            behavior.peekHeight = ScreenUtils.getScreenHeight() / 2
+        }
     }
 }
