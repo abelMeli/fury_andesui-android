@@ -13,6 +13,7 @@ import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownAttrParser
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownAttrs
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfiguration
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfigurationFactory
+import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
 import com.mercadolibre.android.andesui.dropdown.utils.DropdownBottomSheetDialog
@@ -70,6 +71,16 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         }
 
     /**
+     * Getter and setter for [state].
+     */
+    var state: AndesDropdownState
+        get() = andesDropdownAttrs.andesDropdownState
+        set(value) {
+            andesDropdownAttrs = andesDropdownAttrs.copy(andesDropdownState = value)
+            setupEnabledView(createConfig())
+        }
+
+    /**
      * Getter and setter for [menuType].
      */
     var menuType: AndesDropdownMenuType
@@ -90,12 +101,28 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         helper: String,
         placeHolder: String
     ) : super(context) {
-        initAttrs(menuType, label, helper, placeHolder)
+        initAttrs(menuType, label, helper, placeHolder, AndesDropdownState.ENABLED)
+    }
+
+    constructor(
+        context: Context,
+        menuType: AndesDropdownMenuType = AndesDropdownMenuType.BOTTOMSHEET,
+        label: String,
+        helper: String,
+        placeHolder: String,
+        state: AndesDropdownState
+    ) : super(context) {
+        initAttrs(menuType, label, helper, placeHolder, state)
+    }
+
+    private fun setupEnabledView(config: AndesDropdownConfiguration) {
+        andesTextfield.state = config.textfieldState
+        setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
     }
 
     private fun setupMenuType(config: AndesDropdownConfiguration) {
         if (config.menuType == AndesDropdownMenuType.BOTTOMSHEET) {
-            setupBottomSheet()
+            setupBottomSheet(config)
         } else {
             Log.d("AndesDropDownForm", "Menu selected is no developed yet")
         }
@@ -115,13 +142,15 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         menuType: AndesDropdownMenuType,
         label: String,
         helper: String,
-        placeHolder: String
+        placeHolder: String,
+        state: AndesDropdownState
     ) {
         andesDropdownAttrs = AndesDropdownAttrs(
                 andesDropdownMenuType = menuType,
                 andesDropdownLabel = label,
                 andesDropdownHelper = helper,
-                andesDropdownPlaceHolder = placeHolder)
+                andesDropdownPlaceHolder = placeHolder,
+                andesDropdownState = state)
         setupComponents(createConfig())
     }
 
@@ -154,15 +183,15 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         andesTextfield = container.findViewById(R.id.andes_text_field_dropdown_form)
     }
 
-    private fun setupBottomSheet() {
+    private fun setupBottomSheet(config: AndesDropdownConfiguration) {
         bottomSheetDialog.setOnShowListener {
             bottomSheetDialog.andesList?.refreshListAdapter()
 
-            setChevronIcon(ICON_CHEVRON_UP)
+            setChevronIcon(ICON_CHEVRON_UP, config.iconColor)
         }
 
         bottomSheetDialog.setOnDismissListener {
-            setChevronIcon(ICON_CHEVRON_DOWN)
+            setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
             andesTextfield.clearFocus()
         }
     }
@@ -215,15 +244,12 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         andesTextfield.label = config.label
     }
 
-    private fun setChevronIcon(chevronIcon: String) {
-        andesTextfield.setRightIcon(
-                chevronIcon,
-                null,
-                R.color.andes_blue_ml_500)
+    private fun setChevronIcon(chevronIcon: String, color: Int) {
+        andesTextfield.setRightIcon(chevronIcon, null, color)
     }
 
     private fun setupAndesTextFieldComponent(config: AndesDropdownConfiguration) {
-        setChevronIcon(ICON_CHEVRON_DOWN)
+        setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
 
         andesTextfield.onFocusChangeListener = onFocusChange
         andesTextfield.isEnabled = false
@@ -267,7 +293,7 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
 
     override fun getDataSetSize(andesList: AndesList): Int = listItems.size
 
-    private fun createConfig() = AndesDropdownConfigurationFactory.create(andesDropdownAttrs)
+    private fun createConfig() = AndesDropdownConfigurationFactory.create(context, andesDropdownAttrs)
 
     companion object {
         private const val ICON_CHEVRON_DOWN: String = "andes_ui_chevron_down_24"

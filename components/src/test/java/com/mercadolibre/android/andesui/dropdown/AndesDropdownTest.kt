@@ -2,9 +2,16 @@ package com.mercadolibre.android.andesui.dropdown
 
 import android.os.Build
 import android.view.View
+import com.facebook.common.logging.FLog
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipelineConfig
+import com.facebook.imagepipeline.listener.RequestListener
+import com.facebook.imagepipeline.listener.RequestLoggingListener
+import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownAttrs
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfigurationFactory
 import com.mercadolibre.android.andesui.dropdown.size.AndesDropdownSize
+import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
 import com.mercadolibre.android.andesui.list.AndesList
@@ -13,7 +20,10 @@ import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import org.junit.Assert
+import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
@@ -30,6 +40,23 @@ class AndesDropdownTest {
 
     companion object {
         private const val SIZE = 10
+
+        @JvmStatic
+        @BeforeClass
+        fun beforeClass() {
+            SoLoader.setInTestMode()
+        }
+    }
+
+    @Before
+    fun setUp() {
+        val requestListeners = setOf<RequestListener>(RequestLoggingListener())
+        val config = ImagePipelineConfig.newBuilder(context)
+                // other setters
+                .setRequestListeners(requestListeners)
+                .build()
+        Fresco.initialize(context, config)
+        FLog.setMinimumLoggingLevel(FLog.VERBOSE)
     }
 
     @Test
@@ -82,22 +109,83 @@ class AndesDropdownTest {
     }
 
     @Test
-    fun `test dropdown Attrs`() {
+    fun `test dropdown Attrs Enabled`() {
         val label = "label"
         val helper = "helper"
         val placeHolder = "placeHolder"
+        val state = AndesDropdownState.ENABLED
 
         andesDropdownAttrs = AndesDropdownAttrs(
                 andesDropdownMenuType = AndesDropdownMenuType.BOTTOMSHEET,
                 andesDropdownLabel = label,
                 andesDropdownHelper = helper,
-                andesDropdownPlaceHolder = placeHolder)
+                andesDropdownPlaceHolder = placeHolder,
+                andesDropdownState = state)
 
-        val config = configFactory.create(andesDropdownAttrs)
+        val config = configFactory.create(context, andesDropdownAttrs)
 
         Assert.assertEquals(config.menuType, AndesDropdownMenuType.BOTTOMSHEET)
         Assert.assertEquals(config.label, label)
         Assert.assertEquals(config.helper, helper)
         Assert.assertEquals(config.placeHolder, placeHolder)
+        Assert.assertEquals(config.textfieldState, AndesTextfieldState.IDLE)
+    }
+
+    @Test
+    fun `test dropdown Attrs Error`() {
+        val label = "label"
+        val helper = "helper"
+        val placeHolder = "placeHolder"
+        val state = AndesDropdownState.ERROR
+
+        andesDropdownAttrs = AndesDropdownAttrs(
+                andesDropdownMenuType = AndesDropdownMenuType.BOTTOMSHEET,
+                andesDropdownLabel = label,
+                andesDropdownHelper = helper,
+                andesDropdownPlaceHolder = placeHolder,
+                andesDropdownState = state)
+
+        val config = configFactory.create(context, andesDropdownAttrs)
+
+        Assert.assertEquals(config.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+        Assert.assertEquals(config.label, label)
+        Assert.assertEquals(config.helper, helper)
+        Assert.assertEquals(config.placeHolder, placeHolder)
+        Assert.assertEquals(config.textfieldState, AndesTextfieldState.ERROR)
+    }
+
+    @Test
+    fun `test dropdown Attrs Disabled`() {
+        val label = "label"
+        val helper = "helper"
+        val placeHolder = "placeHolder"
+        val state = AndesDropdownState.DISABLED
+
+        andesDropdownAttrs = AndesDropdownAttrs(
+                andesDropdownMenuType = AndesDropdownMenuType.BOTTOMSHEET,
+                andesDropdownLabel = label,
+                andesDropdownHelper = helper,
+                andesDropdownPlaceHolder = placeHolder,
+                andesDropdownState = state)
+
+        val config = configFactory.create(context, andesDropdownAttrs)
+
+        Assert.assertEquals(config.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+        Assert.assertEquals(config.label, label)
+        Assert.assertEquals(config.helper, helper)
+        Assert.assertEquals(config.placeHolder, placeHolder)
+        Assert.assertEquals(config.textfieldState, AndesTextfieldState.DISABLED)
+    }
+
+    @Test
+    fun `test dropdownform default constructor`() {
+        val dropdown = AndesDropDownForm(context, AndesDropdownMenuType.BOTTOMSHEET, "", "", "")
+        Assert.assertEquals(dropdown.state, AndesDropdownState.ENABLED)
+    }
+
+    @Test
+    fun `test dropdownform constructor with state`() {
+        val dropdown = AndesDropDownForm(context, AndesDropdownMenuType.BOTTOMSHEET, "", "", "", AndesDropdownState.DISABLED)
+        Assert.assertEquals(dropdown.state, AndesDropdownState.DISABLED)
     }
 }

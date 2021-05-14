@@ -17,6 +17,7 @@ import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownAttrs
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfiguration
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfigurationFactory
 import com.mercadolibre.android.andesui.dropdown.size.AndesDropdownSize
+import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
 import com.mercadolibre.android.andesui.dropdown.utils.DropdownBottomSheetDialog
@@ -97,7 +98,8 @@ class AndesDropdownStandalone : ConstraintLayout, AndesListDelegate {
                 andesDropdownSize = size,
                 andesDropdownLabel = null,
                 andesDropdownHelper = null,
-                andesDropdownPlaceHolder = null)
+                andesDropdownPlaceHolder = null,
+                andesDropdownState = AndesDropdownState.ENABLED)
         setupComponents(createConfig())
     }
 
@@ -233,5 +235,5 @@ class AndesDropdownStandalone : ConstraintLayout, AndesListDelegate {
 
     override fun getDataSetSize(andesList: AndesList): Int = listItems.size
 
-    private fun createConfig() = AndesDropdownConfigurationFactory.create(andesDropdownAttrs)
+    private fun createConfig() = AndesDropdownConfigurationFactory.create(context, andesDropdownAttrs)
 }

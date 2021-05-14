@@ -20,9 +20,11 @@ import com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
 import com.mercadolibre.android.andesui.dropdown.AndesDropDownItem
 import com.mercadolibre.android.andesui.dropdown.AndesDropdownStandalone
 import com.mercadolibre.android.andesui.dropdown.size.AndesDropdownSize
+import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
+import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 @Suppress("TooManyFunctions")
 class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
@@ -40,6 +42,7 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
     private lateinit var editTextHelper: AndesTextfield
     private lateinit var sizeSpinner: Spinner
     private lateinit var checkboxStarter: AndesCheckbox
+    private lateinit var stateSpinner: Spinner
 
     private lateinit var viewPager: CustomViewPager
 
@@ -102,6 +105,18 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
         editTextHelper = container.findViewById(R.id.editTextDropdownHelper)
         checkboxStarter = container.findViewById(R.id.checkboxDropdownStartingItem)
         checkboxStarter.text = "Starting Item 0"
+
+        stateSpinner = container.findViewById(R.id.dropdownStateSpinner)
+        val stateAdapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                this.resources.getStringArray(R.array.andes_dropdown_state_spinner)
+        )
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        stateSpinner.adapter = stateAdapter
+
+        stateSpinner.setSelection(0)
+
         buttonClear.setOnClickListener {
             clear()
         }
@@ -171,17 +186,23 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
         editTextPlaceHolder.text = andesDropDownPlaceHolder
         editTextHelper.text = andesDropDownHelper
         andesDropDownForm.setItems(getFakeList())
+        stateSpinner.setSelection(0)
+    }
+
+    private fun checkboxStarterClick() {
+        if (checkboxStarter.status == AndesCheckboxStatus.SELECTED) {
+            andesDropDownForm.setItems(getFakeList(), 0)
+        } else {
+            andesDropDownForm.setItems(getFakeList())
+        }
     }
 
     private fun update() {
         andesDropDownForm.label = editTextTitle.text.toString()
         andesDropDownForm.placeholder = editTextPlaceHolder.text.toString()
         andesDropDownForm.helper = editTextHelper.text.toString()
-        if (checkboxStarter.status == AndesCheckboxStatus.SELECTED) {
-            andesDropDownForm.setItems(getFakeList(), 0)
-        } else {
-            andesDropDownForm.setItems(getFakeList())
-        }
+        checkboxStarterClick()
+        andesDropDownForm.state = AndesDropdownState.valueOf(stateSpinner.selectedItem.toString().toUpperCase())
     }
 
     private fun getFakeList(): List<AndesDropDownItem> {

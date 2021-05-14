@@ -1,9 +1,11 @@
 package com.mercadolibre.android.andesui.dropdown.factory
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.dropdown.size.AndesDropdownSize
+import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 
 internal data class AndesDropdownAttrs(
@@ -11,7 +13,8 @@ internal data class AndesDropdownAttrs(
     val andesDropdownLabel: String?,
     val andesDropdownHelper: String?,
     val andesDropdownPlaceHolder: String?,
-    val andesDropdownSize: AndesDropdownSize = AndesDropdownSize.MEDIUM
+    val andesDropdownSize: AndesDropdownSize = AndesDropdownSize.MEDIUM,
+    val andesDropdownState: AndesDropdownState
 )
 
 /**
@@ -27,9 +30,13 @@ internal object AndesDropdownAttrParser {
     private const val ANDES_DROPDOWN_MENU_TYPE_BOTTOMSHEET = "9002"
     private const val ANDES_DROPDOWN_MENU_TYPE_FLOATINGMENU = "9003"
 
+    private const val ANDES_DROPDOWN_STATE_ENABLED = "10003"
+    private const val ANDES_DROPDOWN_STATE_ERROR = "10004"
+    private const val ANDES_DROPDOWN_STATE_DISABLED = "10005"
+
     fun parse(context: Context, attr: AttributeSet?): AndesDropdownAttrs {
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesList)
-
+        val andesDropdownState = getState(typedArray)
         val andesDropdownMenuType = when (typedArray.getString(R.styleable.AndesDropdown_AndesDropdownMenuType)) {
             ANDES_DROPDOWN_MENU_TYPE_BOTTOMSHEET -> AndesDropdownMenuType.BOTTOMSHEET
             ANDES_DROPDOWN_MENU_TYPE_FLOATINGMENU -> AndesDropdownMenuType.FLOATINGMENU
@@ -52,7 +59,16 @@ internal object AndesDropdownAttrParser {
                 andesDropdownLabel = andesDropdownLabel,
                 andesDropdownHelper = andesDropdownHelper,
                 andesDropdownPlaceHolder = andesDropdownPlaceHolder,
-                andesDropdownSize = andesDropdownSize
+                andesDropdownSize = andesDropdownSize,
+                andesDropdownState = andesDropdownState
         ).also { typedArray.recycle() }
     }
+
+    private fun getState(typedArray: TypedArray): AndesDropdownState =
+            when (typedArray.getString(R.styleable.AndesTextfield_andesTextfieldState)) {
+                ANDES_DROPDOWN_STATE_ENABLED -> AndesDropdownState.ENABLED
+                ANDES_DROPDOWN_STATE_ERROR -> AndesDropdownState.ERROR
+                ANDES_DROPDOWN_STATE_DISABLED -> AndesDropdownState.DISABLED
+                else -> AndesDropdownState.ENABLED
+            }
 }

@@ -18,6 +18,12 @@
             <enum name="large" value="10002" />
         </attr>
 
+        <attr name="andesDropdownState">
+            <enum name="idle" value="10003" />
+            <enum name="error" value="10004" />
+            <enum name="disabled" value="10005" />
+        </attr>
+
     </declare-styleable>
 
 </resources>

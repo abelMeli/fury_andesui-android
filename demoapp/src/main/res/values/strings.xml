@@ -255,6 +255,12 @@
     <string name="andes_dropdown_form_title">AndesDropdownForm</string>
     <string name="andes_dropdown_standalone_title">AndesDropdownStandalone</string>
 
+    <string-array name="andes_dropdown_state_spinner">
+        <item>Enabled</item>
+        <item>Error</item>
+        <item>Disabled</item>
+    </string-array>
+
 
     <!-- Andes List -->
     <string name="andes_list">Andes List</string>
