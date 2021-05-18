@@ -1,3 +1,7 @@
+# v3.16.1
+## 🛠 Fixes
+- Rollback google material design from 1.3.0 to 1.0.0 | Author: [@eportasML](https://github.com/eportasML)
+
 # v3.16.0
 ## 🚀 Feature
 - Added states to `AndesDropdownForm` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
