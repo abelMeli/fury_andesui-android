@@ -220,7 +220,7 @@ class AndesCheckbox : ConstraintLayout {
      * Gets data from the config and sets to the titleNumberOfLines component of this checkbox.
      */
     private fun setupTitleNumberLinesComponent(config: AndesCheckboxConfiguration) {
-        checkboxText.setLines(config.titleNumberOfLines)
+        checkboxText.maxLines = config.titleNumberOfLines
     }
 
     private fun createConfig() = AndesCheckboxConfigurationFactory.create(andesCheckboxAttrs)

@@ -1,3 +1,7 @@
+# v3.16.2
+## 🛠 Fixes
+- Changed `setLines` to `maxLines` in `AndesCheckbox` `setupTitleNumberLinesComponent` | Author: [@orellanaML] (https://github.com/orellanaML)
+
 # v3.16.1
 ## 🛠 Fixes
 - Rollback google material design from 1.3.0 to 1.0.0 | Author: [@eportasML](https://github.com/eportasML)
