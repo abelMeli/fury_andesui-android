@@ -200,6 +200,9 @@
     <string-array name="andes_carousel_margin_spinner">
         <item>Default</item>
         <item>XSmall</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
         <item>None</item>
     </string-array>
 
