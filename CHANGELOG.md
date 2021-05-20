@@ -1,4 +1,6 @@
 # v3.16.2
+## 🚀 Feature
+- `AndesCarousel` New margin support added in crousel attributes small, medium and large | Author: [@hruizml](https://https://github.com/hruizml)
 ## 🛠 Fixes
 - Changed `setLines` to `maxLines` in `AndesCheckbox` `setupTitleNumberLinesComponent` | Author: [@orellanaML] (https://github.com/orellanaML)
 
