@@ -8,4 +8,7 @@
 
 
     <dimen name="andes_carousel_recylcer_padding_xsmall">16dp</dimen>
+    <dimen name="andes_carousel_recylcer_padding_small">16dp</dimen>
+    <dimen name="andes_carousel_recylcer_padding_medium">16dp</dimen>
+    <dimen name="andes_carousel_recylcer_padding_large">16dp</dimen>
 </resources>

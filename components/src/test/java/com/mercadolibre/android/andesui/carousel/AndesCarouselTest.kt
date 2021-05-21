@@ -34,7 +34,7 @@ class AndesCarouselTest {
     }
 
     @Test
-    fun `test padding small`() {
+    fun `test padding default`() {
         attrs = AndesCarouselAttrs(
                 CENTER,
                 AndesCarouselMargin.DEFAULT
@@ -52,6 +52,39 @@ class AndesCarouselTest {
         val config = configFactory.create(context, attrs)
         Assert.assertEquals(config.margin, context.resources.getDimension(R.dimen.andes_carousel_padding_xsmall).toInt())
         Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_xsmall).toInt())
+    }
+
+    @Test
+    fun `test padding small`() {
+        attrs = AndesCarouselAttrs(
+                CENTER,
+                AndesCarouselMargin.SMALL
+        )
+        val config = configFactory.create(context, attrs)
+        Assert.assertEquals(config.margin, context.resources.getDimension(R.dimen.andes_carousel_padding_small).toInt())
+        Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_small).toInt())
+    }
+
+    @Test
+    fun `test padding medium`() {
+        attrs = AndesCarouselAttrs(
+                CENTER,
+                AndesCarouselMargin.MEDIUM
+        )
+        val config = configFactory.create(context, attrs)
+        Assert.assertEquals(config.margin, context.resources.getDimension(R.dimen.andes_carousel_padding_medium).toInt())
+        Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_medium).toInt())
+    }
+
+    @Test
+    fun `test padding large`() {
+        attrs = AndesCarouselAttrs(
+                CENTER,
+                AndesCarouselMargin.LARGE
+        )
+        val config = configFactory.create(context, attrs)
+        Assert.assertEquals(config.margin, context.resources.getDimension(R.dimen.andes_carousel_padding_large).toInt())
+        Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_large).toInt())
     }
 
     @Test

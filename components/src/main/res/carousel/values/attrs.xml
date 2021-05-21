@@ -6,6 +6,9 @@
             <enum name="none" value="100" />
             <enum name="defaultMargin" value="101" />
             <enum name="xsmall" value="102" />
+            <enum name="small" value="103" />
+            <enum name="medium" value="104" />
+            <enum name="large" value="105" />
         </attr>
     </declare-styleable>
 </resources>

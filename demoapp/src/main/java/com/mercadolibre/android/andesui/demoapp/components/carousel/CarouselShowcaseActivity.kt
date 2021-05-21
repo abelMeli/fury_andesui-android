@@ -110,6 +110,9 @@ class CarouselShowcaseActivity : AppCompatActivity(), AndesCarouselDelegate {
                 "None" -> AndesCarouselMargin.NONE
                 "XSmall" -> AndesCarouselMargin.XSMALL
                 "Default" -> AndesCarouselMargin.DEFAULT
+                "Small" -> AndesCarouselMargin.SMALL
+                "Medium" -> AndesCarouselMargin.MEDIUM
+                "Large" -> AndesCarouselMargin.LARGE
                 else -> AndesCarouselMargin.DEFAULT
             }
             carousel.center = checkboxCentered.status == AndesCheckboxStatus.SELECTED

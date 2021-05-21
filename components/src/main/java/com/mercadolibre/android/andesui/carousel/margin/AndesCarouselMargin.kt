@@ -10,7 +10,10 @@ package com.mercadolibre.android.andesui.carousel.margin
 enum class AndesCarouselMargin {
     NONE,
     DEFAULT,
-    XSMALL;
+    XSMALL,
+    SMALL,
+    MEDIUM,
+    LARGE;
 
     companion object {
         fun fromString(value: String): AndesCarouselMargin = valueOf(value.toUpperCase())
@@ -23,6 +26,9 @@ enum class AndesCarouselMargin {
             NONE -> AndesCarouselMarginNone
             DEFAULT -> AndesCarouselMarginDefault
             XSMALL -> AndesCarouselMarginXSmall
+            SMALL -> AndesCarouselMarginSmall
+            MEDIUM -> AndesCarouselMarginMedium
+            LARGE -> AndesCarouselMarginLarge
         }
     }
 }
