@@ -14,6 +14,11 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doNothing
+import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.times
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertNull
@@ -24,9 +29,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doNothing
-import com.nhaarman.mockitokotlin2.spy
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
@@ -190,5 +192,22 @@ class AndesTextfieldTest {
     @Test
     fun `textfield without watcher`() {
         assertNull(textfield.textWatcher)
+    }
+
+    @Test
+    fun `clear textWatcher is null when rightContent is not CLEAR`() {
+        assertNull(textfield.clearTextWatcher)
+    }
+
+    @Test
+    fun `removeClearTextWatcher and setupClear are called when resetting rightContent`() {
+        val spiedTextfield = spy(textfield)
+        assertNull(spiedTextfield.clearTextWatcher)
+
+        spiedTextfield.rightContent = AndesTextfieldRightContent.CLEAR
+        assertNotNull(spiedTextfield.clearTextWatcher)
+
+        spiedTextfield.rightContent = AndesTextfieldRightContent.CLEAR
+        verify(spiedTextfield, times(2)).removeClearTextWatcher()
     }
 }

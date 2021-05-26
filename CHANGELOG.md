@@ -1,3 +1,7 @@
+# v3.17.1
+## 🛠 Fixes
+- Changes in the instantiation and assignation for the internal textWatchers in `AndesTextfield` | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v3.17.0
 ## 🚀 Feature
 - `AndesCarousel` New margin support added in crousel attributes small, medium and large | Author: [@hruizml](https://https://github.com/hruizml)

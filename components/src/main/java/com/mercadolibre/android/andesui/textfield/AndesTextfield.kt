@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.annotation.VisibleForTesting
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
@@ -209,6 +210,7 @@ class AndesTextfield : ConstraintLayout {
     private lateinit var rightComponent: FrameLayout
     private var maskWatcher: TextFieldMaskWatcher? = null
     private var hiddenText: String? = EMPTY_STRING
+    internal var clearTextWatcher: TextWatcher? = null
 
     @Suppress("unused")
     constructor(context: Context) : super(context) {
@@ -266,6 +268,7 @@ class AndesTextfield : ConstraintLayout {
 
     private fun setupComponents(config: AndesTextfieldConfiguration) {
         initComponents()
+        setupCounterTextWatcher()
         setupViewId()
         setupViewAsClickable()
         setupEnabledView()
@@ -429,7 +432,9 @@ class AndesTextfield : ConstraintLayout {
         } else {
             counterComponent.visibility = View.GONE
         }
+    }
 
+    private fun setupCounterTextWatcher() {
         textComponent.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
                 // Do nothing.
@@ -444,9 +449,9 @@ class AndesTextfield : ConstraintLayout {
                 verifyHideIconWhenType(textWithoutMask.length)
 
                 counterComponent.text = resources.getString(
-                    R.string.andes_textfield_counter_text,
-                    textWithoutMask.length,
-                    config.counterLength
+                        R.string.andes_textfield_counter_text,
+                        textWithoutMask.length,
+                        counter
                 )
             }
         })
@@ -524,6 +529,7 @@ class AndesTextfield : ConstraintLayout {
      * Gets data from the config and sets to the right component.
      */
     private fun setupRightComponent(config: AndesTextfieldConfiguration) {
+        removeClearTextWatcher()
         if (config.rightComponent != null) {
             rightComponent.removeAllViews()
             rightComponent.addView(config.rightComponent)
@@ -540,35 +546,46 @@ class AndesTextfield : ConstraintLayout {
         }
     }
 
+    @VisibleForTesting
+    internal fun removeClearTextWatcher() {
+        if (clearTextWatcher != null) {
+            textComponent.removeTextChangedListener(clearTextWatcher)
+            clearTextWatcher = null
+        }
+    }
+
     /**
      * Set the clear action to erase the text.
      */
     private fun setupClear() {
         if (rightContent == AndesTextfieldRightContent.CLEAR) {
             rightComponent.visibility = View.GONE
-
-            textComponent.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(text: Editable?) {
-                    if (!text.isNullOrEmpty()) {
-                        rightComponent.visibility = View.VISIBLE
-                    } else {
-                        rightComponent.visibility = View.GONE
-                    }
-                    verifyHideIconWhenType(text.toString().length)
-                }
-
-                override fun beforeTextChanged(charSequence: CharSequence?, start: Int, before: Int, after: Int) {
-                    // Do nothing.
-                }
-
-                override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, after: Int) {
-                    // Do nothing.
-                }
-            })
-
+            addClearTextWatcher()
             val clear: SimpleDraweeView = rightComponent.getChildAt(0) as SimpleDraweeView
             clear.setOnClickListener { textComponent.text?.clear() }
         }
+    }
+
+    private fun addClearTextWatcher() {
+        clearTextWatcher = object : TextWatcher {
+            override fun afterTextChanged(text: Editable?) {
+                if (!text.isNullOrEmpty()) {
+                    rightComponent.visibility = View.VISIBLE
+                } else {
+                    rightComponent.visibility = View.GONE
+                }
+                verifyHideIconWhenType(text.toString().length)
+            }
+
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, before: Int, after: Int) {
+                // Do nothing.
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, after: Int) {
+                // Do nothing.
+            }
+        }
+        textComponent.addTextChangedListener(clearTextWatcher)
     }
 
     /**
