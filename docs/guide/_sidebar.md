@@ -7,5 +7,6 @@
   * [AndesCheckbox](/checkbox/AndesCheckbox.md)
   * [AndesSnackbar](/snackbar/AndesSnackbar.md)
   * [AndesThumbnail](/thumbnail/AndesThumbnail.md)
+  * [AndesTooltip](/tooltip/AndesTooltip.md)
 - Utils
   * [AndesColor](/color/AndesColor.md)
