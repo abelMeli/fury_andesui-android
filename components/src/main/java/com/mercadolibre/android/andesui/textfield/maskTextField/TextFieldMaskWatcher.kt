@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.textfield.maskTextField
 
 import android.text.Editable
+import android.text.InputFilter
 import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import java.math.BigDecimal
@@ -25,11 +26,14 @@ class TextFieldMaskWatcher(private var mask: String = "", private var textChange
 
         val editableLength = editable.length
         if (mask.isNotBlank() && editableLength < mask.length && editableLength > 0) {
+            val filters = editable.filters
+            editable.filters = EMPTY_FILTERS
             if (mask[editableLength] != GENERIC_CHAR) {
                 editable.append(mask[editableLength])
             } else if (mask[editableLength - 1] != GENERIC_CHAR) {
                 editable.insert(editableLength - 1, mask, editableLength - 1, editableLength)
             }
+            editable.filters = filters
         }
 
         isRunning = false
@@ -94,5 +98,6 @@ class TextFieldMaskWatcher(private var mask: String = "", private var textChange
 
     companion object {
         const val GENERIC_CHAR = '#'
+        private val EMPTY_FILTERS = arrayOf<InputFilter>()
     }
 }
