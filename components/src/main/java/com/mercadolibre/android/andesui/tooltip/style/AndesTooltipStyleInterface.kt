@@ -112,11 +112,12 @@ internal object AndesTooltipHighlightStyle : AndesTooltipStyleInterface() {
             else -> throw IllegalStateException("Loud button hierarchy is not allowed in Andes Tooltip secondary action")
         }
     }
-    override fun secondaryActionTextColor(buttonHierarchy: AndesButtonHierarchy) = R.color.andes_accent_color_500.toAndesColor()
+
+    override fun secondaryActionTextColor(buttonHierarchy: AndesButtonHierarchy) = R.color.andes_white.toAndesColor()
 
     override fun linkActionColorConfig(): BackgroundColorConfig {
         return createBackgroundColorConfigTransparent()
     }
-    override fun linkActionTextColor() = R.color.andes_accent_color_500.toAndesColor()
+    override fun linkActionTextColor() = R.color.andes_white.toAndesColor()
     override fun isLinkUnderlined() = false
 }

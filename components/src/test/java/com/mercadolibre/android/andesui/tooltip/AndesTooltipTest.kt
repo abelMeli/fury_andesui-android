@@ -128,6 +128,61 @@ class AndesTooltipTest {
     }
 
     @Test
+    fun `should build HIGHLIGHT tooltip with main and secondary actions`() {
+        val body = "my body"
+        val isDismissibleDefault = true
+        val locationDefault = AndesTooltipLocation.TOP
+        val styleDefault = AndesTooltipStyle.HIGHLIGHT
+        val basicTooltip = AndesTooltip(context = context, body = body, style = styleDefault)
+        val mainActionData = AndesTooltipAction(
+                label = "main action",
+                hierarchy = AndesButtonHierarchy.LOUD,
+                onActionClicked = { _, _ -> }
+        )
+        val secondaryActionData = AndesTooltipAction(
+                label = "secondary action",
+                hierarchy = AndesButtonHierarchy.TRANSPARENT,
+                onActionClicked = { _, _ -> }
+        )
+
+        basicTooltip.mainAction = mainActionData
+        basicTooltip.secondaryAction = secondaryActionData
+
+        assertEquals(body, basicTooltip.body)
+        assertEquals(isDismissibleDefault, basicTooltip.isDismissible)
+        assertEquals(locationDefault, basicTooltip.location)
+        assertEquals(styleDefault, basicTooltip.style)
+        assertNull(basicTooltip.title)
+        assertEquals(basicTooltip.mainAction, mainActionData)
+        assertEquals(basicTooltip.secondaryAction, secondaryActionData)
+        assertNull(basicTooltip.linkAction)
+    }
+
+    @Test
+    fun `should build HIGHLIGHT tooltip with link action`() {
+        val body = "my body"
+        val isDismissibleDefault = true
+        val locationDefault = AndesTooltipLocation.TOP
+        val styleDefault = AndesTooltipStyle.HIGHLIGHT
+        val basicTooltip = AndesTooltip(context = context, body = body, style = styleDefault)
+        val linkActionData = AndesTooltipLinkAction(
+                label = "link action",
+                onActionClicked = { _, _ -> }
+        )
+
+        basicTooltip.linkAction = linkActionData
+
+        assertEquals(body, basicTooltip.body)
+        assertEquals(isDismissibleDefault, basicTooltip.isDismissible)
+        assertEquals(locationDefault, basicTooltip.location)
+        assertEquals(styleDefault, basicTooltip.style)
+        assertNull(basicTooltip.title)
+        assertNull(basicTooltip.mainAction)
+        assertNull(basicTooltip.secondaryAction)
+        assertEquals(basicTooltip.linkAction, linkActionData)
+    }
+
+    @Test
     fun `should NOT build tooltip with DARK AndesTooltipStyle`() {
         val tooltip = spy(AndesTooltip(
                 context = context,
@@ -171,7 +226,7 @@ class AndesTooltipTest {
     }
 
     @Test
-    fun `should NOT build tooltip with secondary action loud in HIGHTLIGHT style`() {
+    fun `should NOT build tooltip with secondary action loud in HIGHLIGHT style`() {
         val mainActionData = AndesTooltipAction(
             label = "main action",
             hierarchy = AndesButtonHierarchy.LOUD,
