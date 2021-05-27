@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.textfield
 
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
@@ -12,9 +11,11 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
@@ -603,6 +604,21 @@ class AndesTextfield : ConstraintLayout {
     }
 
     /**
+     * Updates the Textfield based on the AndesCheckboxStatus
+     */
+    private fun updateTextfield(checkboxStatus: AndesCheckboxStatus) {
+        if (checkboxStatus == AndesCheckboxStatus.SELECTED) {
+            state = AndesTextfieldState.DISABLED
+            hiddenText = text
+            text = EMPTY_STRING
+        } else {
+            state = AndesTextfieldState.IDLE
+            text = hiddenText
+            hiddenText = EMPTY_STRING
+        }
+    }
+
+    /**
      * Set the right content to action and provides an interface to set button text and callback.
      */
     fun setAction(text: String, onClickListener: OnClickListener) {
@@ -630,33 +646,11 @@ class AndesTextfield : ConstraintLayout {
     }
 
     /**
-     * Updates the Textfield based on the AndesCheckboxStatus
-     */
-    private fun updateTextfield(checkboxStatus: AndesCheckboxStatus) {
-        if (checkboxStatus == AndesCheckboxStatus.SELECTED) {
-            state = AndesTextfieldState.DISABLED
-            hiddenText = text
-            text = EMPTY_STRING
-        } else {
-            state = AndesTextfieldState.IDLE
-            text = hiddenText
-            hiddenText = EMPTY_STRING
-        }
-    }
-
-    /**
      * Set the right content to indeterminate.
      */
     fun setIndeterminate() {
         rightContent = AndesTextfieldRightContent.INDETERMINATE
         startProgressAnimation((rightComponent.getChildAt(0) as AndesProgressIndicatorIndeterminate))
-    }
-
-    /**
-     * starts indeterminate animation
-     */
-    internal fun startProgressAnimation(andesProgressIndicatorIndeterminate: AndesProgressIndicatorIndeterminate) {
-        andesProgressIndicatorIndeterminate.start()
     }
 
     /**
@@ -822,6 +816,25 @@ class AndesTextfield : ConstraintLayout {
         contextMenuItemListener: AndesEditText.OnTextContextMenuItemListener
     ) {
         textComponent.setOnTextContextMenuItemListener(contextMenuItemListener)
+    }
+
+    /**
+     * starts indeterminate animation
+     */
+    internal fun startProgressAnimation(andesProgressIndicatorIndeterminate: AndesProgressIndicatorIndeterminate) {
+        andesProgressIndicatorIndeterminate.start()
+    }
+
+    /**
+     * Set listener for textComponent
+     * Only visible for internal development
+     */
+    internal fun setOnClick(onClick: () -> Unit) {
+        textComponent.setOnClickListener { onClick.invoke() }
+        textContainer.setOnClickListener {
+            textComponent.requestFocus()
+            onClick.invoke()
+        }
     }
 
     private fun createConfig() = AndesTextfieldConfigurationFactory.create(context, andesTextfieldAttrs)

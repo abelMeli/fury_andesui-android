@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownAttrParser
@@ -186,13 +185,11 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
     private fun setupBottomSheet(config: AndesDropdownConfiguration) {
         bottomSheetDialog.setOnShowListener {
             bottomSheetDialog.andesList?.refreshListAdapter()
-
             setChevronIcon(ICON_CHEVRON_UP, config.iconColor)
         }
 
         bottomSheetDialog.setOnDismissListener {
             setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
-            andesTextfield.clearFocus()
         }
     }
 
@@ -252,6 +249,11 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
 
         andesTextfield.onFocusChangeListener = onFocusChange
+
+        andesTextfield.setOnClick {
+            openBottomSheet()
+        }
+
         andesTextfield.isEnabled = false
         andesTextfield.inputType = InputType.TYPE_NULL
     }

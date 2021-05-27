@@ -2,6 +2,7 @@
 ## 🛠 Fixes
 - Fixed issue on `AndesTextfield`´s mask not applying characters due to InputType | Author: [@MKiperszmid](https://github.com/MKiperszmid)
 - Changes in the instantiation and assignation for the internal textWatchers in `AndesTextfield` | Author: [@juanunzu](https://github.com/juanunzu)
+- Fixed issue on `AndesDropDownForm` focus listener | Author: [@jperezgonzal](https://github.com/jperezgonzal)
 
 # v3.17.0
 ## 🚀 Feature
