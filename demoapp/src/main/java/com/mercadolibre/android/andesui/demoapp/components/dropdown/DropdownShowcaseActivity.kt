@@ -42,6 +42,7 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
     private lateinit var editTextHelper: AndesTextfield
     private lateinit var sizeSpinner: Spinner
     private lateinit var checkboxStarter: AndesCheckbox
+    private lateinit var checkboxIndeterminate: AndesCheckbox
     private lateinit var stateSpinner: Spinner
 
     private lateinit var viewPager: CustomViewPager
@@ -105,6 +106,8 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
         editTextHelper = container.findViewById(R.id.editTextDropdownHelper)
         checkboxStarter = container.findViewById(R.id.checkboxDropdownStartingItem)
         checkboxStarter.text = "Starting Item 0"
+        checkboxIndeterminate = container.findViewById(R.id.checkboxDropdownIndeterminate)
+        checkboxIndeterminate.text = "Set Indeterminate"
 
         stateSpinner = container.findViewById(R.id.dropdownStateSpinner)
         val stateAdapter = ArrayAdapter(
@@ -197,12 +200,21 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
         }
     }
 
+    private fun checkboxIndeterminateClick() {
+        if (checkboxIndeterminate.status == AndesCheckboxStatus.SELECTED) {
+            andesDropDownForm.setIndeterminate(true)
+        } else {
+            andesDropDownForm.setIndeterminate(false)
+        }
+    }
+
     private fun update() {
         andesDropDownForm.label = editTextTitle.text.toString()
         andesDropDownForm.placeholder = editTextPlaceHolder.text.toString()
         andesDropDownForm.helper = editTextHelper.text.toString()
         checkboxStarterClick()
         andesDropDownForm.state = AndesDropdownState.valueOf(stateSpinner.selectedItem.toString().toUpperCase())
+        checkboxIndeterminateClick()
     }
 
     private fun getFakeList(): List<AndesDropDownItem> {
