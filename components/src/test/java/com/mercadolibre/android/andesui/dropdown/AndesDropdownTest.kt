@@ -20,7 +20,11 @@ import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doNothing
+import com.nhaarman.mockitokotlin2.spy
 import org.junit.Assert
 import org.junit.Before
 import org.junit.BeforeClass
@@ -187,5 +191,15 @@ class AndesDropdownTest {
     fun `test dropdownform constructor with state`() {
         val dropdown = AndesDropDownForm(context, AndesDropdownMenuType.BOTTOMSHEET, "", "", "", AndesDropdownState.DISABLED)
         Assert.assertEquals(dropdown.state, AndesDropdownState.DISABLED)
+    }
+
+    @Test
+    fun `test dropdownform set indeterminate`() {
+        val dropdown = AndesDropDownForm(context, AndesDropdownMenuType.BOTTOMSHEET, "", "", "", AndesDropdownState.ENABLED)
+
+        val spyDropdown = spy(dropdown)
+        doNothing().`when`(spyDropdown).setIndeterminate()
+        spyDropdown.setIndeterminate(true)
+        Assert.assertEquals(AndesDropdownState.DISABLED, spyDropdown.state)
     }
 }

@@ -1,3 +1,7 @@
+# v3.18.0
+## 🚀 Feature
+- Added Indeterminate support to `AndesDropdownForm` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
+
 # v3.17.1
 ## 🛠 Fixes
 - Fixed issue on `AndesTextfield`´s mask not applying characters due to InputType | Author: [@MKiperszmid](https://github.com/MKiperszmid)
