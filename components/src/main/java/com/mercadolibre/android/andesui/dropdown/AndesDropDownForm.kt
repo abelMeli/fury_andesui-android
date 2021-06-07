@@ -200,6 +200,22 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
     }
 
     /**
+     * Sets the indeterminate to show the dropdown is loading
+     */
+    fun setIndeterminate(status: Boolean) {
+        if (status) {
+            state = AndesDropdownState.DISABLED
+            setIndeterminate()
+        } else {
+            setChevronIcon(ICON_CHEVRON_DOWN, createConfig().iconColor)
+        }
+    }
+
+    internal fun setIndeterminate() {
+        andesTextfield.setIndeterminate()
+    }
+
+    /**
      * Sets the list of item that the Dropdown will draw, with optional pre-selected item
      */
     fun setItems(listItems: List<AndesDropDownItem>, defaultPosition: Int = -1) {
