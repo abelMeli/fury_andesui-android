@@ -80,7 +80,7 @@ class AndesRadioButtonTest {
         val config = configFactory.create(attrs)
         assertEquals(
                 config.type.type.borderColor(context, config.status),
-                R.color.andes_blue_ml_500.toAndesColor()
+                R.color.andes_accent_color_500.toAndesColor()
         )
     }
 
@@ -95,7 +95,7 @@ class AndesRadioButtonTest {
         val config = configFactory.create(attrs)
         assertEquals(
                 config.type.type.backgroundColor(context, config.status),
-                R.color.andes_blue_ml_500.toAndesColor()
+                R.color.andes_accent_color_500.toAndesColor()
         )
     }
 

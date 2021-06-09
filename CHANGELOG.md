@@ -1,6 +1,8 @@
 # v3.18.0
 ## 🚀 Feature
 - Added Indeterminate support to `AndesDropdownForm` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
+## 🛠 Fixes
+- Fix AndesRadioButton color to andes_accent_color_500 | Author: [@gimena-martinez](https://github.com/gimena-martinez)
 
 # v3.17.1
 ## 🛠 Fixes
