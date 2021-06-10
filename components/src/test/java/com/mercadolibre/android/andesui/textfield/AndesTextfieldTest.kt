@@ -21,7 +21,6 @@ import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.times
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertNull
 import org.junit.Before
@@ -219,5 +218,4 @@ class AndesTextfieldTest {
 
         assertEquals(InputType.TYPE_TEXT_FLAG_MULTI_LINE, textfield.inputType)
     }
-
 }
