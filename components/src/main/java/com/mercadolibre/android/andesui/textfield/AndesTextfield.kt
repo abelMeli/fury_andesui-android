@@ -502,7 +502,7 @@ class AndesTextfield : ConstraintLayout {
 
     private fun setupMaxLines(config: AndesTextfieldConfiguration) {
         if (config.maxLines != null && config.maxLines > 1) {
-            textComponent.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
             textComponent.isSingleLine = false
             textComponent.maxLines = config.maxLines
         }
