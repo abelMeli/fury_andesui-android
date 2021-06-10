@@ -1,5 +1,6 @@
 # v3.18.0
 ## 🚀 Feature
+- Added full accessibility support for `AndesTextfield` and `AndesTextfieldCode`
 - Added Indeterminate support to `AndesDropdownForm` | Author: [@MKiperszmid](https://github.com/MKiperszmid)
 ## 🛠 Fixes
 - Fix AndesRadioButton color to andes_accent_color_500 | Author: [@gimena-martinez](https://github.com/gimena-martinez)

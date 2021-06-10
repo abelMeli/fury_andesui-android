@@ -9,5 +9,13 @@
     <string name="andes_prefix_hint" translatable="false">Prefix</string>
     <string name="andes_tag_choice_selected" translatable="false">Seleccionado</string>
     <string name="andes_textfield_right_content_clear">Borrar texto</string>
+    <string name="andes_textfield_char_number_text" translatable="false">máximo número de caracteres: %1$d</string>
+    <string name="andes_textfield_error_text" translatable="false">Error</string>
+    <plurals name="andes_textfield_chars_left" translatable="false">
+        <item quantity="one">%d caracter restante</item>
+        <item quantity="other">%d caracteres restantes</item>
+    </plurals>
+    <string name="andes_textfield_chars_entered" translatable="false">Caracteres ingresados: %1$d de %2$d</string>
+    <string name="andes_textfield_field_completed" translatable="false">Campo de texto completo</string>
 
 </resources>
