@@ -12,6 +12,8 @@
 
         <attr name="andesTextfieldCounter" format="integer" />
 
+        <attr name="andesTextfieldMaxLines" format="integer" />
+
         <attr name="andesTextfieldState">
             <enum name="idle" value="20" />
             <enum name="error" value="21" />

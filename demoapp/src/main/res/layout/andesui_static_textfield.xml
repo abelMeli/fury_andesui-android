@@ -125,6 +125,15 @@
             app:andesTextfieldRightContent="suffix"
             app:andesTextfieldState="idle" />
 
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
+            app:andesTextfieldHelper="@string/andes_textfield_help"
+            app:andesTextfieldLabel="@string/andes_textfield_max_lines"
+            app:andesTextfieldPlaceholder="@string/andes_textfield_placeholder_text"
+            app:andesTextfieldMaxLines="3" />
+
         <com.mercadolibre.android.andesui.textfield.AndesTextarea
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
