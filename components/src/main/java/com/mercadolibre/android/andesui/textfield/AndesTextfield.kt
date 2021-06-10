@@ -278,7 +278,7 @@ class AndesTextfield : ConstraintLayout {
     ) {
         val showCounter = SHOW_COUNTER_DEFAULT
         andesTextfieldAttrs = AndesTextfieldAttrs(
-            label, helper, placeholder, counter, showCounter, state, leftContent, rightContent, inputType, maxLines=maxLines
+            label, helper, placeholder, counter, showCounter, state, leftContent, rightContent, inputType, maxLines = maxLines
         )
         val config = AndesTextfieldConfigurationFactory.create(context, andesTextfieldAttrs)
         setupComponents(config)
@@ -921,6 +921,6 @@ class AndesTextfield : ConstraintLayout {
         private val LEFT_COMPONENT_DEFAULT = null
         private val RIGHT_COMPONENT_DEFAULT = null
         private const val INPUT_TYPE_DEFAULT = InputType.TYPE_CLASS_TEXT
-        private val MAXLINES_DEFAULT = 1
+        private const val MAXLINES_DEFAULT = 1
     }
 }
