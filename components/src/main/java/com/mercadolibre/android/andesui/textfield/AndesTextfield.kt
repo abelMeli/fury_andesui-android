@@ -26,6 +26,8 @@ import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.icons.IconProvider
 import com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
+import com.mercadolibre.android.andesui.textfield.accessibility.AndesTextfieldAccessibilityDelegate
+import com.mercadolibre.android.andesui.textfield.accessibility.AndesTextfieldAccessibilityEventDispatcher
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldAttrs
@@ -124,6 +126,7 @@ class AndesTextfield : ConstraintLayout {
             setupColorComponents(config)
             setupHelperComponent(config)
             setupCounterComponent(config)
+            setupTextContainerNavigation()
         }
 
     /**
@@ -216,12 +219,13 @@ class AndesTextfield : ConstraintLayout {
     private lateinit var labelComponent: TextView
     private lateinit var helperComponent: TextView
     private lateinit var counterComponent: TextView
-    private lateinit var textComponent: AndesEditText
+    internal lateinit var textComponent: AndesEditText
     private lateinit var iconComponent: SimpleDraweeView
-    private lateinit var leftComponent: FrameLayout
+    internal lateinit var leftComponent: FrameLayout
     private lateinit var rightComponent: FrameLayout
     private var maskWatcher: TextFieldMaskWatcher? = null
     private var hiddenText: String? = EMPTY_STRING
+    private val a11yEventDispatcher by lazy { AndesTextfieldAccessibilityEventDispatcher() }
     internal var clearTextWatcher: TextWatcher? = null
 
     @Suppress("unused")
@@ -297,6 +301,33 @@ class AndesTextfield : ConstraintLayout {
         setupTextWatcher()
         setupTextComponent(config)
         setupMaxLines(config)
+        setupTextContainerNavigation()
+        setupA11yDelegate()
+    }
+
+    private fun setupA11yDelegate() {
+        accessibilityDelegate = AndesTextfieldAccessibilityDelegate(this)
+    }
+
+    private fun setupTextContainerNavigation() {
+        leftComponent.isFocusable = false
+        leftComponent.isClickable = false
+        leftComponent.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+
+        textContainer.isClickable = false
+        textContainer.isFocusable = false
+
+        textComponent.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+
+        if (state == AndesTextfieldState.READONLY) {
+            textComponent.isClickable = false
+            textComponent.isFocusable = false
+            textContainer.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        } else {
+            textComponent.isClickable = true
+            textComponent.isFocusable = true
+            textContainer.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+        }
     }
 
     /**
@@ -330,17 +361,10 @@ class AndesTextfield : ConstraintLayout {
     }
 
     private fun setupEnabledView() {
-        if (state == AndesTextfieldState.DISABLED || state == AndesTextfieldState.READONLY) {
-            isEnabled = false
-            textComponent.isEnabled = isEnabled
-            textContainer.isEnabled = isEnabled
-            textfieldContainer.isEnabled = isEnabled
-        } else {
-            isEnabled = true
-            textComponent.isEnabled = isEnabled
-            textContainer.isEnabled = isEnabled
-            textfieldContainer.isEnabled = isEnabled
-        }
+        isEnabled = (state != AndesTextfieldState.DISABLED)
+        textComponent.isEnabled = isEnabled
+        textContainer.isEnabled = isEnabled
+        textfieldContainer.isEnabled = isEnabled
     }
 
     /**
@@ -452,7 +476,11 @@ class AndesTextfield : ConstraintLayout {
     private fun setupCounterTextWatcher() {
         textComponent.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
-                // Do nothing.
+                a11yEventDispatcher.notifyA11yTextThresholdReached(
+                        view = this@AndesTextfield,
+                        maxCharsCount = counter,
+                        text = charSequence.toString()
+                )
             }
 
             override fun beforeTextChanged(charSeqeuence: CharSequence?, start: Int, count: Int, after: Int) {
@@ -566,6 +594,23 @@ class AndesTextfield : ConstraintLayout {
             setupClear()
         } else {
             rightComponent.visibility = View.GONE
+        }
+        setupRightComponentNavigation()
+    }
+
+    private fun setupRightComponentNavigation() {
+        rightContent?.let {
+            when (it) {
+                AndesTextfieldRightContent.SUFFIX, AndesTextfieldRightContent.CLEAR,
+                AndesTextfieldRightContent.ACTION, AndesTextfieldRightContent.CHECKBOX -> {
+                    rightComponent.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+                    rightComponent.isFocusable = true
+                }
+                else -> {
+                    rightComponent.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+                    rightComponent.isFocusable = false
+                }
+            }
         }
     }
 

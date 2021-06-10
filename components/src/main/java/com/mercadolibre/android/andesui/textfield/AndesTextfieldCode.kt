@@ -3,7 +3,6 @@ package com.mercadolibre.android.andesui.textfield
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Parcelable
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.SparseArray
@@ -12,10 +11,14 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.textfield.accessibility.AndesTextfieldCodeAccessibilityDelegate
+import com.mercadolibre.android.andesui.textfield.accessibility.AndesTextfieldCodeAccessibilityEventDispatcher
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldCodeAttrs
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldCodeAttrsParser
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldCodeConfiguration
@@ -26,6 +29,7 @@ import com.mercadolibre.android.andesui.textfield.textwatcher.AndesCodeFocusMana
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesCodeTextChangedHandler
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesTextfieldBoxWatcher
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesTextfieldBoxWatcher.Companion.DIRTY_CHARACTER
+import com.mercadolibre.android.andesui.utils.openKeyboard
 import kotlinx.android.parcel.Parcelize
 import kotlin.math.min
 
@@ -86,6 +90,7 @@ class AndesTextfieldCode : ConstraintLayout {
             setUpFocusManagement(config)
             setUpAndesTextfieldCodeWatcher(config)
             setupBoxStyleComponent(config)
+            setupA11yDelegate()
         }
 
     private lateinit var andesTextfieldCodeAttrs: AndesTextfieldCodeAttrs
@@ -99,6 +104,7 @@ class AndesTextfieldCode : ConstraintLayout {
     private var currentText: String? = null
     private var onCompletionListener: OnCompletionListener? = null
     private var onTextChangeListener: OnTextChangeListener? = null
+    private val a11yEventDispatcher by lazy { AndesTextfieldCodeAccessibilityEventDispatcher() }
 
     constructor(
         context: Context,
@@ -147,6 +153,11 @@ class AndesTextfieldCode : ConstraintLayout {
         setUpAndesTextfieldCodeWatcher(config)
         setupBoxStyleComponent(config)
         setupColorComponents(config)
+        setupA11yDelegate()
+    }
+
+    private fun setupA11yDelegate() {
+        accessibilityDelegate = AndesTextfieldCodeAccessibilityDelegate(this)
     }
 
     /**
@@ -161,6 +172,8 @@ class AndesTextfieldCode : ConstraintLayout {
         labelComponent = container.findViewById(R.id.andes_textfield_code_label)
         helperComponent = container.findViewById(R.id.andes_textfield_code_helper)
         iconComponent = container.findViewById(R.id.andes_textfield_code_icon)
+
+        textfieldBoxCodeContainer.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
     }
 
     private fun setupViewId() {
@@ -234,7 +247,10 @@ class AndesTextfieldCode : ConstraintLayout {
                     onTextChangeListener?.onChange(it)
                 }
             },
-            onComplete = { isFull -> onCompletionListener?.onComplete(isFull) })
+            onComplete = { isFull ->
+                onCompletionListener?.onComplete(isFull)
+                a11yEventDispatcher.notifyA11yTextCompleted(this, isFull)
+            })
     }
 
     /**
@@ -245,11 +261,13 @@ class AndesTextfieldCode : ConstraintLayout {
             getBoxAt(previousFocus)?.let {
                 it.setAndesIsLongClickable(false)
                 it.setAndesFocusableInTouchMode(false)
+                it.textComponent.isFocusable = false
             }
             getBoxAt(nextFocus)?.let {
                 it.setAndesIsLongClickable(true)
                 it.setAndesFocusableInTouchMode(true)
                 it.requestFocusOnTextField()
+                it.textComponent.isFocusable = true
                 if (nextFocus < previousFocus) {
                     it.text = DIRTY_CHARACTER
                     it.setSelection(DIRTY_CHARACTER.length)
@@ -269,7 +287,13 @@ class AndesTextfieldCode : ConstraintLayout {
             inputType = InputType.TYPE_CLASS_NUMBER).also {
             it.setAndesTextAlignment(View.TEXT_ALIGNMENT_CENTER)
             it.showCounter = false
+        }.also {
+            if (textfieldBoxCodeContainer.childCount > 0) {
+                accessibilityDelegate = object : AccessibilityDelegate() { }
+                it.textComponent.isFocusable = false
+            }
         }
+
         textfieldBoxCodeContainer.addView(boxView)
         boxView.layoutParams = (boxView.layoutParams as LinearLayout.LayoutParams).also { it.width = config.boxWidth }
 
@@ -292,6 +316,7 @@ class AndesTextfieldCode : ConstraintLayout {
                     andesTextField.text == DIRTY_CHARACTER ||
                     index == lastIndex) {
                     andesTextField.requestFocusOnTextField()
+                    openKeyboard()
                     return super.onInterceptTouchEvent(ev)
                 }
             }
@@ -473,6 +498,10 @@ class AndesTextfieldCode : ConstraintLayout {
 
     override fun dispatchRestoreInstanceState(container: SparseArray<Parcelable?>?) {
         dispatchThawSelfOnly(container)
+    }
+
+    override fun getAccessibilityClassName(): CharSequence {
+        return EditText::class.java.name
     }
 
     override fun onSaveInstanceState(): Parcelable? {
