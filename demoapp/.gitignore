@@ -108,7 +108,4 @@ Temporary Items
 # Hugo plugin: https://github.com/JakeWharton/hugo/issues/107
 ajcore*.txt
 
-
 *.hprof
-/src/main/res/font/andes_font_regular.otf
-/src/main/res/font/andes_font_semibold.otf
