@@ -12,6 +12,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
@@ -202,6 +203,16 @@ class AndesTextfield : ConstraintLayout {
             }
         }
 
+    /**
+     * * Getter and setter for the maxLines of [EditText].
+     */
+    var maxLines: Int?
+        get() = andesTextfieldAttrs.maxLines
+        set(value) {
+            andesTextfieldAttrs = andesTextfieldAttrs.copy(maxLines = value)
+            setupMaxLines(createConfig())
+        }
+
     private lateinit var andesTextfieldAttrs: AndesTextfieldAttrs
     private lateinit var textfieldContainer: ConstraintLayout
     private lateinit var textContainer: ConstraintLayout
@@ -220,7 +231,7 @@ class AndesTextfield : ConstraintLayout {
     @Suppress("unused")
     constructor(context: Context) : super(context) {
         initAttrs(LABEL_DEFAULT, HELPER_DEFAULT, PLACEHOLDER_DEFAULT, COUNTER_DEFAULT,
-            STATE_DEFAULT, LEFT_COMPONENT_DEFAULT, RIGHT_COMPONENT_DEFAULT, INPUT_TYPE_DEFAULT)
+            STATE_DEFAULT, LEFT_COMPONENT_DEFAULT, RIGHT_COMPONENT_DEFAULT, INPUT_TYPE_DEFAULT, MAXLINES_DEFAULT)
     }
 
     @Suppress("LongParameterList")
@@ -233,9 +244,10 @@ class AndesTextfield : ConstraintLayout {
         state: AndesTextfieldState = STATE_DEFAULT,
         leftContent: AndesTextfieldLeftContent? = LEFT_COMPONENT_DEFAULT,
         rightContent: AndesTextfieldRightContent? = RIGHT_COMPONENT_DEFAULT,
-        inputType: Int = INPUT_TYPE_DEFAULT
+        inputType: Int = INPUT_TYPE_DEFAULT,
+        maxLines: Int? = MAXLINES_DEFAULT
     ) : super(context) {
-        initAttrs(label, helper, placeholder, counter, state, leftContent, rightContent, inputType)
+        initAttrs(label, helper, placeholder, counter, state, leftContent, rightContent, inputType, maxLines)
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -261,11 +273,12 @@ class AndesTextfield : ConstraintLayout {
         state: AndesTextfieldState,
         leftContent: AndesTextfieldLeftContent?,
         rightContent: AndesTextfieldRightContent?,
-        inputType: Int
+        inputType: Int,
+        maxLines: Int?
     ) {
         val showCounter = SHOW_COUNTER_DEFAULT
         andesTextfieldAttrs = AndesTextfieldAttrs(
-            label, helper, placeholder, counter, showCounter, state, leftContent, rightContent, inputType
+            label, helper, placeholder, counter, showCounter, state, leftContent, rightContent, inputType, maxLines = maxLines
         )
         val config = AndesTextfieldConfigurationFactory.create(context, andesTextfieldAttrs)
         setupComponents(config)
@@ -287,6 +300,7 @@ class AndesTextfield : ConstraintLayout {
         setupInputType()
         setupTextWatcher()
         setupTextComponent(config)
+        setupMaxLines(config)
         setupTextContainerNavigation()
         setupA11yDelegate()
     }
@@ -484,6 +498,14 @@ class AndesTextfield : ConstraintLayout {
                 )
             }
         })
+    }
+
+    private fun setupMaxLines(config: AndesTextfieldConfiguration) {
+        if (config.maxLines != null && config.maxLines > MAXLINES_DEFAULT) {
+            inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            textComponent.isSingleLine = false
+            textComponent.maxLines = config.maxLines
+        }
     }
 
     /**
@@ -899,5 +921,6 @@ class AndesTextfield : ConstraintLayout {
         private val LEFT_COMPONENT_DEFAULT = null
         private val RIGHT_COMPONENT_DEFAULT = null
         private const val INPUT_TYPE_DEFAULT = InputType.TYPE_CLASS_TEXT
+        private const val MAXLINES_DEFAULT = 1
     }
 }

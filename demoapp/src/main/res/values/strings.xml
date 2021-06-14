@@ -419,6 +419,7 @@
     <string name="andes_textfield_prefix_text">Left component:</string>
     <string name="andes_textfield_suffix_text">Right component:</string>
     <string name="andes_textfield_hide_icon">show and hide icon when type.</string>
+    <string name="andes_textfield_max_lines">Textfield maxlines:</string>
     <string name="andes_counter_text">Counter:</string>
     <string name="andes_mask_hint">Mascara: ##-###-######-#</string>
     <string name="andes_textfield_input_type">Input Type:</string>

@@ -33,7 +33,7 @@ internal data class AndesTextfieldConfiguration(
     val leftComponentRightMargin: Int? = null,
     val rightComponentLeftMargin: Int? = null,
     val rightComponentRightMargin: Int? = null,
-    val maxLines: Int? = null
+    val maxLines: Int? = 1
 )
 
 @Suppress("TooManyFunctions")
@@ -72,7 +72,8 @@ internal object AndesTextfieldConfigurationFactory {
                             andesTextfieldAttrs.state.state,
                             rightContent?.rightContent
                     ),
-                    rightComponentRightMargin = resolveRightComponentRightMargin(context, rightContent?.rightContent)
+                    rightComponentRightMargin = resolveRightComponentRightMargin(context, rightContent?.rightContent),
+                    maxLines = maxLines
             )
         }
     }

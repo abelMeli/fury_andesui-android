@@ -23,7 +23,8 @@ internal data class AndesTextfieldAttrs(
     val leftContent: AndesTextfieldLeftContent?,
     val rightContent: AndesTextfieldRightContent?,
     val inputType: Int,
-    val textWatcher: TextWatcher? = null
+    val textWatcher: TextWatcher? = null,
+    val maxLines: Int?
 )
 
 /**
@@ -62,7 +63,8 @@ internal object AndesTextfieldAttrsParser {
             state = state,
             leftContent = leftContent,
             rightContent = rightContent,
-            inputType = inputType
+            inputType = inputType,
+            maxLines = typedArray.getInt(R.styleable.AndesTextfield_andesTextfieldMaxLines, 1)
         ).also { typedArray.recycle() }
     }
 

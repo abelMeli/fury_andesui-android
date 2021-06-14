@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.textfield
 
 import android.os.Build
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.view.View
 import com.facebook.common.logging.FLog
@@ -209,5 +210,12 @@ class AndesTextfieldTest {
 
         spiedTextfield.rightContent = AndesTextfieldRightContent.CLEAR
         verify(spiedTextfield, times(2)).removeClearTextWatcher()
+    }
+
+    @Test
+    fun `textfield with maxlines`() {
+        textfield.maxLines = 3
+
+        assertEquals(InputType.TYPE_TEXT_FLAG_MULTI_LINE, textfield.inputType)
     }
 }
