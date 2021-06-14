@@ -1,3 +1,7 @@
+# v3.19.0
+## 🚀 Feature
+- Added maxLines support to `AndesTextfield` | Author: [@gonzalomartinez](https://github.com/gonzalomartinez)
+
 # v3.18.0
 ## 🚀 Feature
 - Added full accessibility support for `AndesTextfield` and `AndesTextfieldCode`
