@@ -15,10 +15,6 @@ internal fun Context.displaySize(): Point {
           resources.displayMetrics.heightPixels
   )
 }
-/** returns if an Activity is finishing or not. */
-internal fun Context.isFinishing(): Boolean {
-  return this is Activity && this.isFinishing
-}
 
 /** sets visibility of the view based on the given parameter. */
 internal fun View.visible(shouldVisible: Boolean) {

@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.tooltip
 
+import android.app.Activity
 import android.os.Build
 import android.view.View
 import android.widget.PopupWindow
@@ -34,6 +35,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.times
 import org.mockito.Mockito.never
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
@@ -525,5 +527,109 @@ class AndesTooltipTest {
         tooltip.dismiss()
 
         verify(bodyWindow).dismiss()
+    }
+
+    @Test
+    fun `should not show tooltip when context is null`() {
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val tooltip = spy(AndesTooltip(
+            context = activity,
+            title = title,
+            body = body
+        ))
+
+        val mockTarget: View = spy(AndesButton(activity))
+
+        ReflectionHelpers.setField(tooltip, "isShowing", false)
+        ReflectionHelpers.setField(tooltip, "context", null)
+        `when`(mockTarget.isAttachedToWindow).thenReturn(true)
+
+        assertEquals(tooltip.canShowTooltip(mockTarget), false)
+    }
+
+    @Test
+    fun `should not show tooltip when context is not activity`() {
+        val tooltip = spy(AndesTooltip(
+            context = context,
+            title = title,
+            body = body
+        ))
+
+        val mockTarget: View = spy(AndesButton(context))
+
+        ReflectionHelpers.setField(tooltip, "isShowing", false)
+        ReflectionHelpers.setField(tooltip, "context", context)
+        `when`(mockTarget.isAttachedToWindow).thenReturn(true)
+
+        assertEquals(tooltip.canShowTooltip(mockTarget), false)
+    }
+
+    @Test
+    fun `should not show tooltip when activity is finishing`() {
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val tooltip = spy(AndesTooltip(
+            context = activity,
+            title = title,
+            body = body
+        ))
+
+        val mockTarget: View = spy(AndesButton(activity))
+
+        ReflectionHelpers.setField(tooltip, "isShowing", false)
+        `when`(mockTarget.isAttachedToWindow).thenReturn(true)
+        activity.finish()
+
+        assertEquals(tooltip.canShowTooltip(mockTarget), false)
+    }
+
+    @Test
+    fun `should not show tooltip when tooltip is already showing`() {
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val tooltip = spy(AndesTooltip(
+            context = activity,
+            title = title,
+            body = body
+        ))
+
+        val mockTarget: View = spy(AndesButton(activity))
+
+        ReflectionHelpers.setField(tooltip, "isShowing", true)
+        `when`(mockTarget.isAttachedToWindow).thenReturn(true)
+
+        assertEquals(tooltip.canShowTooltip(mockTarget), false)
+    }
+
+    @Test
+    fun `should not show tooltip when target is not attached to activity`() {
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val tooltip = spy(AndesTooltip(
+            context = activity,
+            title = title,
+            body = body
+        ))
+
+        val mockTarget: View = spy(AndesButton(activity))
+
+        ReflectionHelpers.setField(tooltip, "isShowing", false)
+        `when`(mockTarget.isAttachedToWindow).thenReturn(false)
+
+        assertEquals(tooltip.canShowTooltip(mockTarget), false)
+    }
+
+    @Test
+    fun `should show tooltip when tooltip is not showing and can attach to activity`() {
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+        val tooltip = spy(AndesTooltip(
+            context = activity,
+            title = title,
+            body = body
+        ))
+
+        val mockTarget: View = spy(AndesButton(activity))
+
+        ReflectionHelpers.setField(tooltip, "isShowing", false)
+        `when`(mockTarget.isAttachedToWindow).thenReturn(true)
+
+        assertEquals(tooltip.canShowTooltip(mockTarget), true)
     }
 }

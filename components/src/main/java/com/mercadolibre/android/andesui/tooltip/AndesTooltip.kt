@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.tooltip
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
@@ -27,7 +28,6 @@ import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
 import com.mercadolibre.android.andesui.tooltip.extensions.displaySize
-import com.mercadolibre.android.andesui.tooltip.extensions.isFinishing
 import com.mercadolibre.android.andesui.tooltip.extensions.visible
 import com.mercadolibre.android.andesui.tooltip.factory.AndesTooltipAttrs
 import com.mercadolibre.android.andesui.tooltip.factory.AndesTooltipConfiguration
@@ -259,7 +259,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
     }
 
     internal fun canShowTooltip(target: View) =
-            !isShowing && !context.isFinishing() && ViewCompat.isAttachedToWindow(target)
+            !isShowing && context is Activity && !context.isFinishing && ViewCompat.isAttachedToWindow(target)
 
     /**
      * After AndesTooltip is built, this show(target: View) method will present the tooltip on the screen.
@@ -268,8 +268,8 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
      */
     @MainThread
     fun show(target: View) {
-        if (canShowTooltip(target)) {
-            target.post {
+        target.post {
+            if (canShowTooltip(target)) {
                 container.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
                 bodyWindow.width = tooltipMeasuredWidth
                 bodyWindow.height = tooltipMeasuredHeight
