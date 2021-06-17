@@ -845,9 +845,8 @@ class AndesTextfield : ConstraintLayout {
 
     /**
      * Set selection for textComponent
-     * Only visible for internal development
      */
-    internal fun setSelection(selection: Int) {
+    fun setSelection(selection: Int) {
         textComponent.setSelection(selection)
     }
 

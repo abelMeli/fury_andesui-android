@@ -1,6 +1,7 @@
 # v3.19.0
 ## 🚀 Feature
 - Added maxLines support to `AndesTextfield` | Author: [@gonzalomartinez](https://github.com/gonzalomartinez)
+- Make public setSelection in `AndesTextfield` | Author: [@gonzalomartinez](https://github.com/gonzalomartinez)
 ## 🛠 Fixes
 - Fix `AndesTooltip` crash when context is null | Author: [@eportasML](https://github.com/eportasML)
 
