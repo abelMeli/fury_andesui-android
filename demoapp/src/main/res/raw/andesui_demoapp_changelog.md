@@ -3,6 +3,7 @@
 - Added maxLines support to `AndesTextfield` | Author: [@gonzalomartinez](https://github.com/gonzalomartinez)
 ## 🛠 Fixes
 - Fix `AndesTooltip` crash when context is null | Author: [@eportasML](https://github.com/eportasML)
+- Fix `DemoApp` andes font is added in the demoapp | Author: [@jperezgonzal](https://github.com/jperezgonzal)
 
 # v3.18.0
 ## 🚀 Feature
