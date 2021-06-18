@@ -22,7 +22,8 @@ internal enum class AndesSpecs(val link: String) {
     PROGRESS_INDICATOR("$COMPONENT_PREFIX/progress-indicator"),
     TOOLTIP("$COMPONENT_PREFIX/tooltip"),
     TEXTFIELD("$COMPONENT_PREFIX/textfield"),
-    THUMBNAIL("$COMPONENT_PREFIX/thumbnail-1589997379");
+    THUMBNAIL("$COMPONENT_PREFIX/thumbnail-1589997379"),
+    SWITCH("$COMPONENT_PREFIX/switch")
 }
 
 internal fun launchSpecs(context: Context, specs: AndesSpecs) {

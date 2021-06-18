@@ -1,5 +1,6 @@
 # v3.19.0
 ## 🚀 Feature
+- AndesSwitch
 - Added maxLines support to `AndesTextfield` | Author: [@gonzalomartinez](https://github.com/gonzalomartinez)
 - Make public setSelection in `AndesTextfield` | Author: [@gonzalomartinez](https://github.com/gonzalomartinez)
 ## 🛠 Fixes

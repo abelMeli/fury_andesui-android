@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_switch_status_checked">Activado</string>
+    <string name="andes_switch_status_unchecked">Desactivado</string>
+    <string name="andes_switch_action_check">activar</string>
+    <string name="andes_switch_action_uncheck">desactivar</string>
+</resources>

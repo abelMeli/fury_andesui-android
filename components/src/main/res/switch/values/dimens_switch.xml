@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andes_switch_small_text_size">12sp</dimen>
+    <dimen name="andes_switch_left_text_margin_end">12sp</dimen>
+    <dimen name="andes_switch_right_text_margin_start">12sp</dimen>
+
+    <dimen name="andes_switch_track_width">32dp</dimen>
+    <dimen name="andes_switch_track_height">20dp</dimen>
+    <dimen name="andes_switch_track_corner_radius">10dp</dimen>
+
+    <dimen name="andes_switch_thumb_height">20dp</dimen>
+    <dimen name="andes_switch_thumb_width">20dp</dimen>
+    <dimen name="andes_switch_stroke_width">2dp</dimen>
+
+    <dimen name="andes_switch_translation_x">12dp</dimen>
+
+    <dimen name="andes_switch_layout_height">48dp</dimen>
+</resources>

@@ -83,6 +83,9 @@ class MainActivity : AppCompatActivity() {
         andesui_date_picker.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/datepicker"))
         }
+        andesui_switch.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/switch"))
+        }
     }
 
     private fun setupExtras() {

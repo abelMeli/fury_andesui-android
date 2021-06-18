@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true">
+
+        <TextView
+            android:id="@+id/static_page_switch_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/andes_switch_name_text"
+            android:textColor="#000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.switch.AndesSwitch
+            android:id="@+id/static_page_switch_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:andesSwitchAlign="left"
+            app:andesSwitchStatus="checked"
+            app:andesSwitchText="@string/andes_switch_name_text"
+            app:andesSwitchType="enabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_switch_header" />
+
+        <com.mercadolibre.android.andesui.switch.AndesSwitch
+            android:id="@+id/static_page_switch_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:andesSwitchAlign="right"
+            app:andesSwitchStatus="unchecked"
+            app:andesSwitchText="@string/andes_switch_name_text_unchecked"
+            app:andesSwitchType="enabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_switch_first" />
+
+        <com.mercadolibre.android.andesui.switch.AndesSwitch
+            android:id="@+id/static_page_switch_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:andesSwitchAlign="left"
+            app:andesSwitchStatus="checked"
+            app:andesSwitchText="@string/andes_switch_name_text_checked_disabled"
+            app:andesSwitchType="disabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_switch_second" />
+
+        <com.mercadolibre.android.andesui.switch.AndesSwitch
+            android:id="@+id/static_page_switch_fourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:andesSwitchAlign="right"
+            app:andesSwitchStatus="unchecked"
+            app:andesSwitchText="@string/andes_switch_name_text_unchecked_disabled"
+            app:andesSwitchType="disabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_switch_third" />
+
+        <TextView
+            android:id="@+id/static_page_switch_textview_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/andes_demoapp_label_more"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_switch_fourth" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/static_page_switch_button_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:andesButtonHierarchy="quiet"
+            app:andesButtonSize="medium"
+            app:andesButtonText="@string/andes_switch_specs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_switch_textview_more" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
