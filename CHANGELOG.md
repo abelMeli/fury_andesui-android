@@ -1,3 +1,7 @@
+# v3.20.0
+## 🚀 Feature
+- Added assets to Andes documentation
+
 # v3.19.0
 ## 🚀 Feature
 - AndesSwitch
