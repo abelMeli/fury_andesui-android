@@ -8,7 +8,8 @@ internal data class AndesSwitchConfiguration(
     val leftTextVisibility: Int,
     val rightTextVisibility: Int,
     val status: AndesSwitchStatus,
-    val type: AndesSwitchType
+    val type: AndesSwitchType,
+    val titleNumberOfLines: Int
 )
 
 internal object AndesSwitchConfigurationFactory {
@@ -20,7 +21,8 @@ internal object AndesSwitchConfigurationFactory {
                 leftTextVisibility = andesSwitchAlign.align.leftTextVisibility(),
                 rightTextVisibility = andesSwitchAlign.align.rightTextVisibility(),
                 status = andesSwitchStatus,
-                type = andesSwitchType
+                type = andesSwitchType,
+                titleNumberOfLines = andesSwitchTitleNumberOfLines
             )
         }
     }
