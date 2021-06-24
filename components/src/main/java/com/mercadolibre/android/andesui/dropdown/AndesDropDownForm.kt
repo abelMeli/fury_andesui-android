@@ -160,7 +160,8 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
     private fun setupComponents(config: AndesDropdownConfiguration) {
         initComponents()
         setupViewId()
-        setupAndesTextFieldComponent(config)
+        setupAndesTextFieldComponent()
+        setupEnabledView(config)
         setupMenuType(config)
     }
 
@@ -261,9 +262,7 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         andesTextfield.setRightIcon(chevronIcon, null, color)
     }
 
-    private fun setupAndesTextFieldComponent(config: AndesDropdownConfiguration) {
-        setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
-
+    private fun setupAndesTextFieldComponent() {
         andesTextfield.onFocusChangeListener = onFocusChange
 
         andesTextfield.setOnClick {

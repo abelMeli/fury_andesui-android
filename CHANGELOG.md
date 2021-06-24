@@ -2,6 +2,10 @@
 ## 🚀 Feature
 - Added assets to Andes documentation
 
+# v3.19.1
+## 🛠 Fixes
+- Fix `AndesDropdownAttrs` attribute parsing | Author: [@MKiperszmid](https://github.com/MKiperszmid)
+
 # v3.19.0
 ## 🚀 Feature
 - AndesSwitch
