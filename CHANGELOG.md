@@ -2,6 +2,7 @@
 ## 🚀 Feature
 - Added assets to Andes documentation
 - Changes in andes text colors to comply with a11y standards for color contrast | Author: [@juanunzu](https://github.com/juanunzu)
+- Added multiline support for `AndesSwitch` | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.19.1
 ## 🛠 Fixes
