@@ -198,6 +198,8 @@ class AndesSwitchTest {
         andesSwitch = AndesSwitch(context)
         andesSwitch.titleNumberOfLines = 2
         Assert.assertEquals(2, andesSwitch.titleNumberOfLines)
+        Assert.assertEquals(2, andesSwitch.leftTextComponent.maxLines)
+        Assert.assertEquals(2, andesSwitch.rightTextComponent.maxLines)
     }
 
     @Test
