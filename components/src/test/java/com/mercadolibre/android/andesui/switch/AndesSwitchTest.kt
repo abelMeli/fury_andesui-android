@@ -194,6 +194,13 @@ class AndesSwitchTest {
     }
 
     @Test
+    fun `testing multiline getter and setter`() {
+        andesSwitch = AndesSwitch(context)
+        andesSwitch.titleNumberOfLines = 2
+        Assert.assertEquals(2, andesSwitch.titleNumberOfLines)
+    }
+
+    @Test
     fun `setCallback method works correctly`() {
         andesSwitch = AndesSwitch(context)
         val mockedListener: AndesSwitch.OnStatusChangeListener = mock()
