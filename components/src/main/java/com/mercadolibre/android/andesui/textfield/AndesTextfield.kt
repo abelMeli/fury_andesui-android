@@ -737,7 +737,7 @@ class AndesTextfield : ConstraintLayout {
     fun setRightIcon(
         iconPath: String,
         listener: OnClickListener? = null,
-        colorIcon: Int? = R.color.andes_gray_800,
+        colorIcon: Int? = R.color.andes_gray_900,
         hideWhenType: Boolean = false
     ) {
         rightContent = AndesTextfieldRightContent.ICON
@@ -768,7 +768,7 @@ class AndesTextfield : ConstraintLayout {
         leftIcon.setImageDrawable(buildColoredAndesBitmapDrawable(
             IconProvider(context).loadIcon(iconPath) as BitmapDrawable,
             context,
-            color = R.color.andes_gray_450.toAndesColor())
+            color = R.color.andes_gray_550.toAndesColor())
         )
     }
 

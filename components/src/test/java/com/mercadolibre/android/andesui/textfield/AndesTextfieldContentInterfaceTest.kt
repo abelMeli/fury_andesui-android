@@ -63,7 +63,7 @@ class AndesTextfieldContentInterfaceTest {
     fun `suffix content`() {
         contentInterface = AndesSuffixTextfieldContent
         val suffix = TextView(context)
-        suffix.setTextColor(R.color.andes_gray_450.toColor(context))
+        suffix.setTextColor(R.color.andes_text_color_secondary.toColor(context))
         suffix.text = context.getString(R.string.andes_suffix_hint)
 
         assertEquals(
@@ -78,7 +78,7 @@ class AndesTextfieldContentInterfaceTest {
     fun `prefix content`() {
         contentInterface = AndesPrefixTextfieldContent
         val prefix = TextView(context)
-        prefix.setTextColor(R.color.andes_gray_450.toColor(context))
+        prefix.setTextColor(R.color.andes_text_color_secondary.toColor(context))
         prefix.text = context.getString(R.string.andes_prefix_hint)
 
         assertEquals(context.resources.getDimension(
@@ -96,7 +96,7 @@ class AndesTextfieldContentInterfaceTest {
         icon.setImageDrawable(buildColoredAndesBitmapDrawable(
                 IconProvider(context).loadIcon("andes_ui_placeholder_imagen_24") as BitmapDrawable,
                 context,
-                color = R.color.andes_gray_800.toAndesColor()))
+                color = R.color.andes_gray_900.toAndesColor()))
 
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_icon_left_margin).toInt(), contentInterface.rightMargin(context))
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_icon_right_margin).toInt(),
@@ -127,7 +127,7 @@ class AndesTextfieldContentInterfaceTest {
         clear.setImageDrawable(buildColoredAndesBitmapDrawable(
                 IconProvider(context).loadIcon("andes_ui_close_24") as BitmapDrawable,
                 context,
-                color = R.color.andes_gray_450.toAndesColor())
+                color = R.color.andes_gray_550.toAndesColor())
         )
 
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_clear_left_margin).toInt(), contentInterface.rightMargin(context))

@@ -26,7 +26,7 @@ internal interface AndesSnackbarTypeInterface {
 }
 
 internal class AndesSnackbarNeutralType : AndesSnackbarTypeInterface {
-    override fun primaryColor() = R.color.andes_gray_800_solid.toAndesColor()
+    override fun primaryColor() = R.color.andes_gray_900_solid.toAndesColor()
     override fun secondaryColor() = R.color.andes_gray_070_solid.toAndesColor()
 }
 

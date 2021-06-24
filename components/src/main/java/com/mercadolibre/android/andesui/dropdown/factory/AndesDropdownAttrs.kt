@@ -35,7 +35,7 @@ internal object AndesDropdownAttrParser {
     private const val ANDES_DROPDOWN_STATE_DISABLED = "10005"
 
     fun parse(context: Context, attr: AttributeSet?): AndesDropdownAttrs {
-        val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesList)
+        val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesDropdown)
         val andesDropdownState = getState(typedArray)
         val andesDropdownMenuType = when (typedArray.getString(R.styleable.AndesDropdown_AndesDropdownMenuType)) {
             ANDES_DROPDOWN_MENU_TYPE_BOTTOMSHEET -> AndesDropdownMenuType.BOTTOMSHEET
@@ -65,7 +65,7 @@ internal object AndesDropdownAttrParser {
     }
 
     private fun getState(typedArray: TypedArray): AndesDropdownState =
-            when (typedArray.getString(R.styleable.AndesTextfield_andesTextfieldState)) {
+            when (typedArray.getString(R.styleable.AndesDropdown_andesDropdownState)) {
                 ANDES_DROPDOWN_STATE_ENABLED -> AndesDropdownState.ENABLED
                 ANDES_DROPDOWN_STATE_ERROR -> AndesDropdownState.ERROR
                 ANDES_DROPDOWN_STATE_DISABLED -> AndesDropdownState.DISABLED

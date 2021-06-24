@@ -57,9 +57,9 @@ class AndesTextfieldStateInterfaceTest {
     @Test
     fun `enabled state`() {
         stateInterface = AndesIdleTextfieldState
-        assertEquals(R.color.andes_gray_800.toAndesColor(), stateInterface.labelColor())
+        assertEquals(R.color.andes_text_color_primary.toAndesColor(), stateInterface.labelColor())
         assertEquals(R.color.andes_gray_200.toAndesColor(), stateInterface.placeholderColor())
-        assertEquals(R.color.andes_gray_450.toAndesColor(), stateInterface.helpersColor())
+        assertEquals(R.color.andes_text_color_secondary.toAndesColor(), stateInterface.helpersColor())
         assertNull(stateInterface.icon(context))
     }
 
@@ -91,8 +91,8 @@ class AndesTextfieldStateInterfaceTest {
     @Test
     fun `read only state`() {
         stateInterface = AndesReadonlyTextfieldState
-        assertEquals(R.color.andes_gray_450.toAndesColor(), stateInterface.labelColor())
-        assertEquals(R.color.andes_gray_800.toAndesColor(), stateInterface.placeholderColor())
+        assertEquals(R.color.andes_text_color_secondary.toAndesColor(), stateInterface.labelColor())
+        assertEquals(R.color.andes_text_color_primary.toAndesColor(), stateInterface.placeholderColor())
         assertEquals(R.color.andes_gray_250.toAndesColor(), stateInterface.helpersColor())
         assertNull(stateInterface.icon(context))
     }

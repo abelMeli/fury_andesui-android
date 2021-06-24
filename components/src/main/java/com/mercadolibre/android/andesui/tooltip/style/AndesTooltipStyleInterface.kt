@@ -51,7 +51,7 @@ internal sealed class AndesTooltipStyleInterface {
 internal object AndesTooltipLightStyle : AndesTooltipStyleInterface() {
     override fun backgroundColor() = R.color.andes_bg_color_white.toAndesColor()
 
-    override fun textColor() = R.color.andes_gray_800.toAndesColor()
+    override fun textColor() = R.color.andes_text_color_primary.toAndesColor()
 
     override fun dismissIconColor(): AndesColor? = null
 

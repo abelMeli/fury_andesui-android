@@ -31,9 +31,9 @@ internal sealed class AndesTextfieldStateInterface {
 }
 
 internal object AndesIdleTextfieldState : AndesTextfieldStateInterface() {
-    override fun labelColor(): AndesColor = R.color.andes_gray_800.toAndesColor()
+    override fun labelColor(): AndesColor = R.color.andes_text_color_primary.toAndesColor()
     override fun placeholderColor(): AndesColor = R.color.andes_gray_200.toAndesColor()
-    override fun helpersColor(): AndesColor = R.color.andes_gray_450.toAndesColor()
+    override fun helpersColor(): AndesColor = R.color.andes_text_color_secondary.toAndesColor()
     override fun typeFace(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_regular)
     override fun helper(helper: String?): String? = helper
     override fun leftMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_indeterminate_left_margin).toInt()
@@ -132,8 +132,8 @@ internal object AndesDisabledTextfieldState : AndesTextfieldStateInterface() {
 }
 
 internal object AndesReadonlyTextfieldState : AndesTextfieldStateInterface() {
-    override fun labelColor(): AndesColor = R.color.andes_gray_450.toAndesColor()
-    override fun placeholderColor(): AndesColor = R.color.andes_gray_800.toAndesColor()
+    override fun labelColor(): AndesColor = R.color.andes_text_color_secondary.toAndesColor()
+    override fun placeholderColor(): AndesColor = R.color.andes_text_color_primary.toAndesColor()
     override fun helpersColor(): AndesColor = R.color.andes_gray_250.toAndesColor()
     override fun typeFace(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_regular)
     override fun helper(helper: String?): String? = null

@@ -27,7 +27,7 @@ internal interface AndesBadgeTypeInterface {
 }
 
 internal class AndesNeutralBadgeType : AndesBadgeTypeInterface {
-    override fun primaryColor() = R.color.andes_gray_450_solid.toAndesColor()
+    override fun primaryColor() = R.color.andes_gray_550_solid.toAndesColor()
     override fun secondaryColor() = R.color.andes_gray_070_solid.toAndesColor()
 }
 

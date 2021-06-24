@@ -97,7 +97,7 @@ class CardShowcaseActivity : AppCompatActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView.setTextColor(resources.getColor(R.color.andes_gray_800))
+        textView.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         andesCard.cardView = textView
 
         val andesCardTitle = container.findViewById<AndesTextfield>(R.id.andesTitle)
@@ -255,7 +255,7 @@ class CardShowcaseActivity : AppCompatActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView1.setTextColor(resources.getColor(R.color.andes_gray_800))
+        textView1.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView1.text = resources.getString(R.string.andes_card_example_1)
         card1.cardView = textView1
 
@@ -265,7 +265,7 @@ class CardShowcaseActivity : AppCompatActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView2.setTextColor(resources.getColor(R.color.andes_gray_800))
+        textView2.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView2.text = resources.getString(R.string.andes_card_example_2)
         card2.cardView = textView2
 
@@ -281,7 +281,7 @@ class CardShowcaseActivity : AppCompatActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView3.setTextColor(resources.getColor(R.color.andes_gray_800))
+        textView3.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView3.text = resources.getString(R.string.andes_card_example_3)
         card3.cardView = textView3
 
@@ -291,7 +291,7 @@ class CardShowcaseActivity : AppCompatActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView4.setTextColor(resources.getColor(R.color.andes_gray_800))
+        textView4.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView4.text = resources.getString(R.string.andes_card_example_4)
         card4.cardView = textView4
 
@@ -301,7 +301,7 @@ class CardShowcaseActivity : AppCompatActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView5.setTextColor(resources.getColor(R.color.andes_gray_800))
+        textView5.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView5.text = resources.getString(R.string.andes_card_example_5)
         card5.cardView = textView5
 

@@ -92,7 +92,7 @@ internal fun createBackgroundColorConfigQuiet() =
                 focusedColor = R.color.andes_accent_color_150.toAndesColor(),
                 hoveredColor = R.color.andes_accent_color_200.toAndesColor(),
                 disabledColor = R.color.andes_gray_100.toAndesColor(),
-                otherColor = R.color.andes_gray_800.toAndesColor())
+                otherColor = R.color.andes_gray_900.toAndesColor())
 
 /**
  * Returns the proper [BackgroundColorConfig] for the Transparent Hierarchy button.

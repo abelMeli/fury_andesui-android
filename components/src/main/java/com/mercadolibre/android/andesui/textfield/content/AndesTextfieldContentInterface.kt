@@ -40,7 +40,7 @@ internal object AndesSuffixTextfieldContent : AndesTextfieldContentInterface() {
 
     override fun component(context: Context): TextView {
         val suffix = TextView(context)
-        suffix.setTextColor(R.color.andes_gray_450.toColor(context))
+        suffix.setTextColor(R.color.andes_text_color_secondary.toColor(context))
         suffix.text = context.getString(R.string.andes_suffix_hint)
         suffix.typeface = context.getFontOrDefault(R.font.andes_font_regular)
         suffix.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.andes_textfield_edittext_textSize))
@@ -55,7 +55,7 @@ internal object AndesPrefixTextfieldContent : AndesTextfieldContentInterface() {
 
     override fun component(context: Context): TextView {
         val prefix = TextView(context)
-        prefix.setTextColor(R.color.andes_gray_450.toColor(context))
+        prefix.setTextColor(R.color.andes_text_color_secondary.toColor(context))
         prefix.text = context.getString(R.string.andes_prefix_hint)
         prefix.typeface = context.getFontOrDefault(R.font.andes_font_regular)
         prefix.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.andes_textfield_edittext_textSize))
@@ -75,7 +75,7 @@ internal object AndesIconTextfieldContent : AndesTextfieldContentInterface() {
         icon.setImageDrawable(buildColoredAndesBitmapDrawable(
                 IconProvider(context).loadIcon("andes_ui_placeholder_imagen_24") as BitmapDrawable,
                 context,
-                color = R.color.andes_gray_800.toAndesColor()))
+                color = R.color.andes_gray_900.toAndesColor()))
         icon.contentDescription = ICON_CONTENT_DESCRIPTION
         return icon
     }
@@ -123,7 +123,7 @@ internal object AndesClearTextfieldContent : AndesTextfieldContentInterface() {
         clear.setImageDrawable(buildColoredAndesBitmapDrawable(
                 IconProvider(context).loadIcon("andes_ui_close_24") as BitmapDrawable,
                 context,
-                color = R.color.andes_gray_450.toAndesColor())
+                color = R.color.andes_gray_550.toAndesColor())
         )
         clear.contentDescription = context.getString(R.string.andes_textfield_right_content_clear)
         return clear

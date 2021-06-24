@@ -47,7 +47,7 @@ internal object AndesCardConfigurationFactory {
 
     private fun resolveTitleSize(context: Context) = context.resources.getDimension(R.dimen.andes_card_title_size)
     private fun resolveTitleTypeface(context: Context) = context.getFontOrDefault(R.font.andes_font_semibold)
-    private fun resolveTitleColor() = R.color.andes_gray_800.toAndesColor()
+    private fun resolveTitleColor() = R.color.andes_text_color_primary.toAndesColor()
     private fun resolveTitleHeight(context: Context, padding: AndesCardPaddingInterface) = padding.titleHeight(context)
     private fun resolveLateralMargin(context: Context, padding: AndesCardPadding): Int {
         return if (padding == AndesCardPadding.NONE) {

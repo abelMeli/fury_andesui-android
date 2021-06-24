@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/andes_gray_800" android:state_pressed="true" />
+    <item android:color="@color/andes_gray_900" android:state_pressed="true" />
     <item android:color="@color/andes_white" android:state_activated="true"  />
     <item android:color="@color/andes_gray_100" android:state_enabled="false"  />
-    <item android:color="@color/andes_gray_800" />
+    <item android:color="@color/andes_gray_900" />
 </selector>

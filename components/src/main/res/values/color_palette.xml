@@ -72,6 +72,7 @@
     <color name="andes_gray_200">#33000000</color>
     <color name="andes_gray_250">#40000000</color>
     <color name="andes_gray_450">#73000000</color>
+    <color name="andes_gray_550">#8C000000</color>
     <color name="andes_gray_800">#CC000000</color>
     <color name="andes_gray_900">#E6000000</color>
     <color name="andes_gray_950">#F2000000</color>
@@ -83,7 +84,9 @@
     <color name="andes_gray_100_solid">#E5E5E5</color>
     <color name="andes_gray_250_solid">#BFBFBF</color>
     <color name="andes_gray_450_solid">#8C8C8C</color>
+    <color name="andes_gray_550_solid">#737373</color>
     <color name="andes_gray_800_solid">#333333</color>
+    <color name="andes_gray_900_solid">#1A1A1A</color>
 
     <!--Intermediate Layer-->
 
@@ -103,8 +106,8 @@
     <color name="andes_brand_color">@color/andes_yellow_ml_500</color>
     <color name="andes_accent_color">@color/andes_accent_color_500</color>
 
-    <color name="andes_text_color_primary">@color/andes_gray_800</color>
-    <color name="andes_text_color_secondary">@color/andes_gray_450</color>
+    <color name="andes_text_color_primary">@color/andes_gray_900</color>
+    <color name="andes_text_color_secondary">@color/andes_gray_550</color>
     <color name="andes_text_color_disabled">@color/andes_gray_250</color>
     <color name="andes_text_color_negative">@color/andes_red_500</color>
     <color name="andes_text_color_caution">@color/andes_orange_500</color>

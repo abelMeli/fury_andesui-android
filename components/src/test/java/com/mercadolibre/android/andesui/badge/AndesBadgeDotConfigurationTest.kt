@@ -27,7 +27,7 @@ class AndesBadgeDotConfigurationTest {
     fun `Dot, Neutral`() {
         attrs = AndesBadgeDotAttrs(AndesBadgeType.NEUTRAL)
         val config = configFactory.create(context, attrs)
-        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(R.color.andes_gray_550_solid.toAndesColor(), config.backgroundColor)
     }
 
     @Test

@@ -29,7 +29,7 @@ internal object AndesRadioButtonTypeIdle : AndesRadioButtonTypeInterface {
             R.color.andes_accent_color_500.toAndesColor()
         }
     }
-    override fun textColor(context: Context) = R.color.andes_gray_800_solid.toAndesColor()
+    override fun textColor(context: Context) = R.color.andes_text_color_primary.toAndesColor()
 }
 
 internal object AndesRadioButtonTypeDisabled : AndesRadioButtonTypeInterface {
@@ -49,5 +49,5 @@ internal object AndesRadioButtonTypeError : AndesRadioButtonTypeInterface {
     override fun borderColor(context: Context, status: AndesRadioButtonStatus) = R.color.andes_red_500.toAndesColor()
     override fun iconColor(context: Context, status: AndesRadioButtonStatus) = R.color.andes_white.toAndesColor()
     override fun backgroundColor(context: Context, status: AndesRadioButtonStatus) = R.color.andes_white.toAndesColor()
-    override fun textColor(context: Context) = R.color.andes_gray_800_solid.toAndesColor()
+    override fun textColor(context: Context) = R.color.andes_text_color_primary.toAndesColor()
 }
