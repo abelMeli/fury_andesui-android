@@ -58,9 +58,9 @@ internal object AndesListViewItemConfigurationFactory {
         )
     }
 
-    private fun resolveTitleColor(context: Context) = ContextCompat.getColor(context, R.color.andes_gray_800)
+    private fun resolveTitleColor(context: Context) = ContextCompat.getColor(context, R.color.andes_text_color_primary)
 
-    private fun resolveSubTitleColor(context: Context) = ContextCompat.getColor(context, R.color.andes_gray_450)
+    private fun resolveSubTitleColor(context: Context) = ContextCompat.getColor(context, R.color.andes_text_color_secondary)
 
     private fun resolvePaddingLeft(context: Context, size: AndesListViewItemSizeInterface) = size.paddingLeft(context)
 

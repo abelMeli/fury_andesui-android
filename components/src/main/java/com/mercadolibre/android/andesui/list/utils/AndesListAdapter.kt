@@ -139,8 +139,8 @@ class AndesListAdapter(
             andesListItemIcon.visibility = View.GONE
 
             // Default Title and Subtitle color
-            titleTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.andes_gray_800))
-            subtitleTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.andes_gray_450))
+            titleTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.andes_text_color_primary))
+            subtitleTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.andes_text_color_secondary))
 
             // Title and Subtitle TypeFace
             titleTextView.typeface = itemView.context.getFontOrDefault(R.font.andes_font_regular)

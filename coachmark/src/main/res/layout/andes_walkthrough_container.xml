@@ -24,7 +24,7 @@
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/andes_gray_800"
+        android:background="@color/andes_gray_900"
         app:layout_constraintBottom_toTopOf="@id/guideLineHeader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -94,7 +94,7 @@ class AndesTagChoiceTest {
         attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
                 AndesTagChoiceState.IDLE)
         val config = configFactory.create(attrs)
-        Assert.assertEquals(config.textColor, R.color.andes_gray_800_solid.toAndesColor())
+        Assert.assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
     }
 
     @Test
@@ -110,7 +110,7 @@ class AndesTagChoiceTest {
         attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
                 AndesTagChoiceState.IDLE)
         val config = configFactory.create(attrs)
-        Assert.assertEquals(config.textColor, R.color.andes_gray_800_solid.toAndesColor())
+        Assert.assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
     }
 
     @Test
@@ -126,7 +126,7 @@ class AndesTagChoiceTest {
         attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
                 AndesTagChoiceState.IDLE)
         val config = configFactory.create(attrs)
-        Assert.assertEquals(config.rightContentColor, R.color.andes_gray_450_solid.toAndesColor())
+        Assert.assertEquals(config.rightContentColor, R.color.andes_gray_550_solid.toAndesColor())
     }
 
     @Test
@@ -142,7 +142,7 @@ class AndesTagChoiceTest {
         attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
                 AndesTagChoiceState.IDLE)
         val config = configFactory.create(attrs)
-        Assert.assertEquals(config.rightContentColor, R.color.andes_gray_450_solid.toAndesColor())
+        Assert.assertEquals(config.rightContentColor, R.color.andes_gray_550_solid.toAndesColor())
     }
 
     @Test

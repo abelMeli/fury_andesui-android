@@ -44,7 +44,7 @@ internal class AndesEnabledThumbnailState : AndesThumbnailStateInterface {
 
     override fun iconColor(context: Context, hierarchy: AndesThumbnailHierarchy, accentColor: AndesColor): AndesColor =
         when (hierarchy) {
-        AndesThumbnailHierarchy.DEFAULT -> R.color.andes_gray_800_solid.toAndesColor()
+        AndesThumbnailHierarchy.DEFAULT -> R.color.andes_gray_900_solid.toAndesColor()
         AndesThumbnailHierarchy.LOUD -> R.color.andes_white.toAndesColor()
         AndesThumbnailHierarchy.QUIET -> accentColor
     }

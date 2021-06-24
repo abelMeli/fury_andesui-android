@@ -137,7 +137,7 @@ class AndesMessageConfigurationQuiet {
         attrs = AndesMessageAttrs(AndesMessageHierarchy.QUIET, AndesMessageType.NEUTRAL, "Body",
                 "Title", true, null, null)
         val config = configFactory.create(context, attrs)
-        assertEquals(config.textColor, R.color.andes_gray_800.toAndesColor())
+        assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
     }
 
     @Test
@@ -145,7 +145,7 @@ class AndesMessageConfigurationQuiet {
         attrs = AndesMessageAttrs(AndesMessageHierarchy.QUIET, AndesMessageType.SUCCESS, "Body",
                 "Title", true, null, null)
         val config = configFactory.create(context, attrs)
-        assertEquals(config.textColor, R.color.andes_gray_800.toAndesColor())
+        assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
     }
 
     @Test
@@ -153,7 +153,7 @@ class AndesMessageConfigurationQuiet {
         attrs = AndesMessageAttrs(AndesMessageHierarchy.QUIET, AndesMessageType.ERROR, "Body",
                 "Title", true, null, null)
         val config = configFactory.create(context, attrs)
-        assertEquals(config.textColor, R.color.andes_gray_800.toAndesColor())
+        assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
     }
 
     @Test
@@ -161,7 +161,7 @@ class AndesMessageConfigurationQuiet {
         attrs = AndesMessageAttrs(AndesMessageHierarchy.QUIET, AndesMessageType.WARNING, "Body",
                 "Title", true, null, null)
         val config = configFactory.create(context, attrs)
-        assertEquals(config.textColor, R.color.andes_gray_800.toAndesColor())
+        assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
     }
 
     @Test

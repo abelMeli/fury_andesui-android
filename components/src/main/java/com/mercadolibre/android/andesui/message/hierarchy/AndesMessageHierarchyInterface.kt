@@ -131,8 +131,8 @@ internal object AndesLoudMessageHierarchy : AndesMessageHierarchyInterface() {
 internal object AndesQuietMessageHierarchy : AndesMessageHierarchyInterface() {
     override fun backgroundColor() = R.color.andes_gray_040.toAndesColor()
     override fun backgroundColor(type: AndesMessageTypeInterface) = backgroundColor()
-    override fun textColor() = R.color.andes_gray_800.toAndesColor()
-    override fun dismissableIconColor() = R.color.andes_gray_450.toAndesColor()
+    override fun textColor() = R.color.andes_text_color_primary.toAndesColor()
+    override fun dismissableIconColor() = R.color.andes_gray_550.toAndesColor()
     override fun iconBackgroundColor(type: AndesMessageTypeInterface) = type.primaryColor()
     override fun primaryActionBackgroundColor(type: AndesMessageTypeInterface): BackgroundColorConfig {
         return createBackgroundColorConfigLoud()

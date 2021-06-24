@@ -128,7 +128,7 @@ class AndesTagSimpleTest {
     fun `Simple, Small, Default text color`() {
         attrs = AndesTagSimpleAttrs(AndesTagType.NEUTRAL, AndesTagSize.SMALL, "Body")
         val config = configFactory.create(attrs)
-        assertEquals(config.textColor, R.color.andes_gray_800_solid.toAndesColor())
+        assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
     }
 
     @Test

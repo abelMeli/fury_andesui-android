@@ -10,7 +10,7 @@
         android:id="@+id/text_view_andes_dropdown_trigger_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/andes_gray_800"
+        android:textColor="@color/andes_text_color_primary"
         android:textSize="@dimen/andes_textfield_label_textSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/andes_ui_chevron_down_12"
         android:layout_marginStart="@dimen/andes_dropdown_chevron_margin_start"
-        android:tint="@color/andes_gray_450"
+        android:tint="@color/andes_gray_550"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_view_andes_dropdown_trigger_content"
         app:layout_constraintTop_toTopOf="@+id/text_view_andes_dropdown_trigger_content" />

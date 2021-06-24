@@ -33,7 +33,7 @@ class AndesBadgePillConfigurationLoudTest {
         attrs = AndesBadgePillAttrs(AndesBadgePillHierarchy.LOUD, AndesBadgeType.NEUTRAL,
                 AndesBadgePillBorder.STANDARD, AndesBadgePillSize.SMALL, "Title")
         val config = configFactory.create(context, attrs)
-        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(R.color.andes_gray_550_solid.toAndesColor(), config.backgroundColor)
         assertEquals(SMALL_HEIGHT, config.height)
     }
 
@@ -78,7 +78,7 @@ class AndesBadgePillConfigurationLoudTest {
         attrs = AndesBadgePillAttrs(AndesBadgePillHierarchy.LOUD, AndesBadgeType.NEUTRAL,
                 AndesBadgePillBorder.STANDARD, AndesBadgePillSize.LARGE, "Title")
         val config = configFactory.create(context, attrs)
-        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(R.color.andes_gray_550_solid.toAndesColor(), config.backgroundColor)
         assertEquals(LARGE_HEIGHT, config.height)
     }
 
@@ -126,7 +126,7 @@ class AndesBadgePillConfigurationLoudTest {
         andesBadgePill.text = attrs.andesBadgeText
         andesBadgePill.textStyleDefault = attrs.andesBadgeTextStyleDefault
         val config = configFactory.create(context, attrs)
-        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(R.color.andes_gray_550_solid.toAndesColor(), config.backgroundColor)
         assertEquals(LARGE_HEIGHT, config.height)
         val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
         assertEquals("Title", params.text)
@@ -145,7 +145,7 @@ class AndesBadgePillConfigurationLoudTest {
             false
         )
         val config = configFactory.create(context, attrs)
-        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(R.color.andes_gray_550_solid.toAndesColor(), config.backgroundColor)
         assertEquals(LARGE_HEIGHT, config.height)
         val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
         assertEquals("Title", params.text)
@@ -159,7 +159,7 @@ class AndesBadgePillConfigurationLoudTest {
         andesBadgePill.text = attrs.andesBadgeText
         andesBadgePill.textStyleDefault = attrs.andesBadgeTextStyleDefault
         val config = configFactory.create(context, attrs)
-        assertEquals(R.color.andes_gray_450_solid.toAndesColor(), config.backgroundColor)
+        assertEquals(R.color.andes_gray_550_solid.toAndesColor(), config.backgroundColor)
         assertEquals(LARGE_HEIGHT, config.height)
         val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
         assertEquals("TITLE", params.text)

@@ -34,8 +34,8 @@ internal interface AndesSimpleTagTypeInterface {
 internal class AndesNeutralTagType : AndesSimpleTagTypeInterface {
     override fun backgroundColor() = R.color.andes_transparent.toAndesColor()
     override fun borderColor() = R.color.andes_gray_250_solid.toAndesColor()
-    override fun textColor() = R.color.andes_gray_800_solid.toAndesColor()
-    override fun dismissColor() = R.color.andes_gray_450_solid.toAndesColor()
+    override fun textColor() = R.color.andes_text_color_primary.toAndesColor()
+    override fun dismissColor() = R.color.andes_gray_550_solid.toAndesColor()
 }
 
 internal class AndesHighlightTagType : AndesSimpleTagTypeInterface {
