@@ -198,8 +198,14 @@ class AndesSwitchTest {
         andesSwitch = AndesSwitch(context)
         andesSwitch.titleNumberOfLines = 2
         Assert.assertEquals(2, andesSwitch.titleNumberOfLines)
-        Assert.assertEquals(2, andesSwitch.leftTextComponent.maxLines)
-        Assert.assertEquals(2, andesSwitch.rightTextComponent.maxLines)
+    }
+
+    @Test
+    fun `testing maxLine values from internal textviews`() {
+        andesSwitch = AndesSwitch(context)
+        andesSwitch.titleNumberOfLines = 3
+        Assert.assertEquals(3, andesSwitch.leftTextComponent.maxLines)
+        Assert.assertEquals(3, andesSwitch.rightTextComponent.maxLines)
     }
 
     @Test

@@ -76,8 +76,8 @@ class AndesSwitch : ConstraintLayout {
 
     private lateinit var container: View
     private lateinit var andesSwitchAttrs: AndesSwitchAttrs
-    internal lateinit var leftTextComponent: TextView
-    internal lateinit var rightTextComponent: TextView
+    internal lateinit var leftTextComponent: TextView private set
+    internal lateinit var rightTextComponent: TextView private set
     private lateinit var switchComponent: AndesSwitchComponent
     internal var onStatusChangeListener: OnStatusChangeListener? = null
     private lateinit var a11yEventDispatcher: AndesSwitchAccessibilityEventDispatcher
