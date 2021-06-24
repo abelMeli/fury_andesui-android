@@ -28,12 +28,11 @@
             android:id="@+id/dynamic_page_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            app:layout_constrainedWidth="true"
             app:andesSwitchText="@string/andes_switch_name_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/andesSwitchMessage"
+            app:layout_constraintStart_toStartOf="@id/andesSwitchMessage"
             app:layout_constraintTop_toBottomOf="@id/andesSwitchMessage" />
 
         <Spinner
@@ -101,8 +100,8 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:inputType="number"
             android:layout_marginEnd="24dp"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dynamic_page_switch_spinner_align" />
 

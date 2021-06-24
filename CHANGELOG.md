@@ -1,6 +1,7 @@
 # v3.20.0
 ## 🚀 Feature
 - Added assets to Andes documentation
+- Added multiline support to `AndesSwitch` | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.19.0
 ## 🚀 Feature
