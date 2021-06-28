@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.switch.factory
 import android.content.Context
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.switch.AndesSwitch.Companion.ANDES_SWITCH_NUM_LINES_DEFAULT_VALUE
 import com.mercadolibre.android.andesui.switch.align.AndesSwitchAlign
 import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
 import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
@@ -11,6 +12,7 @@ internal data class AndesSwitchAttrs(
     val andesSwitchAlign: AndesSwitchAlign,
     val andesSwitchStatus: AndesSwitchStatus,
     val andesSwitchType: AndesSwitchType,
+    val andesSwitchTitleNumberOfLines: Int = ANDES_SWITCH_NUM_LINES_DEFAULT_VALUE,
     val andesSwitchText: String?
 )
 
@@ -46,9 +48,13 @@ internal object AndesSwitchAttrsParser {
             else -> AndesSwitchType.ENABLED
         }
 
+        val numberOfLines = typedArray.getInt(
+            R.styleable.AndesSwitch_andesSwitchTitleNumberOfLines, ANDES_SWITCH_NUM_LINES_DEFAULT_VALUE
+        )
+
         val text = typedArray.getString(R.styleable.AndesSwitch_andesSwitchText)
 
-        return AndesSwitchAttrs(align, status, type, text)
+        return AndesSwitchAttrs(align, status, type, numberOfLines, text)
                 .also { typedArray.recycle() }
     }
 }

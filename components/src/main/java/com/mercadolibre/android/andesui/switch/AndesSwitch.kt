@@ -67,10 +67,17 @@ class AndesSwitch : ConstraintLayout {
             setupSwitchComponent(createConfig())
         }
 
+    var titleNumberOfLines: Int
+        get() = andesSwitchAttrs.andesSwitchTitleNumberOfLines
+        set(value) {
+            andesSwitchAttrs = andesSwitchAttrs.copy(andesSwitchTitleNumberOfLines = value)
+            setupNumberOfLines(createConfig())
+        }
+
     private lateinit var container: View
     private lateinit var andesSwitchAttrs: AndesSwitchAttrs
-    private lateinit var leftTextComponent: TextView
-    private lateinit var rightTextComponent: TextView
+    internal lateinit var leftTextComponent: TextView private set
+    internal lateinit var rightTextComponent: TextView private set
     private lateinit var switchComponent: AndesSwitchComponent
     internal var onStatusChangeListener: OnStatusChangeListener? = null
     private lateinit var a11yEventDispatcher: AndesSwitchAccessibilityEventDispatcher
@@ -107,7 +114,12 @@ class AndesSwitch : ConstraintLayout {
         type: AndesSwitchType,
         status: AndesSwitchStatus
     ) {
-        andesSwitchAttrs = AndesSwitchAttrs(align, status, type, text)
+        andesSwitchAttrs = AndesSwitchAttrs(
+            andesSwitchAlign = align,
+            andesSwitchStatus = status,
+            andesSwitchType = type,
+            andesSwitchText = text
+        )
         val config = AndesSwitchConfigurationFactory.create(andesSwitchAttrs)
         setupComponents(config)
     }
@@ -166,6 +178,7 @@ class AndesSwitch : ConstraintLayout {
         leftTextComponent.text = config.text
         rightTextComponent.visibility = config.rightTextVisibility
         rightTextComponent.text = config.text
+        setupNumberOfLines(config)
     }
 
     private fun setupSwitchComponent(config: AndesSwitchConfiguration) {
@@ -178,6 +191,11 @@ class AndesSwitch : ConstraintLayout {
             AndesSwitchType.ENABLED -> true
             AndesSwitchType.DISABLED -> false
         }
+    }
+
+    private fun setupNumberOfLines(config: AndesSwitchConfiguration) {
+        leftTextComponent.maxLines = config.titleNumberOfLines
+        rightTextComponent.maxLines = config.titleNumberOfLines
     }
 
     private fun setupSwitchComponentListener() {
@@ -224,5 +242,6 @@ class AndesSwitch : ConstraintLayout {
         private val ANDES_SWITCH_ALIGN_DEFAULT_VALUE = AndesSwitchAlign.RIGHT
         private val ANDES_SWITCH_TYPE_DEFAULT_VALUE = AndesSwitchType.ENABLED
         private val ANDES_SWITCH_STATUS_DEFAULT_VALUE = AndesSwitchStatus.UNCHECKED
+        internal const val ANDES_SWITCH_NUM_LINES_DEFAULT_VALUE = 1
     }
 }

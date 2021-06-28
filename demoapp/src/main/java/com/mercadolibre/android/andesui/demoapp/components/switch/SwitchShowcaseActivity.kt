@@ -70,9 +70,10 @@ class SwitchShowcaseActivity : AppCompatActivity() {
         val updateButton: AndesButton = container.findViewById(R.id.dynamic_page_switch_button_update)
         val clearButton: AndesButton = container.findViewById(R.id.dynamic_page_switch_button_clear)
         val switchTextfield: AndesTextfield = container.findViewById(R.id.dynamic_page_switch_textfield)
+        val linesTextfield: AndesTextfield = container.findViewById(R.id.dynamic_page_switch_textfield_lines)
 
-        setupClearButton(clearButton, spinnerAlign, spinnerStatus, spinnerType, switchTextfield, dynamicSwitch)
-        setupUpdateButton(updateButton, spinnerAlign, spinnerStatus, spinnerType, switchTextfield, dynamicSwitch)
+        setupClearButton(clearButton, spinnerAlign, spinnerStatus, spinnerType, switchTextfield, linesTextfield, dynamicSwitch)
+        setupUpdateButton(updateButton, spinnerAlign, spinnerStatus, spinnerType, switchTextfield, linesTextfield, dynamicSwitch)
     }
 
     private fun configSpinnerType(container: View): Spinner {
@@ -121,6 +122,7 @@ class SwitchShowcaseActivity : AppCompatActivity() {
         spinnerStatus: Spinner,
         spinnerType: Spinner,
         switchTextfield: AndesTextfield,
+        linesTextfield: AndesTextfield,
         dynamicSwitch: AndesSwitch
     ) {
         clearButton.setOnClickListener {
@@ -129,11 +131,13 @@ class SwitchShowcaseActivity : AppCompatActivity() {
             spinnerStatus.setSelection(0)
 
             switchTextfield.text = Constants.EMPTY_STRING
+            linesTextfield.text = Constants.EMPTY_STRING
 
             dynamicSwitch.status = AndesSwitchStatus.UNCHECKED
             dynamicSwitch.type = AndesSwitchType.ENABLED
             dynamicSwitch.align = AndesSwitchAlign.RIGHT
             dynamicSwitch.text = resources.getString(R.string.andes_switch_name_text)
+            dynamicSwitch.titleNumberOfLines = 1
         }
     }
 
@@ -144,6 +148,7 @@ class SwitchShowcaseActivity : AppCompatActivity() {
         spinnerStatus: Spinner,
         spinnerType: Spinner,
         switchTextfield: AndesTextfield,
+        linesTextfield: AndesTextfield,
         dynamicSwitch: AndesSwitch
     ) {
         updateButton.setOnClickListener {
@@ -167,6 +172,9 @@ class SwitchShowcaseActivity : AppCompatActivity() {
             dynamicSwitch.type = type
             dynamicSwitch.status = status
             dynamicSwitch.align = align
+            if (!linesTextfield.text.isNullOrEmpty()) {
+                dynamicSwitch.titleNumberOfLines = linesTextfield.text?.toInt() ?: 1
+            }
         }
     }
 

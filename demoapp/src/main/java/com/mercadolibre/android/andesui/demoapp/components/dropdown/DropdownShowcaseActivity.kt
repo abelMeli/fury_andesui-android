@@ -24,7 +24,6 @@ import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
-import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 @Suppress("TooManyFunctions")
 class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {

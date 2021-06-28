@@ -29,9 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:layout_constrainedWidth="true"
             app:andesSwitchText="@string/andes_switch_name_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/andesSwitchMessage"
+            app:layout_constraintStart_toStartOf="@id/andesSwitchMessage"
             app:layout_constraintTop_toBottomOf="@id/andesSwitchMessage" />
 
         <Spinner
@@ -95,15 +96,36 @@
             app:layout_constraintTop_toTopOf="@+id/dynamic_page_switch_spinner_align" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_page_switch_textfield_lines"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_page_switch_spinner_align" />
+
+        <TextView
+            android:id="@+id/dynamic_page_switch_textview_lines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/andes_checkbox_number_of_lines"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_page_switch_textfield_lines"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dynamic_page_switch_textfield_lines" />
+
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/dynamic_page_switch_textfield"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             app:andesTextfieldPlaceholder="@string/andes_switch_placeholder_text"
             app:andesTextfieldRightContent="clear"
             app:layout_constraintEnd_toEndOf="@id/dynamic_page_switch_spinner_type"
             app:layout_constraintStart_toStartOf="@id/dynamic_page_switch_textview_type"
-            app:layout_constraintTop_toBottomOf="@id/dynamic_page_switch_textview_align" />
+            app:layout_constraintTop_toBottomOf="@id/dynamic_page_switch_textview_lines" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/dynamic_page_switch_button_update"

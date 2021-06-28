@@ -18,6 +18,8 @@
             <enum name="disabled" value="3001" />
         </attr>
 
+        <attr name="andesSwitchTitleNumberOfLines" format="integer" />
+
         <attr name="andesSwitchText" format="reference" />
 
     </declare-styleable>

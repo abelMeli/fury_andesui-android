@@ -28,6 +28,7 @@ Basic Sample XML
 | app:andesSwitchAlign | Set the switch position at the left or right of the **andesSwitchText**. Possible values: **left**, **right** |
 | app:andesSwitchType | Set a type style for the switch: **enabled**, **disabled** |
 | app:andesSwitchStatus | Set switch initial status: **checked**, **unckecked** |
+| app:andesSwitchTitleNumberOfLines | Set number of lines for the text component |
 
 <br/>
 
@@ -57,6 +58,7 @@ Basic Sample XML
 | align: AndesSwitchAlign | **get():** retrieves switch position. <br/> **set(value: AndesSwitchAlign):** updates switch position at the left or right of the text. |
 | status: AndesSwitchStatus | **get():** retrieves switch current status. <br/> **set(value: AndesSwitchStatus):** updates switch status. |
 | type: AndesSwitchType | **get():** retrieves switch type. <br/> **set(value: AndesSwitchType):** updates component type. |
+| titleNumberOfLines: Int | **get():** retrieves number of lines from the companion text. <br/> **set(value: Int):** updates component text with new number of lines. |
 
 <br/>
 
