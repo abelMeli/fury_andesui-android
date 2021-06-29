@@ -1,8 +1,12 @@
+# v3.21.0
+## 🚀 Feature
+- Added multiline support for `AndesSwitch` | Author: [@juanunzu](https://github.com/juanunzu)
+- Fresco version updated to 2.2.0 | Author: [@eportasML](https://github.com/eportasML)
+
 # v3.20.0
 ## 🚀 Feature
 - Added assets to Andes documentation
 - Changes in andes text colors to comply with a11y standards for color contrast | Author: [@juanunzu](https://github.com/juanunzu)
-- Added multiline support for `AndesSwitch` | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.19.1
 ## 🛠 Fixes
