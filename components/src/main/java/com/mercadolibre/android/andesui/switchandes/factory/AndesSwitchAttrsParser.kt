@@ -1,12 +1,12 @@
-package com.mercadolibre.android.andesui.switch.factory
+package com.mercadolibre.android.andesui.switchandes.factory
 
 import android.content.Context
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.AndesSwitch.Companion.ANDES_SWITCH_NUM_LINES_DEFAULT_VALUE
-import com.mercadolibre.android.andesui.switch.align.AndesSwitchAlign
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.AndesSwitch.Companion.ANDES_SWITCH_NUM_LINES_DEFAULT_VALUE
+import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 
 internal data class AndesSwitchAttrs(
     val andesSwitchAlign: AndesSwitchAlign,

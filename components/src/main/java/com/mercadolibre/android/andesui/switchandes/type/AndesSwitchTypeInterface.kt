@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch.type
+package com.mercadolibre.android.andesui.switchandes.type
 
 internal interface AndesSwitchTypeInterface
 internal object AndesSwitchTypeEnabled : AndesSwitchTypeInterface

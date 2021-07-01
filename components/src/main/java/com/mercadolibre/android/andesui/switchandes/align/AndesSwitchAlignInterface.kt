@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch.align
+package com.mercadolibre.android.andesui.switchandes.align
 
 import android.view.View
 

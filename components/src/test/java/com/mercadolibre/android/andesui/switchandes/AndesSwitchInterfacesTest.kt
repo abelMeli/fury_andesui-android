@@ -1,14 +1,14 @@
-package com.mercadolibre.android.andesui.switch
+package com.mercadolibre.android.andesui.switchandes
 
 import android.content.Context
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatusChecked
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatusUnchecked
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchTypeDisabled
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchTypeEnabled
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatusChecked
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatusUnchecked
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchTypeDisabled
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchTypeEnabled
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

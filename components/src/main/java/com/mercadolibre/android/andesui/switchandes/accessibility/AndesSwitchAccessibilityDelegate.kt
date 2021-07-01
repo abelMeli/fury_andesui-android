@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch.accessibility
+package com.mercadolibre.android.andesui.switchandes.accessibility
 
 import android.content.res.Resources
 import android.os.Build
@@ -7,9 +7,9 @@ import android.view.accessibility.AccessibilityNodeInfo
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.AndesSwitch
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.AndesSwitch
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 
 internal class AndesSwitchAccessibilityDelegate(private val andesSwitch: AndesSwitch) : View.AccessibilityDelegate() {
 

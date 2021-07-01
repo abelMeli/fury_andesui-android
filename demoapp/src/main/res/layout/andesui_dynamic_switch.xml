@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.mercadolibre.android.andesui.switch.AndesSwitch
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
             android:id="@+id/dynamic_page_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

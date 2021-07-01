@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="wrap" />
 
-    <com.mercadolibre.android.andesui.switch.AndesSwitchComponent
+    <com.mercadolibre.android.andesui.switchandes.AndesSwitchComponent
         android:id="@+id/switch_component"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

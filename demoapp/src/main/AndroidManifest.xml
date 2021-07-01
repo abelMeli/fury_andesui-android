@@ -305,7 +305,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".components.switch.SwitchShowcaseActivity"
+            android:name=".components.switchandes.SwitchShowcaseActivity"
             android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

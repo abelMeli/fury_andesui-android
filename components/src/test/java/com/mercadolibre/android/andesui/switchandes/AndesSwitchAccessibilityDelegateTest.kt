@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch
+package com.mercadolibre.android.andesui.switchandes
 
 import android.content.Context
 import android.os.Build
@@ -6,10 +6,10 @@ import android.view.accessibility.AccessibilityNodeInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.accessibility.AndesSwitchAccessibilityDelegate
-import com.mercadolibre.android.andesui.switch.align.AndesSwitchAlign
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.accessibility.AndesSwitchAccessibilityDelegate
+import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify

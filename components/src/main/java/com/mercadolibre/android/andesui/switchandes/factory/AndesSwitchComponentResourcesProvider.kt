@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch.factory
+package com.mercadolibre.android.andesui.switchandes.factory
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -6,8 +6,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 
 object AndesSwitchComponentResourcesProvider {
 

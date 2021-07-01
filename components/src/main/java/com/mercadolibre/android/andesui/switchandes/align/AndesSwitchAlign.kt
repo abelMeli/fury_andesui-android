@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch.align
+package com.mercadolibre.android.andesui.switchandes.align
 
 /**
  * Class with the different align options for the AndesSwitch

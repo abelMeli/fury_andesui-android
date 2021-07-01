@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch.status
+package com.mercadolibre.android.andesui.switchandes.status
 
 internal interface AndesSwitchStatusInterface
 internal object AndesSwitchStatusChecked : AndesSwitchStatusInterface

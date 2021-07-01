@@ -1,16 +1,16 @@
-package com.mercadolibre.android.andesui.switch
+package com.mercadolibre.android.andesui.switchandes
 
 import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import androidx.test.core.view.MotionEventBuilder
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.align.AndesSwitchAlign
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchAttrs
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchComponentResourcesProvider
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchConfigurationFactory
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchAttrs
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchComponentResourcesProvider
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchConfigurationFactory
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Assert
 import org.junit.Test

@@ -1,7 +1,7 @@
-package com.mercadolibre.android.andesui.switch.factory
+package com.mercadolibre.android.andesui.switchandes.factory
 
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 
 internal data class AndesSwitchConfiguration(
     val text: String?,

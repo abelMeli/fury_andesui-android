@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch
+package com.mercadolibre.android.andesui.switchandes
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,15 +9,15 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.accessibility.AndesSwitchAccessibilityDelegate
-import com.mercadolibre.android.andesui.switch.accessibility.AndesSwitchAccessibilityEventDispatcher
-import com.mercadolibre.android.andesui.switch.align.AndesSwitchAlign
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchAttrs
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchAttrsParser
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchConfiguration
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchConfigurationFactory
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.accessibility.AndesSwitchAccessibilityDelegate
+import com.mercadolibre.android.andesui.switchandes.accessibility.AndesSwitchAccessibilityEventDispatcher
+import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchAttrs
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchAttrsParser
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchConfiguration
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchConfigurationFactory
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 
 /**
  * This component allows the user to inmediately turn ON or OFF a preference or functionality.

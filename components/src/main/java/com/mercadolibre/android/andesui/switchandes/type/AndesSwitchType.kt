@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch.type
+package com.mercadolibre.android.andesui.switchandes.type
 
 /**
  * Class with the different type options for the AndesSwitch

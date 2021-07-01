@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.switch
+package com.mercadolibre.android.andesui.switchandes
 
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -7,13 +7,13 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchComponentResourcesProvider.DURATION
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchComponentResourcesProvider.createNewColorWithAnimation
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchComponentResourcesProvider.createThumbDrawable
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchComponentResourcesProvider.createTrackBackgroundColor
-import com.mercadolibre.android.andesui.switch.factory.AndesSwitchComponentResourcesProvider.createTrackDrawable
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchComponentResourcesProvider.DURATION
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchComponentResourcesProvider.createNewColorWithAnimation
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchComponentResourcesProvider.createThumbDrawable
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchComponentResourcesProvider.createTrackBackgroundColor
+import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchComponentResourcesProvider.createTrackDrawable
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 
 internal class AndesSwitchComponent(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
 

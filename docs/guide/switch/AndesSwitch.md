@@ -15,7 +15,7 @@ AndesSwitch(context)
 Basic Sample XML
 
 ```xml
-<com.mercadolibre.android.andesui.switch.AndesSwitch
+<com.mercadolibre.android.andesui.switchandes.AndesSwitch
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 ```

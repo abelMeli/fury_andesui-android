@@ -1,8 +1,8 @@
-package com.mercadolibre.android.andesui.switch.accessibility
+package com.mercadolibre.android.andesui.switchandes.accessibility
 
 import android.view.View
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 
 internal class AndesSwitchAccessibilityEventDispatcher {
 

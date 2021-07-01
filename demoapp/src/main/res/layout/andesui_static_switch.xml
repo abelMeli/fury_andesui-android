@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.mercadolibre.android.andesui.switch.AndesSwitch
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
             android:id="@+id/static_page_switch_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/static_page_switch_header" />
 
-        <com.mercadolibre.android.andesui.switch.AndesSwitch
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
             android:id="@+id/static_page_switch_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/static_page_switch_first" />
 
-        <com.mercadolibre.android.andesui.switch.AndesSwitch
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
             android:id="@+id/static_page_switch_third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/static_page_switch_second" />
 
-        <com.mercadolibre.android.andesui.switch.AndesSwitch
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
             android:id="@+id/static_page_switch_fourth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

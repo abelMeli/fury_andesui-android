@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.demoapp.components.switch
+package com.mercadolibre.android.andesui.demoapp.components.switchandes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,10 +14,10 @@ import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.Constants
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.switch.AndesSwitch
-import com.mercadolibre.android.andesui.switch.align.AndesSwitchAlign
-import com.mercadolibre.android.andesui.switch.status.AndesSwitchStatus
-import com.mercadolibre.android.andesui.switch.type.AndesSwitchType
+import com.mercadolibre.android.andesui.switchandes.AndesSwitch
+import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
+import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 
 @Suppress("TooManyFunctions")
