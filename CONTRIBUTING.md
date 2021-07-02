@@ -12,6 +12,7 @@ There are many ways to get involved with Andes UI.
 - Now you're ready to watch a movie. Well, is not exactly a movie, but is a video. A tech talk, to be honest.
 A tech talk we gave at Mercado Libre that serves as an onboarding to the internals of this library. [Watch it here!](https://drive.google.com/open?id=1a8KBwlILW-JOnrO8cEGuQ7CNYSORJg4A)
 - Oh, I see! You want to get your hands dirty. Fork this repo, run the Demo App and start developing a new Andes component. Or maybe you can improve an existing one.
+- In case you are developing a new component (or planning to do so), keep in mind the creation of a new RFC, [see here for more info!](https://github.com/mercadolibre/fury_andesui-android/wiki/AndesUI-RFC)
 
 # I want to develop a new component or to fix an existing one
 Nice, we like you! Andes UI is a collaborative project, so we need the help of everyone to keep it up.
@@ -32,10 +33,15 @@ We expect to be all aboard this boat... and we are a lot. That's why we have som
 
 ## How to make a local publish
 ``
-./gradlew build publishToMavenLocal
+./gradlew publishLocal
 ``
 
-*Pro tip*: First change the version name in gradle.properties to X.XX.X-LOCAL (Note that we use [SemVer](https://semver.org/)).
+## How to make an experimental publish
+``
+./gradlew publishExperimental
+``
+
+For both cases, there is no need to change the gradle.properties file. The task will automatically add a suffix indicating the publish type and the generation date.
 
 ## Running the Demo App
 Before submitting a Pull Request, please make sure the Demo App is able to show the results of your heavy work.

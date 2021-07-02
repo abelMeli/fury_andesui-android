@@ -4,6 +4,7 @@
 - Added multiline support for `AndesSwitch` | Author: [@juanunzu](https://github.com/juanunzu)
 - Fresco version updated to 2.2.0 | Author: [@eportasML](https://github.com/eportasML)
 - AndesSwitch package rename to `switchandes` to be java compatible | Author: [@eportasML](https://github.com/eportasML)
+- Updates in the CONTRIBUTING.md regarding the creation of local publish | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.20.0
 ## 🚀 Feature
