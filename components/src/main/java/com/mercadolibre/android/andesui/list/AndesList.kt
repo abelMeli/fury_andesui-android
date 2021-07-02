@@ -24,7 +24,8 @@ import com.mercadolibre.android.andesui.list.utils.AndesListDividerItemDecoratio
 class AndesList : ConstraintLayout {
 
     private lateinit var andesListDelegate: AndesListDelegate
-    private lateinit var recyclerViewComponent: RecyclerView
+    internal lateinit var recyclerViewComponent: RecyclerView
+        private set
     private lateinit var listAdapter: AndesListAdapter
 
     /**

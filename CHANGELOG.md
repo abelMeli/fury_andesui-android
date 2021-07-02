@@ -1,5 +1,6 @@
 # v3.21.0
 ## 🚀 Feature
+- AndesFloatingMenu | Author: [@eportasML](https://github.com/eportasML)
 - Added multiline support for `AndesSwitch` | Author: [@juanunzu](https://github.com/juanunzu)
 - Fresco version updated to 2.2.0 | Author: [@eportasML](https://github.com/eportasML)
 - AndesSwitch package rename to `switchandes` to be java compatible | Author: [@eportasML](https://github.com/eportasML)

@@ -1,0 +1,229 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/floatingMenuConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.mercadolibre.android.andesui.message.AndesMessage
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/button_margin_vertical"
+            android:layout_marginTop="@dimen/button_margin_vertical"
+            android:layout_marginEnd="@dimen/button_margin_vertical"
+            app:andesMessageBodyText="@string/andes_floatingmenu_description"
+            app:andesMessageHierarchy="quiet"
+            app:andesMessageTitleText="@string/title_description"
+            app:andesMessageType="neutral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/andes_floatingmenu_trigger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="medium"
+            app:andesButtonText="@string/andes_floatingmenu_trigger_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message" />
+
+        <TextView
+            android:id="@+id/floatingMenuRowsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/andes_floatingmenu_rows"
+            app:layout_constraintEnd_toStartOf="@+id/floatingMenuRowsSpinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/andes_floatingmenu_trigger" />
+
+        <TextView
+            android:id="@+id/floatingMenuOrientationText"
+            android:layout_width="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content"
+            android:text="@string/andes_floatingmenu_orientation"
+            app:layout_constraintEnd_toStartOf="@+id/floatingMenuOrientationSpinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/widthTopBarrier"
+            app:layout_constraintStart_toStartOf="@+id/floatingMenuRowsText"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuRowsText" />
+
+        <TextView
+            android:id="@+id/floatingMenuWidth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/andes_floatingmenu_width"
+            app:layout_constraintEnd_toStartOf="@+id/floatingMenuWidthEditText"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/floatingMenuOrientationText"
+            app:layout_constraintTop_toBottomOf="@+id/widthTopBarrier"
+            app:layout_constraintBottom_toTopOf="@+id/widthBottomBarrier"/>
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/floatingMenuCallback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxStatus="unselected"
+            app:andesCheckboxText="@string/andes_floatingmenu_callback"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuTriggerPositionSpinner"
+            app:layout_constraintStart_toStartOf="@+id/floatingMenuWidth"
+            app:layout_constraintTop_toBottomOf="@+id/widthBottomBarrier" />
+
+        <TextView
+            android:id="@+id/floatingMenuTriggerPosition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/andes_floatingmenu_trigger_position"
+            app:layout_constraintEnd_toStartOf="@+id/floatingMenuWidthSpinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/floatingMenuCallback"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuCallback"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            android:paddingTop="16dp"
+            app:constraint_referenced_ids="floatingMenuWidthSpinner,floatingMenuWidth,floatingMenuWidthEditText"
+            android:id="@+id/widthTopBarrier"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="floatingMenuWidthSpinner,floatingMenuWidth,floatingMenuWidthEditText"
+            android:id="@+id/widthBottomBarrier"/>
+
+        <Spinner
+            android:id="@+id/floatingMenuRowsSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="@+id/floatingMenuRowsText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/floatingMenuRowsText"
+            app:layout_constraintTop_toTopOf="@+id/floatingMenuRowsText" />
+
+        <Spinner
+            android:id="@+id/floatingMenuOrientationSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/widthTopBarrier"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuRowsSpinner"
+            app:layout_constraintStart_toEndOf="@+id/floatingMenuOrientationText"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuRowsText" />
+
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/floatingMenuWidthEditText"
+            android:layout_width="64dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@+id/floatingMenuWidthSpinner"
+            app:layout_constraintBottom_toBottomOf="@+id/widthBottomBarrier"
+            app:layout_constraintTop_toTopOf="@+id/widthTopBarrier"
+            app:layout_constraintStart_toEndOf="@+id/floatingMenuWidth"/>
+
+        <Spinner
+            android:id="@+id/floatingMenuWidthSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuOrientationSpinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/floatingMenuWidthEditText"
+            app:layout_constraintTop_toTopOf="@+id/widthTopBarrier"
+            app:layout_constraintBottom_toBottomOf="@+id/widthBottomBarrier"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <Spinner
+            android:id="@+id/floatingMenuTriggerPositionSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/floatingMenuTriggerPosition"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuWidthSpinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/floatingMenuTriggerPosition"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuCallback"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/floatingMenuSelectable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxStatus="unselected"
+            app:andesCheckboxText="@string/andes_floatingmenu_selectable"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuTriggerPositionSpinner"
+            app:layout_constraintStart_toStartOf="@+id/floatingMenuTriggerPosition"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuTriggerPosition" />
+
+        <TextView
+            android:id="@+id/floatingMenuListSizeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/andes_floatingmenu_list_size"
+            app:layout_constraintEnd_toStartOf="@+id/floatingMenuListSizeEditText"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/floatingMenuSelectable"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuSelectable"
+            app:layout_constraintBottom_toBottomOf="@+id/floatingMenuListSizeEditText"/>
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/floatingMenuListSizeEditText"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuSelectable"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuSelectable" />
+
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/change_button"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andes_message_showcase_change"
+            app:layout_constraintEnd_toStartOf="@+id/clear_button"
+            app:layout_constraintStart_toStartOf="@+id/floatingMenuListSizeText"
+            app:layout_constraintTop_toBottomOf="@+id/floatingMenuListSizeEditText" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/clear_button"
+            android:layout_width="@dimen/button_clear_width"
+            android:layout_height="wrap_content"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andesui_demoapp_clear_button"
+            app:layout_constraintBottom_toBottomOf="@+id/change_button"
+            app:layout_constraintEnd_toEndOf="@+id/floatingMenuSelectable"
+            app:layout_constraintTop_toTopOf="@+id/change_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

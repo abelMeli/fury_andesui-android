@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Andes.FloatingMenuBottomAnimation">
+        <item name="android:windowEnterAnimation">@anim/andes_floatingmenu_bottom_in_animation</item>
+        <item name="android:windowExitAnimation">@anim/andes_floatingmenu_bottom_out_animation</item>
+    </style>
+    <style name="Andes.FloatingMenuTopAnimation">
+        <item name="android:windowEnterAnimation">@anim/andes_floatingmenu_top_in_animation</item>
+        <item name="android:windowExitAnimation">@anim/andes_floatingmenu_top_out_animation</item>
+    </style>
+</resources>

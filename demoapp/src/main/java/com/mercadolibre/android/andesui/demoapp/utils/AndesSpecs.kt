@@ -13,6 +13,7 @@ internal enum class AndesSpecs(val link: String) {
     CARD("$COMPONENT_PREFIX/card-1567452592"),
     CAROUSEL("$COMPONENT_PREFIX/carousel"),
     CHECKBOX("$COMPONENT_PREFIX/checkbox"),
+    FLOATINGMENU("$COMPONENT_PREFIX/floating-menu"),
     LIST("$COMPONENT_PREFIX/list-1584477775"),
     TAG("$COMPONENT_PREFIX/tag-1575576234"),
     BADGE("$COMPONENT_PREFIX/badge"),

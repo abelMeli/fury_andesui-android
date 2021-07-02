@@ -86,6 +86,9 @@ class MainActivity : AppCompatActivity() {
         andesui_switch.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/switch"))
         }
+        andesui_floatingmenu.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/floatingmenu"))
+        }
     }
 
     private fun setupExtras() {

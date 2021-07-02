@@ -46,6 +46,7 @@
     <string name="andes_demoapp_screen_radiobutton">Andes UI: RadioButton</string>
     <string name="andes_demoapp_screen_datepicker">Andes UI: DatePicker</string>
     <string name="andes_demoapp_screen_thumbnail">Andes UI: Thumbnail</string>
+    <string name="andes_demoapp_screen_floatingmenu">Andes UI: Floating Menu</string>
     <string name="andes_demoapp_screen_progress_indicator">Andes UI: Progress Indicator</string>
     <string name="andes_demoapp_screen_whatsnew">Andes UI: What\'s new?</string>
     <string name="andes_demoapp_changelog_error">What\'s New couldn\'t be loaded, please contact our support team.</string>
@@ -541,6 +542,7 @@
     <string name="andes_tooltip_button_top">Show bottom</string>
     <string name="andes_tooltip_button_bottom">Show top</string>
     <string name="andes_tooltip_showcase">Andes Tooltip</string>
+    <string name="andes_thumbnail_specs_2">Show</string>
     <string-array name="andes_tooltip_style_spinner">
         <item>Light</item>
         <item>Highlight</item>
@@ -569,4 +571,40 @@
         <item>Full Size</item>
     </string-array>
 
+    <!-- Andes FloatingMenu -->
+    <string name="andes_floatingmenu_description" translatable="false">It is a card superimposed on the rest of the content that shows lists with actionable or selectable rows.</string>
+    <string name="andes_floatingmenu_rows" translatable="false">Number of rows</string>
+    <string name="andes_floatingmenu_orientation" translatable="false">Orientation</string>
+    <string name="andes_floatingmenu_width" translatable="false">Width</string>
+    <string name="andes_floatingmenu_selectable" translatable="false">Selectable List</string>
+    <string name="andes_floatingmenu_list_size" translatable="false">List size</string>
+    <string name="andes_floatingmenu_trigger_button" translatable="false">Floating Menu Trigger</string>
+    <string name="andes_floatingmenu_trigger_position" translatable="false">Trigger Position</string>
+    <string name="andes_floatingmenu" translatable="false">Andes Floating Menu</string>
+    <string name="andes_floatingmenu_specs" translatable="false">Andes Floating Menu Specs 📘</string>
+    <string name="andes_floatingmenu_tooltip_1" translatable="false">When there is no space available to the left, even if the menu has orientation = LEFT, the component will inflate with orientation = RIGHT. If rows = MAX and the containing list has enough elements, the component will extend until the inferior limit of the container view.</string>
+    <string name="andes_floatingmenu_tooltip_2" translatable="false">Values: orientation = LEFT, width = 380, rows = MEDIUM</string>
+    <string name="andes_floatingmenu_tooltip_3" translatable="false">When there is no space available to the right, even if the menu has orientation = RIGHT, the component will inflate with orientation = LEFT.</string>
+    <string name="andes_floatingmenu_tooltip_4" translatable="false">If the component has rows = MAX and the containing list has enough elements, the component will extend until the inferior limit of the container view.</string>
+    <string name="andes_floatingmenu_tooltip_5" translatable="false">If the menu has rows = MEDIUM and there is not enough space for this config, the component will inflate upwards.</string>
+    <string name="andes_floatingmenu_tooltip_6" translatable="false">If the menu has rows = SMALL or the list has few elements and there is enough space for this config, the component will inflate downwards.</string>
+    <string name="andes_floatingmenu_callback" translatable="false">Show/Hide Callback</string>
+    <string-array name="andes_floatingmenu_rows_spinner">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Max</item>
+    </string-array>
+    <string-array name="andes_floatingmenu_orientation_spinner">
+        <item>Left</item>
+        <item>Right</item>
+    </string-array>
+    <string-array name="andes_floatingmenu_width_spinner">
+        <item>Fixed</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="andes_floatingmenu_trigger_position_spinner">
+        <item>Center</item>
+        <item>Left</item>
+        <item>Right</item>
+    </string-array>
 </resources>
