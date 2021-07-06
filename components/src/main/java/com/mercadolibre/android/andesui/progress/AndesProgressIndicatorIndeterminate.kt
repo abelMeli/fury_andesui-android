@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import android.util.AttributeSet
 import android.view.View
+import com.mercadolibre.android.andesui.progress.accessibility.AndesProgressIndicatorAccessibilityEventDispatcher
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressAttrs
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressAttrsParser
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressConfiguration
@@ -15,6 +16,7 @@ class AndesProgressIndicatorIndeterminate : ConstraintLayout {
 
     private lateinit var andesProgressAttr: AndesProgressAttrs
     private lateinit var progressComponent: LoadingSpinner
+    private val a11yEventDispatcher by lazy { AndesProgressIndicatorAccessibilityEventDispatcher() }
 
     var tint: Int
         get() = andesProgressAttr.tint
@@ -112,6 +114,10 @@ class AndesProgressIndicatorIndeterminate : ConstraintLayout {
 
     fun start() {
         progressComponent.start()
+        a11yEventDispatcher.notifyA11ySpinnerIsLoading(
+                view = this,
+                isLoading = true
+        )
     }
 
     override fun onDetachedFromWindow() {

@@ -23,6 +23,7 @@ import com.facebook.drawee.controller.ControllerListener
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.image.ImageInfo
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.button.accessibility.AndesButtonAccessibilityDelegate
 import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrs
 import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrsParser
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfiguration
@@ -233,6 +234,7 @@ class AndesButton : ConstraintLayout {
         addView(rightIconComponent)
 
         updateComponentsAlignment(config)
+        setupA11yDelegate()
     }
 
     /**
@@ -249,6 +251,10 @@ class AndesButton : ConstraintLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             stateListAnimator = null
         }
+    }
+
+    private fun setupA11yDelegate() {
+        accessibilityDelegate = AndesButtonAccessibilityDelegate(this)
     }
 
     /**
@@ -549,16 +555,6 @@ class AndesButton : ConstraintLayout {
      */
     override fun getAccessibilityClassName(): CharSequence {
         return Button::class.java.name
-    }
-
-    /**
-     * callback invoked when the accessibility service focus this component.
-     * @param info contains all the data needed for the service to work. If custom behaviour is
-     * needed, it should be overwritten here.
-     */
-    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo?) {
-        super.onInitializeAccessibilityNodeInfo(info)
-        info?.contentDescription = text
     }
 
     /**
