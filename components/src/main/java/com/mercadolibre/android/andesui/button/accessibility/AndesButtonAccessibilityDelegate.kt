@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.button.accessibility
 
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 
 /**
@@ -26,10 +27,11 @@ internal class AndesButtonAccessibilityDelegate(private val andesButton: AndesBu
      */
     private fun generateContentDescriptionText(andesButton: AndesButton): String {
         val labelText = andesButton.text.orEmpty()
+        val loadingText = andesButton.context.getString(R.string.andes_button_loading)
 
         return when (andesButton.isLoading) {
             true -> {
-                "$labelText, cargando"
+                "$labelText, $loadingText."
             }
             false -> {
                 "$labelText."
