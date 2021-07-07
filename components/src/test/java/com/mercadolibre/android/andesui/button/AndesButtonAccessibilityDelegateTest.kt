@@ -2,8 +2,6 @@ package com.mercadolibre.android.andesui.button
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
-import android.view.accessibility.AccessibilityNodeInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
@@ -13,9 +11,6 @@ import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.button.accessibility.AndesButtonAccessibilityDelegate
-import com.nhaarman.mockitokotlin2.doNothing
-import com.nhaarman.mockitokotlin2.spy
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -23,15 +18,15 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 
+@LooperMode(LooperMode.Mode.PAUSED)
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
 class AndesButtonAccessibilityDelegateTest {
 
     private lateinit var context: Context
     private lateinit var andesButton: AndesButton
-    private lateinit var nodeInfo: AccessibilityNodeInfo
-    private lateinit var a11yDelegate: AndesButtonAccessibilityDelegate
 
     @Before
     fun setup() {
@@ -43,7 +38,7 @@ class AndesButtonAccessibilityDelegateTest {
                 .build()
         Fresco.initialize(context, config)
         FLog.setMinimumLoggingLevel(FLog.VERBOSE)
-        andesButton = spy(AndesButton(context))
+        andesButton = AndesButton(context)
         setupActivityForTest()
     }
 
@@ -57,28 +52,18 @@ class AndesButtonAccessibilityDelegateTest {
 
     @Test
     fun `AndesButton accessibility when the button is not charging`() {
+        andesButton.text = "Button text"
         val nodeInfo = andesButton.createAccessibilityNodeInfo()
-        a11yDelegate = andesButton.accessibilityDelegate as AndesButtonAccessibilityDelegate
-        a11yDelegate.onInitializeAccessibilityNodeInfo(andesButton, nodeInfo)
         Assert.assertNotNull(nodeInfo)
         Assert.assertEquals("Button text.", nodeInfo.contentDescription)
     }
 
     @Test
     fun `Andes button accessibility when the button is charging`() {
-        doNothing().`when`(andesButton).startLoadingAnimation()
+        andesButton.text = "Button text"
         andesButton.isLoading = true
-
-        nodeInfo = andesButton.createAccessibilityNodeInfo()
-
-        a11yDelegate = andesButton.accessibilityDelegate as AndesButtonAccessibilityDelegate
-
-        a11yDelegate.onInitializeAccessibilityNodeInfo(andesButton, nodeInfo)
-
-        Log.v("TEST_AB", nodeInfo.contentDescription.toString())
-
+        val nodeInfo = andesButton.createAccessibilityNodeInfo()
         Assert.assertNotNull(nodeInfo)
         Assert.assertEquals("Button text, Cargando.", nodeInfo.contentDescription)
     }
-
 }

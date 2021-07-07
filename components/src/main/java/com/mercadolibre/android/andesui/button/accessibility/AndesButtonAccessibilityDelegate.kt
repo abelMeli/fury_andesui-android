@@ -7,7 +7,7 @@ import com.mercadolibre.android.andesui.button.AndesButton
 
 /**
  * class responsible for generating the content description for the andesButton, according
- * to the available parameters (label, helper, counter, state, among others)
+ * to the available parameters (text, isLoading)
  */
 internal class AndesButtonAccessibilityDelegate(private val andesButton: AndesButton) : View.AccessibilityDelegate() {
 
@@ -23,7 +23,7 @@ internal class AndesButtonAccessibilityDelegate(private val andesButton: AndesBu
      * method responsible for generating the string needed as contentDescription.
      *
      * The returned string varies according to the state and the presence/absence of the
-     * label, helper, placeholder, counter and entered text.
+     * text and the value of the isLoading parameter.
      */
     private fun generateContentDescriptionText(andesButton: AndesButton): String {
         val labelText = andesButton.text.orEmpty()
