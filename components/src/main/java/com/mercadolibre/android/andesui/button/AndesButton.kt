@@ -403,7 +403,6 @@ class AndesButton : ConstraintLayout {
      */
     private fun setupLoadingComponent(config: AndesButtonConfiguration) {
         if (config.isLoading) {
-
             loadingView.size = AndesProgressSize.fromString(size.name)
             loadingView.tint = config.textColor.getColorForState(drawableState, 0)
 
@@ -412,13 +411,17 @@ class AndesButton : ConstraintLayout {
             leftIconComponent.visibility = View.INVISIBLE
             rightIconComponent.visibility = View.INVISIBLE
 
-            loadingView.start()
+            startLoadingAnimation()
         } else {
             textComponent.visibility = View.VISIBLE
             loadingView.visibility = View.GONE
             leftIconComponent.visibility = View.VISIBLE
             rightIconComponent.visibility = View.VISIBLE
         }
+    }
+
+    internal fun startLoadingAnimation() {
+        loadingView.start()
     }
 
     /**
