@@ -66,4 +66,13 @@ class AndesButtonAccessibilityDelegateTest {
         Assert.assertNotNull(nodeInfo)
         Assert.assertEquals("Button text, Cargando.", nodeInfo.contentDescription)
     }
+
+    @Test
+    fun `Andes button accessibility when the button is charging and has no text`() {
+        andesButton.text = null
+        andesButton.isLoading = true
+        val nodeInfo = andesButton.createAccessibilityNodeInfo()
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertEquals(", Cargando.", nodeInfo.contentDescription)
+    }
 }

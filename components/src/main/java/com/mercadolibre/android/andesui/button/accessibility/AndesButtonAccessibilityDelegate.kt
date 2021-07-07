@@ -29,13 +29,10 @@ internal class AndesButtonAccessibilityDelegate(private val andesButton: AndesBu
         val labelText = andesButton.text.orEmpty()
         val loadingText = andesButton.context.getString(R.string.andes_button_loading)
 
-        return when (andesButton.isLoading) {
-            true -> {
-                "$labelText, $loadingText."
-            }
-            false -> {
-                "$labelText."
-            }
+        return if (andesButton.isLoading) {
+            "$labelText, $loadingText."
+        } else {
+            "$labelText."
         }
     }
 }

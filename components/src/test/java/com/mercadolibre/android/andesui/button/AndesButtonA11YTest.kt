@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.button
 
 import android.content.Context
 import android.os.Build
-import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
