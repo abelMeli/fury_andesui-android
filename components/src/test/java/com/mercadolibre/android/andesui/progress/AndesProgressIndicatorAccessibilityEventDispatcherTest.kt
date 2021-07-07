@@ -42,8 +42,8 @@ class AndesProgressIndicatorAccessibilityEventDispatcherTest {
         val announceText = "Cargando"
         val spiedEventDispatcher = spy(AndesProgressIndicatorAccessibilityEventDispatcher())
         spiedEventDispatcher.notifyA11ySpinnerIsLoading(
-                view = spiedPrpgress,
-                isLoading = false
+            view = spiedPrpgress,
+            isLoading = false
         )
         verify(spiedPrpgress, times(0)).announceForAccessibility(announceText)
     }
@@ -53,10 +53,9 @@ class AndesProgressIndicatorAccessibilityEventDispatcherTest {
         val announceText = "Cargando"
         val spiedEventDispatcher = spy(AndesProgressIndicatorAccessibilityEventDispatcher())
         spiedEventDispatcher.notifyA11ySpinnerIsLoading(
-                view = spiedPrpgress,
-                isLoading = true
+            view = spiedPrpgress,
+            isLoading = true
         )
         verify(spiedPrpgress, times(1)).announceForAccessibility(announceText)
     }
-
 }

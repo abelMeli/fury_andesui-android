@@ -38,5 +38,4 @@ internal class AndesButtonAccessibilityDelegate(private val andesButton: AndesBu
             }
         }
     }
-
 }

@@ -1,9 +1,7 @@
 package com.mercadolibre.android.andesui.button
 
-import android.app.Activity
 import android.content.Context
 import android.os.Build
-import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import androidx.test.core.app.ApplicationProvider
@@ -17,7 +15,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
@@ -27,7 +24,6 @@ class AndesButtonA11YTest {
 
     private lateinit var context: Context
     private lateinit var andesButton: AndesButton
-    private lateinit var nodeInfo: AccessibilityNodeInfo
 
     @Before
     fun setup() {
