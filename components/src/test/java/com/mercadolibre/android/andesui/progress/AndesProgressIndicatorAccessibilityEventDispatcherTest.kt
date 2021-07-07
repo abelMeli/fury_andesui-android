@@ -34,9 +34,18 @@ class AndesProgressIndicatorAccessibilityEventDispatcherTest {
                 .setRequestListeners(requestListeners)
                 .build()
         Fresco.initialize(context, config)
-
         spiedPrpgress = spy(AndesProgressIndicatorIndeterminate(context))
-        spiedPrpgress.start()
+    }
+
+    @Test
+    fun `AdvertForAccessibility when is not loading`() {
+        val announceText = "Cargando"
+        val spiedEventDispatcher = spy(AndesProgressIndicatorAccessibilityEventDispatcher())
+        spiedEventDispatcher.notifyA11ySpinnerIsLoading(
+                view = spiedPrpgress,
+                isLoading = false
+        )
+        verify(spiedPrpgress, times(0)).announceForAccessibility(announceText)
     }
 
     @Test
@@ -47,9 +56,7 @@ class AndesProgressIndicatorAccessibilityEventDispatcherTest {
                 view = spiedPrpgress,
                 isLoading = true
         )
-
-
-        verify(spiedPrpgress, times(0)).announceForAccessibility(announceText)
+        verify(spiedPrpgress, times(1)).announceForAccessibility(announceText)
     }
 
 }
