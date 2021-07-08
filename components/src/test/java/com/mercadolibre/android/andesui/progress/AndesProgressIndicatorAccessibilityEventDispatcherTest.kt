@@ -8,6 +8,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.progress.accessibility.AndesProgressIndicatorAccessibilityEventDispatcher
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
@@ -39,7 +40,7 @@ class AndesProgressIndicatorAccessibilityEventDispatcherTest {
 
     @Test
     fun `AdvertForAccessibility when is not loading`() {
-        val announceText = "Loading"
+        val announceText = context.resources.getString(R.string.andes_progressindicator_is_loading)
         val spiedEventDispatcher = spy(AndesProgressIndicatorAccessibilityEventDispatcher())
         spiedEventDispatcher.notifyA11ySpinnerIsLoading(
             view = spiedPrpgress,
@@ -50,7 +51,7 @@ class AndesProgressIndicatorAccessibilityEventDispatcherTest {
 
     @Test
     fun `AdvertForAccessibility when is loading`() {
-        val announceText = "Loading"
+        val announceText = context.resources.getString(R.string.andes_progressindicator_is_loading)
         val spiedEventDispatcher = spy(AndesProgressIndicatorAccessibilityEventDispatcher())
         spiedEventDispatcher.notifyA11ySpinnerIsLoading(
             view = spiedPrpgress,
