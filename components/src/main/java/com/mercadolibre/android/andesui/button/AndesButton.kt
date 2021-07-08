@@ -10,7 +10,6 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
-import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.Nullable
@@ -23,15 +22,16 @@ import com.facebook.drawee.controller.ControllerListener
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.image.ImageInfo
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.button.accessibility.AndesButtonAccessibilityDelegate
 import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrs
 import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrsParser
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfiguration
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfigurationFactory
-import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
-import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
-import com.mercadolibre.android.andesui.button.hierarchy.BackgroundColorConfig
+import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
+import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.getConfiguredBackground
+import com.mercadolibre.android.andesui.button.hierarchy.BackgroundColorConfig
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
 import com.mercadolibre.android.andesui.progress.size.AndesProgressSize
@@ -77,7 +77,7 @@ class AndesButton : ConstraintLayout {
 
     private lateinit var andesButtonAttrs: AndesButtonAttrs
     internal lateinit var textComponent: TextView
-    internal lateinit var loadingView: AndesProgressIndicatorIndeterminate
+    private lateinit var loadingView: AndesProgressIndicatorIndeterminate
 
     lateinit var leftIconComponent: SimpleDraweeView
     lateinit var rightIconComponent: SimpleDraweeView
@@ -233,6 +233,7 @@ class AndesButton : ConstraintLayout {
         addView(rightIconComponent)
 
         updateComponentsAlignment(config)
+        setupA11yDelegate()
     }
 
     /**
@@ -249,6 +250,10 @@ class AndesButton : ConstraintLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             stateListAnimator = null
         }
+    }
+
+    private fun setupA11yDelegate() {
+        accessibilityDelegate = AndesButtonAccessibilityDelegate(this)
     }
 
     /**
@@ -362,8 +367,9 @@ class AndesButton : ConstraintLayout {
      *
      */
     private fun setupLeftIconComponent(config: AndesButtonConfiguration) {
-        if (!customIcon)
+        if (!customIcon) {
             leftIconComponent.setImageDrawable(config.leftIcon)
+        }
 
         if (config.leftIcon == null && !customIcon) {
             leftIconComponent.visibility = View.GONE
@@ -376,8 +382,9 @@ class AndesButton : ConstraintLayout {
      *
      */
     private fun setupRightIconComponent(config: AndesButtonConfiguration) {
-        if (!customIcon)
+        if (!customIcon) {
             rightIconComponent.setImageDrawable(config.rightIcon)
+        }
 
         if (config.rightIcon == null && !customIcon) {
             rightIconComponent.visibility = View.GONE
@@ -397,7 +404,6 @@ class AndesButton : ConstraintLayout {
      */
     private fun setupLoadingComponent(config: AndesButtonConfiguration) {
         if (config.isLoading) {
-
             loadingView.size = AndesProgressSize.fromString(size.name)
             loadingView.tint = config.textColor.getColorForState(drawableState, 0)
 
@@ -549,16 +555,6 @@ class AndesButton : ConstraintLayout {
      */
     override fun getAccessibilityClassName(): CharSequence {
         return Button::class.java.name
-    }
-
-    /**
-     * callback invoked when the accessibility service focus this component.
-     * @param info contains all the data needed for the service to work. If custom behaviour is
-     * needed, it should be overwritten here.
-     */
-    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo?) {
-        super.onInitializeAccessibilityNodeInfo(info)
-        info?.contentDescription = text
     }
 
     /**

@@ -3,7 +3,7 @@ ext {
     mockitoKotlinVersion = '2.2.0'
     assertjVersion = '3.17.1'
     mockitoInline = '2.13.0'
-    robolectric = '4.0'
+    robolectric = '4.3'
     soloaderVersion = '0.6.0'
     runnerVersion = '1.0.2'
     junitVersion = '4.13'

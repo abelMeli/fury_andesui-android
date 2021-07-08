@@ -1,3 +1,7 @@
+# v3.22.0
+## 🚀 Feature
+- Added accessibility support for `AndesButton`
+
 # v3.21.0
 ## 🚀 Feature
 - AndesFloatingMenu | Author: [@eportasML](https://github.com/eportasML)
