@@ -64,7 +64,7 @@ class AndesButtonAccessibilityDelegateTest {
         andesButton.isLoading = true
         val nodeInfo = andesButton.createAccessibilityNodeInfo()
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("Button text, Cargando.", nodeInfo.contentDescription)
+        Assert.assertEquals("Button text, Loading.", nodeInfo.contentDescription)
     }
 
     @Test
@@ -73,6 +73,6 @@ class AndesButtonAccessibilityDelegateTest {
         andesButton.isLoading = true
         val nodeInfo = andesButton.createAccessibilityNodeInfo()
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals(", Cargando.", nodeInfo.contentDescription)
+        Assert.assertEquals(", Loading.", nodeInfo.contentDescription)
     }
 }
