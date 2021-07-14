@@ -25,7 +25,6 @@ class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(contex
                 logTracking(position)
             }
         })
-        logTracking(0)
     }
 
     private fun logTracking(currentPosition: Int) {
@@ -45,5 +44,13 @@ class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(contex
                 throw RuntimeException(getString(R.string.andesui_demoapp_error_tracking))
             }
         }
+    }
+
+    /**
+     * Method overridden to track first page when viewpager is created.
+     */
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        logTracking(currentItem)
     }
 }
