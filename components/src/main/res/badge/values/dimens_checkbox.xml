@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="andes_checkbox_text_size">16dp</dimen>
-    <dimen name="andes_checkbox_text_margin">4dp</dimen>
+    <dimen name="andes_checkbox_text_margin">7dp</dimen>
     <dimen name="andes_checkbox_size_icon">16dp</dimen>
     <dimen name="andes_checkbox_margin">8dp</dimen>
     <dimen name="andes_checkbox_radius">2dp</dimen>
