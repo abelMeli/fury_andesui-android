@@ -1,4 +1,6 @@
 # v3.23.0
+## 🚀 Feature
+- Added new icons for charge methods. | Authors: [@rbasualdo7](https://github.com/rbasualdo7) 
 ## 🛠 Fixes
 - Fix `AndesCheckbox` padding top to align text with checkbox | Author: [@mingkao-meli](https://github.com/mingkao-meli)
 
