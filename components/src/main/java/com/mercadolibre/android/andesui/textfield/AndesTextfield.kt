@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.textfield
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.EditText
@@ -152,7 +154,7 @@ class AndesTextfield : ConstraintLayout {
         }
 
     /**
-     * Getter and setter for the [rightContent].
+     * Getter and setter for the [inputType].
      */
     var inputType: Int
         get() = andesTextfieldAttrs.inputType
@@ -213,9 +215,18 @@ class AndesTextfield : ConstraintLayout {
             setupMaxLines(createConfig())
         }
 
+    /**
+     * Getter and setter for the textfield component touch action.
+     */
+    internal var onTouch: ((MotionEvent) -> Unit)? = null
+        set(value) {
+            field = value
+            if (value != null) setupTextComponentTouchAction() else clearTextComponentTouchAction()
+        }
+
     private lateinit var andesTextfieldAttrs: AndesTextfieldAttrs
     private lateinit var textfieldContainer: ConstraintLayout
-    private lateinit var textContainer: ConstraintLayout
+    internal lateinit var textContainer: ConstraintLayout
     private lateinit var labelComponent: TextView
     private lateinit var helperComponent: TextView
     private lateinit var counterComponent: TextView
@@ -375,11 +386,35 @@ class AndesTextfield : ConstraintLayout {
     }
 
     /**
+     * Set up the text component touch action.
+     *
+     * Suppress lint since we need click to show suggestions on [AndesAutosuggest]
+     * and it doesn't affect accessibility since we're never consuming the event.
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupTextComponentTouchAction() {
+        textComponent.setOnTouchListener { _, event ->
+            onTouch?.invoke(event)
+            false
+        }
+    }
+
+    /**
+     * Clear the text component touch action.
+     * Suppress lint since we are just removing the listener.
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private fun clearTextComponentTouchAction() {
+        textComponent.setOnTouchListener(null)
+    }
+
+    /**
      * Set the input type of the edit text.
      */
     private fun setupInputType() {
         textComponent.inputType = inputType
         textComponent.setSelection(textComponent.text?.length ?: 0)
+        textComponent.typeface = createConfig().typeface
     }
 
     /**

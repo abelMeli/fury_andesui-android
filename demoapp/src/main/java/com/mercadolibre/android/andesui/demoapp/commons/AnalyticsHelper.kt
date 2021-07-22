@@ -50,7 +50,7 @@ internal class AnalyticsHelper {
             "SnackbarShowcaseActivity" to arrayListOf("/snackbar/dynamic"),
             "TagShowcaseActivity" to arrayListOf("/tag/simple/dynamic", "/tag/simple/static", "/tag/choice/static"),
             "TextfieldShowcaseActivity" to arrayListOf("/textfield/textfield/dynamic", "/textfield/textarea/dynamic",
-                    "/textfield/textcode/dynamic", "/textfield/static"),
+                    "/textfield/textcode/dynamic", "/textfield/autosuggest/dynamic", "/textfield/static"),
             "ThumbnailShowcaseActivity" to arrayListOf("/thumbnail/dynamic", "/thumbnail/static"),
             "TooltipShowcaseActivity" to arrayListOf("/tooltip/dynamic", "/tooltip/static"),
             "SwitchShowcaseActivity" to arrayListOf("/switch/dynamic", "/switch/static")

@@ -119,6 +119,9 @@ dependencies {
     implementation showcase.glide
     implementation showcase.markwon
 
+    implementation coroutines.core
+    implementation coroutines.android
+
     implementation platform(firebase.bom)
     implementation firebase.analytics
 

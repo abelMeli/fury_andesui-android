@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.ScrollView">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true">
+
+        <com.mercadolibre.android.andesui.textfield.AndesAutosuggest
+            android:id="@+id/autosuggest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_vertical_text_field"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:layout_marginEnd="@dimen/margin_vertical_text_field"
+            app:andesTextfieldState="idle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:background="@color/andes_gray_100_solid"
+            app:layout_constraintEnd_toEndOf="@id/autosuggest"
+            app:layout_constraintStart_toStartOf="@id/autosuggest"
+            app:layout_constraintTop_toBottomOf="@id/autosuggest" />
+
+        <TextView
+            android:id="@+id/state_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:text="@string/andes_textfield_state_text"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@id/state_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@id/divider"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <Spinner
+            android:id="@+id/state_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/state_label"
+            app:layout_constraintEnd_toEndOf="@id/divider"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/state_label"
+            app:layout_constraintTop_toTopOf="@id/state_label" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/label_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:inputType="textCapWords|textCapSentences"
+            app:andesTextfieldLabel="@string/andes_textfield_label_text"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@id/state_spinner"
+            app:layout_constraintStart_toStartOf="@id/state_label"
+            app:layout_constraintTop_toBottomOf="@id/state_label" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/placeholder_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:inputType="textCapWords|textCapSentences"
+            app:andesTextfieldLabel="@string/andes_textfield_placeholder_text"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@id/label_text"
+            app:layout_constraintStart_toStartOf="@id/label_text"
+            app:layout_constraintTop_toBottomOf="@id/label_text" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/helper_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:inputType="textCapWords|textCapSentences"
+            app:andesTextfieldLabel="@string/andes_textfield_helper_text"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@id/placeholder_text"
+            app:layout_constraintStart_toStartOf="@id/placeholder_text"
+            app:layout_constraintTop_toBottomOf="@id/placeholder_text" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/suggestions_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:inputType="textCapWords|textCapSentences"
+            app:andesTextfieldLabel="@string/andes_autosuggest_suggestions_text"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@id/helper_text"
+            app:layout_constraintStart_toStartOf="@id/helper_text"
+            app:layout_constraintTop_toBottomOf="@id/helper_text" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/server_calls_checkbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            app:andesCheckboxText="@string/andes_autosuggest_server_calls"
+            app:andesCheckboxTitleNumberOfLines="2"
+            app:layout_constraintEnd_toEndOf="@id/suggestions_text"
+            app:layout_constraintStart_toStartOf="@id/suggestions_text"
+            app:layout_constraintTop_toBottomOf="@id/suggestions_text" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/change_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:layout_marginEnd="@dimen/margin_vertical_text_field"
+            android:layout_marginBottom="@dimen/margin_vertical_text_field"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andes_message_showcase_change"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/clear_button"
+            app:layout_constraintStart_toStartOf="@id/server_calls_checkbox"
+            app:layout_constraintTop_toBottomOf="@id/server_calls_checkbox" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/clear_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andesui_demoapp_clear_button"
+            app:layout_constraintBottom_toBottomOf="@id/change_button"
+            app:layout_constraintEnd_toEndOf="@id/server_calls_checkbox"
+            app:layout_constraintStart_toEndOf="@id/change_button"
+            app:layout_constraintTop_toTopOf="@id/change_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

@@ -1,6 +1,7 @@
 - Get Started
   * [Introduction](/)
 - Components
+  * [AndesAutosuggest](/autosuggest/AndesAutosuggest.md)
   * [AndesBadgePill](/badge/AndesBadgePill.md)
   * [AndesBadgeDot](/badge/AndesBadgeDot.md)
   * [AndesButton](/button/AndesButton.md)

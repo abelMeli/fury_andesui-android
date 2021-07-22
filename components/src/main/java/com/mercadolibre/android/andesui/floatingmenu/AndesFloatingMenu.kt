@@ -32,7 +32,7 @@ class AndesFloatingMenu(
     orientation: AndesFloatingMenuOrientation = AndesFloatingMenuOrientation.Left
 ) {
 
-    private var isShowing = false
+    internal var isShowing = false
     private lateinit var andesFloatingMenuAttrs: AndesFloatingMenuAttrs
     private lateinit var floatingMenu: PopupWindow
     private var onShowListener: OnShowListener? = null
@@ -125,13 +125,20 @@ class AndesFloatingMenu(
         )
     }
 
+    private fun isParentAttachedToActivity(parentView: View) =
+        context is Activity && !context.isFinishing && ViewCompat.isAttachedToWindow(parentView)
+
     /**
      * Checks if FloatingMenu [PopupWindow] can be showed or not preventing crashes from lifecycle
      * or configuration changes.
      */
-    private fun canShowFloatingMenu(parentView: View) =
-        !isShowing && context is Activity && !context.isFinishing &&
-                ViewCompat.isAttachedToWindow(parentView)
+    private fun canShowFloatingMenu(parentView: View) = !isShowing && isParentAttachedToActivity(parentView)
+
+    /**
+     * Checks if FloatingMenu [PopupWindow] can be updated or not preventing crashes from lifecycle
+     * or configuration changes.
+     */
+    private fun canUpdateFloatingMenu(parentView: View) = isShowing && isParentAttachedToActivity(parentView)
 
     /**
      * Shows [AndesFloatingMenu] attached to [parentView] with current size and orientation
@@ -151,6 +158,24 @@ class AndesFloatingMenu(
                 onShowListener?.onShow()
             }
         }
+    }
+
+    /**
+     * Updates [AndesFloatingMenu] attached to [parentView] with current size and orientation
+     * configurations. If the FloatingMenu is not being showed it will do nothing.
+     */
+    fun update(parentView: View) {
+        parentView.post {
+            if (canUpdateFloatingMenu(parentView)) {
+                val config = getConfig(parentView)
+                floatingMenu.update(parentView, config.xOffset, config.yOffset, config.width, config.height)
+                andesList.refreshListAdapter()
+            }
+        }
+    }
+
+    internal fun setFocusable(isFocusable: Boolean) {
+        floatingMenu.isFocusable = isFocusable
     }
 
     private fun getConfig(parentView: View) = AndesFloatingMenuConfigFactory.create(

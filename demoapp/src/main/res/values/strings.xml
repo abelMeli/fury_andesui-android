@@ -427,6 +427,7 @@
     <string name="andes_textfield_screen">Andes UI: Textfield</string>
     <string name="andes_textarea_screen">Andes UI: Textfield Area</string>
     <string name="andes_textcode_screen">Andes UI: Textfield Code</string>
+    <string name="andes_autosuggest_screen">Andes UI: Autosuggest</string>
     <string name="andes_textfield_specs">Andes TextField Specs 📘</string>
     <string name="andes_textfield_description">Allows the user to enter and edit text values.</string>
     <string name="andes_textfield_name">Nombre</string>
@@ -489,6 +490,12 @@
         <item>Prefix</item>
     </string-array>
 
+    <!-- Andes autosuggest -->
+    <string name="andes_autosuggest_suggestions_label_default">Colors</string>
+    <string name="andes_autosuggest_server_calls">Simulates server calls for updating the suggestions after user writes</string>
+    <string name="andes_autosuggest_suggestions_text">Suggestions (separated by a ,)</string>
+    <string name="andes_autosuggest_suggestions_selected_text">Suggestion selected: %s</string>
+    <string name="andes_autosuggest_suggestions_default">White,Yellow,Blue,Red,Green,Black,Brown,Azure,Ivory,Teal,Silver,Purple,Navy blue,Pea green,Gray,Orange,Maroon,Charcoal,Aquamarine,Coral,Fuchsia,Wheat,Lime,Crimson,Khaki,Hot pink,Magenta,Olden,Plum,Olive,Cyan</string>
 
     <!-- Andes Thumbnail -->
     <string name="andes_thumbnail">Andes Thumbnail</string>

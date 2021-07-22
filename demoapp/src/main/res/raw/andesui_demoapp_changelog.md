@@ -1,3 +1,9 @@
+# v3.23.0
+## 🚀 Feature
+- AndesAutosuggest | Author: [@dylanmuszelml](https://github.com/dylanmuszelml)
+## 🛠 Fixes
+- Fix `AndesCheckbox` padding top to align text with checkbox | Author: [@mingkao-meli](https://github.com/mingkao-meli)
+
 # v3.22.0
 ## 🚀 Feature
 - Added accessibility support for `AndesButton`

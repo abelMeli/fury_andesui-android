@@ -46,6 +46,7 @@ AndesFloatingMenu(context, andesList)
 | Return type | Method |
 | -------- | ------- |
 | Unit | **show(parentView: View)**<br/> Shows floating menu content on screen. If the FloatingMenu is already being showed it will do nothing.<br/>**parentView**: view that will trigger floating menu. |
+| Unit | **update(parentView: View)**<br/> Updates floating menu content on screen. If the FloatingMenu is not being showed it will do nothing.<br/>**parentView**: view that will trigger floating menu. |
 | Unit | **dismiss()**<br/> Stops showing floating menu on screen. If it is not being showed it will do nothing. |
 | Unit | **setOnShowListener(listener: OnShowListener?)**<br/> Sets OnShowListener to notify when floating menu is shown. |
 | Unit | **setOnDismissListener(listener: OnDismissListener?)**<br/> Sets OnDismissListener to notify when floating menu is dismissed. |
