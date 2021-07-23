@@ -116,9 +116,10 @@ class AndesDropdownTest {
         val helper = "helper"
         val placeHolder = "placeHolder"
         val state = AndesDropdownState.ENABLED
+        val menuType = AndesDropdownMenuType.BOTTOMSHEET
 
         andesDropdownAttrs = AndesDropdownAttrs(
-                andesDropdownMenuType = AndesDropdownMenuType.BOTTOMSHEET,
+                andesDropdownMenuType = menuType,
                 andesDropdownLabel = label,
                 andesDropdownHelper = helper,
                 andesDropdownPlaceHolder = placeHolder,
@@ -126,7 +127,7 @@ class AndesDropdownTest {
 
         val config = configFactory.create(context, andesDropdownAttrs)
 
-        Assert.assertEquals(config.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+        Assert.assertEquals(config.menuType::class.java, menuType.type::class.java)
         Assert.assertEquals(config.label, label)
         Assert.assertEquals(config.helper, helper)
         Assert.assertEquals(config.placeHolder, placeHolder)
@@ -139,9 +140,10 @@ class AndesDropdownTest {
         val helper = "helper"
         val placeHolder = "placeHolder"
         val state = AndesDropdownState.ERROR
+        val menuType = AndesDropdownMenuType.BOTTOMSHEET
 
         andesDropdownAttrs = AndesDropdownAttrs(
-                andesDropdownMenuType = AndesDropdownMenuType.BOTTOMSHEET,
+                andesDropdownMenuType = menuType,
                 andesDropdownLabel = label,
                 andesDropdownHelper = helper,
                 andesDropdownPlaceHolder = placeHolder,
@@ -149,7 +151,7 @@ class AndesDropdownTest {
 
         val config = configFactory.create(context, andesDropdownAttrs)
 
-        Assert.assertEquals(config.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+        Assert.assertEquals(config.menuType::class.java, menuType.type::class.java)
         Assert.assertEquals(config.label, label)
         Assert.assertEquals(config.helper, helper)
         Assert.assertEquals(config.placeHolder, placeHolder)
@@ -162,9 +164,10 @@ class AndesDropdownTest {
         val helper = "helper"
         val placeHolder = "placeHolder"
         val state = AndesDropdownState.DISABLED
+        val menuType = AndesDropdownMenuType.FLOATINGMENU
 
         andesDropdownAttrs = AndesDropdownAttrs(
-                andesDropdownMenuType = AndesDropdownMenuType.BOTTOMSHEET,
+                andesDropdownMenuType = menuType,
                 andesDropdownLabel = label,
                 andesDropdownHelper = helper,
                 andesDropdownPlaceHolder = placeHolder,
@@ -172,7 +175,7 @@ class AndesDropdownTest {
 
         val config = configFactory.create(context, andesDropdownAttrs)
 
-        Assert.assertEquals(config.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+        Assert.assertEquals(config.menuType::class.java, menuType.type::class.java)
         Assert.assertEquals(config.label, label)
         Assert.assertEquals(config.helper, helper)
         Assert.assertEquals(config.placeHolder, placeHolder)
@@ -189,6 +192,18 @@ class AndesDropdownTest {
     fun `test dropdownform constructor with state`() {
         val dropdown = AndesDropDownForm(context, AndesDropdownMenuType.BOTTOMSHEET, "", "", "", AndesDropdownState.DISABLED)
         Assert.assertEquals(dropdown.state, AndesDropdownState.DISABLED)
+    }
+
+    @Test
+    fun `test dropdown form constructor with type floatingmenu`() {
+        val dropdown = AndesDropDownForm(
+            context,
+            AndesDropdownMenuType.FLOATINGMENU,
+            "label",
+            "helper",
+            "placeholder"
+        )
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.FLOATINGMENU)
     }
 
     @Test

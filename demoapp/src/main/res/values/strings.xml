@@ -259,11 +259,19 @@
     <string name="andes_dropdown_helper">Helper</string>
     <string name="andes_dropdown_form_title">AndesDropdownForm</string>
     <string name="andes_dropdown_standalone_title">AndesDropdownStandalone</string>
+    <string name="andes_dropdown_title_placeholder">Set a Dropdown Title text…</string>
+    <string name="andes_dropdown_ph_placeholder">Set a Dropdown Placeholder text…</string>
+    <string name="andes_dropdown_helper_placeholder">Set a Dropdown Helper text…</string>
 
     <string-array name="andes_dropdown_state_spinner">
         <item>Enabled</item>
         <item>Error</item>
         <item>Disabled</item>
+    </string-array>
+
+    <string-array name="andes_dropdown_menutype_spinner">
+        <item>BottomSheet</item>
+        <item>FloatingMenu</item>
     </string-array>
 
 

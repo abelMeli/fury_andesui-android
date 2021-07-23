@@ -15,7 +15,7 @@ import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.utils.ScreenUtils
 
-class DropdownBottomSheetDialog(
+internal class DropdownBottomSheetDialog(
     context: Context,
     theme: Int,
     private val andesListDelegate: AndesListDelegate

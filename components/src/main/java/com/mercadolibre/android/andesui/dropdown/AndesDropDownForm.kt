@@ -3,11 +3,12 @@ package com.mercadolibre.android.andesui.dropdown
 import android.content.Context
 import android.text.InputType
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Spinner
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.dropdown.accessibility.AndesDropDownFormAccessibilityDelegate
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownAttrParser
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownAttrs
 import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfiguration
@@ -15,19 +16,22 @@ import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfigurat
 import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
-import com.mercadolibre.android.andesui.dropdown.utils.DropdownBottomSheetDialog
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
+import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
+import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
+import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 @SuppressWarnings("TooManyFunctions")
-class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
-    private val bottomSheetDialog = DropdownBottomSheetDialog(context, R.style.Andes_BottomSheetDialog, this)
+class AndesDropDownForm : ConstraintLayout {
     private lateinit var andesDropdownDelegate: AndesDropdownDelegate
     private lateinit var andesDropdownAttrs: AndesDropdownAttrs
     private lateinit var andesTextfield: AndesTextfield
+    private lateinit var andesList: AndesList
+    private lateinit var container: View
     private var listItems: List<AndesDropDownItem> = listOf()
 
     /**
@@ -76,7 +80,7 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         get() = andesDropdownAttrs.andesDropdownState
         set(value) {
             andesDropdownAttrs = andesDropdownAttrs.copy(andesDropdownState = value)
-            setupEnabledView(createConfig())
+            setupState(createConfig())
         }
 
     /**
@@ -114,19 +118,6 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         initAttrs(menuType, label, helper, placeHolder, state)
     }
 
-    private fun setupEnabledView(config: AndesDropdownConfiguration) {
-        andesTextfield.state = config.textfieldState
-        setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
-    }
-
-    private fun setupMenuType(config: AndesDropdownConfiguration) {
-        if (config.menuType == AndesDropdownMenuType.BOTTOMSHEET) {
-            setupBottomSheet(config)
-        } else {
-            Log.d("AndesDropDownForm", "Menu selected is no developed yet")
-        }
-    }
-
     /**
      * Sets the proper [config] for this component based on the [attrs] received via XML.
      *
@@ -160,43 +151,107 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
     private fun setupComponents(config: AndesDropdownConfiguration) {
         initComponents()
         setupViewId()
-        setupAndesTextFieldComponent()
-        setupEnabledView(config)
+        setupAndesTextFieldComponent(config)
+        setupState(config)
         setupMenuType(config)
+        setupA11yDelegate()
+        setupNavigation()
+    }
+
+    /**
+     * This method creates all the views that are part of this Dropdown.
+     * After this view is created a view id is added to it.
+     */
+    private fun initComponents() {
+        container = LayoutInflater.from(context).inflate(R.layout.andes_layout_dropdown_form, this)
+        andesTextfield = container.findViewById(R.id.andes_text_field_dropdown_form)
     }
 
     /**
      * Sets a view id to this dropdown.
      */
     private fun setupViewId() {
-        if (id == NO_ID) { // If this view has no id
+        if (id == NO_ID) {
             id = View.generateViewId()
         }
     }
 
     /**
-     * Creates all the views that are part of this Dropdown.
-     * After a view is created then a view id is added to it.
+     * sets the state for the internal textfield
      */
-    private fun initComponents() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_dropdown_form, this)
-        andesTextfield = container.findViewById(R.id.andes_text_field_dropdown_form)
+    private fun setupState(config: AndesDropdownConfiguration) {
+        andesTextfield.state = config.textfieldState
+        setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
+        isEnabled = config.textfieldState != AndesTextfieldState.DISABLED
     }
 
-    private fun setupBottomSheet(config: AndesDropdownConfiguration) {
-        bottomSheetDialog.setOnShowListener {
-            bottomSheetDialog.andesList?.refreshListAdapter()
-            setChevronIcon(ICON_CHEVRON_UP, config.iconColor)
+    /**
+     * this method configures the menu type according to the selected variant.
+     * It will create either a floating menu or a bottom sheet dialog.
+     */
+    private fun setupMenuType(config: AndesDropdownConfiguration) {
+        createList(config)
+        with(config.menuType) {
+            createMenu(context, andesList, R.style.Andes_BottomSheetDialog)
+            setOnShowListener {
+                setChevronIcon(ICON_CHEVRON_UP, config.iconColor)
+            }
+            setOnDismissListener {
+                setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
+            }
         }
 
-        bottomSheetDialog.setOnDismissListener {
-            setChevronIcon(ICON_CHEVRON_DOWN, config.iconColor)
-        }
+        setupAndesTextFieldComponent(config)
     }
 
-    private val onFocusChange = OnFocusChangeListener { v, hasFocus ->
-        if (hasFocus) {
-            openBottomSheet()
+    private fun setupA11yDelegate() {
+        accessibilityDelegate = AndesDropDownFormAccessibilityDelegate(this)
+    }
+
+    private fun setupNavigation() {
+        container.isFocusable = true
+        andesTextfield.textContainer.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+    }
+
+    /**
+     * this method reates the andesList to display and adds the delegate to it
+     */
+    private fun createList(config: AndesDropdownConfiguration) {
+        andesList = AndesList(
+            context,
+            AndesListViewItemSize.SMALL,
+            AndesListType.SIMPLE
+        )
+        andesList.delegate = createAndesListDelegate(config)
+    }
+
+    /**
+     * This method creates the andesList delegate needed to manage the dismiss method according to
+     * the [menuType] parameter and to adapt the [listItems] to the AndesListViewItems
+     * needed for the displayed list.
+     */
+    private fun createAndesListDelegate(config: AndesDropdownConfiguration): AndesListDelegate {
+        return object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                selectItem(position)
+                andesList.refreshListAdapter()
+                delegate.onItemSelected(this, position)
+                config.menuType.dismissMenu()
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                val item = listItems[position]
+
+                return AndesListViewItemSimple(
+                    context,
+                    item.title,
+                    size = andesList.size,
+                    avatar = item.avatar,
+                    itemSelected = item.isSelected
+                )
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = listItems.size
         }
     }
 
@@ -217,6 +272,12 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
     }
 
     /**
+     * Method needed by the a11yDelegate to set a proper contentDescription according
+     * to the item selected in the menu
+     */
+    internal fun getSelectedItemTitle() = andesTextfield.text
+
+    /**
      * Sets the list of item that the Dropdown will draw, with optional pre-selected item
      */
     fun setItems(listItems: List<AndesDropDownItem>, defaultPosition: Int = -1) {
@@ -232,10 +293,6 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
      * Gets the list of items
      */
     fun getItems(): List<AndesDropDownItem> = listItems
-
-    private fun openBottomSheet() {
-        bottomSheetDialog.show()
-    }
 
     /**
      * Gets data from the config and sets to the AndesTextField Helper component.
@@ -258,29 +315,18 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         andesTextfield.label = config.label
     }
 
-    private fun setChevronIcon(chevronIcon: String, color: Int) {
-        andesTextfield.setRightIcon(chevronIcon, null, color)
-    }
-
-    private fun setupAndesTextFieldComponent() {
-        andesTextfield.onFocusChangeListener = onFocusChange
-
-        andesTextfield.setOnClick {
-            openBottomSheet()
+    private fun setupAndesTextFieldComponent(config: AndesDropdownConfiguration) {
+        andesTextfield.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                config.menuType.showMenu(andesTextfield.textContainer)
+            }
         }
 
-        andesTextfield.isEnabled = false
+        andesTextfield.setOnClick {
+            config.menuType.showMenu(andesTextfield.textContainer)
+        }
+
         andesTextfield.inputType = InputType.TYPE_NULL
-    }
-
-    override fun onItemClick(andesList: AndesList, position: Int) {
-        selectItem(position)
-
-        andesList.refreshListAdapter()
-
-        delegate.onItemSelected(this, position)
-
-        bottomSheetDialog.dismiss()
     }
 
     private fun selectItem(position: Int) {
@@ -293,24 +339,15 @@ class AndesDropDownForm : ConstraintLayout, AndesListDelegate {
         andesTextfield.text = itemSelected.title
     }
 
-    override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
-        val item = listItems[position]
-        val row: AndesListViewItem?
-
-        row = AndesListViewItemSimple(
-                context,
-                item.title,
-                size = andesList.size,
-                avatar = item.avatar,
-                itemSelected = item.isSelected
-        )
-
-        return row
+    private fun setChevronIcon(chevronIcon: String, color: Int) {
+        andesTextfield.setRightIcon(chevronIcon, null, color)
     }
 
-    override fun getDataSetSize(andesList: AndesList): Int = listItems.size
-
     private fun createConfig() = AndesDropdownConfigurationFactory.create(context, andesDropdownAttrs)
+
+    override fun getAccessibilityClassName(): CharSequence {
+        return Spinner::class.java.name
+    }
 
     companion object {
         private const val ICON_CHEVRON_DOWN: String = "andes_ui_chevron_down_24"

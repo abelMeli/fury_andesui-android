@@ -10,10 +10,10 @@ enum class AndesDropdownMenuType {
 
     internal val type get() = getAndesDropdownMenuType()
 
-    private fun getAndesDropdownMenuType(): AndesDropdownMenu {
+    private fun getAndesDropdownMenuType(): AndesDropdownMenuInterface {
         return when (this) {
-            BOTTOMSHEET -> AndesDropdownMenuTypeBottomSheet
-            FLOATINGMENU -> AndesDropdownMenuTypeFloatingMenu
+            BOTTOMSHEET -> AndesDropdownMenuTypeBottomSheet()
+            FLOATINGMENU -> AndesDropdownMenuTypeFloatingMenu()
         }
     }
 }

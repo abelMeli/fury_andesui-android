@@ -35,108 +35,144 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/message" />
 
+        <View
+            android:id="@+id/dropdown_separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@color/andes_gray_100_solid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/andesDropdown" />
+
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/editTextDropdownLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
             android:inputType="text"
             android:textSize="@dimen/andes_body_font_size_m"
             app:andesTextfieldLabel="@string/andes_dropdown_title"
-            app:layout_constraintEnd_toStartOf="@+id/guideLineStatusBar"
+            app:andesTextfieldPlaceholder="@string/andes_dropdown_title_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/andesDropdown" />
+            app:layout_constraintTop_toBottomOf="@id/dropdown_separator" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/editTextDropdownPlaceHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
             android:inputType="text"
             android:textSize="@dimen/andes_body_font_size_m"
             app:andesTextfieldLabel="@string/andes_dropdown_place_holder"
-            app:layout_constraintEnd_toStartOf="@+id/guideLineStatusBar"
+            app:andesTextfieldPlaceholder="@string/andes_dropdown_ph_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDropdownLabel" />
-
-        <TextView
-            android:id="@+id/dropdownStateLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="State:"
-            app:layout_constraintTop_toTopOf="@id/editTextDropdownPlaceHolder"
-            app:layout_constraintStart_toStartOf="@id/editTextDropdownHelper"/>
-
-        <Spinner
-            android:id="@+id/dropdownStateSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/editTextDropdownHelper"
-            app:layout_constraintStart_toStartOf="@id/editTextDropdownHelper"
-            app:layout_constraintTop_toBottomOf="@id/dropdownStateLabel"
-            app:layout_constraintBottom_toBottomOf="@id/editTextDropdownPlaceHolder"/>
+            app:layout_constraintTop_toBottomOf="@id/editTextDropdownLabel" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/editTextDropdownHelper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:inputType="text"
             android:textSize="@dimen/andes_body_font_size_m"
             app:andesTextfieldLabel="@string/andes_dropdown_helper"
+            app:andesTextfieldPlaceholder="@string/andes_dropdown_helper_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideLineStatusBar"
-            app:layout_constraintTop_toTopOf="@+id/editTextDropdownLabel" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextDropdownPlaceHolder" />
+
+        <TextView
+            android:id="@+id/dropdownStateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="State:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextDropdownHelper" />
+
+        <Spinner
+            android:id="@+id/dropdownStateSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dropdownStateLabel" />
+
+        <TextView
+            android:id="@+id/dropdownMenuTypeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="Menu Type:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dropdownStateSpinner" />
+
+        <Spinner
+            android:id="@+id/dropdownMenuTypeSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dropdownMenuTypeLabel" />
 
         <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
             android:id="@+id/checkboxDropdownStartingItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="@dimen/andes_body_font_size_m"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="@id/editTextDropdownPlaceHolder"
-            app:layout_constraintStart_toStartOf="@id/editTextDropdownPlaceHolder"
-            app:layout_constraintTop_toBottomOf="@id/editTextDropdownPlaceHolder"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dropdownMenuTypeSpinner" />
 
         <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
             android:id="@+id/checkboxDropdownIndeterminate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="@dimen/andes_body_font_size_m"
-            app:layout_constraintTop_toTopOf="@id/checkboxDropdownStartingItem"
-            app:layout_constraintEnd_toEndOf="@id/dropdownStateSpinner"
-            app:layout_constraintStart_toStartOf="@id/dropdownStateSpinner"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideLineStatusBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkboxDropdownStartingItem" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/buttonClear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
             app:andesButtonText="@string/andesui_demoapp_clear_button"
-            app:layout_constraintEnd_toEndOf="@+id/editTextDropdownPlaceHolder"
-            app:layout_constraintStart_toStartOf="@+id/editTextDropdownPlaceHolder"
-            app:layout_constraintTop_toBottomOf="@+id/checkboxDropdownStartingItem" />
+            app:layout_constraintEnd_toStartOf="@id/buttonUpdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkboxDropdownIndeterminate" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/buttonUpdate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             app:andesButtonText="@string/andes_message_showcase_change"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonClear"
-            app:layout_constraintEnd_toEndOf="@+id/editTextDropdownHelper"
-            app:layout_constraintStart_toStartOf="@+id/editTextDropdownHelper" />
+            app:layout_constraintBottom_toBottomOf="@id/buttonClear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/buttonClear"
+            app:layout_constraintTop_toTopOf="@id/buttonClear" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

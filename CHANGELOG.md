@@ -2,6 +2,7 @@
 ## 🚀 Feature
 - Added new icons for charge methods. | Authors: [@rbasualdo7](https://github.com/rbasualdo7) 
 - AndesAutosuggest | Author: [@dylanmuszelml](https://github.com/dylanmuszelml)
+- AndesDropDownForm - implementation of FLOATINGMENU type | Author: [@juanunzu](https://github.com/juanunzu)
 ## 🛠 Fixes
 - Fix `AndesCheckbox` padding top to align text with checkbox | Author: [@mingkao-meli](https://github.com/mingkao-meli)
 
