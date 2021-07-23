@@ -15,6 +15,7 @@ import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemChevron
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
+import com.mercadolibre.android.andesui.list.accessibility.AndesListViewItemAccessibilityDelegate
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
@@ -88,6 +89,8 @@ class AndesListAdapter(
                 is AndesListViewItemSimple -> bindSimpleItem(andesListItemConfig)
                 is AndesListViewItemChevron -> bindChevronItem(andesListItemConfig)
             }
+
+            itemView.accessibilityDelegate = AndesListViewItemAccessibilityDelegate(andesListItemConfig)
         }
 
         /**

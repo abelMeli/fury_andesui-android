@@ -32,7 +32,6 @@
             android:id="@+id/andes_list_item_asset"
             android:layout_width="@dimen/andes_list_item_thumbnail_size_medium"
             android:layout_height="@dimen/andes_list_item_thumbnail_size_medium"
-            android:contentDescription="@string/andes_list_item_image"
             app:andesThumbnailHierarchy="AndesDefault"
             app:andesThumbnailImage="@drawable/andes_otros_almanaque_20"
             app:andesThumbnailSize="size_40"
@@ -45,9 +44,9 @@
             android:id="@+id/image_view_list_item_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/andes_list_item_icon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/andesThumbnailBarrier"

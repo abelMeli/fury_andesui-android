@@ -5,6 +5,7 @@
 - AndesDropDownForm - implementation of FLOATINGMENU type | Author: [@juanunzu](https://github.com/juanunzu)
 ## 🛠 Fixes
 - Fix `AndesCheckbox` padding top to align text with checkbox | Author: [@mingkao-meli](https://github.com/mingkao-meli)
+- Fix `AndesList` a11y issues in list items drawables and selected state | Author: [@eportasML](https://github.com/eportasML)
 
 # v3.22.0
 ## 🚀 Feature
