@@ -1,3 +1,7 @@
+# v3.24.0
+## 🚀 Feature
+- Added divider support for `AndesListViewItem` | Author: [@MatiasTesioMeli](https://github.com/MatiasTesioMeli)
+
 # v3.23.0
 ## 🚀 Feature
 - Added new icons for charge methods. | Authors: [@rbasualdo7](https://github.com/rbasualdo7) 

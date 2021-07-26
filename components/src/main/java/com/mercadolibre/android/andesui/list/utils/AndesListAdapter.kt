@@ -3,6 +3,8 @@ package com.mercadolibre.android.andesui.list.utils
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
@@ -24,7 +26,8 @@ import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 class AndesListAdapter(
     private val andesList: AndesList,
     private val delegate: AndesListDelegate,
-    private var listType: AndesListType
+    private var listType: AndesListType,
+    private var dividerEnabled: Boolean
 ) : RecyclerView.Adapter<AndesListAdapter.ViewHolder>() {
 
     companion object {
@@ -37,7 +40,7 @@ class AndesListAdapter(
     override fun getItemCount() = delegate.getDataSetSize(andesList)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-            holder.bind(andesList, delegate, position)
+            holder.bind(andesList, delegate, position, dividerEnabled)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -67,9 +70,14 @@ class AndesListAdapter(
         this.listType = listType
     }
 
+    fun updateItemDividerStatus(dividerEnabled: Boolean) {
+        this.dividerEnabled = dividerEnabled
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var titleTextView: TextView
         private lateinit var subtitleTextView: TextView
+        private lateinit var itemDivider: View
         private lateinit var spaceTitleSubtitleView: View
         private lateinit var andesListItemContainer: View
         private lateinit var andesListItemSelectionView: View
@@ -77,7 +85,7 @@ class AndesListAdapter(
         private lateinit var andesListItemIcon: ImageView
         private lateinit var andesViewThumbnailSeparator: View
 
-        fun bind(andesList: AndesList, delegate: AndesListDelegate, position: Int) {
+        fun bind(andesList: AndesList, delegate: AndesListDelegate, position: Int, dividerEnabled: Boolean) {
             val andesListItemConfig = delegate.bind(andesList, itemView, position)
 
             itemView.setOnClickListener { delegate.onItemClick(andesList, position) }
@@ -86,8 +94,8 @@ class AndesListAdapter(
             setDefaultCommonViewValues()
 
             when (andesListItemConfig) {
-                is AndesListViewItemSimple -> bindSimpleItem(andesListItemConfig)
-                is AndesListViewItemChevron -> bindChevronItem(andesListItemConfig)
+                is AndesListViewItemSimple -> bindSimpleItem(andesListItemConfig, dividerEnabled)
+                is AndesListViewItemChevron -> bindChevronItem(andesListItemConfig, dividerEnabled)
             }
 
             itemView.accessibilityDelegate = AndesListViewItemAccessibilityDelegate(andesListItemConfig)
@@ -98,17 +106,18 @@ class AndesListAdapter(
          *
          * @param itemConfig current AndesListViewItem config
          */
-        private fun bindSimpleItem(itemConfig: AndesListViewItemSimple) {
-            bindItemCommons(itemConfig)
+        private fun bindSimpleItem(itemConfig: AndesListViewItemSimple, dividerEnabled: Boolean) {
+            bindItemCommons(itemConfig, dividerEnabled)
         }
 
         /**
          * Build Andes List item based on AndesListViewItem configuration for type CHEVRON
          *
          * @param itemConfig current AndesListViewItem config
+         * @param dividerEnabled forces the item divider
          */
-        private fun bindChevronItem(itemConfig: AndesListViewItemChevron) {
-            bindItemCommons(itemConfig)
+        private fun bindChevronItem(itemConfig: AndesListViewItemChevron, dividerEnabled: Boolean) {
+            bindItemCommons(itemConfig, dividerEnabled)
 
             val andesListItemChevron: ImageView = itemView.findViewById(R.id.andes_thumbnail_chevron)
             val layoutParamsChevron = andesListItemChevron.layoutParams as ConstraintLayout.LayoutParams
@@ -124,6 +133,7 @@ class AndesListAdapter(
         private fun findCommonViewsById() {
             titleTextView = itemView.findViewById(R.id.text_view_item_title)
             subtitleTextView = itemView.findViewById(R.id.text_view_item_sub_title)
+            itemDivider = itemView.findViewById(R.id.item_divider)
             spaceTitleSubtitleView = itemView.findViewById<View>(R.id.view_space_title_subtitle)
             andesListItemContainer = itemView.findViewById<View>(R.id.andes_list_item_container)
             andesListItemSelectionView = itemView.findViewById<View>(R.id.view_item_selected)
@@ -136,6 +146,7 @@ class AndesListAdapter(
             // Default view states
             subtitleTextView.visibility = View.GONE
             spaceTitleSubtitleView.visibility = View.GONE
+            itemDivider.visibility = View.GONE
             andesListItemSelectionView.visibility = View.GONE
             andesViewThumbnailSeparator.visibility = View.GONE
             andesListItemAvatar.visibility = View.GONE
@@ -194,8 +205,9 @@ class AndesListAdapter(
          * Build Andes List item based on AndesListViewItem configuration
          *
          * @param itemConfig current AndesListViewItem config
+         * @param dividerEnabled forces the item divider
          */
-        private fun bindItemCommons(itemConfig: AndesListViewItem) {
+        private fun bindItemCommons(itemConfig: AndesListViewItem, dividerEnabled: Boolean) {
             setAndesListTitleConfiguration(itemConfig)
 
             if (itemConfig.showSubtitle && !itemConfig.subtitle.isNullOrEmpty()) {
@@ -215,6 +227,10 @@ class AndesListAdapter(
             setAndesListIconConfiguration(itemConfig)
 
             setAndesListAvatarConfiguration(itemConfig)
+
+            if (dividerEnabled || itemConfig.itemDividerEnabled) {
+                itemDivider.visibility = VISIBLE
+            }
 
             andesListItemContainer.setPadding(
                     itemConfig.paddingLeft,

@@ -14,6 +14,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
@@ -134,6 +137,7 @@ class AndesListTest {
 
             override fun getDataSetSize(andesList: AndesList): Int = SIZE
         }
+
         val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.CHEVRON)
         andesList.delegate = andesListDelegate
 
@@ -146,6 +150,53 @@ class AndesListTest {
             andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.andes_thumbnail_chevron))
+    }
+
+    @Test
+    fun `test list with item divider active`() {
+        val list = AndesList(context)
+        val spyList = Mockito.spy<AndesList>(list)
+        val item = AndesListViewItemSimple(context, "test")
+
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return item
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        spyList.delegate = andesListDelegate
+        spyList.dividerItemEnabled = true
+
+        verify(spyList, times(1)).refreshListAdapter()
+    }
+
+    @Test
+    fun `test list with item divider inactive`() {
+        val list = AndesList(context)
+        val spyList = Mockito.spy<AndesList>(list)
+        val item = AndesListViewItemSimple(context, "test")
+
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return item
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+        spyList.delegate = andesListDelegate
+        spyList.dividerItemEnabled = false
+
+        verify(spyList, times(1)).refreshListAdapter()
     }
 
     private fun setContentToActivity(view: View) {

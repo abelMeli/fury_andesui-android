@@ -1,12 +1,10 @@
 package com.mercadolibre.android.andesui.list
 
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.android.andesui.R
@@ -18,7 +16,6 @@ import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListAdapter
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
-import com.mercadolibre.android.andesui.list.utils.AndesListDividerItemDecoration
 
 @Suppress("TooManyFunctions")
 class AndesList : ConstraintLayout {
@@ -36,7 +33,7 @@ class AndesList : ConstraintLayout {
         set(value) {
             andesListDelegate = value
             val config = createConfig()
-            listAdapter = AndesListAdapter(this, andesListDelegate, config.type)
+            listAdapter = AndesListAdapter(this, andesListDelegate, config.type, config.dividerEnabled)
             recyclerViewComponent.adapter = listAdapter
         }
 
@@ -77,6 +74,16 @@ class AndesList : ConstraintLayout {
         initAttrs(attrs)
     }
 
+    /**
+     * Responsible for update all properties related to components that can change dynamically
+     *
+     * @param config current AndesListConfiguration
+     */
+    private fun updateDynamicComponents(config: AndesListConfiguration) {
+        listAdapter.updateItemDividerStatus(config.dividerEnabled)
+        refreshListAdapter()
+    }
+
     constructor(
         context: Context,
         size: AndesListViewItemSize = SIZE_DEFAULT,
@@ -92,82 +99,31 @@ class AndesList : ConstraintLayout {
      */
     private fun initAttrs(attrs: AttributeSet?) {
         andesListAttrs = AndesListAttrParser.parse(context, attrs)
-        val config = AndesListConfigurationFactory.create(andesListAttrs)
-        setupComponents(config)
-    }
-
-    /**
-     * Responsible for update all properties related to components that can change dynamically
-     *
-     * @param config current AndesListConfiguration
-     */
-    private fun updateDynamicComponents(config: AndesListConfiguration) {
-        setupDivider(config.dividerEnabled)
+        setupComponents()
     }
 
     private fun initAttrs(size: AndesListViewItemSize, type: AndesListType) {
         andesListAttrs = AndesListAttrs(size, type)
-        val config = AndesListConfigurationFactory.create(andesListAttrs)
-        setupComponents(config)
+        setupComponents()
     }
 
     /**
      * Responsible for setting up all properties of each component that is part of this andesList.
      * Is like a choreographer 😉
      *
-     * @param config current AndesListConfiguration
      */
-    private fun setupComponents(config: AndesListConfiguration) {
+    private fun setupComponents() {
         initComponents()
         setupViewId()
-        setupRecyclerViewComponent(config)
+        setupRecyclerViewComponent()
     }
 
     /**
      * Set recyclerview to handle AndesList
      *
-     * @param config current AndesListConfiguration
      */
-    private fun setupRecyclerViewComponent(config: AndesListConfiguration) {
-        setupDivider(config.dividerEnabled)
+    private fun setupRecyclerViewComponent() {
         recyclerViewComponent.layoutManager = LinearLayoutManager(context)
-    }
-
-    /**
-     * Setup the divider to AndesList based on a boolean value
-     *
-     * @param enabled true / false
-     */
-    private fun setupDivider(enabled: Boolean) {
-        if (enabled && recyclerViewComponent.itemDecorationCount < 1) {
-            addDivider()
-        } else if (!enabled) {
-            removeDivider()
-        }
-    }
-
-    /**
-     * Add current divider to AndesList
-     */
-    private fun addDivider() {
-        val dividerSize = resources.getDimension(R.dimen.andes_list_item_divider).toInt()
-
-        val shape = GradientDrawable()
-        shape.shape = GradientDrawable.RECTANGLE
-        shape.setSize(dividerSize, dividerSize)
-        shape.setColor(ResourcesCompat.getColor(resources, R.color.andes_gray_010, context.theme))
-
-        val dividerItemDecoration: RecyclerView.ItemDecoration = AndesListDividerItemDecoration(shape)
-        recyclerViewComponent.addItemDecoration(dividerItemDecoration)
-    }
-
-    /**
-     * Remove current divider from AndesList
-     */
-    private fun removeDivider() {
-        while (recyclerViewComponent.itemDecorationCount > 0) {
-            recyclerViewComponent.removeItemDecorationAt(0)
-        }
     }
 
     /**
