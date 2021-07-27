@@ -6,6 +6,10 @@ internal interface AndesBottomSheetStateInterface {
     fun getState(): Int
 }
 
+internal object AndesBottomSheetStateHalfExpanded : AndesBottomSheetStateInterface {
+    override fun getState(): Int = BottomSheetBehavior.STATE_HALF_EXPANDED
+}
+
 internal object AndesBottomSheetStateExpanded : AndesBottomSheetStateInterface {
     override fun getState(): Int = BottomSheetBehavior.STATE_EXPANDED
 }

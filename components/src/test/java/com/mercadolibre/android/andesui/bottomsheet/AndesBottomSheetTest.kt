@@ -49,18 +49,21 @@ class AndesBottomSheetTest {
     fun `params constructor`() {
         val peekHeight = 250
         val title = "title"
+        val fitContent = true
 
         andesBottomSheet = AndesBottomSheet(
                 context,
                 peekHeight,
                 AndesBottomSheetState.EXPANDED,
                 title,
-                AndesBottomSheetTitleAlignment.CENTERED
+                AndesBottomSheetTitleAlignment.CENTERED,
+                fitContent
         )
 
         assertEquals(andesBottomSheet.peekHeight, peekHeight)
         assertEquals(andesBottomSheet.state, AndesBottomSheetState.EXPANDED)
         assertEquals(andesBottomSheet.titleText, title)
+        assertEquals(andesBottomSheet.fitContent, fitContent)
         assertEquals(andesBottomSheet.titleAlignment, AndesBottomSheetTitleAlignment.CENTERED)
     }
 
@@ -108,8 +111,17 @@ class AndesBottomSheetTest {
     }
 
     @Test
-    fun `expand method should set state to expanded`() {
+    fun `expand method should set state to expanded from collapsed`() {
         andesBottomSheet.state = AndesBottomSheetState.COLLAPSED
+
+        andesBottomSheet.expand()
+
+        assertEquals(andesBottomSheet.state, AndesBottomSheetState.EXPANDED)
+    }
+
+    @Test
+    fun `expand method should set state to expanded from half expanded`() {
+        andesBottomSheet.state = AndesBottomSheetState.HALF_EXPANDED
 
         andesBottomSheet.expand()
 
@@ -126,8 +138,17 @@ class AndesBottomSheetTest {
     }
 
     @Test
-    fun `collapse method should set state to collapsed`() {
+    fun `collapse method should set state to collapsed from expanded`() {
         andesBottomSheet.state = AndesBottomSheetState.EXPANDED
+
+        andesBottomSheet.collapse()
+
+        assertEquals(andesBottomSheet.state, AndesBottomSheetState.COLLAPSED)
+    }
+
+    @Test
+    fun `collapse method should set state to collapsed from half expanded`() {
+        andesBottomSheet.state = AndesBottomSheetState.HALF_EXPANDED
 
         andesBottomSheet.collapse()
 
@@ -141,6 +162,51 @@ class AndesBottomSheetTest {
         andesBottomSheet.collapse()
 
         assertEquals(andesBottomSheet.state, AndesBottomSheetState.COLLAPSED)
+    }
+
+    @Test
+    fun `half expand method should set state to collapsed from expanded`() {
+        andesBottomSheet.state = AndesBottomSheetState.EXPANDED
+
+        andesBottomSheet.halfExpand()
+
+        assertEquals(andesBottomSheet.state, AndesBottomSheetState.HALF_EXPANDED)
+    }
+
+    @Test
+    fun `half expand method should set state to collapsed from half collapsed`() {
+        andesBottomSheet.state = AndesBottomSheetState.COLLAPSED
+
+        andesBottomSheet.halfExpand()
+
+        assertEquals(andesBottomSheet.state, AndesBottomSheetState.HALF_EXPANDED)
+    }
+
+    @Test
+    fun `half expand method should set state to collapsed even if already half expand`() {
+        andesBottomSheet.state = AndesBottomSheetState.HALF_EXPANDED
+
+        andesBottomSheet.halfExpand()
+
+        assertEquals(andesBottomSheet.state, AndesBottomSheetState.HALF_EXPANDED)
+    }
+
+    @Test
+    fun `fit content true should set isFitToContent behavior in true`() {
+        val mockSheet = mock(BottomSheetBehavior::class.java)
+        FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("bottomSheetBehavior"), mockSheet)
+        andesBottomSheet.fitContent = true
+
+        verify(mockSheet).isFitToContents = true
+    }
+
+    @Test
+    fun `fit content false should set isFitToContent behavior in false`() {
+        val mockSheet = mock(BottomSheetBehavior::class.java)
+        FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("bottomSheetBehavior"), mockSheet)
+        andesBottomSheet.fitContent = false
+
+        verify(mockSheet).isFitToContents = false
     }
 
     @Test

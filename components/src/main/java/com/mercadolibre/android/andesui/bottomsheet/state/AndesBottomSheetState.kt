@@ -2,7 +2,8 @@ package com.mercadolibre.android.andesui.bottomsheet.state
 
 enum class AndesBottomSheetState {
     COLLAPSED,
-    EXPANDED;
+    EXPANDED,
+    HALF_EXPANDED;
 
     companion object {
         fun fromString(value: String): AndesBottomSheetState = valueOf(value.toUpperCase())
@@ -12,6 +13,7 @@ enum class AndesBottomSheetState {
 
     private fun getAndesBottomSheetState(): AndesBottomSheetStateInterface {
         return when (this) {
+            HALF_EXPANDED -> AndesBottomSheetStateHalfExpanded
             EXPANDED -> AndesBottomSheetStateExpanded
             COLLAPSED -> AndesBottomSheetStateCollapsed
         }

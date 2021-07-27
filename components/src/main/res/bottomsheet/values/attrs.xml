@@ -5,9 +5,11 @@
         <attr name="andesBottomSheetState" format="enum">
             <enum name="collapsed" value="1000"/>
             <enum name="expanded" value="1001"/>
+            <enum name="half_expanded" value="1002"/>
         </attr>
 
         <attr name="andesBottomSheetTitleText" format="string"/>
+        <attr name="andesBottomSheetFitContent" format="boolean"/>
         <attr name="andesBottomSheetTitleAlign" format="enum">
             <enum name="centered" value="2000"/>
             <enum name="left_aligned" value="2001"/>

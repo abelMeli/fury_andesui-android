@@ -7,7 +7,8 @@ internal data class AndesBottomSheetConfiguration(
     val peekHeight: Int,
     val state: AndesBottomSheetState,
     val titleText: String?,
-    val titleAlignment: AndesBottomSheetTitleAlignment?
+    val titleAlignment: AndesBottomSheetTitleAlignment?,
+    val fitContent: Boolean
 )
 
 internal object AndesBottomSheetConfigurationFactory {
@@ -17,7 +18,8 @@ internal object AndesBottomSheetConfigurationFactory {
                 peekHeight = andesBottomSheetAttrs.andesBottomSheetPeekHeight,
                 state = andesBottomSheetAttrs.andesBottomSheetState,
                 titleText = andesBottomSheetAttrs.andesBottomSheetTitleText,
-                titleAlignment = andesBottomSheetAttrs.andesBottomSheetTitleAlignment
+                titleAlignment = andesBottomSheetAttrs.andesBottomSheetTitleAlignment,
+                fitContent = andesBottomSheetAttrs.andesBottomSheetFitContent
         )
     }
 }

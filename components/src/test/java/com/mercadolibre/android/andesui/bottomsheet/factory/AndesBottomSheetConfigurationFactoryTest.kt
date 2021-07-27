@@ -21,10 +21,12 @@ class AndesBottomSheetConfigurationFactoryTest {
     fun `attr create factory test`() {
         val peekHeight = 100
         val testText = "test"
+        val halfExpanded = false
         attrs = AndesBottomSheetAttrs(
                 andesBottomSheetPeekHeight = peekHeight,
                 andesBottomSheetState = AndesBottomSheetState.EXPANDED,
                 andesBottomSheetTitleAlignment = AndesBottomSheetTitleAlignment.CENTERED,
+                andesBottomSheetFitContent = halfExpanded,
                 andesBottomSheetTitleText = testText
         )
 
@@ -33,6 +35,7 @@ class AndesBottomSheetConfigurationFactoryTest {
         assertEquals(config.peekHeight, peekHeight)
         assertEquals(config.state, AndesBottomSheetState.EXPANDED)
         assertEquals(config.titleAlignment, AndesBottomSheetTitleAlignment.CENTERED)
+        assertEquals(config.fitContent, halfExpanded)
         assertEquals(config.titleText, testText)
     }
 }
