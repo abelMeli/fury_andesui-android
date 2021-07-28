@@ -1,3 +1,7 @@
+# v3.24.0
+## 🚀 Feature
+- Added helperTextLinks to `AndesTextfield`  | Author: [@dylanmuszelml](https://github.com/dylanmuszelml)
+
 # v3.23.0
 ## 🚀 Feature
 - Added new icons for charge methods. | Authors: [@rbasualdo7](https://github.com/rbasualdo7) 
