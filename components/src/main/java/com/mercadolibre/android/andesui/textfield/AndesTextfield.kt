@@ -510,7 +510,7 @@ class AndesTextfield : ConstraintLayout {
     private fun getHelperText(config: AndesTextfieldConfiguration): SpannableString {
         val spannableString = SpannableString(config.helperText)
         config.helperLinks?.let { links ->
-            links.links.filter { it.isValidRange(spannableString) }.forEachIndexed { linkIndex, andesBodyLink ->
+            links.links.filter { it.isValidRange(spannableString) }.forEachIndexed { linkIndex, link ->
                 val clickableSpan = object : ClickableSpan() {
 
                     override fun onClick(view: View) = links.listener(linkIndex)
@@ -522,7 +522,7 @@ class AndesTextfield : ConstraintLayout {
                 }
                 spannableString.setSpan(
                     clickableSpan,
-                    andesBodyLink.startIndex, andesBodyLink.endIndex,
+                    link.startIndex, link.endIndex,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
