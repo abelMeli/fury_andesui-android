@@ -3,17 +3,17 @@ package com.mercadolibre.android.andesui.bottomsheet
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.core.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.bottomsheet.factory.AndesBottomSheetAttrs
 import com.mercadolibre.android.andesui.bottomsheet.factory.AndesBottomSheetAttrsParser
@@ -35,9 +35,7 @@ class AndesBottomSheet : CoordinatorLayout {
         get() = andesBottomSheetAttrs.andesBottomSheetPeekHeight
         set(value) {
             andesBottomSheetAttrs = andesBottomSheetAttrs.copy(andesBottomSheetPeekHeight = value)
-            createConfig().let {
-                updatePeekHeight(it)
-            }
+            updatePeekHeight(createConfig())
         }
 
     /**
@@ -47,34 +45,38 @@ class AndesBottomSheet : CoordinatorLayout {
         get() = andesBottomSheetAttrs.andesBottomSheetState
         set(value) {
             andesBottomSheetAttrs = andesBottomSheetAttrs.copy(andesBottomSheetState = value)
-            createConfig().let {
-                resolveBottomSheetState(it)
-            }
+            resolveBottomSheetState(createConfig())
         }
 
     /**
-     * Getter and Setter for [bottomSheetTitleText], if this value is null or an empty string no title will be shown
+     * Getter and Setter for [titleText], if this value is null or an empty string no title will be shown
      */
     var titleText: String?
         get() = andesBottomSheetAttrs.andesBottomSheetTitleText
         set(value) {
             andesBottomSheetAttrs = andesBottomSheetAttrs.copy(andesBottomSheetTitleText = value)
-            createConfig().let {
-                resolveTitleViewText(it)
-            }
+            resolveTitleViewText(createConfig())
         }
 
     /**
-     * Getter and Setter for [bottomSheetTitleAlignment], alternatives: centered and left_aligned
+     * Getter and Setter for [titleAlignment], alternatives: centered and left_aligned
      */
     var titleAlignment: AndesBottomSheetTitleAlignment?
         get() = andesBottomSheetAttrs.andesBottomSheetTitleAlignment
         set(value) {
             andesBottomSheetAttrs = andesBottomSheetAttrs.copy(andesBottomSheetTitleAlignment = value)
-            createConfig().let {
-                resolveTitleViewAlignment(it)
-            }
+            resolveTitleViewAlignment(createConfig())
     }
+
+    /**
+     * Getter and Setter for [fitContent], if this value is false will not fit the content
+     */
+    var fitContent: Boolean
+        get() = andesBottomSheetAttrs.andesBottomSheetFitContent
+        set(value) {
+            andesBottomSheetAttrs = andesBottomSheetAttrs.copy(andesBottomSheetFitContent = value)
+            resolveBottomSheetFitContent(createConfig())
+        }
 
     private lateinit var andesBottomSheetAttrs: AndesBottomSheetAttrs
     private lateinit var containerView: FrameLayout
@@ -86,14 +88,16 @@ class AndesBottomSheet : CoordinatorLayout {
     private var listener: BottomSheetListener? = null
 
     @Suppress("LongParameterList")
+    @JvmOverloads
     constructor(
         context: Context,
         peekHeight: Int = DEFAULT_PEEK_HEIGHT,
         state: AndesBottomSheetState = DEFAULT_BOTTOM_SHEET_STATE,
         title: String? = DEFAULT_TITLE,
-        titleAlignment: AndesBottomSheetTitleAlignment = DEFAULT_TITLE_ALIGNMENT
+        titleAlignment: AndesBottomSheetTitleAlignment = DEFAULT_TITLE_ALIGNMENT,
+        fitContent: Boolean = DEFAULT_FIT_CONTENT
     ) : super(context) {
-        initAttrs(peekHeight, state, title, titleAlignment)
+        initAttrs(peekHeight, state, title, titleAlignment, fitContent)
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -109,16 +113,17 @@ class AndesBottomSheet : CoordinatorLayout {
         peekHeight: Int,
         bottomSheetState: AndesBottomSheetState,
         titleText: String?,
-        titleAlignment: AndesBottomSheetTitleAlignment
+        titleAlignment: AndesBottomSheetTitleAlignment,
+        fitContent: Boolean
     ) {
         andesBottomSheetAttrs =
                 AndesBottomSheetAttrs(
-                        peekHeight,
-                        bottomSheetState,
-                        titleText,
-                        titleAlignment
+                    peekHeight,
+                    bottomSheetState,
+                    titleText,
+                    titleAlignment,
+                    fitContent
                 )
-
         setupComponents(createConfig())
     }
 
@@ -134,9 +139,10 @@ class AndesBottomSheet : CoordinatorLayout {
         resolveBottomSheetBackground()
         initBottomSheetBehavior()
         resolveBottomSheetState(config)
+        resolveBottomSheetFitContent(config)
         resolveTitleViewText(config)
         resolveTitleViewAlignment(config)
-        resolveBackgroundDim(config)
+        resolveBackgroundDim()
 
         updatePeekHeight(config)
     }
@@ -194,7 +200,14 @@ class AndesBottomSheet : CoordinatorLayout {
     }
 
     private fun resolveBottomSheetState(config: AndesBottomSheetConfiguration) {
-        bottomSheetBehavior.state = config.state.state.getState()
+        // This .post grant the full initialization of the sheet before setting the state
+        containerView.post {
+            bottomSheetBehavior.state = config.state.state.getState()
+        }
+    }
+
+    private fun resolveBottomSheetFitContent(config: AndesBottomSheetConfiguration) {
+        isFitContent(config.fitContent)
     }
 
     private fun resolveTitleViewText(config: AndesBottomSheetConfiguration) {
@@ -218,9 +231,12 @@ class AndesBottomSheet : CoordinatorLayout {
         bottomSheetBehavior.peekHeight = config.peekHeight
     }
 
-    private fun resolveBackgroundDim(config: AndesBottomSheetConfiguration) {
-        backgroundDimView.setOnClickListener { collapse() }
-        if (state == AndesBottomSheetState.EXPANDED) {
+    private fun resolveBackgroundDim() {
+        backgroundDimView.setOnClickListener {
+            listener?.onTouchOutside()
+            collapse()
+        }
+        if (state == AndesBottomSheetState.EXPANDED || state == AndesBottomSheetState.HALF_EXPANDED) {
             backgroundDimView.visibility = View.VISIBLE
             backgroundDimView.alpha = DIM_MAX_ALPHA
         }
@@ -229,7 +245,7 @@ class AndesBottomSheet : CoordinatorLayout {
     /**
      * Sets the provided fragment inside of the bottomSheet
      *
-     * @param supportFragmentManager the supportFragmentManager
+     * @param fragmentManager the supportFragmentManager
      * @param fragment the fragment to be shown, should be
      * @param bundle the info bundle for the fragment
      */
@@ -268,6 +284,13 @@ class AndesBottomSheet : CoordinatorLayout {
     }
 
     /**
+     * Half Expand this bottomSheet
+     */
+    fun halfExpand() {
+        state = AndesBottomSheetState.HALF_EXPANDED
+    }
+
+    /**
      * Collapses this bottomSheet
      */
     fun collapse() {
@@ -275,7 +298,29 @@ class AndesBottomSheet : CoordinatorLayout {
     }
 
     /**
-     * Sets listener to the onCollpase and onExpand events.
+     * Enable/Disable fit content in bottom sheet
+     * Whether the height of the expanded sheet is determined by the height of its contents,
+     * or if it is expanded in two stages (half the height of the parent container,
+     * full height of parent container).
+     * This disable/enable half expanded behavior, if it is disabled, anyway you can set
+     * half expanded state manually with [halfExpand] but maybe you wont have the result you want.
+     */
+    private fun isFitContent(fitContent: Boolean) {
+        bottomSheetBehavior.isFitToContents = fitContent
+        val params = containerView.layoutParams
+        params.width = LayoutParams.MATCH_PARENT
+        if (fitContent) {
+            // Best way to set layout with isFitToContent=true
+            params.height = LayoutParams.WRAP_CONTENT
+        } else {
+            // Best way to set layout with isFitToContent=false
+            params.height = LayoutParams.MATCH_PARENT
+        }
+        containerView.layoutParams = params
+    }
+
+    /**
+     * Sets listener to the onCollapse and onExpand events.
      *
      * @param listener the events listener
      */
@@ -290,22 +335,21 @@ class AndesBottomSheet : CoordinatorLayout {
                     // not used
                 }
                 BottomSheetBehavior.STATE_EXPANDED -> {
-                    listener?.onExpanded().let {
-                        updateStateFromBehavior(newState)
-                    }
+                    listener?.onExpanded()
+                    updateStateFromBehavior(newState)
+                }
+                BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                    listener?.onHalfExpanded()
+                    updateStateFromBehavior(newState)
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
-                    listener?.onCollapsed().let {
-                        updateStateFromBehavior(newState)
-                    }
+                    listener?.onCollapsed()
+                    updateStateFromBehavior(newState)
                 }
                 BottomSheetBehavior.STATE_DRAGGING -> {
                     // not used
                 }
                 BottomSheetBehavior.STATE_SETTLING -> {
-                    // not used
-                }
-                BottomSheetBehavior.STATE_HALF_EXPANDED -> {
                     // not used
                 }
             }
@@ -318,13 +362,18 @@ class AndesBottomSheet : CoordinatorLayout {
                 backgroundDimView.visibility = View.GONE
             }
             if (((slideOffset * ONE_HUNDRED).roundToInt() % TWO) == ZERO) {
-                backgroundDimView.alpha = slideOffset
+                if (slideOffset < DIM_HALF_SHEET) {
+                    backgroundDimView.alpha = slideOffset * TWO
+                } else {
+                    backgroundDimView.alpha = DIM_MAX_ALPHA
+                }
             }
         }
 
         private fun updateStateFromBehavior(bottomSheetBehaviorState: Int) {
             when (bottomSheetBehaviorState) {
                 BottomSheetBehavior.STATE_EXPANDED -> state = AndesBottomSheetState.EXPANDED
+                BottomSheetBehavior.STATE_HALF_EXPANDED -> state = AndesBottomSheetState.HALF_EXPANDED
                 BottomSheetBehavior.STATE_COLLAPSED -> state = AndesBottomSheetState.COLLAPSED
             }
         }
@@ -333,6 +382,7 @@ class AndesBottomSheet : CoordinatorLayout {
     companion object {
         private const val DEFAULT_PEEK_HEIGHT = 0
         private const val DIM_MAX_ALPHA = 1f
+        private const val DIM_HALF_SHEET = 0.5f
         private const val FLOAT_ZERO = 0f
         private const val ONE_HUNDRED = 100
         private const val TWO = 2
@@ -340,6 +390,7 @@ class AndesBottomSheet : CoordinatorLayout {
         private const val MIN_OFFSET_CHANGE = 0.01f
         private val DEFAULT_BOTTOM_SHEET_STATE = AndesBottomSheetState.COLLAPSED
         private val DEFAULT_TITLE = null // no title
+        private const val DEFAULT_FIT_CONTENT = true // enabled
         private val DEFAULT_TITLE_ALIGNMENT = AndesBottomSheetTitleAlignment.CENTERED
     }
 }

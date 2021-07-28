@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.common.util.CollectionUtils.listOf
 import com.mercadolibre.android.andesui.bottomsheet.AndesBottomSheet
 import com.mercadolibre.android.andesui.bottomsheet.BottomSheetListener
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
@@ -72,11 +73,19 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
     }
 
     override fun onCollapsed() {
-        Toast.makeText(applicationContext, "Collapsed!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "Collapsed", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onHalfExpanded() {
+        Toast.makeText(applicationContext, "Half Expanded", Toast.LENGTH_SHORT).show()
     }
 
     override fun onExpanded() {
-        Toast.makeText(applicationContext, "Expanded!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "Expanded", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onTouchOutside() {
+        Toast.makeText(applicationContext, "Touch Outside", Toast.LENGTH_SHORT).show()
     }
 
     fun onAttachViewButtonClicked(view: View) {
@@ -132,6 +141,17 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
             bottomSheet.peekHeight = andes_bottom_sheet_peek_height_text_field.text!!.toInt()
             closeKeyboard(view)
             andes_bottom_sheet_peek_height_text_field.text = ""
+        }
+    }
+
+    fun onSetFitContentButtonClicked(view: View) {
+        val andesButton = view as AndesButton
+        if (bottomSheet.fitContent) {
+            bottomSheet.fitContent = false
+            andesButton.hierarchy = AndesButtonHierarchy.QUIET
+        } else {
+            bottomSheet.fitContent = true
+            andesButton.hierarchy = AndesButtonHierarchy.LOUD
         }
     }
 

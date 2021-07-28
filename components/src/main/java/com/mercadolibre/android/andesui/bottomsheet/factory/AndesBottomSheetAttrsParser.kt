@@ -8,18 +8,21 @@ import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleA
 import kotlin.IllegalArgumentException
 
 private const val DEFAULT_PEEK_HEIGHT = 0f
+private const val DEFAULT_FIT_CONTENT = true
 
 internal data class AndesBottomSheetAttrs(
     val andesBottomSheetPeekHeight: Int,
     val andesBottomSheetState: AndesBottomSheetState,
     val andesBottomSheetTitleText: String?,
-    val andesBottomSheetTitleAlignment: AndesBottomSheetTitleAlignment?
+    val andesBottomSheetTitleAlignment: AndesBottomSheetTitleAlignment?,
+    val andesBottomSheetFitContent: Boolean
 )
 
 internal object AndesBottomSheetAttrsParser {
 
     private const val ANDES_BOTTOM_SHEET_STATE_COLLAPSED = "1000"
     private const val ANDES_BOTTOM_SHEET_STATE_EXPANDED = "1001"
+    private const val ANDES_BOTTOM_SHEET_STATE_HALF_EXPANDED = "1002"
     private const val ANDES_BOTTOM_SHEET_TITLE_CENTER = "2000"
     private const val ANDES_BOTTOM_SHEET_TITLE_LEFT = "2001"
 
@@ -31,6 +34,7 @@ internal object AndesBottomSheetAttrsParser {
         val state = when (typedArray.getString(R.styleable.AndesBottomSheet_andesBottomSheetState)) {
             ANDES_BOTTOM_SHEET_STATE_COLLAPSED -> AndesBottomSheetState.COLLAPSED
             ANDES_BOTTOM_SHEET_STATE_EXPANDED -> AndesBottomSheetState.EXPANDED
+            ANDES_BOTTOM_SHEET_STATE_HALF_EXPANDED -> AndesBottomSheetState.HALF_EXPANDED
             else -> throw IllegalArgumentException("Invalid state, valid states: [COLLAPSED, EXPANDED]")
         }
 
@@ -48,7 +52,10 @@ internal object AndesBottomSheetAttrsParser {
                             DEFAULT_PEEK_HEIGHT).toInt(),
                 andesBottomSheetState = state,
                 andesBottomSheetTitleText = title,
-                andesBottomSheetTitleAlignment = titleAlignment
+                andesBottomSheetTitleAlignment = titleAlignment,
+                andesBottomSheetFitContent = typedArray.getBoolean(
+                    R.styleable.AndesBottomSheet_andesBottomSheetFitContent, DEFAULT_FIT_CONTENT
+                )
         ).also { typedArray.recycle() }
     }
 }

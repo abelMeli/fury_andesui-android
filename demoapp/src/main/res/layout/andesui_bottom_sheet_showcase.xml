@@ -101,6 +101,26 @@
         app:layout_constraintStart_toEndOf="@+id/andes_bottom_sheet_peek_height_text_field"
         app:layout_constraintTop_toTopOf="@+id/andes_bottom_sheet_peek_height_text_field" />
 
+    <View
+        android:id="@+id/andes_bottom_sheet_separator_4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="@dimen/andes_bottom_sheet_margin_small"
+        android:background="@color/andes_gray_550"
+        app:layout_constraintTop_toBottomOf="@+id/andes_bottom_sheet_peek_height_text_field"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/andes_bottom_sheet_half_expanded_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/andes_bottom_sheet_margin_large"
+        android:layout_marginVertical="@dimen/andes_bottom_sheet_margin_small"
+        android:onClick="onSetFitContentButtonClicked"
+        app:andesButtonText="@string/andes_bottom_sheet_fit_content_button"
+        app:layout_constraintTop_toBottomOf="@+id/andes_bottom_sheet_separator_4"
+        tools:layout_editor_absoluteX="16dp" />
+
     <com.mercadolibre.android.andesui.bottomsheet.AndesBottomSheet
         android:id="@+id/andes_bottom_sheet"
         android:layout_width="match_parent"
@@ -108,4 +128,5 @@
         app:andesBottomSheetState="collapsed"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 open class AndesListViewItem {
     internal var title: String = ""
     internal var subtitle: String? = ""
+    internal var itemDividerEnabled: Boolean = false
     internal var paddingLeft: Int = 0
     internal var paddingRight: Int = 0
     internal var paddingTop: Int = 0
@@ -42,6 +43,7 @@ open class AndesListViewItem {
     internal fun andesListViewItemConfig(
         title: String,
         subtitle: String?,
+        itemDividerEnabled: Boolean,
         config: AndesListViewItemConfiguration,
         itemSelected: Boolean?,
         icon: Drawable?,
@@ -52,6 +54,7 @@ open class AndesListViewItem {
     ) {
         this.title = title
         this.subtitle = subtitle
+        this.itemDividerEnabled = itemDividerEnabled
         this.paddingBottom = config.paddingBottom
         this.paddingLeft = config.paddingLeft
         this.paddingRight = config.paddingRight
@@ -83,6 +86,7 @@ class AndesListViewItemSimple @JvmOverloads constructor(
     context: Context,
     title: String,
     subtitle: String? = null,
+    itemDividerEnabled: Boolean = false,
     itemSelected: Boolean = false,
     size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
     icon: Drawable? = null,
@@ -97,6 +101,7 @@ class AndesListViewItemSimple @JvmOverloads constructor(
         this.andesListViewItemSimpleConfig(
             title,
             subtitle,
+            itemDividerEnabled,
             config,
             itemSelected,
             icon,
@@ -110,6 +115,7 @@ class AndesListViewItemSimple @JvmOverloads constructor(
     private fun andesListViewItemSimpleConfig(
         title: String,
         subtitle: String?,
+        itemDividerEnabled: Boolean,
         config: AndesListViewItemConfiguration,
         itemSelected: Boolean?,
         icon: Drawable?,
@@ -122,6 +128,7 @@ class AndesListViewItemSimple @JvmOverloads constructor(
         super.andesListViewItemConfig(
             title,
             subtitle,
+            itemDividerEnabled,
             config,
             itemSelected,
             icon,
@@ -138,6 +145,7 @@ class AndesListViewItemChevron @JvmOverloads constructor(
     context: Context,
     title: String,
     subtitle: String? = null,
+    itemDividerEnabled: Boolean = false,
     itemSelected: Boolean = false,
     size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
     icon: Drawable? = null,
@@ -153,6 +161,7 @@ class AndesListViewItemChevron @JvmOverloads constructor(
         this.andesListViewItemSimpleConfig(
             title,
             subtitle,
+            itemDividerEnabled,
             config,
             itemSelected,
             icon,
@@ -166,6 +175,7 @@ class AndesListViewItemChevron @JvmOverloads constructor(
     private fun andesListViewItemSimpleConfig(
         title: String,
         subtitle: String?,
+        itemDividerEnabled: Boolean,
         config: AndesListViewItemConfiguration,
         itemSelected: Boolean?,
         icon: Drawable?,
@@ -174,10 +184,10 @@ class AndesListViewItemChevron @JvmOverloads constructor(
         avatarContentDescription: String?,
         titleMaxLines: Int
     ) {
-
         super.andesListViewItemConfig(
             title,
             subtitle,
+            itemDividerEnabled,
             config,
             itemSelected,
             icon,
