@@ -502,14 +502,14 @@ class AndesTextfield : ConstraintLayout {
             helperComponent.visibility = View.GONE
         } else {
             helperComponent.visibility = View.VISIBLE
-            helperComponent.text = getHelperText(config.helperText)
+            helperComponent.text = getHelperText(config)
             helperComponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.helperSize)
         }
     }
 
-    private fun getHelperText(text: String): SpannableString {
-        val spannableString = SpannableString(text)
-        helperLinks?.let { links ->
+    private fun getHelperText(config: AndesTextfieldConfiguration): SpannableString {
+        val spannableString = SpannableString(config.helperText)
+        config.helperLinks?.let { links ->
             links.links.filter { it.isValidRange(spannableString) }.forEachIndexed { linkIndex, andesBodyLink ->
                 val clickableSpan = object : ClickableSpan() {
 

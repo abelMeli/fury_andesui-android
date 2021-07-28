@@ -52,7 +52,7 @@ internal object AndesTextfieldConfigurationFactory {
                     helperColor = resolveHelperTextColor(state.state),
                     helperSize = resolveHelperSize(context),
                     helperText = resolveHelper(state.state, helper),
-                    helperLinks = helperLinks,
+                    helperLinks = resolveHelperLinks(state.state, helperLinks),
                     helperTypeface = resolveHelperTypeface(state.state, context),
                     counterColor = resolveCounterTextColor(state.state),
                     counterSize = resolveCounterSize(context),
@@ -153,4 +153,8 @@ internal object AndesTextfieldConfigurationFactory {
         state: AndesTextfieldStateInterface,
         helper: String?
     ): String? = state.helper(helper)
+    private fun resolveHelperLinks(
+        state: AndesTextfieldStateInterface,
+        helperLinks: AndesTextfieldLinks?
+    ): AndesTextfieldLinks? = state.helperLinks(helperLinks)
 }

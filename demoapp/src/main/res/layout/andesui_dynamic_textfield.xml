@@ -177,6 +177,31 @@
             app:layout_constraintTop_toBottomOf="@+id/placeholder_text" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/helper_link_from"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:inputType="number"
+            app:andesTextfieldPlaceholder="@string/andes_textfield_helper_link_from"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toStartOf="@id/helper_link_to"
+            app:layout_constraintStart_toStartOf="@+id/helper_text"
+            app:layout_constraintTop_toBottomOf="@+id/helper_text" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/helper_link_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_vertical_text_field"
+            android:layout_marginTop="@dimen/margin_vertical_text_field"
+            android:inputType="number"
+            app:andesTextfieldPlaceholder="@string/andes_textfield_helper_link_to"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@+id/helper_text"
+            app:layout_constraintStart_toEndOf="@id/helper_link_from"
+            app:layout_constraintTop_toBottomOf="@+id/helper_text" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/mask"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -184,9 +209,9 @@
             android:inputType="textCapWords|textCapSentences"
             app:andesTextfieldPlaceholder="@string/andes_mask_hint"
             app:andesTextfieldRightContent="clear"
-            app:layout_constraintEnd_toEndOf="@+id/helper_text"
-            app:layout_constraintStart_toStartOf="@+id/helper_text"
-            app:layout_constraintTop_toBottomOf="@+id/helper_text" />
+            app:layout_constraintEnd_toEndOf="@+id/helper_link_to"
+            app:layout_constraintStart_toStartOf="@+id/helper_link_from"
+            app:layout_constraintTop_toBottomOf="@+id/helper_link_from" />
 
         <TextView
             android:id="@+id/textView5"

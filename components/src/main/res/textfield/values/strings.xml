@@ -3,6 +3,8 @@
     <string name="andes_textfield_label_text" translatable="false">Label</string>
     <string name="andes_textfield_code_text" translatable="false">Text - Solo se tomaran números </string>
     <string name="andes_textfield_helper_text" translatable="false">Helper text</string>
+    <string name="andes_textfield_helper_link_from" translatable="false">Helper link (from)</string>
+    <string name="andes_textfield_helper_link_to" translatable="false">Helper link (to)</string>
     <string name="andes_textfield_counter_text" translatable="false">%1$d/%2$d</string>
     <string name="andes_textfield_placeholder_text" translatable="false">Placeholder</string>
     <string name="andes_suffix_hint" translatable="false">Suffix</string>

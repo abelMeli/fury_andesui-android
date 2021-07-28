@@ -7,12 +7,12 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Spinner
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import android.widget.EditText
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ScrollView
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
@@ -24,6 +24,8 @@ import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.AndesTextfieldCode
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
+import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLink
+import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLinks
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldCodeState
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.textfield.style.AndesTextfieldCodeStyle
@@ -48,6 +50,8 @@ object InflateTextfieldHelper {
         val clearButton = layoutTextfield.findViewById<AndesButton>(R.id.clear_button)
         val label = layoutTextfield.findViewById<AndesTextfield>(R.id.label_text)
         val helper = layoutTextfield.findViewById<AndesTextfield>(R.id.helper_text)
+        val helperLinkFrom = layoutTextfield.findViewById<AndesTextfield>(R.id.helper_link_from)
+        val helperLinkTo = layoutTextfield.findViewById<AndesTextfield>(R.id.helper_link_to)
         val placeholder = layoutTextfield.findViewById<AndesTextfield>(R.id.placeholder_text)
         val counter = layoutTextfield.findViewById<EditText>(R.id.counter)
         val mask = layoutTextfield.findViewById<AndesTextfield>(R.id.mask)
@@ -92,6 +96,15 @@ object InflateTextfieldHelper {
             textfield.text = ""
             textfield.label = label.text.toString()
             textfield.helper = helper.text.toString()
+            val linksFrom = helperLinkFrom.text?.toIntOrNull()
+            val linksTo = helperLinkTo.text?.toIntOrNull()
+            textfield.helperLinks = if (linksFrom != null || linksTo != null) {
+                AndesTextfieldLinks(
+                    links = listOf(AndesTextfieldLink(linksFrom ?: 0, linksTo ?: textfield.helper?.length ?: 0)),
+                    listener = { Toast.makeText(context, "Clicked on link!", Toast.LENGTH_SHORT).show() })
+            } else {
+                null
+            }
             textfield.placeholder = placeholder.text.toString()
 
             textfield.counter = counter.text.toString().toIntOrNull() ?: 0
