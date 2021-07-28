@@ -6,8 +6,13 @@ import android.graphics.drawable.BitmapDrawable
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
 import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -36,6 +41,7 @@ import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldAttrs
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldAttrsParser
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldConfiguration
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldConfigurationFactory
+import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLinks
 import com.mercadolibre.android.andesui.textfield.maskTextField.TextFieldMaskWatcher
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.utils.buildColoredAndesBitmapDrawable
@@ -75,6 +81,16 @@ class AndesTextfield : ConstraintLayout {
             val config = createConfig()
             setupColorComponents(config)
             setupHelperComponent(config)
+        }
+
+    /**
+     * Getter and setter for [helperLinks].
+     */
+    var helperLinks: AndesTextfieldLinks?
+        get() = andesTextfieldAttrs.helperLinks
+        set(value) {
+            andesTextfieldAttrs = andesTextfieldAttrs.copy(helperLinks = value)
+            setupHelperComponent(createConfig())
         }
 
     /**
@@ -288,8 +304,9 @@ class AndesTextfield : ConstraintLayout {
         maxLines: Int?
     ) {
         val showCounter = SHOW_COUNTER_DEFAULT
+        val helperLinks = HELPER_LINKS_DEFAULT
         andesTextfieldAttrs = AndesTextfieldAttrs(
-            label, helper, placeholder, counter, showCounter, state, leftContent, rightContent, inputType, maxLines = maxLines
+            label, helper, helperLinks, placeholder, counter, showCounter, state, leftContent, rightContent, inputType, maxLines = maxLines
         )
         val config = AndesTextfieldConfigurationFactory.create(context, andesTextfieldAttrs)
         setupComponents(config)
@@ -485,9 +502,33 @@ class AndesTextfield : ConstraintLayout {
             helperComponent.visibility = View.GONE
         } else {
             helperComponent.visibility = View.VISIBLE
-            helperComponent.text = config.helperText
+            helperComponent.text = getHelperText(config.helperText)
             helperComponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.helperSize)
         }
+    }
+
+    private fun getHelperText(text: String): SpannableString {
+        val spannableString = SpannableString(text)
+        helperLinks?.let { links ->
+            links.links.filter { it.isValidRange(spannableString) }.forEachIndexed { linkIndex, andesBodyLink ->
+                val clickableSpan = object : ClickableSpan() {
+
+                    override fun onClick(view: View) = links.listener(linkIndex)
+
+                    override fun updateDrawState(drawerState: TextPaint) {
+                        drawerState.isUnderlineText = true
+                        drawerState.color = AndesColor(R.color.andes_accent_color_500).colorInt(context)
+                    }
+                }
+                spannableString.setSpan(
+                    clickableSpan,
+                    andesBodyLink.startIndex, andesBodyLink.endIndex,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+            helperComponent.movementMethod = LinkMovementMethod.getInstance()
+        }
+        return spannableString
     }
 
     /**
@@ -952,6 +993,7 @@ class AndesTextfield : ConstraintLayout {
         private const val NUMBER_CHAR_HIDE = 4
         private val LABEL_DEFAULT = null
         private val HELPER_DEFAULT = null
+        private val HELPER_LINKS_DEFAULT = null
         private val PLACEHOLDER_DEFAULT = null
         private const val COUNTER_DEFAULT = 0
         private const val SHOW_COUNTER_DEFAULT = true
