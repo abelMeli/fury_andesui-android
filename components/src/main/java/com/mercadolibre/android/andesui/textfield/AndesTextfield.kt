@@ -41,6 +41,7 @@ import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldAttrs
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldAttrsParser
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldConfiguration
 import com.mercadolibre.android.andesui.textfield.factory.AndesTextfieldConfigurationFactory
+import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLink
 import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLinks
 import com.mercadolibre.android.andesui.textfield.maskTextField.TextFieldMaskWatcher
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
@@ -509,26 +510,36 @@ class AndesTextfield : ConstraintLayout {
 
     private fun getHelperText(config: AndesTextfieldConfiguration): SpannableString {
         val spannableString = SpannableString(config.helperText)
-        config.helperLinks?.let { links ->
-            links.links.filter { it.isValidRange(spannableString) }.forEachIndexed { linkIndex, link ->
-                val clickableSpan = object : ClickableSpan() {
-
-                    override fun onClick(view: View) = links.listener(linkIndex)
-
-                    override fun updateDrawState(drawerState: TextPaint) {
-                        drawerState.isUnderlineText = true
-                        drawerState.color = AndesColor(R.color.andes_accent_color_500).colorInt(context)
-                    }
-                }
-                spannableString.setSpan(
-                    clickableSpan,
-                    link.startIndex, link.endIndex,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            }
+        config.helperLinks?.let { helperLinks ->
+            helperLinks
+                .links
+                .filter { it.isValidRange(spannableString) }
+                .forEachIndexed { linkIndex, link -> setHelperSpanLink(spannableString, helperLinks, linkIndex, link) }
             helperComponent.movementMethod = LinkMovementMethod.getInstance()
         }
         return spannableString
+    }
+
+    private fun setHelperSpanLink(
+        spannableString: SpannableString,
+        helperLinks: AndesTextfieldLinks,
+        linkIndex: Int,
+        link: AndesTextfieldLink
+    ) = spannableString.setSpan(
+        getHelperLinkClickableSpan(helperLinks, linkIndex),
+        link.startIndex,
+        link.endIndex,
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+
+    private fun getHelperLinkClickableSpan(helperLinks: AndesTextfieldLinks, index: Int) = object : ClickableSpan() {
+
+        override fun onClick(view: View) = helperLinks.listener(index)
+
+        override fun updateDrawState(drawerState: TextPaint) = with(drawerState) {
+            isUnderlineText = true
+            color = AndesColor(R.color.andes_accent_color_500).colorInt(context)
+        }
     }
 
     /**
