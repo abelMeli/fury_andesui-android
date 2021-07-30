@@ -62,7 +62,8 @@
                 app:layout_goneMarginTop="@dimen/andes_bottom_sheet_frame_view_margin_top"
                 app:layout_constraintTop_toBottomOf="@id/andes_bottom_sheet_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

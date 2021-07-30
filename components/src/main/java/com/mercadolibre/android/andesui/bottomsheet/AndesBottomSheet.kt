@@ -307,16 +307,21 @@ class AndesBottomSheet : CoordinatorLayout {
      */
     private fun isFitContent(fitContent: Boolean) {
         bottomSheetBehavior.isFitToContents = fitContent
+        val contentParams = frameView.layoutParams
         val params = containerView.layoutParams
         params.width = LayoutParams.MATCH_PARENT
         if (fitContent) {
             // Best way to set layout with isFitToContent=true
+            contentParams.height = LayoutParams.WRAP_CONTENT
             params.height = LayoutParams.WRAP_CONTENT
         } else {
             // Best way to set layout with isFitToContent=false
+            // Height must be zero to limit correctly the layout.
+            contentParams.height = CONTENT_LAYOUT_LIMIT
             params.height = LayoutParams.MATCH_PARENT
         }
         containerView.layoutParams = params
+        frameView.layoutParams = contentParams
     }
 
     /**
@@ -388,6 +393,7 @@ class AndesBottomSheet : CoordinatorLayout {
         private const val TWO = 2
         private const val ZERO = 0
         private const val MIN_OFFSET_CHANGE = 0.01f
+        private const val CONTENT_LAYOUT_LIMIT = 0
         private val DEFAULT_BOTTOM_SHEET_STATE = AndesBottomSheetState.COLLAPSED
         private val DEFAULT_TITLE = null // no title
         private const val DEFAULT_FIT_CONTENT = true // enabled
