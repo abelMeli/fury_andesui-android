@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
+import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLinks
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 /**
@@ -16,6 +17,7 @@ import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 internal data class AndesTextfieldAttrs(
     val label: String?,
     val helper: String?,
+    val helperLinks: AndesTextfieldLinks?,
     val placeholder: String?,
     val counter: Int,
     val showCounter: Boolean = true,
@@ -58,6 +60,7 @@ internal object AndesTextfieldAttrsParser {
         return AndesTextfieldAttrs(
             label = typedArray.getString(R.styleable.AndesTextfield_andesTextfieldLabel),
             helper = typedArray.getString(R.styleable.AndesTextfield_andesTextfieldHelper),
+            helperLinks = null,
             placeholder = typedArray.getString(R.styleable.AndesTextfield_andesTextfieldPlaceholder),
             counter = typedArray.getInt(R.styleable.AndesTextfield_andesTextfieldCounter, 0),
             state = state,

@@ -11,6 +11,7 @@ import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.color.toColor
 import com.mercadolibre.android.andesui.icons.IconProvider
+import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLinks
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 import com.mercadolibre.android.andesui.utils.buildColoredCircularShapeWithIconDrawable
 
@@ -27,6 +28,7 @@ internal sealed class AndesTextfieldStateInterface {
     abstract fun helpersColor(): AndesColor
     abstract fun typeFace(context: Context): Typeface
     abstract fun helper(helper: String?): String?
+    abstract fun helperLinks(helperLinks: AndesTextfieldLinks?): AndesTextfieldLinks?
     abstract fun leftMargin(context: Context): Int
 }
 
@@ -36,6 +38,7 @@ internal object AndesIdleTextfieldState : AndesTextfieldStateInterface() {
     override fun helpersColor(): AndesColor = R.color.andes_text_color_secondary.toAndesColor()
     override fun typeFace(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_regular)
     override fun helper(helper: String?): String? = helper
+    override fun helperLinks(helperLinks: AndesTextfieldLinks?): AndesTextfieldLinks? = helperLinks
     override fun leftMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_indeterminate_left_margin).toInt()
 
     override fun backgroundColor(context: Context): Drawable {
@@ -76,6 +79,7 @@ internal object AndesErrorTextfieldState : AndesTextfieldStateInterface() {
     override fun helpersColor(): AndesColor = R.color.andes_red_500.toAndesColor()
     override fun typeFace(context: Context) = context.getFontOrDefault(R.font.andes_font_semibold)
     override fun helper(helper: String?): String? = helper
+    override fun helperLinks(helperLinks: AndesTextfieldLinks?): AndesTextfieldLinks? = helperLinks
     override fun leftMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_indeterminate_left_margin).toInt()
 
     override fun backgroundColor(context: Context): Drawable {
@@ -117,6 +121,7 @@ internal object AndesDisabledTextfieldState : AndesTextfieldStateInterface() {
     override fun helpersColor(): AndesColor = R.color.andes_gray_250.toAndesColor()
     override fun typeFace(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_regular)
     override fun helper(helper: String?): String? = helper
+    override fun helperLinks(helperLinks: AndesTextfieldLinks?): AndesTextfieldLinks? = null
     override fun leftMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_indeterminate_left_margin).toInt()
 
     override fun backgroundColor(context: Context): Drawable {
@@ -137,6 +142,7 @@ internal object AndesReadonlyTextfieldState : AndesTextfieldStateInterface() {
     override fun helpersColor(): AndesColor = R.color.andes_gray_250.toAndesColor()
     override fun typeFace(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_regular)
     override fun helper(helper: String?): String? = null
+    override fun helperLinks(helperLinks: AndesTextfieldLinks?): AndesTextfieldLinks? = null
     override fun leftMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_label_paddingLeft).toInt()
 
     override fun backgroundColor(context: Context): Drawable {

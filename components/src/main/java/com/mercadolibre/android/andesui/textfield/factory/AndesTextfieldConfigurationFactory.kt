@@ -7,6 +7,7 @@ import android.view.View
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldContentInterface
+import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLinks
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldStateInterface
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
@@ -14,6 +15,7 @@ internal data class AndesTextfieldConfiguration(
     val background: Drawable?,
     val helperColor: AndesColor,
     val helperText: String? = null,
+    val helperLinks: AndesTextfieldLinks? = null,
     val helperSize: Float,
     val helperTypeface: Typeface,
     val labelColor: AndesColor,
@@ -50,6 +52,7 @@ internal object AndesTextfieldConfigurationFactory {
                     helperColor = resolveHelperTextColor(state.state),
                     helperSize = resolveHelperSize(context),
                     helperText = resolveHelper(state.state, helper),
+                    helperLinks = resolveHelperLinks(state.state, helperLinks),
                     helperTypeface = resolveHelperTypeface(state.state, context),
                     counterColor = resolveCounterTextColor(state.state),
                     counterSize = resolveCounterSize(context),
@@ -150,4 +153,8 @@ internal object AndesTextfieldConfigurationFactory {
         state: AndesTextfieldStateInterface,
         helper: String?
     ): String? = state.helper(helper)
+    private fun resolveHelperLinks(
+        state: AndesTextfieldStateInterface,
+        helperLinks: AndesTextfieldLinks?
+    ): AndesTextfieldLinks? = state.helperLinks(helperLinks)
 }
