@@ -77,6 +77,9 @@ class MainActivity : AppCompatActivity() {
         andesui_progress.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/progress"))
         }
+        andesui_linear_progress.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/linear_progress"))
+        }
         andesui_bottom_sheet.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/bottom_sheet"))
         }

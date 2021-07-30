@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Andes LinearProgressIndicator -->
+    <integer name="andes_linear_progress_indicator_number_of_steps_example">4</integer>
+</resources>

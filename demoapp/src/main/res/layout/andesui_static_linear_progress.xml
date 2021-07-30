@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/andes_white">
+
+    <LinearLayout
+        android:id="@+id/andes_loud_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesLinearProgressSize="large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/andes_linear_progress_indicator_large"
+            android:textColor="#000" />
+
+        <com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesLinearProgressSize="small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/andes_linear_progress_indicator_small"
+            android:textColor="#000" />
+
+        <com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesLinearProgressSize="large"
+            app:andesLinearProgressIsSplit="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/andes_linear_progress_indicator_split_large"
+            android:textColor="#000" />
+
+        <com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesLinearProgressSize="small"
+            app:andesLinearProgressIsSplit="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/andes_linear_progress_indicator_split_small"
+            android:textColor="#000" />
+
+        <com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
+            android:id="@+id/linear_progress_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesLinearProgressIndicatorTint="@color/andes_green_500"
+            app:andesLinearProgressSize="large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/andes_linear_progress_indicator_custom_indicator_tint"
+            android:textColor="#000" />
+
+        <com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesLinearProgressSize="small"
+            app:andesLinearProgressIsSplit="true"
+            app:andesLinearProgressTrackTint="@color/andes_red_100" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/andes_linear_progress_indicator_custom_track_tint"
+            android:textColor="#000" />
+
+        <com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
+            android:id="@+id/linear_progress_number_of_steps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesLinearProgressSize="small"
+            app:andesLinearProgressIsSplit="true"
+            app:andesLinearProgressNumberOfSteps="@integer/andes_linear_progress_indicator_number_of_steps_example"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/andes_linear_progress_indicator_showcase_quantity"
+            android:textColor="#000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/andesui_demoapp_label_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_margin_vertical_2x"
+                android:text="@string/andes_demoapp_label_more" />
+
+            <com.mercadolibre.android.andesui.button.AndesButton
+                android:id="@+id/andesui_demoapp_andes_specs_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_margin_vertical"
+                app:andesButtonHierarchy="quiet"
+                app:andesButtonSize="medium"
+                app:andesButtonText="@string/andes_linear_progress_indicator_specs"
+                app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_label_more" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

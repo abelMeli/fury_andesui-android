@@ -48,6 +48,7 @@
     <string name="andes_demoapp_screen_thumbnail">Andes UI: Thumbnail</string>
     <string name="andes_demoapp_screen_floatingmenu">Andes UI: Floating Menu</string>
     <string name="andes_demoapp_screen_progress_indicator">Andes UI: Progress Indicator</string>
+    <string name="andes_demoapp_screen_linear_progress_indicator">Andes UI: Linear Progress Indicator</string>
     <string name="andes_demoapp_screen_whatsnew">Andes UI: What\'s new?</string>
     <string name="andes_demoapp_changelog_error">What\'s New couldn\'t be loaded, please contact our support team.</string>
     <string name="andes_demoapp_label_showcase">Showcase</string>
@@ -323,6 +324,35 @@
     <string name="andes_progress_indicator_large">LARGE</string>
     <string name="andes_progress_indicator_medium">MEDIUM</string>
     <string name="andes_progress_indicator_small">SMALL</string>
+
+
+    <!-- Andes LinearProgressIndicator -->
+    <string name="andes_linear_progress_indicator">Andes Linear Progress Indicator</string>
+    <string name="andes_linear_progress_indicator_specs">Andes LinearProgressIndicator Specs 📘</string>
+    <string name="andes_linear_progress_indicator_large">LARGE</string>
+    <string name="andes_linear_progress_indicator_small">SMALL</string>
+    <string name="andes_linear_progress_indicator_custom_track_tint">CUSTOM TRACK TINT</string>
+    <string name="andes_linear_progress_indicator_custom_indicator_tint">CUSTOM INDICATOR TINT</string>
+    <string name="andes_linear_progress_indicator_split_large">SPLIT LARGE</string>
+    <string name="andes_linear_progress_indicator_split_small">SPLIT SMALL</string>
+    <string name="andes_linear_progress_indicator_showcase_next_step">NEXT STEP</string>
+    <string name="andes_linear_progress_indicator_showcase_jump_to_step">JUMP TO STEP</string>
+    <string name="andes_linear_progress_indicator_showcase_step">STEP</string>
+    <string name="andes_linear_progress_indicator_showcase_size">Size</string>
+    <string name="andes_linear_progress_indicator_showcase_split">Split</string>
+    <string name="andes_linear_progress_indicator_showcase_previous_step">PREVIOUS STEP</string>
+    <string name="andes_linear_progress_indicator_showcase_update">UPDATE</string>
+    <string name="andes_linear_progress_indicator_showcase_clear">CLEAR</string>
+    <string name="andes_linear_progress_indicator_showcase_quantity">NUMBER OF STEPS</string>
+    <string name="andes_linear_progress_indicator_showcase_indicator_tint">INDICATOR TINT</string>
+    <string name="andes_linear_progress_indicator_showcase_indicator_tint_helper">e.g. #00A650</string>
+    <string name="andes_linear_progress_indicator_showcase_track_tint">TRACK TINT</string>
+    <string name="andes_linear_progress_indicator_showcase_track_tint_helper">e.g. #1A00A650</string>
+    <string name="andes_linear_progress_indicator_description">linear progress indicator ( determinate ). If the status of the process is detectable, the indicator expresses its completeness between 0% (incomplete or empty) and 100% (complete or full).</string>
+    <string-array name="andes_linear_progress_indicator_size_spinner">
+        <item>Small</item>
+        <item>Large</item>
+    </string-array>
 
 
     <!-- Andes RadioButton -->

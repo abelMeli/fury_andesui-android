@@ -3,6 +3,7 @@
 - Changes in AndesBottomSheet: HalfExpanded state added, BottomSheetListener was improved, FitContent attribute added. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 - Added divider support for `AndesListViewItem` | Author: [@MatiasTesioMeli](https://github.com/MatiasTesioMeli)
 - Added helperTextLinks to `AndesTextfield`  | Author: [@dylanmuszelml](https://github.com/dylanmuszelml)
+- AndesLinearProgressIndicator | Author: [@jhospinobern](https://github.com/jhospinobern)
 
 # v3.23.0
 ## 🚀 Feature

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="AndesLinearProgress" tools:ignore="ResourceName">
+
+        <attr name="andesLinearProgressSize" format="enum">
+            <enum name="large" value="200" />
+            <enum name="small" value="201" />
+        </attr>
+
+        <attr name="andesLinearProgressIndicatorTint" format="color" />
+        <attr name="andesLinearProgressTrackTint" format="color" />
+        <attr name="andesLinearProgressIsSplit" format="boolean" />
+        <attr name="andesLinearProgressNumberOfSteps" format="integer" />
+
+    </declare-styleable>
+</resources>

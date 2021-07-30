@@ -201,6 +201,18 @@
             app:layout_constraintTop_toBottomOf="@id/andesui_messages" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/andesui_linear_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/button_margin_vertical"
+            android:layout_marginTop="@dimen/button_margin_vertical"
+            android:layout_marginRight="@dimen/button_margin_vertical"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andes_linear_progress_indicator"
+            app:layout_constraintTop_toBottomOf="@id/andesui_progress" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/andesui_radiobutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -210,7 +222,7 @@
             app:andesButtonHierarchy="loud"
             app:andesButtonSize="large"
             app:andesButtonText="@string/andes_radiobutton"
-            app:layout_constraintTop_toBottomOf="@id/andesui_progress" />
+            app:layout_constraintTop_toBottomOf="@id/andesui_linear_progress" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/andesui_snackbar"

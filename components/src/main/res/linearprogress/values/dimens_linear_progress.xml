@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <dimen name="andes_linear_progress_height_large">8dp</dimen>
+    <dimen name="andes_linear_progress_height_small">4dp</dimen>
+
+    <dimen name="andes_linear_progress_split_size_large">8dp</dimen>
+    <dimen name="andes_linear_progress_split_size_small">4dp</dimen>
+
+    <dimen name="andes_linear_progress_corner_radius_large">4dp</dimen>
+    <dimen name="andes_linear_progress_corner_radius_small">2dp</dimen>
+
+</resources>
