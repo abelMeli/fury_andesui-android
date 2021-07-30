@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.dropdown
 
 import android.os.Build
 import android.view.View
+import android.widget.Spinner
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
@@ -214,5 +215,38 @@ class AndesDropdownTest {
         doNothing().`when`(spyDropdown).setIndeterminate()
         spyDropdown.setIndeterminate(true)
         Assert.assertEquals(AndesDropdownState.DISABLED, spyDropdown.state)
+    }
+
+    @Test
+    fun `getter for accessibilityClassName works correctly with textfield state READONLY`() {
+        val dropdown = AndesDropDownForm(
+            context,
+            AndesDropdownMenuType.FLOATINGMENU,
+            "",
+            "",
+            "",
+            AndesDropdownState.ENABLED
+        )
+
+        dropdown.setReadOnly()
+        val a11yClassName = dropdown.accessibilityClassName
+
+        Assert.assertEquals("", a11yClassName)
+    }
+
+    @Test
+    fun `getter for accessibilityClassName works correctly with textfield state different than READONLY`() {
+        val dropdown = AndesDropDownForm(
+            context,
+            AndesDropdownMenuType.FLOATINGMENU,
+            "",
+            "",
+            "",
+            AndesDropdownState.ENABLED
+        )
+
+        val a11yClassName = dropdown.accessibilityClassName
+
+        Assert.assertEquals(Spinner::class.java.name, a11yClassName)
     }
 }

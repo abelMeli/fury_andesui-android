@@ -92,6 +92,9 @@ class MainActivity : AppCompatActivity() {
         andesui_floatingmenu.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/floatingmenu"))
         }
+        andesui_timepicker.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/timepicker"))
+        }
     }
 
     private fun setupExtras() {

@@ -15,7 +15,7 @@ class AndesDropDownFormAccessibilityDelegate(private val andesDropDownForm: Ande
 
     private fun generateContentDescriptionText(andesDropDownForm: AndesDropDownForm): String {
         val labelText = andesDropDownForm.label.orEmpty()
-        val helperText = andesDropDownForm.helper.orEmpty()
+        val helperText = getHelperText(andesDropDownForm)
         val innerText = getInnerText(andesDropDownForm)
         val errorText = getErrorText(andesDropDownForm)
 
@@ -36,7 +36,19 @@ class AndesDropDownFormAccessibilityDelegate(private val andesDropDownForm: Ande
             AndesDropdownState.ERROR -> andesDropDownForm
                 .context
                 .getString(R.string.andes_dropdown_error_text)
-            else -> ""
+            else -> EMPTY_STRING
         }
+    }
+
+    private fun getHelperText(andesDropDownForm: AndesDropDownForm): String {
+        return if (andesDropDownForm.isReadOnly()) {
+            EMPTY_STRING
+        } else {
+            andesDropDownForm.helper.orEmpty()
+        }
+    }
+
+    companion object {
+        private const val EMPTY_STRING = ""
     }
 }

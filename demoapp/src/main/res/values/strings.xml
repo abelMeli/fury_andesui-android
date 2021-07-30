@@ -47,6 +47,7 @@
     <string name="andes_demoapp_screen_datepicker">Andes UI: DatePicker</string>
     <string name="andes_demoapp_screen_thumbnail">Andes UI: Thumbnail</string>
     <string name="andes_demoapp_screen_floatingmenu">Andes UI: Floating Menu</string>
+    <string name="andes_demoapp_screen_timepicker">Andes UI: Time Picker</string>
     <string name="andes_demoapp_screen_progress_indicator">Andes UI: Progress Indicator</string>
     <string name="andes_demoapp_screen_linear_progress_indicator">Andes UI: Linear Progress Indicator</string>
     <string name="andes_demoapp_screen_whatsnew">Andes UI: What\'s new?</string>
@@ -572,6 +573,9 @@
         <item>Without Thumbnail</item>
     </string-array>
 
+    <!-- Andes TimePicker -->
+    <string name="andes_timepicker">Andes TimePicker</string>
+
 
     <!-- Andes Tooltip -->
     <string name="andes_tooltip_specs">Andes Tooltip Specs 📘</string>
@@ -653,4 +657,39 @@
         <item>Left</item>
         <item>Right</item>
     </string-array>
+
+    <!-- Andes TimePicker -->
+    <string name="andes_timepicker_dynamic_label" translatable="false">Label</string>
+    <string name="andes_timepicker_dynamic_helper" translatable="false">Helper</string>
+    <string name="andes_timepicker_dynamic_placeholder" translatable="false">00:00</string>
+    <string name="andes_timepicker_dynamic_message" translatable="false">This component allows the selection of time or time ranges.</string>
+    <string name="andes_timepicker_tf_label_forlabel" translatable="false">TimePicker label</string>
+    <string name="andes_timepicker_tf_label_forplaceholder" translatable="false">Insert a label text here</string>
+    <string name="andes_timepicker_tf_helper_forlabel" translatable="false">TimePicker helper</string>
+    <string name="andes_timepicker_tf_helper_forplaceholder" translatable="false">Insert a helper text here</string>
+    <string name="andes_timepicker_tf_current_time_forlabel" translatable="false">TimePicker current time</string>
+    <string name="andes_timepicker_tf_current_time_forplaceholder" translatable="false">Insert time here</string>
+    <string name="andes_timepicker_tf_current_time_error_text" translatable="false">Must respect the time interval set</string>
+    <string name="andes_timepicker_button_update" translatable="false">Update</string>
+    <string name="andes_timepicker_button_clear" translatable="false">Clear</string>
+    <string name="andes_timepicker_static_label_idle" translatable="false">TimePicker idle state</string>
+    <string name="andes_timepicker_static_label_error" translatable="false">TimePicker error state</string>
+    <string name="andes_timepicker_static_label_disabled" translatable="false">TimePicker disabled state</string>
+    <string name="andes_timepicker_static_label_readonly" translatable="false">TimePicker read only state</string>
+    <string name="andes_timepicker_static_helper_text" translatable="false">Helper Text</string>
+    <string name="andes_timepicker_static_current_time_disabled" translatable="false">13:00</string>
+    <string name="andes_timepicker_static_current_time_readonly" translatable="false">04:00</string>
+
+    <string-array name="andes_timepicker_spinner_state">
+        <item>Idle</item>
+        <item>Error</item>
+        <item>Disabled</item>
+        <item>Readonly</item>
+    </string-array>
+    <string-array name="andes_timepicker_spinner_interval">
+        <item>30 minutes</item>
+        <item>60 minutes</item>
+    </string-array>
+
+
 </resources>

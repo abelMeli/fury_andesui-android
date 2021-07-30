@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.mercadolibre.android.andesui.message.AndesMessage
+            android:id="@+id/timepicker_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/button_margin_vertical"
+            android:layout_marginTop="@dimen/button_margin_vertical"
+            android:layout_marginEnd="@dimen/button_margin_vertical"
+            app:andesMessageBodyText="@string/andes_timepicker_dynamic_message"
+            app:andesMessageHierarchy="quiet"
+            app:andesMessageTitleText="@string/title_description"
+            app:andesMessageType="neutral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/timepicker_vertical_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/timepicker_vertical_80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <com.mercadolibre.android.andesui.timepicker.AndesTimePicker
+            android:id="@+id/dynamic_timepicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:andesTimePickerHelper="@string/andes_timepicker_dynamic_helper"
+            app:andesTimePickerInterval="minutes_30"
+            app:andesTimePickerLabel="@string/andes_timepicker_dynamic_label"
+            app:andesTimePickerState="idle"
+            app:layout_constraintEnd_toEndOf="@id/timepicker_vertical_80"
+            app:layout_constraintStart_toStartOf="@id/timepicker_vertical_20"
+            app:layout_constraintTop_toBottomOf="@id/timepicker_message" />
+
+        <View
+            android:id="@+id/timepicker_separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@color/andes_gray_100_solid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_timepicker" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_timepicker_tf_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:andesTextfieldLabel="@string/andes_timepicker_tf_label_forlabel"
+            app:andesTextfieldPlaceholder="@string/andes_timepicker_tf_label_forplaceholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timepicker_separator" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_timepicker_tf_helper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:andesTextfieldLabel="@string/andes_timepicker_tf_helper_forlabel"
+            app:andesTextfieldPlaceholder="@string/andes_timepicker_tf_helper_forplaceholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_timepicker_tf_label" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_timepicker_tf_current_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:inputType="number"
+            app:andesTextfieldLabel="@string/andes_timepicker_tf_current_time_forlabel"
+            app:andesTextfieldPlaceholder="@string/andes_timepicker_tf_current_time_forplaceholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_timepicker_tf_helper" />
+
+        <TextView
+            android:id="@+id/dynamic_timepicker_tv_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="State:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_timepicker_tf_current_time" />
+
+        <Spinner
+            android:id="@+id/dynamic_timepicker_spinner_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_timepicker_tv_state" />
+
+        <TextView
+            android:id="@+id/dynamic_timepicker_tv_interval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="Time interval (in minutes):"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_timepicker_tv_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dynamic_timepicker_tv_state" />
+
+        <Spinner
+            android:id="@+id/dynamic_timepicker_spinner_interval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_timepicker_spinner_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dynamic_timepicker_spinner_state" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/dynamic_timepicker_button_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:andesButtonText="@string/andes_timepicker_button_clear"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dynamic_timepicker_button_update"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_timepicker_spinner_interval" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/dynamic_timepicker_button_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:andesButtonText="@string/andes_timepicker_button_update"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_timepicker_button_clear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dynamic_timepicker_button_clear"
+            app:layout_constraintTop_toTopOf="@id/dynamic_timepicker_button_clear" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

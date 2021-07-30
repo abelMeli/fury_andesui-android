@@ -80,7 +80,9 @@ class AndesDropDownForm : ConstraintLayout {
         get() = andesDropdownAttrs.andesDropdownState
         set(value) {
             andesDropdownAttrs = andesDropdownAttrs.copy(andesDropdownState = value)
-            setupState(createConfig())
+            val config = createConfig()
+            setupState(config)
+            setupMenuType(config)
         }
 
     /**
@@ -151,7 +153,6 @@ class AndesDropDownForm : ConstraintLayout {
     private fun setupComponents(config: AndesDropdownConfiguration) {
         initComponents()
         setupViewId()
-        setupAndesTextFieldComponent(config)
         setupState(config)
         setupMenuType(config)
         setupA11yDelegate()
@@ -329,7 +330,10 @@ class AndesDropDownForm : ConstraintLayout {
         andesTextfield.inputType = InputType.TYPE_NULL
     }
 
-    private fun selectItem(position: Int) {
+    /**
+     * This method is only internal to be used in the AndesTimePicker
+     */
+    internal fun selectItem(position: Int) {
         val itemSelected = listItems[position]
 
         listItems.forEach {
@@ -345,12 +349,39 @@ class AndesDropDownForm : ConstraintLayout {
 
     private fun createConfig() = AndesDropdownConfigurationFactory.create(context, andesDropdownAttrs)
 
+    /**
+     * This method is only created to be used in the AndesTimePicker. Since the AndesDropDown does
+     * not have the READONLY state but the AndesTimePicker does, we need a way to set the value of
+     * the [andesTextfield] state to this value. This method sets this state to the internal textfield,
+     * changes the onClick behavior setting it to do nothing, and removes the chevron icon.
+     */
+    internal fun setReadOnly() {
+        andesTextfield.state = AndesTextfieldState.READONLY
+        andesTextfield.setOnClick(null)
+        andesTextfield.rightContent = null
+    }
+
+    /**
+     * This method is used in the a11yDelegate to tell if the component should read
+     * the helper text (in readonly state, the helper text is hidden)
+     */
+    internal fun isReadOnly() = andesTextfield.state == AndesTextfieldState.READONLY
+
+    /**
+     * since the READONLY state is not present in the AndesDropdownState, we need to verify the
+     * [andesTextfield] state directly to determine if we will need the role + actions for the class.
+     */
     override fun getAccessibilityClassName(): CharSequence {
-        return Spinner::class.java.name
+        return if (!isReadOnly()) {
+            Spinner::class.java.name
+        } else {
+            EMPTY_STRING
+        }
     }
 
     companion object {
         private const val ICON_CHEVRON_DOWN: String = "andes_ui_chevron_down_24"
         private const val ICON_CHEVRON_UP: String = "andes_ui_chevron_up_24"
+        private const val EMPTY_STRING = ""
     }
 }

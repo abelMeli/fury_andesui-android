@@ -986,11 +986,16 @@ class AndesTextfield : ConstraintLayout {
      * Set listener for textComponent
      * Only visible for internal development
      */
-    internal fun setOnClick(onClick: () -> Unit) {
-        textComponent.setOnClickListener { onClick.invoke() }
-        textContainer.setOnClickListener {
-            textComponent.requestFocus()
-            onClick.invoke()
+    internal fun setOnClick(onClick: (() -> Unit)?) {
+        if (onClick != null) {
+            textComponent.setOnClickListener { onClick.invoke() }
+            textContainer.setOnClickListener {
+                textComponent.requestFocus()
+                onClick.invoke()
+            }
+        } else {
+            textComponent.setOnClickListener(null)
+            textContainer.setOnClickListener(null)
         }
     }
 

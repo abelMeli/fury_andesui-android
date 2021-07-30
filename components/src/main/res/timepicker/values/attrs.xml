@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="AndesTimePicker" tools:ignore="ResourceName">
+
+        <attr name="andesTimePickerState" format="enum">
+            <enum name="idle" value="1000" />
+            <enum name="error" value="1001" />
+            <enum name="disabled" value="1002" />
+            <enum name="readonly" value="1003" />
+        </attr>
+
+        <attr name="andesTimePickerType" format="enum">
+            <enum name="time_interval" value="2000" />
+        </attr>
+
+        <attr name="andesTimePickerInterval" format="enum">
+            <enum name="minutes_5" value="3000" />
+            <enum name="minutes_10" value="3001" />
+            <enum name="minutes_15" value="3002" />
+            <enum name="minutes_30" value="3003" />
+            <enum name="minutes_60" value="3004" />
+        </attr>
+
+        <attr name="andesTimePickerLabel" format="reference" />
+
+        <attr name="andesTimePickerHelper" format="reference" />
+
+        <attr name="andesTimePickerCurrentTime" format="reference" />
+
+    </declare-styleable>
+</resources>

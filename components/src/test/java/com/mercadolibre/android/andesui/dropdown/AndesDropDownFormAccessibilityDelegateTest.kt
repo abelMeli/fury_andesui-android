@@ -105,4 +105,21 @@ class AndesDropDownFormAccessibilityDelegateTest {
         Assert.assertNotNull(nodeInfo)
         Assert.assertEquals("$label. , $helper. $placeholder", nodeInfo.contentDescription)
     }
+
+    @Test
+    fun `onInitializeAccessibilityNodeInfo works correctly when the textfield state is readOnly`() {
+        val label = "label"
+        val helper = "helper"
+        val placeholder = "placeholder"
+
+        andesDropDownForm.label = label
+        andesDropDownForm.helper = helper
+        andesDropDownForm.placeholder = placeholder
+        andesDropDownForm.state = AndesDropdownState.ENABLED
+        andesDropDownForm.setReadOnly()
+        nodeInfo = andesDropDownForm.createAccessibilityNodeInfo()
+
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertEquals("$label. , . $placeholder", nodeInfo.contentDescription)
+    }
 }

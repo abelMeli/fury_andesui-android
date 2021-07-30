@@ -1,5 +1,6 @@
 # v3.24.0
 ## 🚀 Feature
+- AndesTimePicker | Author: Andes Team
 - Changes in AndesBottomSheet: HalfExpanded state added, BottomSheetListener was improved, FitContent attribute added. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 - Fixed AndesBottomSheet layout. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 - Added divider support for `AndesListViewItem` | Author: [@MatiasTesioMeli](https://github.com/MatiasTesioMeli)
