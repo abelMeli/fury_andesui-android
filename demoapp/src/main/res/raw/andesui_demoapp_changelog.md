@@ -1,6 +1,7 @@
 # v3.25.0
 ## 🚀 Feature
 - AndesRadioButton accessibility support | Author: [@juanunzu](https://github.com/juanunzu)
+- Added guide for the use of the new Andes Template Plugin for the generation of new components | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.24.0
 ## 🚀 Feature
