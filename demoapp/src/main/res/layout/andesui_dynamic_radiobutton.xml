@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.mercadolibre.android.andesui.radiobutton.AndesRadioButton
-            android:id="@+id/andesRadioButton"
+            android:id="@+id/dynamic_page_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -42,7 +42,7 @@
             android:layout_marginEnd="24dp"
             android:gravity="end"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/andesRadioButton" />
+            app:layout_constraintTop_toBottomOf="@+id/dynamic_page_radiobutton" />
 
         <TextView
             android:id="@+id/textView15"

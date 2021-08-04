@@ -1,3 +1,7 @@
+# v3.25.0
+## 🚀 Feature
+- AndesRadioButton accessibility support | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v3.24.0
 ## 🚀 Feature
 - AndesTimePicker | Author: Andes Team

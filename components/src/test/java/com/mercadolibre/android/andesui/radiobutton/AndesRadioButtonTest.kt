@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.radiobutton
 
 import android.os.Build
+import android.widget.RadioButton
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.radiobutton.align.AndesRadioButtonAlign
@@ -292,5 +293,15 @@ class AndesRadioButtonTest {
                 config.type.type.iconColor(context, config.status),
                 R.color.andes_white.toAndesColor()
         )
+    }
+
+    @Test
+    fun `accessibility class name is correct`() {
+        val nativeRadioButtonA11yClassName = RadioButton::class.java.name
+        val andesRadioButton = AndesRadioButton(context, "text")
+
+        val andesRadioButtonA11yClassName = andesRadioButton.accessibilityClassName
+
+        assertEquals(nativeRadioButtonA11yClassName, andesRadioButtonA11yClassName)
     }
 }

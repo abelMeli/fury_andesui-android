@@ -8,7 +8,9 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.RadioButton
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.radiobutton.accessibility.AndesRadioButtonAccessibilityDelegate
 import com.mercadolibre.android.andesui.radiobutton.align.AndesRadioButtonAlign
 import com.mercadolibre.android.andesui.radiobutton.factory.AndesRadioButtonAttrParser
 import com.mercadolibre.android.andesui.radiobutton.factory.AndesRadioButtonAttrs
@@ -19,6 +21,7 @@ import com.mercadolibre.android.andesui.radiobutton.type.AndesRadioButtonType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 import kotlinx.android.synthetic.main.andes_layout_radiobutton.view.*
 
+@Suppress("TooManyFunctions")
 class AndesRadioButton : ConstraintLayout {
 
     /**
@@ -48,7 +51,9 @@ class AndesRadioButton : ConstraintLayout {
         get() = andesRadioButtonAttrs.andesRadioButtonStatus
         set(value) {
             andesRadioButtonAttrs = andesRadioButtonAttrs.copy(andesRadioButtonStatus = value)
-            setupBackgroundComponent(createConfig())
+            val config = createConfig()
+            setupBackgroundComponent(config)
+            setupEnabled(config)
         }
 
     /**
@@ -119,6 +124,12 @@ class AndesRadioButton : ConstraintLayout {
         setupTitleComponent(config)
         setupAlignComponent(config)
         setupBackgroundComponent(config)
+        setupEnabled(config)
+        setupA11yDelegate()
+    }
+
+    private fun setupA11yDelegate() {
+        accessibilityDelegate = AndesRadioButtonAccessibilityDelegate(this)
     }
 
     /**
@@ -127,12 +138,11 @@ class AndesRadioButton : ConstraintLayout {
      */
     private fun initComponents() {
         val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_radiobutton, this)
-        val radioButton = container.findViewById<ConstraintLayout>(R.id.andesRadioButton)
-        onCheckedChangeListener(radioButton)
+        onCheckedChangeListener(container)
     }
 
-    private fun onCheckedChangeListener(checkbox: ConstraintLayout) {
-        checkbox.setOnClickListener {
+    private fun onCheckedChangeListener(container: View) {
+        container.setOnClickListener {
             when (type) {
                 AndesRadioButtonType.ERROR -> {
                     type = AndesRadioButtonType.IDLE
@@ -201,7 +211,15 @@ class AndesRadioButton : ConstraintLayout {
         rightRadioButtonIcon.background = shapeBackground
     }
 
+    private fun setupEnabled(config: AndesRadioButtonConfiguration) {
+        isEnabled = config.type != AndesRadioButtonType.DISABLED
+    }
+
     private fun createConfig() = AndesRadioButtonConfigurationFactory.create(andesRadioButtonAttrs)
+
+    override fun getAccessibilityClassName(): CharSequence {
+        return RadioButton::class.java.name
+    }
 
     companion object {
         private val ANDES_ALIGN_DEFAULT_VALUE = AndesRadioButtonAlign.LEFT

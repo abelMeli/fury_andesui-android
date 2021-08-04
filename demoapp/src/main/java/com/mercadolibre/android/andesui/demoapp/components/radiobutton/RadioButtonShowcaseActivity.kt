@@ -67,7 +67,7 @@ class RadioButtonShowcaseActivity : AppCompatActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val radioButton: AndesRadioButton = container.findViewById(R.id.andesRadioButton)
+        val radioButton: AndesRadioButton = container.findViewById(R.id.dynamic_page_radiobutton)
 
         val spinnerType: Spinner = container.findViewById(R.id.spinnerType)
         ArrayAdapter.createFromResource(
