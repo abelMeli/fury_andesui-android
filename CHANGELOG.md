@@ -2,6 +2,8 @@
 ## 🚀 Feature
 - AndesRadioButton accessibility support | Author: [@juanunzu](https://github.com/juanunzu)
 - Added guide for the use of the new Andes Template Plugin for the generation of new components | Author: [@juanunzu](https://github.com/juanunzu)
+## 🛠 Fixes
+- Fix in AndesList that removes crash when setting divider | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.24.0
 ## 🚀 Feature

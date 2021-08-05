@@ -80,8 +80,10 @@ class AndesList : ConstraintLayout {
      * @param config current AndesListConfiguration
      */
     private fun updateDynamicComponents(config: AndesListConfiguration) {
-        listAdapter.updateItemDividerStatus(config.dividerEnabled)
-        refreshListAdapter()
+        if (::listAdapter.isInitialized) {
+            listAdapter.updateItemDividerStatus(config.dividerEnabled)
+            refreshListAdapter()
+        }
     }
 
     constructor(
