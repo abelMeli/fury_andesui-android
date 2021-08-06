@@ -219,7 +219,7 @@ class AndesListAdapter(
                     andesListItemSelectionView.visibility = View.VISIBLE
                     titleTextView.setTextColor(ContextCompat.getColor(
                             itemView.context,
-                            R.color.andes_blue_ml_500
+                            R.color.andes_accent_color_500
                     ))
                 }
             }

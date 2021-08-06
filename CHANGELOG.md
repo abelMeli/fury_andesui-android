@@ -5,6 +5,7 @@
 - Added guide for the use of the new Andes Template Plugin for the generation of new components | Author: [@juanunzu](https://github.com/juanunzu)
 ## 🛠 Fixes
 - Fix in AndesList that removes crash when setting divider | Author: [@juanunzu](https://github.com/juanunzu)
+- Fix accent colors in AndesList, AndestTagChoice, AndesLinearProgressIndicator and AndesProgressIndicatorIndeterminate  | Author: [@eportasML](https://github.com/eportasML)
 
 # v3.24.0
 ## 🚀 Feature

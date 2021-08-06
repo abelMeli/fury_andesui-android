@@ -34,7 +34,7 @@ class AndesProgressIndicatorIndeterminateTest {
         var config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 48F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_blue_ml_500))
+        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
     }
 
     @Test
@@ -43,7 +43,7 @@ class AndesProgressIndicatorIndeterminateTest {
         var config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 32F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_blue_ml_500))
+        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
     }
 
     @Test
@@ -52,7 +52,7 @@ class AndesProgressIndicatorIndeterminateTest {
         var config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 24F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_blue_ml_500))
+        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
     }
 
     @Test
@@ -61,7 +61,7 @@ class AndesProgressIndicatorIndeterminateTest {
         var config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 16F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_blue_ml_500))
+        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
     }
 
     @Test

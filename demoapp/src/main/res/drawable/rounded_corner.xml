@@ -3,7 +3,7 @@
 
     <stroke
         android:width="7dp"
-        android:color="@color/andes_blue_ml_300" />
+        android:color="@color/andes_accent_color_300" />
     <corners android:radius="40dp" />
 
 </shape>

@@ -39,7 +39,7 @@ class LoadingSpinner @JvmOverloads constructor(
     }
 
     private fun bindAttrs() {
-        val primaryColorInt = resources.getColor(R.color.andes_blue_ml_500)
+        val primaryColorInt = resources.getColor(R.color.andes_accent_color_500)
         primaryColor = createPaint(Paint.Style.STROKE, strokeSize, primaryColorInt)
     }
 

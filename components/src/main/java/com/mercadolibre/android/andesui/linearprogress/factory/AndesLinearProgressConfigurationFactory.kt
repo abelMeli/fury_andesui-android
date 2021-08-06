@@ -50,7 +50,7 @@ internal object AndesLinearProgressConfigurationFactory {
 
     private fun resolveIndicatorTint(context: Context, tint: Int): Int {
         if (tint == 0) {
-            return context.resources.getColor(R.color.andes_blue_ml_500)
+            return context.resources.getColor(R.color.andes_accent_color_500)
         }
         return tint
     }

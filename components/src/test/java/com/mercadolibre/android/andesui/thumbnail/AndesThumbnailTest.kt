@@ -47,7 +47,7 @@ class AndesThumbnailTest {
                 context = context,
                 type = AndesThumbnailType.ICON,
                 hierarchy = AndesThumbnailHierarchy.DEFAULT,
-                accentColor = R.color.andes_blue_ml_500.toAndesColor(),
+                accentColor = R.color.andes_accent_color_500.toAndesColor(),
                 state = AndesThumbnailState.ENABLED,
                 size = AndesThumbnailSize.SIZE_56,
                 image = drawable)
@@ -70,7 +70,7 @@ class AndesThumbnailTest {
                 context = context,
                 type = AndesThumbnailType.ICON,
                 hierarchy = AndesThumbnailHierarchy.QUIET,
-                accentColor = R.color.andes_blue_ml_500.toAndesColor(),
+                accentColor = R.color.andes_accent_color_500.toAndesColor(),
                 state = AndesThumbnailState.ENABLED,
                 size = AndesThumbnailSize.SIZE_56,
                 image = drawable)
@@ -93,7 +93,7 @@ class AndesThumbnailTest {
                 context = context,
                 type = AndesThumbnailType.IMAGE_CIRCLE,
                 hierarchy = AndesThumbnailHierarchy.LOUD,
-                accentColor = R.color.andes_blue_ml_500.toAndesColor(),
+                accentColor = R.color.andes_accent_color_500.toAndesColor(),
                 state = AndesThumbnailState.ENABLED,
                 size = AndesThumbnailSize.SIZE_56,
                 image = drawable)
@@ -116,7 +116,7 @@ class AndesThumbnailTest {
                 context = context,
                 type = AndesThumbnailType.IMAGE_SQUARE,
                 hierarchy = AndesThumbnailHierarchy.QUIET,
-                accentColor = R.color.andes_blue_ml_500.toAndesColor(),
+                accentColor = R.color.andes_accent_color_500.toAndesColor(),
                 state = AndesThumbnailState.ENABLED,
                 size = AndesThumbnailSize.SIZE_56,
                 image = drawable)
