@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.bottomsheet
 
+import android.content.res.Resources
 import android.os.Build
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.fragment.app.Fragment
@@ -7,8 +8,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetContentMargin
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetState
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
 import com.nhaarman.mockitokotlin2.anyOrNull
@@ -250,6 +254,39 @@ class AndesBottomSheetTest {
     }
 
     @Test
+    fun `container margin should not have horizontal margins`() {
+        val mockContainer = mock(FrameLayout::class.java)
+        val marginParams = ViewGroup.MarginLayoutParams(ZERO, ZERO)
+        val mockResource = mock(Resources::class.java)
+        `when`(mockContainer.layoutParams).thenReturn(marginParams)
+        `when`(mockResource.getDimension(R.dimen.andes_bottom_sheet_title_bottom_margin)).thenReturn(ZERO_FLOAT)
+        FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("frameView"), mockContainer)
+
+        val margins = AndesBottomSheetContentMargin.NO_HORIZONTAL_MARGINS.margins.getMargins(mockResource)
+        marginParams.setMargins(margins.leftMils, margins.topMils, margins.rightMils, margins.bottomMils)
+        andesBottomSheet.setContentMargin(AndesBottomSheetContentMargin.NO_HORIZONTAL_MARGINS)
+
+        verify(mockContainer).setLayoutParams(marginParams)
+    }
+
+    @Test
+    fun `container margin should have default margins`() {
+        val mockContainer = mock(FrameLayout::class.java)
+        val marginParams = ViewGroup.MarginLayoutParams(ZERO, ZERO)
+        val mockResource = mock(Resources::class.java)
+        `when`(mockContainer.layoutParams).thenReturn(marginParams)
+        `when`(mockResource.getDimension(R.dimen.andes_bottom_sheet_title_bottom_margin)).thenReturn(ZERO_FLOAT)
+        `when`(mockResource.getDimension(R.dimen.andes_bottom_sheet_default_margin)).thenReturn(ZERO_FLOAT)
+        FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("frameView"), mockContainer)
+
+        val margins = AndesBottomSheetContentMargin.DEFAULT.margins.getMargins(mockResource)
+        marginParams.setMargins(margins.leftMils, margins.topMils, margins.rightMils, margins.bottomMils)
+        andesBottomSheet.setContentMargin(AndesBottomSheetContentMargin.DEFAULT)
+
+        verify(mockContainer).setLayoutParams(marginParams)
+    }
+
+    @Test
     fun `title alignment left should show it left`() {
         val mockTextView = mock(TextView::class.java)
         FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("titleTextView"), mockTextView)
@@ -292,6 +329,8 @@ class AndesBottomSheetTest {
     }
 
     companion object {
+        private const val ZERO = 0
+        private const val ZERO_FLOAT = 0f
         private const val DEFAULT_PEEK_HEIGHT = 0
         private val DEFAULT_BOTTOM_SHEET_STATE = AndesBottomSheetState.COLLAPSED
     }

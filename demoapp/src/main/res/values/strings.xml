@@ -141,6 +141,7 @@
     <string name="andes_bottom_sheet_text_field">New peek height</string>
     <string name="andes_bottom_sheet_set_button">Set</string>
     <string name="andes_bottom_sheet_fit_content_button">Toggle Fit Content</string>
+    <string name="andes_bottom_sheet_set_content_button">Toggle Margin</string>
     <string name="andes_bottom_sheet_dummy_view">This is a dummy view</string>
 
 

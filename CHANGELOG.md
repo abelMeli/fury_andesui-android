@@ -1,5 +1,6 @@
 # v3.25.0
 ## 🚀 Feature
+- AndesBottomSheet content horizontal margin setter. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 - AndesRadioButton accessibility support | Author: [@juanunzu](https://github.com/juanunzu)
 - Added guide for the use of the new Andes Template Plugin for the generation of new components | Author: [@juanunzu](https://github.com/juanunzu)
 ## 🛠 Fixes

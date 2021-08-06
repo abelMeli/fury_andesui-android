@@ -19,6 +19,7 @@ import com.mercadolibre.android.andesui.bottomsheet.factory.AndesBottomSheetAttr
 import com.mercadolibre.android.andesui.bottomsheet.factory.AndesBottomSheetAttrsParser
 import com.mercadolibre.android.andesui.bottomsheet.factory.AndesBottomSheetConfiguration
 import com.mercadolibre.android.andesui.bottomsheet.factory.AndesBottomSheetConfigurationFactory
+import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetContentMargin
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetState
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
@@ -258,6 +259,19 @@ class AndesBottomSheet : CoordinatorLayout {
                 .beginTransaction()
                 .replace(frameView.id, fragment)
                 .commit()
+    }
+
+    /**
+     * Set margin in content view
+     * @param contentMargin this could be AndesBottomSheetContentMargin.DEFAULT and you will have
+     * horizontal margins in content. And also this could be AndesBottomSheetContentMargin.NO_HORIZONTAL_MARGINS
+     * and you wont have horizontal margins.
+     */
+    fun setContentMargin(contentMargin: AndesBottomSheetContentMargin) {
+        val params = frameView.layoutParams as MarginLayoutParams
+        val margins = contentMargin.margins.getMargins(resources)
+        params.setMargins(margins.leftMils, margins.topMils, margins.rightMils, margins.bottomMils)
+        frameView.layoutParams = params
     }
 
     /**

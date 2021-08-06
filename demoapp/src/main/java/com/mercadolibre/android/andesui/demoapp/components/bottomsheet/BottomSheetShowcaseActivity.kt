@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.util.CollectionUtils.listOf
 import com.mercadolibre.android.andesui.bottomsheet.AndesBottomSheet
 import com.mercadolibre.android.andesui.bottomsheet.BottomSheetListener
+import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetContentMargin
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
@@ -151,6 +152,17 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
             andesButton.hierarchy = AndesButtonHierarchy.QUIET
         } else {
             bottomSheet.fitContent = true
+            andesButton.hierarchy = AndesButtonHierarchy.LOUD
+        }
+    }
+
+    fun onToggleContentMargin(view: View) {
+        val andesButton = view as AndesButton
+        if (andesButton.hierarchy == AndesButtonHierarchy.LOUD) {
+            bottomSheet.setContentMargin(AndesBottomSheetContentMargin.NO_HORIZONTAL_MARGINS)
+            andesButton.hierarchy = AndesButtonHierarchy.QUIET
+        } else {
+            bottomSheet.setContentMargin(AndesBottomSheetContentMargin.DEFAULT)
             andesButton.hierarchy = AndesButtonHierarchy.LOUD
         }
     }
