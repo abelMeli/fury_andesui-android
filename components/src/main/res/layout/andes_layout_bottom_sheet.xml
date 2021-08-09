@@ -65,6 +65,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
+            <View
+                android:id="@+id/andes_bottom_sheet_content_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/andes_bottom_sheet_shadow_height"
+                android:background="@drawable/andes_sheet_shadow"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@+id/andes_bottom_sheet_frame_view" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

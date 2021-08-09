@@ -287,6 +287,26 @@ class AndesBottomSheetTest {
     }
 
     @Test
+    fun `content shadow should be visible`() {
+        val mockShadow = mock(View::class.java)
+        FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("contentShadow"), mockShadow)
+
+        andesBottomSheet.setContentShadow(true)
+
+        verify(mockShadow).setVisibility(View.VISIBLE)
+    }
+
+    @Test
+    fun `content shadow should be invisible`() {
+        val mockShadow = mock(View::class.java)
+        FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("contentShadow"), mockShadow)
+
+        andesBottomSheet.setContentShadow(false)
+
+        verify(mockShadow).setVisibility(View.GONE)
+    }
+
+    @Test
     fun `title alignment left should show it left`() {
         val mockTextView = mock(TextView::class.java)
         FieldSetter.setField(andesBottomSheet, andesBottomSheet::class.java.getDeclaredField("titleTextView"), mockTextView)

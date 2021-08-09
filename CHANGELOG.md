@@ -1,3 +1,7 @@
+# v3.26.0
+## 🚀 Feature
+- AndesBottomSheet content shadow. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
+
 # v3.25.0
 ## 🚀 Feature
 - AndesBottomSheet content horizontal margin setter. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)

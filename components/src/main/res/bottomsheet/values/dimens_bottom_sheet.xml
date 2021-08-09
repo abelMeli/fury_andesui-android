@@ -15,4 +15,5 @@
     <dimen name="andes_bottom_sheet_title_size">20sp</dimen>
 
     <dimen name="andes_bottom_sheet_default_radius">6dp</dimen>
+    <dimen name="andes_bottom_sheet_shadow_height">20dp</dimen>
 </resources>

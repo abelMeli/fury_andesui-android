@@ -112,6 +112,7 @@ dependencies {
     implementation prod.kotlinStdlib
     implementation prod.supportConstraintLayout
     implementation prod.supportLibraryAppCompatV7
+    implementation prod.supportLibraryDesign
     implementation showcase.coordinatorLayout
 
     implementation prod.fresco

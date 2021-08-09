@@ -167,6 +167,10 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
         }
     }
 
+    fun onToggleContentShadow(isShadow: Boolean) {
+        bottomSheet.setContentShadow(isShadow)
+    }
+
     private fun closeKeyboard(view: View) {
         val inputManager: InputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(view.windowToken, 0)

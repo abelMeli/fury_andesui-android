@@ -82,6 +82,7 @@ class AndesBottomSheet : CoordinatorLayout {
     private lateinit var andesBottomSheetAttrs: AndesBottomSheetAttrs
     private lateinit var containerView: FrameLayout
     private lateinit var dragIndicator: View
+    private lateinit var contentShadow: View
     private lateinit var frameView: FrameLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var titleTextView: TextView
@@ -156,6 +157,7 @@ class AndesBottomSheet : CoordinatorLayout {
         containerView = layout.findViewById(R.id.andes_bottom_sheet_container)
         dragIndicator = layout.findViewById(R.id.andes_bottom_sheet_drag_indicator)
         frameView = layout.findViewById(R.id.andes_bottom_sheet_frame_view)
+        contentShadow = layout.findViewById(R.id.andes_bottom_sheet_content_shadow)
         titleTextView = layout.findViewById(R.id.andes_bottom_sheet_title)
         backgroundDimView = layout.findViewById(R.id.andes_bottom_sheet_background_dim)
     }
@@ -272,6 +274,18 @@ class AndesBottomSheet : CoordinatorLayout {
         val margins = contentMargin.margins.getMargins(resources)
         params.setMargins(margins.leftMils, margins.topMils, margins.rightMils, margins.bottomMils)
         frameView.layoutParams = params
+    }
+
+    /**
+     * Set a shadow on the top of the content. Its designed for scrolling.
+     * @param isVisible if its true the shadow will be visible, if its false the shadow will be gone.
+     */
+    fun setContentShadow(isVisible: Boolean) {
+        contentShadow.visibility = if (isVisible) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 
     /**
