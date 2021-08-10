@@ -1,5 +1,6 @@
 # v3.26.0
 ## 🚀 Feature
+- AndesCheckBox accessibility support | Author: [@eportasML](https://github.com/eportasML)
 - AndesBottomSheet content shadow. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 
 # v3.25.0

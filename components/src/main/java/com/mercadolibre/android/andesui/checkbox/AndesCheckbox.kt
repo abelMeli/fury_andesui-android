@@ -9,7 +9,10 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.CheckBox
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.checkbox.accessibility.AndesCheckboxAccessibilityDelegate
+import com.mercadolibre.android.andesui.checkbox.accessibility.AndesCheckboxAccessibilityEventDispatcher
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxAttrParser
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxAttrs
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxConfiguration
@@ -60,7 +63,10 @@ class AndesCheckbox : ConstraintLayout {
         get() = andesCheckboxAttrs.andesCheckboxType
         set(value) {
             andesCheckboxAttrs = andesCheckboxAttrs.copy(andesCheckboxType = value)
-            setupBackgroundComponent(createConfig())
+            createConfig().also {
+                setupBackgroundComponent(it)
+                setupType(it)
+            }
         }
 
     /**
@@ -85,6 +91,7 @@ class AndesCheckbox : ConstraintLayout {
     private var privateListener: OnClickListener? = null
     private lateinit var andesCheckboxAttrs: AndesCheckboxAttrs
     private lateinit var containerCheckbox: ConstraintLayout
+    private val a11yEventDispatcher by lazy { AndesCheckboxAccessibilityEventDispatcher() }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
@@ -124,15 +131,36 @@ class AndesCheckbox : ConstraintLayout {
 
     private fun setupComponents(config: AndesCheckboxConfiguration) {
         initComponents()
-
-        if (id == NO_ID) { // If this view has no id
-            id = View.generateViewId()
-        }
-
+        setupA11yDelegate()
+        setupAccessibilityNavigation()
+        setupViewId()
         setupTitleComponent(config)
         setupAlignComponent(config)
         setupBackgroundComponent(config)
         setupTitleNumberLinesComponent(config)
+        setupType(config)
+    }
+
+    private fun setupViewId() {
+        if (id == NO_ID) {
+            id = View.generateViewId()
+        }
+    }
+
+    private fun setupA11yDelegate() {
+        accessibilityDelegate = AndesCheckboxAccessibilityDelegate(this)
+    }
+
+    private fun setupAccessibilityNavigation() {
+        isClickable = true
+        isFocusable = true
+        importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+
+        with(containerCheckbox) {
+            isFocusable = false
+            isClickable = false
+            importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        }
     }
 
     /**
@@ -142,11 +170,11 @@ class AndesCheckbox : ConstraintLayout {
     private fun initComponents() {
         val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_checkbox, this)
         containerCheckbox = container.findViewById(R.id.andes_checkbox_container)
-        onCheckedChangeListener(containerCheckbox)
+        onCheckedChangeListener()
     }
 
-    private fun onCheckedChangeListener(view: View) {
-        view.setOnClickListener {
+    private fun onCheckedChangeListener() {
+        setOnClickListener {
             when (type) {
                 AndesCheckboxType.ERROR -> {
                     type = AndesCheckboxType.IDLE
@@ -164,6 +192,7 @@ class AndesCheckbox : ConstraintLayout {
                     setupBackgroundComponent(createConfig())
                 }
             }
+            a11yEventDispatcher.notifyA11yStatusChanged(this@AndesCheckbox, status)
         }
     }
 
@@ -174,7 +203,10 @@ class AndesCheckbox : ConstraintLayout {
         checkboxText.text = config.text
         checkboxText.ellipsize = TextUtils.TruncateAt.END
         checkboxText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        checkboxText.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.andes_checkbox_text_size))
+        checkboxText.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            context.resources.getDimension(R.dimen.andes_checkbox_text_size)
+        )
         checkboxText.setTextColor(config.type.type.textColor(context).colorInt(context))
         setupTitleNumberLinesComponent(config)
     }
@@ -209,11 +241,19 @@ class AndesCheckbox : ConstraintLayout {
         // Background
         shape.setColor(config.type.type.backgroundColor(context, config.status).colorInt(context))
         // Icon
-        val icon = config.status.status.icon(context, config.type.type.iconColor(context, config.status))
+        val icon =
+            config.status.status.icon(context, config.type.type.iconColor(context, config.status))
         leftCheckboxIcon.setImageDrawable(icon)
         rightCheckboxIcon.setImageDrawable(icon)
         leftCheckbox.background = shape
         rightCheckbox.background = shape
+    }
+
+    /**
+     * Sets component enable state in order to handle accessibility properly.
+     */
+    private fun setupType(config: AndesCheckboxConfiguration) {
+        isEnabled = config.type != AndesCheckboxType.DISABLED
     }
 
     /**
@@ -224,6 +264,13 @@ class AndesCheckbox : ConstraintLayout {
     }
 
     private fun createConfig() = AndesCheckboxConfigurationFactory.create(andesCheckboxAttrs)
+
+    /**
+     * Overrides accessibility view role.
+     */
+    override fun getAccessibilityClassName(): CharSequence {
+        return CheckBox::class.java.name
+    }
 
     companion object {
         private val ANDES_ALIGN_DEFAULT_VALUE = AndesCheckboxAlign.LEFT

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_checkbox_type_error">Erro</string>
+    <string name="andes_checkbox_status_undefined">Indeterminado</string>
+    <string name="andes_checkbox_status_selected">Ativado</string>
+    <string name="andes_checkbox_status_unselected">Desativado</string>
+    <string name="andes_checkbox_action_click_unselect">desativar</string>
+    <string name="andes_checkbox_action_click_select">ativar</string>
+</resources>
