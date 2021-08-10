@@ -30,7 +30,8 @@ internal class AnalyticsHelper {
             "ThumbnailShowcaseActivity" to "AndesThumbnail",
             "TimePickerShowcaseActivity" to "AndesTimePicker",
             "TooltipShowcaseActivity" to "AndesTooltip",
-            "SwitchShowcaseActivity" to "SwitchTooltip"
+            "SwitchShowcaseActivity" to "AndesSwitch",
+            "TabsShowcaseActivity" to "AndesTabs"
     )
 
     private val screens = mapOf(
@@ -61,7 +62,8 @@ internal class AnalyticsHelper {
             "ThumbnailShowcaseActivity" to arrayListOf("/thumbnail/dynamic", "/thumbnail/static"),
             "TimePickerShowcaseActivity" to arrayListOf("/timepicker/dynamic", "/timepicker/static"),
             "TooltipShowcaseActivity" to arrayListOf("/tooltip/dynamic", "/tooltip/static"),
-            "SwitchShowcaseActivity" to arrayListOf("/switch/dynamic", "/switch/static")
+            "SwitchShowcaseActivity" to arrayListOf("/switch/dynamic", "/switch/static"),
+            "TabsShowcaseActivity" to arrayListOf("/tabs/dynamic", "/tabs/static")
     )
 
     fun getPath(className: String, position: Int): String? {

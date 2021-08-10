@@ -35,6 +35,7 @@
     <string name="andes_demoapp_screen_message">Andes UI: Message</string>
     <string name="andes_demoapp_screen_badge">Andes UI: Badge</string>
     <string name="andes_demoapp_screen_tag">Andes UI: Tag</string>
+    <string name="andes_demoapp_screen_tabs">Andes UI: Tabs</string>
     <string name="andes_demoapp_screen_switch">Andes UI: Switch</string>
     <string name="andes_demoapp_screen_list">Andes UI: List</string>
     <string name="andes_demoapp_screen_dropdown">Andes UI: Dropdown</string>
@@ -462,6 +463,22 @@
         <item>Rounded</item>
     </string-array>
 
+    <!-- Andes Tabs -->
+    <string name="andes_tabs_showcase">Andes Tabs</string>
+    <string name="andes_tabs_simple">Tabs</string>
+    <string name="andes_tabs_showcase_left_align">Left align</string>
+    <string name="andes_tabs_showcase_full_width">Full width</string>
+    <string name="andes_tabs_dynamic_message" translatable="false">They allow you to organize content by grouping information into different sections. Sections are displayed one at a time headed by precise and concise labels.</string>
+    <string-array name="andes_tabs_spinner_type">
+        <item>Full width</item>
+        <item>Left align</item>
+    </string-array>
+    <string-array name="andes_tabs_spinner_callback">
+        <item>None</item>
+        <item>Select</item>
+        <item>Unselect</item>
+        <item>Reselect</item>
+    </string-array>
 
     <!-- Andes Textfield -->
     <string name="andes_textfield">Andes Textfield</string>

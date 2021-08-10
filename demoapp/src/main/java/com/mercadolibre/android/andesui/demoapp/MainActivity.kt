@@ -50,9 +50,6 @@ class MainActivity : AppCompatActivity() {
         andesui_snackbar.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/snackbar"))
         }
-        andesui_tags.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/tag"))
-        }
         andesui_badges.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/badge"))
         }
@@ -91,6 +88,12 @@ class MainActivity : AppCompatActivity() {
         }
         andesui_floatingmenu.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/floatingmenu"))
+        }
+        andesui_tags.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/tag"))
+        }
+        andesui_tabs.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/tabs"))
         }
         andesui_timepicker.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/timepicker"))

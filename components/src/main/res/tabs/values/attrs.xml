@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="AndesTabs" tools:ignore="ResourceName">
+        <attr name="andesTabsType">
+            <enum name="full_width" value="1000" />
+            <enum name="left_align" value="1001" />
+        </attr>
+    </declare-styleable>
+
+</resources>

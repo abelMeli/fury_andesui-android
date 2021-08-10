@@ -20,12 +20,12 @@ enum class AndesTextfieldState {
 
     internal val state get() = getAndesTextfieldState()
 
-        private fun getAndesTextfieldState(): AndesTextfieldStateInterface {
-            return when (this) {
-                IDLE -> AndesIdleTextfieldState
-                ERROR -> AndesErrorTextfieldState
-                DISABLED -> AndesDisabledTextfieldState
-                READONLY -> AndesReadonlyTextfieldState
-            }
+    private fun getAndesTextfieldState(): AndesTextfieldStateInterface {
+        return when (this) {
+            IDLE -> AndesIdleTextfieldState
+            ERROR -> AndesErrorTextfieldState
+            DISABLED -> AndesDisabledTextfieldState
+            READONLY -> AndesReadonlyTextfieldState
         }
     }
+}

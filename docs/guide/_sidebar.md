@@ -9,6 +9,7 @@
   * [AndesFloatingMenu](/floatingmenu/AndesFloatingMenu.md)
   * [AndesSnackbar](/snackbar/AndesSnackbar.md)
   * [AndesSwitch](/switch/AndesSwitch.md)
+  * [AndesTabs](/tabs/AndesTabs.md)
   * [AndesThumbnail](/thumbnail/AndesThumbnail.md)
   * [AndesTooltip](/tooltip/AndesTooltip.md)
 - Utils

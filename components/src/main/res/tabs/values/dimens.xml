@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andes_tabs_container_height">48dp</dimen>
+    <dimen name="andes_tabs_text_size">14sp</dimen>
+    <dimen name="andes_tab_item_padding_horizontal">16dp</dimen>
+    <dimen name="andes_tab_indicator_height">3dp</dimen>
+    <dimen name="andes_tab_indicator_corner">3dp</dimen>
+</resources>
