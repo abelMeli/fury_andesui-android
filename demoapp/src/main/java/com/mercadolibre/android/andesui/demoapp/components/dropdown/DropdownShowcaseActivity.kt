@@ -49,7 +49,7 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
     private lateinit var viewPager: CustomViewPager
 
     companion object {
-        private const val DROP_DOWN_ITEMS_COUNT = 10
+        private const val DROP_DOWN_ITEMS_COUNT = 100
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
