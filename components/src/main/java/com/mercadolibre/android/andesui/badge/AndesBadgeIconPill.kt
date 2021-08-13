@@ -67,17 +67,10 @@ class AndesBadgeIconPill : ConstraintLayout {
         containerView = LayoutInflater.from(context).inflate(R.layout.andes_layout_badge_icon_pill, this)
         imageViewContainer = containerView.findViewById(R.id.badge_icon_pill_image_view)
         setupDrawable(config)
-        setupA11y()
     }
 
     private fun setupDrawable(config: AndesBadgeIconPillConfiguration) {
         imageViewContainer.setImageDrawable(config.icon)
-    }
-
-    private fun setupA11y() {
-        importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
-        isFocusable = false
-        contentDescription = null
     }
 
     private fun createConfig() = AndesBadgeIconPillConfigurationFactory.create(context, andesBadgeIconPillAttrs)
