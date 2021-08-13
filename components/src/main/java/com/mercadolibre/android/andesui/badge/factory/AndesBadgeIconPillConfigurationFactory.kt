@@ -17,7 +17,10 @@ internal object AndesBadgeIconPillConfigurationFactory {
             return AndesBadgeIconPillConfiguration(
                 backgroundColor = andesBadgeType.type.primaryColor(),
                 size = andesBadgeSize.size.height(context),
-                icon = andesBadgeType.type.icon(context, andesBadgeSize)
+                icon = andesBadgeType.type.icon(
+                    context,
+                    andesBadgeSize,
+                    andesBadgeType.type.primaryColor().colorInt(context))
             )
         }
     }
