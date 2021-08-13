@@ -75,6 +75,5 @@ class AndesBadgeIconPillTest {
 
         Assert.assertEquals(defaultType, andesBadgeIconPill.type)
         Assert.assertEquals(defaultSize, andesBadgeIconPill.size)
-
     }
 }
