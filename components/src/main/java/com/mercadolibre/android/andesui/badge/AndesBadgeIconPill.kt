@@ -77,7 +77,6 @@ class AndesBadgeIconPill : ConstraintLayout {
         contentDescription = null
     }
 
-
     private fun createConfig() = AndesBadgeIconPillConfigurationFactory.create(context, andesBadgeIconPillAttrs)
 
     companion object {
