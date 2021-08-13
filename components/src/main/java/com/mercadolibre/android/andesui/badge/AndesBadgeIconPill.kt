@@ -27,6 +27,9 @@ class AndesBadgeIconPill : ConstraintLayout {
             setupDrawable(createConfig())
         }
 
+    /**
+     * Getter and setter for [size].
+     */
     var size: AndesBadgePillSize
         get() = andesBadgeIconPillAttrs.andesBadgeSize
         set(value) {
@@ -38,7 +41,7 @@ class AndesBadgeIconPill : ConstraintLayout {
     private lateinit var containerView: View
     private lateinit var imageViewContainer: ImageView
 
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
     }
 
@@ -46,7 +49,7 @@ class AndesBadgeIconPill : ConstraintLayout {
         context: Context,
         type: AndesBadgeType = TYPE_DEFAULT,
         size: AndesBadgePillSize = SIZE_DEFAULT
-    ): super(context) {
+    ) : super(context) {
         initAttrs(type, size)
     }
 

@@ -18,6 +18,5 @@ internal object AndesBadgeIconPillConfigurationFactory {
                     andesBadgeType.type.primaryColor().colorInt(context))
             )
         }
-
     }
 }

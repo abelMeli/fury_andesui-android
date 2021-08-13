@@ -24,7 +24,7 @@ internal object AndesBadgeIconPillAttrsParser {
     fun parse(context: Context, attrs: AttributeSet?): AndesBadgeIconPillAttrs {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.AndesBadgeIconPill)
 
-        val type = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillType, 2001)) {
+        val type = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillType, ANDES_BADGE_TYPE_HIGHLIGHT)) {
             ANDES_BADGE_TYPE_HIGHLIGHT -> AndesBadgeType.HIGHLIGHT
             ANDES_BADGE_TYPE_SUCCESS -> AndesBadgeType.SUCCESS
             ANDES_BADGE_TYPE_WARNING -> AndesBadgeType.WARNING
@@ -32,7 +32,7 @@ internal object AndesBadgeIconPillAttrsParser {
             else -> AndesBadgeType.HIGHLIGHT
         }
 
-        val size = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillSize, 3001)) {
+        val size = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillSize, ANDES_BADGE_SIZE_SMALL)) {
             ANDES_BADGE_SIZE_LARGE -> AndesBadgePillSize.LARGE
             ANDES_BADGE_SIZE_SMALL -> AndesBadgePillSize.SMALL
             else -> AndesBadgePillSize.SMALL
