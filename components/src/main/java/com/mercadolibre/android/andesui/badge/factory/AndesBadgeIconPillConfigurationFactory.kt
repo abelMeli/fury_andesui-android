@@ -14,9 +14,10 @@ internal object AndesBadgeIconPillConfigurationFactory {
             return AndesBadgeIconPillConfiguration(
                 icon = andesBadgeType.type.icon(
                     context,
-                    andesBadgeSize,
+                    andesBadgeSize.size.height(context).toInt(),
                     andesBadgeType.type.primaryColor().colorInt(context))
             )
         }
+
     }
 }

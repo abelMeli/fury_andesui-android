@@ -31,7 +31,7 @@ internal interface AndesBadgeTypeInterface {
      */
     fun secondaryColor(): AndesColor
 
-    fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable? = null
+    fun icon(context: Context, size: Int, backgroundColor: Int): Drawable? = null
 }
 
 internal class AndesNeutralBadgeType : AndesBadgeTypeInterface {
@@ -42,47 +42,47 @@ internal class AndesNeutralBadgeType : AndesBadgeTypeInterface {
 internal class AndesHighlightBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_accent_color_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_accent_color_100.toAndesColor()
-    override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
+    override fun icon(context: Context, size: Int, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
         IconProvider(context).loadIcon("andes_ui_feedback_info_16") as BitmapDrawable,
         context,
         R.color.andes_white.toAndesColor(),
         backgroundColor,
-        size.size.height(context).toInt()
+        size
     )
 }
 
 internal class AndesSuccessBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_green_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_green_100.toAndesColor()
-    override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
+    override fun icon(context: Context, size: Int, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
         IconProvider(context).loadIcon("andes_ui_feedback_success_16") as BitmapDrawable,
         context,
         R.color.andes_white.toAndesColor(),
         backgroundColor,
-        size.size.height(context).toInt()
+        size
     )
 }
 
 internal class AndesWarningBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_orange_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_orange_100.toAndesColor()
-    override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
+    override fun icon(context: Context, size: Int, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
         IconProvider(context).loadIcon("andes_ui_feedback_warning_16") as BitmapDrawable,
         context,
         R.color.andes_white.toAndesColor(),
         backgroundColor,
-        size.size.height(context).toInt()
+        size
     )
 }
 
 internal class AndesErrorBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_red_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_red_100.toAndesColor()
-    override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
+    override fun icon(context: Context, size: Int, backgroundColor: Int): Drawable = buildColoredCircularShapeWithIconDrawable(
         IconProvider(context).loadIcon("andes_ui_feedback_warning_16") as BitmapDrawable,
         context,
         R.color.andes_white.toAndesColor(),
         backgroundColor,
-        size.size.height(context).toInt()
+        size
     )
 }
