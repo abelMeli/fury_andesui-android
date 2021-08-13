@@ -5,6 +5,7 @@
     <dimen name="button_margin_vertical">16dp</dimen>
     <dimen name="button_margin_vertical_2x">32dp</dimen>
     <dimen name="badge_margin_vertical">4dp</dimen>
+    <dimen name="badge_icon_margin_vertical">14dp</dimen>
 
     <dimen name="margin_vertical_text_field">16dp</dimen>
     <dimen name="margin_horizontal_text_field">16dp</dimen>

@@ -76,6 +76,9 @@
     <string name="andes_badge_pill">Pill</string>
     <string name="andes_badge_other">Other cases</string>
     <string name="andes_badge_dot">Dot</string>
+    <string name="andes_badge_icon_pill">Icon Pill</string>
+    <string name="andes_badge_icon_size_large">Size: Large</string>
+    <string name="andes_badge_icon_size_small">Size: Small</string>
     <string name="andes_badge_error">error</string>
     <string name="andes_badge_warning">warning</string>
     <string name="andes_badge_success">success</string>
