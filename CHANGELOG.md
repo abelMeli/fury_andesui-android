@@ -1,5 +1,6 @@
 # v3.26.0
 ## 🚀 Feature
+- New badge variant: AndesBadgeIconPill | Author: [@juanunzu](https://github.com/juanunzu)
 - Changes in AndesDropDownForm BOTTOMSHEET variant to comply with a11y navigation through the internal list | Author: [@juanunzu](https://github.com/juanunzu)
 - AndesCheckBox accessibility support | Author: [@eportasML](https://github.com/eportasML)
 - AndesBottomSheet content shadow. | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
