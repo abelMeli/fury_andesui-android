@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.badge.icontype
 
-import com.mercadolibre.android.andesui.badge.type.*
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeTypeInterface
 import com.mercadolibre.android.andesui.badge.type.AndesErrorBadgeType
 import com.mercadolibre.android.andesui.badge.type.AndesHighlightBadgeType
