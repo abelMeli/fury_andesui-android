@@ -3,8 +3,8 @@ package com.mercadolibre.android.andesui.badge
 import android.content.Context
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
+import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
-import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -27,7 +27,7 @@ class AndesBadgeIconPillTest {
 
     @Test
     fun `creating new badge with all parameters set by constructor`() {
-        val type = AndesBadgeType.SUCCESS
+        val type = AndesBadgeIconType.SUCCESS
         val size = AndesBadgePillSize.LARGE
 
         andesBadgeIconPill = AndesBadgeIconPill(
@@ -42,7 +42,7 @@ class AndesBadgeIconPillTest {
 
     @Test
     fun `creating new badge with parameters by default`() {
-        val defaultType = AndesBadgeType.HIGHLIGHT
+        val defaultType = AndesBadgeIconType.HIGHLIGHT
         val defaultSize = AndesBadgePillSize.SMALL
 
         andesBadgeIconPill = AndesBadgeIconPill(context)
@@ -53,7 +53,7 @@ class AndesBadgeIconPillTest {
 
     @Test
     fun `creating new badge with parameters set by setter`() {
-        val type = AndesBadgeType.ERROR
+        val type = AndesBadgeIconType.ERROR
         val size = AndesBadgePillSize.LARGE
 
         andesBadgeIconPill = AndesBadgeIconPill(context)
@@ -67,7 +67,7 @@ class AndesBadgeIconPillTest {
 
     @Test
     fun `creating new badge with default parameters from xml constructor`() {
-        val defaultType = AndesBadgeType.HIGHLIGHT
+        val defaultType = AndesBadgeIconType.HIGHLIGHT
         val defaultSize = AndesBadgePillSize.SMALL
         val attrs = Robolectric.buildAttributeSet().build()
 

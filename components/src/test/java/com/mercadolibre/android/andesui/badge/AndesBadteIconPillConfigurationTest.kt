@@ -5,8 +5,8 @@ import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillAttrs
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillConfigurationFactory
+import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
-import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -29,10 +29,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `SMALL, HIGHLIGHT`() {
-        val type = AndesBadgeType.HIGHLIGHT
+        val type = AndesBadgeIconType.HIGHLIGHT
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.HIGHLIGHT
+        val iconDrawable = AndesBadgeIconType.HIGHLIGHT
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
@@ -42,10 +42,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `SMALL, SUCCESS`() {
-        val type = AndesBadgeType.SUCCESS
+        val type = AndesBadgeIconType.SUCCESS
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.SUCCESS
+        val iconDrawable = AndesBadgeIconType.SUCCESS
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
@@ -55,10 +55,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `SMALL, WARNING`() {
-        val type = AndesBadgeType.WARNING
+        val type = AndesBadgeIconType.WARNING
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.WARNING
+        val iconDrawable = AndesBadgeIconType.WARNING
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
@@ -69,10 +69,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `SMALL, ERROR`() {
-        val type = AndesBadgeType.ERROR
+        val type = AndesBadgeIconType.ERROR
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.ERROR
+        val iconDrawable = AndesBadgeIconType.ERROR
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
@@ -83,10 +83,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `LARGE, HIGHLIGHT`() {
-        val type = AndesBadgeType.HIGHLIGHT
+        val type = AndesBadgeIconType.HIGHLIGHT
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.HIGHLIGHT
+        val iconDrawable = AndesBadgeIconType.HIGHLIGHT
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
@@ -97,10 +97,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `LARGE, SUCCESS`() {
-        val type = AndesBadgeType.SUCCESS
+        val type = AndesBadgeIconType.SUCCESS
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.SUCCESS
+        val iconDrawable = AndesBadgeIconType.SUCCESS
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
@@ -111,10 +111,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `LARGE, WARNING`() {
-        val type = AndesBadgeType.WARNING
+        val type = AndesBadgeIconType.WARNING
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.WARNING
+        val iconDrawable = AndesBadgeIconType.WARNING
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
@@ -125,10 +125,10 @@ class AndesBadteIconPillConfigurationTest {
 
     @Test
     fun `LARGE, ERROR`() {
-        val type = AndesBadgeType.ERROR
+        val type = AndesBadgeIconType.ERROR
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
-        val iconDrawable = AndesBadgeType.ERROR
+        val iconDrawable = AndesBadgeIconType.ERROR
             .type
             .icon(context, size.size.height(context).toInt(), type.type.primaryColor().colorInt(context))
 
