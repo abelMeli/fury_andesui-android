@@ -3,20 +3,20 @@ package com.mercadolibre.android.andesui.badge.factory
 import android.content.Context
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
-import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 
 internal data class AndesBadgeIconPillAttrs(
-    val andesBadgeType: AndesBadgeType,
+    val andesBadgeType: AndesBadgeIconType,
     val andesBadgeSize: AndesBadgePillSize
 )
 
 internal object AndesBadgeIconPillAttrsParser {
 
-    private const val ANDES_BADGE_TYPE_HIGHLIGHT = 2001
-    private const val ANDES_BADGE_TYPE_SUCCESS = 2002
-    private const val ANDES_BADGE_TYPE_WARNING = 2003
-    private const val ANDES_BADGE_TYPE_ERROR = 2004
+    private const val ANDES_BADGE_ICON_TYPE_HIGHLIGHT = 2001
+    private const val ANDES_BADGE_ICON_TYPE_SUCCESS = 2002
+    private const val ANDES_BADGE_ICON_TYPE_WARNING = 2003
+    private const val ANDES_BADGE_ICON_TYPE_ERROR = 2004
 
     private const val ANDES_BADGE_SIZE_LARGE = 3000
     private const val ANDES_BADGE_SIZE_SMALL = 3001
@@ -24,12 +24,12 @@ internal object AndesBadgeIconPillAttrsParser {
     fun parse(context: Context, attrs: AttributeSet?): AndesBadgeIconPillAttrs {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.AndesBadgeIconPill)
 
-        val type = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillType, ANDES_BADGE_TYPE_HIGHLIGHT)) {
-            ANDES_BADGE_TYPE_HIGHLIGHT -> AndesBadgeType.HIGHLIGHT
-            ANDES_BADGE_TYPE_SUCCESS -> AndesBadgeType.SUCCESS
-            ANDES_BADGE_TYPE_WARNING -> AndesBadgeType.WARNING
-            ANDES_BADGE_TYPE_ERROR -> AndesBadgeType.ERROR
-            else -> AndesBadgeType.HIGHLIGHT
+        val type = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillType, ANDES_BADGE_ICON_TYPE_HIGHLIGHT)) {
+            ANDES_BADGE_ICON_TYPE_HIGHLIGHT -> AndesBadgeIconType.HIGHLIGHT
+            ANDES_BADGE_ICON_TYPE_SUCCESS -> AndesBadgeIconType.SUCCESS
+            ANDES_BADGE_ICON_TYPE_WARNING -> AndesBadgeIconType.WARNING
+            ANDES_BADGE_ICON_TYPE_ERROR -> AndesBadgeIconType.ERROR
+            else -> AndesBadgeIconType.HIGHLIGHT
         }
 
         val size = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillSize, ANDES_BADGE_SIZE_SMALL)) {

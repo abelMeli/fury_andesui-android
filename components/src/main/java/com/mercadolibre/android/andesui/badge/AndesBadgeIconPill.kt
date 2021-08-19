@@ -11,16 +11,15 @@ import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillAttrs
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillAttrsParser
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillConfiguration
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillConfigurationFactory
+import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
-
-import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 
 class AndesBadgeIconPill : ConstraintLayout {
 
     /**
      * Getter and setter for [type].
      */
-    var type: AndesBadgeType
+    var type: AndesBadgeIconType
         get() = andesBadgeIconPillAttrs.andesBadgeType
         set(value) {
             andesBadgeIconPillAttrs = andesBadgeIconPillAttrs.copy(andesBadgeType = value)
@@ -47,7 +46,7 @@ class AndesBadgeIconPill : ConstraintLayout {
 
     constructor(
         context: Context,
-        type: AndesBadgeType = TYPE_DEFAULT,
+        type: AndesBadgeIconType = TYPE_DEFAULT,
         size: AndesBadgePillSize = SIZE_DEFAULT
     ) : super(context) {
         initAttrs(type, size)
@@ -58,7 +57,7 @@ class AndesBadgeIconPill : ConstraintLayout {
         setupComponents(createConfig())
     }
 
-    private fun initAttrs(type: AndesBadgeType, size: AndesBadgePillSize) {
+    private fun initAttrs(type: AndesBadgeIconType, size: AndesBadgePillSize) {
         andesBadgeIconPillAttrs = AndesBadgeIconPillAttrs(type, size)
         setupComponents(createConfig())
     }
@@ -77,6 +76,6 @@ class AndesBadgeIconPill : ConstraintLayout {
 
     companion object {
         private val SIZE_DEFAULT = AndesBadgePillSize.SMALL
-        private val TYPE_DEFAULT = AndesBadgeType.HIGHLIGHT
+        private val TYPE_DEFAULT = AndesBadgeIconType.HIGHLIGHT
     }
 }
