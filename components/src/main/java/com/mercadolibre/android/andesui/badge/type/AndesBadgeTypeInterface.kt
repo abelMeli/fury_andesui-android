@@ -43,11 +43,8 @@ internal class AndesHighlightBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_accent_color_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_accent_color_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
-        val icon = if (size == AndesBadgePillSize.SMALL) {
-            IconProvider(context).loadIcon(ICON_16) as BitmapDrawable
-        } else {
-            IconProvider(context).loadIcon(ICON_24) as BitmapDrawable
-        }
+        val iconPath = if (size == AndesBadgePillSize.SMALL) ICON_16 else ICON_24
+        val icon = IconProvider(context).loadIcon(iconPath) as BitmapDrawable
         return buildColoredCircularShapeWithIconDrawable(
                 icon,
                 context,
@@ -67,11 +64,8 @@ internal class AndesSuccessBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_green_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_green_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
-        val icon = if (size == AndesBadgePillSize.SMALL) {
-            IconProvider(context).loadIcon(ICON_16) as BitmapDrawable
-        } else {
-            IconProvider(context).loadIcon(ICON_24) as BitmapDrawable
-        }
+        val iconPath = if (size == AndesBadgePillSize.SMALL) ICON_16 else ICON_24
+        val icon = IconProvider(context).loadIcon(iconPath) as BitmapDrawable
         return buildColoredCircularShapeWithIconDrawable(
                 icon,
                 context,
@@ -91,11 +85,8 @@ internal class AndesWarningBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_orange_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_orange_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
-        val icon = if (size == AndesBadgePillSize.SMALL) {
-            IconProvider(context).loadIcon(ICON_16) as BitmapDrawable
-        } else {
-            IconProvider(context).loadIcon(ICON_24) as BitmapDrawable
-        }
+        val iconPath = if (size == AndesBadgePillSize.SMALL) ICON_16 else ICON_24
+        val icon = IconProvider(context).loadIcon(iconPath) as BitmapDrawable
         return buildColoredCircularShapeWithIconDrawable(
                 icon,
                 context,
@@ -115,11 +106,8 @@ internal class AndesErrorBadgeType : AndesBadgeTypeInterface {
     override fun primaryColor() = R.color.andes_red_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_red_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
-        val icon = if (size == AndesBadgePillSize.SMALL) {
-            IconProvider(context).loadIcon(ICON_16) as BitmapDrawable
-        } else {
-            IconProvider(context).loadIcon(ICON_24) as BitmapDrawable
-        }
+        val iconPath = if (size == AndesBadgePillSize.SMALL) ICON_16 else ICON_24
+        val icon = IconProvider(context).loadIcon(iconPath) as BitmapDrawable
         return buildColoredCircularShapeWithIconDrawable(
                 icon,
                 context,
