@@ -38,4 +38,19 @@
             <enum name="error" value="2004" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="AndesBadgeIconPill" tools:ignore="ResourceName">
+        <attr name="andesBadgeIconPillType">
+            <enum name="highlight" value="2001" />
+            <enum name="success" value="2002" />
+            <enum name="warning" value="2003" />
+            <enum name="error" value="2004" />
+        </attr>
+
+        <attr name="andesBadgeIconPillSize">
+            <enum name="large" value="3000" />
+            <enum name="small" value="3001" />
+        </attr>
+    </declare-styleable>
+
 </resources>
