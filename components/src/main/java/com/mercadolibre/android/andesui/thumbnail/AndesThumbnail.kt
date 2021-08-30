@@ -179,9 +179,8 @@ class AndesThumbnail : FrameLayout {
         if (config.hasBorder) {
             val borderSize = resources.getDimension(R.dimen.andes_thumbnail_icon_border)
             shape.setStroke(borderSize.toInt(), config.borderColor.colorIntToAlpha(context))
-        } else {
-            shape.setColor(config.backgroundColor.colorIntToAlpha(context))
         }
+        shape.setColor(config.backgroundColor.colorIntToAlpha(context))
 
         background = shape
         setupBackgroundSize(config.size, config.cornerRadius)

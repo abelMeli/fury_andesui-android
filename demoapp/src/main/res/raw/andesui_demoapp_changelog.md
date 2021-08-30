@@ -2,6 +2,8 @@
 ## 🚀 Feature
 - Badge variant documentation: AndesBadgeIconPill | Author: [@eportasML](https://github.com/eportasML)
 - ThumbnailBadge component | Author: [@eportasML](https://github.com/eportasML)
+## 🛠 Fixes
+- AndesThumbnail variant Icon - Default background color | Author: [@eportasML](https://github.com/eportasML)
 
 # v3.27.0
 ## 🚀 Feature
