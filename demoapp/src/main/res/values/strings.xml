@@ -700,6 +700,16 @@
     <string name="andes_timepicker_static_helper_text" translatable="false">Helper Text</string>
     <string name="andes_timepicker_static_current_time_disabled" translatable="false">13:00</string>
     <string name="andes_timepicker_static_current_time_readonly" translatable="false">04:00</string>
+    <string name="andes_thumbnail_badge_type" translatable="false">Thumbnail Type</string>
+    <string name="andes_thumbnail_badge_component" translatable="false">Badge Component</string>
+    <string name="andes_thumbnail_badge_component_type" translatable="false">Badge Type</string>
+    <string name="thumbnail_badge_pill_text_style" translatable="false">Text in CAPS</string>
+    <string name="andes_thumbnail_badge_size" translatable="false">Thumbnail Size</string>
+    <string name="andes_thumbnail_badge_pill_text" translatable="false">Pill text</string>
+    <string name="andes_thumbnail_badge_pill_text_sample" translatable="false">9</string>
+    <string name="description_text_size_thumbnail_badge_dot" translatable="false">BadgeComponent: Dot, Type: Image Circle, Size: 32, BadgeType: Error</string>
+    <string name="description_text_size_thumbnail_badge_icon_pill" translatable="false">BadgeComponent: Icon Pill, Type: Icon, Size: 48, BadgeType: Highlight</string>
+    <string name="description_text_size_thumbnail_badge_pill" translatable="false">BadgeComponent: Pill, Type: Icon, Size: 56, BadgeType: Highlight</string>
 
     <string-array name="andes_timepicker_spinner_state">
         <item>Idle</item>
@@ -712,5 +722,36 @@
         <item>60 minutes</item>
     </string-array>
 
+    <string-array name="andes_thumbnail_badge_type_spinner">
+        <item>Icon</item>
+        <item>Image Circle</item>
+    </string-array>
+
+    <string-array name="andes_thumbnail_badge_component_spinner">
+        <item>Icon Pill</item>
+        <item>Pill</item>
+        <item>Dot</item>
+    </string-array>
+
+    <string-array name="andes_thumbnail_badge_component_type_spinner">
+        <item>Highlight</item>
+        <item>Success</item>
+        <item>Warning</item>
+        <item>Error</item>
+    </string-array>
+
+    <string-array name="andes_thumbnail_badge_pill_size_spinner">
+        <item>Size 40</item>
+        <item>Size 48</item>
+        <item>Size 56</item>
+        <item>Size 64</item>
+        <item>Size 72</item>
+        <item>Size 80</item>
+    </string-array>
+
+    <string-array name="andes_thumbnail_badge_dot_size_spinner">
+        <item>Size 24</item>
+        <item>Size 32</item>
+    </string-array>
 
 </resources>

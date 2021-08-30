@@ -33,4 +33,44 @@
 
         <attr name="andesThumbnailAccentColor" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="AndesThumbnailBadge" tools:ignore="ResourceName">
+        <attr name="andesThumbnailBadgeType" format="enum">
+            <enum name="icon" value="2000" />
+            <enum name="image_circle" value="2001" />
+        </attr>
+
+        <attr name="andesThumbnailBadgeComponent" format="enum">
+            <enum name="pill" value="3000" />
+            <enum name="icon_pill" value="3001" />
+            <enum name="dot" value="3002" />
+        </attr>
+
+        <attr name="andesThumbnailBadgeComponentType" format="enum">
+            <enum name="highlight" value="5000" />
+            <enum name="success" value="5001" />
+            <enum name="warning" value="5002" />
+            <enum name="error" value="5003" />
+        </attr>
+
+        <attr name="andesThumbnailBadgeComponentDotSize" format="enum">
+            <enum name="size_24" value="6000" />
+            <enum name="size_32" value="6001" />
+        </attr>
+
+        <attr name="andesThumbnailBadgeComponentPillSize" format="enum">
+            <enum name="size_40" value="6002" />
+            <enum name="size_48" value="6003" />
+            <enum name="size_56" value="6004" />
+            <enum name="size_64" value="6005" />
+            <enum name="size_72" value="6006" />
+            <enum name="size_80" value="6007" />
+        </attr>
+
+        <attr name="andesThumbnailBadgePillText" format="reference" />
+        <attr name="andesThumbnailBadgePillDefaultTextStyle" format="boolean" />
+
+        <attr name="andesThumbnailBadgeImage" format="reference" />
+
+    </declare-styleable>
 </resources>

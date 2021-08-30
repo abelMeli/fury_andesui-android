@@ -59,7 +59,7 @@ internal class AnalyticsHelper {
                 "/textfield/textcode/dynamic",
                 "/textfield/autosuggest/dynamic",
                 "/textfield/static"),
-            "ThumbnailShowcaseActivity" to arrayListOf("/thumbnail/dynamic", "/thumbnail/static"),
+            "ThumbnailShowcaseActivity" to arrayListOf("/thumbnail/dynamic", "/thumbnailbadge/dynamic", "/thumbnail/static"),
             "TimePickerShowcaseActivity" to arrayListOf("/timepicker/dynamic", "/timepicker/static"),
             "TooltipShowcaseActivity" to arrayListOf("/tooltip/dynamic", "/tooltip/static"),
             "SwitchShowcaseActivity" to arrayListOf("/switch/dynamic", "/switch/static"),

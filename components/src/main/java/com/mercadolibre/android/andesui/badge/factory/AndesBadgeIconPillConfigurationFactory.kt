@@ -11,11 +11,12 @@ internal object AndesBadgeIconPillConfigurationFactory {
 
     fun create(context: Context, andesBadgeIconPillAttrs: AndesBadgeIconPillAttrs): AndesBadgeIconPillConfiguration {
         with(andesBadgeIconPillAttrs) {
+            val badgeTypeInterface = andesBadgeType.iconType.type
             return AndesBadgeIconPillConfiguration(
-                icon = andesBadgeType.type.icon(
+                icon = badgeTypeInterface.icon(
                     context,
                     andesBadgeSize,
-                    andesBadgeType.type.primaryColor().colorInt(context))
+                    badgeTypeInterface.primaryColor().colorInt(context))
             )
         }
     }

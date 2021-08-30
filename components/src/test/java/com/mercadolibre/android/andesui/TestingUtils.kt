@@ -1,6 +1,13 @@
 package com.mercadolibre.android.andesui
 
+import android.graphics.drawable.Drawable
+import android.util.AttributeSet
+import androidx.annotation.DrawableRes
+import org.junit.Assert
 import org.mockito.internal.util.reflection.FieldSetter
+import org.robolectric.Robolectric
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.android.AttributeSetBuilder
 import java.lang.reflect.Field
 
 /** Returns the value of the private field [this].[name]. */
@@ -31,3 +38,21 @@ private tailrec fun Class<*>.obtainDeclaredField(name: String): Field? {
     }
     return field ?: superclass?.obtainDeclaredField(name)
 }
+
+infix fun Drawable.assertEquals(@DrawableRes expected: Int) {
+    Assert.assertEquals(expected, shadowOf(this).createdFromResId)
+}
+
+infix fun <T> T.assertEquals(expected: T) = Assert.assertEquals(this, expected)
+
+infix fun <T> T.assertIsNull(expectedNull: Boolean) = if (expectedNull) {
+    Assert.assertNull(this)
+} else {
+    Assert.assertNotNull(this)
+}
+
+fun buildAttributeSet(attrs: AttributeSetBuilder.() -> Unit): AttributeSet =
+    with(Robolectric.buildAttributeSet()) {
+        attrs()
+        build()
+    }

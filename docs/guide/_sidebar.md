@@ -11,6 +11,7 @@
   * [AndesSwitch](/switch/AndesSwitch.md)
   * [AndesTabs](/tabs/AndesTabs.md)
   * [AndesThumbnail](/thumbnail/AndesThumbnail.md)
+  * [AndesThumbnailBadge](/thumbnail/AndesThumbnailBadge.md)
   * [AndesTooltip](/tooltip/AndesTooltip.md)
 - Utils
   * [AndesColor](/color/AndesColor.md)

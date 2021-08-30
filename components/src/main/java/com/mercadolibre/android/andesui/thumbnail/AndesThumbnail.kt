@@ -215,7 +215,11 @@ class AndesThumbnail : FrameLayout {
         val tintList = takeIf { config.hasTint }?.let {
             ColorStateList.valueOf(config.iconColor.colorInt(context))
         }
-        DrawableCompat.setTintList(imageFrame.drawable, tintList)
+        tintImage(tintList)
+    }
+
+    internal fun tintImage(colorStateList: ColorStateList?) {
+        DrawableCompat.setTintList(imageFrame.drawable, colorStateList)
     }
 
     private fun setupImageSize(iconSize: Int) {

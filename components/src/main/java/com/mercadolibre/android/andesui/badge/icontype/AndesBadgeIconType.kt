@@ -1,10 +1,6 @@
 package com.mercadolibre.android.andesui.badge.icontype
 
-import com.mercadolibre.android.andesui.badge.type.AndesBadgeTypeInterface
-import com.mercadolibre.android.andesui.badge.type.AndesErrorBadgeType
-import com.mercadolibre.android.andesui.badge.type.AndesHighlightBadgeType
-import com.mercadolibre.android.andesui.badge.type.AndesSuccessBadgeType
-import com.mercadolibre.android.andesui.badge.type.AndesWarningBadgeType
+import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 
 /**
  * Utility class that does two things: Defines the possible styles an [AndesBadgeIconPill] can take because it's an enum, as you can see.
@@ -24,14 +20,14 @@ enum class AndesBadgeIconType {
         fun fromString(value: String): AndesBadgeIconType = valueOf(value.toUpperCase())
     }
 
-    internal val type get() = getAndesBadgeType()
+    internal val iconType get() = getAndesBadgeType()
 
-    private fun getAndesBadgeType(): AndesBadgeTypeInterface {
+    private fun getAndesBadgeType(): AndesBadgeType {
         return when (this) {
-            HIGHLIGHT -> AndesHighlightBadgeType()
-            SUCCESS -> AndesSuccessBadgeType()
-            WARNING -> AndesWarningBadgeType()
-            ERROR -> AndesErrorBadgeType()
+            HIGHLIGHT -> AndesBadgeType.HIGHLIGHT
+            SUCCESS -> AndesBadgeType.SUCCESS
+            WARNING -> AndesBadgeType.WARNING
+            ERROR -> AndesBadgeType.ERROR
         }
     }
 }

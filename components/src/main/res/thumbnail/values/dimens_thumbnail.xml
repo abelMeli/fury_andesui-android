@@ -21,4 +21,7 @@
     <dimen name="andes_thumbnail_size_72">72dp</dimen>
     <dimen name="andes_thumbnail_size_80">80dp</dimen>
 
+    <dimen name="andes_thumbnail_badge_outline_3">3dp</dimen>
+    <dimen name="andes_thumbnail_badge_outline_2">2dp</dimen>
+    <dimen name="andes_thumbnail_badge_dot_margin">1dp</dimen>
 </resources>

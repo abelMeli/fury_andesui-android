@@ -16,7 +16,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
-class AndesBadteIconPillConfigurationTest {
+class AndesBadgeIconPillConfigurationTest {
 
     private lateinit var context: Context
     private lateinit var attrs: AndesBadgeIconPillAttrs
@@ -33,8 +33,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.HIGHLIGHT
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
         assertThat(iconDrawable).usingRecursiveComparison().isEqualTo(config.icon)
@@ -46,8 +46,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.SUCCESS
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
         assertThat(iconDrawable).usingRecursiveComparison().isEqualTo(config.icon)
@@ -59,8 +59,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.WARNING
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
 
@@ -73,8 +73,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.SMALL
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.ERROR
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
 
@@ -87,8 +87,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.HIGHLIGHT
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
 
@@ -101,8 +101,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.SUCCESS
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
 
@@ -115,8 +115,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.WARNING
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
 
@@ -129,8 +129,8 @@ class AndesBadteIconPillConfigurationTest {
         val size = AndesBadgePillSize.LARGE
         attrs = AndesBadgeIconPillAttrs(type, size)
         val iconDrawable = AndesBadgeIconType.ERROR
-            .type
-            .icon(context, size, type.type.primaryColor().colorInt(context))
+            .iconType.type
+            .icon(context, size, type.iconType.type.primaryColor().colorInt(context))
 
         val config = configFactory.create(context, attrs)
 

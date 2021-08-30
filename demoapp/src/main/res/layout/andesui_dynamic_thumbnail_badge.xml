@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/andes_white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true">
+
+        <com.mercadolibre.android.andesui.message.AndesMessage
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_thumbnail"
+            android:layout_marginTop="@dimen/margin_vertical_thumbnail"
+            android:layout_marginEnd="@dimen/margin_horizontal_thumbnail"
+            app:andesMessageBodyText="@string/andes_thumbnail_description"
+            app:andesMessageHierarchy="quiet"
+            app:andesMessageTitleText="@string/title_description"
+            app:andesMessageType="neutral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
+            android:id="@+id/andes_thumbnail_badge_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_thumbnail"
+            android:layout_marginTop="@dimen/button_margin_vertical_2x"
+            android:layout_marginEnd="@dimen/margin_horizontal_thumbnail"
+            app:andesThumbnailBadgeImage="@drawable/andes_navegacion_compras_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/message"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/thumbnail_badge_type_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/andes_thumbnail_badge_type"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/thumbnail_badge_type_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/andes_thumbnail_badge_icon" />
+
+        <Spinner
+            android:id="@+id/thumbnail_badge_type_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/thumbnail_badge_type_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_badge_type_tv"
+            app:layout_constraintTop_toTopOf="@+id/thumbnail_badge_type_tv" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/andes_thumbnail_badge_component"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/thumbnail_badge_component_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/thumbnail_badge_type_tv"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail_badge_type_tv" />
+
+        <Spinner
+            android:id="@+id/thumbnail_badge_component_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/thumbnail_badge_type_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/andes_thumbnail_badge_component_type"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/thumbnail_badge_component_type_spinner"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <Spinner
+            android:id="@+id/thumbnail_badge_component_type_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/thumbnail_badge_component_spinner"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/thumbnail_badge_size_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/andes_thumbnail_badge_size"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/thumbnail_badge_component_type_spinner"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <Spinner
+            android:id="@+id/thumbnail_badge_size_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/thumbnail_badge_size_tv"
+            app:layout_constraintEnd_toEndOf="@+id/thumbnail_badge_component_spinner"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="@+id/thumbnail_badge_size_tv" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/thumbnail_badge_pill_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/andes_border"
+            android:inputType="text"
+            android:paddingTop="20dp"
+            app:andesTextfieldLabel="@string/andes_thumbnail_badge_pill_text"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail_badge_size_tv"
+            app:layout_constraintEnd_toEndOf="@+id/thumbnail_badge_type_spinner"
+            app:layout_constraintStart_toStartOf="@+id/thumbnail_badge_type_tv"
+            app:layout_goneMarginEnd="@dimen/andes_textfield_margin"
+            app:layout_goneMarginStart="@dimen/andes_textfield_margin"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:id="@+id/thumbnail_badge_pill_text_style"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/thumbnail_badge_pill_text_style"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/thumbnail_badge_pill_text_style_switch"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/thumbnail_badge_type_tv"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail_badge_pill_text" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/thumbnail_badge_pill_text_style_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintBottom_toBottomOf="@+id/thumbnail_badge_pill_text_style"
+            app:layout_constraintEnd_toEndOf="@+id/thumbnail_badge_component_type_spinner"
+            app:layout_constraintTop_toTopOf="@+id/thumbnail_badge_pill_text_style" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/change_button"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="32dp"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andes_message_showcase_change"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/clear_button"
+            app:layout_constraintStart_toStartOf="@+id/thumbnail_badge_type_tv"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail_badge_pill_text_style" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/clear_button"
+            android:layout_width="@dimen/button_clear_width"
+            android:layout_height="wrap_content"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andesui_demoapp_clear_button"
+            app:layout_constraintBottom_toBottomOf="@+id/change_button"
+            app:layout_constraintEnd_toEndOf="@+id/thumbnail_badge_type_spinner"
+            app:layout_constraintTop_toTopOf="@+id/change_button" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/thumbnail_badge_pill_configs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="thumbnail_badge_pill_text_style,thumbnail_badge_pill_text_style_switch,thumbnail_badge_pill_text"
+            android:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

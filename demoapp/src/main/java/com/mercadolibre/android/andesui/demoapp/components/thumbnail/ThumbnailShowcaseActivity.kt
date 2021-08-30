@@ -33,6 +33,7 @@ class ThumbnailShowcaseActivity : AppCompatActivity() {
         initActionBar()
         initViewPager()
         attachIndicator()
+
         loadViews()
     }
 
@@ -47,6 +48,7 @@ class ThumbnailShowcaseActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.andesui_viewpager)
         viewPager.adapter = AndesPagerAdapter(listOf<View>(
                 inflater.inflate(R.layout.andesui_dynamic_thumbnail, null, false),
+                inflater.inflate(R.layout.andesui_dynamic_thumbnail_badge, null, false),
                 inflater.inflate(R.layout.andesui_static_thumbnail, null, false)
         ))
     }
@@ -59,7 +61,8 @@ class ThumbnailShowcaseActivity : AppCompatActivity() {
     private fun loadViews() {
         val adapter = viewPager.adapter as AndesPagerAdapter
         addDynamicPage(adapter.views[0])
-        addStaticPage(adapter.views[1])
+        ThumbnailBadgeDynamicPage().create(this, adapter.views[1])
+        addStaticPage(adapter.views[2])
     }
 
     @Suppress("ComplexMethod", "LongMethod")

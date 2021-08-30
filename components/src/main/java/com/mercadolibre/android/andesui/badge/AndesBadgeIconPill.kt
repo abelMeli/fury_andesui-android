@@ -65,7 +65,17 @@ class AndesBadgeIconPill : ConstraintLayout {
     private fun setupComponents(config: AndesBadgeIconPillConfiguration) {
         containerView = LayoutInflater.from(context).inflate(R.layout.andes_layout_badge_icon_pill, this)
         imageViewContainer = containerView.findViewById(R.id.badge_icon_pill_image_view)
+        setupViewId()
         setupDrawable(config)
+    }
+
+    /**
+     * Sets a view id to this badge.
+     */
+    private fun setupViewId() {
+        if (id == NO_ID) {
+            id = View.generateViewId()
+        }
     }
 
     private fun setupDrawable(config: AndesBadgeIconPillConfiguration) {

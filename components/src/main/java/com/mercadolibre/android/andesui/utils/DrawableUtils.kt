@@ -4,16 +4,20 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Build
+import androidx.annotation.ColorInt
+import androidx.annotation.Px
 import com.mercadolibre.android.andesui.color.AndesColor
 
 /**
@@ -48,16 +52,16 @@ fun buildColoredAndesBitmapDrawable(
     }
 
     return BitmapDrawable(context.resources, scaledBitmap)
-            .apply {
-                colors?.let {
-                    if (isLollipopOrNewer()) {
-                        setTintMode(PorterDuff.Mode.SRC_IN)
-                        setTintList(it)
-                    } else {
-                        setColorFilter(it.getColorForState(intArrayOf(android.R.attr.state_enabled), 0), PorterDuff.Mode.SRC_IN)
-                    }
+        .apply {
+            colors?.let {
+                if (isLollipopOrNewer()) {
+                    setTintMode(PorterDuff.Mode.SRC_IN)
+                    setTintList(it)
+                } else {
+                    setColorFilter(it.getColorForState(intArrayOf(android.R.attr.state_enabled), 0), PorterDuff.Mode.SRC_IN)
                 }
             }
+        }
 }
 
 fun buildColoredBitmapDrawable(
@@ -69,16 +73,16 @@ fun buildColoredBitmapDrawable(
 ): BitmapDrawable {
     val scaledBitmap: Bitmap = when {
         dstHeight != null && dstWidth != null -> Bitmap.createScaledBitmap(
-                image.bitmap,
-                dstWidth,
-                dstHeight,
-                true)
+            image.bitmap,
+            dstWidth,
+            dstHeight,
+            true)
         else -> image.bitmap
     }
     return BitmapDrawable(context.resources, scaledBitmap)
-            .apply {
-                color?.let { setColorFilter(color, PorterDuff.Mode.SRC_IN) }
-            }
+        .apply {
+            color?.let { setColorFilter(color, PorterDuff.Mode.SRC_IN) }
+        }
 }
 
 fun buildColoredAndesBitmapDrawable(
@@ -90,16 +94,16 @@ fun buildColoredAndesBitmapDrawable(
 ): BitmapDrawable {
     val scaledBitmap: Bitmap = when {
         dstHeight != null && dstWidth != null -> Bitmap.createScaledBitmap(
-                image.bitmap,
-                dstWidth,
-                dstHeight,
-                true)
+            image.bitmap,
+            dstWidth,
+            dstHeight,
+            true)
         else -> image.bitmap
     }
     return BitmapDrawable(context.resources, scaledBitmap)
-            .apply {
-                color?.let { setColorFilter(it.colorInt(context), PorterDuff.Mode.SRC_IN) }
-            }
+        .apply {
+            color?.let { setColorFilter(it.colorInt(context), PorterDuff.Mode.SRC_IN) }
+        }
 }
 
 fun buildCircleBitmap(
@@ -109,10 +113,10 @@ fun buildCircleBitmap(
 ): Bitmap? {
     val scaledBitmap: Bitmap = when {
         dstHeight != null && dstWidth != null -> Bitmap.createScaledBitmap(
-                image,
-                dstWidth,
-                dstHeight,
-                true)
+            image,
+            dstWidth,
+            dstHeight,
+            true)
         else -> image
     }
     return getCircledBitmap(scaledBitmap)
@@ -171,4 +175,11 @@ fun Drawable.toBitmap(): Bitmap? {
     setBounds(0, 0, canvas.width, canvas.height)
     draw(canvas)
     return bitmap
+}
+
+internal fun buildRing(@ColorInt ringColor: Int, @Px ringWidth: Int) = GradientDrawable().apply {
+    shape = GradientDrawable.OVAL
+    cornerRadii = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+    setColor(Color.TRANSPARENT)
+    setStroke(ringWidth, ringColor)
 }
