@@ -2,8 +2,9 @@
   * [Introduction](/)
 - Components
   * [AndesAutosuggest](/autosuggest/AndesAutosuggest.md)
-  * [AndesBadgePill](/badge/AndesBadgePill.md)
   * [AndesBadgeDot](/badge/AndesBadgeDot.md)
+  * [AndesBadgeIconPill](/badge/AndesBadgeIconPill.md)
+  * [AndesBadgePill](/badge/AndesBadgePill.md)
   * [AndesButton](/button/AndesButton.md)
   * [AndesCheckbox](/checkbox/AndesCheckbox.md)
   * [AndesFloatingMenu](/floatingmenu/AndesFloatingMenu.md)

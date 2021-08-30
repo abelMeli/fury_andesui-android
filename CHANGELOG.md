@@ -1,5 +1,6 @@
 # v3.28.0
 ## 🚀 Feature
+- Badge variant documentation: AndesBadgeIconPill | Author: [@eportasML](https://github.com/eportasML)
 - ThumbnailBadge component | Author: [@eportasML](https://github.com/eportasML)
 
 # v3.27.0
