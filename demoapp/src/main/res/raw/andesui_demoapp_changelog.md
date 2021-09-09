@@ -1,3 +1,11 @@
+# v3.30.0
+## 🛠 Fixes
+- `AndesDatePicker` The DatePicker has been modified so that it can select a minimum date before the current date | Authors: [@PablovskyML](https://github.com/PablovskyML)
+
+# v3.29.0
+## 🚀 Feature
+- Added new Icons for visibility on/off | Author: [@mzangl-meli](https://github.com/mzangl-meli)
+
 # v3.28.0
 ## 🚀 Feature
 - Badge variant documentation: AndesBadgeIconPill | Author: [@eportasML](https://github.com/eportasML)

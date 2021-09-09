@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.datepicker
 
+import android.content.Context
 import android.os.Build
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrs
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerConfigurationFactory
@@ -9,12 +10,34 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import androidx.test.core.app.ApplicationProvider
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipelineConfig
+import com.facebook.imagepipeline.listener.RequestListener
+import com.facebook.imagepipeline.listener.RequestLoggingListener
+import kotlinx.android.synthetic.main.andes_layout_datepicker.view.calendarView
+import org.junit.Before
+import java.util.Calendar
+import java.util.Date
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
 class AndesDatePickerTest {
     private val configFactory = Mockito.spy(AndesDatePickerConfigurationFactory)
     private lateinit var attrs: AndesDatePickerAttrs
+    private lateinit var context: Context
+
+    @Before
+    fun setup() {
+        context = ApplicationProvider.getApplicationContext()
+        val requestListeners = setOf<RequestListener>(RequestLoggingListener())
+        val config = ImagePipelineConfig
+                .newBuilder(context)
+                // other setters
+                .setRequestListeners(requestListeners)
+                .build()
+        Fresco.initialize(context, config)
+    }
 
     @Test
     fun `attr btn enabled`() {
@@ -44,5 +67,44 @@ class AndesDatePickerTest {
         Assert.assertEquals(config.minDate, "01/01/2020")
         Assert.assertEquals(config.maxDate, "31/12/2020")
         Assert.assertFalse(config.applyButtonVisibility!!)
+    }
+
+    @Test
+    fun testAndesDatePickerMinDate() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, -15)
+        val oldDate = calendar.time.time
+        val andesDatePicker = AndesDatePicker(context)
+
+        andesDatePicker.setupMinDate(oldDate)
+        Assert.assertEquals(andesDatePicker.calendarView.minDate, oldDate)
+    }
+
+    @Test
+    fun testAndesDatePickerMinDateGreaterMaxDate() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, +3)
+        val futureDate = calendar.time
+        val nowDate = Date()
+        val andesDatePicker = AndesDatePicker(context)
+        andesDatePicker.setupMaxDate(nowDate.time)
+        andesDatePicker.setupMinDate(futureDate.time)
+
+        Assert.assertEquals(andesDatePicker.calendarView.maxDate, nowDate.time)
+        Assert.assertNotEquals(andesDatePicker.calendarView.minDate, nowDate.time)
+    }
+
+    @Test
+    fun testAndesDatePickerMaxDateGreaterMinDate() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, +3)
+        val futureDate = calendar.time
+        val nowDate = Date()
+        val andesDatePicker = AndesDatePicker(context)
+        andesDatePicker.setupMaxDate(futureDate.time)
+        andesDatePicker.setupMinDate(nowDate.time)
+
+        Assert.assertEquals(andesDatePicker.calendarView.minDate, nowDate.time)
+        Assert.assertNotEquals(andesDatePicker.calendarView.maxDate, nowDate.time)
     }
 }
