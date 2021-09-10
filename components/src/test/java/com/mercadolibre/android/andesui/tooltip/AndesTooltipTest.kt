@@ -20,14 +20,14 @@ import com.mercadolibre.android.andesui.tooltip.location.BottomAndesTooltipLocat
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.nhaarman.mockitokotlin2.mock
-import junit.framework.Assert.assertNull
-import junit.framework.Assert.assertEquals
 import org.junit.After
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertThrows
 import org.junit.runner.RunWith
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.validateMockitoUsage
@@ -185,18 +185,27 @@ class AndesTooltipTest {
     }
 
     @Test
-    fun `should NOT build tooltip with DARK AndesTooltipStyle`() {
-        val tooltip = spy(AndesTooltip(
-                context = context,
-                style = AndesTooltipStyle.LIGHT,
-                title = title,
-                body = body,
-                isDismissible = isDismissible,
-                tooltipLocation = location
-        ))
-        assertThrows(IllegalStateException::class.java) {
-            tooltip.style = AndesTooltipStyle.DARK
-        }
+    fun `should build DARK tooltip with link action`() {
+        val body = "my body"
+        val isDismissibleDefault = true
+        val locationDefault = AndesTooltipLocation.TOP
+        val styleDefault = AndesTooltipStyle.DARK
+        val basicTooltip = AndesTooltip(context = context, body = body, style = styleDefault)
+        val linkActionData = AndesTooltipLinkAction(
+                label = "link action",
+                onActionClicked = { _, _ -> }
+        )
+
+        basicTooltip.linkAction = linkActionData
+
+        assertEquals(body, basicTooltip.body)
+        assertEquals(isDismissibleDefault, basicTooltip.isDismissible)
+        assertEquals(locationDefault, basicTooltip.location)
+        assertEquals(styleDefault, basicTooltip.style)
+        assertNull(basicTooltip.title)
+        assertNull(basicTooltip.mainAction)
+        assertNull(basicTooltip.secondaryAction)
+        assertEquals(basicTooltip.linkAction, linkActionData)
     }
 
     @Test
@@ -280,6 +289,84 @@ class AndesTooltipTest {
 
         assertThrows(IllegalStateException::class.java) {
             tooltip.mainAction = mainTransparentAction
+        }
+    }
+
+    @Test
+    fun `should build tooltip with LOUD AndesButtonHierarchy on primary action button`() {
+        val tooltip = spy(AndesTooltip(
+                context = context,
+                style = AndesTooltipStyle.LIGHT,
+                title = title,
+                body = body,
+                isDismissible = isDismissible,
+                tooltipLocation = location,
+                mainAction = AndesTooltipAction("some action", AndesButtonHierarchy.LOUD) { _, _ -> }
+        ))
+        assertEquals(AndesButtonHierarchy.LOUD, tooltip.mainAction?.hierarchy)
+    }
+
+    @Test
+    fun `should NOT build tooltip with QUIET or TRANSPARENT AndesButtonHierarchy on primary action button`() {
+        val tooltip = spy(AndesTooltip(
+                context = context,
+                style = AndesTooltipStyle.LIGHT,
+                title = title,
+                body = body,
+                isDismissible = isDismissible,
+                tooltipLocation = location
+        ))
+        assertThrows(IllegalStateException::class.java) {
+            tooltip.mainAction = AndesTooltipAction("some action", AndesButtonHierarchy.QUIET) { _, _ -> }
+        }
+        assertThrows(IllegalStateException::class.java) {
+            tooltip.mainAction = AndesTooltipAction("some action", AndesButtonHierarchy.TRANSPARENT) { _, _ -> }
+        }
+    }
+
+    @Test
+    fun `should build tooltip with QUIET AndesButtonHierarchy on secondary action button`() {
+        val tooltip = spy(AndesTooltip(
+                context = context,
+                style = AndesTooltipStyle.LIGHT,
+                title = title,
+                body = body,
+                isDismissible = isDismissible,
+                tooltipLocation = location,
+                mainAction = AndesTooltipAction("some action", AndesButtonHierarchy.LOUD) { _, _ -> },
+                secondaryAction = AndesTooltipAction("some action", AndesButtonHierarchy.QUIET) { _, _ -> }
+        ))
+        assertEquals(AndesButtonHierarchy.QUIET, tooltip.secondaryAction?.hierarchy)
+    }
+
+    @Test
+    fun `should build tooltip with TRANSPARENT AndesButtonHierarchy on secondary action button`() {
+        val tooltip = spy(AndesTooltip(
+                context = context,
+                style = AndesTooltipStyle.LIGHT,
+                title = title,
+                body = body,
+                isDismissible = isDismissible,
+                tooltipLocation = location,
+                mainAction = AndesTooltipAction("some action", AndesButtonHierarchy.LOUD) { _, _ -> },
+                secondaryAction = AndesTooltipAction("some action", AndesButtonHierarchy.TRANSPARENT) { _, _ -> }
+        ))
+        assertEquals(AndesButtonHierarchy.TRANSPARENT, tooltip.secondaryAction?.hierarchy)
+    }
+
+    @Test
+    fun `should NOT build tooltip with LOUD AndesButtonHierarchy on secondary action button`() {
+        val tooltip = spy(AndesTooltip(
+                context = context,
+                style = AndesTooltipStyle.LIGHT,
+                title = title,
+                body = body,
+                isDismissible = isDismissible,
+                tooltipLocation = location,
+                mainAction = AndesTooltipAction("some action", AndesButtonHierarchy.LOUD) { _, _ -> }
+        ))
+        assertThrows(IllegalStateException::class.java) {
+            tooltip.secondaryAction = AndesTooltipAction("some action", AndesButtonHierarchy.LOUD) { _, _ -> }
         }
     }
 

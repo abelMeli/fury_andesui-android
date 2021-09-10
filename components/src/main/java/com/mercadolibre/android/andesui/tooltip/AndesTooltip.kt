@@ -39,7 +39,6 @@ import com.mercadolibre.android.andesui.tooltip.location.getAndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.radius.RadiusLayout
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
-import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
 @Suppress("TooManyFunctions")
 class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
@@ -488,7 +487,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         with(linkActionComponent) {
             if (config.linkAction != null) {
                 text = config.linkAction.label
-                typeface = context.getFontOrDefault(R.font.andes_font_regular)
+                typeface = config.linkActionTypeface
                 config.linkActionTextColor?.let { setTextColor(it.colorInt(context)) }
                 if (config.linkActionIsUnderlined) {
                     paintFlags = Paint.UNDERLINE_TEXT_FLAG

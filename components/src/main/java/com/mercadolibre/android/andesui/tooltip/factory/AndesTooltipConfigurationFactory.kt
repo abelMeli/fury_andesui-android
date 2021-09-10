@@ -33,6 +33,7 @@ internal data class AndesTooltipConfiguration(
     val secondaryActionBackgroundColor: BackgroundColorConfig?,
     val secondaryActionTextColor: AndesColor?,
     val linkAction: AndesTooltipLinkAction?,
+    val linkActionTypeface: Typeface?,
     val linkActionBackgroundColor: BackgroundColorConfig?,
     val linkActionTextColor: AndesColor?,
     val linkActionIsUnderlined: Boolean,
@@ -65,6 +66,7 @@ internal object AndesTooltipConfigurationFactory {
                     secondaryActionBackgroundColor = secondaryAction?.hierarchy?.let { resolveSecondaryActionBackgroundColor(style, it) },
                     secondaryActionTextColor = secondaryAction?.hierarchy?.let { resolveSecondaryActionTextColor(style, it) },
                     linkAction = linkAction,
+                    linkActionTypeface = resolveLinkActionTypeface(style, context),
                     linkActionBackgroundColor = resolveLinkActionBackgroundColor(style),
                     linkActionTextColor = resolveLinkActionTextColor(style),
                     linkActionIsUnderlined = resolveBodyLinkIsUnderlined(style),
@@ -97,6 +99,9 @@ internal object AndesTooltipConfigurationFactory {
 
     private fun resolveSecondaryActionTextColor(style: AndesTooltipStyle, buttonHierarchy: AndesButtonHierarchy) =
             style.type.secondaryActionTextColor(buttonHierarchy)
+
+    private fun resolveLinkActionTypeface(style: AndesTooltipStyle, context: Context) =
+            style.type.linkActionTypeface(context)
 
     private fun resolveLinkActionBackgroundColor(style: AndesTooltipStyle) =
             style.type.linkActionColorConfig()

@@ -23,6 +23,8 @@ internal sealed class AndesTooltipStyleInterface {
 
     fun bodyTypeface(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_regular)
 
+    fun linkActionTypeface(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+
     fun dismissibleIcon(context: Context) =
             buildColoredAndesBitmapDrawable(
                     IconProvider(context).loadIcon("andes_ui_close_20") as BitmapDrawable,
@@ -120,4 +122,41 @@ internal object AndesTooltipHighlightStyle : AndesTooltipStyleInterface() {
     }
     override fun linkActionTextColor() = R.color.andes_white.toAndesColor()
     override fun isLinkUnderlined() = false
+}
+
+@Suppress("TooManyFunctions")
+internal object AndesTooltipDarkStyle : AndesTooltipStyleInterface() {
+    override fun backgroundColor() = R.color.andes_gray_900_solid.toAndesColor()
+
+    override fun textColor() = R.color.andes_text_color_white.toAndesColor()
+
+    override fun dismissIconColor(): AndesColor? = R.color.andes_text_color_white.toAndesColor()
+
+    override fun primaryActionColorConfig(buttonHierarchy: AndesButtonHierarchy): BackgroundColorConfig {
+        return when (buttonHierarchy) {
+            AndesButtonHierarchy.LOUD -> createBackgroundColorConfigLoud()
+            else -> throw IllegalStateException("Quiet and Transparent button hierarchy is not allowed in Andes Tooltip primary action")
+        }
+    }
+    override fun primaryActionTextColor(buttonHierarchy: AndesButtonHierarchy): AndesColor {
+        return when (buttonHierarchy) {
+            AndesButtonHierarchy.LOUD -> R.color.andes_text_color_white.toAndesColor()
+            else -> throw IllegalStateException("Quiet and Transparent button hierarchy is not allowed in Andes Tooltip primary action")
+        }
+    }
+
+    override fun secondaryActionColorConfig(buttonHierarchy: AndesButtonHierarchy): BackgroundColorConfig {
+        return when (buttonHierarchy) {
+            AndesButtonHierarchy.TRANSPARENT -> createBackgroundColorConfigTransparent()
+            else -> throw IllegalStateException("Loud button hierarchy is not allowed in Andes Tooltip secondary action")
+        }
+    }
+    override fun secondaryActionTextColor(buttonHierarchy: AndesButtonHierarchy) =
+            R.color.andes_text_color_white.toAndesColor()
+
+    override fun linkActionColorConfig(): BackgroundColorConfig {
+        return createBackgroundColorConfigTransparent()
+    }
+    override fun linkActionTextColor() = R.color.andes_text_color_white.toAndesColor()
+    override fun isLinkUnderlined() = true
 }

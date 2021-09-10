@@ -1,6 +1,7 @@
 # v3.30.0
 ## 🛠 Fixes
 - `AndesDatePicker` The DatePicker has been modified so that it can select a minimum date before the current date | Authors: [@PablovskyML](https://github.com/PablovskyML)
+- `AndesTooltip` Dark style support | Authors: [@jspano-meli](https://github.com/jspano-meli), [@npayacan](https://github.com/npayacan)
 
 # v3.29.0
 ## 🚀 Feature

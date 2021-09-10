@@ -616,6 +616,7 @@
     <string name="andes_thumbnail_specs_2">Show</string>
     <string-array name="andes_tooltip_style_spinner">
         <item>Light</item>
+        <item>Dark</item>
         <item>Highlight</item>
     </string-array>
     <string-array name="andes_tooltip_location_spinner">
@@ -632,6 +633,9 @@
     </string-array>
     <string-array name="andes_tooltip_main_action_style_spinner">
         <item>Loud</item>
+    </string-array>
+    <string-array name="andes_dark_tooltip_sec_action_style_spinner">
+        <item>Transparent</item>
     </string-array>
     <string-array name="andes_tooltip_sec_action_style_spinner">
         <item>Quiet</item>

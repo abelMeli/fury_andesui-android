@@ -3,10 +3,8 @@ package com.mercadolibre.android.andesui.demoapp.components.tooltip
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Spinner
-import android.widget.ArrayAdapter
-import android.widget.AdapterView
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
@@ -20,6 +18,7 @@ import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
+import com.mercadolibre.android.andesui.demoapp.utils.setupAdapter
 import com.mercadolibre.android.andesui.textfield.AndesTextarea
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
@@ -27,8 +26,8 @@ import com.mercadolibre.android.andesui.tooltip.AndesTooltip
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
-import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 
 @Suppress("TooManyFunctions")
 class TooltipShowcaseActivity : AppCompatActivity() {
@@ -87,104 +86,64 @@ class TooltipShowcaseActivity : AppCompatActivity() {
         val mainActionConfig = container.findViewById<Group>(R.id.main_action_config)
         val secondaryActionConfig = container.findViewById<Group>(R.id.secondary_action_config)
 
+        val spinnerStyle = container.findViewById<Spinner>(R.id.style_spinner)
+        val spinnerOrientation = container.findViewById<Spinner>(R.id.orientation_spinner)
+        val spinnerActionType = container.findViewById<Spinner>(R.id.action_type_spinner)
+        val spinnerSizeStyle = container.findViewById<Spinner>(R.id.size_style_spinner)
+        val primaryActionSpinner = container.findViewById<Spinner>(R.id.primary_action_spinner)
+        val spinnerSecondAction = container.findViewById<Spinner>(R.id.secondary_action_spinner)
+
         body.text = getString(R.string.andes_tooltip_message)
         checkboxDismiss.status = AndesCheckboxStatus.UNSELECTED
 
-        val spinnerStyle = container.findViewById<Spinner>(R.id.style_spinner)
-        ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_tooltip_style_spinner,
-                android.R.layout.simple_spinner_item
-        ).let { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerStyle.adapter = adapter
+        spinnerStyle.setupAdapter(R.array.andes_tooltip_style_spinner) { position ->
+            val hasDarkTooltipStyle = position == TOOLTIP_DARK_STYLE
+            val spinnerTextArray = R.array.andes_dark_tooltip_sec_action_style_spinner
+                    .takeIf { hasDarkTooltipStyle }
+                    ?: R.array.andes_tooltip_sec_action_style_spinner
+            spinnerSecondAction.setupAdapter(spinnerTextArray)
         }
 
-        val spinnerOrientation = container.findViewById<Spinner>(R.id.orientation_spinner)
-        ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_tooltip_location_spinner,
-                android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerOrientation.adapter = adapter
-        }
+        spinnerOrientation.setupAdapter(R.array.andes_tooltip_location_spinner)
 
-        val spinnerActionType = container.findViewById<Spinner>(R.id.action_type_spinner)
-        ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_tooltip_action_type_spinner,
-                android.R.layout.simple_spinner_item
-        ).let { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerActionType.adapter = adapter
-            spinnerActionType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) = Unit
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    when (position) {
-                        TOOLTIP_WITH_MAIN_ACTION -> {
-                            runOnUiThread {
-                                mainActionConfig.visibility = View.VISIBLE
-                                secondaryActionConfig.visibility = View.GONE
-                                linkActionText.visibility = View.GONE
-                            }
-                        }
-                        TOOLTIP_WITH_MAIN_AND_SEC_ACTION -> {
-                            runOnUiThread {
-                                mainActionConfig.visibility = View.VISIBLE
-                                secondaryActionConfig.visibility = View.VISIBLE
-                                linkActionText.visibility = View.GONE
-                            }
-                        }
-                        TOOLTIP_WITH_LINK_ACTION -> {
-                            runOnUiThread {
-                                mainActionConfig.visibility = View.GONE
-                                secondaryActionConfig.visibility = View.GONE
-                                linkActionText.visibility = View.VISIBLE
-                            }
-                        }
-                        TOOLTIP_WITH_NO_ACTION -> {
-                            runOnUiThread {
-                                mainActionConfig.visibility = View.GONE
-                                secondaryActionConfig.visibility = View.GONE
-                                linkActionText.visibility = View.GONE
-                            }
-                        }
+        spinnerActionType.setupAdapter(R.array.andes_tooltip_action_type_spinner) { position ->
+            when (position) {
+                TOOLTIP_WITH_MAIN_ACTION -> {
+                    runOnUiThread {
+                        mainActionConfig.visibility = View.VISIBLE
+                        secondaryActionConfig.visibility = View.GONE
+                        linkActionText.visibility = View.GONE
+                    }
+                }
+                TOOLTIP_WITH_MAIN_AND_SEC_ACTION -> {
+                    runOnUiThread {
+                        mainActionConfig.visibility = View.VISIBLE
+                        secondaryActionConfig.visibility = View.VISIBLE
+                        linkActionText.visibility = View.GONE
+                    }
+                }
+                TOOLTIP_WITH_LINK_ACTION -> {
+                    runOnUiThread {
+                        mainActionConfig.visibility = View.GONE
+                        secondaryActionConfig.visibility = View.GONE
+                        linkActionText.visibility = View.VISIBLE
+                    }
+                }
+                TOOLTIP_WITH_NO_ACTION -> {
+                    runOnUiThread {
+                        mainActionConfig.visibility = View.GONE
+                        secondaryActionConfig.visibility = View.GONE
+                        linkActionText.visibility = View.GONE
                     }
                 }
             }
         }
 
-        val spinnerSizeStyle = container.findViewById<Spinner>(R.id.size_style_spinner)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.andes_tooltip_size_style_spinner,
-            android.R.layout.simple_spinner_item
-        ).let { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerSizeStyle.adapter = adapter
-        }
+        spinnerSizeStyle.setupAdapter(R.array.andes_tooltip_size_style_spinner)
 
-        val primaryActionSpinner = container.findViewById<Spinner>(R.id.primary_action_spinner)
-        ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_tooltip_main_action_style_spinner,
-                android.R.layout.simple_spinner_item
-        ).let { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            primaryActionSpinner.adapter = adapter
-        }
+        primaryActionSpinner.setupAdapter(R.array.andes_tooltip_main_action_style_spinner)
 
-        val spinnerSecondAction = container.findViewById<Spinner>(R.id.secondary_action_spinner)
-        ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_tooltip_sec_action_style_spinner,
-                android.R.layout.simple_spinner_item
-        ).let { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerSecondAction.adapter = adapter
-        }
+        spinnerSecondAction.setupAdapter(R.array.andes_tooltip_sec_action_style_spinner)
 
         andesTooltipToShow = AndesTooltip(
                 context = this,
@@ -397,12 +356,14 @@ class TooltipShowcaseActivity : AppCompatActivity() {
     private fun getStyleBySpinner(spinner: Spinner): AndesTooltipStyle {
         return when (spinner.selectedItem) {
             "Light" -> AndesTooltipStyle.LIGHT
+            "Dark" -> AndesTooltipStyle.DARK
             "Highlight" -> AndesTooltipStyle.HIGHLIGHT
             else -> AndesTooltipStyle.LIGHT
         }
     }
 
     companion object {
+        private const val TOOLTIP_DARK_STYLE = 1
         private const val TOOLTIP_WITH_NO_ACTION = 0
         private const val TOOLTIP_WITH_LINK_ACTION = 1
         private const val TOOLTIP_WITH_MAIN_ACTION = 2

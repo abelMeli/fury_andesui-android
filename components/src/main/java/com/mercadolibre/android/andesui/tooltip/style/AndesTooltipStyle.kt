@@ -17,7 +17,7 @@ enum class AndesTooltipStyle {
         return when (this) {
             LIGHT -> AndesTooltipLightStyle
             HIGHLIGHT -> AndesTooltipHighlightStyle
-            else -> throw IllegalStateException("Other style is not available yet")
+            DARK -> AndesTooltipDarkStyle
         }
     }
 }
