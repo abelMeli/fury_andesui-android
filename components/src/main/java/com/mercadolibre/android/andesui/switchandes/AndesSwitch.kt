@@ -133,6 +133,7 @@ class AndesSwitch : ConstraintLayout {
         setupTextComponent(config)
         setupSwitchComponent(config)
         setupType(config)
+        setupClickBehavior()
     }
 
     private fun initComponents() {
@@ -165,6 +166,16 @@ class AndesSwitch : ConstraintLayout {
 
         switchComponent.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
         switchComponent.isClickable = false
+    }
+
+    /**
+     * since the logic for the click behavior is located in the internal component, we need
+     * to pass the click event to this internal view to be handled
+     */
+    private fun setupClickBehavior() {
+        setOnClickListener {
+            switchComponent.performClick()
+        }
     }
 
     private fun setupViewId() {
@@ -215,16 +226,6 @@ class AndesSwitch : ConstraintLayout {
      */
     fun setOnStatusChangeListener(listener: OnStatusChangeListener) {
         onStatusChangeListener = listener
-    }
-
-    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        ev?.let {
-            if (it.action == MotionEvent.ACTION_DOWN) {
-                switchComponent.performClick()
-                return super.onInterceptTouchEvent(ev)
-            }
-        }
-        return false
     }
 
     /**

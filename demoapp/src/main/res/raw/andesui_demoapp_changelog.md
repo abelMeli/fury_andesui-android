@@ -1,3 +1,7 @@
+# v3.30.1
+## 🛠 Fixes
+- Changes in `AndesSwitch` for the correct handling of the click events when the Talkback is enabled | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v3.30.0
 ## 🛠 Fixes
 - `AndesDatePicker` The DatePicker has been modified so that it can select a minimum date before the current date | Authors: [@PablovskyML](https://github.com/PablovskyML)
