@@ -218,7 +218,7 @@ class AndesDropdownTest {
     }
 
     @Test
-    fun `getter for accessibilityClassName works correctly with textfield state READONLY`() {
+    fun `AndesDropDownForm getter for accessibilityClassName works correctly with textfield state READONLY`() {
         val dropdown = AndesDropDownForm(
             context,
             AndesDropdownMenuType.FLOATINGMENU,
@@ -235,7 +235,7 @@ class AndesDropdownTest {
     }
 
     @Test
-    fun `getter for accessibilityClassName works correctly with textfield state different than READONLY`() {
+    fun `AndesDropDownForm getter for accessibilityClassName works correctly with textfield state different than READONLY`() {
         val dropdown = AndesDropDownForm(
             context,
             AndesDropdownMenuType.FLOATINGMENU,
@@ -243,6 +243,19 @@ class AndesDropdownTest {
             "",
             "",
             AndesDropdownState.ENABLED
+        )
+
+        val a11yClassName = dropdown.accessibilityClassName
+
+        Assert.assertEquals(Spinner::class.java.name, a11yClassName)
+    }
+
+    @Test
+    fun `AndesDropdownStandalone getter for accessibilityClassName works correctly`() {
+        val dropdown = AndesDropdownStandalone(
+            context,
+            AndesDropdownMenuType.BOTTOMSHEET,
+            AndesDropdownSize.MEDIUM
         )
 
         val a11yClassName = dropdown.accessibilityClassName

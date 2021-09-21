@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -236,4 +237,8 @@ class AndesDropdownStandalone : ConstraintLayout, AndesListDelegate {
     override fun getDataSetSize(andesList: AndesList): Int = listItems.size
 
     private fun createConfig() = AndesDropdownConfigurationFactory.create(context, andesDropdownAttrs)
+
+    override fun getAccessibilityClassName(): CharSequence {
+        return Spinner::class.java.name
+    }
 }

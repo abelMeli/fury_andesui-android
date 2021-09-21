@@ -1,3 +1,7 @@
+# v3.31.0
+## 🚀 Feature
+- `AndesDropdownStandalone` accessibility role announcement | [@eportasML](https://github.com/eportasML)
+
 # v3.30.1
 ## 🛠 Fixes
 - Changes in `AndesSwitch` for the correct handling of the click events when the Talkback is enabled | Author: [@juanunzu](https://github.com/juanunzu)
