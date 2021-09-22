@@ -225,81 +225,94 @@ class MessageShowcaseActivity : AppCompatActivity() {
             launchSpecs(it.context, AndesSpecs.MESSAGE)
         }
 
-        container.findViewById<AndesMessage>(R.id.messagePrimaryAction)
+        container.findViewById<AndesMessage>(R.id.message_neutral_first)
                 .setupPrimaryAction(
-                        "Primary",
+                        container.context.resources.getString(R.string.andes_message_static_action_first_neutral),
                         View.OnClickListener {
-                            Toast.makeText(this, "Primary onClick", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Reenviado!", Toast.LENGTH_SHORT).show()
                         }
                 )
 
-        container.findViewById<AndesMessage>(R.id.messagePrimaryAndSecondaryActionQuiet)
-                .setupPrimaryAction(
-                        "Primary",
-                        View.OnClickListener {
-                            Toast.makeText(this, "Primary onClick", Toast.LENGTH_SHORT).show()
-                        }
-                )
-        container.findViewById<AndesMessage>(R.id.messagePrimaryAndSecondaryActionQuiet)
-                .setupSecondaryAction(
-                        "Secondary",
-                        View.OnClickListener {
-                            Toast.makeText(this, "Secondary onClick", Toast.LENGTH_SHORT).show()
-                        }
-                )
+        container.findViewById<AndesMessage>(R.id.message_neutral_third)
+            .setupPrimaryAction(
+                container.context.resources.getString(R.string.andes_message_static_action_first_neutral),
+                View.OnClickListener {
+                    Toast.makeText(this, "Click en primary action", Toast.LENGTH_SHORT).show()
+                }
+            )
 
-        container.findViewById<AndesMessage>(R.id.messagePrimaryAndSecondaryActionLoud)
-                .setupPrimaryAction(
-                        "Primary",
-                        View.OnClickListener {
-                            Toast.makeText(this, "Primary onClick", Toast.LENGTH_SHORT).show()
-                        }
-                )
-        container.findViewById<AndesMessage>(R.id.messagePrimaryAndSecondaryActionLoud)
-                .setupSecondaryAction(
-                        "Secondary",
-                        View.OnClickListener {
-                            Toast.makeText(this, "Secondary onClick", Toast.LENGTH_SHORT).show()
-                        }
-                )
+        container.findViewById<AndesMessage>(R.id.message_success_first)
+            .setupLinkAction(
+                container.context.resources.getString(R.string.andes_message_static_action_link_success),
+                View.OnClickListener {
+                    Toast.makeText(this, "Click en link", Toast.LENGTH_SHORT).show()
+                }
+            )
 
-        container.findViewById<AndesMessage>(R.id.messageLinkLoud)
-                .setupLinkAction(
-                        "Link",
-                        View.OnClickListener {
-                            Toast.makeText(this, "Link onClick", Toast.LENGTH_SHORT).show()
-                        }
-                )
-        container.findViewById<AndesMessage>(R.id.messageLinkQuiet)
-                .setupLinkAction(
-                        "Link",
-                        View.OnClickListener {
-                            Toast.makeText(this, "Link onClick", Toast.LENGTH_SHORT).show()
-                        }
+        container.findViewById<AndesMessage>(R.id.message_success_second)
+            .setupLinkAction(
+                container.context.resources.getString(R.string.andes_message_static_action_link_success),
+                View.OnClickListener {
+                    Toast.makeText(this, "Click en link", Toast.LENGTH_SHORT).show()
+                }
+            )
 
-                )
+        container.findViewById<AndesMessage>(R.id.message_warning_second)
+            .setupPrimaryAction(
+                container.context.resources.getString(R.string.andes_message_static_action_first_warning),
+                View.OnClickListener {
+                    Toast.makeText(this, "Click en primary action", Toast.LENGTH_SHORT).show()
+                }
+            )
+
+        container.findViewById<AndesMessage>(R.id.message_warning_third)
+            .setupPrimaryAction(
+                container.context.resources.getString(R.string.andes_message_static_action_first_warning),
+                View.OnClickListener {
+                    Toast.makeText(this, "Click en primary action", Toast.LENGTH_SHORT).show()
+                }
+            )
+
+        container.findViewById<AndesMessage>(R.id.message_warning_second)
+            .setupSecondaryAction(
+                container.context.resources.getString(R.string.andes_message_static_action_second_warning),
+                View.OnClickListener {
+                    Toast.makeText(this, "Click en secondary action", Toast.LENGTH_SHORT).show()
+                }
+            )
+
+        container.findViewById<AndesMessage>(R.id.message_warning_third)
+            .setupSecondaryAction(
+                container.context.resources.getString(R.string.andes_message_static_action_second_warning),
+                View.OnClickListener {
+                    Toast.makeText(this, "Click en secondary action", Toast.LENGTH_SHORT).show()
+                }
+            )
 
         val links = listOf(
-                AndesBodyLink(firstMessageLink.first, firstMessageLink.second),
-                AndesBodyLink(secondMessageLink.first, secondMessageLink.second)
+            AndesBodyLink(firstMessageLink.first, firstMessageLink.second),
+            AndesBodyLink(secondMessageLink.first, secondMessageLink.second)
         )
 
-        container.findViewById<AndesMessage>(R.id.messageLinkBody).bodyLinks = (AndesBodyLinks(
-                links,
-                listener = {
-                    Toast.makeText(this, "Click at body link: $it", Toast.LENGTH_SHORT).show()
-                }
+        container.findViewById<AndesMessage>(R.id.message_error_first)
+            .bodyLinks = (AndesBodyLinks(
+            links,
+            listener = {
+                Toast.makeText(this, "Click at body link: $it", Toast.LENGTH_SHORT).show()
+            }
         ))
-        container.findViewById<AndesMessage>(R.id.messageLinkBodyWithThumbnail).bodyLinks = (AndesBodyLinks(
-                links,
-                listener = {
-                    Toast.makeText(this, "Click at body link: $it", Toast.LENGTH_SHORT).show()
-                }
+
+        container.findViewById<AndesMessage>(R.id.message_error_second)
+            .bodyLinks = (AndesBodyLinks(
+            links,
+            listener = {
+                Toast.makeText(this, "Click at body link: $it", Toast.LENGTH_SHORT).show()
+            }
         ))
     }
 
     companion object {
-        private val firstMessageLink = 6 to 11
-        private val secondMessageLink = 64 to 71
+        private val firstMessageLink = 11 to 20
+        private val secondMessageLink = 131 to 151
     }
 }

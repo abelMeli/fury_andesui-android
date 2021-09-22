@@ -5,12 +5,15 @@ import android.os.Build
 import android.text.SpannableString
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.TextView
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
+import com.mercadolibre.android.andesui.BuildConfig
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
@@ -24,6 +27,7 @@ import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
@@ -88,4 +92,34 @@ class AndesMessageTest {
 
         assertEquals(andesMessage.thumbnail.visibility, View.VISIBLE)
     }
+
+    @Test
+    fun `AndesMessage with linkAction set with a primaryAction set does not work`() {
+        ReflectionHelpers.setStaticField(BuildConfig::class.java, "DEBUG", false)
+        val actionText = "action"
+        val onClickListener = View.OnClickListener {}
+        andesMessage = AndesMessage(context, AndesMessageHierarchy.LOUD, AndesMessageType.SUCCESS,
+            "This is a body message", "Title", true, null, null
+        )
+
+        andesMessage.setupPrimaryAction(actionText, onClickListener)
+        andesMessage.setupLinkAction(actionText, onClickListener)
+
+        assertEquals(View.GONE, andesMessage.getLinkAction().visibility)
+    }
+
+    @Test
+    fun `AndesMessage with linkAction set without primaryAction set works correctly`() {
+        val actionText = "action"
+        val onClickListener = View.OnClickListener {}
+        andesMessage = AndesMessage(context, AndesMessageHierarchy.LOUD, AndesMessageType.SUCCESS,
+            "This is a body message", "Title", true, null, null
+        )
+
+        andesMessage.setupLinkAction(actionText, onClickListener)
+
+        assertEquals(View.VISIBLE, andesMessage.getLinkAction().visibility)
+    }
+
+    private fun AndesMessage.getLinkAction() = findViewById<TextView>(R.id.andes_link_action)
 }

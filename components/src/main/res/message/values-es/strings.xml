@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="andes_button_text" translatable="false">Do something</string>
     <string name="andes_message_dismiss_button_content_description">Cerrar</string>
 </resources>

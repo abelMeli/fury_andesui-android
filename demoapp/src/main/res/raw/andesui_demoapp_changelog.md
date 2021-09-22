@@ -1,5 +1,6 @@
 # v3.31.0
 ## 🚀 Feature
+- `AndesMessage Accessibility support` | Author: [@juanunzu](https://github.com/juanunzu)
 - `AndesDropdownStandalone` accessibility role announcement | [@eportasML](https://github.com/eportasML)
 
 # v3.30.1

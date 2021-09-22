@@ -321,6 +321,19 @@
     <string name="andes_message_change_primary">Primary action text</string>
     <string name="andes_message_change_secondary">Secondary action text</string>
     <string name="andes_message_change_link_button">Link action text</string>
+    <string name="andes_message_static_title_neutral">Revisá tu e-mail</string>
+    <string name="andes_message_static_title_success">Felicitaciones!</string>
+    <string name="andes_message_static_title_warning">Tenés cuotas por vencer.</string>
+    <string name="andes_message_static_title_error">Dirección incorrecta</string>
+    <string name="andes_message_static_body_neutral">Para que puedas coordinar la entrega, enviamos los datos de contacto del vendedor a tu e-mail. Si no recibiste el correo, clickeá en Reenviar.</string>
+    <string name="andes_message_static_body_success">Alcanzaste el nivel 6. Tenés envíos gratis en tus próximas ventas.</string>
+    <string name="andes_message_static_body_warning">Regularizá tu situación para evitar recargos</string>
+    <string name="andes_message_static_body_error">Ingresá en Mis Datos y revisá tu dirección de entrega. Sin este dato no podremos realizar el envío. También podés revisar nuestras preguntas frecuentes para saber cómo debe ser el formato.</string>
+    <string name="andes_message_static_action_first_neutral">Reenviar correo</string>
+    <string name="andes_message_static_action_first_warning">Pagar ahora</string>
+    <string name="andes_message_static_action_second_warning">Ir a mis compras</string>
+    <string name="andes_message_static_action_link_success">Más info</string>
+
 
 
     <!-- Andes ProgressIndicator -->

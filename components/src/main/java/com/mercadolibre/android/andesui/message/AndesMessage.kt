@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.message
 
 import android.content.Context
-import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.Spanned
@@ -94,24 +93,6 @@ class AndesMessage : CardView {
             setupBodyComponent(createConfig())
         }
 
-    private var primaryActionText: String
-        get() = primaryAction.textComponent.text.toString()
-        set(value) {
-            primaryAction.textComponent.text = value
-        }
-
-    private var linkActionText: String
-        get() = linkAction.textComponent.text.toString()
-        set(value) {
-            linkAction.textComponent.text = value
-        }
-
-    private var secondaryActionText: String
-        get() = secondaryAction.textComponent.text.toString()
-        set(value) {
-            secondaryAction.textComponent.text = value
-        }
-
     private lateinit var messageContainer: ConstraintLayout
     private lateinit var titleComponent: TextView
     lateinit var bodyComponent: TextView
@@ -121,7 +102,7 @@ class AndesMessage : CardView {
     private lateinit var andesMessageAttrs: AndesMessageAttrs
     private lateinit var primaryAction: AndesButton
     private lateinit var secondaryAction: AndesButton
-    private lateinit var linkAction: AndesButton
+    private lateinit var linkAction: TextView
     lateinit var thumbnail: SimpleDraweeView
 
     @Suppress("unused")
@@ -233,7 +214,7 @@ class AndesMessage : CardView {
      *
      */
     private fun setupViewId() {
-        if (id == NO_ID) { // If this view has no id
+        if (id == NO_ID) {
             id = View.generateViewId()
         }
     }
@@ -310,10 +291,14 @@ class AndesMessage : CardView {
 
     private fun setupIcon(config: AndesMessageConfiguration) {
         iconComponent.setImageDrawable(config.icon)
-        dismissableComponent.setImageDrawable(config.dismissableIcon)
     }
 
     private fun setupDismissable(config: AndesMessageConfiguration) {
+        dismissableComponent.setImageDrawable(config.dismissableIcon)
+        dismissableComponent.contentDescription = context
+            .resources
+            .getString(R.string.andes_message_dismiss_button_content_description)
+
         if (config.isDismissable) {
             dismissableComponent.visibility = View.VISIBLE
             dismissableComponent.setOnClickListener {
@@ -329,20 +314,18 @@ class AndesMessage : CardView {
         primaryAction.changeTextColor(config.primaryActionTextColor.colorInt(context))
         secondaryAction.changeBackgroundColor(config.secondaryActionBackgroundColor)
         secondaryAction.changeTextColor(config.secondaryActionTextColor.colorInt(context))
-        linkAction.changeBackgroundColor(config.linkActionBackgroundColor)
-        linkAction.changeTextColor(config.linkActionTextColor.colorInt(context))
     }
 
     fun setupPrimaryAction(text: String, onClickListener: OnClickListener) {
         primaryAction.visibility = View.VISIBLE
-        primaryActionText = text
+        primaryAction.text = text
         primaryAction.setOnClickListener(onClickListener)
     }
 
     fun setupSecondaryAction(text: String, onClickListener: OnClickListener) {
         if (primaryAction.visibility == View.VISIBLE) {
             secondaryAction.visibility = View.VISIBLE
-            secondaryActionText = text
+            secondaryAction.text = text
             secondaryAction.setOnClickListener(onClickListener)
         } else {
             when {
@@ -352,23 +335,25 @@ class AndesMessage : CardView {
         }
     }
 
+    /**
+     * Shows a clickable link in the bottom of this message with the [text] and [onClickListener] behavior
+     * passed as parameters. This method should only be called if there is no primary or secondary actions set. Otherwise,
+     * it will not work. For more info see the Figma docs:
+     * [https://www.figma.com/file/ma8IQUYi9IS8zc8C0rAzEB/Components-specifications?node-id=1478%3A166624]
+     */
     fun setupLinkAction(text: String, onClickListener: OnClickListener) {
         if (primaryAction.visibility == View.GONE) {
-
-            linkAction.setPadding(LINK_BUTTON_PADDING,
-                                  LINK_BUTTON_PADDING,
-                                  LINK_BUTTON_PADDING,
-                                  LINK_BUTTON_PADDING)
-
-            linkAction.visibility = View.VISIBLE
-            linkActionText = text
-            linkAction.textComponent.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-            linkAction.textComponent.paintFlags = if (hierarchy == AndesMessageHierarchy.LOUD) {
-                Paint.UNDERLINE_TEXT_FLAG
-            } else {
-                0
+            val spannableText = createSpannableString(text, onClickListener)
+            linkAction.apply {
+                setPadding(LINK_BUTTON_PADDING,
+                    LINK_BUTTON_PADDING,
+                    LINK_BUTTON_PADDING,
+                    LINK_BUTTON_PADDING)
+                visibility = View.VISIBLE
+                typeface = context.getFontOrDefault(R.font.andes_font_regular)
+                setOnClickListener(onClickListener)
+                this.text = spannableText
             }
-            linkAction.setOnClickListener(onClickListener)
         } else {
             when {
                 BuildConfig.DEBUG ->
@@ -377,6 +362,30 @@ class AndesMessage : CardView {
                     Log.d("AndesMessage", "Cannot initialize a link action with a primary one")
             }
         }
+    }
+
+    /**
+     * Returns a full-clickable spannable string with the [text] parameter and the [onClickListener] behavior,
+     * and the color values present in the config.
+     *
+     */
+    private fun createSpannableString(text: String, onClickListener: OnClickListener): SpannableString {
+        val config = createConfig()
+        val spannableString = SpannableString(text)
+
+        val clickableSpan = object : ClickableSpan() {
+            override fun updateDrawState(ds: TextPaint) {
+                ds.isUnderlineText = config.bodyLinkIsUnderline
+                ds.color = config.bodyLinkTextColor.colorInt(context)
+            }
+
+            override fun onClick(widget: View) {
+                onClickListener.onClick(widget)
+            }
+        }
+
+        spannableString.setSpan(clickableSpan, 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        return spannableString
     }
 
     fun setupDismissableCallback(onClickListener: OnClickListener) {
