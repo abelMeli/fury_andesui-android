@@ -2,6 +2,8 @@
 ## 🚀 Feature
 - `AndesMessage Accessibility support` | Author: [@juanunzu](https://github.com/juanunzu)
 - `AndesDropdownStandalone` accessibility role announcement | [@eportasML](https://github.com/eportasML)
+## 🛠 Fixes
+- Changes in the method that handles drawable colorization | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v3.30.1
 ## 🛠 Fixes

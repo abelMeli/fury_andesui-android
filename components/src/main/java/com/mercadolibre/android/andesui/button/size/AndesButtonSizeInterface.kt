@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.button.size
 
 import android.content.Context
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
@@ -116,7 +115,7 @@ internal interface AndesButtonSizeInterface {
         leftDrawable: Drawable?,
         rightDrawable: Drawable?,
         context: Context
-    ): IconConfig?
+    ): IconConfig? = null
 
     /**
      * Checks if the current size can display an icon.
@@ -195,7 +194,7 @@ internal class AndesLargeButtonSize : AndesButtonSizeInterface {
     ): IconConfig? {
         return try {
             val bitmapDrawable = buildColoredAndesBitmapDrawable(
-                icon as BitmapDrawable,
+                icon,
                 context,
                 context.resources.getDimensionPixelSize(R.dimen.andes_button_icon_width),
                 context.resources.getDimensionPixelSize(R.dimen.andes_button_icon_height),
@@ -251,15 +250,6 @@ internal class AndesMediumButtonSize : AndesButtonSizeInterface {
 
     override fun cornerRadius(context: Context) =
         context.resources.getDimension(R.dimen.andes_button_border_radius_medium)
-
-    override fun iconConfig(
-        hierarchy: AndesButtonHierarchyInterface,
-        leftIcon: String?,
-        rightIcon: String?,
-        leftDrawable: Drawable?,
-        rightDrawable: Drawable?,
-        context: Context
-    ): Nothing? = null
 }
 
 /**
@@ -280,13 +270,4 @@ internal class AndesSmallButtonSize : AndesButtonSizeInterface {
     override fun lateralPadding(context: Context) = context.resources.getDimension(R.dimen.andes_button_lateral_padding_small).toInt()
     override fun cornerRadius(context: Context) =
         context.resources.getDimension(R.dimen.andes_button_border_radius_small)
-
-    override fun iconConfig(
-        hierarchy: AndesButtonHierarchyInterface,
-        leftIcon: String?,
-        rightIcon: String?,
-        leftDrawable: Drawable?,
-        rightDrawable: Drawable?,
-        context: Context
-    ): Nothing? = null
 }

@@ -35,7 +35,7 @@ import com.mercadolibre.android.andesui.color.AndesColor
  * @return a complete look overhauled [BitmapDrawable].
  */
 fun buildColoredAndesBitmapDrawable(
-    image: BitmapDrawable,
+    image: Drawable,
     context: Context,
     dstWidth: Int? = null,
     dstHeight: Int? = null,
@@ -43,12 +43,12 @@ fun buildColoredAndesBitmapDrawable(
 ): BitmapDrawable {
     val scaledBitmap: Bitmap = if (dstHeight != null && dstWidth != null) {
         Bitmap.createScaledBitmap(
-            image.bitmap,
+            image.toBitmap(),
             dstWidth,
             dstHeight,
             true)
     } else {
-        image.bitmap
+        image.toBitmap()
     }
 
     return BitmapDrawable(context.resources, scaledBitmap)
@@ -158,15 +158,14 @@ fun buildColoredCircularShapeWithIconDrawable(
 
 internal fun isLollipopOrNewer() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
-fun Drawable.toBitmap(): Bitmap? {
-    var bitmap: Bitmap? = null
+fun Drawable.toBitmap(): Bitmap {
     if (this is BitmapDrawable) {
         val bitmapDrawable = this
         if (bitmapDrawable.bitmap != null) {
             return bitmapDrawable.bitmap
         }
     }
-    bitmap = if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
+    val bitmap: Bitmap = if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
         Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
     } else {
         Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
