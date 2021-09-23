@@ -10,7 +10,7 @@
         android:id="@+id/andes_bottom_sheet_background_dim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/andes_gray_900"
+        android:background="@color/andes_gray_800"
         android:visibility="gone" />
 
     <FrameLayout
