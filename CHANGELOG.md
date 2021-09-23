@@ -2,6 +2,8 @@
 ## 🚀 Feature
 - `AndesMessage Accessibility support` | Author: [@juanunzu](https://github.com/juanunzu)
 - `AndesDropdownStandalone` accessibility role announcement | [@eportasML](https://github.com/eportasML)
+- Added new icons based in Figma specs: [Bill](https://www.figma.com/file/i275NVe7uWWkuQYnpYGVq8/Andes-02-Iconography?node-id=1%3A542), [Answer](https://www.figma.com/file/i275NVe7uWWkuQYnpYGVq8/Andes-02-Iconography?node-id=1%3A734) and [Mail (only 20 and 32)](https://www.figma.com/file/i275NVe7uWWkuQYnpYGVq8/Andes-02-Iconography?node-id=1%3A788) | Author: [@epennachini](https://github.com/EPENNACHINI)
+
 ## 🛠 Fixes
 - Changes in the method that handles drawable colorization | Author: [@juanunzu](https://github.com/juanunzu)
 
