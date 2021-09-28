@@ -3,6 +3,7 @@
 - `AndesDatePicker` Added day selection in DatePicker | Authors: [@PablovskyML](https://github.com/PablovskyML)
 ## 🛠 Fixes
 - Fix in chevron from `AndesDropdownStandalone` | Author: [@eportasML](https://github.com/eportasML)
+- Fix `AndesTabs` style in portrait and landscape when full_width with single item | Author: [@eportasML](https://github.com/eportasML)
 
 # v3.31.0
 ## 🚀 Feature
