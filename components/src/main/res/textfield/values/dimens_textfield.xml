@@ -13,6 +13,7 @@
     <dimen name="andes_textfield_helper_paddingLeft">6dp</dimen>
     <dimen name="andes_textfield_helper_textSize">13sp</dimen>
     <dimen name="andes_textfield_helper_marginTop">6dp</dimen>
+    <dimen name="andes_textfield_helper_date_marginTop">16dp</dimen>
 
     <dimen name="andes_textfield_counter_textSize">13sp</dimen>
     <dimen name="andes_textfield_counter_marginTop">6dp</dimen>

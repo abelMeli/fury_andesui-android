@@ -30,6 +30,16 @@
             app:layout_constraintRight_toRightOf="@id/andesTextfieldMaxDate"
             app:layout_constraintTop_toBottomOf="@id/andesTextfieldMaxDate" />
 
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/btnSendDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:andesButtonText="@string/andes_datepicker_btn_date"
+            app:layout_constraintBottom_toBottomOf="@+id/andesTextfieldSetDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/andesTextfieldSetDate" />
+
+
         <com.mercadolibre.android.andesui.datepicker.AndesDatePicker
             android:id="@+id/andesDatePicker"
             android:layout_width="match_parent"
@@ -63,6 +73,20 @@
             app:andesTextfieldPlaceholder="@string/andes_datepicker_placeholder"
             app:layout_constraintStart_toStartOf="@+id/andesTextfieldMinDate"
             app:layout_constraintTop_toBottomOf="@id/andesTextfieldMinDate" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/andesTextfieldSetDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="@dimen/andes_textfield_helper_date_marginTop"
+            android:inputType="date"
+            app:andesTextfieldCounter="10"
+            app:andesTextfieldLabel="@string/andes_datepicker_set_date_label"
+            app:andesTextfieldPlaceholder="@string/andes_datepicker_placeholder"
+            app:layout_constraintEnd_toStartOf="@+id/btnSendDate"
+            app:layout_constraintStart_toStartOf="@+id/btnSendMinMaxDate"
+            app:layout_constraintTop_toBottomOf="@+id/btnSendMinMaxDate" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

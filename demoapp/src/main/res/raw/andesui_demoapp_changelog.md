@@ -1,3 +1,7 @@
+# v3.32.0
+## 🚀 Feature
+- `AndesDatePicker` Added day selection in DatePicker | Authors: [@PablovskyML](https://github.com/PablovskyML)
+
 # v3.31.0
 ## 🚀 Feature
 - `AndesMessage Accessibility support` | Author: [@juanunzu](https://github.com/juanunzu)

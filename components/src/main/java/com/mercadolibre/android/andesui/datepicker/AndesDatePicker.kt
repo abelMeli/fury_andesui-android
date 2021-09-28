@@ -195,6 +195,23 @@ class AndesDatePicker : ConstraintLayout {
         }
     }
 
+    /**
+     * Is responsible for setting a new selected date
+     */
+    fun selectDate(select: Long) {
+        val selectDate = Date(select)
+        val calendar = Calendar.getInstance()
+        if (selectDate < Date(calendarView.minDate)) {
+            return
+        }
+        if (selectDate > Date(calendarView.maxDate)) {
+            return
+        }
+        calendarView.date = select
+        calendar.time = selectDate
+        listener?.onDateApply(calendar)
+    }
+
     fun clearMinMaxDate() {
         calendarView.minDate = DEFAULT_MIN_DATE
         calendarView.maxDate = DEFAULT_MAX_DATE

@@ -60,8 +60,10 @@ class DatePickerShowcaseActivity : AppCompatActivity() {
         val datepicker: AndesDatePicker = container.findViewById(R.id.andesDatePicker)
         val btnSend: AndesButton = container.findViewById(R.id.btnSendMinMaxDate)
         val btnReset: AndesButton = container.findViewById(R.id.btnReset)
+        val btnSendDate: AndesButton = container.findViewById(R.id.btnSendDate)
         val inputMinDate: AndesTextfield = container.findViewById(R.id.andesTextfieldMinDate)
         val inputMaxDate: AndesTextfield = container.findViewById(R.id.andesTextfieldMaxDate)
+        val inputSetDate: AndesTextfield = container.findViewById(R.id.andesTextfieldSetDate)
         datepicker.setupButtonVisibility(false)
         datepicker.setupButtonText("Aplicar")
 
@@ -99,6 +101,24 @@ class DatePickerShowcaseActivity : AppCompatActivity() {
 
         btnReset.setOnClickListener() {
             datepicker.clearMinMaxDate()
+        }
+
+        btnSendDate.setOnClickListener() {
+            val setterDate: String? = inputSetDate.text?.trim()
+            if (setterDate != null && setterDate.isNotEmpty() && isValid(setterDate, "dd/MM/yyy")) {
+
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DATE, -1)
+
+                val format = SimpleDateFormat("dd/MM/yyyy")
+                val date = format.parse(setterDate)
+
+                datepicker.selectDate(date.time)
+            } else {
+                Toast
+                        .makeText(this, "La fecha no es una fecha valida", Toast.LENGTH_SHORT)
+                        .show()
+            }
         }
 
         datepicker.setDateAppearance(R.style.Andes_CalendarDateDemo)

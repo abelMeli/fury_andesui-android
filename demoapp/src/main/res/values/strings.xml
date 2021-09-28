@@ -249,8 +249,10 @@
     <string name="andes_datepicker_button">Andes DatePicker</string>
     <string name="andes_datepicker_min_date_label">Setup min date</string>
     <string name="andes_datepicker_max_date_label">Setup max date</string>
+    <string name="andes_datepicker_set_date_label">Setup select day</string>
     <string name="andes_datepicker_placeholder">dd/MM/yyyy</string>
     <string name="andes_datepicker_btn_send">Set MIN MAX Date</string>
+    <string name="andes_datepicker_btn_date">Set selected day</string>
     <string name="andes_datepicker_btn_reset">Reset</string>
 
 

@@ -107,4 +107,41 @@ class AndesDatePickerTest {
         Assert.assertEquals(andesDatePicker.calendarView.minDate, nowDate.time)
         Assert.assertNotEquals(andesDatePicker.calendarView.maxDate, nowDate.time)
     }
+
+    @Test
+    fun testAndesDatePickerSetSelectedDate() {
+        val datePicker = AndesDatePicker(context)
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, -4)
+        datePicker.selectDate(calendar.timeInMillis)
+        Assert.assertEquals(calendar.time.time, datePicker.calendarView.date)
+    }
+
+    @Test
+    fun testAndesDatePickerSetSelectedDateMinDate() {
+        val datePicker = AndesDatePicker(context)
+        val selectDate = Calendar.getInstance()
+        selectDate.add(Calendar.DATE, -4)
+
+        val minDate = Calendar.getInstance()
+        minDate.add(Calendar.DATE, -2)
+
+        datePicker.setupMinDate(minDate.time.time)
+        datePicker.selectDate(selectDate.timeInMillis)
+        Assert.assertNotEquals(selectDate.time.time, datePicker.calendarView.date)
+    }
+
+    @Test
+    fun testAndesDatePickerSetSelectedDateMaxDate() {
+        val datePicker = AndesDatePicker(context)
+        val selectDate = Calendar.getInstance()
+        selectDate.add(Calendar.DATE, +10)
+
+        val maxDate = Calendar.getInstance()
+        maxDate.add(Calendar.DATE, +5)
+
+        datePicker.setupMaxDate(maxDate.time.time)
+        datePicker.selectDate(selectDate.timeInMillis)
+        Assert.assertNotEquals(selectDate.time.time, datePicker.calendarView.date)
+    }
 }
