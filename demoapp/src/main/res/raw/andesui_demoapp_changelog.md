@@ -1,6 +1,8 @@
 # v3.32.0
 ## 🚀 Feature
 - `AndesDatePicker` Added day selection in DatePicker | Authors: [@PablovskyML](https://github.com/PablovskyML)
+## 🛠 Fixes
+- Fix in chevron from `AndesDropdownStandalone` | Author: [@eportasML](https://github.com/eportasML)
 
 # v3.31.0
 ## 🚀 Feature
