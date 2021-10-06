@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".components.a11yplayground.SemanticViewsActivity">
+
+    <com.mercadolibre.android.andesui.message.AndesMessage
+        android:id="@+id/asv_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:andesMessageBodyText="@string/andes_demoapp_playground_asv_body"
+        app:andesMessageHierarchy="quiet"
+        app:andesMessageTitleText="@string/andes_demoapp_playground_asv_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/asv_tv_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/andes_demoapp_playground_asv_tv_first"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/asv_card"
+        app:layout_constraintStart_toStartOf="@id/asv_card"
+        app:layout_constraintTop_toBottomOf="@id/asv_card" />
+
+    <TextView
+        android:id="@+id/asv_tv_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/andes_demoapp_playground_asv_tv_second"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/asv_card"
+        app:layout_constraintStart_toStartOf="@id/asv_card"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_first" />
+
+    <ImageView
+        android:id="@+id/asv_iv_first"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="download"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_second"
+        app:srcCompat="@drawable/ic_down_cloud"
+        app:tint="@color/andes_green_500" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5K+ Downloads"
+        android:textColor="@color/andes_green_500"
+        app:layout_constraintStart_toStartOf="@id/asv_iv_first"
+        app:layout_constraintTop_toBottomOf="@id/asv_iv_first" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Top app"
+        app:layout_constraintBottom_toBottomOf="@id/asv_iv_first"
+        app:layout_constraintStart_toEndOf="@id/asv_iv_first"
+        app:layout_constraintTop_toTopOf="@id/asv_iv_first" />
+
+    <ImageView
+        android:id="@+id/asv_iv_second"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:contentDescription="star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_second"
+        app:srcCompat="@drawable/ic_star"
+        app:tint="@color/andes_orange_500" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.5 stars"
+        android:textColor="@color/andes_orange_500"
+        app:layout_constraintStart_toStartOf="@id/asv_iv_second"
+        app:layout_constraintTop_toBottomOf="@id/asv_iv_second" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Top rated"
+        app:layout_constraintBottom_toBottomOf="@id/asv_iv_second"
+        app:layout_constraintStart_toEndOf="@id/asv_iv_second"
+        app:layout_constraintTop_toTopOf="@id/asv_iv_second" />
+
+    <ImageView
+        android:id="@+id/asv_iv_third"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="card"
+        android:src="@drawable/andes_pagar_y_cobrar_tarjeta_de_credito_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_second"
+        app:tint="@color/andes_accent_color" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$4.99"
+        android:textColor="@color/andes_accent_color"
+        app:layout_constraintEnd_toEndOf="@id/asv_iv_third"
+        app:layout_constraintTop_toBottomOf="@id/asv_iv_third" />
+
+    <TextView
+        android:id="@+id/asv_tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Top priced"
+        app:layout_constraintBottom_toBottomOf="@id/asv_iv_third"
+        app:layout_constraintEnd_toStartOf="@id/asv_iv_third"
+        app:layout_constraintTop_toTopOf="@id/asv_iv_third" />
+
+    <TextView
+        android:id="@+id/asv_tv_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/andes_demoapp_playground_asv_tv_third"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/asv_card"
+        app:layout_constraintStart_toStartOf="@id/asv_card"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_price" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/asv_first_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/andes_demoapp_playground_asv_layout_first"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_third">
+
+        <ImageView
+            android:id="@+id/asv_iv_first_semantic"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:focusable="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_down_cloud"
+            app:tint="@color/andes_green_500" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="5K+ Downloads"
+            android:textColor="@color/andes_green_500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/asv_iv_first_semantic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:focusable="false"
+            android:text="Top app"
+            app:layout_constraintStart_toEndOf="@id/asv_iv_first_semantic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/asv_second_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_third">
+
+        <ImageView
+            android:id="@+id/asv_iv_second_semantic"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_star"
+            app:tint="@color/andes_orange_500" />
+
+        <TextView
+            android:id="@+id/asv_tv_not_focusable_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.5 stars"
+            android:textColor="@color/andes_orange_500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/asv_iv_second_semantic" />
+
+        <TextView
+            android:id="@+id/asv_tv_not_focusable_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Top rated"
+            app:layout_constraintStart_toEndOf="@id/asv_iv_second_semantic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/asv_third_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asv_tv_third">
+
+        <ImageView
+            android:id="@+id/asv_iv_third_semantic"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/andes_pagar_y_cobrar_tarjeta_de_credito_20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/andes_accent_color" />
+
+        <TextView
+            android:id="@+id/asv_tv_not_focusable_fourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$4.99"
+            android:textColor="@color/andes_accent_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/asv_iv_third_semantic" />
+
+        <TextView
+            android:id="@+id/asv_tv_not_focusable_fifth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="Top priced"
+            app:layout_constraintEnd_toStartOf="@id/asv_iv_third_semantic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

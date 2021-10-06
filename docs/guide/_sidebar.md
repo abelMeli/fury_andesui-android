@@ -16,3 +16,4 @@
   * [AndesTooltip](/tooltip/AndesTooltip.md)
 - Utils
   * [AndesColor](/color/AndesColor.md)
+  * [A11yPlayground](/a11y-playground/A11yPlayground.md)

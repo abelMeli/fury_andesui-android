@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".components.a11yplayground.HeadingActivity">
+
+        <com.mercadolibre.android.andesui.message.AndesMessage
+            android:id="@+id/heading_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:andesMessageBodyText="@string/andes_demoapp_playground_ahea_body"
+            app:andesMessageHierarchy="quiet"
+            app:andesMessageTitleText="@string/andes_demoapp_playground_ahea_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/heading_first_heading"
+            style="@style/Andes.Title.M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:accessibilityHeading="true"
+            android:text="@string/andes_demoapp_playground_ahea_first_heading"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading_card" />
+
+        <TextView
+            android:id="@+id/heading_first_paragraph"
+            style="@style/Andes.Body.S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/andes_demoapp_playground_lorem"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading_first_heading" />
+
+        <TextView
+            android:id="@+id/heading_second_heading"
+            style="@style/Andes.Title.M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:accessibilityHeading="true"
+            android:text="@string/andes_demoapp_playground_ahea_second_heading"
+            android:textColor="@color/andes_text_color_primary"
+            android:textSize="26dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading_first_paragraph" />
+
+        <TextView
+            android:id="@+id/heading_second_paragraph"
+            style="@style/Andes.Body.S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/andes_demoapp_playground_lorem"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading_second_heading" />
+
+        <TextView
+            android:id="@+id/heading_third_heading"
+            style="@style/Andes.Title.M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/andes_demoapp_playground_ahea_third_heading"
+            android:textColor="@color/andes_text_color_primary"
+            android:textSize="26dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading_second_paragraph" />
+
+        <TextView
+            android:id="@+id/heading_third_paragraph"
+            style="@style/Andes.Body.S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/andes_demoapp_playground_lorem"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading_third_heading" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

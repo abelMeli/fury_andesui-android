@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".components.a11yplayground.A11yTraversalAfterActivity">
+
+    <com.mercadolibre.android.andesui.message.AndesMessage
+        android:id="@+id/ata_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:andesMessageBodyText="@string/andes_demoapp_playground_ata_body"
+        app:andesMessageHierarchy="quiet"
+        app:andesMessageTitleText="@string/andes_demoapp_playground_ata_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ata_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/andes_demoapp_playground_ata_tv"
+        android:textColor="@color/andes_text_color_primary"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ata_card" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/ata_button_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:accessibilityTraversalAfter="@id/ata_button_2"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_3"
+        app:layout_constraintEnd_toStartOf="@id/ata_button_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ata_tv" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/ata_button_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:accessibilityTraversalAfter="@id/ata_button_1"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_2"
+        app:layout_constraintEnd_toStartOf="@id/ata_button_1"
+        app:layout_constraintStart_toEndOf="@id/ata_button_3"
+        app:layout_constraintTop_toBottomOf="@id/ata_tv" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/ata_button_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:accessibilityTraversalAfter="@id/ata_tv"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ata_button_2"
+        app:layout_constraintTop_toBottomOf="@id/ata_tv" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/ata_button_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ata_button_5"
+        app:layout_constraintTop_toBottomOf="@id/ata_button_1" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/ata_button_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ata_button_5"
+        app:layout_constraintTop_toBottomOf="@id/ata_button_1" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/ata_button_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_6"
+        app:layout_constraintEnd_toStartOf="@id/ata_button_5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ata_button_1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

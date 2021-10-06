@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".components.a11yplayground.NextFocusActivity">
+
+    <com.mercadolibre.android.andesui.message.AndesMessage
+        android:id="@+id/nf_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:andesMessageBodyText="@string/andes_demoapp_playground_nf_body"
+        app:andesMessageHierarchy="quiet"
+        app:andesMessageTitleText="@string/andes_demoapp_playground_nf_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nf_tv_xml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/andes_demoapp_playground_nf_tv_first"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_card" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusRight="@id/nf_button_2"
+        android:nextFocusDown="@id/nf_button_4"
+        android:nextFocusForward="@id/nf_button_2"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_1"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_tv_xml" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusLeft="@id/nf_button_1"
+        android:nextFocusRight="@id/nf_button_3"
+        android:nextFocusDown="@id/nf_button_5"
+        android:nextFocusForward="@id/nf_button_3"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_2"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_3"
+        app:layout_constraintStart_toEndOf="@id/nf_button_1"
+        app:layout_constraintTop_toBottomOf="@id/nf_tv_xml" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusLeft="@id/nf_button_2"
+        android:nextFocusDown="@id/nf_button_6"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nf_button_2"
+        app:layout_constraintTop_toBottomOf="@id/nf_tv_xml" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusRight="@id/nf_button_5"
+        android:nextFocusUp="@id/nf_button_1"
+        android:nextFocusDown="@id/nf_button_7"
+        android:nextFocusForward="@id/nf_button_5"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_4"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_1" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusLeft="@id/nf_button_4"
+        android:nextFocusRight="@id/nf_button_6"
+        android:nextFocusUp="@id/nf_button_2"
+        android:nextFocusDown="@id/nf_button_8"
+        android:nextFocusForward="@id/nf_button_6"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_5"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_6"
+        app:layout_constraintStart_toEndOf="@id/nf_button_4"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_1" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusLeft="@id/nf_button_5"
+        android:nextFocusUp="@id/nf_button_3"
+        android:nextFocusDown="@id/nf_button_9"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nf_button_5"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_1" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusRight="@id/nf_button_8"
+        android:nextFocusUp="@id/nf_button_4"
+        android:nextFocusDown="@id/nf_button_10"
+        android:nextFocusForward="@id/nf_button_8"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_7"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_4" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusLeft="@id/nf_button_7"
+        android:nextFocusRight="@id/nf_button_9"
+        android:nextFocusUp="@id/nf_button_5"
+        android:nextFocusDown="@id/nf_button_11"
+        android:nextFocusForward="@id/nf_button_9"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_8"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_9"
+        app:layout_constraintStart_toEndOf="@id/nf_button_7"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_4" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:nextFocusLeft="@id/nf_button_8"
+        android:nextFocusUp="@id/nf_button_6"
+        android:nextFocusDown="@id/nf_button_12"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nf_button_8"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_4" />
+
+    <TextView
+        android:id="@+id/nf_tv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/andes_demoapp_playground_nf_tv_second"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_7" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_10"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_tv_code" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_11"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_12"
+        app:layout_constraintStart_toEndOf="@id/nf_button_10"
+        app:layout_constraintTop_toBottomOf="@id/nf_tv_code" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nf_button_11"
+        app:layout_constraintTop_toBottomOf="@id/nf_tv_code" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_13"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_10" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_14"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_12"
+        app:layout_constraintStart_toEndOf="@id/nf_button_10"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_10" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nf_button_11"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_10" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_16"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_13" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_17"
+        app:layout_constraintEnd_toStartOf="@id/nf_button_12"
+        app:layout_constraintStart_toEndOf="@id/nf_button_10"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_13" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/nf_button_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesButtonText="@string/andes_demoapp_playground_ata_button_18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/nf_button_11"
+        app:layout_constraintTop_toBottomOf="@id/nf_button_13" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

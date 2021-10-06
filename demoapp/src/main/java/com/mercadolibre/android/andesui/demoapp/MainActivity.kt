@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupCoreComponents() {
+        andesui_playground_a11y.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/playground/home"))
+        }
         andesui_tooltip.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/tooltip"))
         }

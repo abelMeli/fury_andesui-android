@@ -1,3 +1,7 @@
+# v3.33.0
+## 🚀 Feature
+- New section `Andes Accessibility Playground` added in the demoapp to test the different android APIs for a11y
+
 # v3.32.0
 ## 🚀 Feature
 - `AndesDatePicker` Added day selection in DatePicker | Authors: [@PablovskyML](https://github.com/PablovskyML)

@@ -63,6 +63,80 @@
     <string name="andes_demoapp_whatsnew_main_action">View What\'s New</string>
     <string name="andes_demoapp_label_andes_contribution">I want to contribute 🤝</string>
 
+    <!-- Andes A11y Playground -->
+    <string name="andes_demoapp_playground_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="andes_demoapp_playground_card_body">Explore the different APIs needed to make any layout fully accessible</string>
+    <string name="andes_demoapp_playground_card_title">Android Accessibility Playground</string>
+    <string name="andes_demoapp_playground_button_content_description">Content Description</string>
+    <string name="andes_demoapp_playground_button_live_region">Live Region</string>
+    <string name="andes_demoapp_playground_button_traversal_after">A11y Traversal After</string>
+    <string name="andes_demoapp_playground_button_semantic_views">Semantic Views</string>
+    <string name="andes_demoapp_playground_button_announce_a11y">Announce for A11y</string>
+    <string name="andes_demoapp_playground_button_important_for_a11y">Important for A11y</string>
+    <string name="andes_demoapp_playground_button_a11y_heading">Accessibility Heading</string>
+    <string name="andes_demoapp_playground_button_next_focus">Next Focus</string>
+    <string name="andes_demoapp_playground_cd_title">Content description</string>
+    <string name="andes_demoapp_playground_cd_body">String description used by the talkback when the component receives focus.</string>
+    <string name="andes_demoapp_playground_cd_tv_first">The next image has the contentDescription set by xml</string>
+    <string name="andes_demoapp_playground_cd_tv_second">The next image has the contentDescription set by code</string>
+    <string name="andes_demoapp_playground_cd_tv_third">The next image does not have contentDescription</string>
+    <string name="andes_demoapp_playground_cd_first">First red circle</string>
+    <string name="andes_demoapp_playground_cd_second">Second red circle</string>
+    <string name="andes_demoapp_playground_ata_title">Accessibility Traversal After</string>
+    <string name="andes_demoapp_playground_ata_body">Param needed to manage the navigation order of the different layout components.</string>
+    <string name="andes_demoapp_playground_ata_tv">The navigation in the first three elements is set by xml. The rest is set in the activity, by code. To set this parameter in devices with API minor than 22, the only way is to use the code option. For more info please refer to the activity code.</string>
+    <string name="andes_demoapp_playground_nf_title">Next Focus (up/down/left/right)</string>
+    <string name="andes_demoapp_playground_nf_body">This params are needed to manage the navigation when the user has peripheral controllers, such as external keyboards, switches, and more.</string>
+    <string name="andes_demoapp_playground_nf_tv_first">Values set by xml</string>
+    <string name="andes_demoapp_playground_nf_tv_second">Values set by code</string>
+    <string name="andes_demoapp_playground_ifa_title">Important for accessibility</string>
+    <string name="andes_demoapp_playground_ifa_body">Param needed to notify talkback if the component/layout could be focuseable and/or read by the accessibility services.</string>
+    <string name="andes_demoapp_playground_ifa_tv_first">This layout is marked as not important by xml with value "noHideDescendants", therefore it will not be read nor selectable, neither his child views.</string>
+    <string name="andes_demoapp_playground_ifa_tv_second">This layout is marked as not important by code with value "no", therefore it will not be read nor selectable, but some of his childs will.</string>
+    <string name="andes_demoapp_playground_ifa_tv_third">This layout is marked as important by code with value "yes", therefore its content description will be read when selected. Some of the childs will also be read when selected.</string>
+    <string name="andes_demoapp_playground_alr_title">Accessibility Live Region</string>
+    <string name="andes_demoapp_playground_alr_body">Param needed to notify talkback that every time the view that applies this attribute changes, the user must be notified.</string>
+    <string name="andes_demoapp_playground_alr_tv_first">This parameter indicates that every time the component changes, the talkback will notify the user. In this case, the value is set in the textView by xml (assertive).</string>
+    <string name="andes_demoapp_playground_alr_tv_second">In this case, the value is set in the activity, by code (polite).</string>
+    <string name="andes_demoapp_playground_alr_tv_third">The difference between assertive and polite live regions relies in the urgency to notify the changes. In case the talkback is already talking, the announcement emitted by an assertive region will interrupt the previous message to be read right away, while the announcement emitted by a polite region will wait until the end of the previous message before being read.</string>
+    <string name="andes_demoapp_playground_afa_title">Announce for accessibility</string>
+    <string name="andes_demoapp_playground_afa_body">API used to send on demand messages to the talkback.</string>
+    <string name="andes_demoapp_playground_afa_tv">In cases when is necessary to inform the talkback about certain events fired via a particular action, a message can be sent by using this API.</string>
+    <string name="andes_demoapp_playground_alr_button_random">Generate random number</string>
+    <string name="andes_demoapp_playground_alr_tv_random_number">Random number: %d</string>
+    <string name="andes_demoapp_playground_afa_button_send">Send message to talkback</string>
+    <string name="andes_demoapp_playground_afa_textfield_label">Text to send</string>
+    <string name="andes_demoapp_playground_afa_textfield_placeholder">Insert message</string>
+    <string name="andes_demoapp_playground_ata_button_1">Button 1</string>
+    <string name="andes_demoapp_playground_ata_button_2">Button 2</string>
+    <string name="andes_demoapp_playground_ata_button_3">Button 3</string>
+    <string name="andes_demoapp_playground_ata_button_4">Button 4</string>
+    <string name="andes_demoapp_playground_ata_button_5">Button 5</string>
+    <string name="andes_demoapp_playground_ata_button_6">Button 6</string>
+    <string name="andes_demoapp_playground_ata_button_7">Button 7</string>
+    <string name="andes_demoapp_playground_ata_button_8">Button 8</string>
+    <string name="andes_demoapp_playground_ata_button_9">Button 9</string>
+    <string name="andes_demoapp_playground_ata_button_10">Button 10</string>
+    <string name="andes_demoapp_playground_ata_button_11">Button 11</string>
+    <string name="andes_demoapp_playground_ata_button_12">Button 12</string>
+    <string name="andes_demoapp_playground_ata_button_13">Button 13</string>
+    <string name="andes_demoapp_playground_ata_button_14">Button 14</string>
+    <string name="andes_demoapp_playground_ata_button_15">Button 15</string>
+    <string name="andes_demoapp_playground_ata_button_16">Button 16</string>
+    <string name="andes_demoapp_playground_ata_button_17">Button 17</string>
+    <string name="andes_demoapp_playground_ata_button_18">Button 18</string>
+    <string name="andes_demoapp_playground_ahea_title">Accessibility heading</string>
+    <string name="andes_demoapp_playground_ahea_body">API used to indicate that a view is a heading. This is used to allow the user to skip entire sections of content when navigating.</string>
+    <string name="andes_demoapp_playground_ahea_first_heading">This is the first heading.</string>
+    <string name="andes_demoapp_playground_ahea_second_heading">This is the second heading.</string>
+    <string name="andes_demoapp_playground_ahea_third_heading">This is the third heading.</string>
+    <string name="andes_demoapp_playground_asv_title">Semantic Views</string>
+    <string name="andes_demoapp_playground_asv_body">Grouping of views with shared meaning</string>
+    <string name="andes_demoapp_playground_asv_tv_first">We talk about semantic views when we wrap two or more views who share meaning. This way, the Talkback presents them to the user as an unique element. This reduces the amount of noise and makes the app navigation more straightforward and less frustrating.</string>
+    <string name="andes_demoapp_playground_asv_tv_second">In this case, we present three views who share meaning but are separated and not configured to be displayead as semantic views.</string>
+    <string name="andes_demoapp_playground_asv_tv_third">Now, the same views as semantic views.</string>
+    <string name="andes_demoapp_playground_asv_layout_first">Top app. More than five thousand downloads.</string>
+
 
     <!-- Andes Badge -->
     <string name="andes_badge_specs">Andes Badge Specs 📘</string>
@@ -85,6 +159,7 @@
     <string name="andes_badge_highlight">highlight</string>
     <string name="andes_badge_neutral">neutral</string>
     <string name="andes_badge_showcase">Andes Badge</string>
+    <string name="andes_playground_a11y_showcase">Andes A11y Playground</string>
     <string name="andes_badge_loud_badges_text">Hierarchy: Loud</string>
     <string name="andes_badge_quiet_badges_text">Hierarchy: Quiet</string>
     <string name="andes_badge_specs_default_text">Default Text in Badges</string>
@@ -335,7 +410,6 @@
     <string name="andes_message_static_action_first_warning">Pagar ahora</string>
     <string name="andes_message_static_action_second_warning">Ir a mis compras</string>
     <string name="andes_message_static_action_link_success">Más info</string>
-
 
 
     <!-- Andes ProgressIndicator -->
