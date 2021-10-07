@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_money_amount_discount" translatable="false">% OFF</string>
+    <string name="andes_money_amount_discount_accessibility">percent discount</string>
+    <string name="andes_money_amount_negative_accessibility">minus</string>
+    <string name="andes_money_amount_previous_accessibility">Previous price:</string>
+    <string name="andes_money_amount_previous_combo_accessibility">Before:</string>
+    <string name="andes_money_amount_after_accessibility">Now:</string>
+    <string name="andes_money_amount_with_accessibility">with</string>
+    <string name="andes_money_amount_one">one</string>
+
+    <string name="andes_currency_peso_singular" translatable="false">Peso</string>
+    <string name="andes_currency_peso_plural" translatable="false">Pesos</string>
+    <string name="andes_currency_real_singular" translatable="false">Real</string>
+    <string name="andes_currency_real_plural" translatable="false">Reales</string>
+    <string name="andes_currency_colon_singular" translatable="false">Colón</string>
+    <string name="andes_currency_colon_plural" translatable="false">Colónes</string>
+    <string name="andes_currency_euro_singular" translatable="false">Euro</string>
+    <string name="andes_currency_euro_plural" translatable="false">Euros</string>
+    <string name="andes_currency_balboa_singular" translatable="false">Balboa</string>
+    <string name="andes_currency_balboa_plural" translatable="false">Balboas</string>
+    <string name="andes_currency_sol_singular" translatable="false">Sol</string>
+    <string name="andes_currency_sol_plural" translatable="false">Soles</string>
+    <string name="andes_currency_dollar_singular" translatable="false">Dólar</string>
+    <string name="andes_currency_dollar_plural" translatable="false">Dólares</string>
+    <string name="andes_currency_bolivar_singular" translatable="false">Bolivar</string>
+    <string name="andes_currency_bolivar_plural" translatable="false">Bolívares</string>
+    <string name="andes_currency_fomento_singular" translatable="false">Unidad de fomento</string>
+    <string name="andes_currency_fomento_plural" translatable="false">Unidades de fomento</string>
+    <string name="andes_currency_boliviano_singular" translatable="false">Boliviano</string>
+    <string name="andes_currency_boliviano_plural" translatable="false">Bolivianos</string>
+    <string name="andes_currency_guarani_singular" translatable="false">Guaraní</string>
+    <string name="andes_currency_guarani_plural" translatable="false">Guaraníes</string>
+    <string name="andes_currency_quetzal_singular" translatable="false">Quetzal</string>
+    <string name="andes_currency_quetzal_plural" translatable="false">Quetzales</string>
+    <string name="andes_currency_lempira_singular" translatable="false">Lempira</string>
+    <string name="andes_currency_lempira_plural" translatable="false">Lempiras</string>
+    <string name="andes_currency_cordoba_singular" translatable="false">Córdoba</string>
+    <string name="andes_currency_cordoba_plural" translatable="false">Córdobas</string>
+    <string name="andes_currency_cubano_singular" translatable="false">Peso cubano convertible</string>
+    <string name="andes_currency_cubano_plural" translatable="false">Pesos cubanos convertibles</string>
+
+    <string name="andes_currency_centavo_singular" translatable="false">Centavo</string>
+    <string name="andes_currency_centavo_plural" translatable="false">Centavos</string>
+    <string name="andes_currency_centimo_singular" translatable="false">Céntimo</string>
+    <string name="andes_currency_centimo_plural" translatable="false">Céntimos</string>
+    <string name="andes_currency_cent_singular" translatable="false">Cent</string>
+    <string name="andes_currency_cent_plural" translatable="false">Cents</string>
+    <string name="andes_currency_centesimo_singular" translatable="false">Centésimo</string>
+    <string name="andes_currency_centesimo_plural" translatable="false">Centésimos</string>
+</resources>

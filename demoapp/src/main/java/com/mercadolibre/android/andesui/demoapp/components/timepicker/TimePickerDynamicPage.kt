@@ -17,6 +17,7 @@ import com.mercadolibre.android.andesui.timepicker.AndesTimePicker
 import com.mercadolibre.android.andesui.timepicker.minutesInterval.AndesTimePickerInterval
 import com.mercadolibre.android.andesui.timepicker.state.AndesTimePickerState
 
+@Suppress("TooManyFunctions")
 class TimePickerDynamicPage {
 
     private lateinit var andesTimePicker: AndesTimePicker

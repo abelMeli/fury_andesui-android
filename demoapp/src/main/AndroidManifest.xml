@@ -540,6 +540,21 @@
                     android:scheme="meli" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".components.moneyamount.MoneyAmountShowcaseActivity"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="andes"
+                    android:path="/moneyamount"
+                    android:scheme="meli" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

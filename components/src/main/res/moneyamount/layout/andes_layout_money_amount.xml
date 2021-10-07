@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
+        android:id="@+id/andes_money_amount_combo_previous_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesMoneyAmount="1000"
+        app:andesMoneyAmountSize="size_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
+        android:id="@+id/andes_money_amount_combo_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesMoneyAmount="1000"
+        app:layout_constraintStart_toStartOf="@+id/andes_money_amount_combo_previous_amount"
+        app:layout_constraintTop_toBottomOf="@+id/andes_money_amount_combo_previous_amount" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountDiscount
+        android:id="@+id/andes_money_amount_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:andesMoneyAmount="1000"
+        app:andesMoneyAmountDiscountSize="size_18"
+        app:layout_constraintBottom_toBottomOf="@+id/andes_money_amount_combo_amount"
+        app:layout_constraintStart_toEndOf="@+id/andes_money_amount_combo_amount"
+        app:layout_constraintTop_toTopOf="@+id/andes_money_amount_combo_amount" />
+
+</merge>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="AndesMoneyAmount" tools:ignore="ResourceName">
+
+        <attr name="andesMoneyAmountSize">
+            <enum name="size_12" value="1000" />
+            <enum name="size_14" value="1001" />
+            <enum name="size_16" value="1002" />
+            <enum name="size_18" value="1003" />
+            <enum name="size_20" value="1004" />
+            <enum name="size_24" value="1005" />
+            <enum name="size_28" value="1006" />
+            <enum name="size_32" value="1007" />
+            <enum name="size_36" value="1008" />
+            <enum name="size_40" value="1009" />
+            <enum name="size_44" value="1010" />
+            <enum name="size_48" value="1011" />
+            <enum name="size_52" value="1012" />
+            <enum name="size_56" value="1013" />
+            <enum name="size_60" value="1014" />
+        </attr>
+
+        <attr name="andesMoneyAmountType">
+            <enum name="positive" value="2000" />
+            <enum name="negative" value="2001" />
+            <enum name="previous" value="2002" />
+        </attr>
+
+        <attr name="andesMoneyAmountStyle">
+            <enum name="none" value="3000" />
+            <enum name="normal" value="3001" />
+            <enum name="superscript" value="3002" />
+        </attr>
+
+        <attr name="andesMoneyAmountCurrency">
+            <enum name="BRL" value="4001" />
+            <enum name="UYU" value="4002" />
+            <enum name="CLP" value="4003" />
+            <enum name="CLF" value="4004" />
+            <enum name="MXN" value="4006" />
+            <enum name="DOP" value="4007" />
+            <enum name="PAB" value="4008" />
+            <enum name="COP" value="4009" />
+            <enum name="VEF" value="4010" />
+            <enum name="EUR" value="4011" />
+            <enum name="PEN" value="4012" />
+            <enum name="CRC" value="4013" />
+            <enum name="ARS" value="4014" />
+            <enum name="USD" value="4015" />
+            <enum name="BOB" value="4016" />
+            <enum name="GTQ" value="4017" />
+            <enum name="PYG" value="4018" />
+            <enum name="HNL" value="4019" />
+            <enum name="NIO" value="4020" />
+            <enum name="CUC" value="4021" />
+            <enum name="VES" value="4022" />
+        </attr>
+
+        <attr name="andesMoneyAmountCountry">
+            <enum name="AR" value="5001" />
+            <enum name="BR" value="5002" />
+            <enum name="CL" value="5003" />
+            <enum name="CO" value="5004" />
+            <enum name="MX" value="5006" />
+            <enum name="CR" value="5007" />
+            <enum name="PE" value="5008" />
+            <enum name="EC" value="5009" />
+            <enum name="PA" value="5010" />
+            <enum name="DO" value="5011" />
+            <enum name="UY" value="5012" />
+            <enum name="VE" value="5013" />
+            <enum name="BO" value="5014" />
+            <enum name="PY" value="5015" />
+            <enum name="GT" value="5016" />
+            <enum name="HN" value="5017" />
+            <enum name="NI" value="5018" />
+            <enum name="SV" value="5019" />
+            <enum name="PR" value="5020" />
+            <enum name="CU" value="5021" />
+        </attr>
+
+        <attr name="andesMoneyAmount" format="float" />
+
+        <attr name="andesShowZerosDecimal" format="boolean" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="AndesMoneyAmountDiscount" tools:ignore="ResourceName">
+
+        <attr name="andesMoneyAmountDiscountSize">
+            <enum name="size_12" value="1000" />
+            <enum name="size_14" value="1001" />
+            <enum name="size_16" value="1002" />
+            <enum name="size_18" value="1003" />
+            <enum name="size_20" value="1004" />
+            <enum name="size_24" value="1005" />
+            <enum name="size_28" value="1006" />
+            <enum name="size_32" value="1007" />
+            <enum name="size_36" value="1008" />
+            <enum name="size_40" value="1009" />
+            <enum name="size_44" value="1010" />
+            <enum name="size_48" value="1011" />
+            <enum name="size_52" value="1012" />
+            <enum name="size_56" value="1013" />
+            <enum name="size_60" value="1014" />
+        </attr>
+
+        <attr name="andesMoneyDiscount" format="integer" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="AndesMoneyAmountCombo" tools:ignore="ResourceName">
+
+        <attr name="andesMoneyAmountComboSize">
+            <enum name="size_24" value="1000" />
+            <enum name="size_36" value="1001" />
+        </attr>
+
+        <attr name="andesMoneyAmountComboCurrency">
+            <enum name="BRL" value="4001" />
+            <enum name="UYU" value="4002" />
+            <enum name="CLP" value="4003" />
+            <enum name="CLF" value="4004" />
+            <enum name="MXN" value="4006" />
+            <enum name="DOP" value="4007" />
+            <enum name="PAB" value="4008" />
+            <enum name="COP" value="4009" />
+            <enum name="VEF" value="4010" />
+            <enum name="EUR" value="4011" />
+            <enum name="PEN" value="4012" />
+            <enum name="CRC" value="4013" />
+            <enum name="ARS" value="4014" />
+            <enum name="USD" value="4015" />
+            <enum name="BOB" value="4016" />
+            <enum name="GTQ" value="4017" />
+            <enum name="PYG" value="4018" />
+            <enum name="HNL" value="4019" />
+            <enum name="NIO" value="4020" />
+            <enum name="CUC" value="4021" />
+            <enum name="VES" value="4022" />
+        </attr>
+
+        <attr name="andesMoneyAmountComboCountry">
+            <enum name="AR" value="5001" />
+            <enum name="BR" value="5002" />
+            <enum name="CL" value="5003" />
+            <enum name="CO" value="5004" />
+            <enum name="MX" value="5006" />
+            <enum name="CR" value="5007" />
+            <enum name="PE" value="5008" />
+            <enum name="EC" value="5009" />
+            <enum name="PA" value="5010" />
+            <enum name="DO" value="5011" />
+            <enum name="UY" value="5012" />
+            <enum name="VE" value="5013" />
+            <enum name="BO" value="5014" />
+            <enum name="PY" value="5015" />
+            <enum name="GT" value="5016" />
+            <enum name="HN" value="5017" />
+            <enum name="NI" value="5018" />
+            <enum name="SV" value="5019" />
+            <enum name="PR" value="5020" />
+            <enum name="CU" value="5021" />
+        </attr>
+
+        <attr name="andesMoneyAmountComboAmount" format="float" />
+
+        <attr name="andesMoneyAmountComboPreviousAmount" format="float" />
+
+        <attr name="andesMoneyAmountComboDiscount" format="integer" />
+
+    </declare-styleable>
+
+
+</resources>

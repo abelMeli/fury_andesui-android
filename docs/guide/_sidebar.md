@@ -8,12 +8,17 @@
   * [AndesButton](/button/AndesButton.md)
   * [AndesCheckbox](/checkbox/AndesCheckbox.md)
   * [AndesFloatingMenu](/floatingmenu/AndesFloatingMenu.md)
+  * AndesMoneyAmount
+  ** [AndesMoneyAmount](/moneyamount/AndesMoneyAmount.md)
+  ** [AndesMoneyAmountDiscount](/moneyamount/AndesMoneyAmountDiscount.md)
+  ** [AndesMoneyAmountCombo](/moneyamount/AndesMoneyAmountCombo.md)
   * [AndesSnackbar](/snackbar/AndesSnackbar.md)
   * [AndesSwitch](/switch/AndesSwitch.md)
   * [AndesFeedbackScreen](/feedbackscreen/AndesFeedbackScreen.md)
   * [AndesTabs](/tabs/AndesTabs.md)
-  * [AndesThumbnail](/thumbnail/AndesThumbnail.md)
-  * [AndesThumbnailBadge](/thumbnail/AndesThumbnailBadge.md)
+  * AndesThumbnail
+  ** [AndesThumbnail](/thumbnail/AndesThumbnail.md)
+  ** [AndesThumbnailBadge](/thumbnail/AndesThumbnailBadge.md)
   * [AndesTooltip](/tooltip/AndesTooltip.md)
 - Utils
   * [AndesColor](/color/AndesColor.md)

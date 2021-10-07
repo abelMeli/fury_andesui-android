@@ -1,5 +1,6 @@
 # v3.33.0
 ## 🚀 Feature
+- AndesMoneyAmount | Author: [@jperezgonzal](https://github.com/jperezgonzal)
 - New section `Andes Accessibility Playground` added in the demoapp to test the different android APIs for a11y
 - AndesFeedbackScreen | Author: Andes team
 

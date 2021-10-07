@@ -104,6 +104,9 @@ class MainActivity : AppCompatActivity() {
         andesui_feedbackscreen.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/feedbackscreen"))
         }
+        andesui_money_amount.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/moneyamount"))
+        }
     }
 
     private fun setupExtras() {

@@ -50,6 +50,7 @@
     <string name="andes_demoapp_screen_floatingmenu">Andes UI: Floating Menu</string>
     <string name="andes_demoapp_screen_timepicker">Andes UI: Time Picker</string>
     <string name="andes_demoapp_screen_progress_indicator">Andes UI: Progress Indicator</string>
+    <string name="andes_demoapp_screen_money_amount">Andes UI: Money Amount</string>
     <string name="andes_demoapp_screen_linear_progress_indicator">Andes UI: Linear Progress Indicator</string>
     <string name="andes_demoapp_screen_whatsnew">Andes UI: What\'s new?</string>
     <string name="andes_demoapp_changelog_error">What\'s New couldn\'t be loaded, please contact our support team.</string>
@@ -845,7 +846,151 @@
     <string-array name="andes_thumbnail_badge_dot_size_spinner">
         <item>Size 24</item>
         <item>Size 32</item>
+    </string-array>  
+  
+    <string name="demoapp_money_amount">Andes Money Amount</string>
+    <string name="demoapp_money_amount_size">Size</string>
+    <string name="demoapp_money_amount_type">Type</string>
+    <string name="demoapp_money_amount_component_type">MoneyAmount Type</string>
+    <string name="demoapp_money_amount_price">Price</string>
+    <string name="demoapp_money_amount_currency">Currency</string>
+    <string name="demoapp_money_amount_country">Country</string>
+    <string name="demoapp_money_amount_style">Style</string>
+    <string name="demoapp_money_amount_discount">Discount</string>
+    <string name="demoapp_money_amount_previous">Previous price</string>
+    <string name="demoapp_money_amount_description">It is used to refer to the value of an item or a specific amount of money.</string>
+
+    <string name="demoapp_money_amount_title">MoneyAmount</string>
+    <string name="demoapp_money_amount_discount_title">MoneyAmountDiscount</string>
+    <string name="demoapp_money_amount_combo_title">MoneyAmountCombo</string>
+
+    <string-array name="andes_money_amount_spinner_currency">
+        <item>BRL</item>
+        <item>UYU</item>
+        <item>CLP</item>
+        <item>CLF</item>
+        <item>MXN</item>
+        <item>DOP</item>
+        <item>PAB</item>
+        <item>COP</item>
+        <item>VEF</item>
+        <item>EUR</item>
+        <item>PEN</item>
+        <item>CRC</item>
+        <item>ARS</item>
+        <item>USD</item>
+        <item>BOB</item>
+        <item>GTQ</item>
+        <item>PYG</item>
+        <item>HNL</item>
+        <item>NIO</item>
+        <item>CUC</item>
+        <item>VES</item>
     </string-array>
+
+    <string-array name="andes_money_amount_spinner_country">
+        <item>AR</item>
+        <item>BR</item>
+        <item>CL</item>
+        <item>CO</item>
+        <item>MX</item>
+        <item>CR</item>
+        <item>PE</item>
+        <item>EC</item>
+        <item>PA</item>
+        <item>DO</item>
+        <item>UY</item>
+        <item>VE</item>
+        <item>BO</item>
+        <item>PY</item>
+        <item>GT</item>
+        <item>HN</item>
+        <item>NI</item>
+        <item>SV</item>
+        <item>PR</item>
+        <item>CU</item>
+    </string-array>
+
+    <string-array name="andes_money_amount_spinner_type">
+        <item>Positive</item>
+        <item>Negative</item>
+        <item>Previous</item>
+    </string-array>
+
+    <string-array name="andes_money_amount_spinner_money_amount_type">
+        <item>Price</item>
+        <item>Discount</item>
+        <item>Combo</item>
+    </string-array>
+
+    <string-array name="andes_money_amount_spinner_style">
+        <item>None</item>
+        <item>Normal</item>
+        <item>SuperScript</item>
+    </string-array>
+
+    <string-array name="andes_money_amount_spinner_size">
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+        <item>24</item>
+        <item>28</item>
+        <item>32</item>
+        <item>36</item>
+        <item>40</item>
+        <item>44</item>
+        <item>48</item>
+        <item>52</item>
+        <item>56</item>
+        <item>60</item>
+    </string-array>
+
+    <string-array name="andes_money_amount_spinner_combo_size">
+        <item>24</item>
+        <item>36</item>
+    </string-array>
+
+    <string name="currency_peso_singular" translatable="false">Peso</string>
+    <string name="currency_peso_plural" translatable="false">Pesos</string>
+    <string name="currency_real_singular" translatable="false">Real</string>
+    <string name="currency_real_plural" translatable="false">Reales</string>
+    <string name="currency_colon_singular" translatable="false">Colón</string>
+    <string name="currency_colon_plural" translatable="false">Colónes</string>
+    <string name="currency_euro_singular" translatable="false">Euro</string>
+    <string name="currency_euro_plural" translatable="false">Euros</string>
+    <string name="currency_balboa_singular" translatable="false">Balboa</string>
+    <string name="currency_balboa_plural" translatable="false">Balboas</string>
+    <string name="currency_sol_singular" translatable="false">Sol</string>
+    <string name="currency_sol_plural" translatable="false">Soles</string>
+    <string name="currency_dollar_singular" translatable="false">Dólar</string>
+    <string name="currency_dollar_plural" translatable="false">Dólares</string>
+    <string name="currency_bolivar_singular" translatable="false">Bolivar</string>
+    <string name="currency_bolivar_plural" translatable="false">Bolívares</string>
+    <string name="currency_fomento_singular" translatable="false">Unidad de fomento</string>
+    <string name="currency_fomento_plural" translatable="false">Unidades de fomento</string>
+    <string name="currency_boliviano_singular" translatable="false">Boliviano</string>
+    <string name="currency_boliviano_plural" translatable="false">Bolivianos</string>
+    <string name="currency_guarani_singular" translatable="false">Guaraní</string>
+    <string name="currency_guarani_plural" translatable="false">Guaraníes</string>
+    <string name="currency_quetzal_singular" translatable="false">Quetzal</string>
+    <string name="currency_quetzal_plural" translatable="false">Quetzales</string>
+    <string name="currency_lempira_singular" translatable="false">Lempira</string>
+    <string name="currency_lempira_plural" translatable="false">Lempiras</string>
+    <string name="currency_cordoba_singular" translatable="false">Córdoba</string>
+    <string name="currency_cordoba_plural" translatable="false">Córdobas</string>
+    <string name="currency_cubano_singular" translatable="false">Peso cubano convertible</string>
+    <string name="currency_cubano_plural" translatable="false">Pesos cubanos convertibles</string>
+
+    <string name="currency_centavo_singular" translatable="false">Centavo</string>
+    <string name="currency_centavo_plural" translatable="false">Centavos</string>
+    <string name="currency_centimo_singular" translatable="false">Céntimo</string>
+    <string name="currency_centimo_plural" translatable="false">Céntimos</string>
+    <string name="currency_cent_singular" translatable="false">Cent</string>
+    <string name="currency_cent_plural" translatable="false">Cents</string>
+    <string name="currency_centesimo_singular" translatable="false">Centésimo</string>
+    <string name="currency_centesimo_plural" translatable="false">Centésimos</string>
 
     <string name="andes_demoapp_feedbackscreen">Andes UI: Feedback Screen</string>
     <string name="andes_feedbackscreen">Andes FeedbackScreen</string>

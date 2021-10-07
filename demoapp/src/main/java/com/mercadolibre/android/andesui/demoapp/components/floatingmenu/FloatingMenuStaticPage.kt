@@ -145,6 +145,7 @@ class FloatingMenuStaticPage {
      * -creating the floating menu
      * -setting the click listener to the menu trigger
      */
+    @Suppress("LongParameterList")
     private fun inflateComponent(
         andesButton: AndesButton,
         rows: AndesFloatingMenuRows,

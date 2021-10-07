@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/andes_white">
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/andes_gray_950"
+        android:text="@string/demoapp_money_amount_combo_title"
+        android:textSize="18sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_95"
+        app:layout_constraintStart_toStartOf="@+id/vertical_5"
+        app:layout_constraintTop_toBottomOf="@+id/andesMoneyAmount4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/demoapp_money_amount_title"
+        android:textColor="@color/andes_gray_950"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/demoapp_money_amount_discount_title"
+        android:textColor="@color/andes_gray_950"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_95"
+        app:layout_constraintStart_toStartOf="@+id/vertical_5"
+        app:layout_constraintTop_toBottomOf="@+id/andesMoneyAmount2" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
+        android:id="@+id/andesMoneyAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesMoneyAmount="2073.00"
+        app:andesMoneyAmountCurrency="UYU"
+        app:andesMoneyAmountSize="size_18"
+        app:andesMoneyAmountStyle="superscript"
+        app:andesMoneyAmountType="positive"
+        app:andesShowZerosDecimal="true"
+        app:layout_constraintStart_toStartOf="@+id/vertical_5"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
+        android:id="@+id/andesMoneyAmount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesMoneyAmount="1234.56"
+        app:andesMoneyAmountCurrency="EUR"
+        app:andesMoneyAmountSize="size_20"
+        app:andesMoneyAmountStyle="normal"
+        app:andesMoneyAmountType="negative"
+        app:andesShowZerosDecimal="true"
+        app:layout_constraintStart_toStartOf="@+id/vertical_5"
+        app:layout_constraintTop_toBottomOf="@+id/andesMoneyAmount" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesMoneyAmount="1234.56"
+        app:andesMoneyAmountCurrency="BRL"
+        app:andesMoneyAmountSize="size_24"
+        app:andesMoneyAmountStyle="none"
+        app:andesMoneyAmountType="previous"
+        app:andesShowZerosDecimal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/andesMoneyAmount"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_95"
+        app:layout_constraintTop_toTopOf="@+id/andesMoneyAmount" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
+        android:id="@+id/andesMoneyAmount3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesMoneyAmount="1234.56"
+        app:andesMoneyAmountCurrency="USD"
+        app:andesMoneyAmountSize="size_18"
+        app:andesMoneyAmountStyle="superscript"
+        app:andesMoneyAmountType="previous"
+        app:andesShowZerosDecimal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/andesMoneyAmount2"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_95"
+        app:layout_constraintTop_toTopOf="@+id/andesMoneyAmount2" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountDiscount
+        android:id="@+id/andesMoneyAmount4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesMoneyAmountDiscountSize="size_16"
+        app:andesMoneyDiscount="25"
+        app:layout_constraintStart_toStartOf="@+id/vertical_5"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountDiscount
+        android:id="@+id/andesMoneyAmount5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesMoneyAmountDiscountSize="size_24"
+        app:andesMoneyDiscount="10"
+        app:layout_constraintBottom_toBottomOf="@+id/andesMoneyAmount4"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_95"
+        app:layout_constraintTop_toTopOf="@+id/andesMoneyAmount4" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountCombo
+        android:id="@+id/andesMoneyAmountCombo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesMoneyAmountComboCurrency="EUR"
+        app:andesMoneyAmountComboAmount="1350"
+        app:andesMoneyAmountComboSize="size_24"
+        app:layout_constraintStart_toStartOf="@+id/vertical_5"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountCombo
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesMoneyAmountComboCurrency="USD"
+        app:andesMoneyAmountComboAmount="1350"
+        app:andesMoneyAmountComboSize="size_24"
+        app:andesMoneyAmountComboDiscount="10"
+        app:layout_constraintBottom_toBottomOf="@+id/andesMoneyAmountCombo"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_95"
+        app:layout_constraintTop_toTopOf="@+id/andesMoneyAmountCombo" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountCombo
+        android:id="@+id/andesMoneyAmountCombo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesMoneyAmountComboCurrency="ARS"
+        app:andesMoneyAmountComboPreviousAmount="1500"
+        app:andesMoneyAmountComboAmount="1350"
+        app:andesMoneyAmountComboSize="size_24"
+        app:layout_constraintStart_toStartOf="@+id/vertical_5"
+        app:layout_constraintTop_toBottomOf="@+id/andesMoneyAmountCombo" />
+
+    <com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountCombo
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesMoneyAmountComboCurrency="BRL"
+        app:andesMoneyAmountComboPreviousAmount="1500"
+        app:andesMoneyAmountComboAmount="1350"
+        app:andesMoneyAmountComboSize="size_24"
+        app:andesMoneyAmountComboDiscount="10"
+        app:layout_constraintBottom_toBottomOf="@+id/andesMoneyAmountCombo2"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_95"
+        app:layout_constraintTop_toTopOf="@+id/andesMoneyAmountCombo2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,7 +47,7 @@ android {
                            'src/main/res/card', 'src/main/res/progress', 'src/main/res/bottomsheet', 'src/main/res/list',
                            'src/main/res/bottomsheet', 'src/main/res/carousel', 'src/main/res/datepicker',
                            'src/main/res/dropdown', 'src/main/res/switchandes', 'src/main/res/floatingmenu', 'src/main/res/tabs',
-                           'src/main/res/timepicker', 'src/main/res/linearprogress', 'src/main/res/feedbackscreen']
+                           'src/main/res/timepicker', 'src/main/res/linearprogress', 'src/main/res/feedbackscreen', 'src/main/res/moneyamount']
         }
     }
 }

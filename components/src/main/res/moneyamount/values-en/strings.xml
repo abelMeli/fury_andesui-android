@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_money_amount_discount_accessibility">percent discount</string>
+    <string name="andes_money_amount_negative_accessibility">Minus</string>
+    <string name="andes_money_amount_previous_accessibility">Previous price:</string>
+    <string name="andes_money_amount_previous_combo_accessibility">Before:</string>
+    <string name="andes_money_amount_after_accessibility">Now:</string>
+    <string name="andes_money_amount_with_accessibility">with</string>
+    <string name="andes_money_amount_one">one</string>
+</resources>

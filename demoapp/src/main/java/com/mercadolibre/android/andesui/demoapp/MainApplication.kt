@@ -10,6 +10,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
+import com.mercadolibre.android.andesui.demoapp.mock.MockConfigProvider
 
 /**
  * Main Application class that extends from Application to execute the start method only once.
@@ -38,5 +39,7 @@ class MainApplication : Application() {
                 .build()
         Fresco.initialize(this, config)
         FLog.setMinimumLoggingLevel(FLog.VERBOSE)
+
+        MockConfigProvider.configure()
     }
 }
