@@ -101,6 +101,9 @@ class MainActivity : AppCompatActivity() {
         andesui_timepicker.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/timepicker"))
         }
+        andesui_feedbackscreen.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/feedbackscreen"))
+        }
     }
 
     private fun setupExtras() {

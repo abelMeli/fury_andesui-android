@@ -15,4 +15,5 @@ class IconProvider(private val context: Context) {
      * @param name the name of the icon.
      */
     fun loadIcon(name: String): Drawable? = iconProviderStrategy.loadIcon(name)
+    fun loadIcon(idRes: Int): Drawable? = iconProviderStrategy.loadIcon(idRes)
 }

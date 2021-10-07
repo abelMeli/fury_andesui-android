@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import android.util.Log
+import androidx.annotation.DrawableRes
 import java.io.FileNotFoundException
 
 /**
@@ -11,6 +12,7 @@ import java.io.FileNotFoundException
  */
 interface IconProviderStrategy {
     fun loadIcon(name: String): Drawable?
+    fun loadIcon(@DrawableRes idRes: Int): Drawable? = null
 }
 
 /**
@@ -24,6 +26,15 @@ class OfflineIconProviderStrategy(private val context: Context) : IconProviderSt
             ContextCompat.getDrawable(context, resId)
         } catch (e: FileNotFoundException) {
             Log.e("Andes UI", "File $name was not found.", e)
+            null
+        }
+    }
+
+    override fun loadIcon(@DrawableRes idRes: Int): Drawable? {
+        return try {
+            ContextCompat.getDrawable(context, idRes)
+        } catch (e: FileNotFoundException) {
+            Log.e("Andes UI", "File $idRes was not found.", e)
             null
         }
     }

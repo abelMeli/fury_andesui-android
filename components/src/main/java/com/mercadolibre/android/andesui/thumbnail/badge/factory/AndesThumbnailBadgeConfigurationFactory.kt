@@ -14,7 +14,8 @@ internal data class AndesThumbnailBadgeConfiguration(
     val image: Drawable,
     val thumbnailTintColor: ColorStateList?,
     val thumbnailSize: AndesThumbnailSize,
-    val badgeOutline: Int
+    val badgeOutline: Int,
+    val badgeVisibility: Int
 )
 
 @Suppress("TooManyFunctions")
@@ -37,7 +38,8 @@ internal object AndesThumbnailBadgeConfigurationFactory {
                 badgeComponent = badgeComponent,
                 thumbnailSize = badgeComponent.thumbnailSize,
                 badgeColor = badgeColor,
-                badgeOutline = badgeComponent.getBadgeOutlineSize(context)
+                badgeOutline = badgeComponent.getBadgeOutlineSize(context),
+                badgeVisibility = thumbnailType.badgeVisibility()
             )
         }
     }

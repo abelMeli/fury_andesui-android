@@ -32,6 +32,8 @@ internal interface AndesBadgeTypeInterface {
     fun secondaryColor(): AndesColor
 
     fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable? = null
+
+    fun feedbackIcon(context: Context, defaultSize: Boolean): Drawable? = null
 }
 
 internal class AndesNeutralBadgeType : AndesBadgeTypeInterface {
@@ -75,6 +77,13 @@ internal class AndesSuccessBadgeType : AndesBadgeTypeInterface {
         )
     }
 
+    override fun feedbackIcon(context: Context, defaultSize: Boolean): Drawable? {
+        return IconProvider(context).loadIcon(
+            R.drawable.andes_ui_feedback_success_40
+                .takeIf { defaultSize } ?: R.drawable.andes_ui_feedback_success_32
+        )
+    }
+
     private companion object {
         const val ICON_16 = "andes_ui_feedback_success_16"
         const val ICON_24 = "andes_ui_feedback_success_24"
@@ -93,6 +102,13 @@ internal class AndesWarningBadgeType : AndesBadgeTypeInterface {
                 R.color.andes_white.toAndesColor(),
                 backgroundColor,
                 size.size.height(context).toInt()
+        )
+    }
+
+    override fun feedbackIcon(context: Context, defaultSize: Boolean): Drawable? {
+        return IconProvider(context).loadIcon(
+            R.drawable.andes_ui_feedback_warning_40
+                .takeIf { defaultSize } ?: R.drawable.andes_ui_feedback_warning_32
         )
     }
 
@@ -117,8 +133,15 @@ internal class AndesErrorBadgeType : AndesBadgeTypeInterface {
         )
     }
 
+    override fun feedbackIcon(context: Context, defaultSize: Boolean): Drawable? {
+        return IconProvider(context).loadIcon(
+            R.drawable.andes_ui_feedback_error_40
+                .takeIf { defaultSize } ?: R.drawable.andes_ui_feedback_error_32
+        )
+    }
+
     private companion object {
-        const val ICON_16 = "andes_ui_feedback_warning_16"
-        const val ICON_24 = "andes_ui_feedback_warning_24"
+        const val ICON_16 = "andes_ui_feedback_error_16"
+        const val ICON_24 = "andes_ui_feedback_error_24"
     }
 }

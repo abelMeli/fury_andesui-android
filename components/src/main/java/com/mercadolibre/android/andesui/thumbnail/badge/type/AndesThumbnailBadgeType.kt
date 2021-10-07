@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.thumbnail.badge.type
 
-
 /**
  * Utility class that does two things: Defines the possible types an [AndesThumbnailBadge] thumbnail can take.
  *
@@ -16,6 +15,14 @@ sealed class AndesThumbnailBadgeType {
      * Will not tint the [AndesThumbnail] and will set a center_crop scale type to the image.
      */
     object ImageCircle : AndesThumbnailBadgeType()
+
+    /**
+     * This variation will be used only by AndesFeedbackScreenView
+     *
+     * Will tint the [AndesThumbnail] and set a fit_content scale type to the image. It will also hide,
+     * thumbnail badge.
+     */
+    internal object FeedbackIcon : AndesThumbnailBadgeType()
 
     companion object {
         /**
@@ -35,6 +42,7 @@ sealed class AndesThumbnailBadgeType {
         return when (this) {
             Icon -> AndesIconThumbnailBadgeType
             ImageCircle -> AndesImageCircleThumbnailBadgeType
+            FeedbackIcon -> AndesFeedbackIconThumbnailBadgeType
         }
     }
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/andes_feedbackscreen_header_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/andes_white"
+        app:cardCornerRadius="@dimen/andes_card_corner_radius"
+        android:importantForAccessibility="no"
+        android:focusableInTouchMode="false"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
+        android:id="@+id/andes_feedbackscreen_header_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/andes_feedbackscreen_thumbnail_margin_bottom"
+        app:andesThumbnailBadgeComponentPillSize="size_64"
+        app:andesThumbnailBadgeComponentType="success"
+        app:andesThumbnailBadgeImage="@drawable/andes_navegacion_compras_24"
+        app:andesThumbnailBadgeType="icon"
+        app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_overline"
+        app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/andes_feedbackscreen_header_overline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:importantForAccessibility="yes"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/andes_text_color_primary"
+        android:textSize="@dimen/andes_feedbackscreen_header_overline_size"
+        app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_title"
+        app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_image" />
+
+    <TextView
+        android:id="@+id/andes_feedbackscreen_header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/andes_text_color_primary"
+        android:textSize="@dimen/andes_feedbackscreen_header_title_size"
+        android:importantForAccessibility="yes"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_highlight"
+        app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_overline"/>
+
+    <TextView
+        android:id="@+id/andes_feedbackscreen_header_highlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:importantForAccessibility="yes"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/andes_text_color_primary"
+        android:textSize="@dimen/andes_feedbackscreen_header_highlight_size"
+        app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_description"
+        app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_title" />
+
+    <TextView
+        android:id="@+id/andes_feedbackscreen_header_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:importantForAccessibility="yes"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/andes_text_color_primary"
+        android:textSize="@dimen/andes_feedbackscreen_header_description_size"
+        app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_highlight" />
+
+</merge>

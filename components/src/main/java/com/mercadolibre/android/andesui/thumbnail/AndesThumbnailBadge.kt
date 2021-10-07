@@ -40,6 +40,7 @@ class AndesThumbnailBadge : ConstraintLayout {
                 setupThumbnailBadgeTint(it)
                 setupThumbnailOutline(it)
                 setupBadgeComponent(it)
+                setupThumbnailBadgeVisibility(it)
             }
         }
 
@@ -66,6 +67,7 @@ class AndesThumbnailBadge : ConstraintLayout {
             createConfig().let {
                 setupThumbnailType(it)
                 setupThumbnailBadgeTint(it)
+                setupThumbnailBadgeVisibility(it)
             }
         }
 
@@ -110,6 +112,7 @@ class AndesThumbnailBadge : ConstraintLayout {
 
         setupThumbnailBadgeTint(config)
         setupThumbnailOutline(config)
+        setupThumbnailBadgeVisibility(config)
     }
 
     private fun setupThumbnailOutline(config: AndesThumbnailBadgeConfiguration) {
@@ -159,6 +162,10 @@ class AndesThumbnailBadge : ConstraintLayout {
         addView(outlineView)
 
         createBadgeComponent(config)
+    }
+
+    private fun setupThumbnailBadgeVisibility(config: AndesThumbnailBadgeConfiguration) {
+        badge.visibility = config.badgeVisibility
     }
 
     private fun createBadgeComponent(config: AndesThumbnailBadgeConfiguration) {

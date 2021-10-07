@@ -847,4 +847,35 @@
         <item>Size 32</item>
     </string-array>
 
+    <string name="andes_demoapp_feedbackscreen">Andes UI: Feedback Screen</string>
+    <string name="andes_feedbackscreen">Andes FeedbackScreen</string>
+    <string name="andes_feedbackscreen_description">A screen that shows the result of a flow or a group of tasks.</string>
+    <string name="feedbackscreen_type">Feedback Type</string>
+    <string name="feedbackscreen_header_thumbnail">Asset</string>
+    <string name="feedbackscreen_color">Feedback Color</string>
+    <string name="feedbackscreen_header_title">Title</string>
+    <string name="feedbackscreen_header_overlined">Header With overline</string>
+    <string name="feedbackscreen_header_overline">Overline</string>
+    <string name="feedbackscreen_header_highlight">Highlight</string>
+    <string name="feedbackscreen_header_description">Description</string>
+    <string name="feedbackscreen_finish_button">Feedback bottom Button</string>
+    <string name="feedbackscreen_close_button">Feedback close Button</string>
+    <string name="feedbackscreen_dynamic_create_button">Create</string>
+    <string-array name="feedbackscreen_type_spinner">
+        <item>Simple</item>
+        <item>Congrats</item>
+    </string-array>
+    <string-array name="feedbackscreen_color_spinner">
+        <item>Green</item>
+        <item>Orange</item>
+        <item>Red</item>
+    </string-array>
+    <string-array name="feedbackscreen_header_thumbnail_spinner">
+        <item>None</item>
+        <item>Icon</item>
+        <item>Image Circle</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="feedbackscreen_body_number">Feedback Body mocked views</string>
 </resources>

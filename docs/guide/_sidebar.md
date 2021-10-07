@@ -10,6 +10,7 @@
   * [AndesFloatingMenu](/floatingmenu/AndesFloatingMenu.md)
   * [AndesSnackbar](/snackbar/AndesSnackbar.md)
   * [AndesSwitch](/switch/AndesSwitch.md)
+  * [AndesFeedbackScreen](/feedbackscreen/AndesFeedbackScreen.md)
   * [AndesTabs](/tabs/AndesTabs.md)
   * [AndesThumbnail](/thumbnail/AndesThumbnail.md)
   * [AndesThumbnailBadge](/thumbnail/AndesThumbnailBadge.md)

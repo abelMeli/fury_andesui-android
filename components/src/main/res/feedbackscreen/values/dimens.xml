@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andes_feedbackscreen_simple_header_margin_top">24dp</dimen>
+    <dimen name="andes_feedbackscreen_congrats_header_margin_top">56dp</dimen>
+    <dimen name="andes_feedbackscreen_thumbnail_margin_bottom">16dp</dimen>
+    <dimen name="andes_feedbackscreen_thumbnail_margin_start">16dp</dimen>
+    <dimen name="andes_feedbackscreen_header_title_size">24sp</dimen>
+    <dimen name="andes_feedbackscreen_congrats_header_title_size">20sp</dimen>
+    <dimen name="andes_feedbackscreen_header_highlight_size">16sp</dimen>
+    <dimen name="andes_feedbackscreen_header_description_size">16sp</dimen>
+    <dimen name="andes_feedbackscreen_header_overline_size">14sp</dimen>
+    <dimen name="andes_feedbackscreen_close_icon_margin">4dp</dimen>
+
+
+    <dimen name="andes_feedbackscreen_header_body_card_padding">16dp</dimen>
+    <dimen name="andes_feedbackscreen_header_body_padding_vertical">8dp</dimen>
+    <dimen name="andes_feedbackscreen_close_button_size">48dp</dimen>
+
+    <dimen name="andes_feedbackscreen_congrats_header_body_padding_vertical">8dp</dimen>
+    <dimen name="andes_feedbackscreen_congrats_header_body_card_padding">16dp</dimen>
+
+    <dimen name="andes_feedbackscreen_content_horizontal_margin">20dp</dimen>
+    <dimen name="andes_feedbackscreen_content_bottom_margin">20dp</dimen>
+    <dimen name="andes_feedbackscreen_body_margin_bottom">16dp</dimen>
+    <dimen name="andes_feedbackscreen_header_margin_bottom">16dp</dimen>
+
+    <dimen name="andes_feedbackscreen_congrats_gradient_size">72dp</dimen>
+    <dimen name="andes_feedbackscreen_congrats_gradient_solid_size">56dp</dimen>
+</resources>
