@@ -1,3 +1,7 @@
+# v3.33.1
+## 🛠 Fixes
+- Fix in playground that was causing a crash when accessing the <em>traversal after</em> activity
+
 # v3.33.0
 ## 🚀 Feature
 - AndesMoneyAmount | Author: [@jperezgonzal](https://github.com/jperezgonzal)

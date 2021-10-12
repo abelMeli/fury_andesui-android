@@ -28,7 +28,7 @@ class A11yTraversalAfterActivity : AppCompatActivity() {
         button3 = findViewById(R.id.ata_button_3)
         button4 = findViewById(R.id.ata_button_4)
         button5 = findViewById(R.id.ata_button_5)
-        button5 = findViewById(R.id.ata_button_6)
+        button6 = findViewById(R.id.ata_button_6)
     }
 
     /**
