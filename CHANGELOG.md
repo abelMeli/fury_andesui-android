@@ -1,6 +1,7 @@
 # v3.33.1
 ## 🛠 Fixes
 - Fix in playground that was causing a crash when accessing the <em>traversal after</em> activity
+- Fix `AndesFeedbackScreenView` layoutParams wrap_content cases | Author: Andes Team
 
 # v3.33.0
 ## 🚀 Feature

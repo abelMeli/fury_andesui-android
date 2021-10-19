@@ -2,6 +2,9 @@ package com.mercadolibre.android.andesui.feedback.screen.factory
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
@@ -37,7 +40,8 @@ internal data class AndesFeedbackCloseConfiguration(
 
 internal data class AndesFeedbackBodyConfiguration(
     val view: View?,
-    val visibility: Int
+    val visibility: Int,
+    val layoutParams: ViewGroup.LayoutParams
 )
 
 internal data class AndesFeedbackButtonConfiguration(
@@ -137,7 +141,11 @@ internal object AndesFeedbackScreenConfigurationFactory {
     private fun resolveBodyConfiguration(body: View?, hasBody: Boolean) =
         AndesFeedbackBodyConfiguration(
             view = body,
-            visibility = View.VISIBLE.takeIf { hasBody } ?: View.GONE
+            visibility = View.VISIBLE.takeIf { hasBody } ?: View.GONE,
+            layoutParams = ViewGroup.LayoutParams(
+                body?.layoutParams?.width?.takeIf { it != WRAP_CONTENT } ?: MATCH_PARENT,
+                body?.layoutParams?.height ?: WRAP_CONTENT
+            )
         )
 
     private fun resolveCloseConfiguration(

@@ -3,6 +3,9 @@ package com.mercadolibre.android.andesui.feedback.screen
 import android.content.Context
 import android.os.Build
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
@@ -73,6 +76,8 @@ class AndesFeedbackScreenConfigurationTest {
         )
         config.body.view assertEquals view
         config.body.visibility assertEquals View.VISIBLE
+        config.body.layoutParams.width assertEquals MATCH_PARENT
+        config.body.layoutParams.height assertEquals WRAP_CONTENT
         config.close.visibility assertEquals View.VISIBLE
         config.close.tintColor assertEquals ContextCompat.getColor(context, R.color.andes_gray_550)
         config.close.onClick assertIsNull false
@@ -93,7 +98,9 @@ class AndesFeedbackScreenConfigurationTest {
 
     @Test
     fun `Feedback Simple Error with body, close and text with description`() {
-        val view = View(context)
+        val view = View(context).apply {
+            layoutParams = ViewGroup.LayoutParams(500, 400)
+        }
         val config = AndesFeedbackScreenConfigurationFactory.create(
             context = context,
             body = view,
@@ -119,6 +126,8 @@ class AndesFeedbackScreenConfigurationTest {
         )
         config.body.view assertEquals view
         config.body.visibility assertEquals View.VISIBLE
+        config.body.layoutParams.width assertEquals 500
+        config.body.layoutParams.height assertEquals 400
         config.close.visibility assertEquals View.VISIBLE
         config.close.tintColor assertEquals ContextCompat.getColor(context, R.color.andes_gray_550)
         config.close.onClick assertIsNull false
@@ -159,6 +168,8 @@ class AndesFeedbackScreenConfigurationTest {
         )
         config.body.view assertIsNull true
         config.body.visibility assertEquals View.GONE
+        config.body.layoutParams.width assertEquals MATCH_PARENT
+        config.body.layoutParams.height assertEquals WRAP_CONTENT
         config.close.visibility assertEquals View.GONE
         config.close.tintColor assertEquals type.type.getCloseTintColor(context, false)
         config.close.onClick assertIsNull true
@@ -202,6 +213,8 @@ class AndesFeedbackScreenConfigurationTest {
         )
         config.body.view assertIsNull true
         config.body.visibility assertEquals View.GONE
+        config.body.layoutParams.width assertEquals MATCH_PARENT
+        config.body.layoutParams.height assertEquals WRAP_CONTENT
         config.close.visibility assertEquals View.GONE
         config.close.tintColor assertEquals AndesFeedbackScreenType.Congrats.type.getCloseTintColor(context, false)
         config.close.onClick assertIsNull true
@@ -222,7 +235,9 @@ class AndesFeedbackScreenConfigurationTest {
 
     @Test
     fun `Feedback Congrats, ImageCircle, body, close, title, description & highlight`() {
-        val body = View(context)
+        val body = View(context).apply {
+            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+        }
         val description = AndesFeedbackScreenTextDescription(
             "Description",
             AndesBodyLinks(arrayListOf(AndesBodyLink(1, 2)), mock())
@@ -253,6 +268,8 @@ class AndesFeedbackScreenConfigurationTest {
         )
         config.body.view assertIsNull false
         config.body.visibility assertEquals View.VISIBLE
+        config.body.layoutParams.width assertEquals MATCH_PARENT
+        config.body.layoutParams.height assertEquals MATCH_PARENT
         config.close.visibility assertEquals View.VISIBLE
         config.close.tintColor assertEquals ContextCompat.getColor(context, R.color.andes_white)
         config.close.onClick assertIsNull false

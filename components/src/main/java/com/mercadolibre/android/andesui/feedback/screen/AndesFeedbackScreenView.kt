@@ -175,7 +175,7 @@ class AndesFeedbackScreenView : ScrollView {
             body.id = generateViewId()
         }
 
-        container.addView(body)
+        container.addView(body, configBody.layoutParams)
         body.visibility = configBody.visibility
     }
 
@@ -229,11 +229,17 @@ class AndesFeedbackScreenView : ScrollView {
             ConstraintSet.BOTTOM,
             resources.getDimensionPixelSize(R.dimen.andes_feedbackscreen_body_margin_bottom)
         )
+        setGoneMargin(
+            body.id,
+            ConstraintSet.BOTTOM,
+            0
+        )
         connect(body.id, ConstraintSet.BOTTOM, button.id, ConstraintSet.TOP)
         connect(body.id, ConstraintSet.TOP, header.id, ConstraintSet.BOTTOM)
         connect(body.id, ConstraintSet.START, container.id, ConstraintSet.START)
         connect(body.id, ConstraintSet.END, container.id, ConstraintSet.END)
         constrainedWidth(body.id, true)
+        constrainedHeight(body.id, true)
         setVerticalChainStyle(body.id, ConstraintSet.CHAIN_PACKED)
     }
 
