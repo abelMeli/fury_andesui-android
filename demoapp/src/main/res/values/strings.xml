@@ -5,6 +5,7 @@
     <string name="body_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
     <string name="title_description">Atention! 👇</string>
     <string name="dismissable">Dismissable</string>
+    <string name="bullet">Bullet</string>
     <string name="title_text">Atention!</string>
     <string name="andes_message_showcase_change">Update</string>
     <string name="change_text">Title text</string>

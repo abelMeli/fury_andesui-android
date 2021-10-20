@@ -36,7 +36,9 @@ internal data class AndesMessageConfiguration(
     val linkActionTextColor: AndesColor,
     val bodyLinkIsUnderline: Boolean,
     val bodyLinkTextColor: AndesColor,
-    val thumbnail: Drawable?
+    val thumbnail: Drawable?,
+    val bulletGapWith: Int,
+    val bulletDotSize: Int
 )
 
 @Suppress("TooManyFunctions")
@@ -92,7 +94,9 @@ internal object AndesMessageConfigurationFactory {
 
                 bodyLinkIsUnderline = resolveBodyLinkIsUnderline(andesMessageHierarchy.hierarchy, andesMessageType.type),
                 bodyLinkTextColor = resolveBodyLinkTextColor(andesMessageHierarchy.hierarchy, andesMessageType.type),
-                thumbnail = thumbnail
+                thumbnail = thumbnail,
+                bulletGapWith = resolveBulletGapWith(context),
+                bulletDotSize = resolveBulletDotSize(context)
             )
         }
     }
@@ -151,4 +155,8 @@ internal object AndesMessageConfigurationFactory {
         hierarchy: AndesMessageHierarchyInterface,
         type: AndesMessageTypeInterface
     ) = hierarchy.bodyLinkTextColor(type)
+
+    private fun resolveBulletGapWith(context: Context) = context.resources.getInteger(R.integer.andes_message_bullet_gap_width)
+
+    private fun resolveBulletDotSize(context: Context) = context.resources.getInteger(R.integer.andes_message_bullet_dot_size)
 }

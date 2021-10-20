@@ -54,6 +54,13 @@
             android:layout_marginBottom="@dimen/button_margin_vertical"
             app:andesCheckboxText="@string/dismissable" />
 
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/bullet_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
+            app:andesCheckboxText="@string/bullet" />
+
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/title_text"
             android:layout_width="match_parent"

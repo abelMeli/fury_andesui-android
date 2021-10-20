@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.message
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.SpannableStringBuilder
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -18,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.bullet.AndesBulletSpan
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.message.factory.AndesMessageAttrs
@@ -29,6 +31,8 @@ import com.mercadolibre.android.andesui.message.type.AndesMessageType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 import com.mercadolibre.android.andesui.utils.toBitmap
 import com.mercadolibre.android.andesui.utils.getCircledBitmap
+import com.mercadolibre.android.andesui.utils.setupSpannableBodyLink
+import com.mercadolibre.android.andesui.utils.setupSpannableBullet
 
 @Suppress("TooManyFunctions")
 class AndesMessage : CardView {
@@ -93,6 +97,13 @@ class AndesMessage : CardView {
             setupBodyComponent(createConfig())
         }
 
+    var bulletSpans: List<AndesBulletSpan>?
+        get() = andesMessageAttrs.bulletSpans
+        set(value) {
+            andesMessageAttrs = andesMessageAttrs.copy(bulletSpans = value)
+            setupBodyComponent(createConfig())
+        }
+
     private lateinit var messageContainer: ConstraintLayout
     private lateinit var titleComponent: TextView
     lateinit var bodyComponent: TextView
@@ -130,9 +141,10 @@ class AndesMessage : CardView {
         title: String? = TITLE_DEFAULT,
         isDismissable: Boolean = IS_DISMISSIBLE_DEFAULT,
         bodyLinks: AndesBodyLinks? = null,
-        thumbnail: Drawable? = null
+        thumbnail: Drawable? = null,
+        bulletsSpans: List<AndesBulletSpan>? = null
     ) : super(context) {
-        initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail)
+        initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bulletsSpans)
     }
 
     /**
@@ -154,9 +166,10 @@ class AndesMessage : CardView {
         title: String?,
         isDismissable: Boolean,
         bodyLinks: AndesBodyLinks?,
-        thumbnail: Drawable?
+        thumbnail: Drawable?,
+        bulletsSpans: List<AndesBulletSpan>?
     ) {
-        andesMessageAttrs = AndesMessageAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail)
+        andesMessageAttrs = AndesMessageAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bulletsSpans)
         val config = AndesMessageConfigurationFactory.create(context, andesMessageAttrs)
         setupComponents(config)
     }
@@ -253,30 +266,26 @@ class AndesMessage : CardView {
         }
     }
 
-    private fun getBodyText(text: String, config: AndesMessageConfiguration): SpannableString {
-        val spannableString = SpannableString(text)
+    private fun getBodyText(text: String, config: AndesMessageConfiguration): SpannableStringBuilder {
+        val spannableString = SpannableStringBuilder(text)
         bodyLinks?.let {
-            it.links.forEachIndexed { linkIndex, andesBodyLink ->
-                if (andesBodyLink.isValidRange(spannableString)) {
-                    val clickableSpan = object : ClickableSpan() {
-                        override fun onClick(view: View) {
-                            it.listener(linkIndex)
-                        }
-
-                        override fun updateDrawState(ds: TextPaint) {
-                            ds.isUnderlineText = config.bodyLinkIsUnderline
-                            ds.color = config.bodyLinkTextColor.colorInt(context)
-                        }
-                    }
-                    spannableString.setSpan(clickableSpan,
-                            andesBodyLink.startIndex, andesBodyLink.endIndex,
-                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                } else {
-                    Log.d("AndesMessage", "Body link range incorrect: " +
-                            "${andesBodyLink.startIndex}, ${andesBodyLink.endIndex}")
-                }
-            }
+            setupSpannableBodyLink(
+                context,
+                spannableString,
+                it,
+                config.bodyLinkIsUnderline,
+                config.bodyLinkTextColor
+            )
             bodyComponent.movementMethod = LinkMovementMethod.getInstance()
+        }
+        bulletSpans?.let {
+            setupSpannableBullet(
+                spannableString,
+                it,
+                config.bulletGapWith,
+                config.textColor.colorInt(context),
+                config.bulletDotSize
+            )
         }
         return spannableString
     }

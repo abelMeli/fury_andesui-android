@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.message
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.SpannableString
+import android.text.SpannedString
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
@@ -14,6 +15,9 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.bullet.AndesBulletSpan
+import com.mercadolibre.android.andesui.bullet.AndesBulletSpannable
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
@@ -122,4 +126,32 @@ class AndesMessageTest {
     }
 
     private fun AndesMessage.getLinkAction() = findViewById<TextView>(R.id.andes_link_action)
+
+    @Test
+    fun `AndesMessage with bullets`() {
+        val andesMessage = AndesMessage(
+            context,
+            AndesMessageHierarchy.LOUD,
+            AndesMessageType.SUCCESS,
+            "This is a body message",
+            null,
+            true,
+            null,
+            null
+        )
+        andesMessage.bulletSpans = arrayListOf(AndesBulletSpan(1, 2))
+
+        with(andesMessage.getBody()) {
+            text.toString() assertEquals "T\n\nhis is a body message"
+            visibility assertEquals android.view.View.VISIBLE
+            val spans = (text as SpannedString).getSpans(
+                0,
+                "This is a body message".lastIndex,
+                AndesBulletSpannable::class.java
+            )
+            spans.size assertEquals 1
+        }
+    }
+
+    private fun AndesMessage.getBody() = findViewById<TextView>(R.id.andes_body)
 }

@@ -8,6 +8,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.mercadolibre.android.andesui.bullet.AndesBulletSpan
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
@@ -100,6 +101,8 @@ class MessageShowcaseActivity : AppCompatActivity() {
 
         val dismissableCheckbox = container.findViewById<AndesCheckbox>(R.id.dismissable_checkbox)
 
+        val bulletCheckbox = container.findViewById<AndesCheckbox>(R.id.bullet_checkbox)
+
         val bodyText = container.findViewById<AndesTextarea>(R.id.body_text)
 
         val titleText = container.findViewById<AndesTextfield>(R.id.title_text)
@@ -144,6 +147,7 @@ class MessageShowcaseActivity : AppCompatActivity() {
             changeMessage.type = AndesMessageType.fromString(typeSpinner.selectedItem.toString())
             changeMessage.hierarchy = AndesMessageHierarchy.fromString(hierarchySpinner.selectedItem.toString())
             changeMessage.bodyLinks = null
+            changeMessage.bulletSpans = null
 
             if (primaryActionText.text.toString().isNotEmpty()) {
                 changeMessage.setupPrimaryAction(
@@ -216,6 +220,17 @@ class MessageShowcaseActivity : AppCompatActivity() {
             }
 
             changeMessage.setupThumbnail(thumbnailDrawable)
+
+            if (bulletCheckbox.status == AndesCheckboxStatus.SELECTED) {
+                val bulletSpans = listOf(
+                    AndesBulletSpan(8, 19),
+                    AndesBulletSpan(19, 31)
+                )
+                changeMessage.bulletSpans = bulletSpans
+            } else {
+                changeMessage.bulletSpans = null
+            }
+
             changeMessage.visibility = View.VISIBLE
         }
     }
