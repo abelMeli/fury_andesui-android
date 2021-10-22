@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.bullet.AndesBulletSpan
+import com.mercadolibre.android.andesui.bullet.AndesBullet
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
@@ -20,7 +20,7 @@ internal data class AndesMessageAttrs(
     val isDismissable: Boolean,
     val bodyLinks: AndesBodyLinks?,
     val thumbnail: Drawable?,
-    val bulletSpans: List<AndesBulletSpan>?
+    val bullets: List<AndesBullet>?
 )
 
 /**
@@ -61,7 +61,7 @@ internal object AndesMessageAttrsParser {
                 isDismissable = typedArray.getBoolean(R.styleable.AndesMessage_andesMessageDismissable, false),
                 bodyLinks = null,
                 thumbnail = typedArray.getDrawable(R.styleable.AndesMessage_andesMessageThumbnail),
-                bulletSpans = null
+                bullets = null
         ).also { typedArray.recycle() }
     }
 }
