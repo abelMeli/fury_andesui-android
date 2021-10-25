@@ -231,17 +231,20 @@ class AndesTagSimple : ConstraintLayout {
         val rightContent = findViewById<FrameLayout>(R.id.rightContent)
         if (config.rightContent != AndesTagRightContent.NONE) {
             rightContent.removeAllViews()
-            rightContent.addView(config.rightContent.content.view(
-                    context,
-                    config.dismissColor,
-                    config.rightContentData!!,
-                    OnClickListener {
-                        containerTag.visibility = View.GONE
-                        if (config.rightContentData.dismiss?.onClickListener != null) {
-                            config.rightContentData.dismiss?.onClickListener!!.onClick(this)
-                        }
+
+            val view = config.rightContent.content.view(
+                context,
+                config.dismissColor,
+                config.rightContentData!!,
+                OnClickListener {
+                    containerTag.visibility = View.GONE
+                    if (config.rightContentData.dismiss?.onClickListener != null) {
+                        config.rightContentData.dismiss?.onClickListener!!.onClick(this)
                     }
-            ))
+                }
+            )
+            view.contentDescription = "${resources.getString(R.string.andes_tag_dismiss)} ${andesTagAttrs.andesSimpleTagText}"
+            rightContent.addView(view)
 
             val constraintSet = ConstraintSet()
             constraintSet.clone(containerTag)
