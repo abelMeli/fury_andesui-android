@@ -8,6 +8,8 @@
 ## 🛠 Fixes
 - Fix in playground that was causing a crash when accessing the <em>traversal after</em> activity
 - Fix `AndesFeedbackScreenView` layoutParams wrap_content cases | Author: Andes Team
+- Fix `AndesSwitch` dimensions | Author: Andes Team
+- Fix in a11y playground in the <em>semantic views</em> activity
 
 # v3.33.0
 ## 🚀 Feature

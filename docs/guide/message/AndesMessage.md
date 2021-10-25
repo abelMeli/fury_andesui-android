@@ -19,7 +19,7 @@ AndesMessage(
     isDismissable = false,
     bodyLinks = null,
     thumbnail = null,
-    bulletsSpans = null
+    bullets = null
 )
 ```
 
@@ -58,7 +58,7 @@ Basic Sample XML
 | --- |
 | AndesMessage(context: Context, attrs: AttributeSet?) |
 | AndesMessage(context: Context, attrs: AttributeSet?, defStyleAttr: Int) |
-| [AndesMessage](#andesmessagecontext-context-hierarchy-andesmessagehierarchy-type-andesmessagetype-body-string-title-string-isDismissable-boolean-bodyLinks-andesbodylinks-thumbnail-drawable)(context: Context, hierarchy: [AndesMessageHierarchy](#andesmessagehierarchy), type: [AndesMessageType](#andesmessagetype), body: String, title: String?, isDismissable: Boolean, bodyLinks: [AndesBodyLinks](#andesbodylinks), thumbnail: Drawable?, bulletsSpans: List<AndesBulletSpan>?)|
+| [AndesMessage](#andesmessagecontext-context-hierarchy-andesmessagehierarchy-type-andesmessagetype-body-string-title-string-isDismissable-boolean-bodyLinks-andesbodylinks-thumbnail-drawable)(context: Context, hierarchy: [AndesMessageHierarchy](#andesmessagehierarchy), type: [AndesMessageType](#andesmessagetype), body: String, title: String?, isDismissable: Boolean, bodyLinks: [AndesBodyLinks](#andesbodylinks), thumbnail: Drawable?, bullets: List<AndesBullet>?)|
 
 <br/>
 
@@ -73,7 +73,7 @@ Basic Sample XML
 | isDismissable | **Boolean**: sets the dismiss check in the top right corner. Default type is **false** |
 | bodyLinks | **[AndesBodyLinks](#andesbodylinks)**: sets the links for the AndesMessage. Default type is **null** |
 | thumbnail | **Drawable?**: sets the drawable to show in the component body. Default type is **null** |
-| bulletsSpans | **List<AndesBulletSpan>?**: sets the list of AndesBulletSpan where determine the range to set the bullets. Default type is **null** |
+| bullets | **List<AndesBullet>?**: sets the list of AndesBullet where determine the range to set the bullets. Default type is **null** |
 
 <br/>
 
@@ -87,7 +87,7 @@ Basic Sample XML
 | isDismissable: Boolean | **get():** retrieves true or false according if the component can be dismissed or not. <br/> **set(value: Boolean):** updates component. |
 | bodyLinks: AndesBodyLinks| **get():** retrieves body links, or null if is not set. <br/> **set(value: AndesBodyLinks):** updates link values. |
 | thumbnail: Drawable? | **get():** retrieves the drawable object shown in the component body, or null if is not set. <br/> **set(value: Drawable?):** updates component drawable shown in the body. |
-| bulletSpans: List<AndesBulletSpan>? | **get():** retrieves bullet spans, or null if is not set. <br/> **set(value: List<AndesBulletSpan>?):** updates bullet span values. |
+| bullet: List<AndesBullet>? | **get():** retrieves bullet spans, or null if is not set. <br/> **set(value: List<AndesBullet>?):** updates bullet span values. |
 
 <br/>
 
@@ -175,7 +175,7 @@ enum class AndesBodyLink
 ### AndesBulletSpan
 class used to set correctly the bullet range in the message body.
 ```kotlin
-enum class AndesBulletSpan
+enum class AndesBullet
 ```
 | Property | Description |
 | ----------- | ----------- |
@@ -185,7 +185,7 @@ enum class AndesBulletSpan
 #### Functions
 | Return type | Method |
 | -------- | ------- |
-| Boolean | **isValidRange(text: SpannableStringBuilder)**<br/> method to evaluate if the current values of the AndesBulletSpan are correct to set the SpannableStringBuilder. |
+| Boolean | **isValidRange(text: SpannableStringBuilder)**<br/> method to evaluate if the current values of the AndesBullet are correct to set the SpannableStringBuilder. |
 
 
 ## Screenshots

@@ -19,7 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.bullet.AndesBulletSpan
+import com.mercadolibre.android.andesui.bullet.AndesBullet
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.message.factory.AndesMessageAttrs
@@ -97,10 +97,10 @@ class AndesMessage : CardView {
             setupBodyComponent(createConfig())
         }
 
-    var bulletSpans: List<AndesBulletSpan>?
-        get() = andesMessageAttrs.bulletSpans
+    var bullets: List<AndesBullet>?
+        get() = andesMessageAttrs.bullets
         set(value) {
-            andesMessageAttrs = andesMessageAttrs.copy(bulletSpans = value)
+            andesMessageAttrs = andesMessageAttrs.copy(bullets = value)
             setupBodyComponent(createConfig())
         }
 
@@ -142,9 +142,9 @@ class AndesMessage : CardView {
         isDismissable: Boolean = IS_DISMISSIBLE_DEFAULT,
         bodyLinks: AndesBodyLinks? = null,
         thumbnail: Drawable? = null,
-        bulletsSpans: List<AndesBulletSpan>? = null
+        bullets: List<AndesBullet>? = null
     ) : super(context) {
-        initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bulletsSpans)
+        initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bullets)
     }
 
     /**
@@ -167,9 +167,9 @@ class AndesMessage : CardView {
         isDismissable: Boolean,
         bodyLinks: AndesBodyLinks?,
         thumbnail: Drawable?,
-        bulletsSpans: List<AndesBulletSpan>?
+        bullets: List<AndesBullet>?
     ) {
-        andesMessageAttrs = AndesMessageAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bulletsSpans)
+        andesMessageAttrs = AndesMessageAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bullets)
         val config = AndesMessageConfigurationFactory.create(context, andesMessageAttrs)
         setupComponents(config)
     }
@@ -278,7 +278,7 @@ class AndesMessage : CardView {
             )
             bodyComponent.movementMethod = LinkMovementMethod.getInstance()
         }
-        bulletSpans?.let {
+        bullets?.let {
             setupSpannableBullet(
                 spannableString,
                 it,
