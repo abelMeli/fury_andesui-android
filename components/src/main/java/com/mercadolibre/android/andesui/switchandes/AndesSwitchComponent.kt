@@ -59,6 +59,12 @@ internal class AndesSwitchComponent(context: Context, attrs: AttributeSet?) : Co
         minHeight = resources.getDimension(R.dimen.andes_switch_track_height).toInt()
         minWidth = resources.getDimension(R.dimen.andes_switch_track_width).toInt()
         background = refreshTrack(currentBackgroundColor, status, type, context)
+        setPadding(
+            resources.getDimension(R.dimen.andes_switch_padding_track).toInt(),
+            resources.getDimension(R.dimen.andes_switch_padding_track).toInt(),
+            resources.getDimension(R.dimen.andes_switch_padding_track).toInt(),
+            resources.getDimension(R.dimen.andes_switch_padding_track).toInt()
+        )
     }
 
     private fun setupThumb() {

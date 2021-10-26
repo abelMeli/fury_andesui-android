@@ -16,7 +16,7 @@ import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.bullet.AndesBulletSpan
+import com.mercadolibre.android.andesui.bullet.AndesBullet
 import com.mercadolibre.android.andesui.bullet.AndesBulletSpannable
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
@@ -139,7 +139,7 @@ class AndesMessageTest {
             null,
             null
         )
-        andesMessage.bulletSpans = arrayListOf(AndesBulletSpan(1, 2))
+        andesMessage.bullets = arrayListOf(AndesBullet(1, 2))
 
         with(andesMessage.getBody()) {
             text.toString() assertEquals "T\n\nhis is a body message"

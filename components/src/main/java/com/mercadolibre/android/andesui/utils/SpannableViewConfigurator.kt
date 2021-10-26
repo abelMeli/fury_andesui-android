@@ -8,7 +8,7 @@ import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
-import com.mercadolibre.android.andesui.bullet.AndesBulletSpan
+import com.mercadolibre.android.andesui.bullet.AndesBullet
 import com.mercadolibre.android.andesui.bullet.AndesBulletSpannable
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
@@ -64,13 +64,13 @@ private fun setupClickableSpan(
 
 internal fun setupSpannableBullet(
     spannableString: SpannableStringBuilder,
-    bulletSpans: List<AndesBulletSpan>,
+    bullets: List<AndesBullet>,
     bulletGapWith: Int,
     bulletColor: Int,
     bulletRadius: Int
 ) {
     var deltaIndex = 0
-    bulletSpans.forEachIndexed { index, paragraph ->
+    bullets.forEachIndexed { index, paragraph ->
         if (paragraph.isValidRange(spannableString)) {
             spannableString.setSpan(
                 AndesBulletSpannable(
@@ -84,7 +84,7 @@ internal fun setupSpannableBullet(
             )
             spannableString.insert(paragraph.startIndex + deltaIndex, "\n")
             deltaIndex += 1
-            if (index == bulletSpans.lastIndex) {
+            if (index == bullets.lastIndex) {
                 spannableString.insert(paragraph.endIndex, "\n")
             }
         } else {
