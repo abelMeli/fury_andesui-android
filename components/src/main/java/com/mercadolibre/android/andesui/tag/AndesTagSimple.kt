@@ -235,11 +235,11 @@ class AndesTagSimple : ConstraintLayout {
             val view = config.rightContent.content.view(
                 context,
                 config.dismissColor,
-                config.rightContentData!!,
+                config.rightContentData,
                 OnClickListener {
                     containerTag.visibility = View.GONE
-                    if (config.rightContentData.dismiss?.onClickListener != null) {
-                        config.rightContentData.dismiss?.onClickListener!!.onClick(this)
+                    if (config.rightContentData?.dismiss?.onClickListener != null) {
+                        config.rightContentData.dismiss?.onClickListener?.onClick(this)
                     }
                 }
             )
