@@ -11,6 +11,7 @@ import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillAttrs
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillAttrsParser
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillConfiguration
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillConfigurationFactory
+import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgeIconHierarchy
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 
@@ -36,6 +37,16 @@ class AndesBadgeIconPill : ConstraintLayout {
             setupDrawable(createConfig())
         }
 
+    /**
+     * Getter and setter for [hierarchy].
+     */
+    var hierarchy: AndesBadgeIconHierarchy
+        get() = andesBadgeIconPillAttrs.andesBadgeHierarchy
+        set(value) {
+            andesBadgeIconPillAttrs = andesBadgeIconPillAttrs.copy(andesBadgeHierarchy = value)
+            setupDrawable(createConfig())
+        }
+
     private lateinit var andesBadgeIconPillAttrs: AndesBadgeIconPillAttrs
     private lateinit var containerView: View
     private lateinit var imageViewContainer: ImageView
@@ -44,12 +55,14 @@ class AndesBadgeIconPill : ConstraintLayout {
         initAttrs(attrs)
     }
 
+    @JvmOverloads
     constructor(
         context: Context,
         type: AndesBadgeIconType = TYPE_DEFAULT,
-        size: AndesBadgePillSize = SIZE_DEFAULT
+        size: AndesBadgePillSize = SIZE_DEFAULT,
+        hierarchy: AndesBadgeIconHierarchy = HIERARCHY_DEFAULT
     ) : super(context) {
-        initAttrs(type, size)
+        initAttrs(type, size, hierarchy)
     }
 
     private fun initAttrs(attrs: AttributeSet?) {
@@ -57,8 +70,8 @@ class AndesBadgeIconPill : ConstraintLayout {
         setupComponents(createConfig())
     }
 
-    private fun initAttrs(type: AndesBadgeIconType, size: AndesBadgePillSize) {
-        andesBadgeIconPillAttrs = AndesBadgeIconPillAttrs(type, size)
+    private fun initAttrs(type: AndesBadgeIconType, size: AndesBadgePillSize, hierarchy: AndesBadgeIconHierarchy) {
+        andesBadgeIconPillAttrs = AndesBadgeIconPillAttrs(type, size, hierarchy)
         setupComponents(createConfig())
     }
 
@@ -85,7 +98,8 @@ class AndesBadgeIconPill : ConstraintLayout {
     private fun createConfig() = AndesBadgeIconPillConfigurationFactory.create(context, andesBadgeIconPillAttrs)
 
     companion object {
-        private val SIZE_DEFAULT = AndesBadgePillSize.SMALL
+        private val HIERARCHY_DEFAULT = AndesBadgeIconHierarchy.LOUD
         private val TYPE_DEFAULT = AndesBadgeIconType.HIGHLIGHT
+        private val SIZE_DEFAULT = AndesBadgePillSize.SMALL
     }
 }

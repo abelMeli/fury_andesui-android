@@ -1,3 +1,7 @@
+# v3.35.0
+## 🚀 Feature
+- AndesBadgeIconPill hierarchy attribute added | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
+
 # v3.34.0
 ## 🚀 Feature
 - `AndesMessage` add bullet for body text | Authors [@mingkao-meli](https://github.com/mingkao-meli)

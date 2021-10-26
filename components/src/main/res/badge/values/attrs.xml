@@ -51,6 +51,11 @@
             <enum name="large" value="3000" />
             <enum name="small" value="3001" />
         </attr>
+
+        <attr name="andesBadgeIconPillHierarchy">
+            <enum name="loud" value="1001" />
+            <enum name="secondary" value="1002" />
+        </attr>
     </declare-styleable>
 
 </resources>

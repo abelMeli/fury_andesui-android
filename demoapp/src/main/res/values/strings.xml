@@ -155,6 +155,8 @@
     <string name="andes_badge_icon_pill">Icon Pill</string>
     <string name="andes_badge_icon_size_large">Size: Large</string>
     <string name="andes_badge_icon_size_small">Size: Small</string>
+    <string name="andes_badge_icon_hierarchy_loud">Hierarchy: Loud</string>
+    <string name="andes_badge_icon_hierarchy_secondary">Hierarchy: Secondary</string>
     <string name="andes_badge_error">error</string>
     <string name="andes_badge_warning">warning</string>
     <string name="andes_badge_success">success</string>

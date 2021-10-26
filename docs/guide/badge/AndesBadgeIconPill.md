@@ -19,6 +19,7 @@ Basic Sample XML
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:andesBadgeIconPillSize="large"
+    app:andesBadgeIconPillHierarchy="loud"
     app:andesBadgeIconPillType="highlight" />
 ```
 <br/>
@@ -28,6 +29,7 @@ Basic Sample XML
 | -------- | ------- |
 | app:andesBadgeIconPillType | Set a color palette for the badge: **highlight**, **success**, **warning**, **error** |
 | app:andesBadgeIconPillSize | Badge display size: **large**, **small** |
+| app:andesBadgeIconPillHierarchy | Badge background color hierarchy: **loud**, **secondary** |
 
 <br/>
 
@@ -35,16 +37,17 @@ Basic Sample XML
 | Summary |
 | --- |
 | AndesBadgeIconPill(context: Context, attrs: AttributeSet?) |
-| AndesBadgeIconPill(context: Context, type: [AndesBadgeIconType](#andesbadgeicontype), size: [AndesBadgePillSize](#andesbadgepillsize))|
+| AndesBadgeIconPill(context: Context, type: [AndesBadgeIconType](#andesbadgeicontype), size: [AndesBadgePillSize](#andesbadgepillsize), hierarchy: [AndesBadgeIconHierarchy](#andesbadgeiconhierarchy))|
 
 <br/>
 
-##### AndesBadgeIconPill(context: Context, type: AndesBadgeIconType, size: AndesBadgePillSize)
+##### AndesBadgeIconPill(context: Context, type: AndesBadgeIconType, size: AndesBadgePillSize, hierarchy: AndesBadgeIconHierarchy)
 | Parameter | Description |
 | -------- | ------- |
 | context | **Context**|
 | type | **[AndesBadgeIconType](#andesbadgeicontype)**: badge color palette. Default type is **HIGHLIGHT** |
 | size | **[AndesBadgePillSize](#andesbadgepillsize)**: badge display size. Default size is **SMALL** |
+| hierarchy | **[AndesBadgeIconHierarchy](#andesbadgeiconhierarchy)**: badge background color hierarchy. Default hierarchy is **LOUD** |
 
 <br/>
 
@@ -53,6 +56,7 @@ Basic Sample XML
 | -------- | ------- |
 | type: [AndesBadgeIconType](#andesbadgeicontype) | **get():** retrieves badge color palette <br/> **set(value: [AndesBadgeIconType](#andesbadgeicontype)):** updates badge color palette |
 | size: [AndesBadgePillSize](#andesbadgepillsize) | **get():** retrieves badge displayed size <br/> **set(value: [AndesBadgePillSize](#andesbadgepillsize)):** updates badge display size |
+| hierarchy: [AndesBadgeIconHierarchy](#andesbadgeiconhierarchy) | **get():** retrieves badge background color hierarchy <br/> **set(value: [AndesBadgeIconHierarchy](#andesbadgeiconhierarchy)):** updates badge background color hierarchy |
 
 <br/>
 
@@ -95,6 +99,25 @@ enum class AndesBadgePillSize
 | Return type | Method |
 | -------- | ------- |
 | AndesBadgePillSize | **fromString(value: String)**<br/> Retrieves an AndesBadgePillSize that matches the string value |
+
+<br/>
+
+### AndesBadgeIconHierarchy
+Defines the possible hierarchies [AndesBadgeIconHierarchy](#andesbadgeiconhierarchy) can take.
+```kotlin
+enum class AndesBadgeIconHierarchy
+```
+| Enum Values | Description |
+| --------- | ------------- |
+| LOUD | Gives the primary color specified in badge type style<br/><img src="../resources/badge/iconpill/errorLoud.png" height="24"/> |
+| SECONDARY | Gives the primary variant color specified in badge type style<br/><img src="../resources/badge/iconpill/errorSecondary.png" height="24"/> |
+
+<br/>
+
+#### Functions
+| Return type | Method |
+| -------- | ------- |
+| AndesBadgeIconHierarchy | **fromString(value: String)**<br/> Retrieves an AndesBadgeIconHierarchy that matches the string value |
 
 <br/>
 
