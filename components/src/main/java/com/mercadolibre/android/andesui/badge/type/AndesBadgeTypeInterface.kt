@@ -18,6 +18,13 @@ import com.mercadolibre.android.andesui.utils.buildColoredCircularShapeWithIconD
 internal interface AndesBadgeTypeInterface {
 
     /**
+     * Returns a [AndesColor] that contains the primary variant color data for the badge.
+     *
+     * @return a [AndesColor] that contains the primary variant color data for the badge.
+     */
+    fun primaryVariantColor(): AndesColor
+
+    /**
      * Returns a [AndesColor] that contains the primary color data for the badge.
      *
      * @return a [AndesColor] that contains the primary color data for the badge.
@@ -37,11 +44,13 @@ internal interface AndesBadgeTypeInterface {
 }
 
 internal class AndesNeutralBadgeType : AndesBadgeTypeInterface {
+    override fun primaryVariantColor() = R.color.andes_gray_550_solid.toAndesColor()
     override fun primaryColor() = R.color.andes_gray_550_solid.toAndesColor()
     override fun secondaryColor() = R.color.andes_gray_070_solid.toAndesColor()
 }
 
 internal class AndesHighlightBadgeType : AndesBadgeTypeInterface {
+    override fun primaryVariantColor() = R.color.andes_accent_color_600.toAndesColor()
     override fun primaryColor() = R.color.andes_accent_color_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_accent_color_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
@@ -63,6 +72,7 @@ internal class AndesHighlightBadgeType : AndesBadgeTypeInterface {
 }
 
 internal class AndesSuccessBadgeType : AndesBadgeTypeInterface {
+    override fun primaryVariantColor() = R.color.andes_green_600.toAndesColor()
     override fun primaryColor() = R.color.andes_green_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_green_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
@@ -91,6 +101,7 @@ internal class AndesSuccessBadgeType : AndesBadgeTypeInterface {
 }
 
 internal class AndesWarningBadgeType : AndesBadgeTypeInterface {
+    override fun primaryVariantColor() = R.color.andes_orange_600.toAndesColor()
     override fun primaryColor() = R.color.andes_orange_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_orange_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
@@ -119,6 +130,7 @@ internal class AndesWarningBadgeType : AndesBadgeTypeInterface {
 }
 
 internal class AndesErrorBadgeType : AndesBadgeTypeInterface {
+    override fun primaryVariantColor() = R.color.andes_red_600.toAndesColor()
     override fun primaryColor() = R.color.andes_red_500.toAndesColor()
     override fun secondaryColor() = R.color.andes_red_100.toAndesColor()
     override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {

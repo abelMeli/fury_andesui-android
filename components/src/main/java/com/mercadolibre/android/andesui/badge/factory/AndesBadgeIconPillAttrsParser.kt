@@ -3,12 +3,14 @@ package com.mercadolibre.android.andesui.badge.factory
 import android.content.Context
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgeIconHierarchy
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 
 internal data class AndesBadgeIconPillAttrs(
     val andesBadgeType: AndesBadgeIconType,
-    val andesBadgeSize: AndesBadgePillSize
+    val andesBadgeSize: AndesBadgePillSize,
+    val andesBadgeHierarchy: AndesBadgeIconHierarchy
 )
 
 internal object AndesBadgeIconPillAttrsParser {
@@ -20,6 +22,9 @@ internal object AndesBadgeIconPillAttrsParser {
 
     private const val ANDES_BADGE_SIZE_LARGE = 3000
     private const val ANDES_BADGE_SIZE_SMALL = 3001
+
+    private const val ANDES_BADGE_ICON_HIERARCHY_LOUD = 1001
+    private const val ANDES_BADGE_ICON_HIERARCHY_SECONDARY = 1002
 
     fun parse(context: Context, attrs: AttributeSet?): AndesBadgeIconPillAttrs {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.AndesBadgeIconPill)
@@ -38,7 +43,13 @@ internal object AndesBadgeIconPillAttrsParser {
             else -> AndesBadgePillSize.SMALL
         }
 
-        return AndesBadgeIconPillAttrs(type, size).also {
+        val hierarchy = when (typedArray.getInt(R.styleable.AndesBadgeIconPill_andesBadgeIconPillHierarchy, ANDES_BADGE_ICON_HIERARCHY_LOUD)) {
+            ANDES_BADGE_ICON_HIERARCHY_LOUD -> AndesBadgeIconHierarchy.LOUD
+            ANDES_BADGE_ICON_HIERARCHY_SECONDARY -> AndesBadgeIconHierarchy.SECONDARY
+            else -> AndesBadgeIconHierarchy.LOUD
+        }
+
+        return AndesBadgeIconPillAttrs(type, size, hierarchy).also {
             typedArray.recycle()
         }
     }

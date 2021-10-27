@@ -1,6 +1,8 @@
 # v3.35.0
 ## 🛠 Fixes
 - Fix tag accessibility | Author: Andes Team
+## 🚀 Feature
+- AndesBadgeIconPill hierarchy attribute added | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 
 # v3.34.0
 ## 🚀 Feature
