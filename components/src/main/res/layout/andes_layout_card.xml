@@ -14,6 +14,7 @@
             android:id="@+id/andes_card_pipe"
             android:layout_width="@dimen/andes_card_pipe_width"
             android:layout_height="0dp"
+            android:importantForAccessibility="no"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,6 +32,7 @@
             android:id="@+id/andes_view"
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:importantForAccessibility="no"
             android:background="@color/andes_gray_100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/andes_card_pipe"
@@ -51,6 +53,7 @@
             android:id="@+id/andes_view_link"
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:importantForAccessibility="no"
             android:background="@color/andes_gray_100"
             app:layout_constraintBottom_toTopOf="@+id/andes_card_title_link"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,11 +78,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:tint="@color/andes_accent_color_500"
+            android:contentDescription="@null"
+            android:importantForAccessibility="no"
             app:layout_constraintStart_toEndOf="@+id/andes_card_title_link"
             app:layout_constraintTop_toTopOf="@+id/andes_card_title_link"
-            app:srcCompat="@drawable/andes_ui_chevron_right_20"
-            tools:ignore="ContentDescription" />
-        <!-- tools:ignore="ContentDescription" ignored but should be checked with UX -->
+            app:srcCompat="@drawable/andes_ui_chevron_right_20" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_card"

@@ -1,6 +1,7 @@
 # v3.35.0
 ## 🛠 Fixes
-- Fix tag accessibility | Author: Andes Team
+- Fix AndesTag accessibility | Author: Andes Team
+- Fix AndesCard accessibility | Author: Andes Team
 ## 🚀 Feature
 - NEW rebumped docs ✨, start [here](/docs/guide/README.md)!
 - AndesBadgeIconPill hierarchy attribute added | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
