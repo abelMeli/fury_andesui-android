@@ -1,0 +1,1 @@
+La lib de modales existe desde antes que exista la lib de Andes 🤔 , tanto el código como las wikis están acá: https://github.com/mercadolibre/fury_ui-modal-android#como-integrar-modales

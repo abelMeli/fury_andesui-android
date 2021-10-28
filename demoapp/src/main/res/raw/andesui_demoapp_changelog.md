@@ -2,6 +2,7 @@
 ## 🛠 Fixes
 - Fix tag accessibility | Author: Andes Team
 ## 🚀 Feature
+- NEW rebumped docs ✨, start [here](/docs/guide/README.md)!
 - AndesBadgeIconPill hierarchy attribute added | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 
 # v3.34.0
@@ -515,8 +516,8 @@
 - An AndesMessage couldn't be found by its id due to a missing param in the constructor super() call.
 - Renamed `Highlight` type to `Neutral`.
 - `States` are now `Types`.
-- Changed App Name of Demo App.
-- Main buttons of Demo App now have lateral margins.
+- Changed App Name of Showcase App.
+- Main buttons of Showcase App now have lateral margins.
 
 ## Added
 - Enabled animateLayoutChanges() flag.

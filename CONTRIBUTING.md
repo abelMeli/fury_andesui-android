@@ -8,11 +8,12 @@ When submitting code, please make every effort to follow existing conventions an
 ## Get involved in how the library actually works.
 There are many ways to get involved with Andes UI.
 - You already started with the right foot by reading this Contributing file ;)
-- You can fly from here and land on the [Wiki](https://github.com/mercadolibre/fury_andesui-android/wiki)
+- You can fly from here and land on the [Documentation](/docs/guide/README.md) page
 - Now you're ready to watch a movie. Well, is not exactly a movie, but is a video. A tech talk, to be honest.
 A tech talk we gave at Mercado Libre that serves as an onboarding to the internals of this library. [Watch it here!](https://drive.google.com/open?id=1a8KBwlILW-JOnrO8cEGuQ7CNYSORJg4A)
-- Oh, I see! You want to get your hands dirty. Fork this repo, run the Demo App and start developing a new Andes component. Or maybe you can improve an existing one.
-- In case you are developing a new component (or planning to do so), keep in mind the creation of a new RFC, [see here for more info!](https://github.com/mercadolibre/fury_andesui-android/wiki/AndesUI-RFC)
+- Oh, I see! You want to get your hands dirty. Fork this repo, run the Showcase App and start developing a new Andes component. Or maybe you can improve an existing one.
+- In case you are developing a new component (or planning to do so), keep in mind the creation of a new RFC, [see here for more info!](/docs/guide/RFC)
+- After that, you're ready to use our Android Studio template for creating new components: setup a name and choose between some configuration attributes, and you're done! See the [docs](/docs/guide/template-plugin) to download the plugin and learn about the configuration and usage of the template.
 
 # I want to develop a new component or to fix an existing one
 Nice, we like you! Andes UI is a collaborative project, so we need the help of everyone to keep it up.
@@ -20,8 +21,8 @@ We expect to be all aboard this boat... and we are a lot. That's why we have som
 
 ## Happy path of your new code
 - You start by forking this Andes repo.
-- You make the necessary changes and you test them in the Demo App.
-    - If it's a new component then you'll have to add a new Button inside the main page of the Demo App that links to a new Activity that will be the showcase of that new component. You also will have to add that Activity, based on the existing one. Be aware that all the sample activities have a deeplink. For example, the deeplink of the Button Showcase is `meli://andes/button`. Checkout the Demo App's manifest file. Be sure to follow the existing way of developing those showcases. Or propose us a radical new way :D
+- You make the necessary changes and you test them in the Showcase App.
+    - If it's a new component then you'll have to add a new Button inside the main page of the Showcase App that links to a new Activity that will be the showcase of that new component. You also will have to add that Activity, based on the existing one. Be aware that all the sample activities have a deeplink. For example, the deeplink of the Button Showcase is `meli://andes/button`. Checkout the Showcase App's manifest file. Be sure to follow the existing way of developing those showcases. Or propose us a radical new way :D
     - If it's a variation of an existing component (i.e. you develop a new feature for the Andes Button that allows it to become a jumping button, please add this use case to the existing Button Showcase. We all love animations).
 - You are proud of your work. That new feature rocks. (Or thanks to this fix, the component now really rocks). You run `./gradlew check` and everything ran perfectly and smooth. Oh, boy, this needs to be part of Andes UI. Now you commit your latest changes.
 - You make a local publish and you test the changes in an external project that consumes this lib.
@@ -30,6 +31,26 @@ We expect to be all aboard this boat... and we are a lot. That's why we have som
 - You finally create the Pull Request. Continuous Integration starts to work (did we say we use Circle CI?). What am I seeing? All those checks in green! Nice!
 - Our guys check that shiny Pull Request, put some evil comments, you agree with them, you make the changes and... Oh, the Pull Request gets merged.
 - Nice job! We really thank you.
+
+## DO's
+* All components were thought to follow similar implementation patterns, make sure you familiarize with a few of them before implementing a new one, you should follow the same methodologies as the previous components.
+* Each component must have its documentation under the `/docs/guide` directory. If you are adding or updating one, please update the docs too 🙏 .
+* Bugs or feature requests should be submitted at our GitHub Issues section.
+
+## DON'Ts
+
+We’re aligned with [these concepts](https://proandroiddev.com/how-to-maximize-androids-ui-reusability-5-common-mistakes-cb2571216a9f). Please be sure to follow them:
+* Avoid using Business Models inside custom views.
+* Avoid monolithic views.
+* Avoid business logic in custom views.
+* Avoid over-optimization (readable code is better than optimized code!)
+* Avoid neglecting our UI in code reviews.
+
+## Architecture
+
+![Andes UI](https://user-images.githubusercontent.com/51792499/72842980-60714700-3c78-11ea-86bd-83281b1f6bcf.png)
+
+If you want to know more about it, you can watch this [explanation video](https://drive.google.com/file/d/1a8KBwlILW-JOnrO8cEGuQ7CNYSORJg4A/view)
 
 ## How to make a local publish
 ``
@@ -43,11 +64,20 @@ We expect to be all aboard this boat... and we are a lot. That's why we have som
 
 For both cases, there is no need to change the gradle.properties file. The task will automatically add a suffix indicating the publish type and the generation date.
 
-## Running the Demo App
-Before submitting a Pull Request, please make sure the Demo App is able to show the results of your heavy work.
+## How to edit the docs & preview them offline
+
+1. Install [Docsify](https://docsify.js.org/#/quickstart)
+2. Then run: `docsify serve docs/guide`
+3. Go to the local host provided from Docsify `http://localhost:3000` by default.
+
+## Running the Showcase App
+Before submitting a Pull Request, please make sure the Showcase App is able to show the results of your heavy work.
 
 ## Running the tests
 Before submitting a Pull Request, please run `./gradlew check` and be sure that everything gets green. Or yellow. But certainly not red. Well, with no errors, you know.
 
 ## Contact us
-We actively monitor this library, but you can ping us yo tell us that we should check out that new Pull Request.
+We actively monitor this library, but you can ping us to tell us that we should check out that a new Pull Request.
+
+## Contributions tournament (aka Andes Gamification)
+Read our [docs](https://sites.google.com/mercadolibre.com/mobile/arquitectura/libs-utilitarias/andes-ui/andes-gamification)

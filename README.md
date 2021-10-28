@@ -4,59 +4,47 @@
 ## What is this?
 
 This is the Android library of Andes.
-Andes is the design language used at Mercado Libre.
+Andes is the design system used at Mercado Libre.
 
 ## How to use?
 
+### Add it to your project
 You can include this module by adding the dependency to your build.gradle file.
 
 ```
 implementation "com.mercadolibre.android.andesui:components:X.Y.Z"
 ```
 
-### Latest version
-[ ![Download](https://api.bintray.com/packages/mercadolibre/android-public/com.mercadolibre.android.andesui.components/images/download.svg) ](https://bintray.com/mercadolibre/android-public/com.mercadolibre.android.andesui.components/_latestVersion)
+**See the latest version [here](https://github.com/mercadolibre/fury_andesui-android/releases).**
 
-## Useful links
+### Documentation
 
-* [Components](https://github.com/mercadolibre/fury_andesui-android/wiki#components)
-* [Contributing](https://github.com/mercadolibre/fury_andesui-android/blob/develop/CONTRIBUTING.md)
+* [Usage & API Docs](/docs/guide/README.md)
+* [Design guidelines](https://company-161429.frontify.com/d/kxHCRixezmfK/n-a)
 
-## Example
+Are you lost? Try these...
+* [iOS version](https://github.com/mercadolibre/fury_andesui-ios)
+* [React version](https://github.com/mercadolibre/frontend-andes_ui)
 
-This repo contains a [demo application](https://github.com/mercadolibre/fury_andesui-android/tree/develop/demoapp) with examples about how to use the different widgets available in the library.
-
-## Architecture
-
-![Andes UI](https://user-images.githubusercontent.com/51792499/72842980-60714700-3c78-11ea-86bd-83281b1f6bcf.png)
-
-If you want to know more about it, you can watch this [explanation video](https://drive.google.com/file/d/1a8KBwlILW-JOnrO8cEGuQ7CNYSORJg4A/view)
-
-## Considerations
-
-* All components were thought to follow similar implementation patterns, make sure you familiarize with a few of them before implementing a new one, you should follow the same methodologies as the previous components.
-* Each component should have an entry on the wiki, if you are adding or updating one, please add the changes to the related entry.
-* Bugs or feature requests should be submitted at our GitHub Issues section.
-
-## Requirements
-
+### Requirements
 This library needs Android API 19+ (4.4+) to work.
 
-## DON'Ts
+## Live examples
+Enter here [Showcase App](/demoapp) and install our app with live examples. Learn what you can do and how to use the different available components in the library.
 
-We’re aligned with [these concepts](https://proandroiddev.com/how-to-maximize-androids-ui-reusability-5-common-mistakes-cb2571216a9f). Please be sure to follow them:
-* Avoid using Business Models inside custom views.
-* Avoid monolithic views.
-* Avoid business logic in custom views.
-* Avoid over-optimization (readable code is better than optimized code!)
-* Avoid neglecting our UI in code reviews.
+## Support
+We're ready to help you through the [Fury Help](https://web.furycloud.io/help) section, just be sure to do your best before firing a ticket.
+You can also find help from the Andes community at [#help-android](https://meli.slack.com/archives/CSKLKAGC8) & [#help-andes](https://meli.slack.com/archives/CSKCPM30R) @ Slack.
 
+If you know how to reproduce a bug, you can also create an issue in the [GitHub's issues section](https://github.com/mercadolibre/fury_andesui-android/issues)
+
+## How to code with us?
+
+See our [contributing guidelines & toolkit](/CONTRIBUTING.md)
 
 ## Author
-
 Mercado Libre.
 
 ## License
-
 AndesUI is available under the MIT license. See the LICENSE file for more info.
 

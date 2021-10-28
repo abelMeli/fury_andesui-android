@@ -14,7 +14,7 @@ If this change was discussed on RFC please paste link here.
 This is a UI library, delight us with some stunning images.
 ## Checks
 Are you sure you followed all those steps? If so, repeat after me "I solemnly swear that ...":
-   - [ ] I have coded an example inside the Demo App.
+   - [ ] I have coded an example inside the Showcase App.
    - [ ] I have added proper tests.
    - [ ] I have modified the Changelog.md file.
    - [ ] I have updated/added compontent documentation `/docs/guide/`.
@@ -25,4 +25,5 @@ Are you sure you followed all those steps? If so, repeat after me "I solemnly sw
 This is easy, let us know what this code is about:
    - [ ] This code adds a new component
    - [ ] This code includes improvements to an existent component
-   - [ ] This code improves or modifies ONLY the Demo App.
+   - [ ] This code improves or modifies ONLY the Showcase App.
+   - [ ] This code improves or modifies ONLY the Documentation.
