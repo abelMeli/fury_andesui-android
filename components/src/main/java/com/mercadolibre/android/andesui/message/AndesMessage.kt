@@ -141,8 +141,21 @@ class AndesMessage : CardView {
         title: String? = TITLE_DEFAULT,
         isDismissable: Boolean = IS_DISMISSIBLE_DEFAULT,
         bodyLinks: AndesBodyLinks? = null,
+        thumbnail: Drawable? = null
+    ) : super(context) {
+        initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, null)
+    }
+
+    constructor(
+        context: Context,
+        hierarchy: AndesMessageHierarchy = HIERARCHY_DEFAULT,
+        type: AndesMessageType = STATE_DEFAULT,
+        body: String,
+        title: String? = TITLE_DEFAULT,
+        isDismissable: Boolean = IS_DISMISSIBLE_DEFAULT,
+        bodyLinks: AndesBodyLinks? = null,
         thumbnail: Drawable? = null,
-        bullets: List<AndesBullet>? = null
+        bullets: List<AndesBullet>?
     ) : super(context) {
         initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bullets)
     }

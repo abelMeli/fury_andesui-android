@@ -59,8 +59,16 @@ class AndesBadgeIconPill : ConstraintLayout {
     constructor(
         context: Context,
         type: AndesBadgeIconType = TYPE_DEFAULT,
+        size: AndesBadgePillSize = SIZE_DEFAULT
+    ) : super(context) {
+        initAttrs(type, size, HIERARCHY_DEFAULT)
+    }
+
+    constructor(
+        context: Context,
+        type: AndesBadgeIconType = TYPE_DEFAULT,
         size: AndesBadgePillSize = SIZE_DEFAULT,
-        hierarchy: AndesBadgeIconHierarchy = HIERARCHY_DEFAULT
+        hierarchy: AndesBadgeIconHierarchy
     ) : super(context) {
         initAttrs(type, size, hierarchy)
     }

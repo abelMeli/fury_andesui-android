@@ -6,6 +6,10 @@
 - NEW rebumped docs ✨, start [here](/docs/guide/README.md)!
 - AndesBadgeIconPill hierarchy attribute added | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 
+# v3.34.1
+## 🛠 Fixes
+- Overload constructor manually in order to avoid AndesMessage crash | Authors: Andes team
+
 # v3.34.0
 ## 🚀 Feature
 - `AndesMessage` add bullet for body text | Authors [@mingkao-meli](https://github.com/mingkao-meli)
