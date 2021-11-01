@@ -101,6 +101,7 @@ class AndesTabs : ConstraintLayout {
             tabRippleColor = config.tabRippleBackground
             setSelectedTabIndicatorColor(config.tabIndicatorColor.colorInt(context))
             setSelectedTabIndicator(createTabIndicator(config))
+            setSelectedTabIndicatorHeight(config.tabIndicatorHeight)
         }
 
         setComponentOnTabSelectedListener(config)
