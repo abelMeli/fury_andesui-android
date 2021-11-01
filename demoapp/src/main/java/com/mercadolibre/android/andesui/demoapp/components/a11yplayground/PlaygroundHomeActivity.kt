@@ -1,16 +1,19 @@
 package com.mercadolibre.android.andesui.demoapp.components.a11yplayground
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.commons.AnalyticsTracker
 import com.mercadolibre.android.andesui.demoapp.utils.SafeIntent
 
 class PlaygroundHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playground_home)
+        initActionBar()
         setupButtons()
+        AnalyticsTracker.logA11yActivityTracking(this.javaClass.simpleName)
     }
 
     private fun setupButtons() {
@@ -38,5 +41,11 @@ class PlaygroundHomeActivity : AppCompatActivity() {
         findViewById<AndesButton>(R.id.playground_semantic_views).setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/playground/semanticviews"))
         }
+    }
+
+    private fun initActionBar() {
+        setSupportActionBar(findViewById(R.id.a11y_home_nav_bar))
+        supportActionBar?.title = "Andes UI: A11y Playground"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

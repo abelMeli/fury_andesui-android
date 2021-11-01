@@ -20,7 +20,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".components.a11yplayground.SemanticViewsActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -35,7 +35,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.HeadingActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -50,7 +50,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.AnnounceForA11yActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -65,7 +65,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.A11yLiveRegionActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -80,7 +80,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.ImportantForA11yActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -95,7 +95,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.NextFocusActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -110,7 +110,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.A11yTraversalAfterActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -125,7 +125,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.ContentDescriptionActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

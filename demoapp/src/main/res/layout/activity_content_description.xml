@@ -9,6 +9,15 @@
         android:layout_height="wrap_content"
         tools:context=".components.a11yplayground.ContentDescriptionActivity">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/cd_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
         <com.mercadolibre.android.andesui.message.AndesMessage
             android:id="@+id/cd_card"
             android:layout_width="match_parent"
@@ -21,7 +30,7 @@
             app:andesMessageTitleText="@string/andes_demoapp_playground_cd_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/cd_nav_bar" />
 
         <TextView
             android:id="@+id/cd_tv_first_image"

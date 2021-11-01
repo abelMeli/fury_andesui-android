@@ -9,6 +9,15 @@
         android:layout_height="wrap_content"
         tools:context=".components.a11yplayground.ImportantForA11yActivity">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/ifa_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
         <com.mercadolibre.android.andesui.message.AndesMessage
             android:id="@+id/ifa_card"
             android:layout_width="match_parent"
@@ -21,7 +30,7 @@
             app:andesMessageTitleText="@string/andes_demoapp_playground_ifa_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/ifa_nav_bar" />
 
         <LinearLayout
             android:id="@+id/ifa_layout_first"

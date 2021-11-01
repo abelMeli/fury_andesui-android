@@ -1,3 +1,7 @@
+# v3.36.0
+## 🚀 Feature
+- Added analytics tracking to the A11y Playground | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v3.35.0
 ## 🛠 Fixes
 - Fix AndesTag accessibility | Author: Andes Team

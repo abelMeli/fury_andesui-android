@@ -1,12 +1,11 @@
 package com.mercadolibre.android.andesui.demoapp.components.a11yplayground
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 
 @SuppressWarnings("TooManyFunctions")
-class NextFocusActivity : AppCompatActivity() {
+class NextFocusActivity : A11yPlaygroundActivity() {
 
     private lateinit var button7: AndesButton
     private lateinit var button8: AndesButton
@@ -24,6 +23,7 @@ class NextFocusActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_next_focus)
+        initActionBar()
         setupViews()
         setupFocus()
     }
@@ -131,5 +131,12 @@ class NextFocusActivity : AppCompatActivity() {
             nextFocusLeftId = button17.id
             nextFocusUpId = button15.id
         }
+    }
+
+    private fun initActionBar() {
+        val navBarTitle = resources.getString(R.string.andes_demoapp_playground_title_next_focus)
+        setSupportActionBar(findViewById(R.id.nfa_nav_bar))
+        supportActionBar?.title = navBarTitle
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

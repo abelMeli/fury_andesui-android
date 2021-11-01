@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.demoapp
 import android.app.Application
 import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
 import androidx.multidex.MultiDex
 import com.facebook.common.logging.FLog
@@ -10,6 +11,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.mercadolibre.android.andesui.demoapp.mock.MockConfigProvider
 
 /**
@@ -41,5 +43,10 @@ class MainApplication : Application() {
         FLog.setMinimumLoggingLevel(FLog.VERBOSE)
 
         MockConfigProvider.configure()
+        firebaseAnalytics = FirebaseAnalytics.getInstance(applicationContext)
+    }
+
+    companion object {
+        lateinit var firebaseAnalytics: FirebaseAnalytics
     }
 }

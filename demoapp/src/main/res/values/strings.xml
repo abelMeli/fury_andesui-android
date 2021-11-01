@@ -11,7 +11,6 @@
     <string name="change_text">Title text</string>
     <string name="change_body">Body text</string>
     <string name="andesui_demoapp_clear_button">Clear</string>
-    <string name="andesui_demoapp_error_tracking">Current Activity could not be tracked. Add component and screens entries to AnalyticsHelper.</string>
     <string-array name="hierarchy_spinner">
         <item>Quiet</item>
         <item>Loud</item>
@@ -69,14 +68,14 @@
     <string name="andes_demoapp_playground_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="andes_demoapp_playground_card_body">Explore the different APIs needed to make any layout fully accessible</string>
     <string name="andes_demoapp_playground_card_title">Android Accessibility Playground</string>
-    <string name="andes_demoapp_playground_button_content_description">Content Description</string>
-    <string name="andes_demoapp_playground_button_live_region">Live Region</string>
-    <string name="andes_demoapp_playground_button_traversal_after">A11y Traversal After</string>
-    <string name="andes_demoapp_playground_button_semantic_views">Semantic Views</string>
-    <string name="andes_demoapp_playground_button_announce_a11y">Announce for A11y</string>
-    <string name="andes_demoapp_playground_button_important_for_a11y">Important for A11y</string>
-    <string name="andes_demoapp_playground_button_a11y_heading">Accessibility Heading</string>
-    <string name="andes_demoapp_playground_button_next_focus">Next Focus</string>
+    <string name="andes_demoapp_playground_title_content_description">Content Description</string>
+    <string name="andes_demoapp_playground_title_live_region">A11y Live Region</string>
+    <string name="andes_demoapp_playground_title_traversal_after">A11y Traversal After</string>
+    <string name="andes_demoapp_playground_title_semantic_views">Semantic Views</string>
+    <string name="andes_demoapp_playground_title_announce_a11y">Announce for A11y</string>
+    <string name="andes_demoapp_playground_title_important_for_a11y">Important for A11y</string>
+    <string name="andes_demoapp_playground_title_a11y_heading">Accessibility Heading</string>
+    <string name="andes_demoapp_playground_title_next_focus">Next Focus</string>
     <string name="andes_demoapp_playground_cd_title">Content description</string>
     <string name="andes_demoapp_playground_cd_body">String description used by the talkback when the component receives focus.</string>
     <string name="andes_demoapp_playground_cd_tv_first">The next image has the contentDescription set by xml</string>

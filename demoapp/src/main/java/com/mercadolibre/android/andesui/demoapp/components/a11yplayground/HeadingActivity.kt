@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.demoapp.components.a11yplayground
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -9,10 +8,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.mercadolibre.android.andesui.demoapp.R
 
-class HeadingActivity : AppCompatActivity() {
+class HeadingActivity : A11yPlaygroundActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heading)
+        initActionBar()
         setupViews()
     }
 
@@ -41,5 +42,12 @@ class HeadingActivity : AppCompatActivity() {
         }
 
         ViewCompat.setAccessibilityDelegate(thirdHeading, customA11yDelegate)
+    }
+
+    private fun initActionBar() {
+        val navBarTitle = resources.getString(R.string.andes_demoapp_playground_title_a11y_heading)
+        setSupportActionBar(findViewById(R.id.hea_nav_bar))
+        supportActionBar?.title = navBarTitle
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

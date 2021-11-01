@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.demoapp.components.a11yplayground
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.AccessibilityDelegateCompat
@@ -10,7 +9,7 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 
-class A11yTraversalAfterActivity : AppCompatActivity() {
+class A11yTraversalAfterActivity : A11yPlaygroundActivity() {
 
     private lateinit var button3: AndesButton
     private lateinit var button4: AndesButton
@@ -20,6 +19,7 @@ class A11yTraversalAfterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a11y_traversal_after)
+        initActionBar()
         initViews()
         setupNavigation()
     }
@@ -75,5 +75,12 @@ class A11yTraversalAfterActivity : AppCompatActivity() {
         }
         // setting the custom delegate to the view needed
         ViewCompat.setAccessibilityDelegate(button6, newCustomDelegateForButton6)
+    }
+
+    private fun initActionBar() {
+        val navBarTitle = resources.getString(R.string.andes_demoapp_playground_title_traversal_after)
+        setSupportActionBar(findViewById(R.id.ata_nav_bar))
+        supportActionBar?.title = navBarTitle
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

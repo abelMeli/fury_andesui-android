@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.mercadolibre.android.andesui.demoapp.commons.AnalyticsHelper
+import com.mercadolibre.android.andesui.demoapp.commons.AnalyticsTracker
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.SafeIntent
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
@@ -113,29 +113,22 @@ class MainActivity : AppCompatActivity() {
         andesui_demoapp_changelog.setupPrimaryAction(
                 getString(R.string.andes_demoapp_whatsnew_main_action),
                 View.OnClickListener {
-                    trackAnalytics(AnalyticsHelper.whatsNewTrack)
+                    AnalyticsTracker.trackSimpleScreen(AnalyticsHelper.whatsNewTrack)
                     startActivity(SafeIntent(this, "meli://andes/whats-new"))
                 }
         )
 
         andesui_demoapp_andes_specs.setOnClickListener {
-            trackAnalytics(AnalyticsHelper.specsTrack)
+            AnalyticsTracker.trackSimpleScreen(AnalyticsHelper.specsTrack)
             launchSpecs(this, AndesSpecs.HOME_PAGE)
         }
 
         andesui_demoapp_contribution.setOnClickListener {
-            trackAnalytics(AnalyticsHelper.contributeTrack)
+            AnalyticsTracker.trackSimpleScreen(AnalyticsHelper.contributeTrack)
             ContextCompat.startActivity(this,
                     Intent(Intent.ACTION_VIEW,
                             Uri.parse("https://meli.workplace.com/notes/andes-ui/c%C3%B3mo-contribuir-en-andes-ui/2559399620854933")),
                     null)
         }
-    }
-
-    private fun trackAnalytics(screen: String) {
-        val firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, screen)
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle())
     }
 }

@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".components.a11yplayground.NextFocusActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/nfa_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <com.mercadolibre.android.andesui.message.AndesMessage
         android:id="@+id/nf_card"
         android:layout_width="match_parent"
@@ -18,7 +27,7 @@
         app:andesMessageTitleText="@string/andes_demoapp_playground_nf_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/nfa_nav_bar" />
 
     <TextView
         android:id="@+id/nf_tv_xml"

@@ -8,6 +8,17 @@ internal class AnalyticsHelper {
         const val contributeTrack = "Specs"
     }
 
+    private val a11yExamples = mapOf(
+        "A11yLiveRegionActivity" to "AccessibilityLiveRegion",
+        "A11yTraversalAfterActivity" to "AccessibilityTravelsarAfter",
+        "AnnounceForA11yActivity" to "AnnounceForAccessibility",
+        "ContentDescriptionActivity" to "ContentDescription",
+        "HeadingActivity" to "Heading",
+        "ImportantForA11yActivity" to "ImportantForAccessibility",
+        "NextFocusActivity" to "NextFocus",
+        "SemanticViewsActivity" to "SemanticViews"
+    )
+
     private val components = mapOf(
         "BadgeShowcaseActivity" to "AndesBadge",
         "BottomSheetShowcaseActivity" to "AndesBottomSheet",
@@ -101,4 +112,13 @@ internal class AnalyticsHelper {
     fun getComponentName(className: String): String? {
         return components[className]
     }
+
+    fun getA11yExample(className: String): String? {
+        return a11yExamples[className]
+    }
 }
+
+/**
+ * Custom exception to throw when the page is not configured to be tracked
+ */
+internal class AnalyticsTrackingException(override val message: String?) : RuntimeException(message)

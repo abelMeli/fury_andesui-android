@@ -3,12 +3,11 @@ package com.mercadolibre.android.andesui.demoapp.components.a11yplayground
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import kotlin.random.Random
 
-class A11yLiveRegionActivity : AppCompatActivity() {
+class A11yLiveRegionActivity : A11yPlaygroundActivity() {
 
     private lateinit var randomNumberTextViewFirst: TextView
     private lateinit var randomNumberTextViewSecond: TextView
@@ -18,6 +17,7 @@ class A11yLiveRegionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a11y_live_region)
+        initActionBar()
         initViews()
         setupViews()
     }
@@ -48,6 +48,13 @@ class A11yLiveRegionActivity : AppCompatActivity() {
     }
 
     private fun generateRandomNumber() = Random.nextInt(RANDOM_FROM, RANDOM_UNTIL)
+
+    private fun initActionBar() {
+        val navBarTitle = resources.getString(R.string.andes_demoapp_playground_title_live_region)
+        setSupportActionBar(findViewById(R.id.alr_nav_bar))
+        supportActionBar?.title = navBarTitle
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
     companion object {
         private const val RANDOM_FROM = 0

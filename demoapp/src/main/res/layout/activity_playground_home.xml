@@ -9,6 +9,15 @@
         android:layout_height="match_parent"
         tools:context=".components.a11yplayground.PlaygroundHomeActivity">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/a11y_home_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
         <com.mercadolibre.android.andesui.message.AndesMessage
             android:id="@+id/playground_message"
             android:layout_width="match_parent"
@@ -22,7 +31,7 @@
             app:andesMessageType="neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/a11y_home_nav_bar" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/playground_content_description"
@@ -31,7 +40,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_content_description"
+            app:andesButtonText="@string/andes_demoapp_playground_title_content_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_message" />
@@ -43,7 +52,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_next_focus"
+            app:andesButtonText="@string/andes_demoapp_playground_title_next_focus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_content_description" />
@@ -55,7 +64,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_important_for_a11y"
+            app:andesButtonText="@string/andes_demoapp_playground_title_important_for_a11y"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_next_focus" />
@@ -67,7 +76,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_live_region"
+            app:andesButtonText="@string/andes_demoapp_playground_title_live_region"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_important_for_a11y" />
@@ -79,7 +88,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_announce_a11y"
+            app:andesButtonText="@string/andes_demoapp_playground_title_announce_a11y"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_live_region" />
@@ -91,7 +100,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_a11y_heading"
+            app:andesButtonText="@string/andes_demoapp_playground_title_a11y_heading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_announce_a11y" />
@@ -103,7 +112,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_traversal_after"
+            app:andesButtonText="@string/andes_demoapp_playground_title_traversal_after"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_a11y_heading" />
@@ -115,7 +124,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:andesButtonText="@string/andes_demoapp_playground_button_semantic_views"
+            app:andesButtonText="@string/andes_demoapp_playground_title_semantic_views"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playground_traversal_after" />
