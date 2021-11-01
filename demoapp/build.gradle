@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.monits.staticCodeAnalysis'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: "$rootDir/gradle/dexcount.gradle"
@@ -96,14 +95,6 @@ android {
     dexOptions.preDexLibraries = true
 }
 
-staticCodeAnalysis {
-    spotbugs = false
-    // False is REQUIRED in order to make CI server fail the build on errors.
-    ignoreErrors = false
-
-    androidLint = false
-    androidLintConfig = "$rootDir/config/android/android-lint-demoapp.xml"
-}
 
 dependencies {
     implementation project(':components')
