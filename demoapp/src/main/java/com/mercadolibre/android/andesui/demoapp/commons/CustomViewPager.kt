@@ -23,7 +23,7 @@ class CustomViewPager(context: Context, attrs: AttributeSet?) : ViewPager(contex
     }
 
     private fun logTracking(currentPosition: Int) {
-        val className = this.javaClass.simpleName
+        val className = context.javaClass.simpleName
         AnalyticsTracker.logComponentActivityTracking(className, currentPosition)
     }
 
