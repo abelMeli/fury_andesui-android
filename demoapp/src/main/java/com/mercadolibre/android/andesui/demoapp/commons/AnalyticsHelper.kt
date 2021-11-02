@@ -9,6 +9,7 @@ internal class AnalyticsHelper {
     }
 
     private val a11yExamples = mapOf(
+        "PlaygroundHomeActivity" to "PlaygroundHome",
         "A11yLiveRegionActivity" to "AccessibilityLiveRegion",
         "A11yTraversalAfterActivity" to "AccessibilityTravelsarAfter",
         "AnnounceForA11yActivity" to "AnnounceForAccessibility",
