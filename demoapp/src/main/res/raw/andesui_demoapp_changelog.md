@@ -2,6 +2,7 @@
 ## 🚀 Feature
 - Added analytics tracking to the A11y Playground | Author: [@juanunzu](https://github.com/juanunzu)
 - Material Bridge support | Author: Andes Team
+- Added doc for frontend configuration | Author: [eportasML](https://github.com/eportasML)
 
 # v3.35.0
 ## 🛠 Fixes

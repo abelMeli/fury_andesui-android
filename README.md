@@ -15,6 +15,8 @@ You can include this module by adding the dependency to your build.gradle file.
 implementation "com.mercadolibre.android.andesui:components:X.Y.Z"
 ```
 
+If your module runs in Mercado Libre or Mercado Pago check the [setup page](/docs/guide/Setup.md) in order to finish your configuration and have production environment styles in all your components. If not, you should see our [font & colors page](/docs/guide/Fonts&Colors.md) to learn how to customize AndesUI styles.
+
 **See the latest version [here](https://github.com/mercadolibre/fury_andesui-android/releases).**
 
 ### Documentation
