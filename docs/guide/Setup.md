@@ -30,14 +30,14 @@ class MainApplication : Application() {
 
 ## Mercado Pago
 
-You must add [font-configurator](https://github.com/mercadolibre/fury_mp-config-provider-android/tree/master/font-configurator) and [andes-configurator](https://github.com/mercadolibre/fury_mp-config-provider-android/tree/master/andes-configurer):
+You must add [font-configurator](https://github.com/mercadolibre/fury_mp-config-provider-android/tree/master/font-configurator) and [andes-configurer](https://github.com/mercadolibre/fury_mp-config-provider-android/tree/master/andes-configurer):
 
 In your build gradle **build.gradle**
 ```groovy
 dependencies {
     ...
     implementation "com.mercadopago.android.configurer:font-configurator:$mpConfigVersion"
-    implementation "com.mercadopago.android.configurer:andes-configurator:$mpConfigVersion"
+    implementation "com.mercadopago.android.configurer:andes-configurer:$mpConfigVersion"
     ...
 }
 ```
