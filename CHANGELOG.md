@@ -1,6 +1,7 @@
 # v3.36.0
 ## 🚀 Feature
 - Added analytics tracking to the A11y Playground | Author: [@juanunzu](https://github.com/juanunzu)
+- Added progress loading in AndesButton | Author: [@gmacedomeli](https://github.com/gmacedomeli)
 - Material Bridge support | Author: Andes Team
 - Added doc for frontend configuration | Author: [eportasML](https://github.com/eportasML)
 

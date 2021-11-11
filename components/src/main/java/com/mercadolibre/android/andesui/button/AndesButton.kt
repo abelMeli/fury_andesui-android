@@ -27,14 +27,17 @@ import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrs
 import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrsParser
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfiguration
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfigurationFactory
-import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
-import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
-import com.mercadolibre.android.andesui.button.hierarchy.getConfiguredBackground
+import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
+import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
 import com.mercadolibre.android.andesui.button.hierarchy.BackgroundColorConfig
+import com.mercadolibre.android.andesui.button.hierarchy.getConfiguredBackground
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
+import com.mercadolibre.android.andesui.buttonprogress.AndesButtonProgressIndicatorDeterminate
+import com.mercadolibre.android.andesui.buttonprogress.status.AndesButtonProgressAction
 import com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
 import com.mercadolibre.android.andesui.progress.size.AndesProgressSize
+import com.mercadolibre.android.andesui.utils.AnimationsUtils
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -76,8 +79,12 @@ import kotlinx.android.parcel.Parcelize
 class AndesButton : ConstraintLayout {
 
     private lateinit var andesButtonAttrs: AndesButtonAttrs
+    lateinit var componentContainer: ConstraintLayout
+        private set
     internal lateinit var textComponent: TextView
+    internal lateinit var progressLoadingTextComponent: TextView
     private lateinit var loadingView: AndesProgressIndicatorIndeterminate
+    private lateinit var progressView: AndesButtonProgressIndicatorDeterminate
 
     lateinit var leftIconComponent: SimpleDraweeView
     lateinit var rightIconComponent: SimpleDraweeView
@@ -92,6 +99,16 @@ class AndesButton : ConstraintLayout {
         set(value) {
             andesButtonAttrs = andesButtonAttrs.copy(andesButtonText = value)
             textComponent.text = andesButtonAttrs.andesButtonText
+        }
+
+    /**
+     * Getter and setter for [progressLoadingText].
+     */
+    var progressLoadingText: String?
+        get() = andesButtonAttrs.andesButtonProgressLoadingText
+        set(value) {
+            andesButtonAttrs = andesButtonAttrs.copy(andesButtonProgressLoadingText = value)
+            progressLoadingTextComponent.text = andesButtonAttrs.andesButtonProgressLoadingText
         }
 
     /**
@@ -134,6 +151,19 @@ class AndesButton : ConstraintLayout {
             }
         }
 
+    /**
+     * Getter and setter for [progressStatus].
+     */
+    var progressStatus: AndesButtonProgressAction
+        get() = andesButtonAttrs.andesButtonProgressStatus
+        set(value) {
+            andesButtonAttrs = andesButtonAttrs.copy(andesButtonProgressStatus = value)
+            createConfig().let {
+                setupProgressStatusComponent(it)
+                setupProgressLoadingTextComponent(it)
+            }
+        }
+
     init {
         isSaveEnabled = true
     }
@@ -143,7 +173,7 @@ class AndesButton : ConstraintLayout {
      * Builds an AndesButton with Large Size and Hierarchy Loud by default.
      */
     constructor(context: Context) : super(context) {
-        initAttrs(SIZE_DEFAULT, HIERARCHY_DEFAULT, ICON_DEFAULT, TEXT_DEFAULT)
+        initAttrs(SIZE_DEFAULT, HIERARCHY_DEFAULT, ICON_DEFAULT, TEXT_DEFAULT, PROGRESS_LOADING_TEXT_DEFAULT)
     }
 
     /**
@@ -155,10 +185,11 @@ class AndesButton : ConstraintLayout {
         buttonSize: AndesButtonSize = SIZE_DEFAULT,
         buttonHierarchy: AndesButtonHierarchy = HIERARCHY_DEFAULT,
         buttonIcon: AndesButtonIcon? = ICON_DEFAULT,
-        buttonText: String? = TEXT_DEFAULT
+        buttonText: String? = TEXT_DEFAULT,
+        buttonProgressLoadingText: String? = PROGRESS_LOADING_TEXT_DEFAULT
     ) :
-        super(context) {
-        initAttrs(buttonSize, buttonHierarchy, buttonIcon, buttonText)
+            super(context) {
+        initAttrs(buttonSize, buttonHierarchy, buttonIcon, buttonText, buttonProgressLoadingText)
     }
 
     /**
@@ -201,13 +232,17 @@ class AndesButton : ConstraintLayout {
         buttonSize: AndesButtonSize,
         buttonHierarchy: AndesButtonHierarchy,
         buttonIcon: AndesButtonIcon?,
-        text: String?
+        text: String?,
+        progressLoadingText: String?
     ) {
-        andesButtonAttrs = AndesButtonAttrs(buttonHierarchy,
+        andesButtonAttrs = AndesButtonAttrs(
+            buttonHierarchy,
             buttonSize,
             buttonIcon?.leftIcon,
             buttonIcon?.rightIcon,
-            text)
+            text,
+            progressLoadingText
+        )
         setupComponents(createConfig())
     }
 
@@ -227,10 +262,9 @@ class AndesButton : ConstraintLayout {
         updateDynamicComponents(config)
         setupIsLoadingView(config)
 
-        addView(loadingView)
-        addView(textComponent)
-        addView(leftIconComponent)
-        addView(rightIconComponent)
+        addView(progressView)
+        addView(componentContainer)
+        addButtonComponents()
 
         updateComponentsAlignment(config)
         setupA11yDelegate()
@@ -242,9 +276,12 @@ class AndesButton : ConstraintLayout {
      */
     private fun updateDynamicComponents(config: AndesButtonConfiguration) {
         setupTextComponent(config)
+        setupProgressLoadingTextComponent(config)
         setupLeftIconComponent(config)
         setupRightIconComponent(config)
         setupLoadingComponent(config)
+        setupProgressAndesButtonHierarchyComponent(config)
+        setupProgressStatusComponent(config)
 
         background = config.background
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -260,9 +297,23 @@ class AndesButton : ConstraintLayout {
      * Configures the constraints for this button.
      *
      */
-    private fun setupConstraints(config: AndesButtonConfiguration) {
+    private fun setupConstraints() {
         val set = ConstraintSet()
         set.clone(this)
+
+        set.centerVertically(componentContainer.id, ConstraintSet.PARENT_ID)
+        set.centerHorizontally(componentContainer.id, ConstraintSet.PARENT_ID)
+
+        set.applyTo(this)
+    }
+
+    /**
+     * Configures the constraints for the components inside the button.
+     *
+     */
+    private fun setupComponentsConstraints(config: AndesButtonConfiguration) {
+        val set = ConstraintSet()
+        set.clone(componentContainer)
         set.createHorizontalChain(
             ConstraintSet.PARENT_ID, ConstraintSet.LEFT,
             ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,
@@ -279,12 +330,19 @@ class AndesButton : ConstraintLayout {
         set.setMargin(textComponent.id, ConstraintSet.END, config.margin.iconLeftMargin)
         set.setGoneMargin(textComponent.id, ConstraintSet.END, config.margin.textRightMargin)
 
+        set.centerVertically(progressLoadingTextComponent.id, ConstraintSet.PARENT_ID)
+        set.centerHorizontally(progressLoadingTextComponent.id, ConstraintSet.PARENT_ID)
+        set.setMargin(progressLoadingTextComponent.id, ConstraintSet.START, config.margin.iconRightMargin)
+        set.setGoneMargin(progressLoadingTextComponent.id, ConstraintSet.START, config.margin.textLeftMargin)
+        set.setMargin(progressLoadingTextComponent.id, ConstraintSet.END, config.margin.iconLeftMargin)
+        set.setGoneMargin(progressLoadingTextComponent.id, ConstraintSet.END, config.margin.textRightMargin)
+
         set.centerVertically(rightIconComponent.id, ConstraintSet.PARENT_ID)
 
         set.centerVertically(loadingView.id, ConstraintSet.PARENT_ID)
         set.centerHorizontally(loadingView.id, ConstraintSet.PARENT_ID)
 
-        set.applyTo(this)
+        set.applyTo(componentContainer)
     }
 
     /**
@@ -293,14 +351,21 @@ class AndesButton : ConstraintLayout {
      *
      */
     private fun initComponents() {
+        componentContainer = ConstraintLayout(context)
+        componentContainer.id = View.generateViewId()
         textComponent = TextView(context)
         textComponent.id = View.generateViewId()
+        progressLoadingTextComponent = TextView(context)
+        progressLoadingTextComponent.id = View.generateViewId()
         leftIconComponent = SimpleDraweeView(context)
         leftIconComponent.id = View.generateViewId()
         rightIconComponent = SimpleDraweeView(context)
         rightIconComponent.id = View.generateViewId()
         loadingView = AndesProgressIndicatorIndeterminate(context)
         loadingView.id = View.generateViewId()
+        progressView = AndesButtonProgressIndicatorDeterminate(context)
+        progressView.visibility = View.GONE
+        progressView.id = View.generateViewId()
     }
 
     /**
@@ -359,6 +424,54 @@ class AndesButton : ConstraintLayout {
         textComponent.setTextColor(config.textColor)
         textComponent.typeface = config.typeface
         textComponent.ellipsize = TextUtils.TruncateAt.END
+        setupTextComponentsVisibility()
+    }
+
+    /**
+     * Gets data from the config and sets to the text component of this button.
+     *
+     */
+    private fun setupProgressLoadingTextComponent(config: AndesButtonConfiguration) {
+        progressLoadingTextComponent.text = if (config.progressLoadingText.isNullOrEmpty()) {
+            PROGRESS_LOADING_TEXT_DEFAULT
+        } else {
+            config.progressLoadingText
+        }
+        progressLoadingTextComponent.maxLines = config.maxLines
+        progressLoadingTextComponent.isAllCaps = false
+        progressLoadingTextComponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.textSize)
+        progressLoadingTextComponent.setTextColor(config.textColor)
+        progressLoadingTextComponent.typeface = config.typeface
+        progressLoadingTextComponent.ellipsize = TextUtils.TruncateAt.END
+        setupTextComponentsVisibility()
+    }
+
+    private fun setupTextComponentsVisibility() {
+        when (progressStatus) {
+            AndesButtonProgressAction.IDLE -> {
+                progressLoadingTextComponent.alpha = 0f
+            }
+            AndesButtonProgressAction.START, AndesButtonProgressAction.RESUME -> {
+                AnimationsUtils.fadeOut(textComponent, AnimationsUtils.Position.TOP, LOADING_PROGRESS_ANIMATION_DURATION, 0L, false)
+                AnimationsUtils.fadeIn(
+                    progressLoadingTextComponent,
+                    AnimationsUtils.Position.BOTTOM,
+                    LOADING_PROGRESS_ANIMATION_DURATION,
+                    0L,
+                    false
+                )
+            }
+            AndesButtonProgressAction.PAUSE, AndesButtonProgressAction.CANCEL -> {
+                AnimationsUtils.fadeIn(textComponent, AnimationsUtils.Position.TOP, LOADING_PROGRESS_ANIMATION_DURATION, 0L, false)
+                AnimationsUtils.fadeOut(
+                    progressLoadingTextComponent,
+                    AnimationsUtils.Position.BOTTOM,
+                    LOADING_PROGRESS_ANIMATION_DURATION,
+                    0L,
+                    false
+                )
+            }
+        }
     }
 
     /**
@@ -395,7 +508,7 @@ class AndesButton : ConstraintLayout {
      * Sets the paddings of the button.
      */
     private fun setupPaddings(config: AndesButtonConfiguration) {
-        setPadding(config.lateralPadding, paddingTop, config.lateralPadding, paddingBottom)
+        componentContainer.setPadding(config.lateralPadding, paddingTop, config.lateralPadding, paddingBottom)
     }
 
     /**
@@ -422,10 +535,36 @@ class AndesButton : ConstraintLayout {
     }
 
     /**
+     * Method that update the [AndesButtonProgressIndicatorDeterminate] andesButtonHierarchy base on the actual Hierarchy of the button.
+     */
+    private fun setupProgressAndesButtonHierarchyComponent(config: AndesButtonConfiguration) {
+        progressView.andesButtonHierarchy = config.hierarchy
+    }
+
+    /**
+     * Method that update the [AndesButtonProgressIndicatorDeterminate] status base on the actual Action in the config.
+     */
+    private fun setupProgressStatusComponent(config: AndesButtonConfiguration) {
+        config.setupDeterminateProgressStatus(progressView)
+    }
+
+    /**
+     * Method that add the components to the button's component container.
+     */
+    private fun addButtonComponents() {
+        componentContainer.addView(loadingView)
+        componentContainer.addView(textComponent)
+        componentContainer.addView(progressLoadingTextComponent)
+        componentContainer.addView(leftIconComponent)
+        componentContainer.addView(rightIconComponent)
+    }
+
+    /**
      * Responsible to update components positions and constraints based on the current configuration
      */
     private fun updateComponentsAlignment(config: AndesButtonConfiguration) {
-        setupConstraints(config)
+        setupConstraints()
+        setupComponentsConstraints(config)
         setupPaddings(config)
     }
 
@@ -439,18 +578,22 @@ class AndesButton : ConstraintLayout {
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
         textComponent.isEnabled = enabled
+        progressLoadingTextComponent.isEnabled = enabled
         leftIconComponent.isEnabled = enabled
         rightIconComponent.isEnabled = enabled
     }
 
     internal fun changeTextColor(color: Int) {
         textComponent.setTextColor(color)
+        progressLoadingTextComponent.setTextColor(color)
     }
 
     internal fun changeBackgroundColor(backgroundColorConfig: BackgroundColorConfig) {
-        background = getConfiguredBackground(context,
+        background = getConfiguredBackground(
+            context,
             context.resources.getDimension(R.dimen.andes_button_border_radius_medium),
-            backgroundColorConfig)
+            backgroundColorConfig
+        )
     }
 
     /**
@@ -486,8 +629,10 @@ class AndesButton : ConstraintLayout {
 
         if (!leftIconPosition) {
             icon = rightIconComponent
-            andesButtonAttrs = andesButtonAttrs.copy(andesButtonLeftIconPath = null,
-                andesButtonRightIconPath = CUSTOM_ICON_DEFAULT)
+            andesButtonAttrs = andesButtonAttrs.copy(
+                andesButtonLeftIconPath = null,
+                andesButtonRightIconPath = CUSTOM_ICON_DEFAULT
+            )
         }
 
         val listener: ControllerListener<ImageInfo> = object : BaseControllerListener<ImageInfo>() {
@@ -549,6 +694,38 @@ class AndesButton : ConstraintLayout {
     }
 
     /**
+     * Get actual progress value of the progress component
+     * @return the actual progress
+     */
+    fun getProgressIndicatorValue(): Int {
+        return progressView.progress
+    }
+
+    /**
+     * Set from which value the progress should start. Min value 0.
+     * @param from to value
+     */
+    fun setProgressIndicatorFrom(from: Int) {
+        progressView.from = from
+    }
+
+    /**
+     * Set to which value the progress should end. Max value 200.
+     * @param to to value
+     */
+    fun setProgressIndicatorTo(to: Int) {
+        progressView.to = to
+    }
+
+    /**
+     * Setter to modify the duration of de progress animation loading
+     * @param durationInMillis durations in milliseconds
+     */
+    fun setProgressIndicatorDuration(durationInMillis: Long) {
+        progressView.duration = durationInMillis
+    }
+
+    /**
      * returns the class name of this component. This value will be taken as the Role by
      * accessibility services, therefore will be named after the content description
      * and before the available actions for this component.
@@ -562,10 +739,12 @@ class AndesButton : ConstraintLayout {
      */
     companion object {
         private const val TEXT_DEFAULT = "Button text"
+        private const val PROGRESS_LOADING_TEXT_DEFAULT = "Loading"
         private val HIERARCHY_DEFAULT = AndesButtonHierarchy.LOUD
         private val SIZE_DEFAULT = AndesButtonSize.LARGE
         private val ICON_DEFAULT = null
         private const val CUSTOM_ICON_DEFAULT = "andesui_icon"
+        private const val LOADING_PROGRESS_ANIMATION_DURATION = 200L
     }
 
     @Parcelize

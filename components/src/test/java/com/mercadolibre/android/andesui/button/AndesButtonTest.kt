@@ -14,6 +14,7 @@ import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
+import com.mercadolibre.android.andesui.buttonprogress.status.AndesButtonProgressAction
 import com.mercadolibre.android.andesui.icons.IconProvider
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertEquals
@@ -60,11 +61,12 @@ class AndesButtonTest {
         assertEquals(andesButton.textComponent.textSize, 16F)
         assertEquals(textParams.goneStartMargin, 8)
         assertEquals(textParams.goneEndMargin, 8)
-        assertEquals(andesButton.paddingRight, 16)
-        assertEquals(andesButton.paddingLeft, 16)
+        assertEquals(andesButton.componentContainer.paddingRight, 16)
+        assertEquals(andesButton.componentContainer.paddingLeft, 16)
         assertNull(andesButton.leftIconComponent.drawable)
         assertNull(andesButton.rightIconComponent.drawable)
         assertEquals(andesButton.isLoading, false)
+        assertEquals(andesButton.progressStatus, AndesButtonProgressAction.IDLE)
     }
 
     @Test
@@ -75,11 +77,12 @@ class AndesButtonTest {
         assertEquals(andesButton.textComponent.textSize, 14F)
         assertEquals(textParams.goneStartMargin, 0)
         assertEquals(textParams.goneEndMargin, 0)
-        assertEquals(andesButton.paddingRight, 12)
-        assertEquals(andesButton.paddingLeft, 12)
+        assertEquals(andesButton.componentContainer.paddingRight, 12)
+        assertEquals(andesButton.componentContainer.paddingLeft, 12)
         assertNull(andesButton.leftIconComponent.drawable)
         assertNull(andesButton.rightIconComponent.drawable)
         assertEquals(andesButton.isLoading, false)
+        assertEquals(andesButton.progressStatus, AndesButtonProgressAction.IDLE)
     }
 
     @Test
@@ -93,11 +96,12 @@ class AndesButtonTest {
         assertEquals(leftIconParams.marginStart, 0)
         assertEquals(textParams.marginStart, 12)
         assertEquals(textParams.goneEndMargin, 8)
-        assertEquals(andesButton.paddingRight, 16)
-        assertEquals(andesButton.paddingLeft, 16)
+        assertEquals(andesButton.componentContainer.paddingRight, 16)
+        assertEquals(andesButton.componentContainer.paddingLeft, 16)
         assertThat(andesButton.leftIconComponent.drawable).isEqualToComparingOnlyGivenFields(icon)
         assertNull(andesButton.rightIconComponent.drawable)
         assertEquals(andesButton.isLoading, false)
+        assertEquals(andesButton.progressStatus, AndesButtonProgressAction.IDLE)
     }
 
     @Test
@@ -111,11 +115,12 @@ class AndesButtonTest {
         assertEquals(textParams.marginEnd, 12)
         assertEquals(rightIconParams.marginEnd, 0)
         assertEquals(textParams.goneStartMargin, 8)
-        assertEquals(andesButton.paddingRight, 16)
-        assertEquals(andesButton.paddingLeft, 16)
+        assertEquals(andesButton.componentContainer.paddingRight, 16)
+        assertEquals(andesButton.componentContainer.paddingLeft, 16)
         assertNull(andesButton.leftIconComponent.drawable)
         assertThat(andesButton.rightIconComponent.drawable).isEqualToComparingOnlyGivenFields(icon)
         assertEquals(andesButton.isLoading, false)
+        assertEquals(andesButton.progressStatus, AndesButtonProgressAction.IDLE)
     }
 
     @Test

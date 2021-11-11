@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.view.View
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfigurationFactory.create
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
@@ -11,6 +12,8 @@ import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchyInt
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.button.size.AndesButtonSizeInterface
+import com.mercadolibre.android.andesui.buttonprogress.AndesButtonProgressIndicatorDeterminate
+import com.mercadolibre.android.andesui.buttonprogress.status.AndesButtonProgressAction
 
 /**
  * Useful class that holds the data that the [AndesButton] will use to draw the button accordingly.
@@ -28,6 +31,7 @@ import com.mercadolibre.android.andesui.button.size.AndesButtonSizeInterface
 internal data class AndesButtonConfiguration(
     val background: Drawable,
     val text: String? = null,
+    val progressLoadingText: String? = null,
     val textColor: ColorStateList,
     val textSize: Float,
     val margin: AndesButtonMargin,
@@ -36,7 +40,9 @@ internal data class AndesButtonConfiguration(
     val iconConfig: IconConfig? = null,
     val enabled: Boolean = true,
     val lateralPadding: Int,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val hierarchy: AndesButtonHierarchyInterface,
+    val determinateProgressStatusAction: AndesButtonProgressAction = AndesButtonProgressAction.IDLE
 ) {
     /**
      * Constant representing the max of lines a button can have
@@ -56,6 +62,27 @@ internal data class AndesButtonConfiguration(
      * BUT they CAN be null simultaneously: This means the button has no icon.
      */
     val rightIcon get() = iconConfig?.rightIcon
+
+    /**
+     * Method that update the [AndesButtonProgressIndicatorDeterminate] status base on the actual Action.
+     */
+    fun setupDeterminateProgressStatus(progressView: AndesButtonProgressIndicatorDeterminate) {
+        when (determinateProgressStatusAction) {
+            AndesButtonProgressAction.IDLE -> {
+                /* no op */
+            }
+            AndesButtonProgressAction.START -> {
+                progressView.visibility = View.VISIBLE
+                progressView.start()
+            }
+            AndesButtonProgressAction.PAUSE -> progressView.pause()
+            AndesButtonProgressAction.RESUME -> progressView.resume()
+            AndesButtonProgressAction.CANCEL -> {
+                progressView.visibility = View.GONE
+                progressView.cancel()
+            }
+        }
+    }
 }
 
 /**
@@ -80,20 +107,27 @@ internal object AndesButtonConfigurationFactory {
         return AndesButtonConfiguration(
             background = resolveBackground(hierarchy, size, context),
             text = andesButtonAttrs.andesButtonText,
+            progressLoadingText = andesButtonAttrs.andesButtonProgressLoadingText,
             textColor = resolveTextColor(hierarchy, context),
             textSize = resolveTextSize(size, context),
-            margin = resolveMargin(size, andesButtonAttrs.andesButtonLeftIconPath,
+            margin = resolveMargin(
+                size, andesButtonAttrs.andesButtonLeftIconPath,
                 andesButtonAttrs.andesButtonRightIconPath, andesButtonAttrs.andesButtonLeftDrawable,
-                andesButtonAttrs.andesButtonRightDrawable, context),
+                andesButtonAttrs.andesButtonRightDrawable, context
+            ),
             height = resolveHeight(size, context),
             typeface = resolveTypeface(hierarchy, context),
-            iconConfig = resolveIconConfig(size, hierarchy,
+            iconConfig = resolveIconConfig(
+                size, hierarchy,
                 andesButtonAttrs.andesButtonLeftIconPath,
                 andesButtonAttrs.andesButtonRightIconPath, andesButtonAttrs.andesButtonLeftDrawable,
-                andesButtonAttrs.andesButtonRightDrawable, context),
+                andesButtonAttrs.andesButtonRightDrawable, context
+            ),
             enabled = andesButtonAttrs.andesButtonEnabled,
             lateralPadding = resolveLateralPadding(size, context),
-            isLoading = andesButtonAttrs.andesButtonIsLoading
+            isLoading = andesButtonAttrs.andesButtonIsLoading,
+            hierarchy = hierarchy,
+            determinateProgressStatusAction = andesButtonAttrs.andesButtonProgressStatus
         )
     }
 
@@ -109,7 +143,6 @@ internal object AndesButtonConfigurationFactory {
      * @param andesButtonIcon has the necessary info about the icon to draw.
      * @return an [AndesButtonConfiguration] that contains all the data that [AndesButton] needs to draw itself properly.
      */
-
     @Suppress("LongParameterList")
     @Override
     fun create(
@@ -127,13 +160,18 @@ internal object AndesButtonConfigurationFactory {
             background = resolveBackground(hierarchy, size, context),
             textColor = resolveTextColor(hierarchy, context),
             textSize = resolveTextSize(size, context),
-            margin = resolveMargin(size,
-                andesButtonIcon?.leftIcon, andesButtonIcon?.rightIcon, andesButtonLeftDrawable, andesButtonRightDrawable, context),
+            margin = resolveMargin(
+                size,
+                andesButtonIcon?.leftIcon, andesButtonIcon?.rightIcon, andesButtonLeftDrawable, andesButtonRightDrawable, context
+            ),
             height = resolveHeight(size, context),
             typeface = resolveTypeface(hierarchy, context),
-            iconConfig = resolveIconConfig(size,
-                hierarchy, andesButtonIcon?.leftIcon, andesButtonIcon?.rightIcon, andesButtonLeftDrawable, andesButtonRightDrawable, context),
-            lateralPadding = resolveLateralPadding(size, context)
+            iconConfig = resolveIconConfig(
+                size,
+                hierarchy, andesButtonIcon?.leftIcon, andesButtonIcon?.rightIcon, andesButtonLeftDrawable, andesButtonRightDrawable, context
+            ),
+            lateralPadding = resolveLateralPadding(size, context),
+            hierarchy = hierarchy
         )
     }
 

@@ -7,10 +7,15 @@
     <string name="dismissable" translatable="false">Dismissable</string>
     <string name="bullet" translatable="false">Bullet</string>
     <string name="title_text" translatable="false">Atention!</string>
+    <string name="andes_message_start_progress_loading" translatable="false">Start</string>
+    <string name="andes_message_pause_progress_loading" translatable="false">Pause</string>
+    <string name="andes_message_resume_progress_loading" translatable="false">Resume</string>
+    <string name="andes_message_cancel_progress_loading" translatable="false">Cancel</string>
     <string name="andes_message_showcase_change" translatable="false">Update</string>
     <string name="change_text" translatable="false">Title text</string>
     <string name="change_body" translatable="false">Body text</string>
     <string name="andesui_demoapp_clear_button" translatable="false">Clear</string>
+    <string name="andesui_demoapp_error_tracking" translatable="false">Current Activity could not be tracked. Add component and screens entries to AnalyticsHelper.</string>
     <string-array name="hierarchy_spinner">
         <item>Quiet</item>
         <item>Loud</item>
@@ -178,8 +183,18 @@
     <string name="andes_button_enabled" translatable="false">Enabled</string>
     <string name="andes_button_size" translatable="false">Size</string>
     <string name="andes_button_is_loading" translatable="false">Is loading</string>
+    <string name="andes_button_is_progress_loading" translatable="false">Is progress loading</string>
     <string name="andes_button_text" translatable="false">Text</string>
     <string name="andes_button" translatable="false">Andes button</string>
+    <string name="andes_button_loud_progress_label" translatable="false">Andes Button Loud Progress</string>
+    <string name="andes_button_quiet_progress_label" translatable="false">Andes Button Quiet Progress</string>
+    <string name="andes_button_transparent_progress_label" translatable="false">Andes Button Transparent Progress</string>
+    <string name="andes_button_loading_text" translatable="false">Loading Text</string>
+    <string name="andes_button_from" translatable="false">From</string>
+    <string name="andes_button_to" translatable="false">To</string>
+    <string name="andes_button_max" translatable="false">Max</string>
+    <string name="andes_button_duration" translatable="false">Duration</string>
+    <string name="andes_button_progress" translatable="false">Progress</string>
     <string name="andes_button_loud" translatable="false">Loud buttons</string>
     <string name="andes_button_loud_drawable" translatable="false">Loud large with drawable</string>
     <string name="andes_button_loud_large_disabled" translatable="false">Loud large button disabled</string>
@@ -201,8 +216,10 @@
     <string name="andes_button_transparent_medium" translatable="false">Transparent medium button</string>
     <string name="andes_button_transparent_small" translatable="false">Transparent small button</string>
     <string name="andes_button_transparent_small_with_loading" translatable="false">Transparent small button with loading</string>
-    <string name="andes_button_description" translatable="false">The buttons allow you to carry out the main and secondary actions of a screen.\nThey are applied in different places in the UI such as cards, manners and forms.</string>
-    <string-array name="andes_button_size_spinner" translatable="false">
+    <string name="andes_button_description" translatable="false">The buttons allow you to `carry` out the main and secondary actions of a screen.\nThey are applied in different places in the UI such as cards, manners and forms.</string>
+    <string name="andes_button_progress_description" translatable="false">The buttons has a function that allow you to show a progress indicator determinate to provide feedback to a user after he make an action with the button.</string>
+    <string-array name="andes_button_size_spinner">
+
         <item>Large</item>
         <item>Medium</item>
         <item>Small</item>
@@ -848,8 +865,8 @@
     <string-array name="andes_thumbnail_badge_dot_size_spinner" translatable="false">
         <item>Size 24</item>
         <item>Size 32</item>
-    </string-array>  
-  
+    </string-array>
+
     <string name="demoapp_money_amount" translatable="false">Andes Money Amount</string>
     <string name="demoapp_money_amount_size" translatable="false">Size</string>
     <string name="demoapp_money_amount_type" translatable="false">Type</string>

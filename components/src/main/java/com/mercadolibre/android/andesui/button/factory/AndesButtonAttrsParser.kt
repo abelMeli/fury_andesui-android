@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
+import com.mercadolibre.android.andesui.buttonprogress.status.AndesButtonProgressAction
 
 /**
  * The data class that contains the public components of the button.
@@ -16,8 +17,10 @@ internal data class AndesButtonAttrs(
     val andesButtonLeftIconPath: String?,
     val andesButtonRightIconPath: String?,
     val andesButtonText: String?,
+    val andesButtonProgressLoadingText: String?,
     val andesButtonEnabled: Boolean = true,
     val andesButtonIsLoading: Boolean = false,
+    val andesButtonProgressStatus: AndesButtonProgressAction = AndesButtonProgressAction.IDLE,
     val andesButtonLeftDrawable: Drawable? = null,
     val andesButtonRightDrawable: Drawable? = null
 )
@@ -71,7 +74,9 @@ internal object AndesButtonAttrsParser {
                 andesButtonRightIconPath = typedArray.getString(R.styleable.AndesButton_andesButtonRightIconPath),
                 andesButtonEnabled = typedArray.getBoolean(R.styleable.AndesButton_andesButtonEnabled, true),
                 andesButtonText = typedArray.getString(R.styleable.AndesButton_andesButtonText),
-                andesButtonIsLoading = typedArray.getBoolean(R.styleable.AndesButton_andesButtonIsLoading, false)
+                andesButtonProgressLoadingText = typedArray.getString(R.styleable.AndesButton_andesButtonProgressLoadingText),
+                andesButtonIsLoading = typedArray.getBoolean(R.styleable.AndesButton_andesButtonIsLoading, false),
+                andesButtonProgressStatus = AndesButtonProgressAction.IDLE
         ).also { typedArray.recycle() }
     }
 }

@@ -32,6 +32,7 @@ Basic Sample XML
 | app:andesButtonLeftIconPath | Icon at the left of the text. It must be icon string name.|
 | app:andesButtonRightIconPath | Icon at the right of the text. It must be icon string name. |
 | app:andesButtonText | Button display text. Must be a string resource. |
+| app:andesButtonProgressLoadingText | Button display text when the progress loading is in process. Must be a string resource. |
 | app:andesButtonEnabled | Button active or inactive style: **true**, **false** |
 | app:andesButtonIsLoading | Shows progress drawable instead of text: **true**, **false** |
 
@@ -64,9 +65,11 @@ Basic Sample XML
 | leftIconComponent: SimpleDraweeView | **get():** retrieves left icon view. |
 | rightIconComponent: SimpleDraweeView | **get():** retrieves right icon view. |
 | text: String? | **get():** retrieves button displayed text. <br/> **set(value: Drawable):** updates button displayed text. |
+| progressLoadingText: String? | **get():** retrieves button displayed text when the progress loading is in process. <br/> **set(value: Drawable):** updates button displayed text when the progress loading is in process. |
 | hierarchy: [AndesButtonHierarchy](#andesbuttonhierarchy) | **get():** retrieves button hierarchy style. <br/> **set(value: AndesButtonHierarchy):** updates button hierarchy style. |
 | size: [AndesButtonSize](#andesbuttonsize) | **get():** retrieves button size value. <br/> **set(value: AndesButtonSize):** updates button size. |
 | isLoading: Boolean | **get():** retrieves if button is in loading state. <br/> **set(value: Boolean):** updates button loading state. |
+| progressStatus: AndesButtonProgressAction | **get():** retrieves the actual button loading progress status. <br/> **set(value: Boolean):** updates the button loading progress status. |
 
 <br/>
 
@@ -76,6 +79,10 @@ Basic Sample XML
 | Unit | **setEnabled(enabled: Boolean)**<br/> Changes button active state and style. |
 | Unit | **setIconDrawable(drawable: Drawable, orientation: [AndesButtonIconOrientation](#andesbuttoniconorientation))**<br/> Set icon drawable to the button at left or right of the text |
 | Unit | **loadCustomButtonIcon(pipelineDraweeControllerBuilder: PipelineDraweeControllerBuilder, leftIconPosition: Boolean)**<br/> loads icon drawable using fresco PipelineDraweeControllerBuilder. The icon is loaded in left position by default |
+| Int | **getProgressIndicatorValue()**<br/> Get the actual progress loading indicator value of the button |
+| Unit | **setProgressIndicatorFrom(from: Int)**<br/> Set the start of the progress loading indicator value of the button |
+| Unit | **setProgressIndicatorTo(to: Int)**<br/> Set the end of the progress loading indicator value of the button |
+| Unit | **setProgressIndicatorDuration(duration: Int)**<br/> Set the duration of the progress loading animation of the button |
 
 <br/>
 
@@ -166,6 +173,21 @@ enum class AndesButtonIconOrientation
 | Return type | Method |
 | -------- | ------- |
 | AndesButtonIconOrientation | **fromString(value: String)**<br/> Retrieves an AndesButtonIconOrientation that matches the string value |
+
+<br/>
+
+### AndesButtonProgressAction
+Defines the possible actions of the loading progress that button can perform.
+```kotlin
+enum class AndesButtonProgressAction
+```
+| Enum Values | Description |
+| ----------- | ----------- |
+| IDLE | Loading progress IDLE |
+| START | Loading progress starts to animate |
+| PAUSE | Loading progress pauses the animation if it was already started |
+| RESUME | Loading progress resumes the animation if it was already pause |
+| CANCEL | Loading progress cancels if it was already started |
 
 <br/>
 

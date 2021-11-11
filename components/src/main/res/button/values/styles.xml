@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Andes.HorizontalProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/andes_progress_horizontal</item>
+        <item name="android:mirrorForRtl">true</item>
+    </style>
+</resources>

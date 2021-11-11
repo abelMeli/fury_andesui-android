@@ -49,6 +49,14 @@ internal sealed class AndesButtonHierarchyInterface {
      * @return the [Typeface] that should be used for the text inside the [AndesButton].
      */
     fun typeface(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+
+    /**
+     * Returns a Color for the progress button component progress color.
+     *
+     * @param context needed for accessing some resources.
+     * @return a Color for the progress.
+     */
+    abstract fun progressBackgroundColor(context: Context): Int
 }
 
 /**
@@ -59,6 +67,7 @@ internal sealed class AndesButtonHierarchyInterface {
 internal object AndesLoudButtonHierarchy : AndesButtonHierarchyInterface() {
     override fun background(context: Context, cornerRadius: Float) = getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigLoud())
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigLoud())
+    override fun progressBackgroundColor(context: Context): Int = context.resources.getColor(R.color.andes_accent_color_600)
 }
 
 /**
@@ -71,6 +80,7 @@ internal object AndesQuietButtonHierarchy : AndesButtonHierarchyInterface() {
         return getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigQuiet())
     }
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigQuiet())
+    override fun progressBackgroundColor(context: Context): Int = context.resources.getColor(R.color.andes_accent_color_300)
 }
 
 /**
@@ -83,4 +93,5 @@ internal object AndesTransparentButtonHierarchy : AndesButtonHierarchyInterface(
         return getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigTransparent())
     }
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigTransparent())
+    override fun progressBackgroundColor(context: Context): Int = context.resources.getColor(R.color.andes_transparent)
 }

@@ -51,7 +51,7 @@ internal class AnalyticsHelper {
     private val screens = mapOf(
         "BadgeShowcaseActivity" to arrayListOf("/badge/dynamic", "/badge/static"),
         "BottomSheetShowcaseActivity" to arrayListOf("/bottomsheet/dynamic"),
-        "ButtonShowcaseActivity" to arrayListOf("/button/dynamic", "/button/static"),
+        "ButtonShowcaseActivity" to arrayListOf("/button/dynamic", "/button/dynamicprogress", "/button/static"),
         "CardShowcaseActivity" to arrayListOf("/card/dynamic", "/card/static"),
         "CarouselShowcaseActivity" to arrayListOf("/carousel/dynamic", "/carousel/static"),
         "CheckboxShowcaseActivity" to arrayListOf("/checkbox/dynamic", "/checkbox/static"),
