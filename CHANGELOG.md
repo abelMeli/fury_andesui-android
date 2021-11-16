@@ -1,6 +1,10 @@
-# v3.36.2
+# v3.37.0
+## 🚀 Feature
+- Added feedback screen docs about webview experience | Author: [eportasML](https://github.com/eportasML)
+
 ## 🛠 Fixes
 - Fix `AndesDatePicker` date when the button is clicked and no actions happened on Calendar view | Author: [@gabrielcoutos](https://github.com/gabrielcoutos)
+
 # v3.36.1
 ## 🛠 Fixes
 - Progress loading AndesButton overload compatibility fix | Author: [eportasML](https://github.com/eportasML)

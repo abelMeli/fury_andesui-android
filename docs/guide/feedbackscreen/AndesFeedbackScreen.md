@@ -189,3 +189,18 @@ data class AndesFeedbackScreenButton
 | Simple-success (no body) | Simple-warning (no body) | Simple-error (with body) | Congrats (with body) |
 | --------- | --------- | --------- | --------- |
 | ![success](https://user-images.githubusercontent.com/81258246/133291465-bbd8c697-f1ec-41d5-b2fc-678bafbda199.png)|![warning](https://user-images.githubusercontent.com/81258246/133291467-1f71b97f-4636-417b-aa46-36538422b0d8.png)|![error](https://user-images.githubusercontent.com/81258246/133291455-a1bd1eb1-7293-490b-8e92-f181f3251799.png)|![congrats](https://user-images.githubusercontent.com/81258246/133291462-2ef06815-0e68-4a92-8eb4-3a45d185c20f.png) |
+
+## Webview Experience
+
+Actually we **do not recommend** using web AndesFeedbackScreen in webviews because UI and UX is not the expected. We will show some examples to illustrate the difference between webview and [native](#screenshots) feedback screen:
+
+| Simple-success (no body) | Simple-success (with body) | Congrats (with body) | Congrats (with body scrolled) |
+| --- | --- | --- | --- |
+| <img width="300" alt="Captura de Pantalla 2021-11-09 a la(s) 15 33 54" src="https://user-images.githubusercontent.com/58984116/141998408-2d0a9e9b-6ed7-454c-a83e-1353421fd358.png"> | <img width="300" alt="Captura de Pantalla 2021-11-09 a la(s) 15 32 12" src="https://user-images.githubusercontent.com/58984116/141998402-5e70684a-16b6-4155-93f2-eca73743e314.png"> | <img width="300" alt="Captura de Pantalla 2021-11-09 a la(s) 15 18 59" src="https://user-images.githubusercontent.com/58984116/141998396-d5f7c0c1-e0ea-41f1-a7f5-f2dbb08a60e9.png"> | <img width="300" alt="Captura de Pantalla 2021-11-09 a la(s) 15 18 25" src="https://user-images.githubusercontent.com/58984116/141998392-62caf273-8e2d-4c61-8d64-ad7f9c5b5eab.png"> |
+
+### Differences
+- Simple (no body) feedback screen is not centered vertically because there is a white toolbar at the top that can not be hidden in webviews.
+- Icon close can be added in all feedback screens but it is algined to the left when it should be aligned to the right of the screen.
+- Statusbar color can not be changed to green for Congrats type.
+- Top space between statusbar and header is bigger than the component specification because of the toolbar.
+- When a feedback screen with body is scrolled user can see the toolbar that should not be there.
