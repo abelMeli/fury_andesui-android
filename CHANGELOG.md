@@ -1,3 +1,6 @@
+# v3.36.2
+## 🛠 Fixes
+- Fix `AndesDatePicker` date when the button is clicked and no actions happened on Calendar view | Author: [@gabrielcoutos](https://github.com/gabrielcoutos)
 # v3.36.1
 ## 🛠 Fixes
 - Progress loading AndesButton overload compatibility fix | Author: [eportasML](https://github.com/eportasML)

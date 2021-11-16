@@ -245,12 +245,14 @@ class AndesDatePicker : ConstraintLayout {
         val calendar = Calendar.getInstance()
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             calendar.set(year, month, dayOfMonth)
+            calendarView.date = calendar.time.time
             if (andesBtnSelectDate.visibility == View.GONE) {
                 listener?.onDateApply(calendar)
             }
         }
 
         andesBtnSelectDate.setOnClickListener {
+            calendar.time = Date(calendarView.date)
             listener?.onDateApply(calendar)
         }
     }
