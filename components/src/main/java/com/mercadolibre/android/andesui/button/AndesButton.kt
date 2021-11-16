@@ -185,10 +185,23 @@ class AndesButton : ConstraintLayout {
         buttonSize: AndesButtonSize = SIZE_DEFAULT,
         buttonHierarchy: AndesButtonHierarchy = HIERARCHY_DEFAULT,
         buttonIcon: AndesButtonIcon? = ICON_DEFAULT,
+        buttonText: String? = TEXT_DEFAULT
+    ) : super(context) {
+        initAttrs(buttonSize, buttonHierarchy, buttonIcon, buttonText, PROGRESS_LOADING_TEXT_DEFAULT)
+    }
+
+    /**
+     * Constructor for creating an AndesButton programmatically with the specified [buttonSize],
+     * and optionally [buttonIcon] and [buttonText].
+     */
+    constructor(
+        context: Context,
+        buttonSize: AndesButtonSize = SIZE_DEFAULT,
+        buttonHierarchy: AndesButtonHierarchy = HIERARCHY_DEFAULT,
+        buttonIcon: AndesButtonIcon? = ICON_DEFAULT,
         buttonText: String? = TEXT_DEFAULT,
         buttonProgressLoadingText: String? = PROGRESS_LOADING_TEXT_DEFAULT
-    ) :
-            super(context) {
+    ) : super(context) {
         initAttrs(buttonSize, buttonHierarchy, buttonIcon, buttonText, buttonProgressLoadingText)
     }
 
