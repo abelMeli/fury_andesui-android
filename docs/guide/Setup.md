@@ -9,6 +9,7 @@ In your build gradle **build.gradle**
 ```groovy
 dependencies {
     ...
+    implementation "com.mercadolibre.android.configuration.provider:fresco-configurator:develop-$mlConfigVersion"
     implementation "com.mercadolibre.android.configuration.provider:font-configurator:develop-$mlConfigVersion"
     implementation "com.mercadolibre.android.configuration.provider:andes-configurator:$mlConfigVersion"
     ...
@@ -23,6 +24,7 @@ class MainApplication : Application() {
 	...
 	AndesConfigurator().configure(this)
 	FontConfigurator().configure(this)
+	FrescoConfigurator().configure(this)
 	...
    }
 }
@@ -36,6 +38,7 @@ In your build gradle **build.gradle**
 ```groovy
 dependencies {
     ...
+    implementation "com.mercadopago.android.configurer:fresco-configurer:$mpConfigVersion"
     implementation "com.mercadopago.android.configurer:font-configurator:$mpConfigVersion"
     implementation "com.mercadopago.android.configurer:andes-configurer:$mpConfigVersion"
     ...
@@ -50,6 +53,7 @@ class MainApplication : Application() {
 	...
 	AndesConfigurator().configure(this)
 	FontConfigurator().configure(this)
+	FrescoConfigurator().configure(this)
 	...
    }
 }
