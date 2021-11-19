@@ -81,6 +81,7 @@ See the [Fonts & Colors page](Fonts&Colors.md) to be aware of how to use the pro
 * [AndesTabs](tabs/AndesTabs.md)
 * [AndesTag](tag/AndesTag.md)
 * [AndesTextfield](textfield/AndesTextfield.md)
+* [AndesTextView](textview/AndesTextView.md)
 * [AndesThumbnail](thumbnail/AndesThumbnail.md)
 * [AndesThumbnailBadge](thumbnail/AndesThumbnailBadge.md)
 * [AndesTimePicker](timepicker/AndesTimePicker.md)

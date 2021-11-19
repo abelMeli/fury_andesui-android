@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.demoapp.utils
 
 import android.content.Context
+import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.widget.AdapterView
@@ -31,5 +32,11 @@ fun Spinner.setupAdapter(@ArrayRes stringArray: Int, onItemSelected: ((Int) -> U
                 }
             }
         }
+    }
+}
+
+internal fun doWhenGreaterThanApi(apiLevel: Int, actions: () -> Unit) {
+    if (Build.VERSION.SDK_INT >= apiLevel) {
+        actions()
     }
 }

@@ -1,6 +1,8 @@
 package com.mercadolibre.android.andesui
 
 import android.graphics.drawable.Drawable
+import android.text.SpannableString
+import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import org.junit.Assert
@@ -43,7 +45,7 @@ infix fun Drawable.assertEquals(@DrawableRes expected: Int) {
     Assert.assertEquals(expected, shadowOf(this).createdFromResId)
 }
 
-infix fun <T> T.assertEquals(expected: T) = Assert.assertEquals(this, expected)
+infix fun <T> T.assertEquals(expected: T) = Assert.assertEquals(expected, this)
 
 infix fun <T> T.assertIsNull(expectedNull: Boolean) = if (expectedNull) {
     Assert.assertNull(this)
@@ -56,3 +58,15 @@ fun buildAttributeSet(attrs: AttributeSetBuilder.() -> Unit): AttributeSet =
         attrs()
         build()
     }
+
+fun CharSequence?.hasSpans(): Boolean {
+    if (this !is SpannableString) return false
+    val spans = getSpans(0, length, CharacterStyle::class.java)
+    return spans.isNotEmpty()
+}
+
+fun CharSequence?.getSpans(): List<CharacterStyle> {
+    if (this !is SpannableString) return emptyList()
+    val spans = getSpans(0, length, CharacterStyle::class.java)
+    return spans.map { it }
+}

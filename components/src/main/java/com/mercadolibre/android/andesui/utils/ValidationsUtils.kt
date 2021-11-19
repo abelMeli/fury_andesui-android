@@ -10,7 +10,7 @@ fun validateColor(color: String): Boolean {
     return m.matches()
 }
 
-fun doWhenGreaterThanApi(apiLevel: Int, actions: () -> Unit) {
+internal fun doWhenGreaterThanApi(apiLevel: Int, actions: () -> Unit) {
     if (Build.VERSION.SDK_INT >= apiLevel) {
         actions()
     }

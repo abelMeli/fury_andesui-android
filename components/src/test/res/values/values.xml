@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For testing purposes only -->
+    <style name="Andes.Test">
+        <item name="android:textColor">@color/andes_accent_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">60sp</item>
+        <item name="lineHeight">30dp</item>
+    </style>
+    <style name="Andes.Test.2">
+        <item name="android:textStyle">italic</item>
+    </style>
+</resources>

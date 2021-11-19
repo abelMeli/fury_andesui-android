@@ -39,6 +39,7 @@ internal class AnalyticsHelper {
         "SnackbarShowcaseActivity" to "AndesSnackbar",
         "TagShowcaseActivity" to "AndesTag",
         "TextfieldShowcaseActivity" to "AndesTextfield",
+        "TextViewShowcaseActivity" to "AndesTextView",
         "ThumbnailShowcaseActivity" to "AndesThumbnail",
         "TimePickerShowcaseActivity" to "AndesTimePicker",
         "TooltipShowcaseActivity" to "AndesTooltip",
@@ -86,6 +87,10 @@ internal class AnalyticsHelper {
             "/textfield/autosuggest/dynamic",
             "/textfield/static"
         ),
+        "TextViewShowcaseActivity" to arrayListOf(
+            "/textview/dynamic",
+            "/textview/static"
+        ),
         "ThumbnailShowcaseActivity" to arrayListOf(
             "/thumbnail/dynamic",
             "/thumbnailbadge/dynamic",
@@ -103,7 +108,6 @@ internal class AnalyticsHelper {
             "/feedbackscreen/congrats/static"
         ),
         "MoneyAmountShowcaseActivity" to arrayListOf("/moneyamount/dynamic", "/moneyamount/static")
-
     )
 
     fun getPath(className: String, position: Int): String? {

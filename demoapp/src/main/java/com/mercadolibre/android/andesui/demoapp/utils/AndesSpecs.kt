@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat.startActivity
 
 private const val HOME = "https://company-161429.frontify.com/d/kxHCRixezmfK"
 private const val COMPONENT_PREFIX = "$HOME/n-a#/components"
+private const val FOUNDATIONS_PREFIX = "$HOME/n-a#/foundations"
 
 internal enum class AndesSpecs(val link: String) {
     HOME_PAGE(HOME),
@@ -24,7 +25,8 @@ internal enum class AndesSpecs(val link: String) {
     TOOLTIP("$COMPONENT_PREFIX/tooltip"),
     TEXTFIELD("$COMPONENT_PREFIX/textfield"),
     THUMBNAIL("$COMPONENT_PREFIX/thumbnail-1589997379"),
-    SWITCH("$COMPONENT_PREFIX/switch")
+    SWITCH("$COMPONENT_PREFIX/switch"),
+    TEXTVIEW("$FOUNDATIONS_PREFIX/typography")
 }
 
 internal fun launchSpecs(context: Context, specs: AndesSpecs) {

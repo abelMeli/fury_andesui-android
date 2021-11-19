@@ -2,6 +2,7 @@
 ## 🚀 Feature
 - Andes Min API level 21 | Author: [eportasML](https://github.com/eportasML)
 - Added feedback screen docs about webview experience | Author: [eportasML](https://github.com/eportasML)
+- `AndesTextView` component | Author: [@juanunzu](https://github.com/juanunzu)
 - Added access to the web storybook of each component inside a WebView | Author: [@juanunzu](https://github.com/juanunzu)
 
 ## 🛠 Fixes

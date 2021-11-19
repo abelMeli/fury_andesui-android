@@ -27,6 +27,7 @@
   * [AndesTabs](/tabs/AndesTabs.md)
   * [AndesTag](/tag/AndesTag.md)
   * [AndesTextfield](/textfield/AndesTextfield.md)
+  * [AndesTextView](/textview/AndesTextView.md)
   * AndesThumbnail
   ** [AndesColor](/thumbnail/AndesColor.md)
   ** [AndesThumbnail](/thumbnail/AndesThumbnail.md)

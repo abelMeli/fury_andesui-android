@@ -107,6 +107,9 @@ class MainActivity : AppCompatActivity() {
         andesui_money_amount.setOnClickListener {
             startActivity(SafeIntent(this, "meli://andes/moneyamount"))
         }
+        andesui_textview.setOnClickListener {
+            startActivity(SafeIntent(this, "meli://andes/textview"))
+        }
     }
 
     private fun setupExtras() {

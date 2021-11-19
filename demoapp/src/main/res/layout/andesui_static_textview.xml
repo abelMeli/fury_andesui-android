@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true">
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_style_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Style Examples"
+            app:andesTextViewStyle="titleL"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_title_xl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:text="AndesTextView TITLE_XL"
+            app:andesTextViewStyle="titleXl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_style_title" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_title_l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView TITLE_L"
+            app:andesTextViewStyle="titleL"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_title_xl" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_title_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView TITLE_M"
+            app:andesTextViewStyle="titleM"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_title_l" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_title_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView TITLE_S"
+            app:andesTextViewStyle="titleS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_title_m" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_title_xs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView TITLE_XS"
+            app:andesTextViewStyle="titleXs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_title_s" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_body_l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView BODY_L"
+            app:andesTextViewStyle="bodyL"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_title_xs" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_body_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView BODY_M"
+            app:andesTextViewStyle="bodyM"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_body_l" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_body_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView BODY_S"
+            app:andesTextViewStyle="bodyS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_body_m" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_body_xs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView BODY_XS"
+            app:andesTextViewStyle="bodyXs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_body_s" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Color Examples"
+            app:andesTextViewStyle="titleL"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_body_xs" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:text="AndesTextView Primary color"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_title" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Secondary color"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="secondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_primary" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_disabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Disabled color"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="secondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_secondary" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/andes_accent_color"
+            android:text="AndesTextView Inverted color"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="inverted"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_disabled" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Negative color"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="negative"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_inverted" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_caution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Caution color"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="caution"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_negative" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Positive color"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="positive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_caution" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_color_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Range Examples"
+            app:andesTextViewStyle="titleL"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_positive" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_range_primary_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:text="AndesTextView Primary color with link"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_range" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_range_positive_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Positive color with link"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="positive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_range_primary_link" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_range_inverted_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/andes_accent_color"
+            android:text="AndesTextView Inverted color with link"
+            app:andesTextViewIsLinkColorInverted="true"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="inverted"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_range_positive_link" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_range_primary_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Primary color with bold"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_range_inverted_link" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_range_positive_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Positive color with bold"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="positive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_range_primary_bold" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_range_caution_bold_and_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="AndesTextView Caution color with bold and link"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="caution"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_range_positive_bold" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_multilink_example"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Multilink Example"
+            app:andesTextViewStyle="titleL"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_range_caution_bold_and_link" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_example_multiple_links"
+            style="@style/Andes.Body.M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="12dp"
+            android:text="Para poder acceder a este beneficio, debes tener en cuenta las especificaciones y los términos y condiciones que se disponen. Además el CUIT que figura en la sección Mi Perfil debe estar actualizado."
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_multilink_example" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="32dp"
+            android:text="More"
+            app:andesTextViewStyle="bodyS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_example_multiple_links" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/andesui_demoapp_andes_textview_specs_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/button_margin_vertical"
+            android:layout_marginBottom="12dp"
+            app:andesButtonHierarchy="quiet"
+            app:andesButtonSize="medium"
+            app:andesButtonText="@string/andes_textview_specs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_more" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

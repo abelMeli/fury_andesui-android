@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="AndesTextView" tools:ignore="ResourceName">
+        <attr name="andesTextViewTextColor" format="enum">
+            <enum name="primary" value="1000" />
+            <enum name="secondary" value="1001" />
+            <enum name="disabled" value="1002" />
+            <enum name="inverted" value="1003" />
+            <enum name="negative" value="1004" />
+            <enum name="caution" value="1005" />
+            <enum name="positive" value="1006" />
+        </attr>
+
+        <attr name="andesTextViewStyle" format="enum">
+            <enum name="titleXl" value="2000" />
+            <enum name="titleL" value="2001" />
+            <enum name="titleM" value="2002" />
+            <enum name="titleS" value="2003" />
+            <enum name="titleXs" value="2004" />
+            <enum name="bodyL" value="2005" />
+            <enum name="bodyM" value="2006" />
+            <enum name="bodyS" value="2007" />
+            <enum name="bodyXs" value="2008" />
+        </attr>
+
+        <attr name="andesTextViewIsLinkColorInverted" format="boolean" />
+
+        <attr name="android:textColor" format="reference|color" />
+        <attr name="android:textSize" format="dimension" />
+        <attr name="android:fontFamily" format="string" />
+        <attr name="android:textStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="lineHeight" format="dimension" />
+    </declare-styleable>
+
+</resources>
+    

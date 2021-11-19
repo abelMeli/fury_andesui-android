@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <item name="accessibility_action_click_first_link" type="id" tools:ignore="ResourceName" />
+    <item name="accessibility_action_click_second_link" type="id" tools:ignore="ResourceName" />
+    <item name="accessibility_action_click_third_link" type="id" tools:ignore="ResourceName" />
+    <item name="accessibility_action_click_fourth_link" type="id" tools:ignore="ResourceName" />
+</resources>

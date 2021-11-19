@@ -46,6 +46,7 @@
     <string name="andes_demoapp_screen_list" translatable="false">Andes UI: List</string>
     <string name="andes_demoapp_screen_dropdown" translatable="false">Andes UI: Dropdown</string>
     <string name="andes_demoapp_screen_checkbox" translatable="false">Andes UI: Checkbox</string>
+    <string name="andes_demoapp_screen_textview" translatable="false">Andes UI: TextView</string>
     <string name="andes_demoapp_screen_carousel" translatable="false">Andes UI: Carousel</string>
     <string name="andes_demoapp_screen_card" translatable="false">Andes UI: Card</string>
     <string name="andes_demoapp_screen_snackbar" translatable="false">Andes UI: Snackbar</string>
@@ -1040,6 +1041,25 @@
         <item>Icon</item>
         <item>Image Circle</item>
     </string-array>
+
+    <!-- Andes TextView -->
+    <string name="andes_textview_description" translatable="false">Component that inherits from the OS counterpart (intends to be an immediate replacement for the native TextView)</string>
+    <string name="andes_textview_text" translatable="false">Andes TextView</string>
+    <string name="andes_textview_text_style_label" translatable="false">Style</string>
+    <string name="andes_textview_text_color_label" translatable="false">Color</string>
+    <string name="andes_textview_textfield_label" translatable="false">Text to display</string>
+    <string name="andes_textview_textfield_label_from" translatable="false">From index</string>
+    <string name="andes_textview_textfield_label_to" translatable="false">To index</string>
+    <string name="andes_textview_textfield_placeholder" translatable="false">Enter text here...</string>
+    <string name="andes_textview_textfield_style_dd_placeholder" translatable="false">Select a style</string>
+    <string name="andes_textview_textfield_color_dd_placeholder" translatable="false">Select a color</string>
+    <string name="andes_textview_textfield_range_placeholder" translatable="false">Insert value</string>
+    <string name="andes_textview_update_button_text" translatable="false">Update</string>
+    <string name="andes_textview_clear_button_text" translatable="false">Clear</string>
+    <string name="andes_textview_invert_link_color_checkbox" translatable="false">Invert link color</string>
+    <string name="andes_textview_specs" translatable="false">Andes TextView Specs 📘</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="feedbackscreen_body_number" translatable="false">Feedback Body mocked views</string>
