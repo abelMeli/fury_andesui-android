@@ -21,6 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
 class AndesTabsAccessibilityDelegateTest {
 
     private val tabItems: List<AndesTabItem> = listOf(
@@ -53,9 +54,8 @@ class AndesTabsAccessibilityDelegateTest {
         robolectricActivity.start().postCreate(null).resume().visible()
     }
 
-    @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
     @Test
-    fun `AndesTabs list accessibility test API 21`() {
+    fun `AndesTabs list accessibility`() {
         val nodeInfo = andesTabs.createAccessibilityNodeInfo()
         Assert.assertNotNull(nodeInfo)
         Assert.assertNotNull(nodeInfo.collectionInfo)
@@ -65,15 +65,5 @@ class AndesTabsAccessibilityDelegateTest {
             AccessibilityNodeInfo.CollectionInfo.SELECTION_MODE_SINGLE,
             nodeInfo.collectionInfo.selectionMode
         )
-    }
-
-    @Config(sdk = [Build.VERSION_CODES.KITKAT])
-    @Test
-    fun `AndesTabs list accessibility test API 19`() {
-        val nodeInfo = andesTabs.createAccessibilityNodeInfo()
-        Assert.assertNotNull(nodeInfo)
-        Assert.assertNotNull(nodeInfo.collectionInfo)
-        Assert.assertEquals(tabItems.size, nodeInfo.collectionInfo.columnCount)
-        Assert.assertEquals(1, nodeInfo.collectionInfo.rowCount)
     }
 }

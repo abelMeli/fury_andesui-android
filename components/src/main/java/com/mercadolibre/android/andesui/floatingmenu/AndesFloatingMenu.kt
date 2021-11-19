@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -103,11 +102,9 @@ class AndesFloatingMenu(
     }
 
     private fun setFloatingMenuElevation() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            floatingMenu.elevation =
-                context.resources.getDimensionPixelSize(R.dimen.andes_card_elevated_shadow)
-                    .toFloat()
-        }
+        floatingMenu.elevation =
+            context.resources.getDimensionPixelSize(R.dimen.andes_card_elevated_shadow)
+                .toFloat()
     }
 
     /**

@@ -7,7 +7,6 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.graphics.Rect
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -196,17 +195,12 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
     }
 
     private fun getStatusBarColor(): Int {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return activity.window?.statusBarColor ?: activity.resources.getColor(R.color.andes_accent_color_500)
-        }
-        return activity.resources.getColor(R.color.andes_accent_color_500)
+        return activity.window?.statusBarColor ?: activity.resources.getColor(R.color.andes_accent_color_500)
     }
 
     private fun changeStatusBarColor(statusBarColor: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            activity.window.statusBarColor = statusBarColor
-        }
+        activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        activity.window.statusBarColor = statusBarColor
     }
 
     private fun scroll(stepReferenced: AndesWalkthroughCoachmarkStep) {

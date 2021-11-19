@@ -20,7 +20,6 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
@@ -89,19 +88,6 @@ class AndesSwitchAccessibilityDelegateTest {
 
     @Test
     fun `verify action is correctly set for enabled checked switch`() {
-        andesSwitch.type = AndesSwitchType.ENABLED
-        andesSwitch.status = AndesSwitchStatus.CHECKED
-        nodeInfo = andesSwitch.createAccessibilityNodeInfo()
-        val spiedA11yDelegate = spy(andesSwitch.accessibilityDelegate as AndesSwitchAccessibilityDelegate)
-
-        spiedA11yDelegate.onInitializeAccessibilityNodeInfo(andesSwitch, nodeInfo)
-
-        verify(spiedA11yDelegate, times(1)).addActionIfNeeded(nodeInfo, andesSwitch)
-    }
-
-    @Test
-    fun `verify action is correctly set for versions below lollipop`() {
-        ReflectionHelpers.setStaticField(Build.VERSION::class.java, "SDK_INT", 19)
         andesSwitch.type = AndesSwitchType.ENABLED
         andesSwitch.status = AndesSwitchStatus.CHECKED
         nodeInfo = andesSwitch.createAccessibilityNodeInfo()

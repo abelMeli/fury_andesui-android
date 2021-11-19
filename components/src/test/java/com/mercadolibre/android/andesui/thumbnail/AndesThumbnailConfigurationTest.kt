@@ -19,7 +19,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.KITKAT, Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
 class AndesThumbnailConfigurationTest {
 
     private var context = RuntimeEnvironment.application
@@ -321,7 +321,7 @@ class AndesThumbnailConfigurationTest {
     private fun whichIconSize(
         icon: AndesThumbnailType,
         size: AndesThumbnailSize
-    ): Int = if (icon != AndesThumbnailType.ICON && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    ): Int = if (icon != AndesThumbnailType.ICON) {
                 size.size.diameter(context).toInt()
             } else {
                 size.size.iconSize(context).toInt()
@@ -329,5 +329,5 @@ class AndesThumbnailConfigurationTest {
 
     private fun whichImageType(
         icon: AndesThumbnailType
-    ): Boolean = icon != AndesThumbnailType.ICON && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+    ): Boolean = icon != AndesThumbnailType.ICON
 }

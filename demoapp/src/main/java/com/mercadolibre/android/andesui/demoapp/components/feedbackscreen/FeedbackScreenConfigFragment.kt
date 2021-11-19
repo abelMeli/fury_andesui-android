@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.demoapp.components.feedbackscreen
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
-import com.mercadolibre.android.andesui.utils.doWhenGreaterThanApi
 
 @Suppress("TooManyFunctions")
 class FeedbackScreenConfigFragment : Fragment() {
@@ -166,21 +164,19 @@ class FeedbackScreenConfigFragment : Fragment() {
 
     @SuppressLint("NewApi")
     private fun updateStatusBar(position: Int) {
-        doWhenGreaterThanApi(Build.VERSION_CODES.LOLLIPOP) {
-            if (position == CONGRATS_POSITION) {
-                with(requireActivity().window) {
-                    clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                    statusBarColor =
-                        ContextCompat.getColor(requireContext(), R.color.andes_green_500)
-                }
-            } else {
-                with(requireActivity()) {
-                    val typedValue = TypedValue()
-                    theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
-                    window.statusBarColor =
-                        ContextCompat.getColor(this, typedValue.resourceId)
-                }
+        if (position == CONGRATS_POSITION) {
+            with(requireActivity().window) {
+                clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                statusBarColor =
+                    ContextCompat.getColor(requireContext(), R.color.andes_green_500)
+            }
+        } else {
+            with(requireActivity()) {
+                val typedValue = TypedValue()
+                theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
+                window.statusBarColor =
+                    ContextCompat.getColor(this, typedValue.resourceId)
             }
         }
     }

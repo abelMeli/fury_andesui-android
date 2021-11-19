@@ -15,7 +15,6 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
-import android.os.Build
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import com.mercadolibre.android.andesui.color.AndesColor
@@ -54,12 +53,8 @@ fun buildColoredAndesBitmapDrawable(
     return BitmapDrawable(context.resources, scaledBitmap)
         .apply {
             colors?.let {
-                if (isLollipopOrNewer()) {
-                    setTintMode(PorterDuff.Mode.SRC_IN)
-                    setTintList(it)
-                } else {
-                    setColorFilter(it.getColorForState(intArrayOf(android.R.attr.state_enabled), 0), PorterDuff.Mode.SRC_IN)
-                }
+                setTintMode(PorterDuff.Mode.SRC_IN)
+                setTintList(it)
             }
         }
 }
@@ -155,8 +150,6 @@ fun buildColoredCircularShapeWithIconDrawable(
 
     return LayerDrawable(arrayOf(biggerCircle, icon))
 }
-
-internal fun isLollipopOrNewer() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
 fun Drawable.toBitmap(): Bitmap {
     if (this is BitmapDrawable) {

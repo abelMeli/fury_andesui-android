@@ -29,7 +29,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
@@ -88,32 +87,6 @@ class DropdownBottomSheetA11yDelegateTest {
         val containsExpand = actionList?.contains(AccessibilityNodeInfo.AccessibilityAction.ACTION_EXPAND)
 
         Assert.assertNotNull(nodeInfo)
-        containsDismiss?.let {
-            Assert.assertTrue(it)
-        }
-        containsExpand?.let {
-            Assert.assertTrue(it)
-        }
-    }
-
-    @Test
-    fun `actions in nodeInfo are correct for versions older than API 21`() {
-        triggerButton.setOnClickListener {
-            bottomSheet.show()
-        }
-        triggerButton.performClick()
-        val bottomSheetLayout = bottomSheet.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
-        shadowOf(getMainLooper()).idle()
-        ReflectionHelpers.setStaticField(Build.VERSION::class.java, "SDK_INT", 19)
-
-        nodeInfo = bottomSheetLayout?.createAccessibilityNodeInfo()
-        val actionList = nodeInfo?.actionList
-        val containsDismiss = actionList?.contains(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS)
-        val containsExpand = actionList?.contains(AccessibilityNodeInfo.AccessibilityAction.ACTION_EXPAND)
-
-        Assert.assertNotNull(nodeInfo)
-        Assert.assertNotNull(containsDismiss)
-        Assert.assertNotNull(containsExpand)
         containsDismiss?.let {
             Assert.assertTrue(it)
         }

@@ -23,7 +23,6 @@ import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierar
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
-import com.mercadolibre.android.andesui.utils.isLollipopOrNewer
 
 @Suppress("TooManyFunctions")
 class AndesThumbnail : FrameLayout {
@@ -206,7 +205,7 @@ class AndesThumbnail : FrameLayout {
     }
 
     private fun setupImageFitAndBounds(isImageType: Boolean) {
-        if (isLollipopOrNewer()) clipToOutline = isImageType
+        clipToOutline = isImageType
         imageFrame.scaleType = if (isImageType) CENTER_CROP else FIT_CENTER
     }
 

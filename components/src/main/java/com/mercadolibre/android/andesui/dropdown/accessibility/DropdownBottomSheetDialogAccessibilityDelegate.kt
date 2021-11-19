@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.dropdown.accessibility
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
@@ -17,13 +16,8 @@ class DropdownBottomSheetDialogAccessibilityDelegate(
     }
 
     private fun addActions(info: AccessibilityNodeInfo?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            info?.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS)
-            info?.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_EXPAND)
-        } else {
-            info?.addAction(AccessibilityNodeInfo.ACTION_DISMISS)
-            info?.addAction(AccessibilityNodeInfo.ACTION_EXPAND)
-        }
+        info?.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS)
+        info?.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_EXPAND)
     }
 
     override fun performAccessibilityAction(host: View?, action: Int, args: Bundle?): Boolean {

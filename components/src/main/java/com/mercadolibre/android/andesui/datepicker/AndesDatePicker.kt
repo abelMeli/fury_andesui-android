@@ -123,8 +123,7 @@ class AndesDatePicker : ConstraintLayout {
     private fun initComponents() {
         LayoutInflater.from(context).inflate(R.layout.andes_layout_datepicker, this)
         onCheckedChangeListener(andesBtnSelectDate)
-        val version: Int = Build.VERSION.SDK_INT
-        if (version <= API_LEVEL) {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
             calendarView.layoutParams.width = WIDTH
             calendarView.layoutParams.height = HEIGHT
         }
@@ -267,7 +266,6 @@ class AndesDatePicker : ConstraintLayout {
         private const val DEFAULT_MIN_DATE = -2208973392000
         private const val DEFAULT_MAX_DATE = 4133905200000
         private const val DATE_FORMAT = "dd/MM/yyyy"
-        private const val API_LEVEL = 21
         private const val HEIGHT = 900
         private const val WIDTH = 900
     }

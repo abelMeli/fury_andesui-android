@@ -1,10 +1,8 @@
 package com.mercadolibre.android.andesui.checkbox.accessibility
 
 import android.content.res.Resources
-import android.os.Build
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
-import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
@@ -24,11 +22,7 @@ internal class AndesCheckboxAccessibilityDelegate(private val andesCheckbox: And
     @VisibleForTesting
     internal fun addActionIfNeeded(info: AccessibilityNodeInfo?, resources: Resources) {
         if (andesCheckbox.type != AndesCheckboxType.DISABLED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                info?.addAction(generateActionForType(resources))
-            } else {
-                info?.addAction(generateIntActionForType())
-            }
+            info?.addAction(generateActionForType(resources))
         }
     }
 
@@ -55,7 +49,6 @@ internal class AndesCheckboxAccessibilityDelegate(private val andesCheckbox: And
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun generateActionForType(resources: Resources): AccessibilityNodeInfo.AccessibilityAction {
         return AccessibilityNodeInfo.AccessibilityAction(
             AccessibilityNodeInfo.ACTION_CLICK,
@@ -66,10 +59,6 @@ internal class AndesCheckboxAccessibilityDelegate(private val andesCheckbox: And
     private fun getActionClickWord(resources: Resources): String = when (andesCheckbox.status) {
         AndesCheckboxStatus.SELECTED -> resources.getString(R.string.andes_checkbox_action_click_unselect)
         else -> resources.getString(R.string.andes_checkbox_action_click_select)
-    }
-
-    private fun generateIntActionForType(): Int {
-        return AccessibilityNodeInfo.ACTION_CLICK
     }
 
     companion object {

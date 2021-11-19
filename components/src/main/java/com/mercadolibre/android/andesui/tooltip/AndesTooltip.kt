@@ -9,7 +9,6 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -37,8 +36,8 @@ import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocationCon
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocationInterface
 import com.mercadolibre.android.andesui.tooltip.location.getAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.radius.RadiusLayout
-import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 
 @Suppress("TooManyFunctions")
 class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
@@ -379,9 +378,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         with(bodyWindow) {
             isOutsideTouchable = true
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                elevation = this@AndesTooltip.elevation.toFloat()
-            }
+            elevation = this@AndesTooltip.elevation.toFloat()
             isClippingEnabled = false
             setTouchInterceptor(
                     object : View.OnTouchListener {

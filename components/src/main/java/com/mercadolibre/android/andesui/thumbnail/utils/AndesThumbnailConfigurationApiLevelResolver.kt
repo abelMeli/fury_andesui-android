@@ -4,13 +4,10 @@ import android.content.Context
 import com.mercadolibre.android.andesui.thumbnail.factory.AndesThumbnailConfigurationFactory
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSizeInterface
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailTypeInterface
-import com.mercadolibre.android.andesui.utils.isLollipopOrNewer
 
 /**
  * This is intended to serve different implementations by the current
  * device's Api Level.
- *
- * The default implementation provides support Apis below API21 (Lollipop) like API19 (KitKat).
  *
  * @property resolveIsImageType : Always returns <code>false</code> to set scale with fitCenter.
  * @property resolveIconSize : Always return <code>size.iconSize</code> to keep it smaller.
@@ -23,11 +20,6 @@ internal interface AndesThumbnailConfigurationApiLevelResolver {
         type: AndesThumbnailTypeInterface
     ) = size.iconSize(context).toInt()
 }
-
-/**
- * Gets default implementation
- */
-private object ResolverApiLevelBelow21 : AndesThumbnailConfigurationApiLevelResolver
 
 /**
  * Gets the implementation for API21 & higher
@@ -48,6 +40,4 @@ private object ResolverApiLevel21 : AndesThumbnailConfigurationApiLevelResolver 
 }
 
 internal val AndesThumbnailConfigurationFactory.resolverByApiLevel:
-        AndesThumbnailConfigurationApiLevelResolver by lazy {
-            if (isLollipopOrNewer()) ResolverApiLevel21 else ResolverApiLevelBelow21
-        }
+        AndesThumbnailConfigurationApiLevelResolver by lazy { ResolverApiLevel21 }

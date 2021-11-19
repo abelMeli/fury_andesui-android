@@ -73,10 +73,7 @@ class AndesFeedbackScreenView : ScrollView {
      * to be able to reset it at detach in case we previously change the color for the Congrats variant
      */
     private fun getInitialStatusBarColor() {
-        doWhenGreaterThanApi(Build.VERSION_CODES.LOLLIPOP) {
-            initialStatusBarColor = (context as? Activity)
-                ?.window?.statusBarColor ?: 0
-        }
+        initialStatusBarColor = (context as? Activity)?.window?.statusBarColor ?: 0
     }
 
     /**
@@ -85,13 +82,11 @@ class AndesFeedbackScreenView : ScrollView {
      * the standard value.
      */
     override fun onAttachedToWindow() {
-        doWhenGreaterThanApi(Build.VERSION_CODES.LOLLIPOP) {
-            config.statusBarColor?.let { configColor ->
-                (context as? Activity)?.window?.apply {
-                    clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                    statusBarColor = configColor
-                }
+        config.statusBarColor?.let { configColor ->
+            (context as? Activity)?.window?.apply {
+                clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                statusBarColor = configColor
             }
         }
         super.onAttachedToWindow()
@@ -102,13 +97,11 @@ class AndesFeedbackScreenView : ScrollView {
      * detaching
      */
     override fun onDetachedFromWindow() {
-        doWhenGreaterThanApi(Build.VERSION_CODES.LOLLIPOP) {
-            (context as? Activity)?.window?.apply {
-                if (statusBarColor != initialStatusBarColor) {
-                    clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                    statusBarColor = initialStatusBarColor
-                }
+        (context as? Activity)?.window?.apply {
+            if (statusBarColor != initialStatusBarColor) {
+                clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                statusBarColor = initialStatusBarColor
             }
         }
         super.onDetachedFromWindow()

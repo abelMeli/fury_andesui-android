@@ -60,7 +60,7 @@
         android:contentDescription="download"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/asv_tv_second"
-        app:srcCompat="@drawable/ic_down_cloud"
+        android:src="@drawable/ic_down_cloud"
         app:tint="@color/andes_green_500" />
 
     <TextView
@@ -90,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/asv_tv_second"
-        app:srcCompat="@drawable/ic_star"
+        android:src="@drawable/ic_star"
         app:tint="@color/andes_orange_500" />
 
     <TextView
@@ -168,7 +168,7 @@
             android:layout_height="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_down_cloud"
+            android:src="@drawable/ic_down_cloud"
             app:tint="@color/andes_green_500" />
 
         <TextView
@@ -205,7 +205,7 @@
             android:layout_height="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_star"
+            android:src="@drawable/ic_star"
             app:tint="@color/andes_orange_500" />
 
         <TextView

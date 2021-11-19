@@ -2,10 +2,8 @@ package com.mercadolibre.android.andesui.utils
 
 import android.content.Context
 import android.graphics.Rect
-import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.mercadolibre.android.andesui.R
@@ -57,7 +55,6 @@ internal fun ConstraintLayout.setConstraints(actions: ConstraintSet.() -> Unit) 
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 internal fun View.elevateWithShadow(shadow: Boolean = false) {
     this.elevation = resources.getDimension(R.dimen.andes_card_elevated_shadow)
     if (!shadow) {

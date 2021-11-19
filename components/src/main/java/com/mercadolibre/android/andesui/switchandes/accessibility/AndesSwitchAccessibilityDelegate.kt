@@ -1,10 +1,8 @@
 package com.mercadolibre.android.andesui.switchandes.accessibility
 
 import android.content.res.Resources
-import android.os.Build
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
-import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.switchandes.AndesSwitch
@@ -22,11 +20,7 @@ internal class AndesSwitchAccessibilityDelegate(private val andesSwitch: AndesSw
     @VisibleForTesting
     internal fun addActionIfNeeded(info: AccessibilityNodeInfo?, andesSwitch: AndesSwitch) {
         if (andesSwitch.type == AndesSwitchType.ENABLED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                info?.addAction(generateActionForType(andesSwitch))
-            } else {
-                info?.addAction(generateIntActionForType())
-            }
+            info?.addAction(generateActionForType(andesSwitch))
         }
     }
 
@@ -37,14 +31,9 @@ internal class AndesSwitchAccessibilityDelegate(private val andesSwitch: AndesSw
         return "$text. $status"
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun generateActionForType(andesSwitch: AndesSwitch): AccessibilityNodeInfo.AccessibilityAction {
         return AccessibilityNodeInfo.AccessibilityAction(AccessibilityNodeInfo.ACTION_CLICK,
                 getSwitchStatusWord(andesSwitch))
-    }
-
-    private fun generateIntActionForType(): Int {
-        return AccessibilityNodeInfo.ACTION_CLICK
     }
 
     private fun resolveStatus(status: AndesSwitchStatus, resources: Resources): String {

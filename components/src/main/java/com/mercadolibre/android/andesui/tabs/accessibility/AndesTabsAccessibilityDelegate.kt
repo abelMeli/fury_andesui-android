@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.tabs.accessibility
 
-import android.os.Build
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import com.google.android.material.tabs.TabLayout
@@ -25,19 +24,11 @@ internal class AndesTabsAccessibilityDelegate(private val tabLayout: TabLayout) 
     }
 
     private fun generateTabLayoutContentAnnouncement(): AccessibilityNodeInfo.CollectionInfo {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AccessibilityNodeInfo.CollectionInfo.obtain(
-                SINGLE_ROW_COUNT,
-                tabLayout.tabCount,
-                false,
-                AccessibilityNodeInfo.CollectionInfo.SELECTION_MODE_SINGLE
-            )
-        } else {
-            AccessibilityNodeInfo.CollectionInfo.obtain(
-                SINGLE_ROW_COUNT,
-                tabLayout.tabCount,
-                false
-            )
-        }
+        return AccessibilityNodeInfo.CollectionInfo.obtain(
+            SINGLE_ROW_COUNT,
+            tabLayout.tabCount,
+            false,
+            AccessibilityNodeInfo.CollectionInfo.SELECTION_MODE_SINGLE
+        )
     }
 }

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.feedback.screen.header.view
 
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScre
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
 import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgePillSize
-import com.mercadolibre.android.andesui.utils.doWhenGreaterThanApi
 import com.mercadolibre.android.andesui.utils.elevateWithShadow
 
 @Suppress("TooManyFunctions")
@@ -119,14 +117,12 @@ internal class AndesFeedbackScreenSimpleHeaderView : AndesFeedbackScreenHeaderVi
         cardViewBody.clipToPadding = false
         cardViewBody.visibility = VISIBLE
 
-        doWhenGreaterThanApi(Build.VERSION_CODES.LOLLIPOP) {
-            cardViewBody.elevateWithShadow(true)
-            thumbnailBadge.elevateWithShadow()
-            title.elevateWithShadow()
-            description.elevateWithShadow()
-            highlight.elevateWithShadow()
-            overline.elevateWithShadow()
-        }
+        cardViewBody.elevateWithShadow(true)
+        thumbnailBadge.elevateWithShadow()
+        title.elevateWithShadow()
+        description.elevateWithShadow()
+        highlight.elevateWithShadow()
+        overline.elevateWithShadow()
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {

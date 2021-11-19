@@ -132,19 +132,4 @@ class AndesCheckboxAccessibilityDelegateTest {
 
         verify(nodeInfo, never()).addAction(any<AccessibilityNodeInfo.AccessibilityAction>())
     }
-
-    @Config(sdk = [Build.VERSION_CODES.KITKAT])
-    @Test
-    fun `verify action is correctly set for versions below lollipop`() {
-        andesCheckbox.type = AndesCheckboxType.IDLE
-        andesCheckbox.status = AndesCheckboxStatus.SELECTED
-        nodeInfo = spy(andesCheckbox.createAccessibilityNodeInfo())
-        val spiedA11yDelegate = spy(andesCheckbox.accessibilityDelegate as AndesCheckboxAccessibilityDelegate)
-
-        spiedA11yDelegate.onInitializeAccessibilityNodeInfo(andesCheckbox, nodeInfo)
-
-        verify(spiedA11yDelegate, times(1)).addActionIfNeeded(nodeInfo, context.resources)
-        // First time is done by Android A11y Service
-        verify(nodeInfo, times(2)).addAction(AccessibilityNodeInfo.ACTION_CLICK)
-    }
 }

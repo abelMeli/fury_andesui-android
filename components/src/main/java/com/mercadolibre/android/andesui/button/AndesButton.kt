@@ -3,7 +3,6 @@ package com.mercadolibre.android.andesui.button
 import android.content.Context
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.TextUtils
@@ -297,9 +296,7 @@ class AndesButton : ConstraintLayout {
         setupProgressStatusComponent(config)
 
         background = config.background
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            stateListAnimator = null
-        }
+        stateListAnimator = null
     }
 
     private fun setupA11yDelegate() {
