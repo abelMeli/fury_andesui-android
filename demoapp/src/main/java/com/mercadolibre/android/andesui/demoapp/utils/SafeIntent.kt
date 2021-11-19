@@ -4,8 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 
-class SafeIntent(context: Context, uri: String) : Intent(ACTION_VIEW, (Uri.parse(uri))) {
-    init {
+class SafeIntent : Intent {
+
+    constructor(context: Context, uri: String) : super(ACTION_VIEW, (Uri.parse(uri))) {
+        setPackage(context.applicationContext.packageName)
+    }
+
+    constructor(context: Context, uri: Uri) : super(ACTION_VIEW, uri) {
         setPackage(context.applicationContext.packageName)
     }
 }

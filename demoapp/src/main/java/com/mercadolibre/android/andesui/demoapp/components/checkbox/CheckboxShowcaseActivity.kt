@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
@@ -13,6 +12,7 @@ import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
@@ -20,25 +20,19 @@ import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
-class CheckboxShowcaseActivity : AppCompatActivity() {
+class CheckboxShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_checkbox)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_checkbox)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

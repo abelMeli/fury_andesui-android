@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
@@ -17,6 +16,7 @@ import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
@@ -26,26 +26,20 @@ import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import kotlinx.android.synthetic.main.andesui_static_buttons.*
 
 @Suppress("TooManyFunctions")
-class ButtonShowcaseActivity : AppCompatActivity() {
+class ButtonShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
     private var serverCallsRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_button)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_button)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

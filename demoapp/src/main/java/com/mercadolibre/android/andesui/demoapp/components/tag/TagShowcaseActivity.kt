@@ -11,7 +11,6 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.AdapterView.OnItemSelectedListener
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.res.ResourcesCompat
@@ -21,6 +20,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
@@ -41,25 +41,19 @@ import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.utils.validateColor
 
-class TagShowcaseActivity : AppCompatActivity() {
+class TagShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_tag)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_tag)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

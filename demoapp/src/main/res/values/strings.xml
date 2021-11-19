@@ -15,6 +15,7 @@
     <string name="change_text" translatable="false">Title text</string>
     <string name="change_body" translatable="false">Body text</string>
     <string name="andesui_demoapp_clear_button" translatable="false">Clear</string>
+    <string name="andesui_demoapp_web_storybook" translatable="false">WebView 🌐</string>
     <string name="andesui_demoapp_error_tracking" translatable="false">Current Activity could not be tracked. Add component and screens entries to AnalyticsHelper.</string>
     <string-array name="hierarchy_spinner">
         <item>Quiet</item>

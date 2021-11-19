@@ -7,13 +7,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
@@ -27,7 +27,7 @@ import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 
 @Suppress("TooManyFunctions")
-class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
+class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
 
     private var andesDropDownLabel = "Title"
     private var andesDropDownPlaceHolder = "Placeholder"
@@ -54,19 +54,13 @@ class DropdownShowcaseActivity : AppCompatActivity(), AndesDropdownDelegate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_dropdown)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_dropdown)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

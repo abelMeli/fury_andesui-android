@@ -1,6 +1,7 @@
 # v3.37.0
 ## 🚀 Feature
 - Added feedback screen docs about webview experience | Author: [eportasML](https://github.com/eportasML)
+- Added access to the web storybook of each component inside a WebView | Author: [@juanunzu](https://github.com/juanunzu)
 
 ## 🛠 Fixes
 - Fix `AndesDatePicker` date when the button is clicked and no actions happened on Calendar view | Author: [@gabrielcoutos](https://github.com/gabrielcoutos)

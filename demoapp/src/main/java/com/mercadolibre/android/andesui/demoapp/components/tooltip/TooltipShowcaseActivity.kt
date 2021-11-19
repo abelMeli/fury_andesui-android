@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
@@ -14,11 +13,12 @@ import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
+import com.mercadolibre.android.andesui.demoapp.utils.setupAdapter
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.setupAdapter
 import com.mercadolibre.android.andesui.textfield.AndesTextarea
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
@@ -30,26 +30,20 @@ import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 
 @Suppress("TooManyFunctions")
-class TooltipShowcaseActivity : AppCompatActivity() {
+class TooltipShowcaseActivity : BaseActivity() {
 
     private lateinit var andesTooltipToShow: AndesTooltip
     private lateinit var viewPager: CustomViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_tooltip)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_tooltip)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

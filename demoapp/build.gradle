@@ -41,7 +41,9 @@ android {
     }
 
     buildTypes {
+        def config = { k -> "\"${project.properties.get(k)}\"" }
         debug {
+            buildConfigField "String", "STORYBOOK_URL", config("storybook.url")
             applicationIdSuffix '.debug'
             minifyEnabled false
             aaptOptions {
@@ -105,6 +107,12 @@ dependencies {
     implementation prod.supportLibraryAppCompatV7
     implementation prod.supportLibraryDesign
     implementation showcase.coordinatorLayout
+    implementation(showcase.webkitConfigProvider) {
+        exclude group: "com.google.android.gms"
+    }
+    implementation(showcase.webkit) {
+        exclude group: "com.google.android.gms"
+    }
 
     implementation prod.fresco
 

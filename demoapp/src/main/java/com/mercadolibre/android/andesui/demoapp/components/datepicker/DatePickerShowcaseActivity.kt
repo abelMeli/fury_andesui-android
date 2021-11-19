@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.datepicker.AndesDatePicker
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
@@ -18,25 +18,19 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
-class DatePickerShowcaseActivity : AppCompatActivity() {
+class DatePickerShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_datepicker)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_datepicker)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

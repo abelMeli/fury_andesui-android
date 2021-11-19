@@ -9,6 +9,33 @@ Install our Showcase App via Meli Store and enjoy it!
 
 ![Android Showcase Download.png](resources/android-showcase-meli-store-download.png)
 
+### New! WebView live examples
+#### Access to the live example of the WebView version for each component.
+Navigate to the desired component screen, and click in the "WebView" button, in the action bar.
+
+![Storybook Access](resources/storybook-access.png)
+
+Inside the web storybook you can access to the Addons section, where you can modify the different properties the component allows (change the text value, test the available colors, and more)
+
+![Storybook Addons](resources/storybook-addons.png)
+
+You can also navigate to the sidebar, where you can find the different variants for the component. For example, in the button, you can choose between the Default implementation, the Icon implementation, the Progress implementation, and more.
+
+![Storybook Sidebar](resources/storybook-sidebar.png)
+
+#### Open any storybook web component in a WebView
+Navigate to any component present in any version of the storybook, including forked versions!
+
+You only need to launch a deeplink with this structure:
+
+"meli://andes/storybook?url=[https://www.your-link-to-the-storybook.com]()"
+
+Example: install the demoapp, run it through the Android Studio Emulator and launch the following deeplink from the command line:
+
+```console
+adb shell am start -a android.intent.action.VIEW -d "meli://andes/storybook?url=https://tnovas.github.io/fury_frontend-andes-ui/?path=/docs/documentation-button--default-story"
+```
+
 ## Definitions
 
 * Monomodule

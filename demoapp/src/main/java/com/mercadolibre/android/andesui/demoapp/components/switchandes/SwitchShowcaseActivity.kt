@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.Constants
@@ -21,25 +21,19 @@ import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 
 @Suppress("TooManyFunctions")
-class SwitchShowcaseActivity : AppCompatActivity() {
+class SwitchShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_switch)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_switch)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

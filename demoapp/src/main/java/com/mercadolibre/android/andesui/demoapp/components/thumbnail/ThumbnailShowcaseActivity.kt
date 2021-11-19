@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
@@ -22,26 +22,20 @@ import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 import kotlinx.android.synthetic.main.andesui_dynamic_thumbnail.*
 
-class ThumbnailShowcaseActivity : AppCompatActivity() {
+class ThumbnailShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
 
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_thumbnail)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_thumbnail)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

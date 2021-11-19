@@ -33,6 +33,7 @@ This library needs Android API 19+ (4.4+) to work.
 
 ## Live examples
 Enter here [Showcase App](/demoapp) and install our app with live examples. Learn what you can do and how to use the different available components in the library.
+New feature! see live examples in webviews. For more info, check the docs [here](https://github.com/mercadolibre/fury_andesui-android/blob/master/docs/guide/README.md)!
 
 ## Support
 We're ready to help you through the [Fury Help](https://web.furycloud.io/help) section, just be sure to do your best before firing a ticket.

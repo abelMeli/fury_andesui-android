@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmark
@@ -15,30 +14,25 @@ import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmar
 import com.mercadolibre.android.andesui.coachmark.view.CoachmarkView
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 
 @SuppressWarnings("MaxLineLength")
-class CoachmarkShowcaseActivity : AppCompatActivity() {
+class CoachmarkShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_coachmark)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_coachmark)
 
     private fun initViewPager() {
         val inflater = LayoutInflater.from(this)

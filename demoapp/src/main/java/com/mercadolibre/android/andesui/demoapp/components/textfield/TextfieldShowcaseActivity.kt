@@ -2,38 +2,34 @@ package com.mercadolibre.android.andesui.demoapp.components.textfield
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 
-class TextfieldShowcaseActivity : AppCompatActivity() {
+class TextfieldShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
     private val lifecycleScope = CoroutineScope(SupervisorJob())
+    private var appBarTitle = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
     }
 
+    override fun getAppBarTitle() = resources.getString(R.string.andes_textfield_screen)
+
     override fun onDestroy() {
         lifecycleScope.cancel()
         super.onDestroy()
-    }
-
-    private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun initViewPager() {
@@ -49,13 +45,14 @@ class TextfieldShowcaseActivity : AppCompatActivity() {
             override fun onPageScrollStateChanged(position: Int) = Unit
             override fun onPageScrolled(position: Int, p1: Float, p2: Int) = Unit
             override fun onPageSelected(position: Int) {
-                when (position) {
-                    0 -> supportActionBar?.title = resources.getString(R.string.andes_textfield_screen)
-                    1 -> supportActionBar?.title = resources.getString(R.string.andes_textarea_screen)
-                    2 -> supportActionBar?.title = resources.getString(R.string.andes_textcode_screen)
-                    3 -> supportActionBar?.title = resources.getString(R.string.andes_autosuggest_screen)
-                    else -> supportActionBar?.title = resources.getString(R.string.andes_textfield_screen)
+                appBarTitle = when (position) {
+                    0 -> resources.getString(R.string.andes_textfield_screen)
+                    1 -> resources.getString(R.string.andes_textarea_screen)
+                    2 -> resources.getString(R.string.andes_textcode_screen)
+                    3 -> resources.getString(R.string.andes_autosuggest_screen)
+                    else -> resources.getString(R.string.andes_textfield_screen)
                 }
+                updateAppBarTitle(appBarTitle)
             }
         })
     }
