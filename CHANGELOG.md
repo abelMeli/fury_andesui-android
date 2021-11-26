@@ -1,3 +1,7 @@
+# v4.0.1
+## 🛠 Fixes
+- Removed not needed activities imported from external libs in our showcase app manifest | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v4.0.0
 ## 🚀 Feature
 - Andes Min API level 21 | Author: [eportasML](https://github.com/eportasML)
