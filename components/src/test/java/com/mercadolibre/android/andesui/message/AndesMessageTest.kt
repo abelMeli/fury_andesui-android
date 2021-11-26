@@ -144,7 +144,7 @@ class AndesMessageTest {
         with(andesMessage.getBody()) {
             text.toString() assertEquals "T\n\nhis is a body message"
             visibility assertEquals android.view.View.VISIBLE
-            val spans = (text as SpannedString).getSpans(
+            val spans = SpannedString(text).getSpans(
                 0,
                 "This is a body message".lastIndex,
                 AndesBulletSpannable::class.java

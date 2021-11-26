@@ -1,6 +1,8 @@
 # v4.0.1
 ## 🛠 Fixes
+- Fix `AndesMessage` use `AndesTextView` instead of native component so fixing some UX issues | Author: [@gabrielcoutos](https://github.com/gabrielcoutos)
 - Removed not needed activities imported from external libs in our showcase app manifest | Author: [@juanunzu](https://github.com/juanunzu)
+
 
 # v4.0.0
 ## 🚀 Feature
