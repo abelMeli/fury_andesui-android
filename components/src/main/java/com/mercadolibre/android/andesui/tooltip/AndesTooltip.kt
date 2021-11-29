@@ -424,11 +424,16 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
 
     private fun initTooltipBody(config: AndesTooltipConfiguration) {
         with(bodyComponent) {
-            maxWidth = config.bodyMaxWidth
-            text = config.bodyText
-            typeface = config.bodyTypeface
-            setTextColor(config.textColor.colorInt(context))
-            config.bodyTextSize?.let { setTextSize(TypedValue.COMPLEX_UNIT_PX, it) }
+            if (config.bodyText.isNotBlank()) {
+                maxWidth = config.bodyMaxWidth
+                text = config.bodyText
+                typeface = config.bodyTypeface
+                setTextColor(config.textColor.colorInt(context))
+                config.bodyTextSize?.let { setTextSize(TypedValue.COMPLEX_UNIT_PX, it) }
+                visible(true)
+            } else {
+                visible(false)
+            }
         }
     }
 

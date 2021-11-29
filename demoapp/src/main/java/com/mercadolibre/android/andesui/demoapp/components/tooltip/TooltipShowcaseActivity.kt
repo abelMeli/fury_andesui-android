@@ -175,7 +175,7 @@ class TooltipShowcaseActivity : BaseActivity() {
         }
 
         update.setOnClickListener {
-            if (body.text.isNullOrEmpty()) {
+            if (body.text == null) {
                 body.state = AndesTextfieldState.ERROR
                 return@setOnClickListener
             } else {

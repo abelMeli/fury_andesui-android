@@ -719,4 +719,30 @@ class AndesTooltipTest {
 
         assertEquals(tooltip.canShowTooltip(mockTarget), true)
     }
+
+    @Test
+    fun `should set body visibility in false when blank or empty text`() {
+        val tooltip = spy(AndesTooltip(
+            context = context,
+            title = title,
+            body = ""
+        ))
+
+        val bodyComponent = ReflectionHelpers.getField<TextView>(tooltip, "bodyComponent")
+
+        assertEquals(bodyComponent.visibility, View.GONE)
+    }
+
+    @Test
+    fun `should set body visibility in true when NOT blank or empty text`() {
+        val tooltip = spy(AndesTooltip(
+            context = context,
+            title = title,
+            body = body
+        ))
+
+        val bodyComponent = ReflectionHelpers.getField<TextView>(tooltip, "bodyComponent")
+
+        assertEquals(bodyComponent.visibility, View.VISIBLE)
+    }
 }

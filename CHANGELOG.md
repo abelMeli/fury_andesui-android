@@ -1,3 +1,7 @@
+# v4.1.0
+## 🚀 Feature
+- Added support for blank body content in the Tooltip.
+
 # v4.0.1
 ## 🛠 Fixes
 - Fix `AndesMessage` use `AndesTextView` instead of native component so fixing some UX issues | Author: [@gabrielcoutos](https://github.com/gabrielcoutos)
