@@ -192,7 +192,7 @@ data class AndesFeedbackScreenButton
 
 ## Webview Experience
 
-Actually we **do not recommend** using web AndesFeedbackScreen in webviews because UI and UX is not the expected. We will show some examples to illustrate the difference between webview and [native](#screenshots) feedback screen:
+Currently we **do not recommend** using web AndesFeedbackScreen in webviews because UI and UX is not the expected. We will show some examples to illustrate the difference between webview and [native](#screenshots) feedback screen:
 
 | Simple-success (no body) | Simple-success (with body) | Congrats (with body) | Congrats (with body scrolled) |
 | --- | --- | --- | --- |
