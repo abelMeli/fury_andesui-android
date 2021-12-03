@@ -315,6 +315,13 @@
 
 
     <!-- Andes Checkbox -->
+    <string name="andes_checkbox_showcase_example_first" translatable="false">Enviar compra sólo cuando el pedido esté completo</string>
+    <string name="andes_checkbox_showcase_example_second" translatable="false">Acepto los términos y condiciones</string>
+    <string name="andes_checkbox_showcase_example_third" translatable="false">Leí y acepto la normativa y acepto recibir updates sobre las comunicaciones del BCRA sobre formaciones de sociedades anónimas y presentación de estados contables.</string>
+    <string name="andes_checkbox_showcase_example_fourth" translatable="false">Filtrar por usados</string>
+    <string name="andes_checkbox_showcase_example_fifth" translatable="false">Sólo valores menores a $5000</string>
+    <string name="andes_checkbox_showcase_example_sixth" translatable="false">Sólo en tiendas oficiales</string>
+    <string name="andes_checkbox_showcase_example_seventh" translatable="false">Sólo en la tienda oficial de Adidas</string>
     <string name="andes_checkbox_specs" translatable="false">Andes Checkbox Specs 📘</string>
     <string name="andes_checkbox_description" translatable="false">They allow multiple selections from a list of options, unlike radio buttons that only allow you to choose a single option.</string>
     <string name="andes_checkbox_showcase" translatable="false">Andes Checkbox</string>

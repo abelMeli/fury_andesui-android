@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
@@ -44,6 +45,7 @@ internal fun CharSequence?.toSpannableWithLinks(
             val clickableSpan = object : ClickableSpanWithText(this?.substring(andesBodyLink.startIndex, andesBodyLink.endIndex)) {
                 override fun onClick(view: View) {
                     andesBodyLinks.listener(linkIndex)
+                    (view as? AndesTextView)?.shouldCallOnClickListener = false
                 }
 
                 override fun updateDrawState(ds: TextPaint) {
@@ -120,7 +122,7 @@ internal fun CharSequence?.removeBoldSpans(): CharSequence {
  * Return the list of strings which will be clickable in a spannable string.
  * If the caller is empty or is not a spannable string, it returns an empty list.
  */
-internal fun CharSequence.getLinkTextList(): List<String?> {
+internal fun CharSequence?.getLinkTextList(): List<String?> {
     if (this !is SpannableString) return emptyList()
     val spans = getSpans(0, length, ClickableSpanWithText::class.java)
     return spans.map { it.getText() }

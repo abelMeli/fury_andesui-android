@@ -152,7 +152,7 @@ enum class AndesBodyLinks
 ```
 | Property | Description |
 | ----------- | ----------- |
-| links: List<AndesBodyLink> | list of available body links |
+| links: List&lt;AndesBodyLink> | list of available body links |
 | listener: (index: Int) -> Unit | function type value |
 
 <br/>

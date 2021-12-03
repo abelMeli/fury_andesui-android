@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
@@ -17,6 +18,8 @@ import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
@@ -145,7 +148,40 @@ class CheckboxShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
+        container.findViewById<AndesCheckbox>(R.id.static_checkbox_second).apply {
+            val links = listOf(
+                AndesBodyLink(LINK_INDEX_FIRST_START, LINK_INDEX_FIRST_END)
+            )
+            bodyLinks = AndesBodyLinks(links) {
+                Toast.makeText(this@CheckboxShowcaseActivity, "Navegar a Términos y condiciones", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        container.findViewById<AndesCheckbox>(R.id.static_checkbox_third).apply {
+            val links = listOf(
+                AndesBodyLink(LINK_INDEX_SECOND_START, LINK_INDEX_SECOND_END),
+                AndesBodyLink(LINK_INDEX_THIRD_START, LINK_INDEX_THIRD_END)
+            )
+            bodyLinks = AndesBodyLinks(links) {
+                val toastText = when (it) {
+                    0 -> "Navegar a normativa"
+                    1 -> "Navegar a comunicaciones"
+                    else -> ""
+                }
+                Toast.makeText(this@CheckboxShowcaseActivity, toastText, Toast.LENGTH_SHORT).show()
+            }
+        }
+
         container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_checkbox_specs_button)
                 .setOnClickListener { launchSpecs(it.context, AndesSpecs.CHECKBOX) }
+    }
+
+    companion object {
+        private const val LINK_INDEX_FIRST_START = 11
+        private const val LINK_INDEX_FIRST_END = 33
+        private const val LINK_INDEX_SECOND_START = 16
+        private const val LINK_INDEX_SECOND_END = 25
+        private const val LINK_INDEX_THIRD_START = 61
+        private const val LINK_INDEX_THIRD_END = 75
     }
 }

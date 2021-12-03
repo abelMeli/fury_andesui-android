@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.textview
 
 import android.content.Context
-import android.os.Build
 import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -18,7 +17,6 @@ import com.mercadolibre.android.andesui.textview.factory.AndesTextViewAttrsParse
 import com.mercadolibre.android.andesui.textview.factory.AndesTextViewConfiguration
 import com.mercadolibre.android.andesui.textview.factory.AndesTextViewConfigurationFactory
 import com.mercadolibre.android.andesui.textview.style.AndesTextViewStyle
-import com.mercadolibre.android.andesui.utils.doWhenGreaterThanApi
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 
 @Suppress("TooManyFunctions")
@@ -148,9 +146,7 @@ class AndesTextView : AppCompatTextView {
      * Sets the custom a11yDelegate.
      */
     private fun setupA11yDelegate() {
-        doWhenGreaterThanApi(Build.VERSION_CODES.LOLLIPOP) {
-            accessibilityDelegate = AndesTextViewAccessibilityDelegate(this)
-        }
+        accessibilityDelegate = AndesTextViewAccessibilityDelegate(this)
     }
 
     /**
@@ -211,6 +207,25 @@ class AndesTextView : AppCompatTextView {
         }
         setOnTouchListener(onTouchListener)
     }
+
+    /**
+     * We add this check to be able to differ if we need to call the onClickListener
+     * when a click action is performed over this component. When the click is performed
+     * over a link section, we should not call the listener, but the [bodyLinks] listener instead.
+     */
+    override fun performClick(): Boolean {
+        if (shouldCallOnClickListener) {
+            super.performClick()
+        }
+        shouldCallOnClickListener = true
+        return hasOnClickListeners()
+    }
+
+    /**
+     * This value indicates if the click performed over the component was made over a linked section
+     * or not.
+     */
+    internal var shouldCallOnClickListener = true
 
     /**
      * Getter for textColor. Only for internal purposes

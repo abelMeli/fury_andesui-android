@@ -32,12 +32,12 @@
 
     </FrameLayout>
 
-    <TextView
+    <com.mercadolibre.android.andesui.textview.AndesTextView
         android:id="@+id/checkboxText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/andes_checkbox_text_margin"
-        android:textSize="@dimen/andes_tag_small_text_size"
+        app:andesTextViewStyle="bodyM"
         app:layout_constraintEnd_toStartOf="@+id/containerRightCheckbox"
         app:layout_constraintStart_toEndOf="@+id/containerLeftCheckbox"
         app:layout_constraintTop_toTopOf="parent"

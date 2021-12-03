@@ -28,6 +28,7 @@ Basic Sample XML
 | app:andesCheckboxAlign | Set the checkbox position at the left or right of the **andesCheckboxText**. Possible values: **left**, **right** |
 | app:andesCheckboxStatus | Set checkbox initial status: **selected**, **unselected**, **undefined** |
 | app:andesCheckboxType | Set a type style for the checkbox: **idle**, **error**, **disabled** |
+| app:andesCheckboxTitleNumberOfLines | Set a quantity for the desired number of lines for the companion text. |
 
 <br/>
 
@@ -57,6 +58,11 @@ Basic Sample XML
 | align: AndesCheckboxAlign | **get():** retrieves checkbox position. <br/> **set(value: AndesCheckboxAlign):** updates checkbox position at the left or right of the text. |
 | status: AndesCheckboxStatus | **get():** retrieves checkbox current status. <br/> **set(value: AndesCheckboxStatus):** updates checkbox status. |
 | type: AndesCheckboxType | **get():** retrieves checkbox type. <br/> **set(value: AndesCheckboxType):** updates component type. |
+| titleNumberOfLines: Int | **get():** retrieves number of lines of the companion textView. <br/> **set(value: Int):** updates the amount of lines the companion text can show. |
+| bodyLinks: AndesBodyLinks? | **get():** retrieves the available AndesBodyLinks. <br/> **set(value: AndesCheckboxType):** updates the companion text with the links provided from the AndesBodyLinks indexes. |
+
+### Links in companion text
+To have a better understanding of the links in text feature, we recommend checking the [AndesBodyLinks](https://github.com/mercadolibre/fury_andesui-android/blob/master/docs/guide/message/AndesMessage.md#andesbodylinks) docs.
 
 <br/>
 

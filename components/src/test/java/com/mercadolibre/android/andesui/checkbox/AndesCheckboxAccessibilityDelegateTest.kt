@@ -10,12 +10,17 @@ import com.mercadolibre.android.andesui.checkbox.accessibility.AndesCheckboxAcce
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.utils.actionLinkIdList
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -131,5 +136,39 @@ class AndesCheckboxAccessibilityDelegateTest {
         spiedA11yDelegate.onInitializeAccessibilityNodeInfo(andesCheckbox, nodeInfo)
 
         verify(nodeInfo, never()).addAction(any<AccessibilityNodeInfo.AccessibilityAction>())
+    }
+
+    @Test
+    fun `testing a11y actions`() {
+        andesCheckbox.text = "checkbox text with body links"
+        val bodyLinks = AndesBodyLinks(
+            listOf(
+                AndesBodyLink(1, 4),
+                AndesBodyLink(5, 9),
+                AndesBodyLink(10, 11),
+                AndesBodyLink(12, 13)
+            )
+        ) { /* not used*/ }
+        andesCheckbox.bodyLinks = bodyLinks
+        val actionClickFirstLinkId = actionLinkIdList[0]
+        val actionClickSecondLinkId = actionLinkIdList[1]
+        val actionClickThirdLinkId = actionLinkIdList[2]
+        val actionClickFourthLinkId = actionLinkIdList[3]
+        val actionDifferentId = AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS
+
+        val a11yDelegate = andesCheckbox.accessibilityDelegate as AndesCheckboxAccessibilityDelegate
+
+        andesCheckbox.createAccessibilityNodeInfo()
+        val firstActionPerformed = a11yDelegate.performAccessibilityAction(andesCheckbox, actionClickFirstLinkId, null)
+        val secondActionPerformed = a11yDelegate.performAccessibilityAction(andesCheckbox, actionClickSecondLinkId, null)
+        val thirdActionPerformed = a11yDelegate.performAccessibilityAction(andesCheckbox, actionClickThirdLinkId, null)
+        val fourthActionPerformed = a11yDelegate.performAccessibilityAction(andesCheckbox, actionClickFourthLinkId, null)
+        val differentActionPerformed = a11yDelegate.performAccessibilityAction(andesCheckbox, actionDifferentId, null)
+
+        assertTrue(firstActionPerformed)
+        assertTrue(secondActionPerformed)
+        assertTrue(thirdActionPerformed)
+        assertTrue(fourthActionPerformed)
+        assertFalse(differentActionPerformed)
     }
 }

@@ -7,13 +7,15 @@ import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 
 internal data class AndesCheckboxAttrs(
     val andesCheckboxAlign: AndesCheckboxAlign,
     val andesCheckboxText: String?,
     val andesCheckboxStatus: AndesCheckboxStatus,
     val andesCheckboxType: AndesCheckboxType,
-    val andesCheckboxTitleNumberOfLine: Int = AndesCheckbox.DEFAULT_LINES
+    val andesCheckboxTitleNumberOfLine: Int = AndesCheckbox.DEFAULT_LINES,
+    val andesCheckboxBodyLinks: AndesBodyLinks? = null
 )
 
 /**
@@ -67,7 +69,8 @@ internal object AndesCheckboxAttrParser {
                 andesCheckboxStatus = validatedStatus,
                 andesCheckboxType = type,
                 andesCheckboxTitleNumberOfLine =
-                typedArray.getInt(R.styleable.AndesCheckbox_andesCheckboxTitleNumberOfLines, AndesCheckbox.DEFAULT_LINES)
+                typedArray.getInt(R.styleable.AndesCheckbox_andesCheckboxTitleNumberOfLines, AndesCheckbox.DEFAULT_LINES),
+                andesCheckboxBodyLinks = null
         ).also { typedArray.recycle() }
     }
 }

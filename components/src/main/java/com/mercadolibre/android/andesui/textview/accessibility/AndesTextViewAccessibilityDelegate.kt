@@ -4,22 +4,21 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
-import androidx.annotation.RequiresApi
-import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.textview.AndesTextView
-import com.mercadolibre.android.andesui.utils.actionLinkIdList
-import com.mercadolibre.android.andesui.utils.getLinkTextList
-import com.mercadolibre.android.andesui.utils.toA11yAction
+import com.mercadolibre.android.andesui.utils.createActionList
 
 /**
  * class responsible for handling the component accessibility, including the correct setting of the
  * contentDescription, available actions, and more.
  */
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class AndesTextViewAccessibilityDelegate(private val andesTextView: AndesTextView) : View.AccessibilityDelegate() {
 
     private val actionList by lazy {
-        createActionList()
+        createActionList(
+            andesTextView.context,
+            andesTextView.bodyLinks,
+            andesTextView.text
+        )
     }
 
     /**
@@ -61,32 +60,5 @@ class AndesTextViewAccessibilityDelegate(private val andesTextView: AndesTextVie
         actionList.forEach {
             info?.addAction(it)
         }
-    }
-
-    /**
-     * Creates a new accessibility action for each link present in the text.
-     * This way, when giving a11y focus to the component, we can select the different links in the text body
-     * as different actions from the local context menu.
-     *
-     * Every new action created is added to the [actionList] to later be added to the nodeInfo actions.
-     */
-    private fun createActionList(): List<AccessibilityNodeInfo.AccessibilityAction> {
-        val list = mutableListOf<AccessibilityNodeInfo.AccessibilityAction>()
-        andesTextView.bodyLinks?.let {
-            it.links.forEachIndexed { index, _ ->
-                val linkTexts = andesTextView.text.getLinkTextList()
-                if (linkTexts.isNotEmpty()) {
-                    if (!linkTexts[index].isNullOrEmpty()) {
-                        val action = actionLinkIdList[index].toA11yAction(generateLinkActionText(linkTexts[index]))
-                        list.add(action)
-                    }
-                }
-            }
-        }
-        return list
-    }
-
-    private fun generateLinkActionText(text: String?): String {
-        return andesTextView.context.resources.getString(R.string.andes_textview_available_link, text)
     }
 }

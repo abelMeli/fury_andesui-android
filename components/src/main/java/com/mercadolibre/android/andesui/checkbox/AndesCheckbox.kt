@@ -3,25 +3,29 @@ package com.mercadolibre.android.andesui.checkbox
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.text.TextUtils
-import androidx.annotation.Nullable
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
-import android.util.TypedValue
+import android.view.GestureDetector
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.CheckBox
+import androidx.annotation.Nullable
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.checkbox.accessibility.AndesCheckboxAccessibilityDelegate
 import com.mercadolibre.android.andesui.checkbox.accessibility.AndesCheckboxAccessibilityEventDispatcher
+import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxAttrParser
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxAttrs
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxConfiguration
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxConfigurationFactory
-import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
-import com.mercadolibre.android.andesui.typeface.getFontOrDefault
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import kotlinx.android.synthetic.main.andes_layout_checkbox.view.*
+import kotlinx.android.synthetic.main.andes_layout_checkbox.view.checkboxText
+import kotlinx.android.synthetic.main.andes_layout_radiobutton.view.*
 
 @Suppress("TooManyFunctions")
 class AndesCheckbox : ConstraintLayout {
@@ -80,6 +84,17 @@ class AndesCheckbox : ConstraintLayout {
         }
 
     /**
+     * Getter and setter for [bodyLinks].
+     */
+    var bodyLinks: AndesBodyLinks?
+        get() = andesCheckboxAttrs.andesCheckboxBodyLinks
+        set(value) {
+            andesCheckboxAttrs = andesCheckboxAttrs.copy(andesCheckboxBodyLinks = value)
+            setupTitleComponent(createConfig())
+            setupA11yDelegate()
+        }
+
+    /**
      * Setter [OnClickListener].
      */
     fun setupCallback(@Nullable listener: OnClickListener) {
@@ -92,6 +107,9 @@ class AndesCheckbox : ConstraintLayout {
     private lateinit var andesCheckboxAttrs: AndesCheckboxAttrs
     private lateinit var containerCheckbox: ConstraintLayout
     private val a11yEventDispatcher by lazy { AndesCheckboxAccessibilityEventDispatcher() }
+    internal lateinit var spannableText: CharSequence; private set
+    private lateinit var clickableView: View
+    private val gestureDetector by lazy { createGestureDetector() }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
@@ -131,7 +149,6 @@ class AndesCheckbox : ConstraintLayout {
 
     private fun setupComponents(config: AndesCheckboxConfiguration) {
         initComponents()
-        setupA11yDelegate()
         setupAccessibilityNavigation()
         setupViewId()
         setupTitleComponent(config)
@@ -139,6 +156,7 @@ class AndesCheckbox : ConstraintLayout {
         setupBackgroundComponent(config)
         setupTitleNumberLinesComponent(config)
         setupType(config)
+        setupA11yDelegate()
     }
 
     private fun setupViewId() {
@@ -170,11 +188,10 @@ class AndesCheckbox : ConstraintLayout {
     private fun initComponents() {
         val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_checkbox, this)
         containerCheckbox = container.findViewById(R.id.andes_checkbox_container)
-        onCheckedChangeListener()
     }
 
-    private fun onCheckedChangeListener() {
-        setOnClickListener {
+    private fun setOnCheckedChangeListener() {
+        clickableView.setOnClickListener {
             when (type) {
                 AndesCheckboxType.ERROR -> {
                     type = AndesCheckboxType.IDLE
@@ -194,37 +211,50 @@ class AndesCheckbox : ConstraintLayout {
             }
             a11yEventDispatcher.notifyA11yStatusChanged(this@AndesCheckbox, status)
         }
+        checkboxText.setOnClickListener {
+            clickableView.callOnClick()
+        }
+        setOnClickListener {
+            checkboxText.performClick()
+        }
     }
 
     /**
      * Gets data from the config and sets to the title component of this checkbox.
      */
     private fun setupTitleComponent(config: AndesCheckboxConfiguration) {
-        checkboxText.text = config.text
-        checkboxText.ellipsize = TextUtils.TruncateAt.END
-        checkboxText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        checkboxText.setTextSize(
-            TypedValue.COMPLEX_UNIT_PX,
-            context.resources.getDimension(R.dimen.andes_checkbox_text_size)
-        )
-        checkboxText.setTextColor(config.type.type.textColor(context).colorInt(context))
+        checkboxText.apply {
+            text = config.text
+            ellipsize = TextUtils.TruncateAt.END
+            setTextColor(config.type.type.textColor())
+            bodyLinks = config.bodyLinks
+            spannableText = text
+        }
         setupTitleNumberLinesComponent(config)
     }
 
     /**
      * Gets data from the config and sets to the align component of this checkbox.
+     * Also, according to the align, we change the clickable area of the component to
+     * the left or the right checkbox container.
+     *
+     * Every time we change this value, we need to remove the click listener from the now
+     * unused and hidden view, and re-set it in the now visible view.
      */
     private fun setupAlignComponent(config: AndesCheckboxConfiguration) {
         when (config.align) {
             AndesCheckboxAlign.LEFT -> {
                 containerLeftCheckbox.visibility = View.VISIBLE
                 containerRightCheckbox.visibility = View.GONE
+                clickableView = containerLeftCheckbox
             }
             AndesCheckboxAlign.RIGHT -> {
                 containerLeftCheckbox.visibility = View.GONE
                 containerRightCheckbox.visibility = View.VISIBLE
+                clickableView = containerRightCheckbox
             }
         }
+        setOnCheckedChangeListener()
     }
 
     /**
@@ -261,6 +291,80 @@ class AndesCheckbox : ConstraintLayout {
      */
     private fun setupTitleNumberLinesComponent(config: AndesCheckboxConfiguration) {
         checkboxText.maxLines = config.titleNumberOfLines
+    }
+
+    /**
+     * Creates the gesture detector needed to filter the click events over the component.
+     *
+     * The onSingleTapUp() return represents if the action is consumed here or is passed.
+     * When we use TalkBack, we need to catch the tap action here in order to avoid passing
+     * the direct click to the links that may be present in the text. Thus, when the reader is
+     * enabled, this method should return true.
+     */
+    private fun createGestureDetector(): GestureDetector {
+        return GestureDetector(context, object : GestureDetector.OnGestureListener {
+            override fun onDown(e: MotionEvent?): Boolean {
+                return false
+            }
+
+            override fun onShowPress(e: MotionEvent?) { /* no-op */
+            }
+
+            override fun onSingleTapUp(e: MotionEvent?): Boolean {
+                return context.getAccessibilityManager().let {
+                    if (it.isEnabled) {
+                        performClick()
+                    }
+                    it.isEnabled
+                }
+            }
+
+            override fun onScroll(
+                e1: MotionEvent?,
+                e2: MotionEvent?,
+                distanceX: Float,
+                distanceY: Float
+            ): Boolean {
+                return false
+            }
+
+            override fun onLongPress(e: MotionEvent?) { /* no-op */
+            }
+
+            override fun onFling(
+                e1: MotionEvent?,
+                e2: MotionEvent?,
+                velocityX: Float,
+                velocityY: Float
+            ): Boolean {
+                return false
+            }
+        })
+    }
+
+    /**
+     * Intercepts the touch event before it reaches the children of this viewgroup.
+     * When talkback is ON, we need to catch the click event in order to avoid clicking in
+     * the text links.
+     * For more info, check [this site](https://developer.android.com/training/gestures/viewgroup.html)
+     */
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        if (context.getAccessibilityManager().isEnabled) {
+            return true
+        }
+        return super.onInterceptTouchEvent(ev)
+    }
+
+    /**
+     * gets the touch event intercepted in the [onInterceptTouchEvent] when the talkback is ON
+     * and passes the [event] to the [gestureDetector]
+     */
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (context.getAccessibilityManager().isEnabled) {
+            gestureDetector.onTouchEvent(event)
+            return true
+        }
+        return super.onTouchEvent(event)
     }
 
     private fun createConfig() = AndesCheckboxConfigurationFactory.create(andesCheckboxAttrs)

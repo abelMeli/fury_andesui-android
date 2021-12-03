@@ -1,5 +1,6 @@
 # v4.1.0
 ## 🚀 Feature
+- Links support in `AndesCheckbox` companion text | Author: [@juanunzu](https://github.com/juanunzu)
 - Added support for blank body content in the Tooltip.
 
 # v4.0.2

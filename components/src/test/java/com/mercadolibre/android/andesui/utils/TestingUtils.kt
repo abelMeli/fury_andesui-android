@@ -1,10 +1,13 @@
 package com.mercadolibre.android.andesui
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
+import com.mercadolibre.android.andesui.utils.ClickableSpanWithText
+import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import org.junit.Assert
 import org.mockito.internal.util.reflection.FieldSetter
 import org.robolectric.Robolectric
@@ -59,6 +62,11 @@ fun buildAttributeSet(attrs: AttributeSetBuilder.() -> Unit): AttributeSet =
         build()
     }
 
+fun activateTalkbackForTest(context: Context) {
+    val shadowA11yManager = shadowOf(context.getAccessibilityManager())
+    shadowA11yManager.setEnabled(true)
+}
+
 fun CharSequence?.hasSpans(): Boolean {
     if (this !is SpannableString) return false
     val spans = getSpans(0, length, CharacterStyle::class.java)
@@ -68,5 +76,11 @@ fun CharSequence?.hasSpans(): Boolean {
 fun CharSequence?.getSpans(): List<CharacterStyle> {
     if (this !is SpannableString) return emptyList()
     val spans = getSpans(0, length, CharacterStyle::class.java)
+    return spans.map { it }
+}
+
+internal fun CharSequence?.getClickableSpans(): List<ClickableSpanWithText> {
+    if (this !is SpannableString) return emptyList()
+    val spans = getSpans(0, length, ClickableSpanWithText::class.java)
     return spans.map { it }
 }

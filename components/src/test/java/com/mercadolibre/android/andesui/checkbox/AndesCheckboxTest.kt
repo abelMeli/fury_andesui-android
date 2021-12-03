@@ -1,14 +1,27 @@
 package com.mercadolibre.android.andesui.checkbox
 
 import android.os.Build
+import android.view.MotionEvent
+import androidx.test.core.view.MotionEventBuilder
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.activateTalkbackForTest
+import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxAttrs
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxConfigurationFactory
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
 import com.mercadolibre.android.andesui.color.toAndesColor
+import com.mercadolibre.android.andesui.getClickableSpans
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.verify
+import kotlinx.android.synthetic.main.andes_layout_checkbox.view.*
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.spy
@@ -296,6 +309,42 @@ class AndesCheckboxTest {
     }
 
     @Test
+    fun `testing text color with type idle`() {
+        attrs = AndesCheckboxAttrs(
+            andesCheckboxAlign = AndesCheckboxAlign.LEFT,
+            andesCheckboxStatus = AndesCheckboxStatus.SELECTED,
+            andesCheckboxType = AndesCheckboxType.IDLE,
+            andesCheckboxText = null
+        )
+        val config = configFactory.create(attrs)
+        assertEquals(AndesTextViewColor.Primary, config.type.type.textColor())
+    }
+
+    @Test
+    fun `testing text color with type disabled`() {
+        attrs = AndesCheckboxAttrs(
+            andesCheckboxAlign = AndesCheckboxAlign.LEFT,
+            andesCheckboxStatus = AndesCheckboxStatus.SELECTED,
+            andesCheckboxType = AndesCheckboxType.DISABLED,
+            andesCheckboxText = null
+        )
+        val config = configFactory.create(attrs)
+        assertEquals(AndesTextViewColor.Disabled, config.type.type.textColor())
+    }
+
+    @Test
+    fun `testing text color with type error`() {
+        attrs = AndesCheckboxAttrs(
+            andesCheckboxAlign = AndesCheckboxAlign.LEFT,
+            andesCheckboxStatus = AndesCheckboxStatus.SELECTED,
+            andesCheckboxType = AndesCheckboxType.ERROR,
+            andesCheckboxText = null
+        )
+        val config = configFactory.create(attrs)
+        assertEquals(AndesTextViewColor.Primary, config.type.type.textColor())
+    }
+
+    @Test
     fun `Checkbox default title number of lines`() {
         andesCheckbox = AndesCheckbox(
                         context,
@@ -318,5 +367,93 @@ class AndesCheckboxTest {
         andesCheckbox.titleNumberOfLines = 3
 
         assertEquals(andesCheckbox.titleNumberOfLines, 3)
+    }
+
+    @Test
+    fun `sending motion event click with a11y off works correctly`() {
+        andesCheckbox = spy(
+            AndesCheckbox(
+            context,
+            "Andes checkbox",
+            AndesCheckboxAlign.LEFT,
+            AndesCheckboxStatus.SELECTED,
+            AndesCheckboxType.IDLE
+            )
+        )
+
+        val clickMotionEvent = MotionEventBuilder
+            .newBuilder()
+            .setAction(MotionEvent.ACTION_DOWN)
+            .build()
+
+        val isEventIntercepted = andesCheckbox.onInterceptTouchEvent(clickMotionEvent)
+
+        assertFalse(isEventIntercepted)
+        verify(andesCheckbox, never()).onTouchEvent(clickMotionEvent)
+    }
+
+    @Test
+    fun `sending motion event click with a11y on works correctly`() {
+        activateTalkbackForTest(context)
+        andesCheckbox = AndesCheckbox(
+            context,
+            "Andes checkbox",
+            AndesCheckboxAlign.LEFT,
+            AndesCheckboxStatus.SELECTED,
+            AndesCheckboxType.IDLE
+        )
+
+        val clickMotionEvent = MotionEventBuilder
+            .newBuilder()
+            .setAction(MotionEvent.ACTION_DOWN)
+            .build()
+
+        val isEventIntercepted = andesCheckbox.onInterceptTouchEvent(clickMotionEvent)
+        val isTouchEventConsumed = andesCheckbox.onTouchEvent(clickMotionEvent)
+        assertTrue(isEventIntercepted)
+        assertTrue(isTouchEventConsumed)
+    }
+
+    @Test
+    fun `call on click over text component with link does not change status`() {
+        andesCheckbox = AndesCheckbox(
+            context,
+            "Andes checkbox",
+            AndesCheckboxAlign.LEFT,
+            AndesCheckboxStatus.SELECTED,
+            AndesCheckboxType.IDLE
+        )
+
+        andesCheckbox.bodyLinks = getBodyLinksForTest()
+
+        andesCheckbox.checkboxText.text.getClickableSpans().forEach {
+            it.onClick(andesCheckbox.checkboxText)
+        }
+
+        andesCheckbox.status assertEquals AndesCheckboxStatus.SELECTED
+    }
+
+    @Test
+    fun `call on click over text component without link changes status`() {
+        andesCheckbox = AndesCheckbox(
+            context,
+            "Andes checkbox",
+            AndesCheckboxAlign.LEFT,
+            AndesCheckboxStatus.SELECTED,
+            AndesCheckboxType.IDLE
+        )
+
+        andesCheckbox.checkboxText.performClick()
+
+        andesCheckbox.status assertEquals AndesCheckboxStatus.UNSELECTED
+    }
+
+    private fun getBodyLinksForTest(): AndesBodyLinks {
+        return AndesBodyLinks(
+            links = listOf(
+                AndesBodyLink(4, 6)
+            ),
+            listener = { }
+        )
     }
 }

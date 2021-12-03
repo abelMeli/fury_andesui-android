@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.checkbox.factory
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 
 internal data class AndesCheckboxConfiguration(
     val text: String?,
@@ -10,7 +11,8 @@ internal data class AndesCheckboxConfiguration(
     val align: AndesCheckboxAlign,
     val status: AndesCheckboxStatus,
     val type: AndesCheckboxType,
-    val titleNumberOfLines: Int
+    val titleNumberOfLines: Int,
+    val bodyLinks: AndesBodyLinks?
 )
 
 internal object AndesCheckboxConfigurationFactory {
@@ -30,7 +32,8 @@ internal object AndesCheckboxConfigurationFactory {
                 align = andesCheckboxAttrs.andesCheckboxAlign,
                 status = validatedStatus,
                 type = andesCheckboxAttrs.andesCheckboxType,
-                titleNumberOfLines = andesCheckboxAttrs.andesCheckboxTitleNumberOfLine
+                titleNumberOfLines = andesCheckboxAttrs.andesCheckboxTitleNumberOfLine,
+                bodyLinks = andesCheckboxBodyLinks
             )
         }
     }
