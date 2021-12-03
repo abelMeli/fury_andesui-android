@@ -2,6 +2,10 @@
 ## 🚀 Feature
 - Added support for blank body content in the Tooltip.
 
+# v4.0.2
+## 🛠 Fixes
+- Fix in AndesButton padding handling
+
 # v4.0.1
 ## 🛠 Fixes
 - Fix `AndesMessage` use `AndesTextView` instead of native component so fixing some UX issues | Author: [@gabrielcoutos](https://github.com/gabrielcoutos)

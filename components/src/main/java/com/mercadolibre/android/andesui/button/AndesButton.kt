@@ -519,6 +519,7 @@ class AndesButton : ConstraintLayout {
      */
     private fun setupPaddings(config: AndesButtonConfiguration) {
         componentContainer.setPadding(config.lateralPadding, paddingTop, config.lateralPadding, paddingBottom)
+        setPadding(NO_PADDING, NO_PADDING, NO_PADDING, NO_PADDING)
     }
 
     /**
@@ -735,6 +736,10 @@ class AndesButton : ConstraintLayout {
         progressView.duration = durationInMillis
     }
 
+    override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+        super.setPadding(NO_PADDING, NO_PADDING, NO_PADDING, NO_PADDING)
+    }
+
     /**
      * returns the class name of this component. This value will be taken as the Role by
      * accessibility services, therefore will be named after the content description
@@ -748,6 +753,7 @@ class AndesButton : ConstraintLayout {
      * Default values for AndesButton basic properties
      */
     companion object {
+        private const val NO_PADDING = 0
         private const val TEXT_DEFAULT = "Button text"
         private const val PROGRESS_LOADING_TEXT_DEFAULT = "Loading"
         private val HIERARCHY_DEFAULT = AndesButtonHierarchy.LOUD
