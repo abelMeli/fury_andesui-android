@@ -1,3 +1,7 @@
+# v4.1.1
+## 🛠 Fixes
+- Change in the font resolution for the `AndesTextView`
+
 # v4.1.0
 ## 🚀 Feature
 - Links support in `AndesCheckbox` companion text | Author: [@juanunzu](https://github.com/juanunzu)

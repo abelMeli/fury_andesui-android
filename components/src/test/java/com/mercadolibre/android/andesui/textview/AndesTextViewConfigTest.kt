@@ -319,4 +319,16 @@ class AndesTextViewConfigTest {
         config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_body_font_weight
     }
+
+    @Test
+    fun `custom font`() {
+        attrs = AndesTextViewAttrs(
+            AndesTextViewColor.Primary,
+            AndesTextViewStyle.Custom(R.font.andes_font_semibold, 0f, 0f)
+        )
+
+        val config = configFactory.create(context, attrs, "")
+
+        config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
+    }
 }

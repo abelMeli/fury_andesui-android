@@ -132,8 +132,11 @@ internal data class AndesTextViewStyleCustom(
     }
 
     override fun getFont(context: Context): Typeface {
-        return context.getFontOrDefault(customFontValue).takeIf { customFontValue != NO_FONT_SET }
-            ?: context.getFontOrDefault(R.font.andes_font_regular)
+        return if (customFontValue != NO_FONT_SET) {
+            context.getFontOrDefault(customFontValue)
+        } else {
+            context.getFontOrDefault(R.font.andes_font_regular)
+        }
     }
 
     override fun getLineHeight(context: Context): Int {
