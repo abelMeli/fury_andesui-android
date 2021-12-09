@@ -1,5 +1,6 @@
 # v4.1.1
 ## 🛠 Fixes
+- Fixing tooltip text alignment
 - Change in the font resolution for the `AndesTextView`
 
 # v4.1.0
