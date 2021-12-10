@@ -1,4 +1,7 @@
-# v4.1.1
+# v4.2.0
+## 🚀 Feature
+- Added new icon based in Figma specs: [Delete](https://www.figma.com/file/i275NVe7uWWkuQYnpYGVq8/Andes-%2F-02-Iconography?node-id=1%3A385) | Author: [@epennachini](https://github.com/EPENNACHINI)
+
 ## 🛠 Fixes
 - Fixing tooltip text alignment
 - Change in the font resolution for the `AndesTextView`

@@ -79,7 +79,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
         addStaticPage(adapter.views[1])
     }
 
-    @Suppress("LongMethod")
+    @Suppress("LongMethod", "TooGenericExceptionCaught")
     private fun addDynamicPage(container: View) {
         val textFieldTitle = container.findViewById<AndesTextfield>(R.id.title)
         val textFieldSubtitle = container.findViewById<AndesTextfield>(R.id.subtitle)
