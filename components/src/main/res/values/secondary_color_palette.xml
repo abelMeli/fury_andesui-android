@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="andes_secondary_a_100">#FDD5ED</color>
+    <color name="andes_secondary_a_200">#FCC7E6</color>
+    <color name="andes_secondary_a_300">#FAABDA</color>
+    <color name="andes_secondary_a_400">#F98FCD</color>
+    <color name="andes_secondary_a_500">#F773C1</color>
+    <color name="andes_secondary_a_600">#D9539E</color>
+    <color name="andes_secondary_a_700">#BB4A86</color>
+    <color name="andes_secondary_a_800">#9D416F</color>
+    <color name="andes_secondary_a_900">#7F375D</color>
+
+    <color name="andes_secondary_b_100">#F6D0F4</color>
+    <color name="andes_secondary_b_200">#F3BFF0</color>
+    <color name="andes_secondary_b_300">#ECA0E9</color>
+    <color name="andes_secondary_b_400">#E680E1</color>
+    <color name="andes_secondary_b_500">#E060DA</color>
+    <color name="andes_secondary_b_600">#BF46B9</color>
+    <color name="andes_secondary_b_700">#A43E9E</color>
+    <color name="andes_secondary_b_800">#893685</color>
+    <color name="andes_secondary_b_900">#6E2E6A</color>
+
+    <color name="andes_secondary_c_100">#ECCBF9</color>
+    <color name="andes_secondary_c_200">#E5B9F7</color>
+    <color name="andes_secondary_c_300">#D896F3</color>
+    <color name="andes_secondary_c_400">#CC73EF</color>
+    <color name="andes_secondary_c_500">#BF50EB</color>
+    <color name="andes_secondary_c_600">#9B3ACB</color>
+    <color name="andes_secondary_c_700">#8533AF</color>
+    <color name="andes_secondary_c_800">#6E2D93</color>
+    <color name="andes_secondary_c_900">#5C2676</color>
+
+    <color name="andes_secondary_d_100">#DFCCFB</color>
+    <color name="andes_secondary_d_200">#D4BBF9</color>
+    <color name="andes_secondary_d_300">#BE99F6</color>
+    <color name="andes_secondary_d_400">#A977F3</color>
+    <color name="andes_secondary_d_500">#9355F0</color>
+    <color name="andes_secondary_d_600">#6D3ED0</color>
+    <color name="andes_secondary_d_700">#5E36B3</color>
+    <color name="andes_secondary_d_800">#523097</color>
+    <color name="andes_secondary_d_900">#46297A</color>
+
+    <color name="andes_secondary_e_100">#D1CEFC</color>
+    <color name="andes_secondary_e_200">#C1BDFB</color>
+    <color name="andes_secondary_e_300">#A19DF9</color>
+    <color name="andes_secondary_e_400">#827CF7</color>
+    <color name="andes_secondary_e_500">#635BF5</color>
+    <color name="andes_secondary_e_600">#4742D6</color>
+    <color name="andes_secondary_e_700">#3F3AB8</color>
+    <color name="andes_secondary_e_800">#37339B</color>
+    <color name="andes_secondary_e_900">#2F2C7D</color>
+
+    <color name="andes_secondary_f_100">#C4D3FC</color>
+    <color name="andes_secondary_f_200">#B0C4FB</color>
+    <color name="andes_secondary_f_300">#88A6F9</color>
+    <color name="andes_secondary_f_400">#6088F7</color>
+    <color name="andes_secondary_f_500">#386BF5</color>
+    <color name="andes_secondary_f_600">#294ED6</color>
+    <color name="andes_secondary_f_700">#2445B8</color>
+    <color name="andes_secondary_f_800">#1F3C9B</color>
+    <color name="andes_secondary_f_900">#1B337D</color>
+
+    <color name="andes_secondary_g_100">#C6E7FD</color>
+    <color name="andes_secondary_g_200">#B2DEFC</color>
+    <color name="andes_secondary_g_300">#8BCEFA</color>
+    <color name="andes_secondary_g_400">#64BEF9</color>
+    <color name="andes_secondary_g_500">#3EADF7</color>
+    <color name="andes_secondary_g_600">#2D88D9</color>
+    <color name="andes_secondary_g_700">#2873BB</color>
+    <color name="andes_secondary_g_800">#23619D</color>
+    <color name="andes_secondary_g_900">#1E537F</color>
+
+    <color name="andes_secondary_h_100">#C2F6F2</color>
+    <color name="andes_secondary_h_200">#ADF2ED</color>
+    <color name="andes_secondary_h_300">#83EBE4</color>
+    <color name="andes_secondary_h_400">#5AE4DB</color>
+    <color name="andes_secondary_h_500">#31DED2</color>
+    <color name="andes_secondary_h_600">#23BDB0</color>
+    <color name="andes_secondary_h_700">#1FA397</color>
+    <color name="andes_secondary_h_800">#1B887D</color>
+    <color name="andes_secondary_h_900">#176D65</color>
+
+    <color name="andes_secondary_i_100">#C5F5D2</color>
+    <color name="andes_secondary_i_200">#B2F1C2</color>
+    <color name="andes_secondary_i_300">#8BEAA4</color>
+    <color name="andes_secondary_i_400">#64E286</color>
+    <color name="andes_secondary_i_500">#3DDB68</color>
+    <color name="andes_secondary_i_600">#2CBB4B</color>
+    <color name="andes_secondary_i_700">#279F42</color>
+    <color name="andes_secondary_i_800">#22863A</color>
+    <color name="andes_secondary_i_900">#1E6A32</color>
+
+    <color name="andes_secondary_j_100">#DDF7CC</color>
+    <color name="andes_secondary_j_200">#D0F4BA</color>
+    <color name="andes_secondary_j_300">#B9EF98</color>
+    <color name="andes_secondary_j_400">#A2EA75</color>
+    <color name="andes_secondary_j_500">#8BE453</color>
+    <color name="andes_secondary_j_600">#64C43C</color>
+    <color name="andes_secondary_j_700">#59A735</color>
+    <color name="andes_secondary_j_800">#4E8D2E</color>
+    <color name="andes_secondary_j_900">#427128</color>
+
+    <color name="andes_secondary_k_100">#FFF1CB</color>
+    <color name="andes_secondary_k_200">#FFEBBA</color>
+    <color name="andes_secondary_k_300">#FFE297</color>
+    <color name="andes_secondary_k_400">#FFD874</color>
+    <color name="andes_secondary_k_500">#FFCE52</color>
+    <color name="andes_secondary_k_600">#E1AC3B</color>
+    <color name="andes_secondary_k_700">#C29335</color>
+    <color name="andes_secondary_k_800">#A47B2E</color>
+    <color name="andes_secondary_k_900">#856327</color>
+
+    <color name="andes_secondary_l_100">#FFE9CB</color>
+    <color name="andes_secondary_l_200">#FFE1BA</color>
+    <color name="andes_secondary_l_300">#FFD297</color>
+    <color name="andes_secondary_l_400">#FFC374</color>
+    <color name="andes_secondary_l_500">#FFB452</color>
+    <color name="andes_secondary_l_600">#E18F3B</color>
+    <color name="andes_secondary_l_700">#C27A35</color>
+    <color name="andes_secondary_l_800">#A4652E</color>
+    <color name="andes_secondary_l_900">#855627</color>
+</resources>
