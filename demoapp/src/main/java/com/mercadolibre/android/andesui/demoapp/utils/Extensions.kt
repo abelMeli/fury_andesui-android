@@ -8,6 +8,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.annotation.ArrayRes
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
 
 fun Context.getInDp(value: Float): Int {
     return TypedValue.applyDimension(
@@ -39,4 +41,17 @@ internal fun doWhenGreaterThanApi(apiLevel: Int, actions: () -> Unit) {
     if (Build.VERSION.SDK_INT >= apiLevel) {
         actions()
     }
+}
+
+fun <T> MutableList<T>.replaceWith(items: List<T>) {
+    with(this) {
+        clear()
+        addAll(items)
+    }
+}
+
+fun View.hideKeyboard() {
+    (context.getSystemService(
+        Activity.INPUT_METHOD_SERVICE
+    ) as? InputMethodManager)?.hideSoftInputFromWindow(windowToken, 0)
 }

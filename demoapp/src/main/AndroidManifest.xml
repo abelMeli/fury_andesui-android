@@ -18,6 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".home.SearchActivity"
+            android:theme="@style/AppTheme.Home" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/AppTheme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".StorybookActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -153,7 +165,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.PlaygroundHomeActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -173,7 +185,7 @@
 
         <activity
             android:name=".components.datepicker.DatePickerShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -188,7 +200,7 @@
         </activity>
         <activity
             android:name=".components.bottomsheet.BottomSheetShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -201,16 +213,24 @@
                     android:scheme="meli" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".home.MainActivity"
+            android:theme="@style/AppTheme.Home">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="andes"
+                    android:path="/home"
+                    android:scheme="meli" />
             </intent-filter>
         </activity>
         <activity
             android:name=".components.badge.BadgeShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -225,7 +245,7 @@
         </activity>
         <activity
             android:name=".components.snackbar.SnackbarShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -240,7 +260,7 @@
         </activity>
         <activity
             android:name=".components.checkbox.CheckboxShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -255,7 +275,7 @@
         </activity>
         <activity
             android:name=".components.tag.TagShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -270,7 +290,7 @@
         </activity>
         <activity
             android:name=".components.button.ButtonShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -285,7 +305,7 @@
         </activity>
         <activity
             android:name=".components.progressindicator.ProgressShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -300,7 +320,7 @@
         </activity>
         <activity
             android:name=".components.linearprogressindicator.LinearProgressShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -315,7 +335,7 @@
         </activity>
         <activity
             android:name=".components.message.MessageShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -330,7 +350,7 @@
         </activity>
         <activity
             android:name=".components.textfield.TextfieldShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -345,7 +365,7 @@
         </activity>
         <activity
             android:name=".components.thumbnail.ThumbnailShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -360,7 +380,7 @@
         </activity>
         <activity
             android:name=".whatsnew.WhatsNewActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -375,7 +395,7 @@
         </activity>
         <activity
             android:name=".components.radiobutton.RadioButtonShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -390,7 +410,7 @@
         </activity>
         <activity
             android:name=".components.card.CardShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -405,7 +425,7 @@
         </activity>
         <activity
             android:name=".components.coachmark.CoachmarkShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -420,7 +440,7 @@
         </activity>
         <activity
             android:name=".components.list.ListShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -435,7 +455,7 @@
         </activity>
         <activity
             android:name=".components.dropdown.DropdownShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -450,7 +470,7 @@
         </activity>
         <activity
             android:name=".components.carousel.CarouselShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -465,7 +485,7 @@
         </activity>
         <activity
             android:name=".components.tooltip.TooltipShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -480,7 +500,7 @@
         </activity>
         <activity
             android:name=".components.switchandes.SwitchShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -495,7 +515,7 @@
         </activity>
         <activity
             android:name=".components.floatingmenu.FloatingMenuShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -510,7 +530,7 @@
         </activity>
         <activity
             android:name=".components.timepicker.TimePickerShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -525,7 +545,7 @@
         </activity>
         <activity
             android:name=".components.tabs.TabsShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -540,7 +560,7 @@
         </activity>
         <activity
             android:name=".components.feedbackscreen.FeedbackScreenShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -555,7 +575,7 @@
         </activity>
         <activity
             android:name=".components.moneyamount.MoneyAmountShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -570,7 +590,7 @@
         </activity>
         <activity
             android:name=".components.textview.TextViewShowcaseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

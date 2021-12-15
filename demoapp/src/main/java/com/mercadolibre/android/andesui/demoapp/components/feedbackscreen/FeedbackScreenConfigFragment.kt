@@ -55,7 +55,7 @@ class FeedbackScreenConfigFragment : Fragment() {
 
     private fun initActionBar(container: View) {
         toolbar = container.findViewById(R.id.andesui_nav_bar)
-        toolbar.setTitle(R.string.andes_demoapp_feedbackscreen)
+        toolbar.setTitle(R.string.andes_demoapp_screen_feedbackscreen)
         toolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.andes_white))
     }
 

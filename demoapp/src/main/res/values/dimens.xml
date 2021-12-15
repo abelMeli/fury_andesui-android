@@ -22,5 +22,36 @@
 
     <dimen name="andes_bottom_sheet_margin_small">8dp</dimen>
     <dimen name="andes_bottom_sheet_margin_large">16dp</dimen>
+    <dimen name="andes_searchbox_container_padding">8dp</dimen>
+    <dimen name="andes_main_changelog_height">48dp</dimen>
+    <dimen name="andes_main_changelog_icon_size">20dp</dimen>
+    <dimen name="andes_main_changelog_icon_margin_start">16dp</dimen>
+    <dimen name="andes_main_changelog_icon_margin_end">12dp</dimen>
+    <dimen name="andes_main_changelog_text_padding_vertical">14dp</dimen>
+    <dimen name="andes_main_carouselitem_width">96dp</dimen>
+    <dimen name="andes_main_header_height">64dp</dimen>
+    <dimen name="andes_main_horizontal_margin">16dp</dimen>
+    <dimen name="andes_main_carousel_margin_top">16dp</dimen>
+    <dimen name="andes_main_searchbox_margin_top">24dp</dimen>
+    <dimen name="andes_main_searchbox_margin_bottom">16dp</dimen>
+    <dimen name="andes_section_margin_bottom">8dp</dimen>
+    <dimen name="andes_main_section_margin_top">24dp</dimen>
+    <dimen name="andes_searchbox_search_margin_end">4dp</dimen>
+    <dimen name="andes_searchbox_search_margin_start">8dp</dimen>
+    <dimen name="andes_main_carousel_padding_horizontal">12dp</dimen>
+    <dimen name="andes_main_carousel_image_margin_top">20dp</dimen>
+    <dimen name="andes_main_carousel_text_margin_top">12dp</dimen>
+    <dimen name="andes_main_carousel_text_margin_bottom">16dp</dimen>
+    <dimen name="andes_main_carouselitem_height">102dp</dimen>
+    <dimen name="andes_searchbox_close_size">24dp</dimen>
+    <dimen name="andes_searchbox_close_margin_gone_end">8dp</dimen>
+    <dimen name="andes_searchbox_close_margin_horizontal">4dp</dimen>
+    <dimen name="andes_search_close_size">48dp</dimen>
+    <dimen name="andes_search_screen_padding_vertical">16dp</dimen>
+    <dimen name="andes_search_close_padding_top">20dp</dimen>
+    <dimen name="andes_search_screen_padding_horizontal">16dp</dimen>
+    <dimen name="andes_search_close_padding_end">8dp</dimen>
+    <dimen name="andes_search_close_padding_bottom">4dp</dimen>
+    <dimen name="andes_splash_image_size">120dp</dimen>
 
 </resources>

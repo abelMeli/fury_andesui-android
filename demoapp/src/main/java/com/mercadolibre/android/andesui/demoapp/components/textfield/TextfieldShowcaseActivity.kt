@@ -25,7 +25,7 @@ class TextfieldShowcaseActivity : BaseActivity() {
         attachIndicator()
     }
 
-    override fun getAppBarTitle() = resources.getString(R.string.andes_textfield_screen)
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_textfield)
 
     override fun onDestroy() {
         lifecycleScope.cancel()
@@ -46,11 +46,11 @@ class TextfieldShowcaseActivity : BaseActivity() {
             override fun onPageScrolled(position: Int, p1: Float, p2: Int) = Unit
             override fun onPageSelected(position: Int) {
                 appBarTitle = when (position) {
-                    0 -> resources.getString(R.string.andes_textfield_screen)
+                    0 -> resources.getString(R.string.andes_demoapp_screen_textfield)
                     1 -> resources.getString(R.string.andes_textarea_screen)
                     2 -> resources.getString(R.string.andes_textcode_screen)
                     3 -> resources.getString(R.string.andes_autosuggest_screen)
-                    else -> resources.getString(R.string.andes_textfield_screen)
+                    else -> resources.getString(R.string.andes_demoapp_screen_textfield)
                 }
                 updateAppBarTitle(appBarTitle)
             }

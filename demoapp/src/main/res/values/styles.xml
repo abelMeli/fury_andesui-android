@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme.Splash" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/andesui_splash_background</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Andes.customCalendarDemo" parent="android:Widget.CalendarView">
-        <item name="colorControlActivated">@color/andes_accent_color_500</item>
-        <item name="colorControlHighlight">@color/andes_accent_color_300</item>
+    <style name="AppTheme.Home" parent="AppTheme">
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/explode</item>
+        <item name="android:windowExitTransition">@transition/explode</item>
     </style>
 
     <style name="Andes.CalendarDateDemo" parent="android:Widget.CalendarView">
@@ -26,4 +34,5 @@
         <item name="fontWeight">@dimen/andes_title_font_weight</item>
         <item name="fontFamily">"@font/andes_font_regular"</item>
     </style>
+
 </resources>

@@ -1,5 +1,6 @@
 # v4.3.0
 ## 🚀 Feature
+- New showcase app! | Author: [eportasML](https://github.com/eportasML)
 - Added secondary color palette | Author: [@eportasML](https://github.com/eportasML)
 
 # v4.2.0

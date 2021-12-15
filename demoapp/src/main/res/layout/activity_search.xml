@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/andes_bg_color_secondary"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/andes_search_screen_padding_vertical"
+        android:animateLayoutChanges="true"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+        
+        <ImageView
+            android:layout_width="@dimen/andes_search_close_size"
+            android:layout_height="@dimen/andes_search_close_size"
+            android:id="@+id/andes_search_arrow_back"
+            android:src="@drawable/andes_ui_arrow_left_24"
+            android:paddingEnd="@dimen/andes_search_close_padding_end"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/back_arrow"
+            android:paddingBottom="@dimen/andes_search_close_padding_bottom"
+            android:paddingTop="@dimen/andes_search_close_padding_top"
+            android:paddingStart="@dimen/andes_search_screen_padding_horizontal"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/andes_main_searchbox_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/andes_gray_900" />
+
+        <com.mercadolibre.android.andesui.demoapp.home.views.DemoappSearchBoxView
+            android:id="@+id/andes_main_searchbox_view"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/andes_search_screen_padding_vertical"
+            android:layout_height="wrap_content"
+            android:transitionName="searchbox"
+            android:layout_marginEnd="@dimen/andes_main_horizontal_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/andes_search_arrow_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/andes_search_arrow_back" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/andes_search_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/andes_main_section_margin_top"
+            android:layout_marginHorizontal="@dimen/andes_main_horizontal_margin"
+            android:text="@string/andes_search_no_results"
+            android:visibility="gone"
+            app:andesTextViewStyle="bodyM"
+            app:andesTextViewTextColor="secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/andes_main_searchbox_view" />
+
+        <com.mercadolibre.android.andesui.demoapp.home.views.DemoappSectionView
+            android:id="@+id/andes_search_foundations_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/andes_main_section_margin_top"
+            android:layout_marginHorizontal="@dimen/andes_main_horizontal_margin"
+            app:layout_constraintBottom_toTopOf="@+id/andes_search_patterns_section"
+            app:layout_constraintTop_toBottomOf="@+id/andes_main_searchbox_view" />
+
+        <com.mercadolibre.android.andesui.demoapp.home.views.DemoappSectionView
+            android:id="@+id/andes_search_patterns_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/andes_main_horizontal_margin"
+            android:layout_marginTop="@dimen/andes_main_section_margin_top"
+            app:layout_constraintBottom_toTopOf="@+id/andes_search_components_section"
+            app:layout_constraintTop_toBottomOf="@+id/andes_search_foundations_section" />
+
+        <com.mercadolibre.android.andesui.demoapp.home.views.DemoappSectionView
+            android:id="@+id/andes_search_components_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/andes_main_horizontal_margin"
+            android:layout_marginTop="@dimen/andes_main_section_margin_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/andes_search_patterns_section" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

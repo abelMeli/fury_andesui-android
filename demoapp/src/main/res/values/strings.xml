@@ -1,12 +1,9 @@
 <resources>
     <!-- Generic -->
-    <string name="label_andes_specs" translatable="false">Andes Specs 📘</string>
     <string name="andes_message_title" translatable="false">Atention! 👇</string>
-    <string name="body_text" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
     <string name="title_description" translatable="false">Atention! 👇</string>
     <string name="dismissable" translatable="false">Dismissable</string>
     <string name="bullet" translatable="false">Bullet</string>
-    <string name="title_text" translatable="false">Atention!</string>
     <string name="andes_message_start_progress_loading" translatable="false">Start</string>
     <string name="andes_message_pause_progress_loading" translatable="false">Pause</string>
     <string name="andes_message_resume_progress_loading" translatable="false">Resume</string>
@@ -16,7 +13,6 @@
     <string name="change_body" translatable="false">Body text</string>
     <string name="andesui_demoapp_clear_button" translatable="false">Clear</string>
     <string name="andesui_demoapp_web_storybook" translatable="false">WebView 🌐</string>
-    <string name="andesui_demoapp_error_tracking" translatable="false">Current Activity could not be tracked. Add component and screens entries to AnalyticsHelper.</string>
     <string-array name="hierarchy_spinner">
         <item>Quiet</item>
         <item>Loud</item>
@@ -35,41 +31,36 @@
 
 
     <!-- DemoApp -->
-    <string name="andes_demoapp_screen_tooltip" translatable="false">Andes UI: Tooltip</string>
-    <string name="andes_demoapp_screen_button" translatable="false">Andes UI: Button</string>
-    <string name="andes_demoapp_screen_bottom_sheet" translatable="false">Andes UI: Bottom Sheet</string>
-    <string name="andes_demoapp_screen_message" translatable="false">Andes UI: Message</string>
-    <string name="andes_demoapp_screen_badge" translatable="false">Andes UI: Badge</string>
-    <string name="andes_demoapp_screen_tag" translatable="false">Andes UI: Tag</string>
-    <string name="andes_demoapp_screen_tabs" translatable="false">Andes UI: Tabs</string>
-    <string name="andes_demoapp_screen_switch" translatable="false">Andes UI: Switch</string>
-    <string name="andes_demoapp_screen_list" translatable="false">Andes UI: List</string>
-    <string name="andes_demoapp_screen_dropdown" translatable="false">Andes UI: Dropdown</string>
-    <string name="andes_demoapp_screen_checkbox" translatable="false">Andes UI: Checkbox</string>
-    <string name="andes_demoapp_screen_textview" translatable="false">Andes UI: TextView</string>
-    <string name="andes_demoapp_screen_carousel" translatable="false">Andes UI: Carousel</string>
-    <string name="andes_demoapp_screen_card" translatable="false">Andes UI: Card</string>
-    <string name="andes_demoapp_screen_snackbar" translatable="false">Andes UI: Snackbar</string>
-    <string name="andes_demoapp_screen_coachmark" translatable="false">Andes UI: Coachmark</string>
-    <string name="andes_demoapp_screen_radiobutton" translatable="false">Andes UI: RadioButton</string>
-    <string name="andes_demoapp_screen_datepicker" translatable="false">Andes UI: DatePicker</string>
-    <string name="andes_demoapp_screen_thumbnail" translatable="false">Andes UI: Thumbnail</string>
-    <string name="andes_demoapp_screen_floatingmenu" translatable="false">Andes UI: Floating Menu</string>
-    <string name="andes_demoapp_screen_timepicker" translatable="false">Andes UI: Time Picker</string>
-    <string name="andes_demoapp_screen_progress_indicator" translatable="false">Andes UI: Progress Indicator</string>
-    <string name="andes_demoapp_screen_money_amount" translatable="false">Andes UI: Money Amount</string>
-    <string name="andes_demoapp_screen_linear_progress_indicator" translatable="false">Andes UI: Linear Progress Indicator</string>
-    <string name="andes_demoapp_screen_whatsnew" translatable="false">Andes UI: What\'s new?</string>
+    <string name="andes_demoapp_screen_tooltip" translatable="false">Tooltip</string>
+    <string name="andes_demoapp_screen_button" translatable="false">Button</string>
+    <string name="andes_demoapp_screen_bottom_sheet" translatable="false">Bottom sheet</string>
+    <string name="andes_demoapp_screen_message" translatable="false">Message</string>
+    <string name="andes_demoapp_screen_badge" translatable="false">Badge</string>
+    <string name="andes_demoapp_screen_tag" translatable="false">Tag</string>
+    <string name="andes_demoapp_screen_tabs" translatable="false">Tabs</string>
+    <string name="andes_demoapp_screen_switch" translatable="false">Switch</string>
+    <string name="andes_demoapp_screen_list" translatable="false">List</string>
+    <string name="andes_demoapp_screen_dropdown" translatable="false">Dropdown</string>
+    <string name="andes_demoapp_screen_checkbox" translatable="false">Checkbox</string>
+    <string name="andes_demoapp_screen_textview" translatable="false">Typography</string>
+    <string name="andes_demoapp_screen_carousel" translatable="false">Carousel</string>
+    <string name="andes_demoapp_screen_card" translatable="false">Card</string>
+    <string name="andes_demoapp_screen_snackbar" translatable="false">Snackbar</string>
+    <string name="andes_demoapp_screen_coachmark" translatable="false">Coach marks</string>
+    <string name="andes_demoapp_screen_radiobutton" translatable="false">Radio button</string>
+    <string name="andes_demoapp_screen_datepicker" translatable="false">Date picker</string>
+    <string name="andes_demoapp_screen_thumbnail" translatable="false">Thumbnail</string>
+    <string name="andes_demoapp_screen_floatingmenu" translatable="false">Floating menu</string>
+    <string name="andes_demoapp_screen_timepicker" translatable="false">Time picker</string>
+    <string name="andes_demoapp_screen_progress_indicator" translatable="false">Progress</string>
+    <string name="andes_demoapp_screen_money_amount" translatable="false">Money amount</string>
+    <string name="andes_demoapp_screen_linear_progress_indicator" translatable="false">Linear progress</string>
+    <string name="andes_demoapp_screen_whatsnew" translatable="false">What\'s new?</string>
     <string name="andes_demoapp_changelog_error" translatable="false">What\'s New couldn\'t be loaded, please contact our support team.</string>
-    <string name="andes_demoapp_label_showcase" translatable="false">Showcase</string>
-    <string name="andes_demoapp_label_whatsnew_title" translatable="false">Hey! Check the What\'s New!</string>
-    <string name="andes_demoapp_label_whatsnew_body" translatable="false">There you can see what are the things we\'ve been working on 😃</string>
     <string name="andes_demoapp_label_corner" translatable="false">Corner</string>
     <string name="andes_demoapp_label_rounded" translatable="false">Rounded</string>
     <string name="andes_demoapp_label_standard" translatable="false">Standard</string>
     <string name="andes_demoapp_label_more" translatable="false">More</string>
-    <string name="andes_demoapp_whatsnew_main_action" translatable="false">View What\'s New</string>
-    <string name="andes_demoapp_label_andes_contribution" translatable="false">I want to contribute 🤝</string>
 
     <!-- Andes A11y Playground -->
     <string name="andes_demoapp_playground_lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
@@ -168,8 +159,6 @@
     <string name="andes_badge_success" translatable="false">success</string>
     <string name="andes_badge_highlight" translatable="false">highlight</string>
     <string name="andes_badge_neutral" translatable="false">neutral</string>
-    <string name="andes_badge_showcase" translatable="false">Andes Badge</string>
-    <string name="andes_playground_a11y_showcase" translatable="false">Andes A11y Playground</string>
     <string name="andes_badge_loud_badges_text" translatable="false">Hierarchy: Loud</string>
     <string name="andes_badge_quiet_badges_text" translatable="false">Hierarchy: Quiet</string>
     <string name="andes_badge_specs_default_text" translatable="false">Default Text in Badges</string>
@@ -185,18 +174,14 @@
     <string name="andes_button_enabled" translatable="false">Enabled</string>
     <string name="andes_button_size" translatable="false">Size</string>
     <string name="andes_button_is_loading" translatable="false">Is loading</string>
-    <string name="andes_button_is_progress_loading" translatable="false">Is progress loading</string>
     <string name="andes_button_text" translatable="false">Text</string>
     <string name="andes_button" translatable="false">Andes button</string>
     <string name="andes_button_loud_progress_label" translatable="false">Andes Button Loud Progress</string>
     <string name="andes_button_quiet_progress_label" translatable="false">Andes Button Quiet Progress</string>
-    <string name="andes_button_transparent_progress_label" translatable="false">Andes Button Transparent Progress</string>
     <string name="andes_button_loading_text" translatable="false">Loading Text</string>
     <string name="andes_button_from" translatable="false">From</string>
     <string name="andes_button_to" translatable="false">To</string>
-    <string name="andes_button_max" translatable="false">Max</string>
     <string name="andes_button_duration" translatable="false">Duration</string>
-    <string name="andes_button_progress" translatable="false">Progress</string>
     <string name="andes_button_loud" translatable="false">Loud buttons</string>
     <string name="andes_button_loud_drawable" translatable="false">Loud large with drawable</string>
     <string name="andes_button_loud_large_disabled" translatable="false">Loud large button disabled</string>
@@ -234,7 +219,6 @@
 
 
     <!-- Andes BottomSheet -->
-    <string name="andes_bottom_sheet" translatable="false">Andes Bottom Sheet</string>
     <string name="andes_bottom_sheet_attach_view_button" translatable="false">Attach View</string>
     <string name="andes_bottom_sheet_attach_frag_butotn" translatable="false">Attach Fragment</string>
     <string name="andes_bottom_sheet_toggle_title_button" translatable="false">Toggle Title</string>
@@ -300,10 +284,8 @@
     <string name="andes_carousel_not_centered" translatable="false">Carousel free</string>
     <string name="andes_carousel_title" translatable="false">Example</string>
     <string name="andes_carousel_description" translatable="false">Groups and manipulates a horizontal sequence of content.</string>
-    <string name="andes_carousel_showcase" translatable="false">Andes Carousel</string>
     <string name="andes_carousel_margin" translatable="false">Margin</string>
     <string name="andes_carousel_center" translatable="false">Center</string>
-    <string name="andes_carousel_scrolling" translatable="false">Carousel started scrolling</string>
     <string-array name="andes_carousel_margin_spinner" translatable="false">
         <item>Default</item>
         <item>XSmall</item>
@@ -330,8 +312,6 @@
     <string name="andes_checkbox_status" translatable="false">Status</string>
     <string name="andes_checkbox_align" translatable="false">Align</string>
     <string name="andes_checkbox_number_of_lines" translatable="false">Number of Lines</string>
-    <string name="andes_checkbox_text_list_divider" translatable="false">Divider</string>
-    <string name="andes_checkbox_text_list_selection" translatable="false">Selection</string>
     <string-array name="andes_checkbox_type_spinner" translatable="false">
         <item>Idle</item>
         <item>Error</item>
@@ -349,8 +329,6 @@
 
 
     <!-- Andes DatePicker -->
-    <string name="andes_datepicker_text" translatable="false">Aplicar</string>
-    <string name="andes_datepicker_button" translatable="false">Andes DatePicker</string>
     <string name="andes_datepicker_min_date_label" translatable="false">Setup min date</string>
     <string name="andes_datepicker_max_date_label" translatable="false">Setup max date</string>
     <string name="andes_datepicker_set_date_label" translatable="false">Setup select day</string>
@@ -361,11 +339,9 @@
 
 
     <!-- Andes Coachmark -->
-    <string name="andes_coachmark" translatable="false">Andes Coachmark</string>
 
 
     <!-- Andes Dropdown -->
-    <string name="andes_dropdown" translatable="false">Andes Dropdown</string>
     <string name="andes_dropdown_form_description" translatable="false">This trigger is generally applied for form completion, that\'s why his style is aligned to the text field. They are usually used both for simple selections with few options and for more complex and extensive selections and options.</string>
     <string name="andes_dropdown_standalone_description" translatable="false">They apply anywhere on the interface. By default they show a selected option and do not allow it to be empty. There are 3 sizes.</string>
     <string name="andes_dropdown_title" translatable="false">Titulo</string>
@@ -390,7 +366,6 @@
 
 
     <!-- Andes List -->
-    <string name="andes_list" translatable="false">Andes List</string>
     <string name="andes_list_specs" translatable="false">Andes List Specs 📘</string>
     <string name="andes_list_description" translatable="false">They are rows ordered vertically in a sequential way, with similar content and format. They allow you to display information, operate, navigate or select between different options.</string>
     <string name="andes_list_size" translatable="false">Size</string>
@@ -421,7 +396,6 @@
 
 
     <!-- Andes Message -->
-    <string name="andes_message" translatable="false">Andes Message</string>
     <string name="andes_message_specs" translatable="false">Andes Message Specs 📘</string>
     <string name="andes_message_text" translatable="false">The purpose of a message is to highlight information on the screen.</string>
     <string name="andes_message_change_primary" translatable="false">Primary action text</string>
@@ -442,7 +416,6 @@
 
 
     <!-- Andes ProgressIndicator -->
-    <string name="andes_progress_indicator" translatable="false">Andes Progress Indicator</string>
     <string name="andes_progress_indicator_specs" translatable="false">Andes ProgressIndicator Specs 📘</string>
     <string name="andes_progress_indicator_xlarge" translatable="false">XLARGE</string>
     <string name="andes_progress_indicator_large" translatable="false">LARGE</string>
@@ -451,7 +424,6 @@
 
 
     <!-- Andes LinearProgressIndicator -->
-    <string name="andes_linear_progress_indicator" translatable="false">Andes Linear Progress Indicator</string>
     <string name="andes_linear_progress_indicator_specs" translatable="false">Andes LinearProgressIndicator Specs 📘</string>
     <string name="andes_linear_progress_indicator_large" translatable="false">LARGE</string>
     <string name="andes_linear_progress_indicator_small" translatable="false">SMALL</string>
@@ -531,7 +503,6 @@
 
 
     <!-- Andes Snackbar -->
-    <string name="andes_snackbar" translatable="false">Andes Snackbar</string>
     <string name="andes_snackbar_description" translatable="false">They communicate quickly and concisely the status of an event. For more complex or extensive communications, consider the use of tooltip or message.</string>
     <string name="andes_snackbar_error" translatable="false">Required</string>
     <string name="andes_snackbar_action" translatable="false">Action</string>
@@ -549,7 +520,6 @@
     </string-array>
 
     <!-- Andes Switch -->
-    <string name="andes_switch" translatable="false">Andes Switch</string>
 
     <!-- Andes Tag -->
     <string name="andes_tag_specs" translatable="false">Andes Tag Specs 📘</string>
@@ -564,7 +534,6 @@
     <string name="andes_tag_icon_color" translatable="false">Icon color</string>
     <string name="andes_tag_icon" translatable="false">Icon</string>
     <string name="andes_tag_bitmap" translatable="false">Bitmap</string>
-    <string name="andes_tag_showcase" translatable="false">Andes Tag</string>
     <string name="andes_tag_simple" translatable="false">Simple tag</string>
     <string name="andes_tag_choice" translatable="false">Choice tag</string>
     <string name="andes_tag_description" translatable="false">Tags are compact components that represent complex information in a summarized way. Allowing users to make selections, enter information, or filter content.</string>
@@ -586,7 +555,6 @@
 
     <!-- Andes Tabs -->
     <string name="andes_tabs_showcase" translatable="false">Andes Tabs</string>
-    <string name="andes_tabs_simple" translatable="false">Tabs</string>
     <string name="andes_tabs_showcase_left_align" translatable="false">Left align</string>
     <string name="andes_tabs_showcase_full_width" translatable="false">Full width</string>
     <string name="andes_tabs_dynamic_message" translatable="false">They allow you to organize content by grouping information into different sections. Sections are displayed one at a time headed by precise and concise labels.</string>
@@ -602,11 +570,10 @@
     </string-array>
 
     <!-- Andes Textfield -->
-    <string name="andes_textfield" translatable="false">Andes Textfield</string>
-    <string name="andes_textfield_screen" translatable="false">Andes UI: Textfield</string>
-    <string name="andes_textarea_screen" translatable="false">Andes UI: Textfield Area</string>
-    <string name="andes_textcode_screen" translatable="false">Andes UI: Textfield Code</string>
-    <string name="andes_autosuggest_screen" translatable="false">Andes UI: Autosuggest</string>
+    <string name="andes_demoapp_screen_textfield" translatable="false">Textfield</string>
+    <string name="andes_textarea_screen" translatable="false">Textfield Area</string>
+    <string name="andes_textcode_screen" translatable="false">Textfield Code</string>
+    <string name="andes_autosuggest_screen" translatable="false">Autosuggest</string>
     <string name="andes_textfield_specs" translatable="false">Andes TextField Specs 📘</string>
     <string name="andes_textfield_description" translatable="false">Allows the user to enter and edit text values.</string>
     <string name="andes_textfield_name" translatable="false">Nombre</string>
@@ -677,7 +644,6 @@
     <string name="andes_autosuggest_suggestions_default" translatable="false">White,Yellow,Blue,Red,Green,Black,Brown,Azure,Ivory,Teal,Silver,Purple,Navy blue,Pea green,Gray,Orange,Maroon,Charcoal,Aquamarine,Coral,Fuchsia,Wheat,Lime,Crimson,Khaki,Hot pink,Magenta,Olden,Plum,Olive,Cyan</string>
 
     <!-- Andes Thumbnail -->
-    <string name="andes_thumbnail" translatable="false">Andes Thumbnail</string>
     <string name="andes_thumbnail_specs" translatable="false">Andes Thumbnail Specs 📘</string>
     <string name="andes_thumbnail_description" translatable="false">They are containers that specify images, logos and icons for complementary content and modified meaning. When grouped together, they improve the scannability of the information.</string>
     <string name="andes_thumbnail_state" translatable="false">State</string>
@@ -713,7 +679,6 @@
     </string-array>
 
     <!-- Andes TimePicker -->
-    <string name="andes_timepicker" translatable="false">Andes TimePicker</string>
 
 
     <!-- Andes Tooltip -->
@@ -730,7 +695,6 @@
     <string name="andes_tooltip_trigger_button" translatable="false">Show tooltip</string>
     <string name="andes_tooltip_button_top" translatable="false">Show bottom</string>
     <string name="andes_tooltip_button_bottom" translatable="false">Show top</string>
-    <string name="andes_tooltip_showcase" translatable="false">Andes Tooltip</string>
     <string name="andes_thumbnail_specs_2" translatable="false">Show</string>
     <string-array name="andes_tooltip_style_spinner" translatable="false">
         <item>Light</item>
@@ -773,7 +737,6 @@
     <string name="andes_floatingmenu_list_size" translatable="false">List size</string>
     <string name="andes_floatingmenu_trigger_button" translatable="false">Floating Menu Trigger</string>
     <string name="andes_floatingmenu_trigger_position" translatable="false">Trigger Position</string>
-    <string name="andes_floatingmenu" translatable="false">Andes Floating Menu</string>
     <string name="andes_floatingmenu_specs" translatable="false">Andes Floating Menu Specs 📘</string>
     <string name="andes_floatingmenu_tooltip_1" translatable="false">When there is no space available to the left, even if the menu has orientation = LEFT, the component will inflate with orientation = RIGHT. If rows = MAX and the containing list has enough elements, the component will extend until the inferior limit of the container view.</string>
     <string name="andes_floatingmenu_tooltip_2" translatable="false">Values: orientation = LEFT, width = 380, rows = MEDIUM</string>
@@ -804,7 +767,6 @@
     <!-- Andes TimePicker -->
     <string name="andes_timepicker_dynamic_label" translatable="false">Label</string>
     <string name="andes_timepicker_dynamic_helper" translatable="false">Helper</string>
-    <string name="andes_timepicker_dynamic_placeholder" translatable="false">00:00</string>
     <string name="andes_timepicker_dynamic_message" translatable="false">This component allows the selection of time or time ranges.</string>
     <string name="andes_timepicker_tf_label_forlabel" translatable="false">TimePicker label</string>
     <string name="andes_timepicker_tf_label_forplaceholder" translatable="false">Insert a label text here</string>
@@ -876,7 +838,6 @@
         <item>Size 32</item>
     </string-array>
 
-    <string name="demoapp_money_amount" translatable="false">Andes Money Amount</string>
     <string name="demoapp_money_amount_size" translatable="false">Size</string>
     <string name="demoapp_money_amount_type" translatable="false">Type</string>
     <string name="demoapp_money_amount_component_type" translatable="false">MoneyAmount Type</string>
@@ -1020,8 +981,7 @@
     <string name="currency_centesimo_singular" translatable="false">Centésimo</string>
     <string name="currency_centesimo_plural" translatable="false">Centésimos</string>
 
-    <string name="andes_demoapp_feedbackscreen" translatable="false">Andes UI: Feedback Screen</string>
-    <string name="andes_feedbackscreen" translatable="false">Andes FeedbackScreen</string>
+    <string name="andes_demoapp_screen_feedbackscreen" translatable="false">Feedback screens</string>
     <string name="andes_feedbackscreen_description" translatable="false">A screen that shows the result of a flow or a group of tasks.</string>
     <string name="feedbackscreen_type" translatable="false">Feedback Type</string>
     <string name="feedbackscreen_header_thumbnail" translatable="false">Asset</string>
@@ -1068,6 +1028,14 @@
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="feedbackscreen_body_number" translatable="false">Feedback Body mocked views</string>
+    <string name="andes_main_title" translatable="false">Andes UI</string>
+    <string name="andes_main_changelog_text" translatable="false">See what’s new in %1$s! 🚀</string>
+    <string name="andes_demoapp_foundation_title" translatable="false">Foundations</string>
+    <string name="andes_demoapp_patterns_title" translatable="false">Patterns</string>
+    <string name="andes_demoapp_components_title" translatable="false">Components</string>
+    <string name="andes_search_no_results" translatable="false">No results found!</string>
+    <string name="andes_searchbox_hint" translatable="false">Search Components, Patterns and more…</string>
+    <string name="back_arrow">Cancel search</string>
+    <string name="andesui_demoapp_app_name" translatable="false">Andes UI</string>
 </resources>

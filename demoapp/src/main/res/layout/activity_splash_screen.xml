@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/andesui_splash_background"
+    tools:context=".SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/andesui_splash_logo"
+        android:layout_width="@dimen/andes_splash_image_size"
+        android:layout_height="@dimen/andes_splash_image_size"
+        android:src="@drawable/andes_logo_white_shadow_120"
+        android:scaleType="fitCenter"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/andesui_splash_progress"
+        />
+
+    <com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
+        android:id="@+id/andesui_splash_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesProgressSize="large"
+        app:andesProgressStart="true"
+        app:andesProgressTint="@color/andes_bg_color_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/andesui_splash_logo"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

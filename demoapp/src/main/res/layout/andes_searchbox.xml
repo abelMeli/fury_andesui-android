@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ImageView
+        android:id="@+id/andes_searchbox_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/andes_control_y_accion_buscar_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/andes_searchbox_search_margin_start"
+        android:layout_marginEnd="@dimen/andes_searchbox_search_margin_end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/andes_gray_550" />
+
+    <EditText
+        android:id="@+id/andes_searchbox_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/andes_textview_body_font_size_s"
+        android:lineHeight="@dimen/andes_body_line_height_s"
+        android:textColor="@color/andes_text_color_secondary"
+        android:singleLine="true"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        android:hint="@string/andes_searchbox_hint"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/andes_searchbox_close"
+        app:layout_constraintStart_toEndOf="@+id/andes_searchbox_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/andes_searchbox_close"
+        android:layout_width="@dimen/andes_searchbox_close_size"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/andes_textfield_right_content_clear"
+        android:src="@drawable/andes_ui_close_16"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        app:layout_goneMarginEnd="@dimen/andes_searchbox_close_margin_gone_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/andes_searchbox_close_margin_horizontal"
+        android:layout_marginEnd="@dimen/andes_searchbox_close_margin_horizontal"
+        app:layout_constraintStart_toEndOf="@+id/andes_searchbox_edittext"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/andes_gray_550" />
+</merge>
