@@ -1,3 +1,7 @@
+# v4.3.1
+## 🛠 Fixes
+- Feedback screen webview documentation | Author: [eportasML](https://github.com/eportasML)
+
 # v4.3.0
 ## 🚀 Feature
 - New showcase app! | Author: [eportasML](https://github.com/eportasML)
