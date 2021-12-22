@@ -20,7 +20,7 @@ workflows:
         pipeline_id: << pipeline.id >>
         pipeline_number: << pipeline.number >>
     - meli/check:
-        machine_size: medium+
+        machine_size: large
         build_context: << pipeline.parameters.build_context >>
         pipeline_id: << pipeline.id >>
         pipeline_number: << pipeline.number >>
