@@ -1,4 +1,6 @@
-# v4.3.1
+# v4.4.0
+## 🚀 Feature
+- AndesBottomSheet new listeners | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 ## 🛠 Fixes
 - Feedback screen webview documentation | Author: [eportasML](https://github.com/eportasML)
 

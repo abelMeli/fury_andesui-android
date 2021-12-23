@@ -16,6 +16,8 @@ import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetConten
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetState
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
 import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.times
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -112,6 +114,48 @@ class AndesBottomSheetTest {
         andesBottomSheet.removeContent()
 
         verify(mockFrameLayout).removeAllViews()
+    }
+
+    @Test
+    fun `touch outside and verify that old onTouchOutside is called`() {
+        val listener = mock(BottomSheetListener::class.java)
+
+        andesBottomSheet.setBottomSheetListener(listener)
+        andesBottomSheet.backgroundDimView.performClick()
+
+        verify(listener, times(1)).onTouchOutside()
+    }
+
+    @Test
+    fun `touch outside and then collapse the sheet`() {
+        val listener = spy(object : OnTouchOutsideListener {
+            override fun onTouchOutside(): Boolean {
+                return true
+            }
+        })
+
+        andesBottomSheet.state = AndesBottomSheetState.EXPANDED
+        andesBottomSheet.setOnTouchOutsideListener(listener)
+        andesBottomSheet.backgroundDimView.performClick()
+
+        verify(listener, times(1)).onTouchOutside()
+        assertEquals(andesBottomSheet.state, AndesBottomSheetState.COLLAPSED)
+    }
+
+    @Test
+    fun `touch outside and then don't collapse the sheet`() {
+        val listener = spy(object : OnTouchOutsideListener {
+            override fun onTouchOutside(): Boolean {
+                return false
+            }
+        })
+
+        andesBottomSheet.state = AndesBottomSheetState.EXPANDED
+        andesBottomSheet.setOnTouchOutsideListener(listener)
+        andesBottomSheet.backgroundDimView.performClick()
+
+        verify(listener, times(1)).onTouchOutside()
+        assertEquals(andesBottomSheet.state, AndesBottomSheetState.EXPANDED)
     }
 
     @Test

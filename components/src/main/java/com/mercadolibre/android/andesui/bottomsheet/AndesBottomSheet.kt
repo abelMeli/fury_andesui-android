@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.annotation.VisibleForTesting
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.res.ResourcesCompat
@@ -86,8 +87,11 @@ class AndesBottomSheet : CoordinatorLayout {
     private lateinit var frameView: FrameLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var titleTextView: TextView
-    private lateinit var backgroundDimView: View
+    @VisibleForTesting
+    internal lateinit var backgroundDimView: View
     private var listener: BottomSheetListener? = null
+    private var onTouchOutsideListener: OnTouchOutsideListener? = null
+    private var onSlideListener: OnSlideListener? = null
 
     @Suppress("LongParameterList")
     @JvmOverloads
@@ -237,7 +241,9 @@ class AndesBottomSheet : CoordinatorLayout {
     private fun resolveBackgroundDim() {
         backgroundDimView.setOnClickListener {
             listener?.onTouchOutside()
-            collapse()
+            if (onTouchOutsideListener == null || onTouchOutsideListener?.onTouchOutside() == true) {
+                collapse()
+            }
         }
         if (state == AndesBottomSheetState.EXPANDED || state == AndesBottomSheetState.HALF_EXPANDED) {
             backgroundDimView.visibility = View.VISIBLE
@@ -353,12 +359,30 @@ class AndesBottomSheet : CoordinatorLayout {
     }
 
     /**
-     * Sets listener to the onCollapse and onExpand events.
+     * Sets listener to bottom sheet state changes.
      *
-     * @param listener the events listener
+     * @param listener the events listener.
      */
     fun setBottomSheetListener(listener: BottomSheetListener) {
         this.listener = listener
+    }
+
+    /**
+     * Sets listener to OnTouchOutside event.
+     *
+     * @param listener the onTouchOutside listener.
+     */
+    fun setOnTouchOutsideListener(listener: OnTouchOutsideListener) {
+        this.onTouchOutsideListener = listener
+    }
+
+    /**
+     * Sets listener to OnSlide event.
+     *
+     * @param listener the onSlide event listener.
+     */
+    fun setOnSlideListener(listener: OnSlideListener) {
+        this.onSlideListener = listener
     }
 
     private val bottomSheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
@@ -401,6 +425,7 @@ class AndesBottomSheet : CoordinatorLayout {
                     backgroundDimView.alpha = DIM_MAX_ALPHA
                 }
             }
+            onSlideListener?.onSlide(slideOffset)
         }
 
         private fun updateStateFromBehavior(bottomSheetBehaviorState: Int) {
