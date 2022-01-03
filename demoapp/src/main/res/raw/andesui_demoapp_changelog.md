@@ -1,3 +1,7 @@
+# v4.5.0
+## 🚀 Feature
+- Added new icon based in Figma specs: [Phone top-up](https://www.figma.com/file/i275NVe7uWWkuQYnpYGVq8/Andes-%2F-02-Iconography?node-id=2%3A981) | Author: [@epennachini](https://github.com/EPENNACHINI)
+
 # v4.4.0
 ## 🚀 Feature
 - AndesBottomSheet new listeners | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
