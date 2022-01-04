@@ -65,7 +65,8 @@ object HomeDataSource {
         Section("Tag", "meli://andes/tag"),
         Section("Tabs", "meli://andes/tabs"),
         Section("Time picker", "meli://andes/timepicker"),
-        Section("Money amount", "meli://andes/moneyamount")
+        Section("Money amount", "meli://andes/moneyamount"),
+        Section("Switch", "meli://andes/switch")
     ).sortedBy { it.name }
 
     fun getPatternsData() = listOf(

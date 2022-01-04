@@ -1,6 +1,9 @@
 # v4.5.0
 ## 🚀 Feature
 - Added new icon based in Figma specs: [Phone top-up](https://www.figma.com/file/i275NVe7uWWkuQYnpYGVq8/Andes-%2F-02-Iconography?node-id=2%3A981) | Author: [@epennachini](https://github.com/EPENNACHINI)
+- Improve security by changing repository and authentication configuration
+## 🛠 Fixes
+- AndesSwitch text size 12sp to 16sp (bodyM) | Author: [eportasML](https://github.com/eportasML)
 
 # v4.4.0
 ## 🚀 Feature

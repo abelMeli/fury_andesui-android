@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="andes_switch_small_text_size">12sp</dimen>
     <dimen name="andes_switch_left_text_margin_end">10dp</dimen>
     <dimen name="andes_switch_right_text_margin_start">10dp</dimen>
 
