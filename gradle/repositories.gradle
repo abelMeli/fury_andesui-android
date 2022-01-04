@@ -1,79 +1,73 @@
 repositories {
-
-  maven {
+    maven {
         url "https://plugins.gradle.org/m2/"
-  }
+    }
+    // Google libs
+    google {
+        content {
+            includeGroupByRegex 'android\\.arch\\..*'
+            includeGroupByRegex 'androidx\\..*'
+            includeGroupByRegex 'com\\.android.*'
+            includeGroupByRegex 'com\\.google\\..*'
+        }
+    }
 
-  // Google libs
-  google {
-    content {
-      includeGroupByRegex 'android\\.arch\\..*'
-      includeGroupByRegex 'androidx\\..*'
-      includeGroupByRegex 'com\\.android.*'
-      includeGroupByRegex 'com\\.google\\..*'
+    // Meli internal release libs
+    maven {
+        name 'AndroidInternalReleases'
+        url 'https://android.artifacts.furycloud.io/repository/releases'
+        credentials(PasswordCredentials)
+        content {
+            // only releases
+            includeVersionByRegex('com\\.mercadolibre\\..*', '.*', '^((?!EXPERIMENTAL-|LOCAL-).)*$')
+            includeVersionByRegex('com\\.mercadopago\\..*', '.*', '^((?!EXPERIMENTAL-|LOCAL-).)*$')
+            includeGroup 'com.bugsnag'
+        }
     }
-  }
 
-  // Meli internal release libs
-  maven {
-    url 'https://android.artifacts.furycloud.io/repository/releases'
-    credentials {
-      username 'fury-user'
-            password '2r2MJ_L*Y@zM+fa4'
+    // Meli public libs - these are fewer than the private ones, so we try it later
+    maven {
+        url 'https://artifacts.mercadolibre.com/repository/maven-releases'
+        content {
+            // only releases
+            includeVersionByRegex('com\\.mercadolibre\\.android.*', '.*', '^((?!EXPERIMENTAL-|LOCAL-).)*$')
+        }
     }
-    content {
-      // only releases
-      includeVersionByRegex('com\\.mercadolibre\\..*', '.*', '^((?!EXPERIMENTAL-|LOCAL-).)*$')
-      includeVersionByRegex('com\\.mercadopago\\..*', '.*', '^((?!EXPERIMENTAL-|LOCAL-).)*$')
-      includeGroup 'com.bugsnag'
-    }
-  }
 
-  // Meli public libs - these are fewer than the private ones, so we try it later
-  maven {
-    url 'https://artifacts.mercadolibre.com/repository/maven-releases'
-    content {
-      // only releases
-      includeVersionByRegex('com\\.mercadolibre\\.android.*', '.*', '^((?!EXPERIMENTAL-|LOCAL-).)*$')
+    maven {
+        url 'https://s3.amazonaws.com/sdk-ga-releases.cloudmi.datami.com/android/mvn/smisdk/'
+        content {
+            includeGroup 'com.datami'
+        }
     }
-  }
 
-  maven {
-    url 'https://s3.amazonaws.com/sdk-ga-releases.cloudmi.datami.com/android/mvn/smisdk/'
-    content {
-      includeGroup 'com.datami'
+    // only used for github repositories
+    maven {
+        url 'https://jitpack.io'
+        content {
+            includeGroupByRegex 'com\\.github\\..*'
+        }
     }
-  }
 
-  // only used for github repositories
-  maven {
-    url 'https://jitpack.io'
-    content {
-      includeGroupByRegex 'com\\.github\\..*'
+    // only used for experimental libs
+    maven {
+        name 'AndroidInternalExperimental'
+        url 'https://android.artifacts.furycloud.io/repository/experimental'
+        credentials(PasswordCredentials)
+        content {
+            includeVersionByRegex('com\\.mercadolibre\\.android.*', '.*', '^(.*-)?EXPERIMENTAL-.*$')
+            includeVersionByRegex('com\\.mercadopago\\.android.*', '.*', '^(.*-)?EXPERIMENTAL-.*$')
+        }
     }
-  }
 
-  // only used for experimental libs
-  maven {
-    url 'https://android.artifacts.furycloud.io/repository/experimental'
-    credentials {
-            username 'fury-user-experimental'
-            password 'D&v?=D&up;]d9,k3'
+    // only used for local published libs
+    mavenLocal {
+        content {
+            includeVersionByRegex('com\\.mercadolibre\\.android.*', '.*', '^(.*-)?LOCAL-.*$')
+            includeVersionByRegex('com\\.mercadopago\\.android.*', '.*', '^(.*-)?LOCAL-.*$')
+        }
     }
-    content {
-      includeVersionByRegex('com\\.mercadolibre\\.android.*', '.*', '^(.*-)?EXPERIMENTAL-.*$')
-      includeVersionByRegex('com\\.mercadopago\\.android.*', '.*', '^(.*-)?EXPERIMENTAL-.*$')
-    }
-  }
 
-  // only used for local published libs
-  mavenLocal {
-    content {
-      includeVersionByRegex('com\\.mercadolibre\\.android.*', '.*', '^(.*-)?LOCAL-.*$')
-      includeVersionByRegex('com\\.mercadopago\\.android.*', '.*', '^(.*-)?^(.*-)?LOCAL-.*$$')
-    }
-  }
-
-  // catch all repositories
-  jcenter()
+    // catch all repositories
+    jcenter()
 }
