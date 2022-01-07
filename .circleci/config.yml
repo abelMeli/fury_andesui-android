@@ -16,6 +16,7 @@ workflows:
   ci:
     jobs:
     - meli/assemble:
+        machine_size: medium+
         build_context: << pipeline.parameters.build_context >>
         pipeline_id: << pipeline.id >>
         pipeline_number: << pipeline.number >>

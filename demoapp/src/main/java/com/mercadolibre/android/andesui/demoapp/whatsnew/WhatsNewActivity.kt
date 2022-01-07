@@ -1,9 +1,9 @@
 package com.mercadolibre.android.andesui.demoapp.whatsnew
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDemoappWhatsnewBinding
 import io.noties.markwon.Markwon
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
@@ -12,20 +12,19 @@ class WhatsNewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_demoapp_whatsnew)
+        val binding = AndesuiDemoappWhatsnewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
+        setSupportActionBar(binding.andesuiNavBar)
         supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_whatsnew)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val whatsNew = findViewById<TextView>(R.id.andesui_demoapp_whats_new)
-
         val changelog = readChangelogFile()
         if (changelog.isEmpty()) {
-            whatsNew.setText(R.string.andes_demoapp_changelog_error)
+            binding.andesuiDemoappWhatsNew.setText(R.string.andes_demoapp_changelog_error)
         } else {
             val markwon = Markwon.create(this)
-            markwon.setMarkdown(whatsNew, changelog)
+            markwon.setMarkdown(binding.andesuiDemoappWhatsNew, changelog)
         }
     }
 

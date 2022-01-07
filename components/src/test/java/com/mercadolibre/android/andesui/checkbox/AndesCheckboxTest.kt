@@ -15,10 +15,10 @@ import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.getClickableSpans
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
-import kotlinx.android.synthetic.main.andes_layout_checkbox.view.*
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -426,8 +426,8 @@ class AndesCheckboxTest {
 
         andesCheckbox.bodyLinks = getBodyLinksForTest()
 
-        andesCheckbox.checkboxText.text.getClickableSpans().forEach {
-            it.onClick(andesCheckbox.checkboxText)
+        andesCheckbox.checkboxText().text.getClickableSpans().forEach {
+            it.onClick(andesCheckbox.checkboxText())
         }
 
         andesCheckbox.status assertEquals AndesCheckboxStatus.SELECTED
@@ -443,7 +443,7 @@ class AndesCheckboxTest {
             AndesCheckboxType.IDLE
         )
 
-        andesCheckbox.checkboxText.performClick()
+        andesCheckbox.checkboxText().performClick()
 
         andesCheckbox.status assertEquals AndesCheckboxStatus.UNSELECTED
     }
@@ -456,4 +456,6 @@ class AndesCheckboxTest {
             listener = { }
         )
     }
+
+    private fun AndesCheckbox.checkboxText() = this.findViewById<AndesTextView>(R.id.checkboxText)
 }

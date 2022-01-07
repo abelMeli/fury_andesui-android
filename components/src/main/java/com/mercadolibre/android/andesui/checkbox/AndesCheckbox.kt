@@ -21,11 +21,9 @@ import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxConfigurat
 import com.mercadolibre.android.andesui.checkbox.factory.AndesCheckboxConfigurationFactory
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
+import com.mercadolibre.android.andesui.databinding.AndesLayoutCheckboxBinding
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
-import kotlinx.android.synthetic.main.andes_layout_checkbox.view.*
-import kotlinx.android.synthetic.main.andes_layout_checkbox.view.checkboxText
-import kotlinx.android.synthetic.main.andes_layout_radiobutton.view.*
 
 @Suppress("TooManyFunctions")
 class AndesCheckbox : ConstraintLayout {
@@ -105,11 +103,11 @@ class AndesCheckbox : ConstraintLayout {
 
     private var privateListener: OnClickListener? = null
     private lateinit var andesCheckboxAttrs: AndesCheckboxAttrs
-    private lateinit var containerCheckbox: ConstraintLayout
     private val a11yEventDispatcher by lazy { AndesCheckboxAccessibilityEventDispatcher() }
     internal lateinit var spannableText: CharSequence; private set
     private lateinit var clickableView: View
     private val gestureDetector by lazy { createGestureDetector() }
+    private val binding by lazy { AndesLayoutCheckboxBinding.inflate(LayoutInflater.from(context), this, true) }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
@@ -148,7 +146,6 @@ class AndesCheckbox : ConstraintLayout {
     }
 
     private fun setupComponents(config: AndesCheckboxConfiguration) {
-        initComponents()
         setupAccessibilityNavigation()
         setupViewId()
         setupTitleComponent(config)
@@ -174,20 +171,11 @@ class AndesCheckbox : ConstraintLayout {
         isFocusable = true
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
 
-        with(containerCheckbox) {
+        with(binding.andesCheckboxContainer) {
             isFocusable = false
             isClickable = false
             importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
         }
-    }
-
-    /**
-     * Creates all the views that are part of this checkbox.
-     * After a view is created then a view id is added to it.
-     */
-    private fun initComponents() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_checkbox, this)
-        containerCheckbox = container.findViewById(R.id.andes_checkbox_container)
     }
 
     private fun setOnCheckedChangeListener() {
@@ -211,11 +199,11 @@ class AndesCheckbox : ConstraintLayout {
             }
             a11yEventDispatcher.notifyA11yStatusChanged(this@AndesCheckbox, status)
         }
-        checkboxText.setOnClickListener {
+        binding.checkboxText.setOnClickListener {
             clickableView.callOnClick()
         }
         setOnClickListener {
-            checkboxText.performClick()
+            binding.checkboxText.performClick()
         }
     }
 
@@ -223,7 +211,7 @@ class AndesCheckbox : ConstraintLayout {
      * Gets data from the config and sets to the title component of this checkbox.
      */
     private fun setupTitleComponent(config: AndesCheckboxConfiguration) {
-        checkboxText.apply {
+        binding.checkboxText.apply {
             text = config.text
             ellipsize = TextUtils.TruncateAt.END
             setTextColor(config.type.type.textColor())
@@ -244,14 +232,14 @@ class AndesCheckbox : ConstraintLayout {
     private fun setupAlignComponent(config: AndesCheckboxConfiguration) {
         when (config.align) {
             AndesCheckboxAlign.LEFT -> {
-                containerLeftCheckbox.visibility = View.VISIBLE
-                containerRightCheckbox.visibility = View.GONE
-                clickableView = containerLeftCheckbox
+                binding.containerLeftCheckbox.visibility = View.VISIBLE
+                binding.containerRightCheckbox.visibility = View.GONE
+                clickableView = binding.containerLeftCheckbox
             }
             AndesCheckboxAlign.RIGHT -> {
-                containerLeftCheckbox.visibility = View.GONE
-                containerRightCheckbox.visibility = View.VISIBLE
-                clickableView = containerRightCheckbox
+                binding.containerLeftCheckbox.visibility = View.GONE
+                binding.containerRightCheckbox.visibility = View.VISIBLE
+                clickableView = binding.containerRightCheckbox
             }
         }
         setOnCheckedChangeListener()
@@ -273,10 +261,10 @@ class AndesCheckbox : ConstraintLayout {
         // Icon
         val icon =
             config.status.status.icon(context, config.type.type.iconColor(context, config.status))
-        leftCheckboxIcon.setImageDrawable(icon)
-        rightCheckboxIcon.setImageDrawable(icon)
-        leftCheckbox.background = shape
-        rightCheckbox.background = shape
+        binding.leftCheckboxIcon.setImageDrawable(icon)
+        binding.rightCheckboxIcon.setImageDrawable(icon)
+        binding.leftCheckbox.background = shape
+        binding.rightCheckbox.background = shape
     }
 
     /**
@@ -290,7 +278,7 @@ class AndesCheckbox : ConstraintLayout {
      * Gets data from the config and sets to the titleNumberOfLines component of this checkbox.
      */
     private fun setupTitleNumberLinesComponent(config: AndesCheckboxConfiguration) {
-        checkboxText.maxLines = config.titleNumberOfLines
+        binding.checkboxText.maxLines = config.titleNumberOfLines
     }
 
     /**

@@ -3,11 +3,12 @@ package com.mercadolibre.android.andesui.coachmark.view.walkthroughscrolless
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import com.mercadolibre.android.andesui.coachmark.R
+import com.mercadolibre.android.andesui.coachmark.databinding.AndesWalkthroughScrollessContainerBinding
 import com.mercadolibre.android.andesui.coachmark.view.CoachmarkOverlay
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import kotlinx.android.synthetic.main.andes_walkthrough_scrolless_container.view.*
 
 class CoachmarkScrollessContainerView @JvmOverloads constructor(
     context: Context,
@@ -16,10 +17,12 @@ class CoachmarkScrollessContainerView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var coachMarkContainerListener: CoachmarkContainerListener? = null
+    private val binding by lazy {
+        AndesWalkthroughScrollessContainerBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     init {
-        inflate(context, R.layout.andes_walkthrough_scrolless_container, this)
-        counterText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
+        binding.counterText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
     }
 
     fun setListener(coachMarkContainerListener: CoachmarkContainerListener) {
@@ -27,20 +30,24 @@ class CoachmarkScrollessContainerView @JvmOverloads constructor(
     }
 
     fun setData(position: Int, size: Int) {
-        closeButton.setOnClickListener { coachMarkContainerListener?.onClickClose(position) }
-        counterText.text = context.resources.getString(R.string.andes_coachmark_header_numeration_of, position + 1, size)
+        binding.closeButton.setOnClickListener { coachMarkContainerListener?.onClickClose(position) }
+        binding.counterText.text = context.resources.getString(
+            R.string.andes_coachmark_header_numeration_of,
+            position + 1,
+            size
+        )
     }
 
     fun getHamburgerView(): View {
-        return hamburguerView
+        return binding.hamburguerView
     }
 
     internal fun getHeaderView(): CoachmarkOverlay {
-        return headerBackground
+        return binding.headerBackground
     }
 
     fun getCloseButtonView(): View {
-        return closeButton
+        return binding.closeButton
     }
 
     interface CoachmarkContainerListener {

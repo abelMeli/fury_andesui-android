@@ -1,179 +1,155 @@
 package com.mercadolibre.android.andesui.tag
 
+import android.content.Context
+import android.os.Build
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.color.toAndesColor
-import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
+import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.assertIsNull
+import com.mercadolibre.android.andesui.databinding.AndesLayoutSimpleTagBinding
+import com.mercadolibre.android.andesui.tag.choice.AndesTagChoiceCallback
 import com.mercadolibre.android.andesui.tag.choice.mode.AndesTagChoiceMode
-import com.mercadolibre.android.andesui.tag.factory.AndesChoiceTagConfigurationFactory
-import com.mercadolibre.android.andesui.tag.factory.AndesTagChoiceAttrs
+import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
+import com.mercadolibre.android.andesui.tag.leftcontent.LeftContent
+import com.mercadolibre.android.andesui.tag.leftcontent.LeftContentDot
 import com.mercadolibre.android.andesui.tag.size.AndesTagSize
-import org.junit.Assert
+import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
-import org.mockito.Mockito
-import org.robolectric.RuntimeEnvironment
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
 class AndesTagChoiceTest {
-    private var context = RuntimeEnvironment.application
-    private val configFactory = Mockito.spy(AndesChoiceTagConfigurationFactory)
-    private lateinit var attrs: AndesTagChoiceAttrs
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Test
-    fun `Simple, Large, Simple Selected background color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.backgroundColor, R.color.andes_accent_color_100.toAndesColor())
+    fun `Default TagChoice creation`() {
+        // WHEN
+        val tagChoice = AndesTagChoice(context)
+
+        // THEN
+        val binding = AndesLayoutSimpleTagBinding.bind(tagChoice)
+        with(tagChoice) {
+            binding.andesTagContainer().visibility assertEquals View.GONE
+            mode assertEquals AndesTagChoiceMode.SIMPLE
+            size assertEquals AndesTagSize.LARGE
+            text assertIsNull true
+            binding.simpleTagText.text.toString() assertEquals ""
+            state assertEquals AndesTagChoiceState.IDLE
+            binding.rightContent.visibility assertEquals View.GONE
+            leftContent assertIsNull true
+            binding.leftContent.childCount assertEquals 0
+        }
     }
 
     @Test
-    fun `Simple, Large, Simple Idle background color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.backgroundColor, R.color.andes_transparent.toAndesColor())
+    fun `TagChoice creation with text`() {
+        // GIVEN
+        val tagText = "Test"
+
+        // WHEN
+        val tagChoice = AndesTagChoice(context = context, text = tagText)
+
+        // THEN
+        val binding = AndesLayoutSimpleTagBinding.bind(tagChoice)
+        with(tagChoice) {
+            binding.andesTagContainer().visibility assertEquals View.VISIBLE
+            mode assertEquals AndesTagChoiceMode.SIMPLE
+            size assertEquals AndesTagSize.LARGE
+            text assertEquals tagText
+            binding.simpleTagText.text.toString() assertEquals tagText
+            state assertEquals AndesTagChoiceState.IDLE
+            binding.rightContent.visibility assertEquals View.GONE
+            leftContent assertIsNull true
+            binding.leftContent.childCount assertEquals 0
+        }
     }
 
     @Test
-    fun `Simple, Large, Dropdown Selected background color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.backgroundColor, R.color.andes_accent_color_100.toAndesColor())
+    fun `TagChoice creation with text, left content, selected`() {
+        // GIVEN
+        val tagText = "Test"
+        val dotColor = "#FFEC2B"
+        val tagLeftContent = LeftContent(dot = LeftContentDot(dotColor))
+
+        // WHEN
+        val tagChoice =
+            AndesTagChoice(context = context, text = tagText, state = AndesTagChoiceState.SELECTED)
+        tagChoice.leftContent = tagLeftContent
+
+        // THEN
+        val binding = AndesLayoutSimpleTagBinding.bind(tagChoice)
+        with(tagChoice) {
+            binding.andesTagContainer().visibility assertEquals View.VISIBLE
+            mode assertEquals AndesTagChoiceMode.SIMPLE
+            size assertEquals AndesTagSize.LARGE
+            text assertEquals tagText
+            binding.simpleTagText.text.toString() assertEquals tagText
+            state assertEquals AndesTagChoiceState.SELECTED
+            binding.rightContent.visibility assertEquals View.VISIBLE
+            leftContent assertEquals tagLeftContent
+            binding.leftContent.childCount assertEquals 1
+        }
     }
 
     @Test
-    fun `Simple, Large, Dropdown Idle background color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.backgroundColor, R.color.andes_transparent.toAndesColor())
+    fun `TagChoice click callback IDLE to SELECTED`() {
+        // GIVEN
+        val tagText = "Test"
+        val spiedCallback = spy(object : AndesTagChoiceCallback {
+            override fun shouldSelectTag(andesTagChoice: AndesTagChoice) = true
+        })
+        val tagChoice = AndesTagChoice(context = context, text = tagText)
+        tagChoice.callback = spiedCallback
+
+        // WHEN
+        tagChoice.click()
+
+        // THEN
+        val binding = AndesLayoutSimpleTagBinding.bind(tagChoice)
+        with(tagChoice) {
+            state assertEquals AndesTagChoiceState.SELECTED
+            binding.rightContent.visibility assertEquals View.VISIBLE
+            verify(spiedCallback).shouldSelectTag(tagChoice)
+        }
     }
 
     @Test
-    fun `Simple, Large, Simple Selected border color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.borderColor, R.color.andes_accent_color_600.toAndesColor())
+    fun `TagChoice click callback SELECTED to IDLE`() {
+        // GIVEN
+        val tagText = "Test"
+        val spiedCallback = spy(object : AndesTagChoiceCallback {
+            override fun shouldSelectTag(andesTagChoice: AndesTagChoice) = true
+        })
+        val tagChoice =
+            AndesTagChoice(context = context, text = tagText, state = AndesTagChoiceState.SELECTED)
+        tagChoice.callback = spiedCallback
+
+        // WHEN
+        tagChoice.click()
+
+        // THEN
+        val binding = AndesLayoutSimpleTagBinding.bind(tagChoice)
+        with(tagChoice) {
+            state assertEquals AndesTagChoiceState.IDLE
+            binding.rightContent.visibility assertEquals View.GONE
+            verify(spiedCallback).shouldSelectTag(tagChoice)
+        }
     }
 
-    @Test
-    fun `Simple, Large, Simple Idle border color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.borderColor, R.color.andes_gray_250.toAndesColor())
-    }
+    /**
+     * Workaround made to check view visibility. For some reason binding returns always View.VISIBLE.
+     */
+    private fun AndesLayoutSimpleTagBinding.andesTagContainer(): ConstraintLayout =
+        root.findViewById(R.id.andes_tag_container)
 
-    @Test
-    fun `Simple, Large, Dropdown Selected border color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.borderColor, R.color.andes_accent_color_600.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Dropdown Idle border color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.borderColor, R.color.andes_gray_250.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Simple Selected text color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.textColor, R.color.andes_accent_color_600.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Simple Idle text color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Dropdown Selected text color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.textColor, R.color.andes_accent_color_600.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Dropdown Idle text color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.textColor, R.color.andes_text_color_primary.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Simple Selected right content color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.rightContentColor, R.color.andes_accent_color_600.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Simple Idle right content color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.rightContentColor, R.color.andes_gray_550_solid.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Dropdown Selected right content color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.rightContentColor, R.color.andes_accent_color_600.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, Large, Dropdown Idle right content color`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.rightContentColor, R.color.andes_gray_550_solid.toAndesColor())
-    }
-
-    @Test
-    fun `Simple, dropdown idle title text`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.text, "Body")
-    }
-
-    @Test
-    fun `Simple, dropdown selected title text`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.DROPDOWN, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.text, "Body")
-    }
-
-    @Test
-    fun `Simple, simple idle title text`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.IDLE)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.text, "Body")
-    }
-
-    @Test
-    fun `Simple, simple selected title text`() {
-        attrs = AndesTagChoiceAttrs("Body", AndesTagChoiceMode.SIMPLE, AndesTagSize.LARGE,
-                AndesTagChoiceState.SELECTED)
-        val config = configFactory.create(attrs)
-        Assert.assertEquals(config.text, "Body")
+    private fun AndesTagChoice.click() {
+        val binding = AndesLayoutSimpleTagBinding.bind(this)
+        binding.andesTagContainer().performClick()
     }
 }

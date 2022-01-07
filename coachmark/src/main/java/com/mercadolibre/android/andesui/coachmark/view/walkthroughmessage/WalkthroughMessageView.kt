@@ -4,17 +4,13 @@ import android.content.Context
 import android.graphics.Rect
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import com.mercadolibre.android.andesui.coachmark.R
+import com.mercadolibre.android.andesui.coachmark.databinding.AndesWalkthroughMessageBinding
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessageModel
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessagePosition
-import com.mercadolibre.android.andesui.coachmark.view.walkthroughscrolless.WalkthroughScrollessMessageView
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import kotlinx.android.synthetic.main.andes_walkthrough_message.view.*
-import kotlinx.android.synthetic.main.andes_walkthrough_message.view.arcArrowBottom
-import kotlinx.android.synthetic.main.andes_walkthrough_message.view.arcArrowTop
-import kotlinx.android.synthetic.main.andes_walkthrough_message.view.walkthroughDescription
-import kotlinx.android.synthetic.main.andes_walkthrough_message.view.walkthroughTitle
 
 class WalkthroughMessageView @JvmOverloads constructor(
     context: Context,
@@ -23,37 +19,43 @@ class WalkthroughMessageView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var position: WalkthroughMessagePosition = WalkthroughMessagePosition.BELOW
-    private var walkthroughButtonClicklistener: WalkthroughScrollessMessageView.WalkthroughButtonClicklistener? = null
-
-    init {
-        inflate(context, R.layout.andes_walkthrough_message, this)
-        walkthroughTitle.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
-        walkthroughDescription.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        walkthroughNextButton.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+    private var walkthroughButtonClicklistener: WalkthroughButtonClicklistener? = null
+    private val binding by lazy {
+        AndesWalkthroughMessageBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
-    fun setListener(walkthroughButtonClicklistener: WalkthroughScrollessMessageView.WalkthroughButtonClicklistener) {
+    init {
+        with(binding) {
+            walkthroughTitle.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+            walkthroughDescription.typeface = context.getFontOrDefault(R.font.andes_font_regular)
+            walkthroughNextButton.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+        }
+    }
+
+    fun setListener(walkthroughButtonClicklistener: WalkthroughButtonClicklistener) {
         this.walkthroughButtonClicklistener = walkthroughButtonClicklistener
     }
 
     fun setPosition(position: Int) {
-        walkthroughNextButton.setOnClickListener { walkthroughButtonClicklistener?.onClickNextButton(position) }
+        binding.walkthroughNextButton.setOnClickListener { walkthroughButtonClicklistener?.onClickNextButton(position) }
     }
 
     fun setData(data: WalkthroughMessageModel, lastPosition: Boolean) {
-        if (lastPosition) {
-            walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_blue_button_background)
-        } else {
-            walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_button_background)
+        with(binding) {
+            if (lastPosition) {
+                walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_blue_button_background)
+            } else {
+                walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_button_background)
+            }
+
+            walkthroughTitle.text = data.title
+            walkthroughDescription.text = data.description
+            walkthroughNextButton.text = data.buttonText
+
+            checkViewVisibility(walkthroughTitle, data.title)
+            checkViewVisibility(walkthroughDescription, data.description)
+            checkViewVisibility(walkthroughNextButton, data.buttonText)
         }
-
-        walkthroughTitle.text = data.title
-        walkthroughDescription.text = data.description
-        walkthroughNextButton.text = data.buttonText
-
-        checkViewVisibility(walkthroughTitle, data.title)
-        checkViewVisibility(walkthroughDescription, data.description)
-        checkViewVisibility(walkthroughNextButton, data.buttonText)
     }
 
     private fun checkViewVisibility(view: View, content: String) {
@@ -87,8 +89,7 @@ class WalkthroughMessageView @JvmOverloads constructor(
         val paddingTop = context.resources.getDimension(R.dimen.andes_coachmark_default_padding).toInt()
 
         when (position) {
-            WalkthroughMessagePosition.BELOW -> {
-
+            WalkthroughMessagePosition.BELOW -> with(binding) {
                 arcArrowTop.visibility = View.VISIBLE
                 arcArrowBottom.visibility = View.GONE
                 arcArrowTop.getGlobalVisibleRect(tooltipRect)
@@ -99,8 +100,7 @@ class WalkthroughMessageView @JvmOverloads constructor(
                     arcArrowTop.visibility = View.GONE
                 }
             }
-            WalkthroughMessagePosition.ABOVE -> {
-
+            WalkthroughMessagePosition.ABOVE -> with(binding) {
                 arcArrowTop.visibility = View.GONE
                 arcArrowBottom.visibility = View.VISIBLE
                 arcArrowBottom.getGlobalVisibleRect(tooltipRect)
@@ -126,12 +126,14 @@ class WalkthroughMessageView @JvmOverloads constructor(
     }
 
     fun clear() {
-        arcArrowBottom.clear()
-        arcArrowTop.clear()
-        arcArrowBottom.visibility = View.VISIBLE
-        arcArrowTop.visibility = View.GONE
-        walkthroughTitle.visibility = View.GONE
-        walkthroughDescription.visibility = View.GONE
+        with(binding) {
+            arcArrowBottom.clear()
+            arcArrowTop.clear()
+            arcArrowBottom.visibility = View.VISIBLE
+            arcArrowTop.visibility = View.GONE
+            walkthroughTitle.visibility = View.GONE
+            walkthroughDescription.visibility = View.GONE
+        }
     }
 
     fun getPosition(): WalkthroughMessagePosition {

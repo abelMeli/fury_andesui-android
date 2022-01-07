@@ -2,15 +2,12 @@ package com.mercadolibre.android.andesui.demoapp.components.card
 
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.card.AndesCard
 import com.mercadolibre.android.andesui.card.bodyPadding.AndesCardBodyPadding
 import com.mercadolibre.android.andesui.card.hierarchy.AndesCardHierarchy
 import com.mercadolibre.android.andesui.card.padding.AndesCardPadding
@@ -20,10 +17,10 @@ import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicCardBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticCardBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 
 class CardShowcaseActivity : BaseActivity() {
 
@@ -42,17 +39,15 @@ class CardShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_card)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_card, null, false),
-                inflater.inflate(R.layout.andesui_static_card, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiDynamicCardBinding.inflate(layoutInflater).root,
+            AndesuiStaticCardBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -63,15 +58,16 @@ class CardShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
+        val binding = AndesuiDynamicCardBinding.bind(container)
         val title = "Andes card!  \uD83D\uDE04"
         val link = "View more"
         val message = "Cards are containers that allow you to group or structure the content on the screen. " +
                 "They are used as a support for actions, text, images and other components throughout the entire UI."
 
-        val andesCard: AndesCard = container.findViewById(R.id.andesCard)
+        val andesCard = binding.andesCard
         andesCard.setCardAction(
                 View.OnClickListener {
-                    Toast.makeText(this, "OnClicked card!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "OnClicked card!", Toast.LENGTH_LONG).show()
                 }
         )
         andesCard.title = title
@@ -94,13 +90,13 @@ class CardShowcaseActivity : BaseActivity() {
         textView.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         andesCard.cardView = textView
 
-        val andesCardTitle = container.findViewById<AndesTextfield>(R.id.andesTitle)
+        val andesCardTitle = binding.andesTitle
         andesCardTitle.text = title
 
-        val andesCardLink = container.findViewById<AndesTextfield>(R.id.andesLink)
+        val andesCardLink = binding.andesLink
         andesCardLink.text = link
 
-        val spinnerType: Spinner = container.findViewById(R.id.spinnerType)
+        val spinnerType: Spinner = binding.spinnerType
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_card_type_spinner,
@@ -111,7 +107,7 @@ class CardShowcaseActivity : BaseActivity() {
         }
         spinnerType.setSelection(1)
 
-        val spinnerStyle: Spinner = container.findViewById(R.id.spinnerStyle)
+        val spinnerStyle = binding.spinnerStyle
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_card_style_spinner,
@@ -121,7 +117,7 @@ class CardShowcaseActivity : BaseActivity() {
             spinnerStyle.adapter = adapter
         }
 
-        val spinnerPadding: Spinner = container.findViewById(R.id.spinnerPadding)
+        val spinnerPadding = binding.spinnerPadding
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_card_padding_spinner,
@@ -132,7 +128,7 @@ class CardShowcaseActivity : BaseActivity() {
         }
         spinnerPadding.setSelection(1)
 
-        val spinnerBodyPadding: Spinner = container.findViewById(R.id.spinnerBodyPadding)
+        val spinnerBodyPadding = binding.spinnerBodyPadding
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_card_body_padding_spinner,
@@ -143,7 +139,7 @@ class CardShowcaseActivity : BaseActivity() {
         }
         spinnerBodyPadding.setSelection(1)
 
-        val spinnerHierarchy: Spinner = container.findViewById(R.id.spinnerHierarchy)
+        val spinnerHierarchy = binding.spinnerHierarchy
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_card_hierarchy_spinner,
@@ -153,7 +149,7 @@ class CardShowcaseActivity : BaseActivity() {
             spinnerHierarchy.adapter = adapter
         }
 
-        container.findViewById<AndesButton>(R.id.buttonUpdate).setOnClickListener {
+        binding.buttonUpdate.setOnClickListener {
             val type = when (spinnerType.selectedItem) {
                 "None" -> AndesCardType.NONE
                 "Highlight" -> AndesCardType.HIGHLIGHT
@@ -200,7 +196,7 @@ class CardShowcaseActivity : BaseActivity() {
                 andesCard.setLinkAction(
                         andesCardLink.text!!,
                         View.OnClickListener {
-                            Toast.makeText(this, "OnClicked action!", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext, "OnClicked action!", Toast.LENGTH_LONG).show()
                         }
                 )
             } else {
@@ -208,7 +204,7 @@ class CardShowcaseActivity : BaseActivity() {
             }
         }
 
-        container.findViewById<AndesButton>(R.id.buttonClear).setOnClickListener {
+        binding.buttonClear.setOnClickListener {
             andesCardTitle.text = title
             andesCardLink.text = link
             andesCard.cardView = textView
@@ -219,13 +215,13 @@ class CardShowcaseActivity : BaseActivity() {
             andesCard.style = AndesCardStyle.ELEVATED
             andesCard.setCardAction(
                     View.OnClickListener {
-                        Toast.makeText(this, "OnClicked card!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, "OnClicked card!", Toast.LENGTH_LONG).show()
                     }
             )
             andesCard.setLinkAction(
                     link,
                     View.OnClickListener {
-                        Toast.makeText(this, "OnClicked action card!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "OnClicked action card!", Toast.LENGTH_SHORT).show()
                     }
             )
             spinnerType.setSelection(1)
@@ -237,11 +233,11 @@ class CardShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        val card1 = container.findViewById<AndesCard>(R.id.card_example_1)
-        card1.setLinkAction(
+        val binding = AndesuiStaticCardBinding.bind(container)
+        binding.cardExample1.setLinkAction(
                 "Action",
                 View.OnClickListener {
-                    Toast.makeText(this, "Action clicked!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Action clicked!", Toast.LENGTH_SHORT).show()
                 }
         )
         val textView1 = TextView(this)
@@ -251,9 +247,8 @@ class CardShowcaseActivity : BaseActivity() {
         )
         textView1.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView1.text = resources.getString(R.string.andes_card_example_1)
-        card1.cardView = textView1
+        binding.cardExample1.cardView = textView1
 
-        val card2 = container.findViewById<AndesCard>(R.id.card_example_2)
         val textView2 = TextView(this)
         textView2.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
@@ -261,13 +256,12 @@ class CardShowcaseActivity : BaseActivity() {
         )
         textView2.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView2.text = resources.getString(R.string.andes_card_example_2)
-        card2.cardView = textView2
+        binding.cardExample2.cardView = textView2
 
-        val card3 = container.findViewById<AndesCard>(R.id.card_example_3)
-        card3.setLinkAction(
+        binding.cardExample3.setLinkAction(
                 "Action",
                 View.OnClickListener {
-                    Toast.makeText(this, "Action clicked!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Action clicked!", Toast.LENGTH_SHORT).show()
                 }
         )
         val textView3 = TextView(this)
@@ -277,9 +271,8 @@ class CardShowcaseActivity : BaseActivity() {
         )
         textView3.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView3.text = resources.getString(R.string.andes_card_example_3)
-        card3.cardView = textView3
+        binding.cardExample3.cardView = textView3
 
-        val card4 = container.findViewById<AndesCard>(R.id.card_example_4)
         val textView4 = TextView(this)
         textView4.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
@@ -287,9 +280,8 @@ class CardShowcaseActivity : BaseActivity() {
         )
         textView4.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView4.text = resources.getString(R.string.andes_card_example_4)
-        card4.cardView = textView4
+        binding.cardExample4.cardView = textView4
 
-        val card5 = container.findViewById<AndesCard>(R.id.card_example_5)
         val textView5 = TextView(this)
         textView5.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
@@ -297,9 +289,9 @@ class CardShowcaseActivity : BaseActivity() {
         )
         textView5.setTextColor(resources.getColor(R.color.andes_text_color_primary))
         textView5.text = resources.getString(R.string.andes_card_example_5)
-        card5.cardView = textView5
+        binding.cardExample5.cardView = textView5
 
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_card_specs_button).setOnClickListener {
+        binding.andesuiDemoappAndesCardSpecsButton.setOnClickListener {
             launchSpecs(it.context, AndesSpecs.CARD)
         }
     }

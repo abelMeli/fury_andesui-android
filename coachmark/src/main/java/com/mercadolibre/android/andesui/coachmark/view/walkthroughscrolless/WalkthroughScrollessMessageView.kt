@@ -4,12 +4,13 @@ import android.content.Context
 import android.graphics.Rect
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import com.mercadolibre.android.andesui.coachmark.R
+import com.mercadolibre.android.andesui.coachmark.databinding.AndesWalkthroughScrollessMessageBinding
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessageModel
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessagePosition
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import kotlinx.android.synthetic.main.andes_walkthrough_scrolless_message.view.*
 
 class WalkthroughScrollessMessageView @JvmOverloads constructor(
     context: Context,
@@ -19,12 +20,16 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
 
     private var position: WalkthroughMessagePosition = WalkthroughMessagePosition.BELOW
     private var walkthroughButtonClicklistener: WalkthroughButtonClicklistener? = null
+    private val binding by lazy {
+        AndesWalkthroughScrollessMessageBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     init {
-        inflate(context, R.layout.andes_walkthrough_scrolless_message, this)
-        walkthroughTitle.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
-        walkthroughDescription.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        walkthroughNextButton.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+        with(binding) {
+            walkthroughTitle.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+            walkthroughDescription.typeface = context.getFontOrDefault(R.font.andes_font_regular)
+            walkthroughNextButton.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+        }
     }
 
     fun setListener(walkthroughButtonClicklistener: WalkthroughButtonClicklistener) {
@@ -32,23 +37,26 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
     }
 
     fun setPosition(position: Int) {
-        walkthroughNextButton.setOnClickListener { walkthroughButtonClicklistener?.onClickNextButton(position) }
+        binding.walkthroughNextButton.setOnClickListener { walkthroughButtonClicklistener?.onClickNextButton(position) }
     }
 
     fun setData(data: WalkthroughMessageModel, lastPosition: Boolean) {
-        if (lastPosition) {
-            walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_blue_button_background)
-        } else {
-            walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_button_background)
+        with(binding) {
+
+            if (lastPosition) {
+                walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_blue_button_background)
+            } else {
+                walkthroughNextButton.setBackgroundResource(R.drawable.andes_walkthrough_configuration_button_background)
+            }
+
+            walkthroughDescription.text = data.description
+            walkthroughTitle.text = data.title
+            walkthroughNextButton.text = data.buttonText
+
+            checkViewVisibility(walkthroughDescription, data.description)
+            checkViewVisibility(walkthroughTitle, data.title)
+            checkViewVisibility(walkthroughNextButton, data.buttonText)
         }
-
-        walkthroughDescription.text = data.description
-        walkthroughTitle.text = data.title
-        walkthroughNextButton.text = data.buttonText
-
-        checkViewVisibility(walkthroughDescription, data.description)
-        checkViewVisibility(walkthroughTitle, data.title)
-        checkViewVisibility(walkthroughNextButton, data.buttonText)
     }
 
     fun definePosition(overlayRect: Rect, targetRect: Rect) {
@@ -82,26 +90,30 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
     }
 
     private fun setMessagePositionAbove(tooltipRect: Rect, centerTarget: Int, paddingTop: Int) {
-        arcArrowTop.visibility = View.GONE
-        arcArrowBottom.visibility = View.VISIBLE
-        arcArrowBottom.getGlobalVisibleRect(tooltipRect)
-        val centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
-        if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
-            arcArrowBottom.addRect(centerTooltip, tooltipRect.top - paddingTop, centerTarget, tooltipRect.bottom - paddingTop)
-        } else {
-            arcArrowBottom.visibility = View.GONE
+        with(binding) {
+            arcArrowTop.visibility = View.GONE
+            arcArrowBottom.visibility = View.VISIBLE
+            arcArrowBottom.getGlobalVisibleRect(tooltipRect)
+            val centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
+            if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
+                arcArrowBottom.addRect(centerTooltip, tooltipRect.top - paddingTop, centerTarget, tooltipRect.bottom - paddingTop)
+            } else {
+                arcArrowBottom.visibility = View.GONE
+            }
         }
     }
 
     private fun setMessagePositionBelow(tooltipRect: Rect, centerTarget: Int, paddingTop: Int) {
-        arcArrowTop.visibility = View.VISIBLE
-        arcArrowBottom.visibility = View.GONE
-        arcArrowTop.getGlobalVisibleRect(tooltipRect)
-        val centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
-        if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
-            arcArrowTop.addRect(centerTooltip, tooltipRect.bottom - paddingTop, centerTarget, tooltipRect.top - paddingTop)
-        } else {
-            arcArrowTop.visibility = View.GONE
+        with(binding) {
+            arcArrowTop.visibility = View.VISIBLE
+            arcArrowBottom.visibility = View.GONE
+            arcArrowTop.getGlobalVisibleRect(tooltipRect)
+            val centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
+            if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
+                arcArrowTop.addRect(centerTooltip, tooltipRect.bottom - paddingTop, centerTarget, tooltipRect.top - paddingTop)
+            } else {
+                arcArrowTop.visibility = View.GONE
+            }
         }
     }
 
@@ -117,12 +129,14 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
     }
 
     fun clear() {
-        arcArrowBottom.clear()
-        arcArrowTop.clear()
-        arcArrowBottom.visibility = View.VISIBLE
-        arcArrowTop.visibility = View.GONE
-        walkthroughTitle.visibility = View.GONE
-        walkthroughDescription.visibility = View.GONE
+        with(binding) {
+            arcArrowBottom.clear()
+            arcArrowTop.clear()
+            arcArrowBottom.visibility = View.VISIBLE
+            arcArrowTop.visibility = View.GONE
+            walkthroughTitle.visibility = View.GONE
+            walkthroughDescription.visibility = View.GONE
+        }
     }
 
     fun getPosition(): WalkthroughMessagePosition {

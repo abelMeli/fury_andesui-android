@@ -15,7 +15,12 @@ import androidx.viewpager.widget.ViewPager
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicFeedbackScreenBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiShowcaseMainBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticFeedbackScreenCongratsBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticFeedbackScreenSimpleBodyBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticFeedbackScreenSimpleSuccessBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticFeedbackScreenSimpleWarningBinding
 
 @Suppress("TooManyFunctions")
 class FeedbackScreenConfigFragment : Fragment() {
@@ -38,52 +43,43 @@ class FeedbackScreenConfigFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.andesui_showcase_main, container, false)
+    ): View {
+        val binding = AndesuiShowcaseMainBinding.inflate(inflater, container, false)
 
-        initActionBar(view)
-        initViewPager(view, inflater)
-        attachIndicator(view)
+        initActionBar(binding)
+        initViewPager(binding)
+        attachIndicator(binding)
         loadViews()
         setupToolbarViewPagerListener()
         setupStatusBarViewPagerListener()
         configToolbarVisibility()
         configStatusBarColor()
 
-        return view
+        return binding.root
     }
 
-    private fun initActionBar(container: View) {
-        toolbar = container.findViewById(R.id.andesui_nav_bar)
+    private fun initActionBar(binding: AndesuiShowcaseMainBinding) {
+        toolbar = binding.andesuiNavBar
         toolbar.setTitle(R.string.andes_demoapp_screen_feedbackscreen)
         toolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.andes_white))
     }
 
-    private fun initViewPager(container: View, inflater: LayoutInflater) {
-        viewPager = container.findViewById(R.id.andesui_viewpager)
+    private fun initViewPager(binding: AndesuiShowcaseMainBinding) {
+        viewPager = binding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(
             listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_feedback_screen, null, false),
-                inflater.inflate(
-                    R.layout.andesui_static_feedback_screen_simple_success,
-                    null,
-                    false
-                ),
-                inflater.inflate(
-                    R.layout.andesui_static_feedback_screen_simple_warning,
-                    null,
-                    false
-                ),
-                inflater.inflate(R.layout.andesui_static_feedback_screen_simple_body, null, false),
-                inflater.inflate(R.layout.andesui_static_feedback_screen_congrats, null, false)
+                AndesuiDynamicFeedbackScreenBinding.inflate(layoutInflater).root,
+                AndesuiStaticFeedbackScreenSimpleSuccessBinding.inflate(layoutInflater).root,
+                AndesuiStaticFeedbackScreenSimpleWarningBinding.inflate(layoutInflater).root,
+                AndesuiStaticFeedbackScreenSimpleBodyBinding.inflate(layoutInflater).root,
+                AndesuiStaticFeedbackScreenCongratsBinding.inflate(layoutInflater).root
             )
         )
         viewPager.offscreenPageLimit = OFFSCREEN_PAGES_LIMIT
     }
 
-    private fun attachIndicator(container: View) {
-        val indicator = container.findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+    private fun attachIndicator(binding: AndesuiShowcaseMainBinding) {
+        binding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {

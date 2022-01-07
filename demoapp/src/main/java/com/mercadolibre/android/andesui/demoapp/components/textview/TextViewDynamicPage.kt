@@ -8,6 +8,7 @@ import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTextviewBinding
 import com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
 import com.mercadolibre.android.andesui.dropdown.AndesDropDownItem
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
@@ -63,7 +64,7 @@ class TextViewDynamicPage {
                 ),
                 listener = {
                     Log.d("TextViewDynamicPage", it.toString())
-                    Toast.makeText(context, "Click on link", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context.applicationContext, "Click on link", Toast.LENGTH_SHORT).show()
                 }
             )
         } else {
@@ -175,17 +176,18 @@ class TextViewDynamicPage {
     }
 
     private fun initComponents(containerView: View) {
-        textView = containerView.findViewById(R.id.dynamic_page_textview)
-        textFieldText = containerView.findViewById(R.id.dynamic_page_textview_tf_text)
-        dropdownStyle = containerView.findViewById(R.id.dynamic_page_textview_dd_style)
-        dropdownColor = containerView.findViewById(R.id.dynamic_page_textview_dd_color)
-        updateButton = containerView.findViewById(R.id.dynamic_page_textview_update_button)
-        clearButton = containerView.findViewById(R.id.dynamic_page_textview_clear_button)
-        textFieldLinkFrom = containerView.findViewById(R.id.dynamic_page_textview_tf_link_from)
-        textFieldLinkTo = containerView.findViewById(R.id.dynamic_page_textview_tf_link_to)
-        textFieldBoldFrom = containerView.findViewById(R.id.dynamic_page_textview_tf_bold_from)
-        textFieldBoldTo = containerView.findViewById(R.id.dynamic_page_textview_tf_bold_to)
-        checkboxInvertedLink = containerView.findViewById(R.id.dynamic_page_textview_checkbox_link_inverted)
+        val binding = AndesuiDynamicTextviewBinding.bind(containerView)
+        textView = binding.dynamicPageTextview
+        textFieldText = binding.dynamicPageTextviewTfText
+        dropdownStyle = binding.dynamicPageTextviewDdStyle
+        dropdownColor = binding.dynamicPageTextviewDdColor
+        updateButton = binding.dynamicPageTextviewUpdateButton
+        clearButton = binding.dynamicPageTextviewClearButton
+        textFieldLinkFrom = binding.dynamicPageTextviewTfLinkFrom
+        textFieldLinkTo = binding.dynamicPageTextviewTfLinkTo
+        textFieldBoldFrom = binding.dynamicPageTextviewTfBoldFrom
+        textFieldBoldTo = binding.dynamicPageTextviewTfBoldTo
+        checkboxInvertedLink = binding.dynamicPageTextviewCheckboxLinkInverted
     }
 
     private fun setupStyleList() {

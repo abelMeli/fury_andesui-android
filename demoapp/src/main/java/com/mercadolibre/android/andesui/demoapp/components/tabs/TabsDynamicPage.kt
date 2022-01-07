@@ -6,21 +6,16 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTabsBinding
 import com.mercadolibre.android.andesui.tabs.AndesTabItem
 import com.mercadolibre.android.andesui.tabs.AndesTabs
 import com.mercadolibre.android.andesui.tabs.type.AndesTabsType
 
 class TabsDynamicPage {
 
-    private lateinit var tabsDynamic: AndesTabs
     private lateinit var items: ArrayList<AndesTabItem>
     private lateinit var views: ArrayList<View>
-    private lateinit var spinnerType: Spinner
-    private lateinit var spinnerCallback: Spinner
-    private lateinit var clearButton: AndesButton
-    private lateinit var updateButton: AndesButton
     private lateinit var callback: AndesTabs.OnTabChangedListener
     private var callbackType = CALLBACK_TYPE_NONE
 
@@ -33,19 +28,14 @@ class TabsDynamicPage {
     }
 
     fun create(context: Context, container: View) {
-        initComponents(context, container)
-        setupTypeSpinner(context)
-        setupTypeCallback(context)
-        setupDynamicTab()
+        val binding = AndesuiDynamicTabsBinding.bind(container)
+        initComponents(context)
+        setupTypeSpinner(context, binding.dynamicTabsSpinnerType)
+        setupTypeCallback(context, binding.dynamicTabsSpinnerCallback)
+        setupDynamicTab(binding)
     }
 
-    private fun initComponents(context: Context, container: View) {
-        tabsDynamic = container.findViewById(R.id.showcase_dynamic_tabs)
-        spinnerType = container.findViewById(R.id.dynamic_tabs_spinner_type)
-        spinnerCallback = container.findViewById(R.id.dynamic_tabs_spinner_callback)
-        clearButton = container.findViewById(R.id.dynamic_tabs_button_clear)
-        updateButton = container.findViewById(R.id.dynamic_tabs_button_update)
-
+    private fun initComponents(context: Context) {
         views = arrayListOf()
         val view1 = TextView(context)
         view1.text = "Tab content, section 1"
@@ -63,70 +53,70 @@ class TabsDynamicPage {
         items.add(AndesTabItem("Tab 3"))
     }
 
-    private fun setupTypeSpinner(context: Context) {
+    private fun setupTypeSpinner(context: Context, spinner: Spinner) {
         ArrayAdapter.createFromResource(
             context,
             R.array.andes_tabs_spinner_type,
             android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerType.adapter = adapter
+            spinner.adapter = adapter
         }
     }
 
-    private fun setupTypeCallback(context: Context) {
+    private fun setupTypeCallback(context: Context, spinner: Spinner) {
         ArrayAdapter.createFromResource(
             context,
             R.array.andes_tabs_spinner_callback,
             android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerCallback.adapter = adapter
+            spinner.adapter = adapter
         }
 
         callback = object : AndesTabs.OnTabChangedListener {
             override fun onTabSelected(position: Int, tabs: List<AndesTabItem>) {
                 if (callbackType == CALLBACK_TYPE_SELECT) {
-                    Toast.makeText(context, "Tab $position selected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context.applicationContext, "Tab $position selected", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onTabUnselected(position: Int, tabs: List<AndesTabItem>) {
                 if (callbackType == CALLBACK_TYPE_UNSELECT) {
-                    Toast.makeText(context, "Tab $position unselected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context.applicationContext, "Tab $position unselected", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onTabReselected(position: Int, tabs: List<AndesTabItem>) {
                 if (callbackType == CALLBACK_TYPE_RESELECT) {
-                    Toast.makeText(context, "Tab $position reselected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context.applicationContext, "Tab $position reselected", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-    private fun setupDynamicTab() {
-        tabsDynamic.setItems(items)
-        tabsDynamic.setOnTabChangedListener(callback)
+    private fun setupDynamicTab(binding: AndesuiDynamicTabsBinding) = with(binding) {
+        showcaseDynamicTabs.setItems(items)
+        showcaseDynamicTabs.setOnTabChangedListener(callback)
 
-        clearButton.setOnClickListener {
-            spinnerType.setSelection(0)
-            spinnerCallback.setSelection(0)
-            updateView()
+        dynamicTabsButtonClear.setOnClickListener {
+            dynamicTabsSpinnerType.setSelection(0)
+            dynamicTabsSpinnerCallback.setSelection(0)
+            updateView(this)
         }
 
-        updateButton.setOnClickListener {
-            updateView()
+        dynamicTabsButtonUpdate.setOnClickListener {
+            updateView(this)
         }
     }
 
-    private fun updateView() {
-        if (spinnerType.selectedItem == TAB_TYPE_LEFT_ALIGN) {
-            tabsDynamic.type = AndesTabsType.LeftAlign()
+    private fun updateView(binding: AndesuiDynamicTabsBinding) = with(binding) {
+        if (dynamicTabsSpinnerType.selectedItem == TAB_TYPE_LEFT_ALIGN) {
+            showcaseDynamicTabs.type = AndesTabsType.LeftAlign()
         } else {
-            tabsDynamic.type = AndesTabsType.FullWidth
+            showcaseDynamicTabs.type = AndesTabsType.FullWidth
         }
 
-        callbackType = spinnerCallback.selectedItem as String
+        callbackType = dynamicTabsSpinnerCallback.selectedItem as String
     }
 }

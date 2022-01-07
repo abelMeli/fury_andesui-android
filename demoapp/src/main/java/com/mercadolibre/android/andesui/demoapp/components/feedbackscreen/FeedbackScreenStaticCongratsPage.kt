@@ -60,11 +60,11 @@ class FeedbackScreenStaticCongratsPage {
         val bottomButton = AndesFeedbackScreenButton(
             "Repetir compra",
             View.OnClickListener {
-                Toast.makeText(context, "Click en repetir compra", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Click en repetir compra", Toast.LENGTH_SHORT).show()
             }
         )
         val feedbackCloseButton = View.OnClickListener {
-            Toast.makeText(context, "Click in close", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context.applicationContext, "Click in close", Toast.LENGTH_SHORT).show()
         }
 
         feedbackActions = AndesFeedbackScreenActions(

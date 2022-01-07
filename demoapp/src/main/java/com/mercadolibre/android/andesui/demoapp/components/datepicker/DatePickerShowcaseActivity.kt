@@ -1,17 +1,14 @@
 package com.mercadolibre.android.andesui.demoapp.components.datepicker
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.datepicker.AndesDatePicker
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticDatepickerBinding
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -33,16 +30,14 @@ class DatePickerShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_datepicker)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_static_datepicker, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiStaticDatepickerBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -51,13 +46,14 @@ class DatePickerShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        val datepicker: AndesDatePicker = container.findViewById(R.id.andesDatePicker)
-        val btnSend: AndesButton = container.findViewById(R.id.btnSendMinMaxDate)
-        val btnReset: AndesButton = container.findViewById(R.id.btnReset)
-        val btnSendDate: AndesButton = container.findViewById(R.id.btnSendDate)
-        val inputMinDate: AndesTextfield = container.findViewById(R.id.andesTextfieldMinDate)
-        val inputMaxDate: AndesTextfield = container.findViewById(R.id.andesTextfieldMaxDate)
-        val inputSetDate: AndesTextfield = container.findViewById(R.id.andesTextfieldSetDate)
+        val binding = AndesuiStaticDatepickerBinding.bind(container)
+        val datepicker = binding.andesDatePicker
+        val btnSend = binding.btnSendMinMaxDate
+        val btnReset = binding.btnReset
+        val btnSendDate = binding.btnSendDate
+        val inputMinDate = binding.andesTextfieldMinDate
+        val inputMaxDate = binding.andesTextfieldMaxDate
+        val inputSetDate = binding.andesTextfieldSetDate
         datepicker.setupButtonVisibility(false)
         datepicker.setupButtonText("Aplicar")
 
@@ -84,12 +80,12 @@ class DatePickerShowcaseActivity : BaseActivity() {
             if (setterMax != null && setterMax.isNotEmpty() && isValid(setterMax, "dd/MM/yyyy")) {
                 datepicker.setupMaxDate(convertStringToDate(setterMax, "dd/MM/yyyy").time)
             } else {
-                Toast.makeText(this, "la fecha maxima no es una fecha valida", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "la fecha maxima no es una fecha valida", Toast.LENGTH_SHORT).show()
             }
             if (setterMin != null && setterMin.isNotEmpty() && isValid(setterMin, "dd/MM/yyyy")) {
                 datepicker.setupMinDate(convertStringToDate(setterMin, "dd/MM/yyyy").time)
             } else {
-                Toast.makeText(this, "la fecha minima no es una fecha valida", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "la fecha minima no es una fecha valida", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -110,8 +106,8 @@ class DatePickerShowcaseActivity : BaseActivity() {
                 datepicker.selectDate(date.time)
             } else {
                 Toast
-                        .makeText(this, "La fecha no es una fecha valida", Toast.LENGTH_SHORT)
-                        .show()
+                    .makeText(this, "La fecha no es una fecha valida", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -122,7 +118,7 @@ class DatePickerShowcaseActivity : BaseActivity() {
             override fun onDateApply(date: Calendar) {
                 val dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT)
                 val formattedDate = dateFormatter.format(date.time)
-                Toast.makeText(this@DatePickerShowcaseActivity, formattedDate, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, formattedDate, Toast.LENGTH_SHORT).show()
             }
         })
     }

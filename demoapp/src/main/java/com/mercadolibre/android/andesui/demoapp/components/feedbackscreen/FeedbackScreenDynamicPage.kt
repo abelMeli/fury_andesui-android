@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicFeedbackScreenBinding
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
@@ -130,7 +131,7 @@ class FeedbackScreenDynamicPage {
     private fun getFeedbackCloseButton(context: Context): View.OnClickListener? {
         return if (closeButtonSwitch.status == AndesSwitchStatus.CHECKED) {
             View.OnClickListener {
-                Toast.makeText(context, "Clicked close!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Clicked close!", Toast.LENGTH_SHORT).show()
                 (context as Activity).onBackPressed()
             }
         } else {
@@ -141,7 +142,7 @@ class FeedbackScreenDynamicPage {
     private fun getFeedbackButtonBody(context: Context) =
         if (!feedbackButtonText.text.isNullOrEmpty()) {
             AndesFeedbackScreenButton(feedbackButtonText.text.toString(), View.OnClickListener {
-                Toast.makeText(context, "Clicked the button!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Clicked the button!", Toast.LENGTH_SHORT).show()
             })
         } else {
             null
@@ -164,7 +165,7 @@ class FeedbackScreenDynamicPage {
                             VALID_BODY_LINK
                         )
                     ) {
-                        Toast.makeText(context, "Clicked the link!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context.applicationContext, "Clicked the link!", Toast.LENGTH_SHORT).show()
                     }
                 ),
                 feedbackHeaderHighlight.text.takeIf { !feedbackHeaderTitle.text.isNullOrEmpty() }
@@ -242,21 +243,20 @@ class FeedbackScreenDynamicPage {
     }
 
     private fun initComponents(container: View) {
-        closeButtonSwitch = container.findViewById(R.id.feedbackscreen_close_button_switch)
-        feedbackTypeSpinner = container.findViewById(R.id.feedbackscreen_type_spinner)
-        feedbackColorGroup = container.findViewById(R.id.feedbackscreen_color_group)
-        feedbackColorSpinner = container.findViewById(R.id.feedbackscreen_color_spinner)
-        feedbackThumbnailSpinner =
-            container.findViewById(R.id.feedbackscreen_header_thumbnail_spinner)
-        feedbackHeaderTitle = container.findViewById(R.id.feedbackscreen_header_title)
-        feedbackHeaderOverlineSwitch =
-            container.findViewById(R.id.feedbackscreen_header_overline_switch)
-        feedbackHeaderOverline = container.findViewById(R.id.feedbackscreen_header_overline)
-        feedbackHeaderHighlight = container.findViewById(R.id.andes_feedbackscreen_header_highlight)
-        feedbackHeaderDescription = container.findViewById(R.id.feedbackscreen_header_description)
-        feedbackButtonText = container.findViewById(R.id.feedbackscreen_finish_button_text)
-        feedbackBodyMocks = container.findViewById(R.id.feedbackscreen_body_content_text)
-        updateButton = container.findViewById(R.id.change_button)
+        val binding = AndesuiDynamicFeedbackScreenBinding.bind(container)
+        closeButtonSwitch = binding.feedbackscreenCloseButtonSwitch
+        feedbackTypeSpinner = binding.feedbackscreenTypeSpinner
+        feedbackColorGroup = binding.feedbackscreenColorGroup
+        feedbackColorSpinner = binding.feedbackscreenColorSpinner
+        feedbackThumbnailSpinner = binding.feedbackscreenHeaderThumbnailSpinner
+        feedbackHeaderTitle = binding.feedbackscreenHeaderTitle
+        feedbackHeaderOverlineSwitch = binding.feedbackscreenHeaderOverlineSwitch
+        feedbackHeaderOverline = binding.feedbackscreenHeaderOverline
+        feedbackHeaderHighlight = binding.andesFeedbackscreenHeaderHighlight
+        feedbackHeaderDescription = binding.feedbackscreenHeaderDescription
+        feedbackButtonText = binding.feedbackscreenFinishButtonText
+        feedbackBodyMocks = binding.feedbackscreenBodyContentText
+        updateButton = binding.changeButton
     }
 
     private fun setupSpinnerComponent(context: Context, spinner: Spinner, @ArrayRes content: Int) {

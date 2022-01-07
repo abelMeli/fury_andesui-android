@@ -1,26 +1,22 @@
 package com.mercadolibre.android.andesui.demoapp.components.thumbnail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import androidx.appcompat.widget.SwitchCompat
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicThumbnailBadgeBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicThumbnailBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticThumbnailBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
-import kotlinx.android.synthetic.main.andesui_dynamic_thumbnail.*
 
 class ThumbnailShowcaseActivity : BaseActivity() {
 
@@ -38,18 +34,16 @@ class ThumbnailShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_thumbnail)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_thumbnail, null, false),
-                inflater.inflate(R.layout.andesui_dynamic_thumbnail_badge, null, false),
-                inflater.inflate(R.layout.andesui_static_thumbnail, null, false)
+            AndesuiDynamicThumbnailBinding.inflate(layoutInflater).root,
+            AndesuiDynamicThumbnailBadgeBinding.inflate(layoutInflater).root,
+            AndesuiStaticThumbnailBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -61,7 +55,8 @@ class ThumbnailShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val hierarchySpinner: Spinner = container.findViewById(R.id.hierarchy_spinner)
+        val binding = AndesuiDynamicThumbnailBinding.bind(container)
+        val hierarchySpinner = binding.hierarchySpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_thumbnail_hierarchy_spinner,
@@ -71,7 +66,7 @@ class ThumbnailShowcaseActivity : BaseActivity() {
             hierarchySpinner.adapter = adapter
         }
 
-        val typeSpinner: Spinner = container.findViewById(R.id.simple_type_spinner)
+        val typeSpinner = binding.simpleTypeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_thumbnail_type_spinner,
@@ -81,7 +76,7 @@ class ThumbnailShowcaseActivity : BaseActivity() {
             typeSpinner.adapter = adapter
         }
 
-        val sizeSpinner: Spinner = container.findViewById(R.id.size_spinner)
+        val sizeSpinner = binding.sizeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_thumbnail_size_spinner,
@@ -91,12 +86,12 @@ class ThumbnailShowcaseActivity : BaseActivity() {
             sizeSpinner.adapter = adapter
         }
 
-        val stateSwitch: SwitchCompat = container.findViewById(R.id.state_switch)
+        val stateSwitch = binding.stateSwitch
 
-        val clearButton: AndesButton = container.findViewById(R.id.clear_button)
-        val changeButton: AndesButton = container.findViewById(R.id.change_button)
+        val clearButton = binding.clearButton
+        val changeButton = binding.changeButton
 
-        val andesThumbnail: AndesThumbnail = container.findViewById(R.id.andes_thumbnail_icon)
+        val andesThumbnail = binding.andesThumbnailIcon
 
         hierarchySpinner.setSelection(DEFAULT_HIERARCHY_OPTION)
         typeSpinner.setSelection(DEFAULT_TYPE_OPTION)
@@ -104,7 +99,7 @@ class ThumbnailShowcaseActivity : BaseActivity() {
         stateSwitch.isChecked = true
 
         clearButton.setOnClickListener {
-            group.visibility = View.VISIBLE
+            binding.group.visibility = View.VISIBLE
             andesThumbnail.visibility = View.VISIBLE
 
             hierarchySpinner.setSelection(DEFAULT_HIERARCHY_OPTION)
@@ -158,7 +153,7 @@ class ThumbnailShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_button).setOnClickListener {
+        AndesuiStaticThumbnailBinding.bind(container).andesuiDemoappAndesSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.THUMBNAIL)
         }
     }

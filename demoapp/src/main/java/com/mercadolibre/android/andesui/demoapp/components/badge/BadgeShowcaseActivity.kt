@@ -1,30 +1,23 @@
 package com.mercadolibre.android.andesui.demoapp.components.badge
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import com.mercadolibre.android.andesui.badge.AndesBadgeDot
-import com.mercadolibre.android.andesui.badge.AndesBadgePill
 import com.mercadolibre.android.andesui.badge.border.AndesBadgePillBorder
 import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgePillHierarchy
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
-import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicBadgesBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticBadgesBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
-import kotlinx.android.synthetic.main.andesui_dynamic_badges.*
 
 class BadgeShowcaseActivity : BaseActivity() {
 
@@ -41,17 +34,15 @@ class BadgeShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle(): String = resources.getString(R.string.andes_demoapp_screen_badge)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_badges, null, false),
-                inflater.inflate(R.layout.andesui_static_badges, null, false)
+            AndesuiDynamicBadgesBinding.inflate(layoutInflater).root,
+            AndesuiStaticBadgesBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -62,7 +53,8 @@ class BadgeShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val modifierSpinner: Spinner = container.findViewById(R.id.modifier_spinner)
+        val binding = AndesuiDynamicBadgesBinding.bind(container)
+        val modifierSpinner = binding.modifierSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_badge_modifier_spinner,
@@ -72,7 +64,7 @@ class BadgeShowcaseActivity : BaseActivity() {
             modifierSpinner.adapter = adapter
         }
 
-        val hierarchySpinner: Spinner = container.findViewById(R.id.hierarchy_spinner)
+        val hierarchySpinner = binding.hierarchySpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.hierarchy_spinner,
@@ -82,7 +74,7 @@ class BadgeShowcaseActivity : BaseActivity() {
             hierarchySpinner.adapter = adapter
         }
 
-        val typeSpinner: Spinner = container.findViewById(R.id.simple_type_spinner)
+        val typeSpinner = binding.simpleTypeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.simple_type_spinner,
@@ -92,7 +84,7 @@ class BadgeShowcaseActivity : BaseActivity() {
             typeSpinner.adapter = adapter
         }
 
-        val sizeSpinner: Spinner = container.findViewById(R.id.size_spinner)
+        val sizeSpinner = binding.sizeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.size_spinner,
@@ -102,7 +94,7 @@ class BadgeShowcaseActivity : BaseActivity() {
             sizeSpinner.adapter = adapter
         }
 
-        val borderSpinner: Spinner = container.findViewById(R.id.border_spinner)
+        val borderSpinner = binding.borderSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_border_spinner,
@@ -112,14 +104,12 @@ class BadgeShowcaseActivity : BaseActivity() {
             borderSpinner.adapter = adapter
         }
 
-        val textField: AndesTextfield = container.findViewById(R.id.label_text)
-        val clearButton: AndesButton = container.findViewById(R.id.clear_button)
-        val changeButton: AndesButton = container.findViewById(R.id.change_button)
+        val textField = binding.labelText
 
-        val andesBadgePill: AndesBadgePill = container.findViewById(R.id.andes_badge_pill)
-        val andesBadgeDot: AndesBadgeDot = container.findViewById(R.id.andes_badge_dot)
-
-        val andesBadgeDefaultText: AndesCheckbox = container.findViewById(R.id.andesui_demoapp_defaul_text)
+        val andesBadgePill = binding.andesBadgePill
+        val andesBadgeDot = binding.andesBadgeDot
+        val group = binding.group
+        val andesBadgeDefaultText = binding.andesuiDemoappDefaulText
 
         modifierSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -147,7 +137,7 @@ class BadgeShowcaseActivity : BaseActivity() {
             }
         }
 
-        clearButton.setOnClickListener {
+        binding.clearButton.setOnClickListener {
             group.visibility = View.VISIBLE
             andesBadgePill.visibility = View.VISIBLE
             andesBadgeDot.visibility = View.INVISIBLE
@@ -166,7 +156,7 @@ class BadgeShowcaseActivity : BaseActivity() {
             andesBadgePill.pillBorder = AndesBadgePillBorder.STANDARD
         }
 
-        changeButton.setOnClickListener {
+        binding.changeButton.setOnClickListener {
             when (modifierSpinner.getItemAtPosition(modifierSpinner.selectedItemPosition)) {
                 "Pill" -> {
                     if (textField.text.isNullOrEmpty()) {
@@ -229,11 +219,8 @@ class BadgeShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        bindAndesSpecsButton(container)
-    }
-
-    private fun bindAndesSpecsButton(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_badge_specs_button).setOnClickListener {
+        val binding = AndesuiStaticBadgesBinding.bind(container)
+        binding.andesuiDemoappAndesBadgeSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.BADGE)
         }
     }

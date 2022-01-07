@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -12,7 +11,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.common.util.CollectionUtils.listOf
 import com.mercadolibre.android.andesui.bottomsheet.AndesBottomSheet
 import com.mercadolibre.android.andesui.bottomsheet.BottomSheetListener
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetContentMargin
@@ -22,8 +20,8 @@ import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
-import kotlinx.android.synthetic.main.andesui_bottom_sheet_showcase.*
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiBottomSheetShowcaseBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiShowcaseMainBinding
 
 @Suppress("TooManyFunctions")
 class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
@@ -33,10 +31,11 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
     private var showTitle = false
     private var leftAlignTitle = true
     private var textView: TextView? = null
+    private val baseBinding by lazy { AndesuiShowcaseMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
+        setContentView(baseBinding.root)
 
         initActionBar()
         initViewPager()
@@ -45,22 +44,20 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
     }
 
     private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
+        setSupportActionBar(baseBinding.andesuiNavBar)
         supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_bottom_sheet)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_bottom_sheet_showcase, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiBottomSheetShowcaseBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -69,7 +66,7 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
     }
 
     private fun addDynamicPage(container: View) {
-        bottomSheet = container.findViewById(R.id.andes_bottom_sheet)
+        bottomSheet = AndesuiBottomSheetShowcaseBinding.bind(container).andesBottomSheet
         bottomSheet.setBottomSheetListener(this)
     }
 
@@ -138,10 +135,11 @@ class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
     }
 
     fun onSetPeekHeightButtonClicked(view: View) {
-        if (!andes_bottom_sheet_peek_height_text_field.text.isNullOrEmpty()) {
-            bottomSheet.peekHeight = andes_bottom_sheet_peek_height_text_field.text!!.toInt()
+        val binding = AndesuiBottomSheetShowcaseBinding.bind(view)
+        if (!binding.andesBottomSheetPeekHeightTextField.text.isNullOrEmpty()) {
+            bottomSheet.peekHeight = binding.andesBottomSheetPeekHeightTextField.text!!.toInt()
             closeKeyboard(view)
-            andes_bottom_sheet_peek_height_text_field.text = ""
+            binding.andesBottomSheetPeekHeightTextField.text = ""
         }
     }
 

@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.Group
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicMoneyAmountBinding
 import com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
 import com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountCombo
 import com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmountDiscount
@@ -54,24 +55,25 @@ class MoneyAmountDynamicPage {
     }
 
     private fun initComponents(view: View) {
-        priceGroup = view.findViewById(R.id.priceGroup)
-        discountGroup = view.findViewById(R.id.discountGroup)
-        comboGroup = view.findViewById(R.id.comboGroup)
-        andesMoneyAmount = view.findViewById(R.id.andes_money_amount)
-        andesMoneyAmountDiscount = view.findViewById(R.id.andes_money_amount_discount)
-        andesMoneyAmountCombo = view.findViewById(R.id.andes_money_amount_combo)
-        textFieldDiscount = view.findViewById(R.id.money_amount_discount)
-        textFieldPrevious = view.findViewById(R.id.money_amount_previous)
-        textFieldPrice = view.findViewById(R.id.money_amount_price)
-        spinnerType = view.findViewById(R.id.spinner_type)
-        spinnerMoneyAmountType = view.findViewById(R.id.spinner_money_amount_type)
-        spinnerCountry = view.findViewById(R.id.spinner_country)
-        spinnerStyle = view.findViewById(R.id.spinner_style)
-        spinnerCurrency = view.findViewById(R.id.spinner_currency)
-        spinnerSize = view.findViewById(R.id.spinner_size)
-        spinnerComboSize = view.findViewById(R.id.spinner_combo_size)
-        changeButton = view.findViewById(R.id.change_button)
-        clearButton = view.findViewById(R.id.clear_button)
+        val binding = AndesuiDynamicMoneyAmountBinding.bind(view)
+        priceGroup = binding.priceGroup
+        discountGroup = binding.discountGroup
+        comboGroup = binding.comboGroup
+        andesMoneyAmount = binding.andesMoneyAmount
+        andesMoneyAmountDiscount = binding.andesMoneyAmountDiscount
+        andesMoneyAmountCombo = binding.andesMoneyAmountCombo
+        textFieldDiscount = binding.moneyAmountDiscount
+        textFieldPrevious = binding.moneyAmountPrevious
+        textFieldPrice = binding.moneyAmountPrice
+        spinnerType = binding.spinnerType
+        spinnerMoneyAmountType = binding.spinnerMoneyAmountType
+        spinnerCountry = binding.spinnerCountry
+        spinnerStyle = binding.spinnerStyle
+        spinnerCurrency = binding.spinnerCurrency
+        spinnerSize = binding.spinnerSize
+        spinnerComboSize = binding.spinnerComboSize
+        changeButton = binding.changeButton
+        clearButton = binding.clearButton
     }
 
     private fun setupSpinners(context: Context) {

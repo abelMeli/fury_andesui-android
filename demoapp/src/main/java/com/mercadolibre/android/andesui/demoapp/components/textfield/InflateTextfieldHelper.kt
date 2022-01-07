@@ -8,19 +8,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTextareaBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTextcodeBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTextfieldBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTextfieldBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.textfield.AndesTextarea
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.AndesTextfieldCode
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
@@ -37,35 +35,29 @@ object InflateTextfieldHelper {
     @Suppress("LongMethod")
     // Method used to inflate a textfield usecase for test app
     fun inflateAndesTextfield(context: Context): View {
+        val binding = AndesuiDynamicTextfieldBinding.inflate(LayoutInflater.from(context))
 
-        val layoutTextfield = LayoutInflater
-                .from(context)
-                .inflate(R.layout.andesui_dynamic_textfield,
-                        null,
-                        false
-                )
-
-        val textfield = layoutTextfield.findViewById<AndesTextfield>(R.id.andesui_textfield)
-        val button = layoutTextfield.findViewById<AndesButton>(R.id.change_button)
-        val clearButton = layoutTextfield.findViewById<AndesButton>(R.id.clear_button)
-        val label = layoutTextfield.findViewById<AndesTextfield>(R.id.label_text)
-        val helper = layoutTextfield.findViewById<AndesTextfield>(R.id.helper_text)
-        val helperLinkFrom = layoutTextfield.findViewById<AndesTextfield>(R.id.helper_link_from)
-        val helperLinkTo = layoutTextfield.findViewById<AndesTextfield>(R.id.helper_link_to)
-        val placeholder = layoutTextfield.findViewById<AndesTextfield>(R.id.placeholder_text)
-        val counter = layoutTextfield.findViewById<EditText>(R.id.counter)
-        val mask = layoutTextfield.findViewById<AndesTextfield>(R.id.mask)
-        val checkBoxHideIcon = layoutTextfield.findViewById<CheckBox>(R.id.checkboxHideIcon)
+        val textfield = binding.andesuiTextfield
+        val button = binding.changeButton
+        val clearButton = binding.clearButton
+        val label = binding.labelText
+        val helper = binding.helperText
+        val helperLinkFrom = binding.helperLinkFrom
+        val helperLinkTo = binding.helperLinkTo
+        val placeholder = binding.placeholderText
+        val counter = binding.counter
+        val mask = binding.mask
+        val checkBoxHideIcon = binding.checkboxHideIcon
 
         counter.setText(COUNTER_DEFAULT_TEXT)
         textfield.counter = COUNTER_DEFAULT
 
-        val inputTypeSpinner: Spinner = layoutTextfield.findViewById(R.id.textType_spinner)
+        val inputTypeSpinner = binding.textTypeSpinner
         val typeAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, getInputTypesArray())
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         inputTypeSpinner.adapter = typeAdapter
 
-        val stateSpinner: Spinner = layoutTextfield.findViewById(R.id.state_spinner)
+        val stateSpinner = binding.stateSpinner
         val stateAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
@@ -74,7 +66,7 @@ object InflateTextfieldHelper {
         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         stateSpinner.adapter = stateAdapter
 
-        val preffixSpinner: Spinner = layoutTextfield.findViewById(R.id.prefix_spinner)
+        val preffixSpinner = binding.prefixSpinner
         val preffixAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
@@ -83,7 +75,7 @@ object InflateTextfieldHelper {
         preffixAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         preffixSpinner.adapter = preffixAdapter
 
-        val suffixSpinner: Spinner = layoutTextfield.findViewById(R.id.suffix_spinner)
+        val suffixSpinner = binding.suffixSpinner
         val suffixAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
@@ -101,7 +93,7 @@ object InflateTextfieldHelper {
             textfield.helperLinks = if (linksFrom != null || linksTo != null) {
                 AndesTextfieldLinks(
                     links = listOf(AndesTextfieldLink(linksFrom ?: 0, linksTo ?: textfield.helper?.length ?: 0)),
-                    listener = { Toast.makeText(context, "Clicked on link!", Toast.LENGTH_SHORT).show() })
+                    listener = { Toast.makeText(context.applicationContext, "Clicked on link!", Toast.LENGTH_SHORT).show() })
             } else {
                 null
             }
@@ -127,14 +119,14 @@ object InflateTextfieldHelper {
                     textfield.setAction(
                             "Button",
                             View.OnClickListener {
-                                Toast.makeText(context, "Right action pressed", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context.applicationContext, "Right action pressed", Toast.LENGTH_LONG).show()
                             }
                     )
                 } else if (textfield.rightContent == AndesTextfieldRightContent.CHECKBOX) {
                     textfield.setCheckbox(
                             "Checkbox", View.OnClickListener { v ->
                         val checkbox = v as AndesCheckbox
-                        Toast.makeText(context, "Status: ${checkbox.status}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context.applicationContext, "Status: ${checkbox.status}", Toast.LENGTH_SHORT).show()
                     }
                     )
                 } else if (textfield.rightContent == AndesTextfieldRightContent.INDETERMINATE) {
@@ -188,24 +180,22 @@ object InflateTextfieldHelper {
             textfield.clearMask()
         }
 
-        return layoutTextfield
+        return binding.root
     }
 
     fun inflateAndesTextfieldArea(context: Context): View {
-        val layoutTextfieldArea = LayoutInflater
-                .from(context)
-                .inflate(R.layout.andesui_dynamic_textarea, null, false)
-        val textarea = layoutTextfieldArea.findViewById<AndesTextarea>(R.id.andesui_tag)
-        val button = layoutTextfieldArea.findViewById<AndesButton>(R.id.change_button)
-        val clearButton = layoutTextfieldArea.findViewById<AndesButton>(R.id.clear_button)
-        val label = layoutTextfieldArea.findViewById<AndesTextfield>(R.id.label_text)
-        val helper = layoutTextfieldArea.findViewById<AndesTextfield>(R.id.helper_text)
-        val placeholder = layoutTextfieldArea.findViewById<AndesTextfield>(R.id.placeholder_text)
-        val counter = layoutTextfieldArea.findViewById<EditText>(R.id.counter)
+        val binding = AndesuiDynamicTextareaBinding.inflate(LayoutInflater.from(context))
+        val textarea = binding.andesuiTextarea
+        val button = binding.changeButton
+        val clearButton = binding.clearButton
+        val label = binding.labelText
+        val helper = binding.helperText
+        val placeholder = binding.placeholderText
+        val counter = binding.counter
         counter.setText(COUNTER_DEFAULT_TEXT)
         textarea.counter = COUNTER_DEFAULT
 
-        val stateSpinner: Spinner = layoutTextfieldArea.findViewById(R.id.state_spinner)
+        val stateSpinner = binding.stateSpinner
         val stateAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
@@ -241,24 +231,20 @@ object InflateTextfieldHelper {
             textarea.state = AndesTextfieldState.IDLE
         }
 
-        return layoutTextfieldArea
+        return binding.root
     }
 
     fun inflateAndesTextfieldCode(context: Context): View {
-        val layoutTextfieldCode = LayoutInflater.from(context).inflate(
-                R.layout.andesui_dynamic_textcode,
-                null,
-                false
-        ) as ScrollView
+        val binding = AndesuiDynamicTextcodeBinding.inflate(LayoutInflater.from(context))
 
-        val textfieldCode = layoutTextfieldCode.findViewById<AndesTextfieldCode>(R.id.andesui_textfield_code)
-        val updateButton = layoutTextfieldCode.findViewById<AndesButton>(R.id.change_button)
-        val clearButton = layoutTextfieldCode.findViewById<AndesButton>(R.id.clear_button)
-        val stateSpinner = layoutTextfieldCode.findViewById<Spinner>(R.id.state_spinner)
-        val styleSpinner = layoutTextfieldCode.findViewById<Spinner>(R.id.style_spinner)
-        val text = layoutTextfieldCode.findViewById<AndesTextfield>(R.id.text)
-        val label = layoutTextfieldCode.findViewById<AndesTextfield>(R.id.label_text)
-        val helper = layoutTextfieldCode.findViewById<AndesTextfield>(R.id.helper_text)
+        val textfieldCode = binding.andesuiTextfieldCode
+        val updateButton = binding.changeButton
+        val clearButton = binding.clearButton
+        val stateSpinner = binding.stateSpinner
+        val styleSpinner = binding.styleSpinner
+        val text = binding.text
+        val label = binding.labelText
+        val helper = binding.helperText
 
         configureStateAdapter(stateSpinner)
         configureStyleAdapter(styleSpinner)
@@ -297,23 +283,18 @@ object InflateTextfieldHelper {
             textfieldCode.style = AndesTextfieldCodeStyle.THREESOME
         }
 
-        return layoutTextfieldCode
+        return binding.root
     }
 
     fun inflateStaticTextfieldLayout(context: Context): View {
-        val layoutTextfield = LayoutInflater.from(context).inflate(
-                R.layout.andesui_static_textfield,
-                null,
-                false
-        ) as ScrollView
-        layoutTextfield.left
+        val binding = AndesuiStaticTextfieldBinding.inflate(LayoutInflater.from(context))
 
         // Set action clear
-        val textfield1 = layoutTextfield.findViewById<AndesTextfield>(R.id.andesTextfield1)
+        val textfield1 = binding.andesTextfield1
         textfield1.text = context.resources.getString(R.string.andes_textfield_placeholder)
         textfield1.textWatcher = object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                Toast.makeText(context, "Text changed: $s", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Text changed: $s", Toast.LENGTH_SHORT).show()
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -326,33 +307,33 @@ object InflateTextfieldHelper {
         }
 
         // Set text
-        val textfield2 = layoutTextfield.findViewById<AndesTextfield>(R.id.andesTextfield2)
+        val textfield2 = binding.andesTextfield2
         textfield2.text = context.resources.getString(R.string.andes_textfield_placeholder)
 
         // Set action
-        val textfield3 = layoutTextfield.findViewById<AndesTextfield>(R.id.andesTextfield3)
+        val textfield3 = binding.andesTextfield3
         textfield3.setAction(
                 "Button",
                 View.OnClickListener {
-                    Toast.makeText(context, "Action pressed", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context.applicationContext, "Action pressed", Toast.LENGTH_LONG).show()
                 }
         )
 
         // Set text
-        val textfield4 = layoutTextfield.findViewById<AndesTextfield>(R.id.andesTextfield4)
+        val textfield4 = binding.andesTextfield4
         textfield4.text = context.resources.getString(R.string.andes_textfield_placeholder)
 
         // Set left icon
-        val textViewLeftIcon = layoutTextfield.findViewById<AndesTextfield>(R.id.textViewLeftIcon)
+        val textViewLeftIcon = binding.textViewLeftIcon
         textViewLeftIcon.setLeftIcon("andes_navegacion_buscar_24")
 
         ContextCompat.getDrawable(context, com.mercadolibre.android.andesui.R.drawable.andes_navegacion_ajustes)
 
-        layoutTextfield.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_button).setOnClickListener {
+        binding.andesuiDemoappAndesSpecsButton.setOnClickListener {
             launchSpecs(context, AndesSpecs.TEXTFIELD)
         }
 
-        return layoutTextfield
+        return binding.root
     }
 
     private fun configureStateAdapter(stateSpinner: Spinner) {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.mercadolibre.android.andesui.demoapp.commons.AnalyticsHelper
 import com.mercadolibre.android.andesui.demoapp.commons.AnalyticsTracker
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStorybookMainBinding
 import com.mercadolibre.android.andesui.demoapp.utils.COMPONENT_KEY
 import com.mercadolibre.android.andesui.demoapp.utils.QUERY_PARAMETER_KEY
 import com.mercadolibre.android.mlwebkit.webkitcomponent.WebViewComponent
@@ -15,9 +16,10 @@ class StorybookActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_storybook_main)
+        val binding = AndesuiStorybookMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        webviewComponent = findViewById(R.id.webview_storybook)
+        webviewComponent = binding.webviewStorybook
 
         val url = intent.data?.getQueryParameter(QUERY_PARAMETER_KEY)
         val isValidUrl = url?.contains("fury_frontend-andes-ui") ?: false
@@ -25,7 +27,7 @@ class StorybookActivity : AppCompatActivity() {
         if (isValidUrl) {
             webviewComponent.load(url)
         } else {
-            Toast.makeText(this, "URL not allowed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "URL not allowed", Toast.LENGTH_SHORT).show()
         }
 
         val activityName = intent.getStringExtra(COMPONENT_KEY)

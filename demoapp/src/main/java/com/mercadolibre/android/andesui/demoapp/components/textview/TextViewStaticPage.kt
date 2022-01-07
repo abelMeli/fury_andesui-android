@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.Toast
 import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTextviewBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
@@ -48,7 +48,7 @@ class TextViewStaticPage {
                 AndesBodyLink(BODY_LINK_FROM_THIRD, BODY_LINK_TO_THIRD)
             ),
             listener = {
-                Toast.makeText(context, "Click in caution link", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Click in caution link", Toast.LENGTH_SHORT).show()
             }
         )
         val bodyBold = AndesBodyBolds(
@@ -84,7 +84,7 @@ class TextViewStaticPage {
                 AndesBodyLink(BODY_LINK_FROM_SECOND, BODY_LINK_TO_SECOND)
             ),
             listener = {
-                Toast.makeText(context, "Click in inverted link", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Click in inverted link", Toast.LENGTH_SHORT).show()
             }
         )
         invertedLink.bodyLinks = bodyLink
@@ -96,7 +96,7 @@ class TextViewStaticPage {
                 AndesBodyLink(BODY_LINK_FROM_SECOND, BODY_LINK_TO_SECOND)
             ),
             listener = {
-                Toast.makeText(context, "Click in positive link", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Click in positive link", Toast.LENGTH_SHORT).show()
             }
         )
         positiveLink.bodyLinks = bodyLink
@@ -108,7 +108,7 @@ class TextViewStaticPage {
                 AndesBodyLink(BODY_LINK_FROM_FIRST, BODY_LINK_TO_FIRST)
             ),
             listener = {
-                Toast.makeText(context, "Click in primary link", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Click in primary link", Toast.LENGTH_SHORT).show()
             }
         )
         primaryLink.bodyLinks = bodyLink
@@ -123,9 +123,9 @@ class TextViewStaticPage {
             ),
             listener = { index ->
                 when (index) {
-                    0 -> Toast.makeText(context, "Ir a Especificaciones", Toast.LENGTH_SHORT).show()
-                    1 -> Toast.makeText(context, "Ir a Términos y Condiciones", Toast.LENGTH_SHORT).show()
-                    2 -> Toast.makeText(context, "Ir a Mi Perfil", Toast.LENGTH_SHORT).show()
+                    0 -> Toast.makeText(context.applicationContext, "Ir a Especificaciones", Toast.LENGTH_SHORT).show()
+                    1 -> Toast.makeText(context.applicationContext, "Ir a Términos y Condiciones", Toast.LENGTH_SHORT).show()
+                    2 -> Toast.makeText(context.applicationContext, "Ir a Mi Perfil", Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -133,14 +133,15 @@ class TextViewStaticPage {
     }
 
     private fun initComponents(containerView: View) {
-        primaryLink = containerView.findViewById(R.id.static_page_textview_range_primary_link)
-        positiveLink = containerView.findViewById(R.id.static_page_textview_range_positive_link)
-        invertedLink = containerView.findViewById(R.id.static_page_textview_range_inverted_link)
-        primaryBold = containerView.findViewById(R.id.static_page_textview_range_primary_bold)
-        positiveBold = containerView.findViewById(R.id.static_page_textview_range_positive_bold)
-        cautionBoldLink = containerView.findViewById(R.id.static_page_textview_range_caution_bold_and_link)
-        textViewSpecs = containerView.findViewById(R.id.andesui_demoapp_andes_textview_specs_button)
-        multiLink = containerView.findViewById(R.id.static_page_textview_example_multiple_links)
+        val binding = AndesuiStaticTextviewBinding.bind(containerView)
+        primaryLink = binding.staticPageTextviewRangePrimaryLink
+        positiveLink = binding.staticPageTextviewRangePositiveLink
+        invertedLink = binding.staticPageTextviewRangeInvertedLink
+        primaryBold = binding.staticPageTextviewRangePrimaryBold
+        positiveBold = binding.staticPageTextviewRangePositiveBold
+        cautionBoldLink = binding.staticPageTextviewRangeCautionBoldAndLink
+        textViewSpecs = binding.andesuiDemoappAndesTextviewSpecsButton
+        multiLink = binding.staticPageTextviewExampleMultipleLinks
     }
 
     private companion object {

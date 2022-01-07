@@ -9,10 +9,10 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.ArrayRes
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicFloatingmenuBinding
 import com.mercadolibre.android.andesui.demoapp.utils.getInDp
 import com.mercadolibre.android.andesui.floatingmenu.AndesFloatingMenu
 import com.mercadolibre.android.andesui.floatingmenu.orientation.AndesFloatingMenuOrientation
@@ -29,30 +29,17 @@ import com.mercadolibre.android.andesui.textfield.AndesTextfield
 class FloatingMenuDynamicPage {
 
     private lateinit var floatingMenu: AndesFloatingMenu
-    private lateinit var rowsSpinner: Spinner
-    private lateinit var orientationSpinner: Spinner
-    private lateinit var widthSpinner: Spinner
-    private lateinit var triggerPositionSpinner: Spinner
-    private lateinit var updateButton: AndesButton
-    private lateinit var triggerButton: AndesButton
-    private lateinit var clearButton: AndesButton
     private lateinit var andesList: AndesList
-    private lateinit var selectableCheckbox: AndesCheckbox
-    private lateinit var callbackCheckbox: AndesCheckbox
-    private lateinit var constraintContainer: ConstraintLayout
-    private lateinit var listSizeTextField: AndesTextfield
-    private lateinit var widthCustomPixels: AndesTextfield
 
     fun create(context: Context, container: View) {
-        initComponents(container)
-
-        setupConfigComponents(context)
-        setupAndesList(context)
-        setupFloatingMenu(context)
-        setupActionButtons(context)
+        val binding = AndesuiDynamicFloatingmenuBinding.bind(container)
+        setupConfigComponents(context, binding)
+        setupAndesList(context, binding)
+        setupFloatingMenu(context, binding)
+        setupActionButtons(context, binding)
     }
 
-    private fun setupAndesList(context: Context) {
+    private fun setupAndesList(context: Context, binding: AndesuiDynamicFloatingmenuBinding) {
         andesList = AndesList(context).apply {
             delegate = object : AndesListDelegate {
                 var selected = UNSELECTED_POSITION
@@ -70,39 +57,39 @@ class FloatingMenuDynamicPage {
                         context = context,
                         title = "Option ${position + 1}",
                         size = AndesListViewItemSize.SMALL,
-                        itemSelected = selected == position && selectableCheckbox.status == AndesCheckboxStatus.SELECTED
+                        itemSelected = selected == position && binding.floatingMenuSelectable.status == AndesCheckboxStatus.SELECTED
                     )
                 }
 
                 override fun getDataSetSize(andesList: AndesList): Int =
-                    listSizeTextField.text?.toIntOrNull() ?: DEFAULT_LIST_SIZE
+                    binding.floatingMenuListSizeEditText.text?.toIntOrNull() ?: DEFAULT_LIST_SIZE
             }
         }
     }
 
-    private fun setupActionButtons(context: Context) {
-        updateButton.setOnClickListener {
+    private fun setupActionButtons(context: Context, binding: AndesuiDynamicFloatingmenuBinding) {
+        binding.changeButton.setOnClickListener {
             with(floatingMenu) {
-                rows = retrieveSelectedRows()
-                orientation = retrieveSelectedOrientation()
-                width = retrieveSelectedWidth()
-                setOnDismissListener(retrieveDismissListener(context))
-                setOnShowListener(retrieveShowListener(context))
+                rows = retrieveSelectedRows(binding.floatingMenuRowsSpinner)
+                orientation = retrieveSelectedOrientation(binding.floatingMenuOrientationSpinner)
+                width = retrieveSelectedWidth(binding)
+                setOnDismissListener(retrieveDismissListener(context, binding.floatingMenuCallback))
+                setOnShowListener(retrieveShowListener(context, binding.floatingMenuCallback))
             }
-            updateTriggerPosition(context)
+            updateTriggerPosition(context, binding)
         }
-        clearButton.setOnClickListener {
-            resetSpinners()
-            resetSelectableCheck()
-            resetCallbackCheck()
-            updateTriggerPosition(context)
-            resetAndesList(context)
-            resetComponent(context)
+        binding.clearButton.setOnClickListener {
+            resetSpinners(binding)
+            resetSelectableCheck(binding.floatingMenuSelectable)
+            resetCallbackCheck(binding.floatingMenuCallback)
+            updateTriggerPosition(context, binding)
+            resetAndesList(context, binding)
+            resetComponent(context, binding)
         }
     }
 
-    private fun retrieveDismissListener(context: Context): AndesFloatingMenu.OnDismissListener? {
-        return when (callbackCheckbox.status) {
+    private fun retrieveDismissListener(context: Context, checkbox: AndesCheckbox): AndesFloatingMenu.OnDismissListener? {
+        return when (checkbox.status) {
             AndesCheckboxStatus.SELECTED -> object : AndesFloatingMenu.OnDismissListener {
                 override fun onDismiss() {
                     Toast.makeText(context.applicationContext, "Dismissed", LENGTH_SHORT).show()
@@ -112,8 +99,8 @@ class FloatingMenuDynamicPage {
         }
     }
 
-    private fun retrieveShowListener(context: Context): AndesFloatingMenu.OnShowListener? {
-        return when (callbackCheckbox.status) {
+    private fun retrieveShowListener(context: Context, checkbox: AndesCheckbox): AndesFloatingMenu.OnShowListener? {
+        return when (checkbox.status) {
             AndesCheckboxStatus.SELECTED -> object : AndesFloatingMenu.OnShowListener {
                 override fun onShow() {
                     Toast.makeText(context.applicationContext, "Showed", LENGTH_SHORT).show()
@@ -123,53 +110,56 @@ class FloatingMenuDynamicPage {
         }
     }
 
-    private fun resetComponent(context: Context) {
+    private fun resetComponent(context: Context, binding: AndesuiDynamicFloatingmenuBinding) {
         with(floatingMenu) {
             orientation = AndesFloatingMenuOrientation.Left
             rows = AndesFloatingMenuRows.Medium
             width = AndesFloatingMenuWidth.Fixed
-            setOnDismissListener(retrieveDismissListener(context))
-            setOnShowListener(retrieveShowListener(context))
+            setOnDismissListener(retrieveDismissListener(context, binding.floatingMenuCallback))
+            setOnShowListener(retrieveShowListener(context, binding.floatingMenuCallback))
         }
     }
 
-    private fun resetSpinners() {
-        rowsSpinner.setSelection(1)
-        orientationSpinner.setSelection(0)
-        widthSpinner.setSelection(0)
-        triggerPositionSpinner.setSelection(0)
+    private fun resetSpinners(binding: AndesuiDynamicFloatingmenuBinding) = with(binding) {
+        floatingMenuRowsSpinner.setSelection(1)
+        floatingMenuOrientationSpinner.setSelection(0)
+        floatingMenuWidthSpinner.setSelection(0)
+        floatingMenuTriggerPositionSpinner.setSelection(0)
     }
 
-    private fun resetSelectableCheck() {
-        selectableCheckbox.status = AndesCheckboxStatus.UNSELECTED
+    private fun resetSelectableCheck(checkbox: AndesCheckbox) {
+        checkbox.status = AndesCheckboxStatus.UNSELECTED
     }
 
-    private fun resetCallbackCheck() {
-        callbackCheckbox.status = AndesCheckboxStatus.UNSELECTED
+    private fun resetCallbackCheck(checkbox: AndesCheckbox) {
+        checkbox.status = AndesCheckboxStatus.UNSELECTED
     }
 
-    private fun updateTriggerPosition(context: Context) {
-        val params = triggerButton.layoutParams as ConstraintLayout.LayoutParams
+    private fun updateTriggerPosition(
+        context: Context,
+        binding: AndesuiDynamicFloatingmenuBinding
+    ) = with(binding) {
+        val params = andesFloatingmenuTrigger.layoutParams as ConstraintLayout.LayoutParams
 
-        when (triggerPositionSpinner.getItemAtPosition(triggerPositionSpinner.selectedItemPosition)) {
+        when (floatingMenuTriggerPositionSpinner.getItemAtPosition(floatingMenuTriggerPositionSpinner.selectedItemPosition)) {
             "Left" -> setConstraints(
                 params = params,
-                mStartToStart = constraintContainer.id,
+                mStartToStart = floatingMenuConstraintLayout.id,
                 mMarginStart = context.getInDp(SIDE_MARGIN)
             )
             "Right" -> setConstraints(
                 params = params,
-                mEndToEnd = constraintContainer.id,
+                mEndToEnd = floatingMenuConstraintLayout.id,
                 mMarginEnd = context.getInDp(SIDE_MARGIN)
             )
             "Center" -> setConstraints(
                 params = params,
-                mStartToStart = constraintContainer.id,
-                mEndToEnd = constraintContainer.id
+                mStartToStart = floatingMenuConstraintLayout.id,
+                mEndToEnd = floatingMenuConstraintLayout.id
             )
         }
-        triggerButton.layoutParams = params
-        triggerButton.requestLayout()
+        binding.andesFloatingmenuTrigger.layoutParams = params
+        binding.andesFloatingmenuTrigger.requestLayout()
     }
 
     private fun setConstraints(
@@ -185,23 +175,25 @@ class FloatingMenuDynamicPage {
         marginEnd = mMarginEnd
     }
 
-    private fun resetAndesList(context: Context) {
-        listSizeTextField.text = "$DEFAULT_LIST_SIZE"
-        setupAndesList(context)
+    private fun resetAndesList(context: Context, binding: AndesuiDynamicFloatingmenuBinding) {
+        binding.floatingMenuListSizeEditText.text = "$DEFAULT_LIST_SIZE"
+        setupAndesList(context, binding)
     }
 
-    private fun retrieveSelectedWidth(): AndesFloatingMenuWidth {
-        return when (widthSpinner.getItemAtPosition(widthSpinner.selectedItemPosition)) {
+    private fun retrieveSelectedWidth(
+        binding: AndesuiDynamicFloatingmenuBinding
+    ): AndesFloatingMenuWidth = with(binding) {
+        when (floatingMenuWidthSpinner.getItemAtPosition(floatingMenuWidthSpinner.selectedItemPosition)) {
             "Fixed" -> AndesFloatingMenuWidth.Fixed
             "Custom" -> AndesFloatingMenuWidth.Custom(
-                widthCustomPixels.text?.toIntOrNull() ?: DEFAULT_WIDTH
+                floatingMenuWidthEditText.text?.toIntOrNull() ?: DEFAULT_WIDTH
             )
             else -> AndesFloatingMenuWidth.Fixed
         }
     }
 
-    private fun retrieveSelectedRows(): AndesFloatingMenuRows {
-        return when (rowsSpinner.getItemAtPosition(rowsSpinner.selectedItemPosition)) {
+    private fun retrieveSelectedRows(spinner: Spinner): AndesFloatingMenuRows {
+        return when (spinner.getItemAtPosition(spinner.selectedItemPosition)) {
             "Small" -> AndesFloatingMenuRows.Small
             "Medium" -> AndesFloatingMenuRows.Medium
             "Max" -> AndesFloatingMenuRows.Max
@@ -209,63 +201,59 @@ class FloatingMenuDynamicPage {
         }
     }
 
-    private fun retrieveSelectedOrientation(): AndesFloatingMenuOrientation {
-        return when (orientationSpinner.getItemAtPosition(orientationSpinner.selectedItemPosition)) {
+    private fun retrieveSelectedOrientation(spinner: Spinner): AndesFloatingMenuOrientation {
+        return when (spinner.getItemAtPosition(spinner.selectedItemPosition)) {
             "Left" -> AndesFloatingMenuOrientation.Left
             "Right" -> AndesFloatingMenuOrientation.Right
             else -> AndesFloatingMenuOrientation.Left
         }
     }
 
-    private fun initComponents(container: View) {
-        constraintContainer = container.findViewById(R.id.floatingMenuConstraintLayout)
-        rowsSpinner = container.findViewById(R.id.floatingMenuRowsSpinner)
-        orientationSpinner = container.findViewById(R.id.floatingMenuOrientationSpinner)
-        widthSpinner = container.findViewById(R.id.floatingMenuWidthSpinner)
-        widthCustomPixels = container.findViewById(R.id.floatingMenuWidthEditText)
-        triggerPositionSpinner = container.findViewById(R.id.floatingMenuTriggerPositionSpinner)
-        callbackCheckbox = container.findViewById(R.id.floatingMenuCallback)
-        selectableCheckbox = container.findViewById(R.id.floatingMenuSelectable)
-        listSizeTextField = container.findViewById(R.id.floatingMenuListSizeEditText)
-        updateButton = container.findViewById(R.id.change_button)
-        triggerButton = container.findViewById(R.id.andes_floatingmenu_trigger)
-        clearButton = container.findViewById(R.id.clear_button)
-    }
-
-    private fun setupConfigComponents(context: Context) {
-        setupSpinnerComponent(context, rowsSpinner, R.array.andes_floatingmenu_rows_spinner).also {
-            rowsSpinner.setSelection(1)
+    private fun setupConfigComponents(
+        context: Context,
+        binding: AndesuiDynamicFloatingmenuBinding
+    ) = with(binding) {
+        setupSpinnerComponent(
+            context,
+            floatingMenuRowsSpinner,
+            R.array.andes_floatingmenu_rows_spinner
+        ).also {
+            floatingMenuRowsSpinner.setSelection(1)
         }
         setupSpinnerComponent(
             context,
-            orientationSpinner,
+            floatingMenuOrientationSpinner,
             R.array.andes_floatingmenu_orientation_spinner
         )
-        setupSpinnerComponent(context, widthSpinner, R.array.andes_floatingmenu_width_spinner)
         setupSpinnerComponent(
             context,
-            triggerPositionSpinner,
+            floatingMenuWidthSpinner,
+            R.array.andes_floatingmenu_width_spinner
+        )
+        setupSpinnerComponent(
+            context,
+            floatingMenuTriggerPositionSpinner,
             R.array.andes_floatingmenu_trigger_position_spinner
         )
-        setupWidthCustomComponent()
-        setupListSizeComponent()
+        setupWidthCustomComponent(this)
+        setupListSizeComponent(floatingMenuListSizeEditText)
     }
 
-    private fun setupListSizeComponent() {
-        listSizeTextField.text = DEFAULT_LIST_SIZE.toString()
+    private fun setupListSizeComponent(textfield: AndesTextfield) {
+        textfield.text = DEFAULT_LIST_SIZE.toString()
     }
 
-    private fun setupWidthCustomComponent() {
-        widthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+    private fun setupWidthCustomComponent(binding: AndesuiDynamicFloatingmenuBinding) = with(binding) {
+        floatingMenuWidthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                when (widthSpinner.getItemAtPosition(position)) {
-                    "Custom" -> widthCustomPixels.visibility = View.VISIBLE
-                    else -> widthCustomPixels.visibility = View.GONE
+                when (floatingMenuWidthSpinner.getItemAtPosition(position)) {
+                    "Custom" -> floatingMenuWidthEditText.visibility = View.VISIBLE
+                    else -> floatingMenuWidthEditText.visibility = View.GONE
                 }
             }
 
@@ -273,12 +261,12 @@ class FloatingMenuDynamicPage {
                 // no-op
             }
         }
-        widthCustomPixels.text = DEFAULT_WIDTH.toString()
+        floatingMenuWidthEditText.text = DEFAULT_WIDTH.toString()
     }
 
-    private fun setupFloatingMenu(context: Context) {
+    private fun setupFloatingMenu(context: Context, binding: AndesuiDynamicFloatingmenuBinding) {
         floatingMenu = AndesFloatingMenu(context, andesList)
-        triggerButton.setOnClickListener {
+        binding.andesFloatingmenuTrigger.setOnClickListener {
             floatingMenu.show(it)
         }
     }

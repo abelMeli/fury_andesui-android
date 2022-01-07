@@ -2,28 +2,22 @@ package com.mercadolibre.android.andesui.demoapp.components.linearprogressindica
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicLinearProgressBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticLinearProgressBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.linearprogress.AndesLinearProgressIndicatorDeterminate
 import com.mercadolibre.android.andesui.linearprogress.size.AndesLinearProgressSize
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 private const val TINT_DEFAULT = 0
 private const val NUMBER_OF_STEPS_DEFAULT = 10
-private const val NUMBER_OF_STEPS_EXAMPLE = 4
 private const val MAX_NUMBER_OF_STEPS = 20
 private const val MIN_NUMBER_OF_STEPS = 2
 private const val STEP_ONE = 1
@@ -46,19 +40,17 @@ class LinearProgressShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_linear_progress_indicator)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(
-            listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_linear_progress, null, false),
-                inflater.inflate(R.layout.andesui_static_linear_progress, null, false)
+            listOf(
+                AndesuiDynamicLinearProgressBinding.inflate(layoutInflater).root,
+                AndesuiStaticLinearProgressBinding.inflate(layoutInflater).root
             )
         )
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -68,19 +60,19 @@ class LinearProgressShowcaseActivity : BaseActivity() {
     }
 
     private fun addDynamicPage(container: View) {
-        val nextStepButton = container.findViewById<AndesButton>(R.id.next_step_button)
-        val previousStepButton = container.findViewById<AndesButton>(R.id.previous_step_button)
-        val changeButton = container.findViewById<AndesButton>(R.id.change_button)
-        val clearButton = container.findViewById<AndesButton>(R.id.clear_button)
-        val jumpToStepButton = container.findViewById<AndesButton>(R.id.jump_to_step_button)
-        val linearProgress =
-            container.findViewById<AndesLinearProgressIndicatorDeterminate>(R.id.linear_progress)
-        val jumpToStepField: AndesTextfield = container.findViewById(R.id.jump_to_step_text)
-        val numberOfStepsField: AndesTextfield = container.findViewById(R.id.number_of_steps_text)
-        val indicatorField: AndesTextfield = container.findViewById(R.id.indicator_text)
-        val trackField: AndesTextfield = container.findViewById(R.id.track_text)
-        val splitCheckbox = container.findViewById<AndesCheckbox>(R.id.split_checkbox)
-        val sizeSpinner: Spinner = container.findViewById(R.id.size_spinner)
+        val binding = AndesuiDynamicLinearProgressBinding.bind(container)
+        val nextStepButton = binding.nextStepButton
+        val previousStepButton = binding.previousStepButton
+        val changeButton = binding.changeButton
+        val clearButton = binding.clearButton
+        val jumpToStepButton = binding.jumpToStepButton
+        val linearProgress = binding.linearProgress
+        val jumpToStepField = binding.jumpToStepText
+        val numberOfStepsField = binding.numberOfStepsText
+        val indicatorField = binding.indicatorText
+        val trackField = binding.trackText
+        val splitCheckbox = binding.splitCheckbox
+        val sizeSpinner = binding.sizeSpinner
 
         numberOfStepsField.helper = HELPER_NUMBER_OF_STEPS
         jumpToStepField.helper = "MIN = $STEP_ONE / MAX = $numberOfSteps"
@@ -187,16 +179,10 @@ class LinearProgressShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        container.findViewById<AndesLinearProgressIndicatorDeterminate>(R.id.linear_progress_indicator)
-            .jumpToStep(STEP_THREE)
-
-        bindAndesSpecsButton(container)
-    }
-
-    private fun bindAndesSpecsButton(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_progress)
-            .setOnClickListener {
-                launchSpecs(container.context, AndesSpecs.PROGRESS_INDICATOR)
-            }
+        val binding = AndesuiStaticLinearProgressBinding.bind(container)
+        binding.linearProgressIndicator.jumpToStep(STEP_THREE)
+        binding.andesuiDemoappAndesSpecsProgress.setOnClickListener {
+            launchSpecs(container.context, AndesSpecs.PROGRESS_INDICATOR)
+        }
     }
 }

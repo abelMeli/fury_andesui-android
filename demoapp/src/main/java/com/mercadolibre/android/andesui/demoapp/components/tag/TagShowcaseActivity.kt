@@ -2,10 +2,7 @@ package com.mercadolibre.android.andesui.demoapp.components.tag
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.Spinner
-import android.widget.TextView
 import android.widget.ArrayAdapter
 import android.widget.AdapterView
 import android.widget.LinearLayout
@@ -17,13 +14,14 @@ import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTagBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTagChoiceBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTagSimpleBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.tag.AndesTagChoice
 import com.mercadolibre.android.andesui.tag.AndesTagSimple
@@ -37,7 +35,6 @@ import com.mercadolibre.android.andesui.tag.leftcontent.LeftContentImage
 import com.mercadolibre.android.andesui.tag.leftcontent.IconSize
 import com.mercadolibre.android.andesui.tag.size.AndesTagSize
 import com.mercadolibre.android.andesui.tag.type.AndesTagType
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.utils.validateColor
 
@@ -56,18 +53,16 @@ class TagShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_tag)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_tag, null, false),
-                inflater.inflate(R.layout.andesui_static_tag_simple, null, false),
-                inflater.inflate(R.layout.andesui_static_tag_choice, null, false)
+                AndesuiDynamicTagBinding.inflate(layoutInflater).root,
+                AndesuiStaticTagSimpleBinding.inflate(layoutInflater).root,
+                AndesuiStaticTagChoiceBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -79,11 +74,12 @@ class TagShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val andesTagSimple: AndesTagSimple = container.findViewById(R.id.andesui_tag)
-        val simpleTypeTextView: TextView = container.findViewById(R.id.simpleTypeTextView)
-        val andesTagChoice: AndesTagChoice = container.findViewById(R.id.andesui_tag_choice)
+        val binding = AndesuiDynamicTagBinding.bind(container)
+        val andesTagSimple = binding.andesuiTag
+        val simpleTypeTextView = binding.simpleTypeTextView
+        val andesTagChoice = binding.andesuiTagChoice
 
-        val typeSpinner: Spinner = container.findViewById(R.id.tag_type_spinner)
+        val typeSpinner = binding.tagTypeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_tag_type_spinner,
@@ -93,7 +89,7 @@ class TagShowcaseActivity : BaseActivity() {
             typeSpinner.adapter = adapter
         }
 
-        val simpleTypeSpinner: Spinner = container.findViewById(R.id.simple_type_spinner)
+        val simpleTypeSpinner = binding.simpleTypeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.simple_type_spinner,
@@ -103,14 +99,14 @@ class TagShowcaseActivity : BaseActivity() {
             simpleTypeSpinner.adapter = adapter
         }
 
-        val groupDot: Group = container.findViewById(R.id.group_dot)
-        val groupIcon: Group = container.findViewById(R.id.group_icon)
-        val groupImage: Group = container.findViewById(R.id.group_image)
+        val groupDot: Group = binding.groupDot
+        val groupIcon: Group = binding.groupIcon
+        val groupImage: Group = binding.groupImage
         groupDot.visibility = View.GONE
         groupIcon.visibility = View.GONE
         groupImage.visibility = View.GONE
 
-        val sizeSpinner: Spinner = container.findViewById(R.id.size_spinner)
+        val sizeSpinner = binding.sizeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.size_spinner,
@@ -120,7 +116,7 @@ class TagShowcaseActivity : BaseActivity() {
             sizeSpinner.adapter = adapter
         }
 
-        val leftContentSpinner: Spinner = container.findViewById(R.id.left_content_spinner)
+        val leftContentSpinner = binding.leftContentSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_left_content_spinner,
@@ -130,25 +126,25 @@ class TagShowcaseActivity : BaseActivity() {
             leftContentSpinner.adapter = adapter
         }
 
-        val backgroundColor: AndesTextfield = container.findViewById(R.id.left_content_background_color)
+        val backgroundColor = binding.leftContentBackgroundColor
         backgroundColor.setPrefix("#")
         backgroundColor.placeholder = "FFFFFF"
 
-        val color: AndesTextfield = container.findViewById(R.id.left_content_text_color)
+        val color = binding.leftContentTextColor
         color.setPrefix("#")
         color.placeholder = "FFFFFF"
 
-        val iconBackgroundColor: AndesTextfield = container.findViewById(R.id.left_content_icon_background_color)
+        val iconBackgroundColor = binding.leftContentIconBackgroundColor
         iconBackgroundColor.setPrefix("#")
         iconBackgroundColor.placeholder = "FFFFFF"
 
-        val iconColor: AndesTextfield = container.findViewById(R.id.left_content_icon_color)
+        val iconColor = binding.leftContentIconColor
         iconColor.setPrefix("#")
         iconColor.placeholder = "FFFFFF"
 
         val array = arrayOf("Warning", "Success", "Close", "Info")
-        val iconsSpinner: Spinner = container.findViewById(R.id.icon_spinner)
-        val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
+        val iconsSpinner = binding.iconSpinner
+        val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter(
                 this,
                 android.R.layout.simple_spinner_item,
                 array
@@ -157,7 +153,7 @@ class TagShowcaseActivity : BaseActivity() {
         iconsSpinner.adapter = spinnerArrayAdapter
 
         val arrayUrl = arrayOf("Image 1", "Image 2", "Image 3")
-        val urlSpinner: Spinner = container.findViewById(R.id.spinner_url)
+        val urlSpinner = binding.spinnerUrl
         val urlArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -166,11 +162,11 @@ class TagShowcaseActivity : BaseActivity() {
         urlArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         urlSpinner.adapter = urlArrayAdapter
 
-        val labelText: AndesTextfield = container.findViewById(R.id.label_text)
+        val labelText = binding.labelText
         labelText.placeholder = resources.getString(R.string.andes_textfield_label_text)
 
-        val dismissable: SwitchCompat = container.findViewById(R.id.dismissable)
-        val shouldAnimate: SwitchCompat = container.findViewById(R.id.should_animate)
+        val dismissable = binding.dismissable
+        val shouldAnimate: SwitchCompat = binding.shouldAnimate
 
         typeSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -235,11 +231,7 @@ class TagShowcaseActivity : BaseActivity() {
             }
         }
 
-        val clearButton: AndesButton = container.findViewById(R.id.clear_button)
-        val changeButton: AndesButton = container.findViewById(R.id.change_button)
-        val textDot: AndesTextfield = container.findViewById(R.id.left_content_text)
-
-        clearButton.setOnClickListener {
+        binding.clearButton.setOnClickListener {
             andesTagSimple.visibility = View.VISIBLE
 
             dismissable.isChecked = false
@@ -258,7 +250,7 @@ class TagShowcaseActivity : BaseActivity() {
             andesTagSimple.leftContent = null
         }
 
-        changeButton.setOnClickListener {
+        binding.changeButton.setOnClickListener {
             val size = AndesTagSize.fromString(sizeSpinner.selectedItem as String)
 
             if (labelText.text.isNullOrEmpty()) {
@@ -304,7 +296,7 @@ class TagShowcaseActivity : BaseActivity() {
                     leftContent = LeftContent(
                             dot = LeftContentDot(
                                     "#${backgroundColor.text!!}",
-                                    textDot.text,
+                                    binding.leftContentText.text,
                                     textColor
                             )
                     )
@@ -390,12 +382,13 @@ class TagShowcaseActivity : BaseActivity() {
 
     @Suppress("LongMethod")
     private fun addStaticPage(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_tag_specs_button).setOnClickListener {
+        val binding = AndesuiStaticTagSimpleBinding.bind(container)
+        binding.andesuiDemoappAndesTagSpecsButton.setOnClickListener {
             launchSpecs(it.context, AndesSpecs.TAG)
         }
 
-        val firstColumn = container.findViewById<LinearLayout>(R.id.firstColumn)
-        val secondColumn = container.findViewById<LinearLayout>(R.id.secondColumn)
+        val firstColumn = binding.firstColumn
+        val secondColumn = binding.secondColumn
 
         val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -430,7 +423,7 @@ class TagShowcaseActivity : BaseActivity() {
         tagSimpleSmallDismissableWithCallback.isDismissable = true
         tagSimpleSmallDismissableWithCallback.setupDismsissableCallback(
                 View.OnClickListener {
-                    Toast.makeText(this@TagShowcaseActivity, "Dismiss onClicked", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "Dismiss onClicked", Toast.LENGTH_LONG).show()
                 }
         )
         firstColumn.addView(tagSimpleSmallDismissableWithCallback, params)
@@ -461,7 +454,7 @@ class TagShowcaseActivity : BaseActivity() {
         tagSimpleDismissableWithCallback.isDismissable = true
         tagSimpleDismissableWithCallback.setupDismsissableCallback(
                 View.OnClickListener {
-                    Toast.makeText(this@TagShowcaseActivity, "Dismiss onClicked", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "Dismiss onClicked", Toast.LENGTH_LONG).show()
                 }
         )
         firstColumn.addView(tagSimpleDismissableWithCallback, params)
@@ -592,17 +585,18 @@ class TagShowcaseActivity : BaseActivity() {
 
     @Suppress("LongMethod")
     private fun addStaticSecondPage(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_tag_specs_button).setOnClickListener {
+        val binding = AndesuiStaticTagChoiceBinding.bind(container)
+        binding.andesuiDemoappAndesTagSpecsButton.setOnClickListener {
             launchSpecs(this, AndesSpecs.TAG)
         }
-        val viewTitle: TextView = container.findViewById(R.id.static_tag_title)
+        val viewTitle = binding.staticTagTitle
         viewTitle.text = "Choice tag"
 
         val drawable = ResourcesCompat.getDrawable(
                 resources, R.drawable.andes_navegacion_ajustes, applicationContext.theme
         )
-        val firstColumn = container.findViewById<LinearLayout>(R.id.firstColumn)
-        val secondColumn = container.findViewById<LinearLayout>(R.id.secondColumn)
+        val firstColumn = binding.firstColumn
+        val secondColumn = binding.secondColumn
 
         val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -743,7 +737,7 @@ class TagShowcaseActivity : BaseActivity() {
         )
         tagChoiceDropdownCallback.callback = object : AndesTagChoiceCallback {
             override fun shouldSelectTag(andesTagChoice: AndesTagChoice): Boolean {
-                Toast.makeText(this@TagShowcaseActivity, "Dropdown clicked. Return false", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Dropdown clicked. Return false", Toast.LENGTH_LONG).show()
                 return false
             }
         }
@@ -758,7 +752,7 @@ class TagShowcaseActivity : BaseActivity() {
         )
         tagChoiceDropdownCallback2.callback = object : AndesTagChoiceCallback {
             override fun shouldSelectTag(andesTagChoice: AndesTagChoice): Boolean {
-                Toast.makeText(this@TagShowcaseActivity, "Dropdown clicked. Return true", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Dropdown clicked. Return true", Toast.LENGTH_LONG).show()
                 return true
             }
         }
@@ -773,7 +767,7 @@ class TagShowcaseActivity : BaseActivity() {
         )
         tagChoiceDropdownCallbackSmall.callback = object : AndesTagChoiceCallback {
             override fun shouldSelectTag(andesTagChoice: AndesTagChoice): Boolean {
-                Toast.makeText(this@TagShowcaseActivity, "Dropdown clicked. Return false", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Dropdown clicked. Return false", Toast.LENGTH_LONG).show()
                 return false
             }
         }
@@ -788,7 +782,7 @@ class TagShowcaseActivity : BaseActivity() {
         )
         tagChoiceDropdownCallbackSmall2.callback = object : AndesTagChoiceCallback {
             override fun shouldSelectTag(andesTagChoice: AndesTagChoice): Boolean {
-                Toast.makeText(this@TagShowcaseActivity, "Dropdown clicked. Return true", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Dropdown clicked. Return true", Toast.LENGTH_LONG).show()
                 return true
             }
         }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.databinding.AndesLayoutSimpleTagBinding
 import com.mercadolibre.android.andesui.tag.choice.AndesTagChoiceCallback
 import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
 import com.mercadolibre.android.andesui.tag.choice.mode.AndesTagChoiceMode
@@ -24,13 +25,14 @@ import com.mercadolibre.android.andesui.tag.leftcontent.LeftContent
 import com.mercadolibre.android.andesui.tag.rightcontent.AndesTagRightContent
 import com.mercadolibre.android.andesui.tag.size.AndesTagSize
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import kotlinx.android.synthetic.main.andes_layout_simple_tag.view.*
 
 @Suppress("TooManyFunctions")
 class AndesTagChoice : ConstraintLayout {
 
     private lateinit var andesTagAttrs: AndesTagChoiceAttrs
-    private lateinit var containerTag: ConstraintLayout
+    private val binding by lazy {
+        AndesLayoutSimpleTagBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     /**
      * Getter and setter for [state].
@@ -167,7 +169,7 @@ class AndesTagChoice : ConstraintLayout {
         setupRightContent(config)
         setupBackgroundComponents(config)
 
-        containerTag.setOnClickListener {
+        binding.andesTagContainer.setOnClickListener {
             onTagClick()
         }
     }
@@ -188,16 +190,13 @@ class AndesTagChoice : ConstraintLayout {
      * After a view is created then a view id is added to it.
      */
     private fun initComponents() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_simple_tag, this)
-        containerTag = container.findViewById(R.id.andes_tag_container)
-
         // enable animations
         if (shouldAnimateTag) {
             val layoutTransition = LayoutTransition()
             layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
-            containerTag.layoutTransition = layoutTransition
+            binding.andesTagContainer.layoutTransition = layoutTransition
         } else {
-            containerTag.layoutTransition = null
+            binding.andesTagContainer.layoutTransition = null
         }
     }
 
@@ -209,9 +208,11 @@ class AndesTagChoice : ConstraintLayout {
         shape.setStroke(borderSize.toInt(), config.borderColor.colorInt(context))
         background = shape
 
-        containerTag.minHeight = size.size.height(context).toInt()
-        containerTag.maxHeight = size.size.height(context).toInt()
-        containerTag.minWidth = size.size.height(context).toInt()
+        with(binding.andesTagContainer) {
+            minHeight = size.size.height(context).toInt()
+            maxHeight = size.size.height(context).toInt()
+            minWidth = size.size.height(context).toInt()
+        }
     }
 
     /**
@@ -219,26 +220,37 @@ class AndesTagChoice : ConstraintLayout {
      */
     private fun setupTitleComponent(config: AndesTagChoiceConfiguration) {
         if (state == AndesTagChoiceState.SELECTED) {
-            containerTag.contentDescription = config.text + context.resources.getString(R.string.andes_tag_choice_selected)
+            binding.andesTagContainer.contentDescription =
+                config.text + context.resources.getString(R.string.andes_tag_choice_selected)
         } else {
-            containerTag.contentDescription = config.text
+            binding.andesTagContainer.contentDescription = config.text
         }
 
         if (config.text == null || config.text.isEmpty()) {
-            containerTag.visibility = View.GONE
+            binding.andesTagContainer.visibility = View.GONE
         } else {
-            containerTag.visibility = View.VISIBLE
+            binding.andesTagContainer.visibility = View.VISIBLE
 
-            simpleTagText.text = config.text
-            simpleTagText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-            simpleTagText.setTextSize(TypedValue.COMPLEX_UNIT_PX, size.size.textSize(context))
-            simpleTagText.setTextColor(config.textColor.colorInt(context))
+            with(binding.simpleTagText) {
+                text = config.text
+                typeface = context.getFontOrDefault(R.font.andes_font_regular)
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, size.size.textSize(context))
+                setTextColor(config.textColor.colorInt(context))
+            }
 
             val constraintSet = ConstraintSet()
-            constraintSet.clone(containerTag)
-            constraintSet.setMargin(R.id.simpleTagText, ConstraintSet.START, config.leftContent.content.leftMarginText(context, size))
-            constraintSet.setMargin(R.id.simpleTagText, ConstraintSet.END, config.rightContent.content.rightMarginText(context, size))
-            constraintSet.applyTo(containerTag)
+            constraintSet.clone(binding.andesTagContainer)
+            constraintSet.setMargin(
+                R.id.simpleTagText,
+                ConstraintSet.START,
+                config.leftContent.content.leftMarginText(context, size)
+            )
+            constraintSet.setMargin(
+                R.id.simpleTagText,
+                ConstraintSet.END,
+                config.rightContent.content.rightMarginText(context, size)
+            )
+            constraintSet.applyTo(binding.andesTagContainer)
         }
     }
 
@@ -262,10 +274,18 @@ class AndesTagChoice : ConstraintLayout {
             leftContent.visibility = View.VISIBLE
 
             val constraintSet = ConstraintSet()
-            constraintSet.clone(containerTag)
-            constraintSet.setMargin(R.id.leftContent, ConstraintSet.START, config.leftContent.content.leftMargin(context))
-            constraintSet.setMargin(R.id.leftContent, ConstraintSet.END, config.leftContent.content.rightMargin(context))
-            constraintSet.applyTo(containerTag)
+            constraintSet.clone(binding.andesTagContainer)
+            constraintSet.setMargin(
+                R.id.leftContent,
+                ConstraintSet.START,
+                config.leftContent.content.leftMargin(context)
+            )
+            constraintSet.setMargin(
+                R.id.leftContent,
+                ConstraintSet.END,
+                config.leftContent.content.rightMargin(context)
+            )
+            constraintSet.applyTo(binding.andesTagContainer)
         } else {
             leftContent.visibility = View.GONE
         }
@@ -275,18 +295,28 @@ class AndesTagChoice : ConstraintLayout {
         val rightContent = findViewById<FrameLayout>(R.id.rightContent)
         if (config.rightContent != AndesTagRightContent.NONE) {
             rightContent.removeAllViews()
-            rightContent.addView(config.rightContent.content.view(
+            rightContent.addView(
+                config.rightContent.content.view(
                     context,
                     config.rightContentColor,
                     null,
                     null
-            ))
+                )
+            )
 
             val constraintSet = ConstraintSet()
-            constraintSet.clone(containerTag)
-            constraintSet.setMargin(R.id.rightContent, ConstraintSet.START, config.rightContent.content.leftMargin(context, size))
-            constraintSet.setMargin(R.id.rightContent, ConstraintSet.END, config.rightContent.content.rightMargin(context, size))
-            constraintSet.applyTo(containerTag)
+            constraintSet.clone(binding.andesTagContainer)
+            constraintSet.setMargin(
+                R.id.rightContent,
+                ConstraintSet.START,
+                config.rightContent.content.leftMargin(context, size)
+            )
+            constraintSet.setMargin(
+                R.id.rightContent,
+                ConstraintSet.END,
+                config.rightContent.content.rightMargin(context, size)
+            )
+            constraintSet.applyTo(binding.andesTagContainer)
 
             rightContent.visibility = View.VISIBLE
         } else {

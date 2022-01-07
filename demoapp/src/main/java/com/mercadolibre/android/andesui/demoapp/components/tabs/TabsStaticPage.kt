@@ -3,30 +3,22 @@ package com.mercadolibre.android.andesui.demoapp.components.tabs
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import androidx.viewpager.widget.ViewPager
-import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTabsBinding
 import com.mercadolibre.android.andesui.tabs.AndesTabItem
-import com.mercadolibre.android.andesui.tabs.AndesTabs
 
 class TabsStaticPage {
 
-    private lateinit var andesTabsLeftAlign: AndesTabs
-    private lateinit var andesTabsFullWidth: AndesTabs
-    private lateinit var viewPager: ViewPager
     private lateinit var items: ArrayList<AndesTabItem>
     private lateinit var views: ArrayList<View>
 
     fun create(context: Context, container: View) {
-        initComponents(container, context)
-        setupAndesTabLeftAlign()
-        setupAndesTabFullWidth()
+        val binding = AndesuiStaticTabsBinding.bind(container)
+        initComponents(context)
+        setupAndesTabLeftAlign(binding)
+        setupAndesTabFullWidth(binding)
     }
 
-    private fun initComponents(container: View, context: Context) {
-        andesTabsLeftAlign = container.findViewById(R.id.andes_tab_left_align)
-        andesTabsFullWidth = container.findViewById(R.id.andes_tab_full_width)
-        viewPager = container.findViewById(R.id.view_pager)
-
+    private fun initComponents(context: Context) {
         views = arrayListOf()
         val view1 = TextView(context)
         view1.text = "Tab content, section 1"
@@ -44,13 +36,13 @@ class TabsStaticPage {
         items.add(AndesTabItem("Tab 3"))
     }
 
-    private fun setupAndesTabLeftAlign() {
-        andesTabsLeftAlign.setItems(items)
+    private fun setupAndesTabLeftAlign(binding: AndesuiStaticTabsBinding) = with(binding) {
+        andesTabLeftAlign.setItems(items)
         viewPager.adapter = AndesTabsPagerAdapter(views)
-        andesTabsLeftAlign.setupWithViewPager(viewPager)
+        andesTabLeftAlign.setupWithViewPager(viewPager)
     }
 
-    private fun setupAndesTabFullWidth() {
-        andesTabsFullWidth.setItems(items)
+    private fun setupAndesTabFullWidth(binding: AndesuiStaticTabsBinding) {
+        binding.andesTabFullWidth.setItems(items)
     }
 }

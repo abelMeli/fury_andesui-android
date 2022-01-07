@@ -1,24 +1,18 @@
 package com.mercadolibre.android.andesui.demoapp.components.snackbar
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.widget.SwitchCompat
-import androidx.constraintlayout.widget.Group
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicSnackbarBinding
 import com.mercadolibre.android.andesui.snackbar.AndesSnackbar
 import com.mercadolibre.android.andesui.snackbar.action.AndesSnackbarAction
 import com.mercadolibre.android.andesui.snackbar.duration.AndesSnackbarDuration
 import com.mercadolibre.android.andesui.snackbar.type.AndesSnackbarType
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 class SnackbarShowcaseActivity : BaseActivity() {
@@ -36,16 +30,14 @@ class SnackbarShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_snackbar)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_snackbar, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiDynamicSnackbarBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -55,14 +47,13 @@ class SnackbarShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val type: Spinner = container.findViewById(R.id.snackbar_type)
-        val duration: Spinner = container.findViewById(R.id.snackbar_duration)
-        val hasAction: SwitchCompat = container.findViewById(R.id.snackbar_has_action)
-        val text: AndesTextfield = container.findViewById(R.id.snackbar_text)
-        val textAction: AndesTextfield = container.findViewById(R.id.snackbar_text_action)
-        val clearButton: AndesButton = container.findViewById(R.id.clear_button)
-        val confirmButton: AndesButton = container.findViewById(R.id.change_button)
-        val actionGroup: Group = container.findViewById(R.id.action_group)
+        val binding = AndesuiDynamicSnackbarBinding.bind(container)
+        val hasAction = binding.snackbarHasAction
+        val text = binding.snackbarText
+        val textAction = binding.snackbarTextAction
+        val clearButton = binding.clearButton
+        val confirmButton = binding.changeButton
+        val actionGroup = binding.actionGroup
 
         hasAction.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -72,7 +63,7 @@ class SnackbarShowcaseActivity : BaseActivity() {
             }
         }
 
-        val snackbarType: Spinner = container.findViewById(R.id.snackbar_type)
+        val snackbarType = binding.snackbarType
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_snackbar_type_spinner,
@@ -82,7 +73,7 @@ class SnackbarShowcaseActivity : BaseActivity() {
             snackbarType.adapter = adapter
         }
 
-        val snackbarDuration: Spinner = container.findViewById(R.id.snackbar_duration)
+        val snackbarDuration = binding.snackbarDuration
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_snackbar_duration_spinner,
@@ -104,8 +95,8 @@ class SnackbarShowcaseActivity : BaseActivity() {
             textAction.helper = null
             textAction.text = null
 
-            type.setSelection(0)
-            duration.setSelection(0)
+            snackbarType.setSelection(0)
+            snackbarDuration.setSelection(0)
         }
 
         confirmButton.setOnClickListener {
@@ -132,13 +123,13 @@ class SnackbarShowcaseActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            val selectedType = when (type.selectedItem) {
+            val selectedType = when (snackbarType.selectedItem) {
                 "Neutral" -> AndesSnackbarType.NEUTRAL
                 "Success" -> AndesSnackbarType.SUCCESS
                 else -> AndesSnackbarType.ERROR
             }
 
-            val selectedDuration = when (duration.selectedItem) {
+            val selectedDuration = when (snackbarDuration.selectedItem) {
                 "Long" -> AndesSnackbarDuration.LONG
                 "Normal" -> AndesSnackbarDuration.NORMAL
                 else -> AndesSnackbarDuration.SHORT
@@ -155,7 +146,7 @@ class SnackbarShowcaseActivity : BaseActivity() {
                 snackbar.action = AndesSnackbarAction(
                         textAction.text!!,
                         View.OnClickListener {
-                            Toast.makeText(this, "Callback", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "Callback", Toast.LENGTH_SHORT).show()
                         }
                 )
             }

@@ -1,13 +1,12 @@
 package com.mercadolibre.android.andesui.demoapp.components.moneyamount
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicMoneyAmountBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticMoneyAmountBinding
 
 class MoneyAmountShowcaseActivity : BaseActivity() {
 
@@ -24,17 +23,15 @@ class MoneyAmountShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_money_amount)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-            inflater.inflate(R.layout.andesui_dynamic_money_amount, null, false),
-            inflater.inflate(R.layout.andesui_static_money_amount, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiDynamicMoneyAmountBinding.inflate(layoutInflater).root,
+            AndesuiStaticMoneyAmountBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {

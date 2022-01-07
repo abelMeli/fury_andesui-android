@@ -1,13 +1,9 @@
 package com.mercadolibre.android.andesui.demoapp.components.checkbox
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
@@ -15,12 +11,12 @@ import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicCheckboxBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticCheckboxBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 class CheckboxShowcaseActivity : BaseActivity() {
@@ -38,17 +34,15 @@ class CheckboxShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_checkbox)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_checkbox, null, false),
-                inflater.inflate(R.layout.andesui_static_checkbox, null, false)
+            AndesuiDynamicCheckboxBinding.inflate(layoutInflater).root,
+            AndesuiStaticCheckboxBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -59,9 +53,10 @@ class CheckboxShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val checkbox: AndesCheckbox = container.findViewById(R.id.andesCheckbox)
+        val binding = AndesuiDynamicCheckboxBinding.bind(container)
+        val checkbox = binding.andesCheckbox
 
-        val spinnerType: Spinner = container.findViewById(R.id.spinnerType)
+        val spinnerType = binding.spinnerType
         ArrayAdapter.createFromResource(
                 this, R.array.andes_checkbox_type_spinner, android.R.layout.simple_spinner_item)
                 .let { adapter ->
@@ -69,7 +64,7 @@ class CheckboxShowcaseActivity : BaseActivity() {
                     spinnerType.adapter = adapter
                 }
 
-        val spinnerAlign: Spinner = container.findViewById(R.id.spinnerAlign)
+        val spinnerAlign = binding.spinnerAlign
         ArrayAdapter.createFromResource(
                 this, R.array.andes_checkbox_align_spinner, android.R.layout.simple_spinner_item)
                 .let { adapter ->
@@ -77,7 +72,7 @@ class CheckboxShowcaseActivity : BaseActivity() {
                     spinnerAlign.adapter = adapter
                 }
 
-        val spinnerStatus: Spinner = container.findViewById(R.id.spinnerStatus)
+        val spinnerStatus = binding.spinnerStatus
         ArrayAdapter.createFromResource(
                 this, R.array.andes_checkbox_status_spinner, android.R.layout.simple_spinner_item)
                 .let { adapter ->
@@ -85,11 +80,11 @@ class CheckboxShowcaseActivity : BaseActivity() {
                     spinnerStatus.adapter = adapter
                 }
 
-        val numberOfLinesTextField: AndesTextfield = container.findViewById(R.id.numberOfLinesTextField)
+        val numberOfLinesTextField = binding.numberOfLinesTextField
 
-        val clearButton: AndesButton = container.findViewById(R.id.buttonClear)
-        val changeButton: AndesButton = container.findViewById(R.id.buttonUpdate)
-        val andesTextfield: AndesTextfield = container.findViewById(R.id.andesTextfield)
+        val clearButton = binding.buttonClear
+        val changeButton = binding.buttonUpdate
+        val andesTextfield = binding.andesTextfield
 
         clearButton.setOnClickListener {
             spinnerType.setSelection(0)
@@ -148,16 +143,17 @@ class CheckboxShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        container.findViewById<AndesCheckbox>(R.id.static_checkbox_second).apply {
+        val binding = AndesuiStaticCheckboxBinding.bind(container)
+        binding.staticCheckboxSecond.apply {
             val links = listOf(
                 AndesBodyLink(LINK_INDEX_FIRST_START, LINK_INDEX_FIRST_END)
             )
             bodyLinks = AndesBodyLinks(links) {
-                Toast.makeText(this@CheckboxShowcaseActivity, "Navegar a Términos y condiciones", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Navegar a Términos y condiciones", Toast.LENGTH_SHORT).show()
             }
         }
 
-        container.findViewById<AndesCheckbox>(R.id.static_checkbox_third).apply {
+        binding.staticCheckboxThird.apply {
             val links = listOf(
                 AndesBodyLink(LINK_INDEX_SECOND_START, LINK_INDEX_SECOND_END),
                 AndesBodyLink(LINK_INDEX_THIRD_START, LINK_INDEX_THIRD_END)
@@ -168,12 +164,13 @@ class CheckboxShowcaseActivity : BaseActivity() {
                     1 -> "Navegar a comunicaciones"
                     else -> ""
                 }
-                Toast.makeText(this@CheckboxShowcaseActivity, toastText, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, toastText, Toast.LENGTH_SHORT).show()
             }
         }
 
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_checkbox_specs_button)
-                .setOnClickListener { launchSpecs(it.context, AndesSpecs.CHECKBOX) }
+        binding.andesuiDemoappAndesCheckboxSpecsButton.setOnClickListener {
+            launchSpecs(it.context, AndesSpecs.CHECKBOX)
+        }
     }
 
     companion object {

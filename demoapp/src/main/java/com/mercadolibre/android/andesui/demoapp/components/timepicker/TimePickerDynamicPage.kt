@@ -7,6 +7,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTimepickerBinding
 import com.mercadolibre.android.andesui.demoapp.utils.Constants.TIMEPICKER_DEFAULT_HELPER
 import com.mercadolibre.android.andesui.demoapp.utils.Constants.TIMEPICKER_DEFAULT_LABEL
 import com.mercadolibre.android.andesui.demoapp.utils.Constants.TIMEPICKER_DIGITS
@@ -38,14 +39,15 @@ class TimePickerDynamicPage {
     }
 
     private fun initComponents(view: View) {
-        andesTimePicker = view.findViewById(R.id.dynamic_timepicker)
-        textFieldLabel = view.findViewById(R.id.dynamic_timepicker_tf_label)
-        textFieldHelper = view.findViewById(R.id.dynamic_timepicker_tf_helper)
-        textFieldCurrentTime = view.findViewById(R.id.dynamic_timepicker_tf_current_time)
-        stateSpinner = view.findViewById(R.id.dynamic_timepicker_spinner_state)
-        intervalSpinner = view.findViewById(R.id.dynamic_timepicker_spinner_interval)
-        clearButton = view.findViewById(R.id.dynamic_timepicker_button_clear)
-        updateButton = view.findViewById(R.id.dynamic_timepicker_button_update)
+        val binding = AndesuiDynamicTimepickerBinding.bind(view)
+        andesTimePicker = binding.dynamicTimepicker
+        textFieldLabel = binding.dynamicTimepickerTfLabel
+        textFieldHelper = binding.dynamicTimepickerTfHelper
+        textFieldCurrentTime = binding.dynamicTimepickerTfCurrentTime
+        stateSpinner = binding.dynamicTimepickerSpinnerState
+        intervalSpinner = binding.dynamicTimepickerSpinnerInterval
+        clearButton = binding.dynamicTimepickerButtonClear
+        updateButton = binding.dynamicTimepickerButtonUpdate
     }
 
     private fun setupTextfieldCurrentTime() {
@@ -130,7 +132,7 @@ class TimePickerDynamicPage {
     private fun setupListeners(context: Context) {
         andesTimePicker.setupCallback(object : AndesTimePicker.OnTimeSelectedListener {
             override fun onTimeSelected(currentTime: String) {
-                Toast.makeText(context, "Time selected: $currentTime", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Time selected: $currentTime", Toast.LENGTH_SHORT).show()
             }
 
             override fun onTimePeriodSelected() {

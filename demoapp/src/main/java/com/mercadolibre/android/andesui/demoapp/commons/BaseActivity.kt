@@ -5,7 +5,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiCustomMenuItemBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiShowcaseMainBinding
 import com.mercadolibre.android.andesui.demoapp.utils.COMPONENT_KEY
 import com.mercadolibre.android.andesui.demoapp.utils.QUERY_PARAMETER_KEY
 import com.mercadolibre.android.andesui.demoapp.utils.SafeIntent
@@ -14,15 +15,16 @@ import com.mercadolibre.android.andesui.demoapp.utils.StorybookPage
 abstract class BaseActivity : AppCompatActivity() {
 
     private lateinit var appBarTitleTextView: TextView
+    protected val baseBinding: AndesuiShowcaseMainBinding by lazy { AndesuiShowcaseMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andesui_showcase_main)
+        setContentView(baseBinding.root)
         initActionBar()
     }
 
     private fun initActionBar() {
-        setSupportActionBar(findViewById(R.id.andesui_nav_bar))
+        setSupportActionBar(baseBinding.andesuiNavBar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
@@ -30,13 +32,11 @@ abstract class BaseActivity : AppCompatActivity() {
             setDisplayShowCustomEnabled(true)
             setDisplayShowHomeEnabled(false)
         }
-        val customAppBarLayout =
-            layoutInflater.inflate(R.layout.andesui_custom_menu_item, null, false)
-        appBarTitleTextView = customAppBarLayout.findViewById(R.id.custom_action_bar_title)
+        val customAppBarLayout = AndesuiCustomMenuItemBinding.inflate(layoutInflater)
+        appBarTitleTextView = customAppBarLayout.customActionBarTitle
         val activityName = this::class.java.simpleName
 
-        val webviewText =
-            customAppBarLayout.findViewById<TextView>(R.id.custom_action_bar_webview_text)
+        val webviewText = customAppBarLayout.customActionBarWebviewText
 
         webviewText.setOnClickListener {
             val uri = createUri(activityName)
@@ -50,7 +50,7 @@ abstract class BaseActivity : AppCompatActivity() {
             ActionBar.LayoutParams.MATCH_PARENT,
             ActionBar.LayoutParams.MATCH_PARENT
         )
-        supportActionBar?.setCustomView(customAppBarLayout, layoutParams)
+        supportActionBar?.setCustomView(customAppBarLayout.root, layoutParams)
         appBarTitleTextView.text = getAppBarTitle()
     }
 

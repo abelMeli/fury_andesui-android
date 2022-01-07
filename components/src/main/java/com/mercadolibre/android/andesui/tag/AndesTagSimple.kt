@@ -12,6 +12,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.FrameLayout
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.databinding.AndesLayoutSimpleTagBinding
 import com.mercadolibre.android.andesui.tag.factory.AndesSimpleTagConfigurationFactory
 import com.mercadolibre.android.andesui.tag.factory.AndesTagSimpleAttrs
 import com.mercadolibre.android.andesui.tag.factory.AndesTagSimpleAttrsParser
@@ -24,7 +25,6 @@ import com.mercadolibre.android.andesui.tag.rightcontent.RightContentDismiss
 import com.mercadolibre.android.andesui.tag.size.AndesTagSize
 import com.mercadolibre.android.andesui.tag.type.AndesTagType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import kotlinx.android.synthetic.main.andes_layout_simple_tag.view.*
 
 class AndesTagSimple : ConstraintLayout {
 
@@ -111,7 +111,10 @@ class AndesTagSimple : ConstraintLayout {
     }
 
     private lateinit var andesTagAttrs: AndesTagSimpleAttrs
-    private lateinit var containerTag: ConstraintLayout
+
+    private val binding: AndesLayoutSimpleTagBinding by lazy {
+        AndesLayoutSimpleTagBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
@@ -154,8 +157,6 @@ class AndesTagSimple : ConstraintLayout {
      * Is like a choreographer ;)
      */
     private fun setupComponents(config: AndesTagSimpleConfiguration) {
-        initComponents()
-
         if (id == NO_ID) { // If this view has no id
             id = View.generateViewId()
         }
@@ -166,15 +167,6 @@ class AndesTagSimple : ConstraintLayout {
         setupRightContent(config)
     }
 
-    /**
-     * Creates all the views that are part of this badge.
-     * After a view is created then a view id is added to it.
-     */
-    private fun initComponents() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_simple_tag, this)
-        containerTag = container.findViewById(R.id.andes_tag_container)
-    }
-
     private fun setupBackgroundComponents(config: AndesTagSimpleConfiguration) {
         val shape = GradientDrawable()
         shape.cornerRadius = size.size.border(context)
@@ -183,9 +175,11 @@ class AndesTagSimple : ConstraintLayout {
         shape.setStroke(borderSize.toInt(), config.borderColor.colorInt(context))
         background = shape
 
-        containerTag.minHeight = size.size.height(context).toInt()
-        containerTag.maxHeight = size.size.height(context).toInt()
-        containerTag.minWidth = size.size.height(context).toInt()
+        with(binding.andesTagContainer) {
+            minHeight = size.size.height(context).toInt()
+            maxHeight = size.size.height(context).toInt()
+            minWidth = size.size.height(context).toInt()
+        }
     }
 
     /**
@@ -193,20 +187,22 @@ class AndesTagSimple : ConstraintLayout {
      */
     private fun setupTitleComponent(config: AndesTagSimpleConfiguration) {
         if (config.text == null || config.text.isEmpty()) {
-            containerTag.visibility = View.GONE
+            binding.andesTagContainer.visibility = View.GONE
         } else {
-            containerTag.visibility = View.VISIBLE
+            binding.andesTagContainer.visibility = View.VISIBLE
 
-            simpleTagText.text = config.text
-            simpleTagText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-            simpleTagText.setTextSize(TypedValue.COMPLEX_UNIT_PX, size.size.textSize(context))
-            simpleTagText.setTextColor(config.textColor.colorInt(context))
+            with(binding.simpleTagText) {
+                text = config.text
+                typeface = context.getFontOrDefault(R.font.andes_font_regular)
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, size.size.textSize(context))
+                setTextColor(config.textColor.colorInt(context))
+            }
 
             val constraintSet = ConstraintSet()
-            constraintSet.clone(containerTag)
+            constraintSet.clone(binding.andesTagContainer)
             constraintSet.setMargin(R.id.simpleTagText, ConstraintSet.START, config.leftContent.content.leftMarginText(context, size))
             constraintSet.setMargin(R.id.simpleTagText, ConstraintSet.END, config.rightContent.content.rightMarginText(context, size))
-            constraintSet.applyTo(containerTag)
+            constraintSet.applyTo(binding.andesTagContainer)
         }
     }
 
@@ -218,10 +214,10 @@ class AndesTagSimple : ConstraintLayout {
             leftContent.visibility = View.VISIBLE
 
             val constraintSet = ConstraintSet()
-            constraintSet.clone(containerTag)
+            constraintSet.clone(binding.andesTagContainer)
             constraintSet.setMargin(R.id.leftContent, ConstraintSet.START, config.leftContent.content.leftMargin(context))
             constraintSet.setMargin(R.id.leftContent, ConstraintSet.END, config.leftContent.content.rightMargin(context))
-            constraintSet.applyTo(containerTag)
+            constraintSet.applyTo(binding.andesTagContainer)
         } else {
             leftContent.visibility = View.GONE
         }
@@ -237,7 +233,7 @@ class AndesTagSimple : ConstraintLayout {
                 config.dismissColor,
                 config.rightContentData,
                 OnClickListener {
-                    containerTag.visibility = View.GONE
+                    binding.andesTagContainer.visibility = View.GONE
                     config.rightContentData?.dismiss?.onClickListener?.onClick(this)
                 }
             )
@@ -245,10 +241,10 @@ class AndesTagSimple : ConstraintLayout {
             rightContent.addView(view)
 
             val constraintSet = ConstraintSet()
-            constraintSet.clone(containerTag)
+            constraintSet.clone(binding.andesTagContainer)
             constraintSet.setMargin(R.id.rightContent, ConstraintSet.START, config.rightContent.content.leftMargin(context, size))
             constraintSet.setMargin(R.id.rightContent, ConstraintSet.END, config.rightContent.content.rightMargin(context, size))
-            constraintSet.applyTo(containerTag)
+            constraintSet.applyTo(binding.andesTagContainer)
 
             rightContent.visibility = View.VISIBLE
         } else {

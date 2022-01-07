@@ -1,26 +1,20 @@
 package com.mercadolibre.android.andesui.demoapp.components.tooltip
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.constraintlayout.widget.Group
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
-import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTooltipBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.setupAdapter
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.textfield.AndesTextarea
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.tooltip.AndesTooltip
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
@@ -46,17 +40,15 @@ class TooltipShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_tooltip)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_tooltip, null, false),
-                inflater.inflate(R.layout.andesui_static_tooltip, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiDynamicTooltipBinding.inflate(layoutInflater).root,
+            AndesuiStaticTooltipBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -67,25 +59,26 @@ class TooltipShowcaseActivity : BaseActivity() {
 
     @Suppress("LongMethod")
     private fun addDynamicPage(container: View) {
-        val checkboxDismiss = container.findViewById<AndesCheckbox>(R.id.dismissable_checkbox)
-        val title = container.findViewById<AndesTextfield>(R.id.title_text)
-        val body = container.findViewById<AndesTextarea>(R.id.body_text)
-        val primaryActionText = container.findViewById<AndesTextfield>(R.id.primary_action_text)
-        val secondaryActionText = container.findViewById<AndesTextfield>(R.id.secondary_action_text)
-        val linkActionText = container.findViewById<AndesTextfield>(R.id.link_action_text)
-        val update = container.findViewById<AndesButton>(R.id.change_button)
-        val clear = container.findViewById<AndesButton>(R.id.clear_button)
-        val tooltip = container.findViewById<AndesButton>(R.id.andes_tooltip_button)
+        val binding = AndesuiDynamicTooltipBinding.bind(container)
+        val checkboxDismiss = binding.dismissableCheckbox
+        val title = binding.titleText
+        val body = binding.bodyText
+        val primaryActionText = binding.primaryActionText
+        val secondaryActionText = binding.secondaryActionText
+        val linkActionText = binding.linkActionText
+        val update = binding.changeButton
+        val clear = binding.clearButton
+        val tooltip = binding.andesTooltipButton
 
-        val mainActionConfig = container.findViewById<Group>(R.id.main_action_config)
-        val secondaryActionConfig = container.findViewById<Group>(R.id.secondary_action_config)
+        val mainActionConfig = binding.mainActionConfig
+        val secondaryActionConfig = binding.secondaryActionConfig
 
-        val spinnerStyle = container.findViewById<Spinner>(R.id.style_spinner)
-        val spinnerOrientation = container.findViewById<Spinner>(R.id.orientation_spinner)
-        val spinnerActionType = container.findViewById<Spinner>(R.id.action_type_spinner)
-        val spinnerSizeStyle = container.findViewById<Spinner>(R.id.size_style_spinner)
-        val primaryActionSpinner = container.findViewById<Spinner>(R.id.primary_action_spinner)
-        val spinnerSecondAction = container.findViewById<Spinner>(R.id.secondary_action_spinner)
+        val spinnerStyle = binding.styleSpinner
+        val spinnerOrientation = binding.orientationSpinner
+        val spinnerActionType = binding.actionTypeSpinner
+        val spinnerSizeStyle = binding.sizeStyleSpinner
+        val primaryActionSpinner = binding.primaryActionSpinner
+        val spinnerSecondAction = binding.secondaryActionSpinner
 
         body.text = getString(R.string.andes_tooltip_message)
         checkboxDismiss.status = AndesCheckboxStatus.UNSELECTED
@@ -249,6 +242,7 @@ class TooltipShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
+        val binding = AndesuiStaticTooltipBinding.bind(container)
         val tooltipTop = AndesTooltip(
                 context = this,
                 isDismissible = false,
@@ -289,23 +283,23 @@ class TooltipShowcaseActivity : BaseActivity() {
         tooltipRight.mainAction = buildMainAction("Primary", AndesButtonHierarchy.LOUD)
         tooltipRight.secondaryAction = buildMainAction("Secondary", AndesButtonHierarchy.QUIET)
 
-        container.findViewById<ImageView>(R.id.andes_tooltip_left).setOnClickListener {
+        binding.andesTooltipLeft.setOnClickListener {
             tooltipLeft.show(it)
         }
 
-        container.findViewById<ImageView>(R.id.andes_tooltip_right).setOnClickListener {
+        binding.andesTooltipRight.setOnClickListener {
             tooltipRight.show(it)
         }
 
-        container.findViewById<AndesButton>(R.id.andes_tooltip_top).setOnClickListener {
+        binding.andesTooltipTop.setOnClickListener {
             tooltipTop.show(it)
         }
 
-        container.findViewById<AndesButton>(R.id.andes_tooltip_bottom).setOnClickListener {
+        binding.andesTooltipBottom.setOnClickListener {
             tooltipBottom.show(it)
         }
 
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_tooltip_specs_button).setOnClickListener {
+        binding.andesuiDemoappAndesTooltipSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.TOOLTIP)
         }
     }
@@ -337,13 +331,13 @@ class TooltipShowcaseActivity : BaseActivity() {
 
     private fun buildMainAction(text: String, hierarchy: AndesButtonHierarchy): AndesTooltipAction {
         return AndesTooltipAction(text, hierarchy) { _, _ ->
-            Toast.makeText(this, "$text was clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "$text was clicked", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun buildLinkAction(text: String): AndesTooltipLinkAction {
         return AndesTooltipLinkAction(text) { _, _ ->
-            Toast.makeText(this, "$text was clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "$text was clicked", Toast.LENGTH_SHORT).show()
         }
     }
 

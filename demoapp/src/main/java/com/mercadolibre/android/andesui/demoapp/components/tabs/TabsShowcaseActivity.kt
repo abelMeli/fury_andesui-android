@@ -1,13 +1,12 @@
 package com.mercadolibre.android.andesui.demoapp.components.tabs
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTabsBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTabsBinding
 
 class TabsShowcaseActivity : BaseActivity() {
 
@@ -24,17 +23,15 @@ class TabsShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_tabs)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_tabs, null, false),
-                inflater.inflate(R.layout.andesui_static_tabs, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiDynamicTabsBinding.inflate(layoutInflater).root,
+            AndesuiStaticTabsBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {

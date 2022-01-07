@@ -2,19 +2,18 @@ package com.mercadolibre.android.andesui.demoapp.components.list
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicListBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticListBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
@@ -60,17 +59,15 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_list)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_list, null, false),
-                inflater.inflate(R.layout.andesui_static_list, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+                AndesuiDynamicListBinding.inflate(layoutInflater).root,
+                AndesuiStaticListBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -81,11 +78,12 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
 
     @Suppress("LongMethod", "TooGenericExceptionCaught")
     private fun addDynamicPage(container: View) {
-        val textFieldTitle = container.findViewById<AndesTextfield>(R.id.title)
-        val textFieldSubtitle = container.findViewById<AndesTextfield>(R.id.subtitle)
-        val textFieldMaxLines = container.findViewById<AndesTextfield>(R.id.max_lines)
+        val binding = AndesuiDynamicListBinding.bind(container)
+        val textFieldTitle = binding.title
+        val textFieldSubtitle = binding.subtitle
+        val textFieldMaxLines = binding.maxLines
 
-        andesListDynamic = container.findViewById(R.id.andesList)
+        andesListDynamic = binding.andesList
         andesListDynamic.tag = ANDES_LIST_DYNAMIC
         andesListDynamic.dividerItemEnabled = true
         andesListDynamic.delegate = this
@@ -94,7 +92,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
         andesListDynamic.type = AndesListType.SIMPLE
         andesListDynamic.refreshListAdapter()
 
-        val listSize: Spinner = container.findViewById(R.id.list_size_spinner)
+        val listSize = binding.listSizeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_list_size_spinner,
@@ -104,7 +102,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
             listSize.adapter = adapter
         }
 
-        val listType: Spinner = container.findViewById(R.id.list_type_spinner)
+        val listType = binding.listTypeSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_list_type_spinner,
@@ -114,7 +112,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
             listType.adapter = adapter
         }
 
-        val listAsset: Spinner = container.findViewById(R.id.list_asset_spinner)
+        val listAsset = binding.listAssetSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_list_asset_spinner,
@@ -128,7 +126,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
         textFieldSubtitle.text = ITEM_SUBTITLE
         textFieldMaxLines.text = DEFAULT_TITLE_NUMBER_OF_LINES.toString()
 
-        container.findViewById<AndesButton>(R.id.change_button).setOnClickListener {
+        binding.changeButton.setOnClickListener {
             getAssetSelected(listAsset)
             val type = getTypeSelected(listType)
             val size = getSizeSelected(listSize)
@@ -153,7 +151,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
             andesListDynamic.refreshListAdapter()
         }
 
-        container.findViewById<AndesButton>(R.id.clear_button).setOnClickListener {
+        binding.clearButton.setOnClickListener {
             listSize.setSelection(0)
             listType.setSelection(0)
             listAsset.setSelection(0)
@@ -226,18 +224,19 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
     }
 
     private fun addStaticPage(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_checkbox_specs_button).setOnClickListener {
+        val binding = AndesuiStaticListBinding.bind(container)
+        binding.andesuiDemoappAndesCheckboxSpecsButton.setOnClickListener {
             launchSpecs(it.context, AndesSpecs.LIST)
         }
 
-        andesListStatic = container.findViewById(R.id.andesList)
+        andesListStatic = binding.andesList
         andesListStatic.tag = ANDES_LIST_STATIC
         andesListStatic.dividerItemEnabled = true
         andesListStatic.delegate = this
     }
 
     override fun onItemClick(andesList: AndesList, position: Int) {
-        Toast.makeText(this, "Position of item selected $position", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "Position of item selected $position", Toast.LENGTH_SHORT).show()
         if (andesList.tag == andesListStatic.tag) {
             itemStaticSelected = position
             andesListStatic.refreshListAdapter()

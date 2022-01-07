@@ -1,5 +1,6 @@
 # v4.5.0
 ## 🚀 Feature
+- Andes synthetics imports replaced with viewbinding | Author: [@eportasML](https://github.com/eportasML)
 - Added new icon based in Figma specs: [Phone top-up](https://www.figma.com/file/i275NVe7uWWkuQYnpYGVq8/Andes-%2F-02-Iconography?node-id=2%3A981) | Author: [@epennachini](https://github.com/EPENNACHINI)
 - Improve security by changing repository and authentication configuration
 ## 🛠 Fixes

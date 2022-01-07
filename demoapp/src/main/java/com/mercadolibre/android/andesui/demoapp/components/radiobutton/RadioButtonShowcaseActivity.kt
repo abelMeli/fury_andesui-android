@@ -1,26 +1,23 @@
 package com.mercadolibre.android.andesui.demoapp.components.radiobutton
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicRadiobuttonBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticRadiobuttonBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticRadiobuttonGroupBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
-import com.mercadolibre.android.andesui.radiobutton.AndesRadioButton
 import com.mercadolibre.android.andesui.radiobutton.align.AndesRadioButtonAlign
 import com.mercadolibre.android.andesui.radiobutton.status.AndesRadioButtonStatus
 import com.mercadolibre.android.andesui.radiobutton.type.AndesRadioButtonType
 import com.mercadolibre.android.andesui.radiobuttongroup.AndesRadioButtonGroup
 import com.mercadolibre.android.andesui.radiobuttongroup.RadioButtonItem
-import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 class RadioButtonShowcaseActivity : BaseActivity() {
@@ -38,18 +35,16 @@ class RadioButtonShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_radiobutton)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_radiobutton, null, false),
-                inflater.inflate(R.layout.andesui_static_radiobutton, null, false),
-                inflater.inflate(R.layout.andesui_static_radiobutton_group, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+                AndesuiDynamicRadiobuttonBinding.inflate(layoutInflater).root,
+                AndesuiStaticRadiobuttonBinding.inflate(layoutInflater).root,
+                AndesuiStaticRadiobuttonGroupBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -61,9 +56,10 @@ class RadioButtonShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val radioButton: AndesRadioButton = container.findViewById(R.id.dynamic_page_radiobutton)
+        val binding = AndesuiDynamicRadiobuttonBinding.bind(container)
+        val radioButton = binding.dynamicPageRadiobutton
 
-        val spinnerType: Spinner = container.findViewById(R.id.spinnerType)
+        val spinnerType = binding.spinnerType
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_radiobutton_type_spinner,
@@ -73,7 +69,7 @@ class RadioButtonShowcaseActivity : BaseActivity() {
             spinnerType.adapter = adapter
         }
 
-        val spinnerAlign: Spinner = container.findViewById(R.id.spinnerAlign)
+        val spinnerAlign = binding.spinnerAlign
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_radiobutton_align_spinner,
@@ -83,7 +79,7 @@ class RadioButtonShowcaseActivity : BaseActivity() {
             spinnerAlign.adapter = adapter
         }
 
-        val spinnerStatus: Spinner = container.findViewById(R.id.spinnerStatus)
+        val spinnerStatus = binding.spinnerStatus
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_radiobutton_status_spinner,
@@ -93,11 +89,9 @@ class RadioButtonShowcaseActivity : BaseActivity() {
             spinnerStatus.adapter = adapter
         }
 
-        val clearButton: AndesButton = container.findViewById(R.id.buttonClear)
-        val changeButton: AndesButton = container.findViewById(R.id.buttonUpdate)
-        val andesTextfield: AndesTextfield = container.findViewById(R.id.andesTextfield)
+        val andesTextfield = binding.andesTextfield
 
-        clearButton.setOnClickListener {
+        binding.buttonClear.setOnClickListener {
             spinnerType.setSelection(0)
             spinnerAlign.setSelection(0)
             spinnerStatus.setSelection(0)
@@ -112,7 +106,7 @@ class RadioButtonShowcaseActivity : BaseActivity() {
             radioButton.text = resources.getString(R.string.andes_radiobutton_text)
         }
 
-        changeButton.setOnClickListener {
+        binding.buttonUpdate.setOnClickListener {
             if (andesTextfield.text.isNullOrEmpty()) {
                 andesTextfield.state = AndesTextfieldState.ERROR
                 andesTextfield.helper = "Este campo es requerido"
@@ -146,12 +140,14 @@ class RadioButtonShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_radiobutton_specs_button).setOnClickListener {
+        AndesuiStaticRadiobuttonBinding.bind(container)
+            .andesuiDemoappAndesRadiobuttonSpecsButton.setOnClickListener {
             launchSpecs(it.context, AndesSpecs.RADIOBUTTON)
         }
     }
 
     private fun addStaticSecondPage(container: View) {
+        val binding = AndesuiStaticRadiobuttonGroupBinding.bind(container)
         val radioButtons = arrayListOf<RadioButtonItem>()
         radioButtons.add(RadioButtonItem("item 1", AndesRadioButtonType.DISABLED))
         radioButtons.add(RadioButtonItem("item 2", AndesRadioButtonType.IDLE))
@@ -159,26 +155,24 @@ class RadioButtonShowcaseActivity : BaseActivity() {
         radioButtons.add(RadioButtonItem("item 4", AndesRadioButtonType.IDLE))
         radioButtons.add(RadioButtonItem("item 5", AndesRadioButtonType.IDLE))
 
-        val radioButtonGroup = container.findViewById<AndesRadioButtonGroup>(R.id.radioButtonGroup1)
+        val radioButtonGroup = binding.radioButtonGroup1
         radioButtonGroup.selected = 1
         radioButtonGroup.radioButtons = radioButtons
         radioButtonGroup.setupCallback(
                 object : AndesRadioButtonGroup.OnRadioButtonCheckedChanged {
                     override fun onRadioButtonCheckedChanged(index: Int) {
-                        Toast.makeText(this@RadioButtonShowcaseActivity, "Radiobutton clicked, index: $index", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, "Radiobutton clicked, index: $index", Toast.LENGTH_LONG).show()
                     }
                 }
         )
 
-        val radioButtonGroupHorizontal = container.findViewById<AndesRadioButtonGroup>(
-                R.id.radioButtonGroup2
-        )
+        val radioButtonGroupHorizontal = binding.radioButtonGroup2
         radioButtonGroupHorizontal.selected = 1
         radioButtonGroupHorizontal.radioButtons = radioButtons
         radioButtonGroupHorizontal.setupCallback(
                 object : AndesRadioButtonGroup.OnRadioButtonCheckedChanged {
                     override fun onRadioButtonCheckedChanged(index: Int) {
-                        Toast.makeText(this@RadioButtonShowcaseActivity, "Radiobutton clicked, index: $index", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, "Radiobutton clicked, index: $index", Toast.LENGTH_LONG).show()
                     }
                 }
         )

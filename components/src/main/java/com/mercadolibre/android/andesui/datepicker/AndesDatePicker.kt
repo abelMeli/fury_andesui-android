@@ -6,13 +6,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.databinding.AndesLayoutDatepickerBinding
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrParser
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrs
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerConfiguration
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerConfigurationFactory
-import kotlinx.android.synthetic.main.andes_layout_datepicker.view.*
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -66,6 +65,9 @@ class AndesDatePicker : ConstraintLayout {
     var btnVisibility: Boolean? = null
         get() = andesDatePickerAttrs.andesBtnVisibility
     private lateinit var andesDatePickerAttrs: AndesDatePickerAttrs
+    private val binding by lazy {
+        AndesLayoutDatepickerBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
@@ -121,11 +123,10 @@ class AndesDatePicker : ConstraintLayout {
      * After a view is created then a view id is added to it.
      */
     private fun initComponents() {
-        LayoutInflater.from(context).inflate(R.layout.andes_layout_datepicker, this)
-        onCheckedChangeListener(andesBtnSelectDate)
+        onCheckedChangeListener(binding.andesBtnSelectDate)
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
-            calendarView.layoutParams.width = WIDTH
-            calendarView.layoutParams.height = HEIGHT
+            binding.calendarView.layoutParams.width = WIDTH
+            binding.calendarView.layoutParams.height = HEIGHT
         }
     }
 
@@ -153,11 +154,11 @@ class AndesDatePicker : ConstraintLayout {
     }
 
     fun setDateAppearance(appearance: Int) {
-        calendarView.dateTextAppearance = appearance
+        binding.calendarView.dateTextAppearance = appearance
     }
 
     fun setWeekDayAppearance(weekAppearance: Int) {
-        calendarView.weekDayTextAppearance = weekAppearance
+        binding.calendarView.weekDayTextAppearance = weekAppearance
     }
 
     /**
@@ -165,11 +166,11 @@ class AndesDatePicker : ConstraintLayout {
      */
 
     private fun setMinDate(minDate: Long) {
-        calendarView.minDate = DEFAULT_MIN_DATE
+        binding.calendarView.minDate = DEFAULT_MIN_DATE
         val minDateDate = Date(minDate)
-        var isMaxDateAfterMinDate: Boolean = minDateDate.time < calendarView.maxDate
+        var isMaxDateAfterMinDate: Boolean = minDateDate.time < binding.calendarView.maxDate
         if (isMaxDateAfterMinDate) {
-            calendarView.minDate = minDate
+            binding.calendarView.minDate = minDate
         }
     }
 
@@ -178,17 +179,17 @@ class AndesDatePicker : ConstraintLayout {
      */
 
     private fun setMaxDate(maxDate: Long) {
-        calendarView.maxDate = DEFAULT_MAX_DATE
+        binding.calendarView.maxDate = DEFAULT_MAX_DATE
         val maxDateDate: Date = Date(maxDate)
         val dateDiference = validateDateToCurrentDate(maxDateDate)
-        var isMaxDateAfterMinDate: Boolean = maxDateDate.time > calendarView.minDate
+        var isMaxDateAfterMinDate: Boolean = maxDateDate.time > binding.calendarView.minDate
         if (validateDateToCurrentDate(maxDateDate) == 0) {
-            calendarView.maxDate = maxDate
+            binding.calendarView.maxDate = maxDate
         } else {
             if (dateDiference < 0 && isMaxDateAfterMinDate) {
-                calendarView.maxDate = maxDate
-                if (calendarView.minDate < 0) {
-                    calendarView.minDate = 0
+                binding.calendarView.maxDate = maxDate
+                if (binding.calendarView.minDate < 0) {
+                    binding.calendarView.minDate = 0
                 }
             }
         }
@@ -200,20 +201,22 @@ class AndesDatePicker : ConstraintLayout {
     fun selectDate(select: Long) {
         val selectDate = Date(select)
         val calendar = Calendar.getInstance()
-        if (selectDate < Date(calendarView.minDate)) {
+        if (selectDate < Date(binding.calendarView.minDate)) {
             return
         }
-        if (selectDate > Date(calendarView.maxDate)) {
+        if (selectDate > Date(binding.calendarView.maxDate)) {
             return
         }
-        calendarView.date = select
+        binding.calendarView.date = select
         calendar.time = selectDate
         listener?.onDateApply(calendar)
     }
 
     fun clearMinMaxDate() {
-        calendarView.minDate = DEFAULT_MIN_DATE
-        calendarView.maxDate = DEFAULT_MAX_DATE
+        with(binding.calendarView) {
+            minDate = DEFAULT_MIN_DATE
+            maxDate = DEFAULT_MAX_DATE
+        }
     }
 
     fun setupMinDate(minDate: Long) {
@@ -225,14 +228,14 @@ class AndesDatePicker : ConstraintLayout {
     }
 
     fun setupButtonText(text: String?) {
-        andesBtnSelectDate.text = text
+        binding.andesBtnSelectDate.text = text
     }
 
     fun setupButtonVisibility(applyButtonVisibility: Boolean?) {
         if (applyButtonVisibility == true) {
-            andesBtnSelectDate.visibility = View.VISIBLE
+            binding.andesBtnSelectDate.visibility = View.VISIBLE
         } else {
-            andesBtnSelectDate.visibility = View.GONE
+            binding.andesBtnSelectDate.visibility = View.GONE
         }
     }
 
@@ -242,16 +245,16 @@ class AndesDatePicker : ConstraintLayout {
 
     private fun onCheckedChangeListener(andesBtnSelectDate: AndesButton) {
         val calendar = Calendar.getInstance()
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             calendar.set(year, month, dayOfMonth)
-            calendarView.date = calendar.time.time
+            binding.calendarView.date = calendar.time.time
             if (andesBtnSelectDate.visibility == View.GONE) {
                 listener?.onDateApply(calendar)
             }
         }
 
         andesBtnSelectDate.setOnClickListener {
-            calendar.time = Date(calendarView.date)
+            calendar.time = Date(binding.calendarView.date)
             listener?.onDateApply(calendar)
         }
     }

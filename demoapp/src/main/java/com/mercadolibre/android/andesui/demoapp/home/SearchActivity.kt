@@ -7,32 +7,24 @@ import androidx.core.widget.doAfterTextChanged
 import com.mercadolibre.android.andesui.demoapp.utils.SafeIntent
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.ActivitySearchBinding
 import com.mercadolibre.android.andesui.demoapp.home.model.Section
 import com.mercadolibre.android.andesui.demoapp.home.utils.setupAndesList
 import com.mercadolibre.android.andesui.demoapp.home.viewmodel.SearchViewModel
 import com.mercadolibre.android.andesui.demoapp.utils.replaceWith
-import com.mercadolibre.android.andesui.demoapp.home.views.DemoappSearchBoxView
-import com.mercadolibre.android.andesui.demoapp.home.views.DemoappSectionView
-import com.mercadolibre.android.andesui.textview.AndesTextView
 
 class SearchActivity : AppCompatActivity() {
 
-    private val emptyText: AndesTextView by lazy { findViewById<AndesTextView>(R.id.andes_search_empty) }
-    private val backArrow: ImageView by lazy { findViewById<ImageView>(R.id.andes_search_arrow_back) }
-    private val patternsSection by lazy { findViewById<DemoappSectionView>(R.id.andes_search_patterns_section) }
-    private val componentsSection by lazy { findViewById<DemoappSectionView>(R.id.andes_search_components_section) }
-    private val foundationsSection by lazy { findViewById<DemoappSectionView>(R.id.andes_search_foundations_section) }
-    private val searchbox: DemoappSearchBoxView by lazy { findViewById<DemoappSearchBoxView>(R.id.andes_main_searchbox_view) }
     private lateinit var viewModel: SearchViewModel
+    private val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        setContentView(binding.root)
 
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
 
@@ -44,7 +36,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setupBackArrowView() {
-        backArrow.setOnClickListener {
+        binding.andesSearchArrowBack.setOnClickListener {
             finishAfterTransition()
         }
     }
@@ -55,11 +47,14 @@ class SearchActivity : AppCompatActivity() {
             startActivity(SafeIntent(this, components[position].uri))
             finishAfterTransition()
         }.also { list ->
-            componentsSection.setContent(getString(R.string.andes_demoapp_components_title), list)
+            binding.andesSearchComponentsSection.setContent(
+                getString(R.string.andes_demoapp_components_title),
+                list
+            )
             viewModel.getComponents().observe(this, Observer {
                 components.replaceWith(it)
                 list.refreshListAdapter()
-                refreshListVisibility(it, componentsSection)
+                refreshListVisibility(it, binding.andesSearchComponentsSection)
                 refreshNoResultsVisibility()
             })
         }
@@ -71,11 +66,14 @@ class SearchActivity : AppCompatActivity() {
             startActivity(SafeIntent(this, patterns[position].uri))
             finishAfterTransition()
         }.also { list ->
-            patternsSection.setContent(getString(R.string.andes_demoapp_patterns_title), list)
+            binding.andesSearchPatternsSection.setContent(
+                getString(R.string.andes_demoapp_patterns_title),
+                list
+            )
             viewModel.getPatterns().observe(this, Observer {
                 patterns.replaceWith(it)
                 list.refreshListAdapter()
-                refreshListVisibility(it, patternsSection)
+                refreshListVisibility(it, binding.andesSearchPatternsSection)
                 refreshNoResultsVisibility()
             })
         }
@@ -87,18 +85,25 @@ class SearchActivity : AppCompatActivity() {
             startActivity(SafeIntent(this, foundations[position].uri))
             finishAfterTransition()
         }.also { list ->
-            foundationsSection.setContent(getString(R.string.andes_demoapp_foundation_title), list)
+            binding.andesSearchFoundationsSection.setContent(
+                getString(R.string.andes_demoapp_foundation_title),
+                list
+            )
             viewModel.getFoundations().observe(this, Observer {
                 foundations.replaceWith(it)
                 list.refreshListAdapter()
-                refreshListVisibility(it, foundationsSection)
+                refreshListVisibility(it, binding.andesSearchFoundationsSection)
                 refreshNoResultsVisibility()
             })
         }
     }
 
     private fun refreshNoResultsVisibility() {
-        emptyText.isVisible = !(foundationsSection.isVisible || patternsSection.isVisible || componentsSection.isVisible)
+        binding.andesSearchEmpty.isVisible = (
+                binding.andesSearchFoundationsSection.isVisible ||
+                binding.andesSearchPatternsSection.isVisible ||
+                binding.andesSearchComponentsSection.isVisible
+        ).not()
     }
 
     private fun refreshListVisibility(list: List<Section>, view: View) {
@@ -106,7 +111,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setupSearchboxView() {
-        with(searchbox.searchEditText) {
+        with(binding.andesMainSearchboxView.searchEditText) {
             isEnabled = true
             isClickable = true
             isFocusable = true

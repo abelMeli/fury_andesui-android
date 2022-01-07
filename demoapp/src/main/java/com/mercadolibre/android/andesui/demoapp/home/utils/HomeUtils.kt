@@ -2,8 +2,7 @@ package com.mercadolibre.android.andesui.demoapp.home.utils
 
 import android.content.Context
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.databinding.AndesLayoutListBinding
 import com.mercadolibre.android.andesui.demoapp.home.model.Section
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItemChevron
@@ -17,7 +16,7 @@ fun setupAndesList(context: Context, items: List<Section>, onItemClick: (andesLi
     type = AndesListType.CHEVRON
 ).apply {
     dividerItemEnabled = true
-    findViewById<RecyclerView>(R.id.andes_list).isNestedScrollingEnabled = false
+    AndesLayoutListBinding.bind(this).andesList.isNestedScrollingEnabled = false
     delegate = object : AndesListDelegate {
         override fun onItemClick(andesList: AndesList, position: Int) = onItemClick.invoke(andesList, position)
 

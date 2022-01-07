@@ -2,17 +2,19 @@ package com.mercadolibre.android.andesui.demoapp.components.a11yplayground
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.ActivityHeadingBinding
 
 class HeadingActivity : A11yPlaygroundActivity() {
 
+    private val binding by lazy { ActivityHeadingBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_heading)
+        setContentView(binding.root)
         initActionBar()
         setupViews()
     }
@@ -29,7 +31,7 @@ class HeadingActivity : A11yPlaygroundActivity() {
      * the value needed (compatible with older versions).
      */
     private fun setupViews() {
-        val thirdHeading = findViewById<TextView>(R.id.heading_third_heading)
+        val thirdHeading = binding.headingThirdHeading
 
         val customA11yDelegate = object : AccessibilityDelegateCompat() {
             override fun onInitializeAccessibilityNodeInfo(
@@ -46,7 +48,7 @@ class HeadingActivity : A11yPlaygroundActivity() {
 
     private fun initActionBar() {
         val navBarTitle = resources.getString(R.string.andes_demoapp_playground_title_a11y_heading)
-        setSupportActionBar(findViewById(R.id.hea_nav_bar))
+        setSupportActionBar(binding.heaNavBar)
         supportActionBar?.title = navBarTitle
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ArrayAdapter
@@ -14,6 +15,7 @@ import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicAutosuggestBinding
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
@@ -58,20 +60,20 @@ class AutosuggestView(
         }
 
     init {
-        View.inflate(context, R.layout.andesui_dynamic_autosuggest, this)
-        changeButton = findViewById(R.id.change_button)
-        clearButton = findViewById(R.id.clear_button)
-        labelTextfield = findViewById<AndesTextfield>(R.id.label_text).apply {
+        val binding = AndesuiDynamicAutosuggestBinding.inflate(LayoutInflater.from(context), this)
+        changeButton = binding.changeButton
+        clearButton = binding.clearButton
+        labelTextfield = binding.labelText.apply {
             text = context.getString(R.string.andes_autosuggest_suggestions_label_default)
         }
-        helperTextfield = findViewById(R.id.helper_text)
-        placeholderTextfield = findViewById(R.id.placeholder_text)
-        serverCallsCheckbox = findViewById(R.id.server_calls_checkbox)
-        suggestionsTextfield = findViewById<AndesTextfield>(R.id.suggestions_text).apply {
+        helperTextfield = binding.helperText
+        placeholderTextfield = binding.placeholderText
+        serverCallsCheckbox = binding.serverCallsCheckbox
+        suggestionsTextfield = binding.suggestionsText.apply {
             text = context.getString(R.string.andes_autosuggest_suggestions_default)
         }
-        autosuggest = findViewById(R.id.autosuggest)
-        stateSpinner = findViewById<Spinner>(R.id.state_spinner).apply {
+        autosuggest = binding.autosuggest
+        stateSpinner = binding.stateSpinner.apply {
             adapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,

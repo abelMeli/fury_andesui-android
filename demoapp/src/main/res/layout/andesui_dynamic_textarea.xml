@@ -10,7 +10,7 @@
         android:isScrollContainer="true">
 
         <com.mercadolibre.android.andesui.textfield.AndesTextarea
-            android:id="@+id/andesui_tag"
+            android:id="@+id/andesui_textarea"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_vertical_text_field"
@@ -31,15 +31,15 @@
             app:layout_constraintEnd_toStartOf="@+id/state_spinner"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/andesui_tag"
-            app:layout_constraintTop_toBottomOf="@+id/andesui_tag" />
+            app:layout_constraintStart_toStartOf="@+id/andesui_textarea"
+            app:layout_constraintTop_toBottomOf="@+id/andesui_textarea" />
 
         <Spinner
             android:id="@+id/state_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/simpleTypeTextView"
-            app:layout_constraintEnd_toEndOf="@+id/andesui_tag"
+            app:layout_constraintEnd_toEndOf="@+id/andesui_textarea"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/simpleTypeTextView"
             app:layout_constraintTop_toTopOf="@+id/simpleTypeTextView" />

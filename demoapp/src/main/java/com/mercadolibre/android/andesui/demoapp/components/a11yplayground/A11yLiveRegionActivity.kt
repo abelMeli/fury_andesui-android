@@ -2,46 +2,34 @@ package com.mercadolibre.android.andesui.demoapp.components.a11yplayground
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.ActivityA11yLiveRegionBinding
 import kotlin.random.Random
 
 class A11yLiveRegionActivity : A11yPlaygroundActivity() {
 
-    private lateinit var randomNumberTextViewFirst: TextView
-    private lateinit var randomNumberTextViewSecond: TextView
-    private lateinit var announceButtonFirst: AndesButton
-    private lateinit var announceButtonSecond: AndesButton
+    private val binding by lazy { ActivityA11yLiveRegionBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_a11y_live_region)
+        setContentView(binding.root)
         initActionBar()
-        initViews()
         setupViews()
     }
 
-    private fun initViews() {
-        randomNumberTextViewFirst = findViewById(R.id.alr_tv_random_number)
-        randomNumberTextViewSecond = findViewById(R.id.alr_tv_random_number_2)
-        announceButtonFirst = findViewById(R.id.alr_button_1)
-        announceButtonSecond = findViewById(R.id.alr_button_2)
-    }
-
     private fun setupViews() {
-        randomNumberTextViewFirst.accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
+        binding.alrTvRandomNumber.accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
 
-        announceButtonFirst.setOnClickListener {
+        binding.alrButton1.setOnClickListener {
             val newValue = generateRandomNumber()
-            randomNumberTextViewFirst.text = resources.getString(
+            binding.alrTvRandomNumber.text = resources.getString(
                 R.string.andes_demoapp_playground_alr_tv_random_number, newValue
             )
         }
 
-        announceButtonSecond.setOnClickListener {
+        binding.alrButton2.setOnClickListener {
             val newValue = generateRandomNumber()
-            randomNumberTextViewSecond.text = resources.getString(
+            binding.alrTvRandomNumber2.text = resources.getString(
                 R.string.andes_demoapp_playground_alr_tv_random_number, newValue
             )
         }
@@ -51,7 +39,7 @@ class A11yLiveRegionActivity : A11yPlaygroundActivity() {
 
     private fun initActionBar() {
         val navBarTitle = resources.getString(R.string.andes_demoapp_playground_title_live_region)
-        setSupportActionBar(findViewById(R.id.alr_nav_bar))
+        setSupportActionBar(binding.alrNavBar)
         supportActionBar?.title = navBarTitle
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

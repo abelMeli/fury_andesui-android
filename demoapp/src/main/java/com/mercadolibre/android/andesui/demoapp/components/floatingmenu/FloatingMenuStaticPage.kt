@@ -2,9 +2,9 @@ package com.mercadolibre.android.andesui.demoapp.components.floatingmenu
 
 import android.content.Context
 import android.view.View
-import android.widget.ImageView
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticFloatingmenuBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.floatingmenu.AndesFloatingMenu
@@ -19,20 +19,19 @@ import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.tooltip.AndesTooltip
 
 class FloatingMenuStaticPage {
-
-    private lateinit var context: Context
     companion object {
         private const val DEFAULT_WIDTH = 380
     }
 
     fun create(context: Context, container: View) {
-        this.context = context
-        setupTooltips(container)
-        setupMenus(container)
+        AndesuiStaticFloatingmenuBinding.bind(container).also { binding ->
+            setupTooltips(context, binding)
+            setupMenus(context, binding)
+        }
     }
 
-    private fun setupTooltips(container: View) {
-        container.findViewById<ImageView>(R.id.floating_menu_tooltip_1).also {
+    private fun setupTooltips(context: Context, binding: AndesuiStaticFloatingmenuBinding) {
+        binding.floatingMenuTooltip1.also {
             it.setOnClickListener { view ->
                 AndesTooltip(
                     context = context,
@@ -40,7 +39,7 @@ class FloatingMenuStaticPage {
                 ).show(view)
             }
         }
-        container.findViewById<ImageView>(R.id.floating_menu_tooltip_2).also {
+        binding.floatingMenuTooltip2.also {
             it.setOnClickListener { view ->
                 AndesTooltip(
                     context = context,
@@ -48,7 +47,7 @@ class FloatingMenuStaticPage {
                 ).show(view)
             }
         }
-        container.findViewById<ImageView>(R.id.floating_menu_tooltip_3).also {
+        binding.floatingMenuTooltip3.also {
             it.setOnClickListener { view ->
                 AndesTooltip(
                     context = context,
@@ -56,7 +55,7 @@ class FloatingMenuStaticPage {
                 ).show(view)
             }
         }
-        container.findViewById<ImageView>(R.id.floating_menu_tooltip_4).also {
+        binding.floatingMenuTooltip4.also {
             it.setOnClickListener { view ->
                 AndesTooltip(
                     context = context,
@@ -64,7 +63,7 @@ class FloatingMenuStaticPage {
                 ).show(view)
             }
         }
-        container.findViewById<ImageView>(R.id.floating_menu_tooltip_5).also {
+        binding.floatingMenuTooltip5.also {
             it.setOnClickListener { view ->
                 AndesTooltip(
                     context = context,
@@ -72,7 +71,7 @@ class FloatingMenuStaticPage {
                 ).show(view)
             }
         }
-        container.findViewById<ImageView>(R.id.floating_menu_tooltip_6).also {
+        binding.floatingMenuTooltip6.also {
             it.setOnClickListener { view ->
                 AndesTooltip(
                     context = context,
@@ -82,11 +81,11 @@ class FloatingMenuStaticPage {
         }
     }
 
-    private fun setupMenus(container: View) {
+    private fun setupMenus(context: Context, binding: AndesuiStaticFloatingmenuBinding) {
         val testWidth = AndesFloatingMenuWidth.Custom(DEFAULT_WIDTH)
 
         inflateComponent(
-            container.findViewById(R.id.andesui_demoapp_andes_trigger),
+            binding.andesuiDemoappAndesTrigger,
             AndesFloatingMenuRows.Max,
             testWidth,
             context,
@@ -94,7 +93,7 @@ class FloatingMenuStaticPage {
         )
 
         inflateComponent(
-            container.findViewById(R.id.andesui_demoapp_andes_trigger_2),
+            binding.andesuiDemoappAndesTrigger2,
             AndesFloatingMenuRows.Medium,
             testWidth,
             context,
@@ -102,7 +101,7 @@ class FloatingMenuStaticPage {
         )
 
         inflateComponent(
-            container.findViewById(R.id.andesui_demoapp_andes_trigger_3),
+            binding.andesuiDemoappAndesTrigger3,
             AndesFloatingMenuRows.Max,
             testWidth,
             context,
@@ -110,7 +109,7 @@ class FloatingMenuStaticPage {
         )
 
         inflateComponent(
-            container.findViewById(R.id.andesui_demoapp_andes_trigger_4),
+            binding.andesuiDemoappAndesTrigger4,
             AndesFloatingMenuRows.Max,
             testWidth,
             context,
@@ -118,7 +117,7 @@ class FloatingMenuStaticPage {
         )
 
         inflateComponent(
-            container.findViewById(R.id.andesui_demoapp_andes_trigger_5),
+            binding.andesuiDemoappAndesTrigger5,
             AndesFloatingMenuRows.Medium,
             testWidth,
             context,
@@ -126,7 +125,7 @@ class FloatingMenuStaticPage {
         )
 
         inflateComponent(
-            container.findViewById(R.id.andesui_demoapp_andes_trigger_6),
+            binding.andesuiDemoappAndesTrigger6,
             AndesFloatingMenuRows.Small,
             testWidth,
             context,
@@ -134,8 +133,8 @@ class FloatingMenuStaticPage {
             2
         )
 
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_button).setOnClickListener {
-            launchSpecs(container.context, AndesSpecs.FLOATINGMENU)
+        binding.andesuiDemoappAndesSpecsButton.setOnClickListener {
+            launchSpecs(context, AndesSpecs.FLOATINGMENU)
         }
     }
 

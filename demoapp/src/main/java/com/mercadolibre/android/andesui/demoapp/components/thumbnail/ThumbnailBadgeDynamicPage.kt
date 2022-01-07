@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.Group
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicThumbnailBadgeBinding
 import com.mercadolibre.android.andesui.demoapp.utils.Constants.EMPTY_STRING
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
@@ -70,7 +71,6 @@ class ThumbnailBadgeDynamicPage {
      */
     fun create(context: Context, container: View) {
         initComponents(container)
-
         setupSpinners(context)
         setupBadgeComponentGroups(context)
         setupActionButtons(context)
@@ -233,19 +233,17 @@ class ThumbnailBadgeDynamicPage {
     }
 
     private fun initComponents(container: View) {
-        thumbnailBadge = container.findViewById(R.id.andes_thumbnail_badge_icon)
-        thumbnailTypeSpinner = container.findViewById(R.id.thumbnail_badge_type_spinner)
-        thumbnailBadgeComponentSpinner =
-            container.findViewById(R.id.thumbnail_badge_component_spinner)
-        thumbnailBadgeComponentTypeSpinner =
-            container.findViewById(R.id.thumbnail_badge_component_type_spinner)
-        thumbnailBadgeSizeSpinner = container.findViewById(R.id.thumbnail_badge_size_spinner)
-        thumbnailBadgePillConfigs = container.findViewById(R.id.thumbnail_badge_pill_configs)
-        clearButton = container.findViewById(R.id.clear_button)
-        updateButton = container.findViewById(R.id.change_button)
-        thumbnailBadgePillText = container.findViewById(R.id.thumbnail_badge_pill_text)
-        thumbnailBadgePillTextStyleCaps =
-            container.findViewById(R.id.thumbnail_badge_pill_text_style_switch)
+        val binding = AndesuiDynamicThumbnailBadgeBinding.bind(container)
+        thumbnailBadge = binding.andesThumbnailBadgeIcon
+        thumbnailTypeSpinner = binding.thumbnailBadgeTypeSpinner
+        thumbnailBadgeComponentSpinner = binding.thumbnailBadgeComponentSpinner
+        thumbnailBadgeComponentTypeSpinner = binding.thumbnailBadgeComponentTypeSpinner
+        thumbnailBadgeSizeSpinner = binding.thumbnailBadgeSizeSpinner
+        thumbnailBadgePillConfigs = binding.thumbnailBadgePillConfigs
+        clearButton = binding.clearButton
+        updateButton = binding.changeButton
+        thumbnailBadgePillText = binding.thumbnailBadgePillText
+        thumbnailBadgePillTextStyleCaps = binding.thumbnailBadgePillTextStyleSwitch
     }
 
     private fun setupSpinnerComponent(context: Context, spinner: Spinner, @ArrayRes content: Int) {

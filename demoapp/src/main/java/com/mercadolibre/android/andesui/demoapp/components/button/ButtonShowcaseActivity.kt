@@ -1,10 +1,8 @@
 package com.mercadolibre.android.andesui.demoapp.components.button
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.mercadolibre.android.andesui.button.AndesButton
@@ -12,18 +10,18 @@ import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientation
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.buttonprogress.status.AndesButtonProgressAction
-import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicButtonProgressBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicButtonsBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticButtonsBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
-import kotlinx.android.synthetic.main.andesui_static_buttons.*
 
 @Suppress("TooManyFunctions")
 class ButtonShowcaseActivity : BaseActivity() {
@@ -42,20 +40,18 @@ class ButtonShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_button)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(
             listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_buttons, null, false),
-                inflater.inflate(R.layout.andesui_dynamic_button_progress, null, false),
-                inflater.inflate(R.layout.andesui_static_buttons, null, false)
+                AndesuiDynamicButtonsBinding.inflate(layoutInflater).root,
+                AndesuiDynamicButtonProgressBinding.inflate(layoutInflater).root,
+                AndesuiStaticButtonsBinding.inflate(layoutInflater).root
             )
         )
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -66,14 +62,13 @@ class ButtonShowcaseActivity : BaseActivity() {
     }
 
     private fun addDynamicPage(container: View) {
-        val andesButton = container.findViewById<AndesButton>(R.id.andes_button)
-        val changeButton = container.findViewById<AndesButton>(R.id.change_button)
-        val clearButton = container.findViewById<AndesButton>(R.id.clear_button)
-        val loadingCheckbox = container.findViewById<AndesCheckbox>(R.id.checkbox_loading)
-        val enabledCheckbox = container.findViewById<AndesCheckbox>(R.id.checkbox_enabled)
-        val text = container.findViewById<AndesTextfield>(R.id.label_text)
+        val binding = AndesuiDynamicButtonsBinding.bind(container)
+        val andesButton = binding.andesButton
+        val loadingCheckbox = binding.checkboxLoading
+        val enabledCheckbox = binding.checkboxEnabled
+        val text = binding.labelText
 
-        val sizeSpinner: Spinner = container.findViewById(R.id.size_spinner)
+        val sizeSpinner = binding.sizeSpinner
         ArrayAdapter.createFromResource(
             this,
             R.array.andes_button_size_spinner,
@@ -83,7 +78,7 @@ class ButtonShowcaseActivity : BaseActivity() {
             sizeSpinner.adapter = adapter
         }
 
-        val hierarchySpinner: Spinner = container.findViewById(R.id.hierarchy_spinner)
+        val hierarchySpinner = binding.hierarchySpinner
         ArrayAdapter.createFromResource(
             this,
             R.array.andes_button_hierarchy_spinner,
@@ -99,7 +94,7 @@ class ButtonShowcaseActivity : BaseActivity() {
             }
         }
 
-        clearButton.setOnClickListener {
+        binding.clearButton.setOnClickListener {
             sizeSpinner.setSelection(0)
             hierarchySpinner.setSelection(0)
 
@@ -114,7 +109,7 @@ class ButtonShowcaseActivity : BaseActivity() {
             text.text = null
         }
 
-        changeButton.setOnClickListener {
+        binding.changeButton.setOnClickListener {
             if (text.text.isNullOrEmpty()) {
                 text.state = AndesTextfieldState.ERROR
                 text.helper = "Campo obligatorio"
@@ -143,25 +138,20 @@ class ButtonShowcaseActivity : BaseActivity() {
     }
 
     private fun addDynamicProgressPage(container: View) {
-        val andesButtonLoud = container.findViewById<AndesButton>(R.id.andes_button_loud)
-        val andesButtonQuiet = container.findViewById<AndesButton>(R.id.andes_button_quiet)
+        val binding = AndesuiDynamicButtonProgressBinding.bind(container)
+        val andesButtonLoud = binding.andesButtonLoud
+        val andesButtonQuiet = binding.andesButtonQuiet
 
-        val loadingText = container.findViewById<AndesTextfield>(R.id.loading_text_field)
-        val from = container.findViewById<AndesTextfield>(R.id.from_text_field)
-        val to = container.findViewById<AndesTextfield>(R.id.to_text_field)
-        val duration = container.findViewById<AndesTextfield>(R.id.duration_text_field)
+        val loadingText = binding.loadingTextField
+        val from = binding.fromTextField
+        val to = binding.toTextField
+        val duration = binding.durationTextField
 
-        val startProgressLoadingButton =
-            container.findViewById<AndesButton>(R.id.start_progress_loading)
-        val pauseProgressLoadingButton =
-            container.findViewById<AndesButton>(R.id.pause_progress_loading)
-        val cancelProgressLoadingButton =
-            container.findViewById<AndesButton>(R.id.cancel_progress_loading)
+        val startProgressLoadingButton = binding.startProgressLoading
+        val pauseProgressLoadingButton = binding.pauseProgressLoading
+        val cancelProgressLoadingButton = binding.cancelProgressLoading
 
-        val serverCallsCheckbox = container.findViewById<AndesCheckbox>(R.id.server_calls_checkbox)
-
-        val changeButton = container.findViewById<AndesButton>(R.id.change_button)
-        val clearButton = container.findViewById<AndesButton>(R.id.clear_button)
+        val serverCallsCheckbox = binding.serverCallsCheckbox
 
         startProgressLoadingButton.setOnClickListener {
             if (serverCallsCheckbox.status == AndesCheckboxStatus.SELECTED) {
@@ -191,10 +181,10 @@ class ButtonShowcaseActivity : BaseActivity() {
 
         uploadButtons(andesButtonLoud, startProgressLoadingButton, pauseProgressLoadingButton, cancelProgressLoadingButton)
 
-        changeButton.setOnClickListener {
+        binding.changeButton.setOnClickListener {
             changeProgressValues(listOf(andesButtonLoud, andesButtonQuiet), loadingText, from, to, duration)
         }
-        clearButton.setOnClickListener {
+        binding.clearButton.setOnClickListener {
             clearProgressValues(loadingText, from, to, duration)
         }
         clearProgressValues(loadingText, from, to, duration)
@@ -350,44 +340,40 @@ class ButtonShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
+        val binding = AndesuiStaticButtonsBinding.bind(container)
         ResourcesCompat.getDrawable(resources, R.drawable.andesui_icon_dynamic, null)?.let {
-            container.findViewById<AndesButton>(R.id.button_loud_with_drawable).setIconDrawable(
+            binding.buttonLoudWithDrawable.setIconDrawable(
                 it, AndesButtonIconOrientation.LEFT
             )
         }
 
         ResourcesCompat.getDrawable(resources, R.drawable.andesui_icon_dynamic, null)?.let {
-            container.findViewById<AndesButton>(R.id.button_quiet_with_drawable).setIconDrawable(
+            binding.buttonQuietWithDrawable.setIconDrawable(
                 it, AndesButtonIconOrientation.RIGHT
             )
         }
 
         ResourcesCompat.getDrawable(resources, R.drawable.andesui_icon_dynamic, null)?.let {
-            container.findViewById<AndesButton>(R.id.button_transparent_with_drawable)
+            binding.buttonTransparentWithDrawable
                 .setIconDrawable(
                     it, AndesButtonIconOrientation.LEFT
                 )
         }
 
-        bindAndesSpecsButton(container)
+        binding.andesuiDemoappAndesSpecsButton.setOnClickListener {
+            launchSpecs(container.context, AndesSpecs.BUTTON)
+        }
     }
 
     fun buttonClicked(v: View) {
         if (v is AndesButton) {
-            if (v.id == button_loud_with_loading.id ||
-                v.id == button_quiet_with_loading.id ||
-                v.id == button_transparent_with_loading.id
+            if (v.id == R.id.button_loud_with_loading ||
+                v.id == R.id.button_quiet_with_loading ||
+                v.id == R.id.button_transparent_with_loading
             ) {
                 v.isLoading = !v.isLoading
             }
-            Toast.makeText(this, "${v.text} clicked!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "${v.text} clicked!", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun bindAndesSpecsButton(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_button)
-            .setOnClickListener {
-                launchSpecs(container.context, AndesSpecs.BUTTON)
-            }
     }
 }

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.demoapp.components.switchandes
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -10,9 +9,10 @@ import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicSwitchBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticSwitchBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.Constants
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.switchandes.AndesSwitch
 import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
@@ -36,17 +36,17 @@ class SwitchShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_switch)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_switch, null, false),
-                inflater.inflate(R.layout.andesui_static_switch, null, false)
-        ))
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(
+            listOf(
+                AndesuiDynamicSwitchBinding.inflate(layoutInflater).root,
+                AndesuiStaticSwitchBinding.inflate(layoutInflater).root
+            )
+        )
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -56,57 +56,62 @@ class SwitchShowcaseActivity : BaseActivity() {
     }
 
     @Suppress("ComplexMethod", "LongMethod")
-    private fun addDynamicPage(container: View) {
-        val dynamicSwitch: AndesSwitch = container.findViewById(R.id.dynamic_page_switch)
-        val spinnerType = configSpinnerType(container)
-        val spinnerStatus = configSpinnerStatus(container)
-        val spinnerAlign = configSpinnerAlign(container)
-        val updateButton: AndesButton = container.findViewById(R.id.dynamic_page_switch_button_update)
-        val clearButton: AndesButton = container.findViewById(R.id.dynamic_page_switch_button_clear)
-        val switchTextfield: AndesTextfield = container.findViewById(R.id.dynamic_page_switch_textfield)
-        val linesTextfield: AndesTextfield = container.findViewById(R.id.dynamic_page_switch_textfield_lines)
+    private fun addDynamicPage(container: View) =
+        with(AndesuiDynamicSwitchBinding.bind(container)) {
+            configSpinnerType(dynamicPageSwitchSpinnerType)
+            configSpinnerStatus(dynamicPageSwitchSpinnerStatus)
+            configSpinnerAlign(dynamicPageSwitchSpinnerAlign)
+            setupClearButton(
+                dynamicPageSwitchButtonClear,
+                dynamicPageSwitchSpinnerAlign,
+                dynamicPageSwitchSpinnerStatus,
+                dynamicPageSwitchSpinnerType,
+                dynamicPageSwitchTextfield,
+                dynamicPageSwitchTextfieldLines,
+                dynamicPageSwitch
+            )
+            setupUpdateButton(
+                dynamicPageSwitchButtonUpdate,
+                dynamicPageSwitchSpinnerAlign,
+                dynamicPageSwitchSpinnerStatus,
+                dynamicPageSwitchSpinnerType,
+                dynamicPageSwitchTextfield,
+                dynamicPageSwitchTextfieldLines,
+                dynamicPageSwitch
+            )
+        }
 
-        setupClearButton(clearButton, spinnerAlign, spinnerStatus, spinnerType, switchTextfield, linesTextfield, dynamicSwitch)
-        setupUpdateButton(updateButton, spinnerAlign, spinnerStatus, spinnerType, switchTextfield, linesTextfield, dynamicSwitch)
-    }
-
-    private fun configSpinnerType(container: View): Spinner {
-        val spinnerType: Spinner = container.findViewById(R.id.dynamic_page_switch_spinner_type)
+    private fun configSpinnerType(spinner: Spinner) {
         ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_switch_type_spinner,
-                android.R.layout.simple_spinner_item
+            this,
+            R.array.andes_switch_type_spinner,
+            android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerType.adapter = adapter
+            spinner.adapter = adapter
         }
-        return spinnerType
     }
 
-    private fun configSpinnerStatus(container: View): Spinner {
-        val spinnerStatus: Spinner = container.findViewById(R.id.dynamic_page_switch_spinner_status)
+    private fun configSpinnerStatus(spinner: Spinner) {
         ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_switch_status_spinner,
-                android.R.layout.simple_spinner_item
+            this,
+            R.array.andes_switch_status_spinner,
+            android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerStatus.adapter = adapter
+            spinner.adapter = adapter
         }
-        return spinnerStatus
     }
 
-    private fun configSpinnerAlign(container: View): Spinner {
-        val spinnerAlign: Spinner = container.findViewById(R.id.dynamic_page_switch_spinner_align)
+    private fun configSpinnerAlign(spinner: Spinner) {
         ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_switch_align_spinner,
-                android.R.layout.simple_spinner_item
+            this,
+            R.array.andes_switch_align_spinner,
+            android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerAlign.adapter = adapter
+            spinner.adapter = adapter
         }
-        return spinnerAlign
     }
 
     @Suppress("LongParameterList")
@@ -173,8 +178,9 @@ class SwitchShowcaseActivity : BaseActivity() {
     }
 
     private fun addStaticPage(container: View) {
-        container.findViewById<AndesButton>(R.id.static_page_switch_button_more).setOnClickListener {
-            launchSpecs(this, AndesSpecs.SWITCH)
-        }
+        AndesuiStaticSwitchBinding.bind(container).staticPageSwitchButtonMore
+            .setOnClickListener {
+                launchSpecs(this, AndesSpecs.SWITCH)
+            }
     }
 }

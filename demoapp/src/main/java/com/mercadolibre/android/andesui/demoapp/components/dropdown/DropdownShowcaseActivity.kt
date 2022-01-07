@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.demoapp.components.dropdown
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -15,7 +14,8 @@ import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicDropdownBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticDropdownBinding
 import com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
 import com.mercadolibre.android.andesui.dropdown.AndesDropDownItem
 import com.mercadolibre.android.andesui.dropdown.AndesDropdownStandalone
@@ -40,7 +40,6 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
     private lateinit var editTextTitle: AndesTextfield
     private lateinit var editTextPlaceHolder: AndesTextfield
     private lateinit var editTextHelper: AndesTextfield
-    private lateinit var sizeSpinner: Spinner
     private lateinit var checkboxStarter: AndesCheckbox
     private lateinit var checkboxIndeterminate: AndesCheckbox
     private lateinit var stateSpinner: Spinner
@@ -63,17 +62,15 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_dropdown)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_dropdown, null, false),
-                inflater.inflate(R.layout.andesui_static_dropdown, null, false)
+            AndesuiDynamicDropdownBinding.inflate(layoutInflater).root,
+            AndesuiStaticDropdownBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -83,10 +80,11 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
     }
 
     private fun addDynamicPage(container: View) {
-        buttonClear = container.findViewById(R.id.buttonClear)
-        buttonUpdate = container.findViewById(R.id.buttonUpdate)
+        val binding = AndesuiDynamicDropdownBinding.bind(container)
+        buttonClear = binding.buttonClear
+        buttonUpdate = binding.buttonUpdate
 
-        andesDropDownForm = container.findViewById(R.id.andesDropdown)
+        andesDropDownForm = binding.andesDropdown
 
         andesDropDownForm.label = andesDropDownLabel
         andesDropDownForm.placeholder = andesDropDownPlaceHolder
@@ -96,15 +94,15 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
 
         andesDropDownForm.delegate = this
 
-        editTextTitle = container.findViewById(R.id.editTextDropdownLabel)
-        editTextPlaceHolder = container.findViewById(R.id.editTextDropdownPlaceHolder)
-        editTextHelper = container.findViewById(R.id.editTextDropdownHelper)
-        checkboxStarter = container.findViewById(R.id.checkboxDropdownStartingItem)
+        editTextTitle = binding.editTextDropdownLabel
+        editTextPlaceHolder = binding.editTextDropdownPlaceHolder
+        editTextHelper = binding.editTextDropdownHelper
+        checkboxStarter = binding.checkboxDropdownStartingItem
         checkboxStarter.text = "Starting Item 0"
-        checkboxIndeterminate = container.findViewById(R.id.checkboxDropdownIndeterminate)
+        checkboxIndeterminate = binding.checkboxDropdownIndeterminate
         checkboxIndeterminate.text = "Set Indeterminate"
 
-        stateSpinner = container.findViewById(R.id.dropdownStateSpinner)
+        stateSpinner = binding.dropdownStateSpinner
         val stateAdapter = ArrayAdapter(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -115,7 +113,7 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
 
         stateSpinner.setSelection(0)
 
-        menuTypeSpinner = container.findViewById(R.id.dropdownMenuTypeSpinner)
+        menuTypeSpinner = binding.dropdownMenuTypeSpinner
         val menuTypeAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
@@ -136,7 +134,8 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
     }
 
     private fun addStaticPage(container: View) {
-        val spinnerType: Spinner = container.findViewById(R.id.andes_dropdown_standalone_show_case_spinner)
+        val binding = AndesuiStaticDropdownBinding.bind(container)
+        val spinnerType = binding.andesDropdownStandaloneShowCaseSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_type_list_spinner,
@@ -146,23 +145,22 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
             spinnerType.adapter = adapter
         }
 
-        andesDropdownStandalone = container.findViewById(R.id.andesDropdownStandalone)
+        andesDropdownStandalone = binding.andesDropdownStandalone
 
         andesDropdownStandalone.setItems(getFakeList())
 
         andesDropdownStandalone.delegate = this
 
-        sizeSpinner = container.findViewById(R.id.andes_dropdown_standalone_show_case_spinner)
-        sizeSpinner.setSelection(1) // medium value
+        spinnerType.setSelection(1) // medium value
 
-        sizeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parentView: AdapterView<*>?,
                 selectedItemView: View,
                 position: Int,
                 id: Long
             ) {
-                andesDropdownStandalone.size = when (sizeSpinner.getItemAtPosition(position).toString().toLowerCase()) {
+                andesDropdownStandalone.size = when (spinnerType.getItemAtPosition(position).toString().toLowerCase()) {
                     "small" -> {
                         AndesDropdownSize.SMALL
                     }
@@ -183,7 +181,7 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
     }
 
     override fun onItemSelected(andesDropDown: AndesListDelegate, position: Int) {
-        Toast.makeText(this, "item selected position: $position", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "item selected position: $position", Toast.LENGTH_SHORT).show()
     }
 
     private fun clear() {

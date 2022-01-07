@@ -86,11 +86,11 @@ class FeedbackScreenStaticSimpleRedBodyPage {
     private fun createActions(context: Context) {
         val feedbackButtonBody = AndesFeedbackScreenButton("Reintentar",
             View.OnClickListener {
-                Toast.makeText(context, "Click in button", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Click in button", Toast.LENGTH_SHORT).show()
             })
 
         val feedbackCloseButton = View.OnClickListener {
-            Toast.makeText(context, "Click in close", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context.applicationContext, "Click in close", Toast.LENGTH_SHORT).show()
         }
 
         feedbackActions = AndesFeedbackScreenActions(

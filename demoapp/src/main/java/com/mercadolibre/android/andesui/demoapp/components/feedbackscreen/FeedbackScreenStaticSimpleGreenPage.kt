@@ -30,12 +30,12 @@ class FeedbackScreenStaticSimpleGreenPage {
         val button = AndesFeedbackScreenButton(
             text = "Ir al login",
             onClick = View.OnClickListener {
-                Toast.makeText(context, "Click in bottom button", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context.applicationContext, "Click in bottom button", Toast.LENGTH_SHORT).show()
             }
         )
 
         val feedbackCloseButton = View.OnClickListener {
-            Toast.makeText(context, "Click in close", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context.applicationContext, "Click in close", Toast.LENGTH_SHORT).show()
         }
 
         feedbackActions = AndesFeedbackScreenActions(

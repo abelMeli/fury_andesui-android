@@ -1,15 +1,13 @@
 package com.mercadolibre.android.andesui.demoapp.components.progressindicator
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticProgressBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 
 class ProgressShowcaseActivity : BaseActivity() {
@@ -27,16 +25,14 @@ class ProgressShowcaseActivity : BaseActivity() {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_progress_indicator)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_static_progress, null, false)
+                AndesuiStaticProgressBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -49,7 +45,7 @@ class ProgressShowcaseActivity : BaseActivity() {
     }
 
     private fun bindAndesSpecsButton(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_progress).setOnClickListener {
+        AndesuiStaticProgressBinding.bind(container).andesuiDemoappAndesSpecsProgress.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.PROGRESS_INDICATOR)
         }
     }

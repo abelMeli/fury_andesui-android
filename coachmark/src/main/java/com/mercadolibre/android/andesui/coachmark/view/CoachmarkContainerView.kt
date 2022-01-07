@@ -3,9 +3,10 @@ package com.mercadolibre.android.andesui.coachmark.view
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import com.mercadolibre.android.andesui.coachmark.R
+import com.mercadolibre.android.andesui.coachmark.databinding.AndesWalkthroughContainerBinding
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import kotlinx.android.synthetic.main.andes_walkthrough_container.view.*
 
 class CoachmarkContainerView @JvmOverloads constructor(
     context: Context,
@@ -14,10 +15,12 @@ class CoachmarkContainerView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var listener: CoachmarkContainerListener? = null
+    private val binding by lazy {
+        AndesWalkthroughContainerBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     init {
-        inflate(context, R.layout.andes_walkthrough_container, this)
-        counterText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
+        binding.counterText.typeface = context.getFontOrDefault(R.font.andes_font_regular)
     }
 
     fun setListener(l: CoachmarkContainerListener) {
@@ -25,8 +28,8 @@ class CoachmarkContainerView @JvmOverloads constructor(
     }
 
     fun setData(position: Int, size: Int) {
-        closeButton.setOnClickListener { listener?.onClickClose(position) }
-        counterText.text = context.resources.getString(R.string.andes_coachmark_header_numeration_of, position + 1, size)
+        binding.closeButton.setOnClickListener { listener?.onClickClose(position) }
+        binding.counterText.text = context.resources.getString(R.string.andes_coachmark_header_numeration_of, position + 1, size)
     }
 
     interface CoachmarkContainerListener {

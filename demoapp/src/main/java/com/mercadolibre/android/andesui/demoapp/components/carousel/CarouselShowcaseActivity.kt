@@ -4,25 +4,22 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Spinner
 import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.ImageView
 import android.widget.Toast
-import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.card.AndesCard
 import com.mercadolibre.android.andesui.card.type.AndesCardType
 import com.mercadolibre.android.andesui.carousel.AndesCarousel
 import com.mercadolibre.android.andesui.carousel.margin.AndesCarouselMargin
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
-import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiCarouselCardItemBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiCarouselItemBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicCarouselBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticCarouselBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.PageIndicator
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 
 @Suppress("TooManyFunctions", "LongMethod")
@@ -53,17 +50,15 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_carousel)
 
     private fun initViewPager() {
-        val inflater = LayoutInflater.from(this)
-        viewPager = findViewById(R.id.andesui_viewpager)
-        viewPager.adapter = AndesPagerAdapter(listOf<View>(
-                inflater.inflate(R.layout.andesui_dynamic_carousel, null, false),
-                inflater.inflate(R.layout.andesui_static_carousel, null, false)
+        viewPager = baseBinding.andesuiViewpager
+        viewPager.adapter = AndesPagerAdapter(listOf(
+            AndesuiDynamicCarouselBinding.inflate(layoutInflater).root,
+            AndesuiStaticCarouselBinding.inflate(layoutInflater).root
         ))
     }
 
     private fun attachIndicator() {
-        val indicator = findViewById<PageIndicator>(R.id.page_indicator)
-        indicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {
@@ -73,15 +68,16 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
     }
 
     private fun addDynamicPage(container: View) {
-        val clearButton = container.findViewById<AndesButton>(R.id.clear_button)
-        val changeButton = container.findViewById<AndesButton>(R.id.change_button)
-        val carousel = container.findViewById<AndesCarousel>(R.id.andes_carousel)
-        val checkboxCentered = container.findViewById<AndesCheckbox>(R.id.checkbox_centered)
+        val binding = AndesuiDynamicCarouselBinding.bind(container)
+        val clearButton = binding.clearButton
+        val changeButton = binding.changeButton
+        val carousel = binding.andesCarousel
+        val checkboxCentered = binding.checkboxCentered
 
         dynamicCarouselId = carousel.id
         carousel.delegate = this
 
-        val marginSpinner: Spinner = container.findViewById(R.id.margin_spinner)
+        val marginSpinner = binding.marginSpinner
         ArrayAdapter.createFromResource(
                 this,
                 R.array.andes_carousel_margin_spinner,
@@ -115,19 +111,16 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
     }
 
     private fun addStaticPage(container: View) {
-        val carouselSnapped = container.findViewById<AndesCarousel>(R.id.carousel_snapped)
-        val carouselFree = container.findViewById<AndesCarousel>(R.id.carousel_free)
+        val binding = AndesuiStaticCarouselBinding.bind(container)
+        val carouselSnapped = binding.carouselSnapped
+        val carouselFree = binding.carouselFree
 
         snappedCarouselId = carouselSnapped.id
         freeCarouselId = carouselFree.id
         carouselSnapped.delegate = this
         carouselFree.delegate = this
 
-        bindAndesSpecsButton(container)
-    }
-
-    private fun bindAndesSpecsButton(container: View) {
-        container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_carousel_specs_button).setOnClickListener {
+        binding.andesuiDemoappAndesCarouselSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.CAROUSEL)
         }
     }
@@ -151,24 +144,24 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
     )
 
     override fun bind(andesCarouselView: AndesCarousel, view: View, position: Int) {
+        val binding = AndesuiCarouselItemBinding.bind(view)
         val item = when (andesCarouselView.id) {
             freeCarouselId -> freelist[position]
             snappedCarouselId -> snappedlist[position]
             else -> dynamicList[position]
         }
 
-        val cardItem = view.findViewById<AndesCard>(R.id.card_item).apply {
-            val inflater = LayoutInflater.from(context)
-            val cardView = inflater.inflate(R.layout.andesui_carousel_card_item, null, false)
-            cardView.findViewById<TextView>(R.id.text).apply {
+        val cardItem = binding.cardItem.apply {
+            val cardView = AndesuiCarouselCardItemBinding.inflate(LayoutInflater.from(context))
+            cardView.text.apply {
                 this.text = item.label
             }
-            cardView.findViewById<ImageView>(R.id.image).apply {
+            cardView.image.apply {
                 if (andesCarouselView.id == freeCarouselId) {
                     this.visibility = View.GONE
                 }
             }
-            this.cardView = cardView
+            this.cardView = cardView.root
         }
 
         when (item.backgroundColor) {
@@ -183,13 +176,13 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
     override fun onClickItem(andesCarouselView: AndesCarousel, position: Int) {
         when (andesCarouselView.id) {
             freeCarouselId -> {
-                Toast.makeText(this@CarouselShowcaseActivity, freelist[position].toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, freelist[position].toString(), Toast.LENGTH_SHORT).show()
             }
             snappedCarouselId -> {
-                Toast.makeText(this@CarouselShowcaseActivity, snappedlist[position].toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, snappedlist[position].toString(), Toast.LENGTH_SHORT).show()
             }
             else -> {
-                Toast.makeText(this@CarouselShowcaseActivity, dynamicList[position].toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, dynamicList[position].toString(), Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -105,7 +105,7 @@ class CoachmarkView private constructor(builder: Builder) : CoachmarkViewInterfa
             }
         })
 
-        walkthroughMessageView.setListener(object : WalkthroughScrollessMessageView.WalkthroughButtonClicklistener {
+        walkthroughMessageView.setListener(object : WalkthroughMessageView.WalkthroughButtonClicklistener {
             override fun onClickNextButton(position: Int) {
 
                 if (coachmarkData.steps.size == position + 1) {
