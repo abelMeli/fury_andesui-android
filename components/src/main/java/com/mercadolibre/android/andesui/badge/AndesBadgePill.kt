@@ -19,6 +19,7 @@ import com.mercadolibre.android.andesui.badge.factory.AndesBadgePillConfiguratio
 import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgePillHierarchy
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
+import com.mercadolibre.android.andesui.utils.isUpperCase
 import java.util.Locale
 
 class AndesBadgePill : CardView {
@@ -190,12 +191,16 @@ class AndesBadgePill : CardView {
         if (config.text == null || config.text.isEmpty()) {
             badgeTitle.visibility = View.GONE
         } else {
+            var marginTop = 0
             badgeTitle.visibility = View.VISIBLE
             badgeTitle.text = if (textStyleDefault) { config.text.toUpperCase(Locale.getDefault()) } else config.text
+            if (badgeTitle.text.isUpperCase()) {
+                marginTop = if (pillSize == AndesBadgePillSize.LARGE) MARGIN_TOP_UPPERCASE_LARGE else MARGIN_TOP_UPPERCASE_SMALL
+            }
             badgeTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.textSize)
             badgeTitle.setTextColor(config.textColor.colorInt(context))
             val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-            params.setMargins(config.textMargin, 0, config.textMargin, 0)
+            params.setMargins(config.textMargin, marginTop, config.textMargin, 0)
             params.gravity = Gravity.CENTER
             badgeTitle.layoutParams = params
         }
@@ -235,5 +240,7 @@ class AndesBadgePill : CardView {
         private const val BACKGROUND_RADIUS_1 = 1
         private const val BACKGROUND_RADIUS_2 = 2
         private const val BACKGROUND_RADIUS_3 = 3
+        private const val MARGIN_TOP_UPPERCASE_SMALL = 1
+        private const val MARGIN_TOP_UPPERCASE_LARGE = 2
     }
 }

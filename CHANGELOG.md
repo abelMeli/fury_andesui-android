@@ -1,6 +1,7 @@
 # v4.6.0
 ## 🛠 Fixes
 - AndesMessage text size in action link | Author: [jperezgonzal](https://github.com/jperezgonzal)
+- AndesBadgePill centralized uppercase text | Author: [@gabrielcoutos](https://github.com/gabrielcoutos)
 
 # v4.5.0
 ## 🚀 Feature

@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.badge
 
 import android.os.Build
+import android.view.ViewGroup
 import android.widget.TextView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.border.AndesBadgePillBorder
@@ -163,6 +164,36 @@ class AndesBadgePillConfigurationLoudTest {
         assertEquals(LARGE_HEIGHT, config.height)
         val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
         assertEquals("TITLE", params.text)
+    }
+
+    @Test
+    fun `Pill, Loud, Neutral, Corner, Small check centralized text`() {
+        val andesBadgePill = AndesBadgePill(
+            context,
+            AndesBadgePillHierarchy.LOUD,
+            AndesBadgeType.NEUTRAL,
+            AndesBadgePillBorder.CORNER,
+            AndesBadgePillSize.SMALL,
+            "test"
+        )
+        val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
+        val layout = params.layoutParams as ViewGroup.MarginLayoutParams
+        assertEquals(1, layout.topMargin)
+    }
+
+    @Test
+    fun `Pill, Loud, Neutral, ROUNDED, Large check centralized text`() {
+        val andesBadgePill = AndesBadgePill(
+            context,
+            AndesBadgePillHierarchy.LOUD,
+            AndesBadgeType.NEUTRAL,
+            AndesBadgePillBorder.ROUNDED,
+            AndesBadgePillSize.LARGE,
+            "test"
+        )
+        val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
+        val layout = params.layoutParams as ViewGroup.MarginLayoutParams
+        assertEquals(2, layout.topMargin)
     }
 
     companion object {

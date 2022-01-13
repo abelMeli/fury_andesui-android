@@ -127,3 +127,15 @@ internal fun CharSequence?.getLinkTextList(): List<String?> {
     val spans = getSpans(0, length, ClickableSpanWithText::class.java)
     return spans.map { it.getText() }
 }
+
+/**
+ * Return if the text is uppercase.
+ */
+internal fun CharSequence?.isUpperCase(): Boolean {
+    this?.forEach {
+        if (!it.isUpperCase()) {
+            return false
+        }
+    }
+    return true
+}
