@@ -365,6 +365,7 @@ class AndesMessage : CardView {
      */
     fun setupLinkAction(text: String, onClickListener: OnClickListener) {
         if (primaryAction.visibility == View.GONE) {
+            val config = createConfig()
             val spannableText = createSpannableString(text, onClickListener)
             linkAction.apply {
                 setPadding(LINK_BUTTON_PADDING,
@@ -373,6 +374,7 @@ class AndesMessage : CardView {
                     LINK_BUTTON_PADDING)
                 visibility = View.VISIBLE
                 typeface = context.getFontOrDefault(R.font.andes_font_regular)
+                linkAction.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.actionTextSize)
                 setOnClickListener(onClickListener)
                 this.text = spannableText
             }

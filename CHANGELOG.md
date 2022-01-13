@@ -1,3 +1,7 @@
+# v4.6.0
+## 🛠 Fixes
+- AndesMessage text size in action link | Author: [jperezgonzal](https://github.com/jperezgonzal)
+
 # v4.5.0
 ## 🚀 Feature
 - Andes synthetics imports replaced with viewbinding | Author: [@eportasML](https://github.com/eportasML)

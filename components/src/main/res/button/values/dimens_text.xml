@@ -4,5 +4,4 @@
     <dimen name="andes_text_size_body">14sp</dimen>
     <dimen name="andes_text_size_caption">12sp</dimen>
     <dimen name="andes_text_default_line_height">18sp</dimen>
-
 </resources>
