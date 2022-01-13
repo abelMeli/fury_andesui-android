@@ -3,6 +3,7 @@
 
     <dimen name="andes_message_title">@dimen/andes_text_size_subhead</dimen>
     <dimen name="andes_message_body">@dimen/andes_text_size_body</dimen>
+    <dimen name="andes_message_action_text_size">@dimen/andes_text_size_body</dimen>
     <dimen name="andes_message_line_height">@dimen/andes_text_default_line_height</dimen>
 
 </resources>
