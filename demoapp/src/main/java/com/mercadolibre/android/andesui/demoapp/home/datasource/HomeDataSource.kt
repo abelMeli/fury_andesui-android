@@ -75,6 +75,6 @@ object HomeDataSource {
     ).sortedBy { it.name }
 
     fun getFoundationsData() = listOf(
-        Section("Typography", "meli://andes/textview")
+        Section("Typography", "meli://andes/typography")
     ).sortedBy { it.name }
 }

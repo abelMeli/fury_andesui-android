@@ -58,31 +58,40 @@ See the [Setup page](Setup.md) to apply production styles in Mercado Libre & Mer
 See the [Fonts & Colors page](Fonts&Colors.md) to be aware of how to use the proper Colors and Fonts with AndesUI.
 
 ## Components
-* [AndesAutosuggest](autosuggest/AndesAutosuggest.md)
-* [AndesBadge](badge/AndesBadge.md)
-* [AndesBadgeIconPill](badge/AndesBadgeIconPill.md)
-* [AndesBadgePill](badge/AndesBadgePill.md)
-* [AndesButton](button/AndesButton.md)
-* [AndesCarousel](carousel/AndesCarousel.md)
-* [AndesCheckbox](checkbox/AndesCheckbox.md)
-* [AndesCoachMark](coachmark/AndesCoachMark.md)
-* [AndesDatePicker](datepicker/AndesDatePicker.md)
-* [AndesDropdown](dropdown/AndesDropdown.md)
-* [AndesFeedbackScreen](feedbackscreen/AndesFeedbackScreen.md)
-* [AndesFloatingMenu](floatingmenu/AndesFloatingMenu.md)
-* [AndesList](list/AndesList.md)
-* [AndesMessage](message/AndesMessage.md)
-* [AndesModal](modal/AndesModal.md)
-* [AndesMoneyAmount](moneyamount/AndesMoneyAmount.md)
-* [AndesMoneyAmountCombo](moneyamount/AndesMoneyAmountCombo.md)
-* [AndesMoneyAmountDiscount](moneyamount/AndesMoneyAmountDiscount.md)
-* [AndesSnackbar](snackbar/AndesSnackbar.md)
-* [AndesSwitch](switch/AndesSwitch.md)
-* [AndesTabs](tabs/AndesTabs.md)
-* [AndesTag](tag/AndesTag.md)
-* [AndesTextfield](textfield/AndesTextfield.md)
-* [AndesTextView](textview/AndesTextView.md)
-* [AndesThumbnail](thumbnail/AndesThumbnail.md)
-* [AndesThumbnailBadge](thumbnail/AndesThumbnailBadge.md)
-* [AndesTimePicker](timepicker/AndesTimePicker.md)
-* [AndesTooltip](tooltip/AndesTooltip.md)
+| Component | Deeplink |
+| -------- | -------- |
+| [AndesAutosuggest](autosuggest/AndesAutosuggest.md) | meli://andes/textfield |
+| [AndesBadge](badge/AndesBadge.md) | meli://andes/badge |
+| [AndesBadgeIconPill](badge/AndesBadgeIconPill.md) | meli://andes/badge |
+| [AndesBadgePill](badge/AndesBadgePill.md) | meli://andes/badge |
+| [AndesButton](button/AndesButton.md) | meli://andes/button |
+| [AndesCarousel](carousel/AndesCarousel.md) | meli://andes/carousel |
+| [AndesCheckbox](checkbox/AndesCheckbox.md) | meli://andes/checkbox |
+| [AndesCoachMark](coachmark/AndesCoachMark.md) | meli://andes/coachmark |
+| [AndesDatePicker](datepicker/AndesDatePicker.md) | meli://andes/datepicker |
+| [AndesDropdown](dropdown/AndesDropdown.md) | meli://andes/dropdown |
+| [AndesFeedbackScreen](feedbackscreen/AndesFeedbackScreen.md) | meli://andes/feedbackscreen |
+| [AndesFloatingMenu](floatingmenu/AndesFloatingMenu.md) | meli://andes/floatingmenu |
+| [AndesList](list/AndesList.md) | meli://andes/list |
+| [AndesMessage](message/AndesMessage.md) | meli://andes/message |
+| [AndesModal](modal/AndesModal.md) |  |
+| [AndesMoneyAmount](moneyamount/AndesMoneyAmount.md) | meli://andes/moneyamount |
+| [AndesMoneyAmountCombo](moneyamount/AndesMoneyAmountCombo.md) | meli://andes/moneyamount |
+| [AndesMoneyAmountDiscount](moneyamount/AndesMoneyAmountDiscount.md) | meli://andes/moneyamount |
+| [AndesSnackbar](snackbar/AndesSnackbar.md) | meli://andes/snackbar |
+| [AndesSwitch](switch/AndesSwitch.md) | meli://andes/switch |
+| [AndesTabs](tabs/AndesTabs.md) | meli://andes/tabs |
+| [AndesTag](tag/AndesTag.md) | meli://andes/tag |
+| [AndesTextfield](textfield/AndesTextfield.md) | meli://andes/textfield |
+| [AndesTextView](textview/AndesTextView.md) | meli://andes/typography |
+| [AndesThumbnail](thumbnail/AndesThumbnail.md) | meli://andes/thumbnail |
+| [AndesThumbnailBadge](thumbnail/AndesThumbnailBadge.md) | meli://andes/thumbnail |
+| [AndesTimePicker](timepicker/AndesTimePicker.md) | meli://andes/timepicker |
+| [AndesTooltip](tooltip/AndesTooltip.md) | meli://andes/tooltip |
+
+### Open any component deeplink in Andes Showcase App
+First you need to install [Andes Showcase App](#live-examples). Then run the following `adb` command in your terminal.
+```console
+adb shell am start -a android.intent.action.VIEW -d "meli://andes/{component}"
+```
+If you don't use Android Studio install any app to test deeplinks, for example: "Deep Link Tester". Then enter any component deeplink in your app: `meli://andes/{component}`.

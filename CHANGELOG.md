@@ -1,4 +1,6 @@
 # v4.7.0
+## 🚀 Feature
+- Demoapp deeplink documentation and typography name refactor | Author: [@eportasML](https://github.com/eportasML)
 ## 🛠 Fixes
 - AndesFeedbackScreen can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)
 

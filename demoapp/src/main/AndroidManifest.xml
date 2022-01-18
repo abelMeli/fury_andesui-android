@@ -599,7 +599,7 @@
 
                 <data
                     android:host="andes"
-                    android:path="/textview"
+                    android:path="/typography"
                     android:scheme="meli" />
             </intent-filter>
         </activity>

@@ -1,3 +1,7 @@
+# v4.7.0
+## 🚀 Feature
+- Demoapp deeplink documentation and typography name refactor | Author: [@eportasML](https://github.com/eportasML)
+
 # v4.6.0
 ## 🛠 Fixes
 - AndesMessage text size in action link | Author: [jperezgonzal](https://github.com/jperezgonzal)
