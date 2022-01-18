@@ -39,6 +39,9 @@ AndesFeedbackScreenView(
 | Return type | Method |
 | -------- | ------- |
 | Unit | **setFeedbackScreenAsset(feedbackImage: AndesFeedbackScreenAsset?)**<br/> Replaces current feedback image with the new [feedbackImage] asset. If you select an AndesThumbnailBadgeType.Icon, the [drawable] will be colorized as the previously selected status (green for SUCCESS, orange for WARNING, red for ERROR). |
+| Unit | **setFeedbackScreenHeader(header: AndesFeedbackScreenHeader)**<br/> Replaces current feedback header with the new [feedbackScreenHeader]. |
+| Unit | **setFeedbackScreenActions(actions: AndesFeedbackScreenActions)**<br/> Replaces current feedback actions with the new [feedbackScreenActions]. |
+| Unit | **setFeedbackScreenType(type: AndesFeedbackScreenType)**<br/> Replaces current feedback type with the new [feedbackScreenType]. |
 
 <br/>
 

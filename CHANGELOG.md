@@ -1,3 +1,7 @@
+# v4.7.0
+## 🛠 Fixes
+- AndesFeedbackScreen can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)
+
 # v4.6.0
 ## 🛠 Fixes
 - AndesMessage text size in action link | Author: [jperezgonzal](https://github.com/jperezgonzal)

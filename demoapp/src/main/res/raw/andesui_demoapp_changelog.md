@@ -12,6 +12,10 @@
 - AndesSwitch text size 12sp to 16sp (bodyM) | Author: [eportasML](https://github.com/eportasML)
 
 # v4.4.0
+## 🛠 Fixes
+- AndesFeedbackScreen can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)
+
+# v4.4.0
 ## 🚀 Feature
 - AndesBottomSheet new listeners | Author: [@guidoperre-meli](https://github.com/guidoperre-meli)
 ## 🛠 Fixes

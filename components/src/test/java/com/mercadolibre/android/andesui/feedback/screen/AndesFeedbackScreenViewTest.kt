@@ -2,7 +2,10 @@ package com.mercadolibre.android.andesui.feedback.screen
 
 import android.content.Context
 import android.os.Build
+import android.text.SpannableString
+import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
@@ -14,13 +17,20 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
+import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
+import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
+import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenType
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
+import com.nhaarman.mockitokotlin2.mock
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -208,4 +218,109 @@ class AndesFeedbackScreenViewTest {
         robolectricActivity = Robolectric.buildActivity(AppCompatActivity::class.java).create()
         activity = robolectricActivity.get()
     }
+
+    @Test
+    fun `FeedbackScreen Simple without body replace header`() {
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Simple(
+                    AndesFeedbackScreenColor.RED
+            ),
+            header = AndesFeedbackScreenHeader(
+                    AndesFeedbackScreenText(
+                            "Title"
+                    )
+            ),
+            body = null
+        )
+        startActivity(screenView)
+        screenView.setFeedbackScreenHeader(
+            AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "New Title",
+                    AndesFeedbackScreenTextDescription(
+                        "New Description",
+                        AndesBodyLinks(arrayListOf(AndesBodyLink(1, 2), AndesBodyLink(3, 4)), mock())
+                    ),
+                    "New Highlight"
+                )
+            )
+        )
+
+        screenView.setFeedbackScreenType(
+            AndesFeedbackScreenType.Simple(AndesFeedbackScreenColor.GREEN)
+        )
+
+        val badge = screenView.getThumbnailBadge()
+
+        with(screenView.getTitle()) {
+            text assertEquals "New Title"
+            visibility assertEquals View.VISIBLE
+        }
+        with(screenView.getDescription()) {
+            text.toString() assertEquals "New Description"
+            visibility assertEquals View.VISIBLE
+            val spans = (text as SpannableString).getSpans(
+                0,
+                "Description".lastIndex,
+                ClickableSpan::class.java
+            )
+            spans.size assertEquals 2
+        }
+
+        with(screenView.getHighlight()) {
+            text assertEquals "New Highlight"
+            visibility assertEquals View.VISIBLE
+            currentTextColor assertEquals badge.badgeComponent.color.iconType.type.primaryColor().colorInt(context)
+        }
+
+    }
+
+
+    @Test
+    fun `FeedbackScreen Simple without body set actions`() {
+        val onClick = View.OnClickListener { }
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Simple(
+                AndesFeedbackScreenColor.RED
+            ),
+            header = AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "Title"
+                )
+            ),
+            body = null
+        )
+
+        startActivity(screenView)
+        screenView.setFeedbackScreenActions(
+            AndesFeedbackScreenActions(
+                AndesFeedbackScreenButton(
+                    "Button",
+                    onClick
+                ),
+                onClick
+            )
+        )
+
+        with(screenView.getButton()) {
+            text assertEquals "Button"
+        }
+    }
+
+    private fun AndesFeedbackScreenView.getDescription() =
+            findViewById<TextView>(R.id.andes_feedbackscreen_header_description)
+
+    private fun AndesFeedbackScreenView.getTitle() =
+            findViewById<TextView>(R.id.andes_feedbackscreen_header_title)
+
+    private fun AndesFeedbackScreenView.getHighlight() =
+            findViewById<TextView>(R.id.andes_feedbackscreen_header_highlight)
+
+    private fun AndesFeedbackScreenView.getThumbnailBadge() =
+            findViewById<AndesThumbnailBadge>(R.id.andes_feedbackscreen_header_image)
+
+    private fun AndesFeedbackScreenView.getButton() =
+            findViewById<AndesButton>(R.id.andes_feedbackscreen_button)
 }

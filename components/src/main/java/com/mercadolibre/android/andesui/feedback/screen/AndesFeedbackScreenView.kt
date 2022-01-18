@@ -118,10 +118,10 @@ class AndesFeedbackScreenView : ScrollView {
                 AndesFeedbackScreenConfigurationFactory.resolveFeedbackThumbnail(
                     context = context,
                     feedbackImage = feedbackImage,
-                    feedbackType = config.type,
+                    feedbackType = config.typeInterface,
                     hasBody = config.body.view != null
                 ),
-                config.type.feedbackColor
+                config.typeInterface.feedbackColor
             )
         }
     }
@@ -157,7 +157,10 @@ class AndesFeedbackScreenView : ScrollView {
     }
 
     private fun setupFeedbackHeader(config: AndesFeedbackScreenConfiguration) {
-        header = config.header
+        if (this::header.isInitialized) {
+            container.removeView(header)
+        }
+        header = config.headerView
         container.addView(header)
     }
 
@@ -275,4 +278,33 @@ class AndesFeedbackScreenView : ScrollView {
         type: AndesFeedbackScreenType,
         header: AndesFeedbackScreenHeader
     ) = AndesFeedbackScreenConfigurationFactory.create(context, body, actions, type, header)
+
+    /**
+     * Replaces current feedback header with the new [AndesFeedbackScreenHeader].
+     */
+    fun setFeedbackScreenHeader(header: AndesFeedbackScreenHeader) {
+        val nullBody = body.takeIf { body.visibility == VISIBLE }
+        config = createConfig(nullBody, config.actions, config.type, header)
+        setupFeedbackHeader(config)
+        setContainerConstraints(config)
+    }
+
+    /**
+     * Replaces current feedback header with the new [AndesFeedbackScreenActions].
+     */
+    fun setFeedbackScreenActions(actions: AndesFeedbackScreenActions) {
+        val nullBody = body.takeIf { body.visibility == VISIBLE }
+        config = createConfig(nullBody, actions, config.type, config.header)
+        setupClose(config.close)
+        setupFeedbackButton(config.feedbackButton)
+    }
+
+    /**
+     * Replaces current feedback type with the new [AndesFeedbackScreenType].
+     */
+    fun setFeedbackScreenType(type: AndesFeedbackScreenType) {
+        val nullBody = body.takeIf { body.visibility == VISIBLE }
+        config = createConfig(nullBody, config.actions, type, config.header)
+        setupFeedbackContainer(config)
+    }
 }
