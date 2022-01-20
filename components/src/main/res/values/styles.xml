@@ -55,11 +55,13 @@
         <item name="colorControlActivated">@color/andes_accent_color_500</item>
         <item name="colorControlHighlight">@color/andes_accent_color_300</item>
     </style>
+
     <style name="Andes.CalendarDate">
         <item name="android:textSize">@dimen/andes_body_font_size_s</item>
         <item name="android:textColor">@drawable/andes_selector</item>
         <item name="fontFamily">"@font/andes_font_regular"</item>
     </style>
+
     <style name="Andes.CalendarDateWeek">
         <item name="android:textSize">@dimen/andes_datepicker_week_font_size</item>
         <item name="fontWeight">@dimen/andes_title_font_weight</item>
@@ -80,4 +82,9 @@
         <item name="android:windowExitAnimation">@anim/andes_tooltip_fade_out_anim</item>
     </style>
 
+    <!-- Slider -->
+    <style name="Andes.Slider" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="trackColor">@color/andes_gray_070_solid</item>
+        <item name="trackColorInactive">@color/andes_gray_070_solid</item>
+    </style>
 </resources>

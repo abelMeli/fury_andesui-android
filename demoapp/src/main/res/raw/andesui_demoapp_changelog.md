@@ -1,6 +1,9 @@
 # v4.7.0
 ## 🚀 Feature
 - Demoapp deeplink documentation and typography name refactor | Author: [@eportasML](https://github.com/eportasML)
+- `AndesSlider` component | Author: [lenibaldassarre](https://github.com/lenibaldassarre)
+## 🛠 Fixes
+- AndesFeedbackScreen can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)
 
 # v4.6.0
 ## 🛠 Fixes
@@ -14,10 +17,6 @@
 - Improve security by changing repository and authentication configuration
 ## 🛠 Fixes
 - AndesSwitch text size 12sp to 16sp (bodyM) | Author: [eportasML](https://github.com/eportasML)
-
-# v4.4.0
-## 🛠 Fixes
-- AndesFeedbackScreen can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)
 
 # v4.4.0
 ## 🚀 Feature

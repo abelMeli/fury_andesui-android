@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_slider_content_description">from %1$s to %2$s %3$s</string>
+    <string name="andes_slider_selected_value">Selected value: %1$s %2$s.</string>
+</resources>

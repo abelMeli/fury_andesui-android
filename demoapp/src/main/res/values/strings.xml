@@ -31,6 +31,7 @@
 
 
     <!-- DemoApp -->
+    <string name="andes_demoapp_screen_slider" translatable="false">Slider</string>
     <string name="andes_demoapp_screen_tooltip" translatable="false">Tooltip</string>
     <string name="andes_demoapp_screen_button" translatable="false">Button</string>
     <string name="andes_demoapp_screen_bottom_sheet" translatable="false">Bottom sheet</string>
@@ -678,6 +679,49 @@
         <item>Without Thumbnail</item>
     </string-array>
 
+    <!-- Andes Slider -->
+    <string-array name="andes_slider_state_spinner">
+        <item>Idle</item>
+        <item>Disabled</item>
+    </string-array>
+
+    <string-array name="andes_slider_type_spinner">
+        <item>Simple</item>
+        <item>Icon</item>
+        <item>Limits</item>
+    </string-array>
+
+    <string-array name="andes_slider_steps_spinner">
+        <item>0</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+    <array name="initial_slider_values">
+        <item>25</item>
+        <item>75</item>
+    </array>
+
+    <string name="andes_slider_limit_left" translatable="false">0%</string>
+    <string name="andes_slider_limit_right" translatable="false">100%</string>
+
+    <string name="andes_slider_description" translatable="false">A slider is a control that allows you to make a quick selection within a defined range of values. 📘</string>
+    <string name="andes_slider_specs" translatable="false">Andes Slider Specs 📘</string>
+    <string name="andes_slider_title" translatable="false">Label</string>
+    <string name="andes_slider_textview_min" translatable="false">Min value</string>
+    <string name="andes_slider_textview_value" translatable="false">Position value</string>
+    <string name="andes_slider_textview_max" translatable="false">Max value</string>
+    <string name="andes_slider_textview_type" translatable="false">Type</string>
+    <string name="andes_slider_textview_state" translatable="false">State</string>
+    <string name="andes_slider_textview_steps" translatable="false">Steps</string>
+    
     <!-- Andes TimePicker -->
 
 

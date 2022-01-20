@@ -78,6 +78,7 @@ See the [Fonts & Colors page](Fonts&Colors.md) to be aware of how to use the pro
 | [AndesMoneyAmount](moneyamount/AndesMoneyAmount.md) | meli://andes/moneyamount |
 | [AndesMoneyAmountCombo](moneyamount/AndesMoneyAmountCombo.md) | meli://andes/moneyamount |
 | [AndesMoneyAmountDiscount](moneyamount/AndesMoneyAmountDiscount.md) | meli://andes/moneyamount |
+| [AndesSnackbar](slider/AndesSlider.md) | meli://andes/slider |
 | [AndesSnackbar](snackbar/AndesSnackbar.md) | meli://andes/snackbar |
 | [AndesSwitch](switch/AndesSwitch.md) | meli://andes/switch |
 | [AndesTabs](tabs/AndesTabs.md) | meli://andes/tabs |

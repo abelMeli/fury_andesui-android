@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="AndesSlider">
+
+        <attr name="andesSliderTitle" format="string" />
+
+        <attr name="andesSliderValue" format="float" />
+
+        <attr name="andesSliderMin" format="float" />
+
+        <attr name="andesSliderMax" format="float" />
+
+        <attr name="andesSliderSteps" format="integer" />
+
+        <attr name="andesSliderState" format="enum">
+            <enum name="idle" value="3000" />
+            <enum name="disabled" value="3001" />
+        </attr>
+
+        <attr name="andesSliderType" format="enum">
+            <enum name="simple" value="1000" />
+            <enum name="icon" value="1001" />
+            <enum name="limits" value="1002" />
+        </attr>
+
+        <attr name="andesSliderLeftContent" format="reference" />
+        <attr name="andesSliderRightContent" format="reference" />
+
+        <attr name="andesSliderAccessibilityContentSuffix" format="string" />
+    </declare-styleable>
+
+</resources>

@@ -49,6 +49,7 @@ object HomeDataSource {
         Section("Tooltip", "meli://andes/tooltip"),
         Section("Checkbox", "meli://andes/checkbox"),
         Section("Radio button", "meli://andes/radiobutton"),
+        Section("Slider", "meli://andes/slider"),
         Section("Snackbar", "meli://andes/snackbar"),
         Section("Badge", "meli://andes/badge"),
         Section("Button", "meli://andes/button"),
