@@ -37,7 +37,7 @@ internal fun setupSpannableBodyLink(
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         } else {
-            Log.d("AndesBodyLink", "Body link range incorrect: " +
+            Log.e("AndesBodyLink", "Body link range incorrect: " +
                 "${andesBodyLink.startIndex}, ${andesBodyLink.endIndex}")
         }
     }
@@ -64,32 +64,20 @@ private fun setupClickableSpan(
 
 internal fun setupSpannableBullet(
     spannableString: SpannableStringBuilder,
-    bullets: List<AndesBullet>,
+    bulletsText: String,
     bulletGapWith: Int,
     bulletColor: Int,
     bulletRadius: Int
 ) {
-    var deltaIndex = 0
-    bullets.forEachIndexed { index, paragraph ->
-        if (paragraph.isValidRange(spannableString)) {
-            spannableString.setSpan(
-                AndesBulletSpannable(
-                    bulletGapWith,
-                    bulletColor,
-                    bulletRadius
-                ),
-                paragraph.startIndex + deltaIndex,
-                paragraph.endIndex + deltaIndex,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            spannableString.insert(paragraph.startIndex + deltaIndex, "\n")
-            deltaIndex += 1
-            if (index == bullets.lastIndex) {
-                spannableString.insert(paragraph.endIndex, "\n")
-            }
-        } else {
-            Log.d("AndesBulletSpan", "Bullet span range incorrect: " +
-                "${paragraph.startIndex}, ${paragraph.endIndex}")
-        }
-    }
+    spannableString.setSpan(
+        AndesBulletSpannable(
+            bulletGapWith,
+            bulletColor,
+            bulletRadius
+        ),
+        0,
+        bulletsText.length,
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
 }
+
