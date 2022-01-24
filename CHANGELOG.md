@@ -1,3 +1,7 @@
+# v4.8.0
+## 🚀 Feature
+- Added new icons with dimension 24: `andes_ui_nip`,`andes_ui_reportar`| Author: [@lguerrero88](https://github.com/lguerrero88)
+
 # v4.7.0
 ## 🚀 Feature
 - Demoapp deeplink documentation and typography name refactor | Author: [@eportasML](https://github.com/eportasML)
