@@ -300,7 +300,7 @@ class AndesMessage : CardView {
 
     private fun setupBullet(config: AndesMessageConfiguration) {
         bulletContainer.removeAllViews()
-        if (!bullets.isNullOrEmpty()) {
+        bulletContainer.visibility = if (!bullets.isNullOrEmpty()) {
             bullets!!.forEach { bullet ->
                 val andesBulletView = AndesBulletViewConfigurator(context).configure(
                     context,
@@ -315,9 +315,9 @@ class AndesMessage : CardView {
                 )
                 bulletContainer.addView(andesBulletView)
             }
-            bulletContainer.visibility = VISIBLE
+            View.VISIBLE
         } else {
-            bulletContainer.visibility = GONE
+            View.GONE
         }
     }
 
