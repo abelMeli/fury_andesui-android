@@ -483,6 +483,7 @@
                     android:scheme="meli" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".components.tooltip.TooltipShowcaseActivity"
             android:parentActivityName=".home.MainActivity">
@@ -495,6 +496,21 @@
                 <data
                     android:host="andes"
                     android:path="/tooltip"
+                    android:scheme="meli" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".components.slider.SliderShowcaseActivity"
+            android:parentActivityName=".home.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="andes"
+                    android:path="/slider"
                     android:scheme="meli" />
             </intent-filter>
         </activity>
@@ -599,7 +615,7 @@
 
                 <data
                     android:host="andes"
-                    android:path="/textview"
+                    android:path="/typography"
                     android:scheme="meli" />
             </intent-filter>
         </activity>

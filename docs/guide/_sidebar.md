@@ -22,6 +22,7 @@
   ** [AndesMoneyAmount](/moneyamount/AndesMoneyAmount.md)
   ** [AndesMoneyAmountDiscount](/moneyamount/AndesMoneyAmountDiscount.md)
   ** [AndesMoneyAmountCombo](/moneyamount/AndesMoneyAmountCombo.md)
+  * [AndesSlider](/slider/AndesSlider.md)
   * [AndesSnackbar](/snackbar/AndesSnackbar.md)
   * [AndesSwitch](/switch/AndesSwitch.md)
   * [AndesTabs](/tabs/AndesTabs.md)

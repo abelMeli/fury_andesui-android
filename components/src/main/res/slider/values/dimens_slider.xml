@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Slider label title-->
+    <dimen name="andes_slider_title_text_size">16sp</dimen>
+
+    <!-- Slider thumb-->
+    <dimen name="andes_slider_thumb_radius">10dp</dimen>
+    <dimen name="andes_slider_thumb_stroke_width">2dp</dimen>
+    <dimen name="andes_slider_track_height">3sp</dimen>
+    <dimen name="andes_slider_halo_radius">13dp</dimen>
+
+    <!-- Slider label textView-->
+    <dimen name="andes_slider_label_value_margin_top">8dp</dimen>
+
+    <!-- Slider label textView-->
+    <dimen name="andes_slider_image_view_size">20dp</dimen>
+</resources>

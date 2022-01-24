@@ -25,11 +25,14 @@ internal data class AndesFeedbackScreenConfiguration(
     val close: AndesFeedbackCloseConfiguration,
     val feedbackButton: AndesFeedbackButtonConfiguration,
     val feedbackText: AndesFeedbackScreenText,
-    val type: AndesFeedbackScreenTypeInterface,
-    val header: View,
+    val typeInterface: AndesFeedbackScreenTypeInterface,
+    val headerView: View,
     val gradientVisibility: Int,
     val headerTopMargin: Int,
-    val statusBarColor: Int?
+    val statusBarColor: Int?,
+    val actions: AndesFeedbackScreenActions?,
+    val type: AndesFeedbackScreenType,
+    val header: AndesFeedbackScreenHeader
 )
 
 internal data class AndesFeedbackCloseConfiguration(
@@ -75,12 +78,15 @@ internal object AndesFeedbackScreenConfigurationFactory {
                 hasBody
             ),
             feedbackButton = resolveFeedbackButtonConfig(actions?.button),
-            type = feedbackType,
+            typeInterface = feedbackType,
             feedbackText = header.feedbackText,
-            header = resolveHeader(context, feedbackType, hasBody, header),
+            headerView = resolveHeader(context, feedbackType, hasBody, header),
             gradientVisibility = feedbackType.getGradientVisiblity(hasBody),
             headerTopMargin = resolveHeaderTopMargin(context, feedbackType, hasBody),
-            statusBarColor = resolveStatusBarColor(context, feedbackType)
+            statusBarColor = resolveStatusBarColor(context, feedbackType),
+            actions = actions,
+            type = type,
+            header = header
         )
     }
 

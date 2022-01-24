@@ -92,8 +92,8 @@ class AndesFeedbackScreenConfigurationTest {
         config.feedbackText.overline assertEquals "Overline"
         config.feedbackText.title assertEquals "Title"
         config.statusBarColor assertIsNull true
-        assert(config.header is AndesFeedbackScreenSimpleHeaderView)
-        assert(config.type is AndesSimpleFeedbackScreenType)
+        assert(config.headerView is AndesFeedbackScreenSimpleHeaderView)
+        assert(config.typeInterface is AndesSimpleFeedbackScreenType)
     }
 
     @Test
@@ -143,8 +143,8 @@ class AndesFeedbackScreenConfigurationTest {
         config.feedbackText.overline assertEquals null
         config.feedbackText.title assertEquals "Title"
         config.statusBarColor assertIsNull true
-        assert(config.header is AndesFeedbackScreenSimpleHeaderView)
-        assert(config.type is AndesSimpleFeedbackScreenType)
+        assert(config.headerView is AndesFeedbackScreenSimpleHeaderView)
+        assert(config.typeInterface is AndesSimpleFeedbackScreenType)
     }
 
     @Test
@@ -184,8 +184,8 @@ class AndesFeedbackScreenConfigurationTest {
         config.feedbackText.overline assertEquals null
         config.feedbackText.title assertEquals "Title"
         config.statusBarColor assertIsNull true
-        assert(config.header is AndesFeedbackScreenSimpleHeaderView)
-        assert(config.type is AndesSimpleFeedbackScreenType)
+        assert(config.headerView is AndesFeedbackScreenSimpleHeaderView)
+        assert(config.typeInterface is AndesSimpleFeedbackScreenType)
     }
 
     @Test
@@ -229,8 +229,8 @@ class AndesFeedbackScreenConfigurationTest {
         config.feedbackText.overline assertEquals null
         config.feedbackText.title assertEquals "Title"
         config.statusBarColor assertEquals ContextCompat.getColor(context, R.color.andes_green_500)
-        assert(config.header is AndesFeedbackScreenSimpleHeaderView)
-        assert(config.type is AndesCongratsFeedbackScreenType)
+        assert(config.headerView is AndesFeedbackScreenSimpleHeaderView)
+        assert(config.typeInterface is AndesCongratsFeedbackScreenType)
     }
 
     @Test
@@ -284,7 +284,7 @@ class AndesFeedbackScreenConfigurationTest {
         config.feedbackText.overline assertEquals null
         config.feedbackText.title assertEquals "Title"
         config.statusBarColor assertEquals ContextCompat.getColor(context, R.color.andes_green_500)
-        assert(config.header is AndesFeedbackScreenCongratsHeaderView)
-        assert(config.type is AndesCongratsFeedbackScreenType)
+        assert(config.headerView is AndesFeedbackScreenCongratsHeaderView)
+        assert(config.typeInterface is AndesCongratsFeedbackScreenType)
     }
 }

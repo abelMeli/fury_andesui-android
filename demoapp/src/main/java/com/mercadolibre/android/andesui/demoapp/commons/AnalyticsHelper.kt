@@ -36,6 +36,7 @@ internal class AnalyticsHelper {
         "LinearProgressShowcaseActivity" to "AndesLinearProgressIndicator",
         "ProgressShowcaseActivity" to "AndesProgressIndicator",
         "RadioButtonShowcaseActivity" to "AndesRadioButton",
+        "SliderShowcaseActivity" to "AndesSlider",
         "SnackbarShowcaseActivity" to "AndesSnackbar",
         "TagShowcaseActivity" to "AndesTag",
         "TextfieldShowcaseActivity" to "AndesTextfield",
@@ -73,6 +74,10 @@ internal class AnalyticsHelper {
         "RadioButtonShowcaseActivity" to arrayListOf(
             "/radiobutton/radiobutton/dynamic",
             "/radiobutton/radiobutton/static", "/radiobutton/radiobuttongroup/static"
+        ),
+        "SliderShowcaseActivity" to arrayListOf(
+            "/slider/dynamic",
+            "/slider/static"
         ),
         "SnackbarShowcaseActivity" to arrayListOf("/snackbar/dynamic"),
         "TagShowcaseActivity" to arrayListOf(

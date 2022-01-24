@@ -27,7 +27,8 @@ internal enum class StorybookPage(val link: String) {
     ANDESSNACKBAR("$HOME/?path=/story/snackbar--andes-snackbar"),
     ANDESTIMEPICKER("$HOME/?path=/story/time-picker--andes-time-picker"),
     ANDESTABS("$HOME/?path=/story/tabs--andes-default-tabs"),
-    ANDESMONEYAMOUNT("$HOME/?path=/story/money-amount--andes-money-amount");
+    ANDESMONEYAMOUNT("$HOME/?path=/story/money-amount--andes-money-amount"),
+    ANDESSLIDER("$HOME/?path=/story/slider--andes-slider-default");
 
     companion object {
         fun getStorybookPage(string: String): StorybookPage = valueOf(string.toUpperCase())

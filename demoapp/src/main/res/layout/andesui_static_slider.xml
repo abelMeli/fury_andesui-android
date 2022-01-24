@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:customView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/andes_white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/andes_main_horizontal_margin">
+
+        <com.mercadolibre.android.andesui.slider.AndesSlider
+            android:id="@+id/slider_simple"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            customView:layout_constraintEnd_toEndOf="parent"
+            customView:layout_constraintStart_toStartOf="parent"
+            customView:layout_constraintTop_toTopOf="parent"
+            customView:andesSliderTitle="Simple type"
+            customView:andesSliderType="simple"
+            customView:andesSliderValue="50"
+            />
+
+        <com.mercadolibre.android.andesui.slider.AndesSlider
+            android:id="@+id/slider_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            customView:layout_constraintEnd_toEndOf="parent"
+            customView:layout_constraintStart_toStartOf="parent"
+            customView:layout_constraintTop_toBottomOf="@+id/slider_simple"
+            customView:andesSliderTitle="Icon Type"
+            customView:andesSliderType="icon"
+            customView:andesSliderLeftContent="@drawable/andes_ui_placeholder_imagen_20"
+            customView:andesSliderRightContent="@drawable/andes_ui_placeholder_imagen_20"
+            customView:andesSliderValue="50"
+            />
+
+        <com.mercadolibre.android.andesui.slider.AndesSlider
+            android:id="@+id/slider_limits"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            customView:layout_constraintEnd_toEndOf="parent"
+            customView:layout_constraintStart_toStartOf="parent"
+            customView:layout_constraintTop_toBottomOf="@+id/slider_icon"
+            customView:andesSliderTitle="Limits type"
+            customView:andesSliderType="limits"
+            customView:andesSliderLeftContent="@string/andes_slider_limit_left"
+            customView:andesSliderRightContent="@string/andes_slider_limit_right"
+            customView:andesSliderValue="50"
+            customView:andesSliderAccessibilityContentSuffix="%"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
