@@ -30,7 +30,7 @@ import com.mercadolibre.android.andesui.message.factory.AndesMessageConfiguratio
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import com.mercadolibre.android.andesui.utils.AndesBulletView
+import com.mercadolibre.android.andesui.utils.AndesBulletViewConfigurator
 import com.mercadolibre.android.andesui.utils.getCircledBitmap
 import com.mercadolibre.android.andesui.utils.setupSpannableBodyLink
 import com.mercadolibre.android.andesui.utils.toBitmap
@@ -301,10 +301,10 @@ class AndesMessage : CardView {
     private fun setupBullet(config: AndesMessageConfiguration) {
         bulletContainer.removeAllViews()
         if (!bullets.isNullOrEmpty()) {
-            bullets!!.forEachIndexed { _, paragraph ->
-                val andesBulletView = AndesBulletView(context)
-                andesBulletView.configure(
-                    paragraph,
+            bullets!!.forEach { bullet ->
+                val andesBulletView = AndesBulletViewConfigurator(context).configure(
+                    context,
+                    bullet,
                     config.bulletGapWith,
                     config.textColor.colorInt(context),
                     config.bulletDotSize,
