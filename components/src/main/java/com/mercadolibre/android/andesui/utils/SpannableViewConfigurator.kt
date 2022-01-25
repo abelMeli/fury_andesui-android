@@ -8,7 +8,6 @@ import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
-import com.mercadolibre.android.andesui.bullet.AndesBullet
 import com.mercadolibre.android.andesui.bullet.AndesBulletSpannable
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
@@ -37,8 +36,10 @@ internal fun setupSpannableBodyLink(
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         } else {
-            Log.e("AndesBodyLink", "Body link range incorrect: " +
-                "${andesBodyLink.startIndex}, ${andesBodyLink.endIndex}")
+            Log.e(
+                "AndesBodyLink",
+                "Body link range incorrect: " + "${andesBodyLink.startIndex}, ${andesBodyLink.endIndex}"
+            )
         }
     }
 }

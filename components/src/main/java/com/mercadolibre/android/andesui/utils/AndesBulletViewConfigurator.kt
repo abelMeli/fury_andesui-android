@@ -5,10 +5,6 @@ import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.util.TypedValue
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.bullet.AndesBullet
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.textview.AndesTextView
@@ -54,5 +50,4 @@ class AndesBulletViewConfigurator(context: Context) {
 
         return bulletComponent
     }
-
 }

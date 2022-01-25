@@ -40,6 +40,8 @@ class AndesMessageTest {
 
     private lateinit var andesMessage: AndesMessage
 
+    private fun AndesMessage.getBulletContainer() = findViewById<LinearLayout>(R.id.andes_bullet_container)
+
     companion object {
         @JvmStatic
         @BeforeClass
@@ -128,7 +130,7 @@ class AndesMessageTest {
 
     @Test
     fun `AndesMessage with bullets`() {
-        val bulletText = "Bullet"
+        val bulletText = "Bullet multiline example with simple dummy text."
         val andesMessage = AndesMessage(
             context,
             AndesMessageHierarchy.LOUD,
@@ -139,12 +141,18 @@ class AndesMessageTest {
             null,
             null
         )
-        andesMessage.bullets = arrayListOf(AndesBullet(bulletText, null))
-
+        var indexSelected = -1
+        val links = listOf(AndesBodyLink(0, 10))
+        andesMessage.bullets = arrayListOf(AndesBullet(bulletText, AndesBodyLinks(links, listener = {
+            indexSelected = it
+        })))
         val bulletTextField = andesMessage.getBulletContainer().getChildAt(0) as AndesTextView
+        bulletTextField.let {
+            (it.text as SpannableString).getSpans(0, 10, ClickableSpan::class.java)[0].onClick(bulletTextField)
+        }
+        assertEquals(indexSelected, 0)
         assertEquals(View.VISIBLE, bulletTextField.visibility)
         assertEquals(bulletText, bulletTextField.text.toString())
-
     }
 
     @Test
@@ -163,6 +171,4 @@ class AndesMessageTest {
         andesMessage.bullets = null
         assertEquals(View.GONE, andesMessage.getBulletContainer().visibility)
     }
-
-    private fun AndesMessage.getBulletContainer() = findViewById<LinearLayout>(R.id.andes_bullet_container)
 }
