@@ -147,5 +147,22 @@ class AndesMessageTest {
 
     }
 
+    @Test
+    fun `AndesMessage without bullets`() {
+        val andesMessage = AndesMessage(
+            context,
+            AndesMessageHierarchy.LOUD,
+            AndesMessageType.SUCCESS,
+            "This is a body message",
+            null,
+            true,
+            null,
+            null
+        )
+
+        andesMessage.bullets = null
+        assertEquals(View.GONE, andesMessage.getBulletContainer().visibility)
+    }
+
     private fun AndesMessage.getBulletContainer() = findViewById<LinearLayout>(R.id.andes_bullet_container)
 }
