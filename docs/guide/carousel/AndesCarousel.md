@@ -37,6 +37,14 @@ newCarousel.delegate = this
 mainContainer.addView(newCarousel)
 ```
 
+Also navigate to a specific position in the carousel using the scrollToPosition passing the position as value
+
+```
+val position = 3
+val newCarousel = AndesCarousel(this, false, AndesCarouselMargin.NONE)
+newCarousel.scrollToPosition(position)
+```
+
 ### NOTE: 
 It's important to mention that in case of no attributes were specified, the carousel by default will be andesCarouselCenter in false and andesCarouselMargin in default. 
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import com.mercadolibre.android.andesui.card.type.AndesCardType
 import com.mercadolibre.android.andesui.carousel.AndesCarousel
 import com.mercadolibre.android.andesui.carousel.margin.AndesCarouselMargin
@@ -71,6 +72,8 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         val binding = AndesuiDynamicCarouselBinding.bind(container)
         val clearButton = binding.clearButton
         val changeButton = binding.changeButton
+        val scrollButton = binding.scrollButton
+        val scrollEditText: AppCompatEditText = binding.scrollEditText
         val carousel = binding.andesCarousel
         val checkboxCentered = binding.checkboxCentered
 
@@ -79,12 +82,21 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
 
         val marginSpinner = binding.marginSpinner
         ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_carousel_margin_spinner,
-                android.R.layout.simple_spinner_item
+            this,
+            R.array.andes_carousel_margin_spinner,
+            android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             marginSpinner.adapter = adapter
+        }
+
+        scrollButton.setOnClickListener {
+            scrollEditText.text?.toString()?.apply {
+                val position =
+                    if (scrollEditText.text?.toString().isNullOrBlank()) 0
+                    else scrollEditText.text?.toString()?.toInt()
+                carousel.scrollToPosition(position ?: 0)
+            }
         }
 
         clearButton.setOnClickListener {
@@ -126,21 +138,21 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
     }
 
     private fun getDataSetSnapped() = listOf(
-            CarouselModel(Color.RED, getString(R.string.andes_carousel_text)),
-            CarouselModel(Color.BLUE, getString(R.string.andes_carousel_text)),
-            CarouselModel(Color.GREEN, getString(R.string.andes_carousel_text)),
-            CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
-            CarouselModel(Color.RED, getString(R.string.andes_carousel_text)),
-            CarouselModel(Color.TRANSPARENT, getString(R.string.andes_carousel_text))
+        CarouselModel(Color.RED, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.BLUE, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.GREEN, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.RED, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.TRANSPARENT, getString(R.string.andes_carousel_text))
     )
 
     private fun getDataSetFree() = listOf(
-            CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
-            CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
-            CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
-            CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
-            CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
-            CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}")
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}")
     )
 
     override fun bind(andesCarouselView: AndesCarousel, view: View, position: Int) {
