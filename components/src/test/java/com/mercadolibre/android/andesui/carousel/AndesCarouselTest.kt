@@ -1,27 +1,20 @@
 package com.mercadolibre.android.andesui.carousel
 
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.common.base.Verify
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrs
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselConfigurationFactory
 import com.mercadolibre.android.andesui.carousel.margin.AndesCarouselMargin
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
-import com.mercadolibre.android.andesui.databinding.AndesLayoutCarouselBinding
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.Mockito.any
 import org.mockito.Mockito.spy
-import org.mockito.Spy
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
