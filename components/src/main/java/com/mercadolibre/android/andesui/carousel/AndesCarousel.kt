@@ -73,6 +73,7 @@ class AndesCarousel : ConstraintLayout {
 
     /**
      * Method to add a scroll listener to recyclerView.
+     *
      * @param listener listener that should be added to recyclerView.
      */
     fun addOnScrollListener(listener: RecyclerView.OnScrollListener) {
@@ -81,7 +82,6 @@ class AndesCarousel : ConstraintLayout {
 
     /**
      * Method to scroll to position in recyclerView.
-     *
      * @param position  position to scroll into recyclerView.
      */
     fun scrollToPosition(position: Int) {
