@@ -42,14 +42,6 @@ class AndesMessageTest {
 
     private fun AndesMessage.getBulletContainer() = findViewById<LinearLayout>(R.id.andes_bullet_container)
 
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun beforeClass() {
-            SoLoader.setInTestMode()
-        }
-    }
-
     @Before
     fun setUp() {
         val requestListeners = setOf<RequestListener>(RequestLoggingListener())
@@ -143,9 +135,17 @@ class AndesMessageTest {
         )
         var indexSelected = -1
         val links = listOf(AndesBodyLink(0, 10))
-        andesMessage.bullets = arrayListOf(AndesBullet(bulletText, AndesBodyLinks(links, listener = {
-            indexSelected = it
-        })))
+        andesMessage.bullets = arrayListOf(
+            AndesBullet(
+                bulletText,
+                AndesBodyLinks(
+                    links,
+                    listener = {
+                        indexSelected = it
+                    }
+                )
+            )
+        )
         val bulletTextField = andesMessage.getBulletContainer().getChildAt(0) as AndesTextView
         bulletTextField.let {
             (it.text as SpannableString).getSpans(0, 10, ClickableSpan::class.java)[0].onClick(bulletTextField)
@@ -170,5 +170,13 @@ class AndesMessageTest {
 
         andesMessage.bullets = null
         assertEquals(View.GONE, andesMessage.getBulletContainer().visibility)
+    }
+
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun beforeClass() {
+            SoLoader.setInTestMode()
+        }
     }
 }

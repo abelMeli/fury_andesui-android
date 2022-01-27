@@ -116,7 +116,7 @@ class AndesMessage : CardView {
     private lateinit var secondaryAction: AndesButton
     private lateinit var linkAction: TextView
     lateinit var thumbnail: SimpleDraweeView
-    lateinit var bulletContainer: LinearLayout
+    private lateinit var bulletContainer: LinearLayout
 
     @Suppress("unused")
     private constructor(context: Context) : super(context) {
