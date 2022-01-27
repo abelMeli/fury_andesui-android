@@ -27,9 +27,6 @@ class AndesCarouselTest {
     private val configFactory = spy(AndesCarouselConfigurationFactory)
     private lateinit var attrs: AndesCarouselAttrs
 
-    //@Mock
-    //lateinit var carousel: AndesCarousel
-
     @Test
     fun `test padding none`() {
         attrs = AndesCarouselAttrs(
