@@ -19,6 +19,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".components.feedbackscreen.FeedbackScreenDynamicShowcase"
+            android:exported="false" />
+        <activity
             android:name=".home.SearchActivity"
             android:theme="@style/AppTheme.Home" />
         <activity
@@ -483,7 +486,6 @@
                     android:scheme="meli" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".components.tooltip.TooltipShowcaseActivity"
             android:parentActivityName=".home.MainActivity">
@@ -619,10 +621,18 @@
                     android:scheme="meli" />
             </intent-filter>
         </activity>
-        <activity android:name="com.mercadolibre.android.mlwebkit.landing.WebkitLandingActivity" tools:node="remove" />
-        <activity android:name="com.mercadolibre.android.mlwebkit.deeplinks.DeeplinksCatcherActivity" tools:node="remove" />
-        <activity android:name="com.mercadolibre.android.melidata.experiments.MelidataExperimentsSplitActivity" tools:node="remove" />
-        <activity android:name="com.mercadolibre.android.melidata.experiments.MelidataExperimentsForceActivity" tools:node="remove" />
+        <activity
+            android:name="com.mercadolibre.android.mlwebkit.landing.WebkitLandingActivity"
+            tools:node="remove" />
+        <activity
+            android:name="com.mercadolibre.android.mlwebkit.deeplinks.DeeplinksCatcherActivity"
+            tools:node="remove" />
+        <activity
+            android:name="com.mercadolibre.android.melidata.experiments.MelidataExperimentsSplitActivity"
+            tools:node="remove" />
+        <activity
+            android:name="com.mercadolibre.android.melidata.experiments.MelidataExperimentsForceActivity"
+            tools:node="remove" />
     </application>
 
 </manifest>

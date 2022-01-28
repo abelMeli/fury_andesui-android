@@ -1084,4 +1084,7 @@
     <string name="andes_searchbox_hint" translatable="false">Search Components, Patterns and more…</string>
     <string name="back_arrow">Cancel search</string>
     <string name="andesui_demoapp_app_name" translatable="false">Andes UI</string>
+    <string name="andesui_demoapp_web_storybook_description" translatable="false">Webview</string>
+    <string name="andesui_demoapp_web_storybook_caution_description" translatable="false">Webview (caution)</string>
+    <string name="andesui_demoapp_web_storybook_not_recommended" translatable="false">Component NOT recommended to use in webviews.</string>
 </resources>

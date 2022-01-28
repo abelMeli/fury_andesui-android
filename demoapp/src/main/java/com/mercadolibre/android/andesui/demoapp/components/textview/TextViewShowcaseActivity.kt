@@ -4,34 +4,28 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTextviewBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiShowcaseMainBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTextviewBinding
 
-class TextViewShowcaseActivity : AppCompatActivity() {
+class TextViewShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
-    private val binding by lazy { AndesuiShowcaseMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(binding.andesuiNavBar)
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_textview)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_textview)
 
     private fun initViewPager() {
-        viewPager = binding.andesuiViewpager
+        viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf(
             AndesuiDynamicTextviewBinding.inflate(layoutInflater).root,
             AndesuiStaticTextviewBinding.inflate(layoutInflater).root
@@ -39,7 +33,7 @@ class TextViewShowcaseActivity : AppCompatActivity() {
     }
 
     private fun attachIndicator() {
-        binding.pageIndicator.attach(viewPager)
+        baseBinding.pageIndicator.attach(viewPager)
     }
 
     private fun loadViews() {

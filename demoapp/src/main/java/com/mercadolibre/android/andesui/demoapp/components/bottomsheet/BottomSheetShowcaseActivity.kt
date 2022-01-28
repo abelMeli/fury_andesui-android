@@ -10,7 +10,6 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.bottomsheet.AndesBottomSheet
 import com.mercadolibre.android.andesui.bottomsheet.BottomSheetListener
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetContentMargin
@@ -19,35 +18,29 @@ import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
+import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiBottomSheetShowcaseBinding
-import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiShowcaseMainBinding
 
 @Suppress("TooManyFunctions")
-class BottomSheetShowcaseActivity : AppCompatActivity(), BottomSheetListener {
+class BottomSheetShowcaseActivity : BaseActivity(), BottomSheetListener {
 
     private lateinit var viewPager: CustomViewPager
     private lateinit var bottomSheet: AndesBottomSheet
     private var showTitle = false
     private var leftAlignTitle = true
     private var textView: TextView? = null
-    private val baseBinding by lazy { AndesuiShowcaseMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(baseBinding.root)
 
-        initActionBar()
         initViewPager()
         attachIndicator()
         loadViews()
     }
 
-    private fun initActionBar() {
-        setSupportActionBar(baseBinding.andesuiNavBar)
-        supportActionBar?.title = resources.getString(R.string.andes_demoapp_screen_bottom_sheet)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    override fun getAppBarTitle(): String =
+        resources.getString(R.string.andes_demoapp_screen_bottom_sheet)
 
     private fun initViewPager() {
         viewPager = baseBinding.andesuiViewpager
