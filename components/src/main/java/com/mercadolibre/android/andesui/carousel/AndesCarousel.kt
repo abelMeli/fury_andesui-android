@@ -80,6 +80,14 @@ class AndesCarousel : ConstraintLayout {
         recyclerViewComponent.addOnScrollListener(listener)
     }
 
+    /**
+     * Method to scroll to position in recyclerView.
+     * @param position  position to scroll into recyclerView.
+     */
+    fun scrollToPosition(position: Int) {
+        recyclerViewComponent.smoothScrollToPosition(position)
+    }
+
     override fun onDetachedFromWindow() {
         recyclerViewComponent.clearOnScrollListeners()
         super.onDetachedFromWindow()

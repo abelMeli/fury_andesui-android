@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/andes_white">
@@ -81,7 +82,7 @@
             app:andesButtonText="@string/andes_message_showcase_change"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/checkbox_centered"
-            app:layout_constraintTop_toBottomOf="@+id/checkbox_centered" />
+            app:layout_constraintTop_toBottomOf="@+id/scroll_button" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/clear_button"
@@ -93,6 +94,28 @@
             app:layout_constraintBottom_toBottomOf="@+id/change_button"
             app:layout_constraintEnd_toEndOf="@+id/checkbox_centered"
             app:layout_constraintTop_toTopOf="@+id/change_button" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesEditText
+            android:id="@+id/scroll_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:inputType="number"
+            android:hint="@string/andesui_demoapp_scroll_position_hint"
+            app:layout_constraintBottom_toBottomOf="@+id/scroll_button"
+            app:layout_constraintStart_toEndOf="@+id/scroll_button"
+            app:layout_constraintTop_toTopOf="@+id/scroll_button" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/scroll_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andesui_demoapp_scroll_button"
+            app:layout_constraintStart_toStartOf="@+id/checkbox_centered"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_centered" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
