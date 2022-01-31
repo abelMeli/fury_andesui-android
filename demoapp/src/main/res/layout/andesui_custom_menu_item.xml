@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="?attr/actionBarSize"
+    tools:background="@color/andes_accent_color_500"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <com.mercadolibre.android.andesui.textview.AndesTextView
         android:id="@+id/custom_action_bar_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -12,28 +14,38 @@
         android:ellipsize="end"
         android:fontFamily="@font/andes_font_semibold"
         android:maxLines="1"
-        android:text="AndesUI: Prueba"
-        android:textColor="@color/andes_text_color_white"
-        android:textSize="20sp"
+        app:andesTextViewStyle="titleXs"
+        tools:text="AndesUI: Prueba"
+        app:andesTextViewTextColor="inverted"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/custom_action_bar_webview_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.mercadolibre.android.andesui.textview.AndesTextView
         android:id="@+id/custom_action_bar_webview_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:fontFamily="@font/andes_font_regular"
         android:text="@string/andesui_demoapp_web_storybook"
-        android:textColor="@color/andes_text_color_white"
-        android:textSize="16sp"
+        app:andesTextViewTextColor="inverted"
+        app:andesTextViewStyle="bodyM"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/custom_action_bar_title"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.mercadolibre.android.andesui.badge.AndesBadgeDot
+        android:id="@+id/custom_action_bar_webview_not_supported"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:clickable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintEnd_toEndOf="@+id/custom_action_bar_webview_text"
+        app:layout_constraintTop_toTopOf="@+id/custom_action_bar_webview_text"
+        app:andesBadgeDotType="error"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

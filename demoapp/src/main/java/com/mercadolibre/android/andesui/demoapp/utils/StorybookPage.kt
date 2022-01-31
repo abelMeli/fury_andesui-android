@@ -20,18 +20,22 @@ internal enum class StorybookPage(val link: String) {
     ANDESTEXTFIELD("$HOME/?path=/story/textfield-textfield--andes-text-field"),
     ANDESTHUMBNAIL("$HOME/?path=/story/thumbnail--andes-thumbnail"),
     ANDESSWITCH("$HOME/?path=/story/switch--andes-switch"),
-    ANDESFEEDBACKSCREEN("$HOME/?path=/story/feedbackscreen--andes-feedback-screen"),
-    ANDESCOACHMARK("$HOME/?path=/story/coachmarks--andes-coach-marks"),
+    ANDESFEEDBACKSCREENVIEW("$HOME/?path=/story/feedbackscreen--andes-feedback-screen"),
     ANDESDATEPICKER("$HOME/?path=/story/datepicker--andes-datepicker"),
     ANDESDROPDOWN("$HOME/?path=/story/dropdown--andes-dropdown-form"),
     ANDESSNACKBAR("$HOME/?path=/story/snackbar--andes-snackbar"),
     ANDESTIMEPICKER("$HOME/?path=/story/time-picker--andes-time-picker"),
+    ANDESTEXTVIEW("$HOME/?path=/story/typography--andes-typography"),
     ANDESTABS("$HOME/?path=/story/tabs--andes-default-tabs"),
     ANDESMONEYAMOUNT("$HOME/?path=/story/money-amount--andes-money-amount"),
     ANDESSLIDER("$HOME/?path=/story/slider--andes-slider-default");
 
     companion object {
-        fun getStorybookPage(string: String): StorybookPage = valueOf(string.toUpperCase())
+        fun getStorybookPage(string: String): StorybookPage? = try {
+            valueOf(string.toUpperCase())
+        } catch (e :IllegalArgumentException) {
+            null
+        }
     }
 }
 
