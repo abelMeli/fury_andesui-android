@@ -30,6 +30,7 @@ class BottomSheetShowcaseActivity : BaseActivity(), BottomSheetListener {
     private var showTitle = false
     private var leftAlignTitle = true
     private var textView: TextView? = null
+    private lateinit var binding: AndesuiBottomSheetShowcaseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +60,8 @@ class BottomSheetShowcaseActivity : BaseActivity(), BottomSheetListener {
     }
 
     private fun addDynamicPage(container: View) {
-        bottomSheet = AndesuiBottomSheetShowcaseBinding.bind(container).andesBottomSheet
+        binding = AndesuiBottomSheetShowcaseBinding.bind(container)
+        bottomSheet = binding.andesBottomSheet
         bottomSheet.setBottomSheetListener(this)
     }
 
@@ -128,7 +130,6 @@ class BottomSheetShowcaseActivity : BaseActivity(), BottomSheetListener {
     }
 
     fun onSetPeekHeightButtonClicked(view: View) {
-        val binding = AndesuiBottomSheetShowcaseBinding.bind(view)
         if (!binding.andesBottomSheetPeekHeightTextField.text.isNullOrEmpty()) {
             bottomSheet.peekHeight = binding.andesBottomSheetPeekHeightTextField.text!!.toInt()
             closeKeyboard(view)
