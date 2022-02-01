@@ -2,4 +2,6 @@
 <resources>
     <string name="andes_button_text" translatable="false">Do something</string>
     <string name="andes_message_dismiss_button_content_description">Cerrar</string>
+    <string name="andes_body_link_tag">AndesBodyLink</string>
+    <string name="andes_body_link_range_incorrect">El rango es incorrecto: %1$d, %2$d</string>
 </resources>
