@@ -9,45 +9,46 @@ import com.mercadolibre.android.andesui.bullet.AndesBullet
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.textview.AndesTextView
 
-class AndesBulletViewConfigurator(context: Context) {
+internal fun configureBullet(
+    andesBulletView: AndesTextView,
+    bulletText: String,
+    bulletGapWith: Int,
+    bulletColor: Int,
+    bulletDotSize: Int,
+    bulletTextSize: Float,
+    bulletTypeFace: Typeface?
+) {
+    val spannableString = SpannableStringBuilder(bulletText)
+    setupSpannableBullet(
+        spannableString,
+        bulletText,
+        bulletGapWith,
+        bulletColor,
+        bulletDotSize
+    )
+    andesBulletView.text = spannableString
+    andesBulletView.setTextSize(TypedValue.COMPLEX_UNIT_PX, bulletTextSize)
+    andesBulletView.setTextColor(bulletColor)
+    andesBulletView.typeface = bulletTypeFace
+}
 
-    private var bulletComponent: AndesTextView = AndesTextView(context)
-
-    fun configure(
-        context: Context,
-        bullet: AndesBullet,
-        bulletGapWith: Int,
-        bulletColor: Int,
-        bulletDotSize: Int,
-        bulletTextSize: Float,
-        bulletTypeFace: Typeface?,
-        bodyLinkIsUnderline: Boolean,
-        bodyLinkTextColor: AndesColor
-    ): AndesTextView {
-        val spannableString = SpannableStringBuilder(bullet.text)
-        bullet.textLinks?.let {
-            setupSpannableBodyLink(
-                context,
-                spannableString,
-                it,
-                bodyLinkIsUnderline,
-                bodyLinkTextColor
-            )
-            bulletComponent.movementMethod = LinkMovementMethod.getInstance()
-        }
-
-        setupSpannableBullet(
+internal fun configureBulletBodyLink(
+    andesBulletView: AndesTextView,
+    context: Context,
+    bullet: AndesBullet,
+    bodyLinkIsUnderline: Boolean,
+    bodyLinkTextColor: AndesColor
+) {
+    val spannableString = SpannableStringBuilder(bullet.text)
+    bullet.textLinks?.let {
+        setupSpannableBodyLink(
+            context,
             spannableString,
-            bullet.text,
-            bulletGapWith,
-            bulletColor,
-            bulletDotSize
+            it,
+            bodyLinkIsUnderline,
+            bodyLinkTextColor
         )
-        bulletComponent.text = spannableString
-        bulletComponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, bulletTextSize)
-        bulletComponent.setTextColor(bulletColor)
-        bulletComponent.typeface = bulletTypeFace
-
-        return bulletComponent
+        andesBulletView.movementMethod = LinkMovementMethod.getInstance()
     }
+    andesBulletView.text = spannableString
 }

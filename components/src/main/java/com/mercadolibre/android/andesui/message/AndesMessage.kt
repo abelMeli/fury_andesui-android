@@ -29,11 +29,10 @@ import com.mercadolibre.android.andesui.message.factory.AndesMessageConfiguratio
 import com.mercadolibre.android.andesui.message.factory.AndesMessageConfigurationFactory
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import com.mercadolibre.android.andesui.utils.AndesBulletViewConfigurator
-import com.mercadolibre.android.andesui.utils.getCircledBitmap
+import com.mercadolibre.android.andesui.utils.*
 import com.mercadolibre.android.andesui.utils.setupSpannableBodyLink
-import com.mercadolibre.android.andesui.utils.toBitmap
 
 @Suppress("TooManyFunctions")
 class AndesMessage : CardView {
@@ -305,17 +304,25 @@ class AndesMessage : CardView {
         } else {
             bullets?.let {
                 it.forEach { bullet ->
-                    val andesBulletView = AndesBulletViewConfigurator(context).configure(
-                        context,
-                        bullet,
+                    val andesBulletView = AndesTextView(context)
+                    configureBullet(
+                        andesBulletView,
+                        bullet.text,
                         config.bulletGapWith,
                         config.textColor.colorInt(context),
                         config.bulletDotSize,
                         config.bodySize,
-                        config.bodyTypeface,
-                        config.bodyLinkIsUnderline,
-                        config.bodyLinkTextColor
+                        config.bodyTypeface
                     )
+                    bullet.textLinks?.let {
+                        configureBulletBodyLink(
+                            andesBulletView,
+                            context,
+                            bullet,
+                            config.bodyLinkIsUnderline,
+                            config.bodyLinkTextColor
+                        )
+                    }
                     bulletContainer.addView(andesBulletView)
                 }
             }
