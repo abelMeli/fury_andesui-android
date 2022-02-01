@@ -303,19 +303,21 @@ class AndesMessage : CardView {
         bulletContainer.visibility = if (bullets.isNullOrEmpty()) {
             View.GONE
         } else {
-            bullets!!.forEach { bullet ->
-                val andesBulletView = AndesBulletViewConfigurator(context).configure(
-                    context,
-                    bullet,
-                    config.bulletGapWith,
-                    config.textColor.colorInt(context),
-                    config.bulletDotSize,
-                    config.bodySize,
-                    config.bodyTypeface,
-                    config.bodyLinkIsUnderline,
-                    config.bodyLinkTextColor
-                )
-                bulletContainer.addView(andesBulletView)
+            bullets?.let {
+                it.forEach { bullet ->
+                    val andesBulletView = AndesBulletViewConfigurator(context).configure(
+                        context,
+                        bullet,
+                        config.bulletGapWith,
+                        config.textColor.colorInt(context),
+                        config.bulletDotSize,
+                        config.bodySize,
+                        config.bodyTypeface,
+                        config.bodyLinkIsUnderline,
+                        config.bodyLinkTextColor
+                    )
+                    bulletContainer.addView(andesBulletView)
+                }
             }
             View.VISIBLE
         }

@@ -1,9 +1,13 @@
+# v4.9.0
+- `AndesMessage` fix bullets implementation to align  with iOS | Authors [@mingkao-meli](https://github.com/mingkao-meli)
+
 # v4.8.0
 ## 🚀 Feature
 - Added new icons with dimension 24: `andes_ui_nip`,`andes_ui_reportar`| Author: [@lguerrero88](https://github.com/lguerrero88)
-- Added not recommended components in webviews | Author: [@lguerrero88](https://github.com/lguerrero88)
+- Added not recommended components in webviews to showcase app | Author: [@eportasML](https://github.com/eportasML)
 - Added scrollToPosition feature in carousel component. | Author: [FranciscoRMontufar](https://github.com/FranciscoRMontufar)
-- `AndesMessage` fix bullets implementation to align  with iOS | Authors [@mingkao-meli](https://github.com/mingkao-meli)
+## 🛠 Fixes
+- Solved crash when setting peekHeight in demo app. | Author: [@edgnavarro] (https://github.com/edgnavarro)
 
 # v4.7.0
 ## 🚀 Feature
