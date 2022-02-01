@@ -31,7 +31,10 @@ import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import com.mercadolibre.android.andesui.utils.*
+import com.mercadolibre.android.andesui.utils.configureBullet
+import com.mercadolibre.android.andesui.utils.configureBulletBodyLink
+import com.mercadolibre.android.andesui.utils.getCircledBitmap
+import com.mercadolibre.android.andesui.utils.toBitmap
 import com.mercadolibre.android.andesui.utils.setupSpannableBodyLink
 
 @Suppress("TooManyFunctions")
