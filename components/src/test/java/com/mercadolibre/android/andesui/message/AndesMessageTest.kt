@@ -3,9 +3,9 @@ package com.mercadolibre.android.andesui.message
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.SpannableString
-import android.text.SpannedString
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -15,13 +15,12 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.bullet.AndesBullet
-import com.mercadolibre.android.andesui.bullet.AndesBulletSpannable
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.BeforeClass
@@ -41,13 +40,7 @@ class AndesMessageTest {
 
     private lateinit var andesMessage: AndesMessage
 
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun beforeClass() {
-            SoLoader.setInTestMode()
-        }
-    }
+    private fun AndesMessage.getBulletContainer() = findViewById<LinearLayout>(R.id.andes_bullet_container)
 
     @Before
     fun setUp() {
@@ -129,6 +122,7 @@ class AndesMessageTest {
 
     @Test
     fun `AndesMessage with bullets`() {
+        val bulletText = "Bullet multiline example with simple dummy text."
         val andesMessage = AndesMessage(
             context,
             AndesMessageHierarchy.LOUD,
@@ -139,19 +133,50 @@ class AndesMessageTest {
             null,
             null
         )
-        andesMessage.bullets = arrayListOf(AndesBullet(1, 2))
-
-        with(andesMessage.getBody()) {
-            text.toString() assertEquals "T\n\nhis is a body message"
-            visibility assertEquals android.view.View.VISIBLE
-            val spans = SpannedString(text).getSpans(
-                0,
-                "This is a body message".lastIndex,
-                AndesBulletSpannable::class.java
+        var indexSelected = -1
+        val links = listOf(AndesBodyLink(0, 10))
+        andesMessage.bullets = arrayListOf(
+            AndesBullet(
+                bulletText,
+                AndesBodyLinks(
+                    links,
+                    listener = {
+                        indexSelected = it
+                    }
+                )
             )
-            spans.size assertEquals 1
+        )
+        val bulletTextField = andesMessage.getBulletContainer().getChildAt(0) as AndesTextView
+        bulletTextField.let {
+            (it.text as SpannableString).getSpans(0, 10, ClickableSpan::class.java)[0].onClick(bulletTextField)
         }
+        assertEquals(indexSelected, 0)
+        assertEquals(View.VISIBLE, bulletTextField.visibility)
+        assertEquals(bulletText, bulletTextField.text.toString())
     }
 
-    private fun AndesMessage.getBody() = findViewById<TextView>(R.id.andes_body)
+    @Test
+    fun `AndesMessage without bullets`() {
+        val andesMessage = AndesMessage(
+            context,
+            AndesMessageHierarchy.LOUD,
+            AndesMessageType.SUCCESS,
+            "This is a body message",
+            null,
+            true,
+            null,
+            null
+        )
+
+        andesMessage.bullets = null
+        assertEquals(View.GONE, andesMessage.getBulletContainer().visibility)
+    }
+
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun beforeClass() {
+            SoLoader.setInTestMode()
+        }
+    }
 }

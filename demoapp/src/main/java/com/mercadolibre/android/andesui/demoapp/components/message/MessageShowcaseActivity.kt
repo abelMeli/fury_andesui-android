@@ -201,11 +201,25 @@ class MessageShowcaseActivity : BaseActivity() {
             changeMessage.setupThumbnail(thumbnailDrawable)
 
             if (bulletCheckbox.status == AndesCheckboxStatus.SELECTED) {
-                val bulletSpans = listOf(
-                    AndesBullet(8, 19),
-                    AndesBullet(19, 31)
+                val secondBulletLinks = listOf(
+                    AndesBodyLink(0, 26),
+                    AndesBodyLink(38, 44)
                 )
-                changeMessage.bullets = bulletSpans
+                val bodyLinksForSecondBullet = AndesBodyLinks(
+                    secondBulletLinks,
+                    listener = {
+                        Toast.makeText(applicationContext, "Click at body link: $it", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                val bullets = listOf(
+                    AndesBullet("Bullet 1 example.", null),
+                    AndesBullet(
+                        "Bullet 2 Multiline example with simple dummy text of the printing and tysetting industry. Lorem impsum.",
+                        bodyLinksForSecondBullet
+                    ),
+                    AndesBullet("Bullet 3 example.", null)
+                )
+                changeMessage.bullets = bullets
             } else {
                 changeMessage.bullets = null
             }

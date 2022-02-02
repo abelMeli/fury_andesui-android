@@ -73,7 +73,7 @@ Basic Sample XML
 | isDismissable | **Boolean**: sets the dismiss check in the top right corner. Default type is **false** |
 | bodyLinks | **[AndesBodyLinks](#andesbodylinks)**: sets the links for the AndesMessage. Default type is **null** |
 | thumbnail | **Drawable?**: sets the drawable to show in the component body. Default type is **null** |
-| bullets | **List<AndesBullet>?**: sets the list of AndesBullet where determine the range to set the bullets. Default type is **null** |
+| bullets | **List<AndesBullet>?**: sets the list of AndesBullet below the component body. Default type is **null** |
 
 <br/>
 
@@ -87,7 +87,7 @@ Basic Sample XML
 | isDismissable: Boolean | **get():** retrieves true or false according if the component can be dismissed or not. <br/> **set(value: Boolean):** updates component. |
 | bodyLinks: AndesBodyLinks| **get():** retrieves body links, or null if is not set. <br/> **set(value: AndesBodyLinks):** updates link values. |
 | thumbnail: Drawable? | **get():** retrieves the drawable object shown in the component body, or null if is not set. <br/> **set(value: Drawable?):** updates component drawable shown in the body. |
-| bullet: List<AndesBullet>? | **get():** retrieves bullet spans, or null if is not set. <br/> **set(value: List<AndesBullet>?):** updates bullet span values. |
+| bullet: List<AndesBullet>? | **get():** retrieves a list of AndesBullet, or null if is not set. <br/> **set(value: List<AndesBullet>?):** updates bullet span values. |
 
 <br/>
 
@@ -172,15 +172,15 @@ enum class AndesBodyLink
 | -------- | ------- |
 | Boolean | **isValidRange(text: SpannableString)**<br/> method to evaluate if the current values of the AndesBodyLink are correct to set the spannableString. |
 
-### AndesBulletSpan
+### AndesBullet
 class used to set correctly the bullet range in the message body.
 ```kotlin
 enum class AndesBullet
 ```
 | Property | Description |
 | ----------- | ----------- |
-| startIndex: Int | start index for the bullet text |
-| endIndex: Int | end index for the bullet text |
+| text: String | the text of the bullet to show |
+| textLinks: AndesBodyLinks | the links for the text AndesBullet |
 
 #### Functions
 | Return type | Method |

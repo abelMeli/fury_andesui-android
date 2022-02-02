@@ -2,8 +2,8 @@ package com.mercadolibre.android.andesui.message
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.text.SpannableStringBuilder
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
@@ -13,6 +13,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,11 +29,13 @@ import com.mercadolibre.android.andesui.message.factory.AndesMessageConfiguratio
 import com.mercadolibre.android.andesui.message.factory.AndesMessageConfigurationFactory
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import com.mercadolibre.android.andesui.utils.toBitmap
+import com.mercadolibre.android.andesui.utils.configureBullet
+import com.mercadolibre.android.andesui.utils.configureBulletBodyLink
 import com.mercadolibre.android.andesui.utils.getCircledBitmap
+import com.mercadolibre.android.andesui.utils.toBitmap
 import com.mercadolibre.android.andesui.utils.setupSpannableBodyLink
-import com.mercadolibre.android.andesui.utils.setupSpannableBullet
 
 @Suppress("TooManyFunctions")
 class AndesMessage : CardView {
@@ -115,6 +118,7 @@ class AndesMessage : CardView {
     private lateinit var secondaryAction: AndesButton
     private lateinit var linkAction: TextView
     lateinit var thumbnail: SimpleDraweeView
+    private lateinit var bulletContainer: LinearLayout
 
     @Suppress("unused")
     private constructor(context: Context) : super(context) {
@@ -233,6 +237,7 @@ class AndesMessage : CardView {
         secondaryAction = container.findViewById(R.id.andes_secondary_action)
         linkAction = container.findViewById(R.id.andes_link_action)
         thumbnail = container.findViewById(R.id.andes_thumbnail)
+        bulletContainer = container.findViewById(R.id.andes_bullet_container)
     }
 
     /**
@@ -291,16 +296,41 @@ class AndesMessage : CardView {
             )
             bodyComponent.movementMethod = LinkMovementMethod.getInstance()
         }
-        bullets?.let {
-            setupSpannableBullet(
-                spannableString,
-                it,
-                config.bulletGapWith,
-                config.textColor.colorInt(context),
-                config.bulletDotSize
-            )
-        }
+        setupBullet(config)
         return spannableString
+    }
+
+    private fun setupBullet(config: AndesMessageConfiguration) {
+        bulletContainer.removeAllViews()
+        bulletContainer.visibility = if (bullets.isNullOrEmpty()) {
+            View.GONE
+        } else {
+            bullets?.let {
+                it.forEach { bullet ->
+                    val andesBulletView = AndesTextView(context)
+                    configureBullet(
+                        andesBulletView,
+                        bullet.text,
+                        config.bulletGapWith,
+                        config.textColor.colorInt(context),
+                        config.bulletDotSize,
+                        config.bodySize,
+                        config.bodyTypeface
+                    )
+                    bullet.textLinks?.let {
+                        configureBulletBodyLink(
+                            andesBulletView,
+                            context,
+                            bullet,
+                            config.bodyLinkIsUnderline,
+                            config.bodyLinkTextColor
+                        )
+                    }
+                    bulletContainer.addView(andesBulletView)
+                }
+            }
+            View.VISIBLE
+        }
     }
 
     private fun setupBackground(config: AndesMessageConfiguration) {

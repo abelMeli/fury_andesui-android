@@ -1,3 +1,7 @@
+# v4.9.0
+- `AndesMessage` fix bullets implementation to align  with iOS | Authors [@mingkao-meli](https://github.com/mingkao-meli)
+
+
 # v4.8.0
 ## 🚀 Feature
 - Added new icons with dimension 24: `andes_ui_nip`,`andes_ui_reportar`| Author: [@lguerrero88](https://github.com/lguerrero88)

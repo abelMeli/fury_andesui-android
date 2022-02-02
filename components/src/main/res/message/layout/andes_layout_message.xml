@@ -27,6 +27,7 @@
             android:id="@+id/andes_body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/andes_message_distance_title_body"
             android:layout_marginStart="@dimen/andes_message_distance_thumbnail_body"
             app:andesTextViewStyle="bodyS"
             app:layout_constraintBottom_toTopOf="@+id/andes_bottom_guideline"
@@ -34,6 +35,19 @@
             app:layout_constraintStart_toStartOf="@+id/andes_message_barrier_vertical"
             app:layout_constraintTop_toBottomOf="@+id/andes_title"
             app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:id="@+id/andes_bullet_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/andes_bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/andes_dismissableleft_guideline"
+            app:layout_constraintStart_toStartOf="@+id/andes_body"
+            app:layout_constraintTop_toBottomOf="@+id/andes_body"
+            app:layout_constraintVertical_bias="0.0"
+            tools:visibility="visible" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/andes_thumbnail"
@@ -58,7 +72,7 @@
             app:layout_constraintEnd_toStartOf="@+id/andes_message_barrier_vertical"
             app:layout_constraintBottom_toBottomOf="@id/andes_message_barrier_bottom"/>
 
-            <com.facebook.drawee.view.SimpleDraweeView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/andes_dismissable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,7 +106,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="@dimen/andes_message_guideline_icon_start" />
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/andes_lefticon_guideline_botttom"
@@ -142,7 +155,6 @@
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="andes_thumbnail,andes_righticon_guideline_bottom" />
-
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/andes_message_barrier_top"
@@ -207,7 +219,6 @@
             app:layout_constraintTop_toBottomOf="@+id/andes_body"
             app:layout_constraintVertical_bias="1.0"
             tools:visibility="visible" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>
