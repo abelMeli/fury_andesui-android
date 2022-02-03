@@ -11,7 +11,8 @@ package com.mercadolibre.android.andesui.snackbar.duration
 enum class AndesSnackbarDuration {
     SHORT,
     NORMAL,
-    LONG;
+    LONG,
+    INFINITE;
 
     companion object {
         fun fromString(value: String): AndesSnackbarDuration = valueOf(value.toUpperCase())
@@ -24,6 +25,7 @@ enum class AndesSnackbarDuration {
             SHORT -> AndesSnackbarShortDuration()
             NORMAL -> AndesSnackbarNormalDuration()
             LONG -> AndesSnackbarLongDuration()
+            INFINITE -> AndesSnackbarInfiniteDuration()
         }
     }
 }

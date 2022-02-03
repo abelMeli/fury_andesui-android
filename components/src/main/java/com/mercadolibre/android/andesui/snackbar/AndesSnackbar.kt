@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import androidx.cardview.widget.CardView
 import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,11 @@ import com.mercadolibre.android.andesui.snackbar.factory.AndesSnackbarConfigurat
 import com.mercadolibre.android.andesui.snackbar.factory.AndesSnackbarConfigurationFactory
 import com.mercadolibre.android.andesui.snackbar.type.AndesSnackbarType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
+
+import com.mercadolibre.android.andesui.textview.AndesTextView
+import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBold
+import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
+import com.mercadolibre.android.andesui.textview.style.AndesTextViewStyle
 
 @Suppress("TooManyFunctions")
 class AndesSnackbar : CardView {
@@ -64,6 +70,17 @@ class AndesSnackbar : CardView {
         }
 
     /**
+     * Getter and setter for [errorCode].
+     */
+    var errorCode: String?
+        get() = andesSnackbarAttrs.andesSnackbarErrorCode
+        set(value) {
+            andesSnackbarAttrs.andesSnackbarErrorCode = value
+            type = AndesSnackbarType.ERROR
+            setupErrorCodeComponent(createConfig())
+        }
+
+    /**
      * Show the snackbar.
      */
     fun show() {
@@ -99,7 +116,27 @@ class AndesSnackbar : CardView {
 
     @Suppress("unused", "LongParameterList")
     private constructor(context: Context) : super(context) {
-        throw IllegalStateException("Constructor without parameters in Andes Badge is not allowed. You must provide some attributes.")
+        throw IllegalStateException("Constructor without parameters in Andes Snackbar is not allowed. You must provide some attributes.")
+    }
+
+
+    @Suppress("LongParameterList")
+    constructor(
+        context: Context,
+        view: View,
+        errorCode: String,
+        text: String,
+        duration: AndesSnackbarDuration,
+        action: AndesSnackbarAction? = null
+    ) : super(context) {
+        initAttrs(
+            view,
+            AndesSnackbarType.ERROR,
+            text,
+            duration,
+            action,
+            errorCode
+        )
     }
 
     @Suppress("unused")
@@ -131,9 +168,10 @@ class AndesSnackbar : CardView {
         type: AndesSnackbarType,
         text: String,
         duration: AndesSnackbarDuration,
-        action: AndesSnackbarAction? = null
+        action: AndesSnackbarAction? = null,
+        errorCode: String? = null
     ) {
-        andesSnackbarAttrs = AndesSnackbarAttrs(type, text, duration, action)
+        andesSnackbarAttrs = AndesSnackbarAttrs(type, text, duration, action, errorCode)
         val config = AndesSnackbarConfigurationFactory.create(context, view, andesSnackbarAttrs)
         setupComponents(config)
     }
@@ -148,6 +186,7 @@ class AndesSnackbar : CardView {
 
         setupBackgroundComponents(config)
         setupMessageComponent(config)
+        setupErrorCodeComponent(config)
         setupDurationComponent()
         setupActionComponent()
     }
@@ -159,9 +198,9 @@ class AndesSnackbar : CardView {
     private fun initComponents(config: AndesSnackbarConfiguration) {
         view = config.view
         snackbar = Snackbar.make(
-                view,
-                andesSnackbarAttrs.andesSnackbarText,
-                andesSnackbarAttrs.andesSnackbarDuration.duration.duration()
+            view,
+            andesSnackbarAttrs.andesSnackbarText,
+            andesSnackbarAttrs.andesSnackbarDuration.duration.duration()
         )
     }
 
@@ -182,7 +221,8 @@ class AndesSnackbar : CardView {
         radius = context.resources.getDimension(R.dimen.andes_snackbar_radius)
         snackbar.view.setBackgroundColor(Color.TRANSPARENT)
 
-        val andesSnackbar = LayoutInflater.from(context).inflate(R.layout.andes_layout_snackbar, this)
+        val andesSnackbar =
+            LayoutInflater.from(context).inflate(R.layout.andes_layout_snackbar, this)
         val snackContainer = andesSnackbar.findViewById<ConstraintLayout>(R.id.snack_constraint)
         snackContainer.setBackgroundColor(config.backgroundColor.colorInt(context))
 
@@ -202,7 +242,10 @@ class AndesSnackbar : CardView {
         val snackConstraint = layout.findViewById<ConstraintLayout>(R.id.snack_constraint)
         title.text = andesSnackbarAttrs.andesSnackbarText
         title.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        title.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.andes_snackbar_text))
+        title.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            context.resources.getDimension(R.dimen.andes_snackbar_text)
+        )
         title.setTextColor(config.textColor.colorInt(context))
 
         snackConstraint.setPadding(
@@ -261,6 +304,29 @@ class AndesSnackbar : CardView {
     }
 
     /**
+     * Gets data from the config and sets to the errorCode of this snackbar.
+     */
+    private fun setupErrorCodeComponent(config: AndesSnackbarConfiguration) {
+        val layout = snackbar.view as Snackbar.SnackbarLayout
+        val errorCode = layout.findViewById<AndesTextView>(R.id.error_code)
+        if (!andesSnackbarAttrs.andesSnackbarErrorCode.isNullOrEmpty()) {
+            errorCode.style = AndesTextViewStyle.BodyXs
+
+            val codeText = layout.resources.getString(R.string.andes_snackbar_code)
+            val codeValue = andesSnackbarAttrs.andesSnackbarErrorCode.orEmpty()
+
+            errorCode.text = codeText.plus(codeValue)
+            val andesBodyBold = AndesBodyBold(codeText.count() - 1, errorCode.text.count())
+            errorCode.bodyBolds = AndesBodyBolds(listOf(andesBodyBold))
+
+            errorCode.setTextColor(config.textColor.colorInt(context))
+            errorCode.visibility = View.VISIBLE
+        } else {
+            errorCode.visibility = View.GONE
+        }
+    }
+
+    /**
      * Gets the screen resolution and returns the width.
      */
     private fun getFullScreenWidth(): Int {
@@ -282,7 +348,8 @@ class AndesSnackbar : CardView {
         return freeSpace
     }
 
-    private fun createConfig() = AndesSnackbarConfigurationFactory.create(context, view, andesSnackbarAttrs)
+    private fun createConfig() =
+        AndesSnackbarConfigurationFactory.create(context, view, andesSnackbarAttrs)
 
     companion object {
         const val ANDES_SNACKBAR_PADDING = 3

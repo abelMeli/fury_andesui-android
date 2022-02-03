@@ -23,3 +23,7 @@ internal class AndesSnackbarNormalDuration : AndesSnackbarDurationInterface {
 internal class AndesSnackbarLongDuration : AndesSnackbarDurationInterface {
     override fun duration() = 10000
 }
+
+internal class AndesSnackbarInfiniteDuration : AndesSnackbarDurationInterface {
+    override fun duration() = Int.MAX_VALUE
+}

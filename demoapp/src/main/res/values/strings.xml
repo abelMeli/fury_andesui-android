@@ -520,6 +520,12 @@
         <item>Short</item>
         <item>Normal</item>
         <item>Long</item>
+        <item>Infinite</item>
+    </string-array>
+    <string name="andes_snackbar_variation" translatable="false">Variation</string>
+    <string-array name="andes_snackbar_variation_spinner" translatable="false">
+        <item>Simple</item>
+        <item>Error Code</item>
     </string-array>
 
     <!-- Andes Switch -->

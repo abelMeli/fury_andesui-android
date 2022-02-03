@@ -2,7 +2,9 @@ package com.mercadolibre.android.andesui.demoapp.components.snackbar
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
@@ -18,6 +20,7 @@ import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 class SnackbarShowcaseActivity : BaseActivity() {
 
     private lateinit var viewPager: CustomViewPager
+    private lateinit var binding: AndesuiDynamicSnackbarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +34,11 @@ class SnackbarShowcaseActivity : BaseActivity() {
 
     private fun initViewPager() {
         viewPager = baseBinding.andesuiViewpager
-        viewPager.adapter = AndesPagerAdapter(listOf(
-            AndesuiDynamicSnackbarBinding.inflate(layoutInflater).root
-        ))
+        viewPager.adapter = AndesPagerAdapter(
+            listOf(
+                AndesuiDynamicSnackbarBinding.inflate(layoutInflater).root
+            )
+        )
     }
 
     private fun attachIndicator() {
@@ -47,13 +52,16 @@ class SnackbarShowcaseActivity : BaseActivity() {
 
     @Suppress("ComplexMethod", "LongMethod")
     private fun addDynamicPage(container: View) {
-        val binding = AndesuiDynamicSnackbarBinding.bind(container)
+        binding = AndesuiDynamicSnackbarBinding.bind(container)
+        val variation = binding.snackbarVariation
         val hasAction = binding.snackbarHasAction
         val text = binding.snackbarText
         val textAction = binding.snackbarTextAction
         val clearButton = binding.clearButton
         val confirmButton = binding.changeButton
         val actionGroup = binding.actionGroup
+
+        setupAndesSnackabrVariation(variation)
 
         hasAction.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -65,9 +73,9 @@ class SnackbarShowcaseActivity : BaseActivity() {
 
         val snackbarType = binding.snackbarType
         ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_snackbar_type_spinner,
-                android.R.layout.simple_spinner_item
+            this,
+            R.array.andes_snackbar_type_spinner,
+            android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             snackbarType.adapter = adapter
@@ -75,9 +83,9 @@ class SnackbarShowcaseActivity : BaseActivity() {
 
         val snackbarDuration = binding.snackbarDuration
         ArrayAdapter.createFromResource(
-                this,
-                R.array.andes_snackbar_duration_spinner,
-                android.R.layout.simple_spinner_item
+            this,
+            R.array.andes_snackbar_duration_spinner,
+            android.R.layout.simple_spinner_item
         ).let { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             snackbarDuration.adapter = adapter
@@ -96,61 +104,153 @@ class SnackbarShowcaseActivity : BaseActivity() {
             textAction.text = null
 
             snackbarType.setSelection(0)
+            variation.setSelection(0)
             snackbarDuration.setSelection(0)
         }
 
         confirmButton.setOnClickListener {
-            var hasError = false
-            if (text.text.isNullOrEmpty()) {
-                text.state = AndesTextfieldState.ERROR
-                text.helper = getString(R.string.andes_snackbar_error)
-                hasError = true
+            if (variation.selectedItem == SIMPLE) {
+                showSimpleSnackbar(container)
             } else {
-                text.state = AndesTextfieldState.IDLE
-                text.helper = null
+                showErrorCodeSnackbar(container)
             }
-
-            if (hasAction.isChecked && textAction.text.isNullOrEmpty()) {
-                textAction.state = AndesTextfieldState.ERROR
-                textAction.helper = getString(R.string.andes_snackbar_error)
-                hasError = true
-            } else {
-                textAction.state = AndesTextfieldState.IDLE
-                textAction.helper = null
-            }
-
-            if (hasError) {
-                return@setOnClickListener
-            }
-
-            val selectedType = when (snackbarType.selectedItem) {
-                "Neutral" -> AndesSnackbarType.NEUTRAL
-                "Success" -> AndesSnackbarType.SUCCESS
-                else -> AndesSnackbarType.ERROR
-            }
-
-            val selectedDuration = when (snackbarDuration.selectedItem) {
-                "Long" -> AndesSnackbarDuration.LONG
-                "Normal" -> AndesSnackbarDuration.NORMAL
-                else -> AndesSnackbarDuration.SHORT
-            }
-
-            val snackbar = AndesSnackbar(
-                    this,
-                    container,
-                    selectedType,
-                    text.text!!,
-                    selectedDuration
-            )
-            if (hasAction.isChecked) {
-                snackbar.action = AndesSnackbarAction(
-                        textAction.text!!,
-                        View.OnClickListener {
-                            Toast.makeText(applicationContext, "Callback", Toast.LENGTH_SHORT).show()
-                        }
-                )
-            }
-            snackbar.show()
         }
+    }
+
+    private fun setupAndesSnackabrVariation(
+        variationSpinner: Spinner
+    ) {
+        with(variationSpinner) {
+            ArrayAdapter.createFromResource(
+                context,
+                R.array.andes_snackbar_variation_spinner,
+                android.R.layout.simple_spinner_item
+            ).let { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                this.adapter = adapter
+            }
+
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (selectedItem) {
+                        ERROR_CODE -> {
+                            binding.snackbarType.visibility = View.GONE
+                            binding.textView15.visibility = View.GONE
+                        }
+                        SIMPLE -> {
+                            binding.snackbarType.visibility = View.VISIBLE
+                            binding.textView15.visibility = View.VISIBLE
+                        }
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // no-op
+                }
+            }
+        }
+    }
+
+    private fun showSimpleSnackbar(container: View) {
+        if (!isValidText() || !isValidHasAction()) {
+            return
+        }
+
+        val selectedType = getSelectedType()
+
+        val selectedDuration = getSelectedDuration()
+
+        val snackbar = AndesSnackbar(
+            this,
+            container,
+            selectedType,
+            binding.snackbarText.text!!,
+            selectedDuration
+        )
+        if (binding.snackbarHasAction.isChecked) {
+            snackbar.action = AndesSnackbarAction(
+                binding.snackbarTextAction.text!!,
+                View.OnClickListener {
+                    Toast.makeText(this, "Callback", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+        snackbar.show()
+    }
+
+    private fun showErrorCodeSnackbar(container: View) {
+        if (!isValidText() || !isValidHasAction()) {
+            return
+        }
+
+        val selectedDuration = getSelectedDuration()
+
+        val snackbar = AndesSnackbar(
+            this,
+            container,
+            "84AJDJ2",
+            binding.snackbarText.text!!,
+            selectedDuration
+        )
+        if (binding.snackbarHasAction.isChecked) {
+            snackbar.action = AndesSnackbarAction(
+                binding.snackbarTextAction.text!!,
+                View.OnClickListener {
+                    Toast.makeText(this, "Callback", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+        snackbar.show()
+    }
+
+    private fun isValidText(): Boolean {
+        return if (binding.snackbarText.text.isNullOrEmpty()) {
+            binding.snackbarText.state = AndesTextfieldState.ERROR
+            binding.snackbarText.helper = getString(R.string.andes_snackbar_error)
+            false
+        } else {
+            binding.snackbarText.state = AndesTextfieldState.IDLE
+            binding.snackbarText.helper = null
+            true
+        }
+    }
+
+    private fun isValidHasAction(): Boolean {
+        return if (binding.snackbarHasAction.isChecked && binding.snackbarTextAction.text.isNullOrEmpty()) {
+            binding.snackbarTextAction.state = AndesTextfieldState.ERROR
+            binding.snackbarTextAction.helper = getString(R.string.andes_snackbar_error)
+            false
+        } else {
+            binding.snackbarTextAction.state = AndesTextfieldState.IDLE
+            binding.snackbarTextAction.helper = null
+            true
+        }
+    }
+
+    private fun getSelectedDuration(): AndesSnackbarDuration {
+        return when (binding.snackbarDuration.selectedItem) {
+            "Long" -> AndesSnackbarDuration.LONG
+            "Normal" -> AndesSnackbarDuration.NORMAL
+            "Infinite" -> AndesSnackbarDuration.INFINITE
+            else -> AndesSnackbarDuration.SHORT
+        }
+    }
+
+    private fun getSelectedType(): AndesSnackbarType {
+        return when (binding.snackbarType.selectedItem) {
+            "Neutral" -> AndesSnackbarType.NEUTRAL
+            "Success" -> AndesSnackbarType.SUCCESS
+            else -> AndesSnackbarType.ERROR
+        }
+    }
+
+    companion object {
+        private const val ERROR_CODE = "Error Code"
+        private const val SIMPLE = "Simple"
     }
 }

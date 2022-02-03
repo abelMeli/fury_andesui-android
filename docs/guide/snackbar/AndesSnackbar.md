@@ -20,6 +20,7 @@ This component can't be created via XML.
 | --- |
 | [AndesSnackbar](#andessnackbarcontext-context-view-view-type-andessnackbartype-text-string-duration-andessnackbarduration)(context: Context, view: View, type: [AndesSnackbarType](#andessnackbartype), text: String, duration: [AndesSnackbarDuration](#andessnackbarduration)) |
 | [AndesSnackbar](#andessnackbarcontext-context-view-view-type-andessnackbartype-text-string-duration-andessnackbarduration-action-andessnackbaraction)(context: Context, view: View, type: [AndesSnackbarType](#andessnackbartype), text: String, duration: [AndesSnackbarDuration](#andessnackbarduration), action: [AndesSnackbarAction](#andessnackbaraction)) |
+| [AndesSnackbar](#andessnackbarcontext-context-view-view-errorCode-string-text-string-duration-andessnackbarduration)(context: Context, view: View, errorCode: String, text: String, duration: [AndesSnackbarDuration](#andessnackbarduration), action: [AndesSnackbarAction?](#andessnackbaraction)) |
 
 <br/>
 
@@ -42,6 +43,18 @@ This component can't be created via XML.
 | duration | **[AndesSnackbarDuration](#andessnackbarduration)**: how long to display the message. |
 | action | **[AndesSnackbarAction](#andessnackbaraction)**: set snackbar button text and callback |
 
+
+##### AndesSnackbar(context: Context, view: View, errorCode: String, text: String, duration: AndesSnackbarDuration, action: AndesSnackbarAction?)
+| Parameter | Description |
+| -------- | ------- |
+| context | **Context**|
+| view | **View**: container view where snackbar will be attached. |
+| errorCode | **String**: snackbar error code to display, setting this attribute make the snackbar color turn red |
+| text | **String**: snackbar text to display. |
+| duration | **[AndesSnackbarDuration](#andessnackbarduration)**: how long to display the message. |
+| action | **[AndesSnackbarAction](#andessnackbaraction)**: set snackbar button text and callback |
+
+
 <br/>
 
 ## Properties
@@ -51,6 +64,7 @@ This component can't be created via XML.
 | text: String? | **get():** retrieves snackbar text displayed. <br/> **set(value: String?):** updates snackbar text displayed. |
 | duration: [AndesSnackbarDuration](#andessnackbarduration) | **get():** retrieves how long to display the message. <br/> **set(value: AndesSnackbarDuration):** updates how long to display the message. |
 | action: [AndesSnackbarAction?](#andessnackbaraction) | **get():** retrieves snackbar button text and callback. <br/> **set(value: AndesSnackbarAction?):** updates snackbar button text and callback. |
+| errorCode: String? | **get():** retrieves snackbar errorCode displayed. <br/> **set(value: String?):** updates snackbar errorCode displayed. Setting this attribute make the snackbar color turn red |
 
 <br/>
 
@@ -95,6 +109,7 @@ enum class AndesSnackbarDuration
 | SHORT | Message will be displayed for 3000 milliseconds |
 | NORMAL | Message will be displayed for 6000 milliseconds |
 | LONG | Message will be displayed for 10000 milliseconds |
+| INFINITE | Message will be displayed for infinite time |
 
 <br/>
 
@@ -125,3 +140,4 @@ class AndesSnackbarAction
 
 ## Screenshots
 <img src="../resrouces/../resources/snackbar/snackbarExample.png" width="300">
+<img src="../resrouces/../resources/snackbar/snackbarErrorCodeExample.png" width="300">
