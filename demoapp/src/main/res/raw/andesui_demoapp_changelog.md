@@ -1,4 +1,4 @@
-# v4.9.0
+# v4.9.1
 ## 🚀 Feature
 - Added new snackbar variant AndesSnackbarErrorCode | Author: [@SofiaTejerina](https://github.com/SofiaTejerina)
 - `AndesMessage` fix bullets implementation to align  with iOS | Authors [@mingkao-meli](https://github.com/mingkao-meli)
