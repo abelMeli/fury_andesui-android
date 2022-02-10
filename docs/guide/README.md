@@ -60,39 +60,39 @@ See the [Fonts & Colors page](Fonts&Colors.md) to be aware of how to use the pro
 ## Components
 | Component | Deeplink |
 | -------- | -------- |
-| [AndesAutosuggest](autosuggest/AndesAutosuggest.md) | meli://andes/textfield |
+| [AndesAutosuggest](autosuggest/AndesAutosuggest.md) | andes://textfield |
 | [AndesBadge](badge/AndesBadge.md) | meli://andes/badge |
-| [AndesBadgeIconPill](badge/AndesBadgeIconPill.md) | meli://andes/badge |
-| [AndesBadgePill](badge/AndesBadgePill.md) | meli://andes/badge |
-| [AndesButton](button/AndesButton.md) | meli://andes/button |
-| [AndesCarousel](carousel/AndesCarousel.md) | meli://andes/carousel |
-| [AndesCheckbox](checkbox/AndesCheckbox.md) | meli://andes/checkbox |
-| [AndesCoachMark](coachmark/AndesCoachMark.md) | meli://andes/coachmark |
-| [AndesDatePicker](datepicker/AndesDatePicker.md) | meli://andes/datepicker |
-| [AndesDropdown](dropdown/AndesDropdown.md) | meli://andes/dropdown |
-| [AndesFeedbackScreen](feedbackscreen/AndesFeedbackScreen.md) | meli://andes/feedbackscreen |
-| [AndesFloatingMenu](floatingmenu/AndesFloatingMenu.md) | meli://andes/floatingmenu |
-| [AndesList](list/AndesList.md) | meli://andes/list |
-| [AndesMessage](message/AndesMessage.md) | meli://andes/message |
+| [AndesBadgeIconPill](badge/AndesBadgeIconPill.md) | andes://badge |
+| [AndesBadgePill](badge/AndesBadgePill.md) | andes://badge |
+| [AndesButton](button/AndesButton.md) | andes://button |
+| [AndesCarousel](carousel/AndesCarousel.md) | andes://carousel |
+| [AndesCheckbox](checkbox/AndesCheckbox.md) | andes://checkbox |
+| [AndesCoachMark](coachmark/AndesCoachMark.md) | andes://coachmark |
+| [AndesDatePicker](datepicker/AndesDatePicker.md) | andes://datepicker |
+| [AndesDropdown](dropdown/AndesDropdown.md) | andes://dropdown |
+| [AndesFeedbackScreen](feedbackscreen/AndesFeedbackScreen.md) | andes://feedbackscreen |
+| [AndesFloatingMenu](floatingmenu/AndesFloatingMenu.md) | andes://floatingmenu |
+| [AndesList](list/AndesList.md) | andes://list |
+| [AndesMessage](message/AndesMessage.md) | andes://message |
 | [AndesModal](modal/AndesModal.md) |  |
-| [AndesMoneyAmount](moneyamount/AndesMoneyAmount.md) | meli://andes/moneyamount |
-| [AndesMoneyAmountCombo](moneyamount/AndesMoneyAmountCombo.md) | meli://andes/moneyamount |
-| [AndesMoneyAmountDiscount](moneyamount/AndesMoneyAmountDiscount.md) | meli://andes/moneyamount |
-| [AndesSnackbar](slider/AndesSlider.md) | meli://andes/slider |
-| [AndesSnackbar](snackbar/AndesSnackbar.md) | meli://andes/snackbar |
-| [AndesSwitch](switch/AndesSwitch.md) | meli://andes/switch |
-| [AndesTabs](tabs/AndesTabs.md) | meli://andes/tabs |
-| [AndesTag](tag/AndesTag.md) | meli://andes/tag |
-| [AndesTextfield](textfield/AndesTextfield.md) | meli://andes/textfield |
-| [AndesTextView](textview/AndesTextView.md) | meli://andes/typography |
-| [AndesThumbnail](thumbnail/AndesThumbnail.md) | meli://andes/thumbnail |
-| [AndesThumbnailBadge](thumbnail/AndesThumbnailBadge.md) | meli://andes/thumbnail |
-| [AndesTimePicker](timepicker/AndesTimePicker.md) | meli://andes/timepicker |
-| [AndesTooltip](tooltip/AndesTooltip.md) | meli://andes/tooltip |
+| [AndesMoneyAmount](moneyamount/AndesMoneyAmount.md) | andes://moneyamount |
+| [AndesMoneyAmountCombo](moneyamount/AndesMoneyAmountCombo.md) | andes://moneyamount |
+| [AndesMoneyAmountDiscount](moneyamount/AndesMoneyAmountDiscount.md) | andes://moneyamount |
+| [AndesSnackbar](slider/AndesSlider.md) | andes://slider |
+| [AndesSnackbar](snackbar/AndesSnackbar.md) | andes://snackbar |
+| [AndesSwitch](switch/AndesSwitch.md) | andes://switch |
+| [AndesTabs](tabs/AndesTabs.md) | andes://tabs |
+| [AndesTag](tag/AndesTag.md) | andes://tag |
+| [AndesTextfield](textfield/AndesTextfield.md) | andes://textfield |
+| [AndesTextView](textview/AndesTextView.md) | andes://typography |
+| [AndesThumbnail](thumbnail/AndesThumbnail.md) | andes://thumbnail |
+| [AndesThumbnailBadge](thumbnail/AndesThumbnailBadge.md) | andes://thumbnail |
+| [AndesTimePicker](timepicker/AndesTimePicker.md) | andes://timepicker |
+| [AndesTooltip](tooltip/AndesTooltip.md) | andes://tooltip |
 
 ### Open any component deeplink in Andes Showcase App
 First you need to install [Andes Showcase App](#live-examples). Then run the following `adb` command in your terminal.
 ```console
-adb shell am start -a android.intent.action.VIEW -d "meli://andes/{component}"
+adb shell am start -a android.intent.action.VIEW -d "andes://{component}"
 ```
-If you don't use Android Studio install any app to test deeplinks, for example: "Deep Link Tester". Then enter any component deeplink in your app: `meli://andes/{component}`.
+If you don't use Android Studio install any app to test deeplinks, for example: "Deep Link Tester". Then enter any component deeplink in your app: `andes://{component}`.

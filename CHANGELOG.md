@@ -1,8 +1,11 @@
+# v4.10.0
+## 🛠 Fixes
+- Demoapp deeplink schema name refactor | Author: [@meligeo](https://github.com/meligeo)
+
 # v4.9.1
 ## 🚀 Feature
 - Added new snackbar variant AndesSnackbarErrorCode | Author: [@SofiaTejerina](https://github.com/SofiaTejerina)
 - `AndesMessage` fix bullets implementation to align  with iOS | Authors [@mingkao-meli](https://github.com/mingkao-meli)
-
 
 # v4.8.0
 ## 🚀 Feature

@@ -16,7 +16,7 @@ object HomeDataSource {
 
     fun getCarouselData() = listOf(
         MainAction("A11y Playground", R.drawable.andes_a11y_24) { context ->
-            SafeIntent(context, "meli://andes/playground/home")
+            SafeIntent(context, "andes://playground/home")
         },
         MainAction("UX docs", R.drawable.andes_uxdocs_24) {
             AnalyticsTracker.trackSimpleScreen(AnalyticsHelper.specsTrack)
@@ -26,9 +26,8 @@ object HomeDataSource {
             AnalyticsTracker.logWebviewComponentTracking("Home")
             SafeIntent(
                 context, Uri.Builder()
-                    .scheme("meli")
-                    .authority("andes")
-                    .path("storybook")
+                    .scheme("andes")
+                    .authority("storybook")
                     .appendQueryParameter(QUERY_PARAMETER_KEY, StorybookPage.HOMEPAGE.link)
                     .build()
             )
@@ -44,38 +43,38 @@ object HomeDataSource {
     ).sortedBy { it.name }
 
     fun getComponentsData() = listOf(
-        Section("Card", "meli://andes/card"),
-        Section("Carousel", "meli://andes/carousel"),
-        Section("Tooltip", "meli://andes/tooltip"),
-        Section("Checkbox", "meli://andes/checkbox"),
-        Section("Radio button", "meli://andes/radiobutton"),
-        Section("Slider", "meli://andes/slider"),
-        Section("Snackbar", "meli://andes/snackbar"),
-        Section("Badge", "meli://andes/badge"),
-        Section("Button", "meli://andes/button"),
-        Section("Message", "meli://andes/message"),
-        Section("Textfield", "meli://andes/textfield"),
-        Section("Thumbnail", "meli://andes/thumbnail"),
-        Section("Dropdown", "meli://andes/dropdown"),
-        Section("List", "meli://andes/list"),
-        Section("Progress", "meli://andes/progress"),
-        Section("Linear Progress", "meli://andes/linear_progress"),
-        Section("Bottom sheet", "meli://andes/bottom_sheet"),
-        Section("Date picker", "meli://andes/datepicker"),
-        Section("Floating menu", "meli://andes/floatingmenu"),
-        Section("Tag", "meli://andes/tag"),
-        Section("Tabs", "meli://andes/tabs"),
-        Section("Time picker", "meli://andes/timepicker"),
-        Section("Money amount", "meli://andes/moneyamount"),
-        Section("Switch", "meli://andes/switch")
+        Section("Card", "andes://card"),
+        Section("Carousel", "andes://carousel"),
+        Section("Tooltip", "andes://tooltip"),
+        Section("Checkbox", "andes://checkbox"),
+        Section("Radio button", "andes://radiobutton"),
+        Section("Slider", "andes://slider"),
+        Section("Snackbar", "andes://snackbar"),
+        Section("Badge", "andes://badge"),
+        Section("Button", "andes://button"),
+        Section("Message", "andes://message"),
+        Section("Textfield", "andes://textfield"),
+        Section("Thumbnail", "andes://thumbnail"),
+        Section("Dropdown", "andes://dropdown"),
+        Section("List", "andes://list"),
+        Section("Progress", "andes://progress"),
+        Section("Linear Progress", "andes://linear_progress"),
+        Section("Bottom sheet", "andes://bottom_sheet"),
+        Section("Date picker", "andes://datepicker"),
+        Section("Floating menu", "andes://floatingmenu"),
+        Section("Tag", "andes://tag"),
+        Section("Tabs", "andes://tabs"),
+        Section("Time picker", "andes://timepicker"),
+        Section("Money amount", "andes://moneyamount"),
+        Section("Switch", "andes://switch")
     ).sortedBy { it.name }
 
     fun getPatternsData() = listOf(
-        Section("Coach marks", "meli://andes/coachmark"),
-        Section("Feedback screens", "meli://andes/feedbackscreen")
+        Section("Coach marks", "andes://coachmark"),
+        Section("Feedback screens", "andes://feedbackscreen")
     ).sortedBy { it.name }
 
     fun getFoundationsData() = listOf(
-        Section("Typography", "meli://andes/typography")
+        Section("Typography", "andes://typography")
     ).sortedBy { it.name }
 }

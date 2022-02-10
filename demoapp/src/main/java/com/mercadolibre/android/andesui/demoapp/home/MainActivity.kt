@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             }
             setOnClickListener {
                 AnalyticsTracker.trackSimpleScreen(AnalyticsHelper.whatsNewTrack)
-                startActivity(SafeIntent(this@MainActivity, "meli://andes/whats-new"))
+                startActivity(SafeIntent(this@MainActivity, "andes://whats-new"))
             }
         }
     }

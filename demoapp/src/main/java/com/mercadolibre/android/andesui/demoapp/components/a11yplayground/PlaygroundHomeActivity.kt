@@ -20,28 +20,28 @@ class PlaygroundHomeActivity : AppCompatActivity() {
 
     private fun setupButtons() {
         binding.playgroundContentDescription.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/contentdescription"))
+            startActivity(SafeIntent(this, "andes://playground/contentdescription"))
         }
         binding.playgroundTraversalAfter.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/traversalafter"))
+            startActivity(SafeIntent(this, "andes://playground/traversalafter"))
         }
         binding.playgroundNextFocus.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/nextfocus"))
+            startActivity(SafeIntent(this, "andes://playground/nextfocus"))
         }
         binding.playgroundImportantForA11y.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/importantfora11y"))
+            startActivity(SafeIntent(this, "andes://playground/importantfora11y"))
         }
         binding.playgroundLiveRegion.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/a11yliveregion"))
+            startActivity(SafeIntent(this, "andes://playground/a11yliveregion"))
         }
         binding.playgroundAnnounceA11y.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/announcefora11y"))
+            startActivity(SafeIntent(this, "andes://playground/announcefora11y"))
         }
         binding.playgroundA11yHeading.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/a11yheading"))
+            startActivity(SafeIntent(this, "andes://playground/a11yheading"))
         }
         binding.playgroundSemanticViews.setOnClickListener {
-            startActivity(SafeIntent(this, "meli://andes/playground/semanticviews"))
+            startActivity(SafeIntent(this, "andes://playground/semanticviews"))
         }
     }
 

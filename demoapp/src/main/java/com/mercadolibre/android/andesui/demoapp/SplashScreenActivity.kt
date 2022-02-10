@@ -20,7 +20,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun goMainActivity() {
-        SafeIntent(this, "meli://andes/home").also {
+        SafeIntent(this, "andes://home").also {
             startActivity(it)
             finishAfterTransition()
         }
