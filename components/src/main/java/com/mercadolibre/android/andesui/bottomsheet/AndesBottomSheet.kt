@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
@@ -24,6 +25,7 @@ import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetConten
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetState
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
+import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import kotlin.math.roundToInt
 
 @Suppress("TooManyFunctions")
@@ -92,6 +94,8 @@ class AndesBottomSheet : CoordinatorLayout {
     private var listener: BottomSheetListener? = null
     private var onTouchOutsideListener: OnTouchOutsideListener? = null
     private var onSlideListener: OnSlideListener? = null
+    private val a11yManager = context.getAccessibilityManager()
+    private val importantForAccessibilityValue = hashMapOf<Int, Int>()
 
     @Suppress("LongParameterList")
     @JvmOverloads
@@ -139,7 +143,6 @@ class AndesBottomSheet : CoordinatorLayout {
         initComponents()
 
         setupViewId()
-
         resolveDragIndicator()
         resolveBottomSheetParams()
         resolveBottomSheetBackground()
@@ -225,7 +228,10 @@ class AndesBottomSheet : CoordinatorLayout {
 
         titleTextView.visibility = View.VISIBLE
         titleTextView.text = config.titleText
+        titleTextView.contentDescription = config.titleText
+        titleTextView.isFocusable = true
         titleTextView.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
+        titleTextView.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
     }
 
     private fun resolveTitleViewAlignment(config: AndesBottomSheetConfiguration) {
@@ -248,6 +254,41 @@ class AndesBottomSheet : CoordinatorLayout {
         if (state == AndesBottomSheetState.EXPANDED || state == AndesBottomSheetState.HALF_EXPANDED) {
             backgroundDimView.visibility = View.VISIBLE
             backgroundDimView.alpha = DIM_MAX_ALPHA
+        }
+    }
+
+    private fun unlockAllBrothers() {
+        if (a11yManager.isEnabled) {
+            (parent as? ViewGroup)?.let { viewGroup ->
+                for (i in 0 until viewGroup.childCount) {
+                    if (viewGroup.getChildAt(i) != this) {
+                        viewGroup.getChildAt(i).importantForAccessibility =
+                            importantForAccessibilityValue.getValue(
+                                viewGroup.getChildAt(i).id
+                            )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun lockAllBrothers() {
+        if (a11yManager.isEnabled) {
+            (parent as? ViewGroup)?.let { viewGroup ->
+                for (i in 0 until viewGroup.childCount) {
+                    if (viewGroup.getChildAt(i) != this) {
+                        if (importantForAccessibilityValue.count() < viewGroup.childCount - 1) {
+                            importantForAccessibilityValue.put(
+                                viewGroup.getChildAt(i).id,
+                                viewGroup.getChildAt(i).importantForAccessibility
+                            )
+                        }
+                        viewGroup.getChildAt(i).importantForAccessibility =
+                            IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+                    }
+                }
+            }
+            containerView.requestFocus()
         }
     }
 
@@ -394,14 +435,17 @@ class AndesBottomSheet : CoordinatorLayout {
                 BottomSheetBehavior.STATE_EXPANDED -> {
                     listener?.onExpanded()
                     updateStateFromBehavior(newState)
+                    lockAllBrothers()
                 }
                 BottomSheetBehavior.STATE_HALF_EXPANDED -> {
                     listener?.onHalfExpanded()
                     updateStateFromBehavior(newState)
+                    lockAllBrothers()
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     listener?.onCollapsed()
                     updateStateFromBehavior(newState)
+                    unlockAllBrothers()
                 }
                 BottomSheetBehavior.STATE_DRAGGING -> {
                     // not used

@@ -10,13 +10,12 @@
         android:id="@+id/andes_bottom_sheet_background_dim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:importantForAccessibility="no"
         android:background="@color/andes_gray_800"
         android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/andes_bottom_sheet_container"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

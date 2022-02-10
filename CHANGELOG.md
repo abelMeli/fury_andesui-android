@@ -1,5 +1,6 @@
 # v4.10.0
 ## 🛠 Fixes
+- Improved accessibility of the bottomsheet component. | Author: [@edgnavarro] (https://github.com/edgnavarro)
 - Demoapp deeplink schema name refactor | Author: [@meligeo](https://github.com/meligeo)
 
 # v4.9.1

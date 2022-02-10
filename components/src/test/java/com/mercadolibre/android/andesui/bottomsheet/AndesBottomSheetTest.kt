@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.bottomsheet
 
 import android.content.res.Resources
 import android.os.Build
+import android.os.Looper.getMainLooper
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -9,9 +10,14 @@ import androidx.fragment.app.FragmentTransaction
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.activateTalkbackForTest
+import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetContentMargin
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetState
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
@@ -28,19 +34,26 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.never
 import org.mockito.Mockito.any
 import org.mockito.internal.util.reflection.FieldSetter
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@LooperMode(LooperMode.Mode.PAUSED)
 class AndesBottomSheetTest {
     private var context = RuntimeEnvironment.application
     private lateinit var andesBottomSheet: AndesBottomSheet
+    private lateinit var activity: AppCompatActivity
+    private lateinit var button1: Button
+    private lateinit var button2: Button
 
     @Before
     fun setUp() {
-        andesBottomSheet = AndesBottomSheet(context)
+        setupTestActivity()
     }
 
     @Test
@@ -381,6 +394,65 @@ class AndesBottomSheetTest {
         verify(mockBottomSheetBehavior).setPeekHeight(newPeekHeight)
     }
 
+    @Test
+    fun `check that all siblings have the importantForAccessibility with IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, when status is expanded`() {
+        activateTalkbackForTest(context)
+
+        andesBottomSheet.expand()
+        shadowOf(getMainLooper()).idle()
+
+        button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+    }
+
+    @Test
+    fun `check that all siblings have the default importantForAccessibility, when the expanded and collapsed method is invoked`() {
+        activateTalkbackForTest(context)
+
+        andesBottomSheet.expand()
+        shadowOf(getMainLooper()).idle()
+        andesBottomSheet.collapse()
+        shadowOf(getMainLooper()).idle()
+
+        button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+
+    @Test
+    fun `check that all siblings have the importantForAccessibility with IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, when status is halfExpand`() {
+        activateTalkbackForTest(context)
+
+        andesBottomSheet.halfExpand()
+        shadowOf(getMainLooper()).idle()
+
+        button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+    }
+
+    @Test
+    fun `check that all siblings have the default importantForAccessibility, when the expanded, halfExpanded and collapsed method is invoked`() {
+        activateTalkbackForTest(context)
+
+        andesBottomSheet.expand()
+        shadowOf(getMainLooper()).idle()
+        andesBottomSheet.halfExpand()
+        shadowOf(getMainLooper()).idle()
+        andesBottomSheet.collapse()
+        shadowOf(getMainLooper()).idle()
+
+        button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+
+    @Test
+    fun `check that all siblings have the same importantForAccessibility, when status is expanded and a11y is off`() {
+        andesBottomSheet.expand()
+        shadowOf(getMainLooper()).idle()
+
+        button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+
     private fun mockFragmentManager(): FragmentManager {
         val fragmentTransaction = mock(FragmentTransaction::class.java)
         `when`(fragmentTransaction.replace(anyOrNull(), any(Fragment::class.java))).thenReturn(fragmentTransaction)
@@ -390,6 +462,33 @@ class AndesBottomSheetTest {
         `when`(fragmentManager.beginTransaction()).thenReturn(fragmentTransaction)
 
         return fragmentManager
+    }
+
+    private fun setupTestActivity() {
+        val robolectricActivity = Robolectric.buildActivity(AppCompatActivity::class.java).create()
+        activity = robolectricActivity.get()
+        val rl = RelativeLayout(activity).apply {
+            layoutParams = RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT
+            )
+        }
+        activity.setTheme(R.style.Theme_AppCompat_NoActionBar)
+        button1 = Button(activity).apply {
+            id = 1
+            importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        }
+        button2 = Button(activity).apply {
+            id = 2
+            importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        }
+        andesBottomSheet = AndesBottomSheet(activity)
+        rl.addView(button1)
+        rl.addView(button2)
+        rl.addView(andesBottomSheet)
+        activity.setContentView(rl)
+
+        robolectricActivity.start().postCreate(null).resume().visible()
     }
 
     companion object {
