@@ -3,9 +3,9 @@ package com.mercadolibre.android.andesui.typeface
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
+import android.util.Log
 import androidx.annotation.FontRes
 import androidx.core.content.res.ResourcesCompat
-import android.util.Log
 
 /**
  * Extension function that retrieves a desired typeface if it founds it.

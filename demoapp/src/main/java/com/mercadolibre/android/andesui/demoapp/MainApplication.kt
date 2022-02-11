@@ -38,6 +38,7 @@ class MainApplication : Application() {
         FLog.setMinimumLoggingLevel(FLog.VERBOSE)
 
         MockConfigProvider.configure()
+
         WebKitConfigurator().configure(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(applicationContext)
     }

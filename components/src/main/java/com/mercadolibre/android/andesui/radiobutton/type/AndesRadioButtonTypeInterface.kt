@@ -2,9 +2,9 @@ package com.mercadolibre.android.andesui.radiobutton.type
 
 import android.content.Context
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.radiobutton.status.AndesRadioButtonStatus
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
+import com.mercadolibre.android.andesui.radiobutton.status.AndesRadioButtonStatus
 
 internal interface AndesRadioButtonTypeInterface {
     fun borderColor(context: Context, status: AndesRadioButtonStatus): AndesColor

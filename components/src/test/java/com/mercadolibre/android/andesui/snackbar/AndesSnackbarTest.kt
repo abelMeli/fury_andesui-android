@@ -3,9 +3,9 @@ package com.mercadolibre.android.andesui.snackbar
 import android.app.Activity
 import android.content.Context
 import android.os.Build
+import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.test.platform.app.InstrumentationRegistry
-import android.view.View
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.snackbar.action.AndesSnackbarAction
 import com.mercadolibre.android.andesui.snackbar.duration.AndesSnackbarDuration

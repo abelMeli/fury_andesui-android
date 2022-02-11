@@ -31,8 +31,7 @@ class AndesMoneyAmountComboAttrsParserTest {
 
     @Test
     fun `All enum SIZE have an xml attribute`() {
-        val enumToAttrs =
-            AndesMoneyAmountComboSize.values().associateBy { size -> size.name.toLowerCase() }
+        val enumToAttrs = AndesMoneyAmountComboSize.values().associateBy { size -> size.name.toLowerCase() }
         enumToAttrs.forEach { entry ->
             val attrs = Robolectric.buildAttributeSet()
                 .addAttribute(R.attr.andesMoneyAmountComboSize, entry.key)
@@ -43,22 +42,8 @@ class AndesMoneyAmountComboAttrsParserTest {
     }
 
     @Test
-    fun `All enum CURRENCY have an xml attribute`() {
-        val enumToAttrs =
-            AndesMoneyAmountCurrency.values().associateBy { size -> size.name }
-        enumToAttrs.forEach { entry ->
-            val attrs = Robolectric.buildAttributeSet()
-                .addAttribute(R.attr.andesMoneyAmountComboCurrency, entry.key)
-                .build()
-            val andesMoneyAmountAttrs = attrsParser.parse(context, attrs)
-            andesMoneyAmountAttrs.andesMoneyAmountCurrency assertEquals entry.value
-        }
-    }
-
-    @Test
     fun `All enum COUNTRY have an xml attribute`() {
-        val enumToAttrs =
-            AndesCountry.values().associateBy { size -> size.name }
+        val enumToAttrs = AndesCountry.values().associateBy { size -> size.name }
         enumToAttrs.forEach { entry ->
             val attrs = Robolectric.buildAttributeSet()
                 .addAttribute(R.attr.andesMoneyAmountComboCountry, entry.key)

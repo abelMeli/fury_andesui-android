@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.badge.icontype
 
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
+import java.util.Locale
 
 /**
  * Utility class that does two things: Defines the possible styles an [AndesBadgeIconPill] can take because it's an enum, as you can see.
@@ -17,7 +18,7 @@ enum class AndesBadgeIconType {
     ERROR;
 
     companion object {
-        fun fromString(value: String): AndesBadgeIconType = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesBadgeIconType = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val iconType get() = getAndesBadgeType()

@@ -42,7 +42,8 @@ internal class AndesMoneyAmountComboAccessibilityDelegate(
                 amount.amount,
                 isCombo = true,
                 showZerosDecimal = false,
-                countryInfo = countryInfo
+                countryInfo = countryInfo,
+                suffixAccessibility = ""
             )}$COMMA"
         } else {
             EMPTY
@@ -60,7 +61,8 @@ internal class AndesMoneyAmountComboAccessibilityDelegate(
                 previousAmount.amount,
                 isCombo = true,
                 showZerosDecimal = false,
-                countryInfo = countryInfo
+                countryInfo = countryInfo,
+                suffixAccessibility = ""
             )
         } else {
             EMPTY

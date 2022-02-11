@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.button.size
 
 import com.mercadolibre.android.andesui.button.AndesButton
+import java.util.Locale
 
 /**
  * Utility class that does two things: Defines the possible sizes an [AndesButton] can take because it's an enum, as you can see.
@@ -16,7 +17,7 @@ enum class AndesButtonSize {
     LARGE;
 
     companion object {
-        fun fromString(value: String): AndesButtonSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesButtonSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesButtonSize()

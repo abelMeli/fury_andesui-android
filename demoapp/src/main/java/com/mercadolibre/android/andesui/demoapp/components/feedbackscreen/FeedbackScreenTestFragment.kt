@@ -1,13 +1,13 @@
 package com.mercadolibre.android.andesui.demoapp.components.feedbackscreen
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.mercadolibre.android.andesui.feedback.screen.AndesFeedbackScreenView
-import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
+import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText

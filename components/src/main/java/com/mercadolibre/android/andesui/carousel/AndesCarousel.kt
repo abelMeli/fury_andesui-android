@@ -1,13 +1,13 @@
 package com.mercadolibre.android.andesui.carousel
 
 import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.View
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrParser
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrs

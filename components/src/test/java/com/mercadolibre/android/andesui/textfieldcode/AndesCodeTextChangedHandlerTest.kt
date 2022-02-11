@@ -4,9 +4,9 @@ import android.os.Build
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesCodeTextChangedHandler
 import com.mercadolibre.android.andesui.textfield.textwatcher.OnChange
 import com.mercadolibre.android.andesui.textfield.textwatcher.OnComplete
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.Before
 import org.junit.Test

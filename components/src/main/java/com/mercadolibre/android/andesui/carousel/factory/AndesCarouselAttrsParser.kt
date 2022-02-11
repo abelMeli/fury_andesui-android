@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.carousel.factory
 
-import com.mercadolibre.android.andesui.R
 import android.content.Context
 import android.util.AttributeSet
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.carousel.margin.AndesCarouselMargin
 
 internal data class AndesCarouselAttrs(

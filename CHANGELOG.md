@@ -1,4 +1,6 @@
 # v4.10.0
+## 🚀 Feature
+- `AndesMoneyAmount` added suffix, icon in discount and support to crypto currency | Author: [@jperezgonzal](https://github.com/jperezgonzal)
 ## 🛠 Fixes
 - Improved accessibility of the bottomsheet component. | Author: [@edgnavarro] (https://github.com/edgnavarro)
 - Demoapp deeplink schema name refactor | Author: [@meligeo](https://github.com/meligeo)

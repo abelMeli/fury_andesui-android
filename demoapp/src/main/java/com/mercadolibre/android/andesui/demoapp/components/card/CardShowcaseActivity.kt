@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.card.bodyPadding.AndesCardBodyPadding
 import com.mercadolibre.android.andesui.card.hierarchy.AndesCardHierarchy
 import com.mercadolibre.android.andesui.card.padding.AndesCardPadding
@@ -87,7 +88,7 @@ class CardShowcaseActivity : BaseActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView.setTextColor(resources.getColor(R.color.andes_text_color_primary))
+        textView.setTextColor(ContextCompat.getColor(this, R.color.andes_text_color_primary))
         andesCard.cardView = textView
 
         val andesCardTitle = binding.andesTitle
@@ -245,7 +246,7 @@ class CardShowcaseActivity : BaseActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView1.setTextColor(resources.getColor(R.color.andes_text_color_primary))
+        textView1.setTextColor(ContextCompat.getColor(this, R.color.andes_text_color_primary))
         textView1.text = resources.getString(R.string.andes_card_example_1)
         binding.cardExample1.cardView = textView1
 
@@ -254,7 +255,7 @@ class CardShowcaseActivity : BaseActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView2.setTextColor(resources.getColor(R.color.andes_text_color_primary))
+        textView2.setTextColor(ContextCompat.getColor(this, R.color.andes_text_color_primary))
         textView2.text = resources.getString(R.string.andes_card_example_2)
         binding.cardExample2.cardView = textView2
 
@@ -269,7 +270,7 @@ class CardShowcaseActivity : BaseActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView3.setTextColor(resources.getColor(R.color.andes_text_color_primary))
+        textView3.setTextColor(ContextCompat.getColor(this, R.color.andes_text_color_primary))
         textView3.text = resources.getString(R.string.andes_card_example_3)
         binding.cardExample3.cardView = textView3
 
@@ -278,7 +279,7 @@ class CardShowcaseActivity : BaseActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView4.setTextColor(resources.getColor(R.color.andes_text_color_primary))
+        textView4.setTextColor(ContextCompat.getColor(this, R.color.andes_text_color_primary))
         textView4.text = resources.getString(R.string.andes_card_example_4)
         binding.cardExample4.cardView = textView4
 
@@ -287,7 +288,7 @@ class CardShowcaseActivity : BaseActivity() {
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.title_text_size_card)
         )
-        textView5.setTextColor(resources.getColor(R.color.andes_text_color_primary))
+        textView5.setTextColor(ContextCompat.getColor(this, R.color.andes_text_color_primary))
         textView5.text = resources.getString(R.string.andes_card_example_5)
         binding.cardExample5.cardView = textView5
 

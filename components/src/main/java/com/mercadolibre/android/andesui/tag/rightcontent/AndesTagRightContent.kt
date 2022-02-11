@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.tag.rightcontent
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible states an [AndesTag] can take because it's an enum, as you can see.
  * But as a bonus it gives you the proper implementation so you don't have to make any mapping.
@@ -15,7 +17,7 @@ enum class AndesTagRightContent {
     NONE;
 
     companion object {
-        fun fromString(value: String): AndesTagRightContent = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesTagRightContent = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val content get() = getAndesTagRightContent()

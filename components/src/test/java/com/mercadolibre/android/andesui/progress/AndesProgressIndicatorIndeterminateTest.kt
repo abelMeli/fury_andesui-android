@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.progress
 
 import android.os.Build
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressAttrs
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressConfigurationFactory
@@ -31,46 +32,46 @@ class AndesProgressIndicatorIndeterminateTest {
     @Test
     fun `Size XLarge and color default`() {
         andesProgressAttrs = AndesProgressAttrs(AndesProgressSize.XLARGE, 0, false)
-        var config = configFactory.create(context, andesProgressAttrs)
+        val config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 48F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
+        assertEquals(config.tint, ContextCompat.getColor(context, R.color.andes_accent_color_500))
     }
 
     @Test
     fun `Size Large and color default`() {
         andesProgressAttrs = AndesProgressAttrs(AndesProgressSize.LARGE, 0, false)
-        var config = configFactory.create(context, andesProgressAttrs)
+        val config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 32F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
+        assertEquals(config.tint, ContextCompat.getColor(context, R.color.andes_accent_color_500))
     }
 
     @Test
     fun `Size Medium and color default`() {
         andesProgressAttrs = AndesProgressAttrs(AndesProgressSize.MEDIUM, 0, false)
-        var config = configFactory.create(context, andesProgressAttrs)
+        val config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 24F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
+        assertEquals(config.tint, ContextCompat.getColor(context, R.color.andes_accent_color_500))
     }
 
     @Test
     fun `Size Small and color default`() {
         andesProgressAttrs = AndesProgressAttrs(AndesProgressSize.SMALL, 0, false)
-        var config = configFactory.create(context, andesProgressAttrs)
+        val config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 16F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_accent_color_500))
+        assertEquals(config.tint, ContextCompat.getColor(context, R.color.andes_accent_color_500))
     }
 
     @Test
     fun `Size Small and color `() {
         andesProgressAttrs = AndesProgressAttrs(AndesProgressSize.SMALL,
-                context.resources.getColor(R.color.andes_yellow_ml_500), false)
-        var config = configFactory.create(context, andesProgressAttrs)
+            ContextCompat.getColor(context, R.color.andes_yellow_ml_500), false)
+        val config = configFactory.create(context, andesProgressAttrs)
 
         assertEquals(config.size, 16F)
-        assertEquals(config.tint, context.resources.getColor(R.color.andes_yellow_ml_500))
+        assertEquals(config.tint, ContextCompat.getColor(context, R.color.andes_yellow_ml_500))
     }
 }

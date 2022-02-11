@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.carousel.margin
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible styles an [AndesCarousel] can take
  * because it's an enum, as you can see.
@@ -16,7 +18,7 @@ enum class AndesCarouselMargin {
     LARGE;
 
     companion object {
-        fun fromString(value: String): AndesCarouselMargin = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesCarouselMargin = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val margin get() = getAndesCarouselMargin()

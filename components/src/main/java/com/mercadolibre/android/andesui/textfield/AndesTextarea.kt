@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.textfield
 
 import android.content.Context
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
@@ -12,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.R
@@ -298,7 +298,7 @@ class AndesTextarea : ConstraintLayout {
             counterComponent.visibility = View.VISIBLE
             counterComponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.counterSize)
             counterComponent.text = resources.getString(R.string.andes_textfield_counter_text, 0, config.counterLength)
-            textComponent.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(config.counterLength!!))
+            textComponent.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(config.counterLength))
         } else {
             counterComponent.visibility = View.GONE
         }

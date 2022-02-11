@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.switchandes
 import android.os.Build
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.test.core.view.MotionEventBuilder
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
@@ -117,7 +118,7 @@ class AndesSwitchTest {
 
         Assert.assertEquals(
             provider.createTrackBackgroundColor(status, type, context),
-            context.resources.getColor(R.color.andes_gray_100)
+            ContextCompat.getColor(context, R.color.andes_gray_100)
         )
     }
 
@@ -135,7 +136,7 @@ class AndesSwitchTest {
 
         Assert.assertEquals(
             provider.createTrackBackgroundColor(status, type, context),
-            context.resources.getColor(R.color.andes_gray_070)
+            ContextCompat.getColor(context, R.color.andes_gray_070)
         )
     }
 
@@ -153,7 +154,7 @@ class AndesSwitchTest {
 
         Assert.assertEquals(
             provider.createTrackBackgroundColor(status, type, context),
-            context.resources.getColor(R.color.andes_accent_color_500)
+            ContextCompat.getColor(context, R.color.andes_accent_color_500)
         )
     }
 
@@ -171,7 +172,7 @@ class AndesSwitchTest {
 
         Assert.assertEquals(
             provider.createTrackBackgroundColor(status, type, context),
-            context.resources.getColor(R.color.andes_accent_color_300)
+            ContextCompat.getColor(context, R.color.andes_accent_color_300)
         )
     }
 
@@ -189,7 +190,7 @@ class AndesSwitchTest {
 
         Assert.assertEquals(
             provider.createTrackBackgroundColor(status, type, context),
-            context.resources.getColor(R.color.andes_gray_100)
+            ContextCompat.getColor(context, R.color.andes_gray_100)
         )
     }
 

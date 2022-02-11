@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.snackbar.duration
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible styles an [AndesTag] can take because it's an enum, as you can see.
  * But as a bonus it gives you the proper implementation so you don't have to make any mapping.
@@ -15,7 +17,7 @@ enum class AndesSnackbarDuration {
     INFINITE;
 
     companion object {
-        fun fromString(value: String): AndesSnackbarDuration = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesSnackbarDuration = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val duration get() = getAndesSnackbarDuration()

@@ -49,7 +49,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         get() = andesTooltipAttrs.title
         set(value) {
             andesTooltipAttrs = andesTooltipAttrs.copy(title = value)
-            setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+            setupComponents(createConfig(andesTooltipAttrs))
         }
 
     /**
@@ -59,7 +59,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         get() = andesTooltipAttrs.body
         set(value) {
             andesTooltipAttrs = andesTooltipAttrs.copy(body = value)
-            setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+            setupComponents(createConfig(andesTooltipAttrs))
         }
 
     /**
@@ -69,7 +69,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         get() = andesTooltipAttrs.isDismissible
         set(value) {
             andesTooltipAttrs = andesTooltipAttrs.copy(isDismissible = value)
-            setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+            setupComponents(createConfig(andesTooltipAttrs))
         }
 
     /**
@@ -79,7 +79,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         get() = andesTooltipAttrs.style
         set(value) {
             andesTooltipAttrs = andesTooltipAttrs.copy(style = value)
-            setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+            setupComponents(createConfig(andesTooltipAttrs))
         }
 
     /**
@@ -90,7 +90,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         set(value) {
             value?.let {
                 andesTooltipAttrs = andesTooltipAttrs.copy(mainAction = it, secondaryAction = null, linkAction = null)
-                setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+                setupComponents(createConfig(andesTooltipAttrs))
             }
         }
 
@@ -103,7 +103,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
             value?.let {
                 if (andesTooltipAttrs.mainAction != null) {
                     andesTooltipAttrs = andesTooltipAttrs.copy(secondaryAction = it, linkAction = null)
-                    setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+                    setupComponents(createConfig(andesTooltipAttrs))
                 }
             }
         }
@@ -116,7 +116,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         set(value) {
             value?.let {
                 andesTooltipAttrs = andesTooltipAttrs.copy(mainAction = null, secondaryAction = null, linkAction = it)
-                setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+                setupComponents(createConfig(andesTooltipAttrs))
             }
         }
 
@@ -128,7 +128,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         set(value) {
             value?.let {
                 andesTooltipAttrs = andesTooltipAttrs.copy(tooltipLocation = it)
-                setupComponents(createConfig(andesTooltipAttrs), andesTooltipLocationConfigRequired)
+                setupComponents(createConfig(andesTooltipAttrs))
             }
         }
 
@@ -316,7 +316,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         linkActionComponent = container.findViewById(R.id.andes_tooltip_link_action)
         arrowComponent = container.findViewById(R.id.andes_tooltip_arrow)
 
-        setupComponents(createConfig(attrs), andesTooltipLocationConfigRequired)
+        setupComponents(createConfig(attrs))
     }
 
     private fun createConfig(attrs: AndesTooltipAttrs): AndesTooltipConfiguration {
@@ -335,10 +335,10 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         }
     }
 
-    private fun setupComponents(config: AndesTooltipConfiguration, locationConfig: AndesTooltipLocationConfig) {
+    private fun setupComponents(config: AndesTooltipConfiguration) {
         initializeBackground(config)
         initializeAndesTooltipWindow(config)
-        initializeAndesTooltipContent(config, locationConfig)
+        initializeAndesTooltipContent(config)
     }
 
     private fun initializeArrow(
@@ -395,7 +395,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         }
     }
 
-    private fun initializeAndesTooltipContent(config: AndesTooltipConfiguration, locationConfig: AndesTooltipLocationConfig) {
+    private fun initializeAndesTooltipContent(config: AndesTooltipConfiguration) {
         with(frameLayoutContainer) {
             setPadding(paddingWithArrow, paddingWithArrow, paddingWithArrow, paddingWithArrow)
         }
@@ -521,7 +521,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
 
         val config = AndesTooltipConfigurationFactory.create(context, attrs)
         initializeArrow(locationConfig, config, xOff)
-        setupComponents(config, locationConfig)
+        setupComponents(config)
         applyAndesTooltipAnimation()
     }
 

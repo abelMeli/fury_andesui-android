@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.badge.hierarchy
 
+import com.mercadolibre.android.andesui.badge.AndesBadgeIconPill
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeTypeInterface
 import com.mercadolibre.android.andesui.color.AndesColor
-import com.mercadolibre.android.andesui.badge.AndesBadgeIconPill
 
 /**
  * Defines all style related properties that an [AndesBadgeIconPill] needs to be drawn properly.

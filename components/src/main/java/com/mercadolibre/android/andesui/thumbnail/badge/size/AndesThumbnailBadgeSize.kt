@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.thumbnail.badge.size
 
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
+import java.util.Locale
 
 /**
  * Utility class that does two things: Defines the possible sizes an [AndesThumbnailBadge] can take
@@ -22,7 +23,7 @@ enum class AndesThumbnailBadgePillSize {
         /**
          * Retrieves a [AndesThumbnailBadgePillSize] from the given enum value in string.
          */
-        fun fromString(value: String): AndesThumbnailBadgePillSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesThumbnailBadgePillSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesThumbnailSize()
@@ -56,7 +57,7 @@ enum class AndesThumbnailBadgeDotSize {
         /**
          * Retrieves a [AndesThumbnailBadgeDotSize] from the given enum value in string.
          */
-        fun fromString(value: String): AndesThumbnailBadgeDotSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesThumbnailBadgeDotSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesThumbnailSize()

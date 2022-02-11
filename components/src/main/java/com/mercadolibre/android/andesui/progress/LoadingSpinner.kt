@@ -7,13 +7,14 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import androidx.annotation.ColorRes
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 
 @Suppress("TooManyFunctions")
@@ -39,7 +40,7 @@ class LoadingSpinner @JvmOverloads constructor(
     }
 
     private fun bindAttrs() {
-        val primaryColorInt = resources.getColor(R.color.andes_accent_color_500)
+        val primaryColorInt = ContextCompat.getColor(context, R.color.andes_accent_color_500)
         primaryColor = createPaint(Paint.Style.STROKE, strokeSize, primaryColorInt)
     }
 

@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.message.hierarchy
 
 import com.mercadolibre.android.andesui.message.AndesMessage
+import java.util.Locale
 
 /**
  * Utility class that does two things: Defines the possible styles an [AndesMessage] can take because it's an enum, as you can see.
@@ -15,7 +16,7 @@ enum class AndesMessageHierarchy {
     LOUD;
 
     companion object {
-        fun fromString(value: String): AndesMessageHierarchy = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesMessageHierarchy = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val hierarchy get() = getAndesMessageHierarchy()

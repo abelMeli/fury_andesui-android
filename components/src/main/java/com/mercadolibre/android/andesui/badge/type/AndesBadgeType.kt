@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.badge.type
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible styles an [AndesBadge] can take because it's an enum, as you can see.
  * But as a bonus it gives you the proper implementation so you don't have to make any mapping.
@@ -16,7 +18,7 @@ enum class AndesBadgeType {
     ERROR;
 
     companion object {
-        fun fromString(value: String): AndesBadgeType = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesBadgeType = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val type get() = getAndesBadgeHierarchy()

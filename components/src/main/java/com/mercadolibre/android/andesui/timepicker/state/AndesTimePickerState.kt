@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.timepicker.state
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible states an [AndesTimePicker] can take because it's an enum,
  * as you can see.
@@ -16,7 +18,7 @@ enum class AndesTimePickerState {
     READONLY;
 
     companion object {
-        fun fromString(value: String): AndesTimePickerState = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesTimePickerState = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val state get() = getAndesTimePickerState()

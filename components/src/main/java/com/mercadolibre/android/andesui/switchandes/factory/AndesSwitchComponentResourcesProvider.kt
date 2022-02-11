@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
@@ -20,19 +21,19 @@ object AndesSwitchComponentResourcesProvider {
     ): Int {
         return when {
             status == AndesSwitchStatus.CHECKED && type == AndesSwitchType.ENABLED -> {
-                context.resources.getColor(R.color.andes_accent_color_500)
+                ContextCompat.getColor(context, R.color.andes_accent_color_500)
             }
             status == AndesSwitchStatus.CHECKED && type == AndesSwitchType.DISABLED -> {
-                context.resources.getColor(R.color.andes_accent_color_300)
+                ContextCompat.getColor(context, R.color.andes_accent_color_300)
             }
             status == AndesSwitchStatus.UNCHECKED && type == AndesSwitchType.ENABLED -> {
-                context.resources.getColor(R.color.andes_gray_100)
+                ContextCompat.getColor(context, R.color.andes_gray_100)
             }
             status == AndesSwitchStatus.UNCHECKED && type == AndesSwitchType.DISABLED -> {
-                context.resources.getColor(R.color.andes_gray_070)
+                ContextCompat.getColor(context, R.color.andes_gray_070)
             }
             else -> {
-                context.resources.getColor(R.color.andes_accent_color_500)
+                ContextCompat.getColor(context, R.color.andes_accent_color_500)
             }
         }
     }
@@ -41,8 +42,8 @@ object AndesSwitchComponentResourcesProvider {
         val height = context.resources.getDimension(R.dimen.andes_switch_thumb_height).toInt()
         val width = context.resources.getDimension(R.dimen.andes_switch_thumb_width).toInt()
         val strokeWidth = context.resources.getDimension(R.dimen.andes_switch_stroke_width).toInt()
-        val strokeColor = context.resources.getColor(R.color.andes_transparent)
-        val backgroundColor = context.resources.getColor(R.color.andes_bg_color_white)
+        val strokeColor = ContextCompat.getColor(context, R.color.andes_transparent)
+        val backgroundColor = ContextCompat.getColor(context, R.color.andes_bg_color_white)
         return GradientDrawable().apply {
             shape = GradientDrawable.OVAL
             setColor(backgroundColor)

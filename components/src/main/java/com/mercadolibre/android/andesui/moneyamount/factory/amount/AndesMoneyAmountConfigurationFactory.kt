@@ -1,23 +1,35 @@
 package com.mercadolibre.android.andesui.moneyamount.factory.amount
 
 import android.content.Context
-import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.AndesColor
+import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.currency.AndesCountryInfo
 import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
 import com.mercadolibre.android.andesui.currency.AndesCurrencyInfo
-import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils.formatAmount
+import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils
+import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils.ERROR
 import com.mercadolibre.android.andesui.moneyamount.decimalstyle.AndesMoneyAmountDecimalsStyle
 import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
-import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
 
 internal data class AndesMoneyAmountConfiguration(
-    val amountFormatted: SpannableString,
     val amountSize: Float,
-    val color: AndesColor,
-    val isValidSize: Boolean,
+    val iconSize: Float,
+    val iconPadding: Float,
+    val showIcon: Boolean,
+    val currencyColor: AndesColor,
+    val suffixColor: AndesColor,
+    val isValidData: ERROR,
     val countryInfo: AndesCountryInfo,
-    val currencyInfo: AndesCurrencyInfo
+    val currencyInfo: AndesCurrencyInfo,
+    val showZerosDecimal: Boolean,
+    val superScriptSize: Float,
+    val suffix: SpannableStringBuilder?,
+    val suffixAccessibility: String?,
+    val suffixSize: Float,
+    val suffixPadding: Float,
+    val amountFormatted: SpannableStringBuilder
 )
 
 internal object AndesMoneyAmountConfigurationFactory {
@@ -26,59 +38,64 @@ internal object AndesMoneyAmountConfigurationFactory {
         return with(andesMoneyAmountAttrs) {
             val countryInfo = AndesCurrencyHelper.getCountry(andesMoneyAmountAttrs.andesMoneyAmountCountry)
             val currencyInfo = AndesCurrencyHelper.getCurrency(andesMoneyAmountAttrs.andesMoneyAmountCurrency)
+            val suffixSize = andesMoneyAmountSize.size.suffixSize(context)
+            val suffixPadding = andesMoneyAmountSize.size.suffixPadding(context)
+            val suffixColor = resolveTextColor(andesTextColor,  R.color.andes_text_color_secondary.toAndesColor())
+            val superScriptSize = andesMoneyAmountSize.size.superScriptSize(context)
+            val amount = andesMoneyAmountDecimalsStyle.style.getAmountStyled(
+                andesMoneyAmount,
+                countryInfo,
+                currencyInfo,
+                andesShowZerosDecimal,
+                superScriptSize
+            )
             AndesMoneyAmountConfiguration(
-                amountFormatted = formatMoneyAmount(
-                    andesMoneyAmountType.type.getSign(),
-                    andesMoneyAmount,
-                    andesShowZerosDecimal,
-                    andesMoneyAmountDecimalsStyle,
-                    andesMoneyAmountType,
-                    currencyInfo,
-                    countryInfo,
-                    andesMoneyAmountSize.size.superScriptSize(context)
-                ),
                 amountSize = andesMoneyAmountSize.size.textSize(context),
-                color = andesMoneyAmountType.type.getTextColor(),
-                isValidSize = resolveValidData(andesMoneyAmountAttrs.andesMoneyAmountDecimalsStyle, andesMoneyAmountAttrs.andesMoneyAmountSize),
+                iconSize = andesMoneyAmountSize.size.iconSize(context),
+                iconPadding = andesMoneyAmountSize.size.iconPadding(context),
+                showIcon = andesShowIcon,
+                currencyColor = resolveTextColor(andesTextColor, andesMoneyAmountType.type.getTextColor()),
+                suffixColor = suffixColor,
+                isValidData = resolveValidData(currencyInfo, andesMoneyAmountAttrs.andesMoneyAmountDecimalsStyle,
+                    andesMoneyAmountAttrs.andesSuffix, andesMoneyAmountAttrs.andesMoneyAmountSize),
                 countryInfo = countryInfo,
-                currencyInfo = currencyInfo
+                currencyInfo = currencyInfo,
+                suffix = andesSuffix,
+                suffixAccessibility = andesSuffixAccessibility,
+                suffixSize = suffixSize,
+                suffixPadding = suffixPadding,
+                showZerosDecimal = andesShowZerosDecimal,
+                superScriptSize = superScriptSize,
+                amountFormatted = MoneyAmountUtils.formatMoneyAmount(
+                    context = context,
+                    amount = amount,
+                    type = andesMoneyAmountType,
+                    suffix = andesSuffix,
+                    suffixSize = suffixSize,
+                    suffixPadding = suffixPadding,
+                    suffixColor = suffixColor
+                )
             )
         }
     }
 
-    private fun resolveValidData(decimalsStyle: AndesMoneyAmountDecimalsStyle, size: AndesMoneyAmountSize): Boolean {
-        if (decimalsStyle == AndesMoneyAmountDecimalsStyle.SUPERSCRIPT) {
-            if (size == AndesMoneyAmountSize.SIZE_12 || size == AndesMoneyAmountSize.SIZE_14) {
-                return false
-            }
-        }
-        return true
+    private fun resolveTextColor(overrideColor: AndesColor?, defaultColor: AndesColor): AndesColor {
+        return overrideColor ?: defaultColor
     }
 
-    @Suppress("LongParameterList")
-    private fun formatMoneyAmount(
-        sign: String,
-        amount: Double,
-        showZerosDecimal: Boolean,
-        style: AndesMoneyAmountDecimalsStyle,
-        type: AndesMoneyAmountType,
-        currency: AndesCurrencyInfo,
-        country: AndesCountryInfo,
-        superScriptSize: Float
-    ): SpannableString {
-        return style.style.getDecimalPlaces(currency.decimalPlaces, showZerosDecimal, amount).let { decimalPlaces ->
-            SpannableString("$sign${formatAmount(amount, decimalPlaces, currency.symbol, country)}")
-        }.let {
-            style.style.setStyle(
-                it,
-                superScriptSize,
-                currency.decimalPlaces,
-                country.decimalSeparator,
-                amount,
-                showZerosDecimal
-            )
-        }.also {
-            type.type.setStrikeThrough(it)
+    private fun resolveValidData(currency: AndesCurrencyInfo, decimalsStyle: AndesMoneyAmountDecimalsStyle,
+                                 suffix: SpannableStringBuilder?, size: AndesMoneyAmountSize): ERROR {
+        if (decimalsStyle == AndesMoneyAmountDecimalsStyle.SUPERSCRIPT &&
+            (size == AndesMoneyAmountSize.SIZE_12 || size == AndesMoneyAmountSize.SIZE_14)) {
+            return ERROR.SIZE
         }
+        if (currency.isCrypto && decimalsStyle != AndesMoneyAmountDecimalsStyle.NORMAL) {
+            return ERROR.DECIMAL_FORMAT
+        }
+        if (size == AndesMoneyAmountSize.SIZE_12 && suffix != null) {
+            return ERROR.SUFFIX_SIZE
+        }
+        return ERROR.NONE
     }
+
 }

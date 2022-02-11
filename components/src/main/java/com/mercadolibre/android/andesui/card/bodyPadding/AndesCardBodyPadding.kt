@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.card.bodyPadding
 
+import java.util.Locale
+
 enum class AndesCardBodyPadding {
     NONE,
     SMALL,
@@ -8,7 +10,7 @@ enum class AndesCardBodyPadding {
     XLARGE;
 
     companion object {
-        fun fromString(value: String): AndesCardBodyPadding = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesCardBodyPadding = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val bodyPadding get() = getAndesCardBodyPadding()

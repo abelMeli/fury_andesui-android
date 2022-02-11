@@ -4,6 +4,7 @@ import android.content.Context
 import com.mercadolibre.android.andesui.thumbnail.factory.AndesThumbnailConfigurationFactory
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSizeInterface
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailTypeInterface
+import com.mercadolibre.android.andesui.thumbnail.utils.ResolverApiLevel21.resolveIconSize
 
 /**
  * This is intended to serve different implementations by the current

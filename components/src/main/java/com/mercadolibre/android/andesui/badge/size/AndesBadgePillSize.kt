@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.badge.size
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible sizes an [AndesBadge] can take because it's an enum,
  * as you can see.
@@ -14,7 +16,7 @@ enum class AndesBadgePillSize {
     LARGE;
 
     companion object {
-        fun fromString(value: String): AndesBadgePillSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesBadgePillSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesBadgeSize()

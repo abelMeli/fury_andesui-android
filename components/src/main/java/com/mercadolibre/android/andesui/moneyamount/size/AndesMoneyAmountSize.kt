@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.moneyamount.size
 
+import java.util.Locale
+
 enum class AndesMoneyAmountSize {
     SIZE_12,
     SIZE_14,
@@ -18,7 +20,7 @@ enum class AndesMoneyAmountSize {
     SIZE_60;
 
     companion object {
-        fun fromString(value: String): AndesMoneyAmountSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesMoneyAmountSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesMoneyAmountSize()

@@ -1,12 +1,22 @@
 package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
+import android.text.SpannableStringBuilder
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.color.AndesColor
+import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
+import com.mercadolibre.android.andesui.databinding.AndesLayoutMoneyAmountBinding
+import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils.ERROR
 import com.mercadolibre.android.andesui.moneyamount.accessibility.AndesMoneyAmountAccessibilityDelegate
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.moneyamount.decimalstyle.AndesMoneyAmountDecimalsStyle
@@ -18,7 +28,7 @@ import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
 import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
-class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
+class AndesMoneyAmount : ConstraintLayout {
 
     /**
      * Getter and setter for [amount].
@@ -37,7 +47,7 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
         get() = andesMoneyAmountAttrs.andesMoneyAmountType
         set(value) {
             andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesMoneyAmountType = value)
-            setupAmount(createConfig())
+            setupMoneyAmount(createConfig())
         }
 
     /**
@@ -47,7 +57,7 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
         get() = andesMoneyAmountAttrs.andesMoneyAmountSize
         set(value) {
             andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesMoneyAmountSize = value)
-            setupAmount(createConfig())
+            setupMoneyAmount(createConfig())
         }
 
     /**
@@ -57,7 +67,7 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
         get() = andesMoneyAmountAttrs.andesMoneyAmountCurrency
         set(value) {
             andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesMoneyAmountCurrency = value)
-            setupAmount(createConfig())
+            setupMoneyAmount(createConfig())
         }
 
     /**
@@ -77,7 +87,7 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
         get() = andesMoneyAmountAttrs.andesMoneyAmountDecimalsStyle
         set(value) {
             andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesMoneyAmountDecimalsStyle = value)
-            setupAmount(createConfig())
+            setupMoneyAmount(createConfig())
         }
 
     /**
@@ -90,7 +100,46 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
             setupAmount(createConfig())
         }
 
+    /**
+     * Getter and setter for [showIcon].
+     */
+    var showIcon: Boolean
+        get() = andesMoneyAmountAttrs.andesShowIcon
+        set(value) {
+            andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesShowIcon = value)
+            setupIcon(createConfig())
+        }
+
+    /**
+     * Setter for [suffix] with your accessibility.
+     */
+    fun setSuffix(suffix: SpannableStringBuilder?, suffixAccessibility: String?) {
+        andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(
+            andesSuffix = suffix, andesSuffixAccessibility = suffixAccessibility
+        )
+        setupMoneyAmount(createConfig())
+    }
+
+    /**
+     * Setter for the textColor
+     */
+    fun setTextColor(color: AndesColor) {
+        andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesTextColor = color)
+        setupMoneyAmount(createConfig())
+    }
+
+    /**
+     * Setter for the textColor
+     */
+    fun setTextColor(@ColorRes color: Int) {
+        andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesTextColor = color.toAndesColor())
+        setupMoneyAmount(createConfig())
+    }
+
     private lateinit var andesMoneyAmountAttrs: AndesMoneyAmountAttrs
+    private val binding by lazy {
+        AndesLayoutMoneyAmountBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     private constructor(context: Context) : super(context)
 
@@ -129,15 +178,18 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
         size: AndesMoneyAmountSize,
         type: AndesMoneyAmountType,
         style: AndesMoneyAmountDecimalsStyle,
-        country: AndesCountry
+        country: AndesCountry,
+        showIcon: Boolean = false
     ) {
-        andesMoneyAmountAttrs = AndesMoneyAmountAttrs(amount, showZerosDecimal, size, type, style, currency, country)
+        andesMoneyAmountAttrs = AndesMoneyAmountAttrs(
+            amount, showZerosDecimal, size, type, style, currency, country, showIcon
+        )
         setupComponents(createConfig())
     }
 
     private fun setupComponents(config: AndesMoneyAmountConfiguration) {
         setupViewId()
-        setupAmount(config)
+        setupMoneyAmount(config)
         setupAccessibility()
     }
 
@@ -148,18 +200,47 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
     }
 
     private fun setupAccessibility() {
-        accessibilityDelegate = AndesMoneyAmountAccessibilityDelegate(this)
+        isFocusable = true
+        accessibilityDelegate = AndesMoneyAmountAccessibilityDelegate(this, andesMoneyAmountAttrs)
+    }
+
+    private fun setupMoneyAmount(config: AndesMoneyAmountConfiguration) {
+        when (config.isValidData) {
+            ERROR.NONE -> {
+                setupIcon(config)
+                setupAmount(config)
+            }
+            ERROR.SIZE -> throw IllegalArgumentException(context.resources.getString(R.string.andes_money_amount_error_size))
+            ERROR.DECIMAL_FORMAT -> throw IllegalArgumentException(context.resources.getString(R.string.andes_money_amount_error_decimal_format))
+            ERROR.SUFFIX_SIZE -> throw IllegalArgumentException(context.resources.getString(R.string.andes_money_amount_error_suffix_size))
+        }
+    }
+
+    private fun setupIcon(config: AndesMoneyAmountConfiguration) {
+        config.currencyInfo.icon.let {
+            val showIcon = it != null && config.showIcon
+            binding.moneyAmountIcon.apply {
+                visibility = if (showIcon) View.VISIBLE else  View.GONE
+                layoutParams.height = config.iconSize.toInt()
+                layoutParams.width = config.iconSize.toInt()
+                setPadding(DEFAULT_PADDING,DEFAULT_PADDING,config.iconPadding.toInt(),DEFAULT_PADDING)
+                setImageDrawable(it?.let { drawable -> ContextCompat.getDrawable(context, drawable) })
+            }
+        }
     }
 
     private fun setupAmount(config: AndesMoneyAmountConfiguration) {
-        if (config.isValidSize) {
-            setTextColor(config.color.colorInt(context))
+        binding.moneyAmountText.apply {
+            setTextColor(config.currencyColor.colorInt(context))
             setTextSize(TypedValue.COMPLEX_UNIT_PX, config.amountSize)
             typeface = context.getFontOrDefault(R.font.andes_font_regular)
             text = config.amountFormatted
-        } else {
-            throw IllegalArgumentException("This size is not valid for superscript select a higher value")
+            setupAccessibility()
         }
+    }
+
+    override fun getAccessibilityClassName(): CharSequence {
+        return TextView::class.java.name
     }
 
     private fun createConfig() = AndesMoneyAmountConfigurationFactory.create(context, andesMoneyAmountAttrs)
@@ -169,5 +250,6 @@ class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView {
         private val ANDES_TYPE_DEFAULT_VALUE = AndesMoneyAmountType.POSITIVE
         private val ANDES_STYLE_DEFAULT_VALUE = AndesMoneyAmountDecimalsStyle.NORMAL
         private const val ANDES_SHOW_ZEROS_DEFAULT_VALUE = false
+        private const val DEFAULT_PADDING = 0
     }
 }

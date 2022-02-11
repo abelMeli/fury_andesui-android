@@ -13,6 +13,7 @@ import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.assertIsNull
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
+import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.factory.AndesFeedbackScreenConfigurationFactory
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
@@ -20,7 +21,6 @@ import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScre
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
 import com.mercadolibre.android.andesui.feedback.screen.header.view.AndesFeedbackScreenCongratsHeaderView
 import com.mercadolibre.android.andesui.feedback.screen.header.view.AndesFeedbackScreenSimpleHeaderView
-import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesCongratsFeedbackScreenType
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenType
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesSimpleFeedbackScreenType

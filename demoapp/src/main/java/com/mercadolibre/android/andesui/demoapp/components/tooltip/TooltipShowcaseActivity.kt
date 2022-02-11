@@ -13,8 +13,8 @@ import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTooltipBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
-import com.mercadolibre.android.andesui.demoapp.utils.setupAdapter
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
+import com.mercadolibre.android.andesui.demoapp.utils.setupAdapter
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.tooltip.AndesTooltip
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction

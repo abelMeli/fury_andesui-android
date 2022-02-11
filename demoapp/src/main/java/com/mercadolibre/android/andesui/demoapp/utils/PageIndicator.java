@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.demoapp.utils;
 
+import static android.graphics.Color.parseColor;
+
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
@@ -14,8 +16,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mercadolibre.android.andesui.demoapp.R;
-
-import static android.graphics.Color.parseColor;
 
 public class PageIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
 

@@ -12,9 +12,9 @@ import com.mercadolibre.android.andesui.thumbnail.badge.factory.AndesThumbnailBa
 import com.mercadolibre.android.andesui.thumbnail.badge.factory.AndesThumbnailBadgeAttrsParser
 import com.mercadolibre.android.andesui.thumbnail.badge.factory.AndesThumbnailBadgeConfiguration
 import com.mercadolibre.android.andesui.thumbnail.badge.factory.AndesThumbnailBadgeConfigurationFactory
-import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
+import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.utils.buildRing
 
 /**

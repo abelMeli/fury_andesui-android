@@ -2,11 +2,16 @@ package com.mercadolibre.android.andesui.moneyamount
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.databinding.AndesLayoutMoneyAmountBinding
 import com.mercadolibre.android.andesui.moneyamount.accessibility.AndesMoneyAmountDiscountAccessibilityDelegate
 import com.mercadolibre.android.andesui.moneyamount.factory.discount.AndesMoneyAmountDiscountAttrs
 import com.mercadolibre.android.andesui.moneyamount.factory.discount.AndesMoneyAmountDiscountAttrsParser
@@ -15,18 +20,18 @@ import com.mercadolibre.android.andesui.moneyamount.factory.discount.AndesMoneyA
 import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
-class AndesMoneyAmountDiscount : androidx.appcompat.widget.AppCompatTextView {
+class AndesMoneyAmountDiscount : ConstraintLayout {
 
     /**
      * Getter and setter for [discount].
      */
     var discount: Int
-        get() = andesMoneyAmountDiscountAttrs.andesMoneyDiscount
+        get() = andesMoneyAmountDiscountAttrs.discount
         set(value) {
-            andesMoneyAmountDiscountAttrs = andesMoneyAmountDiscountAttrs.copy(andesMoneyDiscount = value)
+            andesMoneyAmountDiscountAttrs = andesMoneyAmountDiscountAttrs.copy(discount = value)
             createConfig().also {
                 validateData(it)
-                setupAmount(it)
+                setupDiscount(it)
             }
         }
 
@@ -34,13 +39,33 @@ class AndesMoneyAmountDiscount : androidx.appcompat.widget.AppCompatTextView {
      * Getter and setter for [size].
      */
     var size: AndesMoneyAmountSize
-        get() = andesMoneyAmountDiscountAttrs.andesMoneyAmountSize
+        get() = andesMoneyAmountDiscountAttrs.discountSize
         set(value) {
-            andesMoneyAmountDiscountAttrs = andesMoneyAmountDiscountAttrs.copy(andesMoneyAmountSize = value)
-            setupAmount(createConfig())
+            andesMoneyAmountDiscountAttrs = andesMoneyAmountDiscountAttrs.copy(discountSize = value)
+            createConfig().also {
+                validateData(it)
+                setupDiscount(it)
+                setupIcon(it)
+            }
+        }
+
+    /**
+     * Getter and setter icon.
+     */
+    var icon: Drawable?
+        get() = andesMoneyAmountDiscountAttrs.discountIcon
+        set(value) {
+            andesMoneyAmountDiscountAttrs = andesMoneyAmountDiscountAttrs.copy(discountIcon = value)
+            createConfig().also {
+                validateData(it)
+                setupIcon(it)
+            }
         }
 
     private lateinit var andesMoneyAmountDiscountAttrs: AndesMoneyAmountDiscountAttrs
+    private val binding by lazy {
+        AndesLayoutMoneyAmountBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
     private constructor(context: Context) : super(context)
 
@@ -56,6 +81,15 @@ class AndesMoneyAmountDiscount : androidx.appcompat.widget.AppCompatTextView {
         initAttrs(discount, size)
     }
 
+    constructor(
+        context: Context,
+        discount: Int,
+        icon: Drawable,
+        size: AndesMoneyAmountSize = ANDES_SIZE_DEFAULT_VALUE
+    ) : super(context) {
+        initAttrs(discount, size, icon)
+    }
+
     /**
      * Sets the proper [config] for this component based on the [attrs] received via XML.
      *
@@ -68,16 +102,18 @@ class AndesMoneyAmountDiscount : androidx.appcompat.widget.AppCompatTextView {
 
     private fun initAttrs(
         discount: Int,
-        size: AndesMoneyAmountSize = ANDES_SIZE_DEFAULT_VALUE
+        size: AndesMoneyAmountSize = ANDES_SIZE_DEFAULT_VALUE,
+        icon: Drawable? = null
     ) {
-        andesMoneyAmountDiscountAttrs = AndesMoneyAmountDiscountAttrs(discount, size)
+        andesMoneyAmountDiscountAttrs = AndesMoneyAmountDiscountAttrs(discount, size, icon)
         setupComponents(createConfig())
     }
 
     private fun setupComponents(config: AndesMoneyAmountDiscountConfiguration) {
         setupViewId()
         validateData(config)
-        setupAmount(config)
+        setupDiscount(config)
+        setupIcon(config)
         setupAccessibility()
     }
 
@@ -93,7 +129,9 @@ class AndesMoneyAmountDiscount : androidx.appcompat.widget.AppCompatTextView {
 
     private fun validateData(config: AndesMoneyAmountDiscountConfiguration) {
         if (config.discount < DISCOUNT_0 || config.discount > DISCOUNT_100) {
-            throw IllegalArgumentException("The discount must be a value between 0 and 100")
+            throw IllegalArgumentException(context.resources.getString(R.string.andes_money_amount_error_discount))
+        } else if (config.discountIcon != null && size.size.discountIconSize(context) == 0F) {
+            throw IllegalArgumentException(context.resources.getString(R.string.andes_money_amount_error_discount_size))
         }
     }
 
@@ -101,18 +139,45 @@ class AndesMoneyAmountDiscount : androidx.appcompat.widget.AppCompatTextView {
      * Construct and draw the component
      */
     @SuppressLint("SetTextI18n")
-    private fun setupAmount(config: AndesMoneyAmountDiscountConfiguration) {
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, config.discountSize)
-        typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        setTextColor(ContextCompat.getColor(context, R.color.andes_green_500))
-        text = "${config.discount}${context.getString(R.string.andes_money_amount_discount)}"
+    private fun setupDiscount(config: AndesMoneyAmountDiscountConfiguration) {
+        binding.moneyAmountText.apply {
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, config.discountSize)
+            typeface = context.getFontOrDefault(R.font.andes_font_regular)
+            setTextColor(ContextCompat.getColor(context, R.color.andes_green_500))
+            text = "${config.discount}${context.getString(R.string.andes_money_amount_discount)}"
+        }
+    }
+
+    private fun setupIcon(config: AndesMoneyAmountDiscountConfiguration) {
+        config.discountIcon?.let {
+            binding.moneyAmountIcon.apply {
+                layoutParams.height = config.discountIconSize.toInt()
+                layoutParams.width = config.discountIconSize.toInt()
+                setPadding(
+                    DEFAULT_PADDING,
+                    DEFAULT_PADDING,
+                    config.iconPadding.toInt(),
+                    DEFAULT_PADDING
+                )
+                setColorFilter(ContextCompat.getColor(context, R.color.andes_green_500))
+                setImageDrawable(it)
+                visibility = View.VISIBLE
+            }
+        } ?: run {
+            binding.moneyAmountIcon.visibility = View.GONE
+        }
     }
 
     private fun createConfig() = AndesMoneyAmountDiscountConfigurationFactory.create(context, andesMoneyAmountDiscountAttrs)
 
+    override fun getAccessibilityClassName(): CharSequence {
+        return TextView::class.java.name
+    }
+
     companion object {
         private val ANDES_SIZE_DEFAULT_VALUE = AndesMoneyAmountSize.SIZE_24
         const val DISCOUNT_0 = 0
+        const val DEFAULT_PADDING = 0
         const val DISCOUNT_100 = 100
     }
 }

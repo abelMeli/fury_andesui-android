@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.card.padding
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible styles an [AndesCard] can take
  * because it's an enum, as you can see.
@@ -15,7 +17,7 @@ enum class AndesCardPadding {
     XLARGE;
 
     companion object {
-        fun fromString(value: String): AndesCardPadding = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesCardPadding = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val padding get() = getAndesCardPadding()

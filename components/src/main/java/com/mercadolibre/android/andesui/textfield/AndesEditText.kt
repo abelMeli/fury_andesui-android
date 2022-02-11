@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.textfield
 
 import android.content.Context
-import androidx.appcompat.widget.AppCompatEditText
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatEditText
 
 /**
  * Custom EditText for to be able to handle the actions of onTextContextMenuItem.

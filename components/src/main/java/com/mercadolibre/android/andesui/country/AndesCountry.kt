@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.country
 
+import java.util.Locale
+
 enum class AndesCountry {
 
     AR, BR, CL, CO, MX, CR, PE,
@@ -7,6 +9,6 @@ enum class AndesCountry {
     GT, HN, NI, SV, PR, CU;
 
     companion object {
-        fun fromString(value: String): AndesCountry = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesCountry = valueOf(value.toUpperCase(Locale.ROOT))
     }
 }

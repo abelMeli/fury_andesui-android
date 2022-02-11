@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.list.size
 
+import java.util.Locale
+
 /**
  * This class handle the AndesList item size, based on {SMALL, MEDIUM, LARGE} values
  */
@@ -9,7 +11,7 @@ enum class AndesListViewItemSize {
     LARGE;
 
     companion object {
-        fun fromString(value: String): AndesListViewItemSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesListViewItemSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesListRowSize()

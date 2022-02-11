@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.demoapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.andesui.demoapp.commons.AnalyticsHelper
 import com.mercadolibre.android.andesui.demoapp.commons.AnalyticsTracker
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStorybookMainBinding

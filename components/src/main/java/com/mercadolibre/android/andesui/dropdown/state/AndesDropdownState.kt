@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.dropdown.state
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible states an [AndesDropdown] can take because it's an enum, as you can see.
  * But as a bonus it gives you the proper implementation so you don't have to make any mapping.
@@ -14,7 +16,7 @@ enum class AndesDropdownState {
     DISABLED;
 
     companion object {
-        fun fromString(value: String): AndesDropdownState = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesDropdownState = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val state get() = getAndesDropdowmState()

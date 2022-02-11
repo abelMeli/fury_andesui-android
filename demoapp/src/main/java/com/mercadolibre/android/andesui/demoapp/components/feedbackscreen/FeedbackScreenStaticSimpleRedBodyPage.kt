@@ -8,11 +8,11 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.feedback.screen.AndesFeedbackScreenView
-import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
+import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
+import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
-import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenType
 import com.mercadolibre.android.andesui.message.AndesMessage
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy

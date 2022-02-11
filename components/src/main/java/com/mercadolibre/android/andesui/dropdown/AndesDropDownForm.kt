@@ -5,6 +5,7 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.Spinner
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R

@@ -44,11 +44,13 @@ object AndesCurrencyHelper {
     private val DEFAULT_COUNTRY = AndesCountryInfo(',', '.')
 
     private val DEFAULT_CURRENCY = AndesCurrencyInfo(
-            symbol = "$",
-            decimalPlaces = 2,
-            singularDescription = R.string.andes_currency_peso_singular,
-            pluralDescription = R.string.andes_currency_peso_plural,
-            decimalSingularDescription = R.string.andes_currency_centavo_singular,
-            decimalPluralDescription = R.string.andes_currency_centavo_plural
+        symbol = "$",
+        decimalPlaces = 2,
+        singularDescription = R.string.andes_currency_peso_singular,
+        pluralDescription = R.string.andes_currency_peso_plural,
+        decimalSingularDescription = R.string.andes_currency_centavo_singular,
+        decimalPluralDescription = R.string.andes_currency_centavo_plural,
+        icon = null,
+        isCrypto = false
     )
 }

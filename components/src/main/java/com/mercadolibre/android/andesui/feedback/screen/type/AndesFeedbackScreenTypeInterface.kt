@@ -6,9 +6,9 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
+import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.header.view.AndesFeedbackScreenCongratsHeaderView
 import com.mercadolibre.android.andesui.feedback.screen.header.view.AndesFeedbackScreenSimpleHeaderView
-import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 
 internal interface AndesFeedbackScreenTypeInterface {
     val feedbackColor: AndesBadgeIconType

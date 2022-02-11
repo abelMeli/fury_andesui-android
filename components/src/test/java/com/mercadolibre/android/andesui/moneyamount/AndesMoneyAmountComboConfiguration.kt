@@ -9,6 +9,8 @@ import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCur
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboAttrs
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboConfigurationFactory
 import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
+import com.mercadolibre.android.andesui.utils.MockConfigProvider
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +21,10 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
 class AndesMoneyAmountComboConfiguration {
+
+    init {
+        MockConfigProvider.configure()
+    }
 
     private var context = ApplicationProvider.getApplicationContext<Context>()
     private val configFactory = spy(AndesMoneyAmountComboConfigurationFactory)
@@ -147,7 +153,38 @@ class AndesMoneyAmountComboConfiguration {
                 andesMoneyAmountSize = AndesMoneyAmountComboSize.SIZE_36
         )
         val config = configFactory.create(context, attrs)
-        assertEquals(config.previousAmount!!, 1500.0, DELTA)
+        assertEquals(config.previousAmount, 1500.0, DELTA)
+    }
+
+    @Test
+    fun `AndesMoneyAmountCombo with crypto currency throws exception`() {
+        Assert.assertThrows(IllegalArgumentException::class.java) {
+            AndesMoneyAmountCombo(
+                context = context,
+                amount = 1350.0,
+                currency = AndesMoneyAmountCurrency.USDP,
+                country = AndesCountry.AR,
+                previousAmount = 1500.0,
+                discount = 10,
+                size = AndesMoneyAmountComboSize.SIZE_36
+            )
+        }
+    }
+
+    @Test
+    fun `AndesMoneyAmountCombo with crypto currency throws exception setter`() {
+        val andesMoneyAmountCombo = AndesMoneyAmountCombo(
+            context = context,
+            amount = 1350.0,
+            currency = AndesMoneyAmountCurrency.ARS,
+            country = AndesCountry.AR,
+            previousAmount = 1500.0,
+            discount = 10,
+            size = AndesMoneyAmountComboSize.SIZE_36
+        )
+        Assert.assertThrows(IllegalArgumentException::class.java) {
+            andesMoneyAmountCombo.currency = AndesMoneyAmountCurrency.USDP
+        }
     }
 
     companion object {

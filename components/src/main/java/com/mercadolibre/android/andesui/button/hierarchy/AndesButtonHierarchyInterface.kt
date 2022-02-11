@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
@@ -67,7 +68,7 @@ internal sealed class AndesButtonHierarchyInterface {
 internal object AndesLoudButtonHierarchy : AndesButtonHierarchyInterface() {
     override fun background(context: Context, cornerRadius: Float) = getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigLoud())
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigLoud())
-    override fun progressBackgroundColor(context: Context): Int = context.resources.getColor(R.color.andes_accent_color_600)
+    override fun progressBackgroundColor(context: Context): Int = ContextCompat.getColor(context, R.color.andes_accent_color_600)
 }
 
 /**
@@ -80,7 +81,7 @@ internal object AndesQuietButtonHierarchy : AndesButtonHierarchyInterface() {
         return getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigQuiet())
     }
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigQuiet())
-    override fun progressBackgroundColor(context: Context): Int = context.resources.getColor(R.color.andes_accent_color_300)
+    override fun progressBackgroundColor(context: Context): Int = ContextCompat.getColor(context, R.color.andes_accent_color_300)
 }
 
 /**
@@ -93,5 +94,5 @@ internal object AndesTransparentButtonHierarchy : AndesButtonHierarchyInterface(
         return getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigTransparent())
     }
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigTransparent())
-    override fun progressBackgroundColor(context: Context): Int = context.resources.getColor(R.color.andes_transparent)
+    override fun progressBackgroundColor(context: Context): Int = ContextCompat.getColor(context, R.color.andes_transparent)
 }

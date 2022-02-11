@@ -2,8 +2,6 @@ package com.mercadolibre.android.andesui.tag
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
@@ -11,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.databinding.AndesLayoutSimpleTagBinding
 import com.mercadolibre.android.andesui.tag.factory.AndesSimpleTagConfigurationFactory

@@ -9,9 +9,9 @@ import com.mercadolibre.android.andesui.button.hierarchy.BackgroundColorConfig
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
-import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 
 internal data class AndesTooltipConfiguration(
     val backgroundColor: AndesColor,

@@ -3,9 +3,6 @@ package com.mercadolibre.android.andesui.card
 import android.animation.LayoutTransition
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import androidx.constraintlayout.widget.Group
-import androidx.core.content.ContextCompat
-import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -14,6 +11,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.Group
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.card.bodyPadding.AndesCardBodyPadding
 import com.mercadolibre.android.andesui.card.factory.AndesCardAttrParser

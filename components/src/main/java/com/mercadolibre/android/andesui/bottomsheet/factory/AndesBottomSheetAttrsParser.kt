@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetState
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment
-import kotlin.IllegalArgumentException
 
 private const val DEFAULT_PEEK_HEIGHT = 0f
 private const val DEFAULT_FIT_CONTENT = true

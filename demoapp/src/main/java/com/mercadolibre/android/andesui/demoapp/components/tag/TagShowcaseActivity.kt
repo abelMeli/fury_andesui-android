@@ -3,11 +3,11 @@ package com.mercadolibre.android.andesui.demoapp.components.tag
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Toast
-import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.res.ResourcesCompat

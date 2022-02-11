@@ -55,6 +55,10 @@
             <enum name="NIO" value="4020" />
             <enum name="CUC" value="4021" />
             <enum name="VES" value="4022" />
+            <enum name="BTC" value="4023" />
+            <enum name="ETH" value="4024" />
+            <enum name="MCN" value="4025" />
+            <enum name="USDP" value="4026" />
         </attr>
 
         <attr name="andesMoneyAmountCountry">
@@ -83,6 +87,8 @@
         <attr name="andesMoneyAmount" format="float" />
 
         <attr name="andesShowZerosDecimal" format="boolean" />
+
+        <attr name="andesShowIcon" format="boolean" />
 
     </declare-styleable>
 

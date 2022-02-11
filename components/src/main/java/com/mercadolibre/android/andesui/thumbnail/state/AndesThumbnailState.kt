@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.thumbnail.state
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible states an [AndesThumbnail] can take because it's an enum,
  * as you can see.
@@ -14,7 +16,7 @@ enum class AndesThumbnailState {
     ENABLED;
 
     companion object {
-        fun fromString(value: String): AndesThumbnailState = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesThumbnailState = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val state get() = getAndesThumbnailState()

@@ -25,8 +25,9 @@ class AndesMoneyAmountDiscountConfiguration {
     @Test
     fun `Size size_18`() {
         attrs = AndesMoneyAmountDiscountAttrs(
-                andesMoneyDiscount = 15,
-                andesMoneyAmountSize = AndesMoneyAmountSize.SIZE_18
+            discount = 15,
+            discountSize = AndesMoneyAmountSize.SIZE_18,
+            discountIcon = null
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.discountSize, context.resources.getDimension(R.dimen.andes_text_size_18))
@@ -35,8 +36,9 @@ class AndesMoneyAmountDiscountConfiguration {
     @Test
     fun `Size size_24`() {
         attrs = AndesMoneyAmountDiscountAttrs(
-                andesMoneyDiscount = 15,
-                andesMoneyAmountSize = AndesMoneyAmountSize.SIZE_24
+            discount = 15,
+            discountSize = AndesMoneyAmountSize.SIZE_24,
+            discountIcon = null
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.discountSize, context.resources.getDimension(R.dimen.andes_text_size_24))
@@ -45,8 +47,9 @@ class AndesMoneyAmountDiscountConfiguration {
     @Test
     fun `Discount`() {
         attrs = AndesMoneyAmountDiscountAttrs(
-                andesMoneyDiscount = 15,
-                andesMoneyAmountSize = AndesMoneyAmountSize.SIZE_24
+            discount = 15,
+            discountSize = AndesMoneyAmountSize.SIZE_24,
+            discountIcon = null
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.discount, 15)

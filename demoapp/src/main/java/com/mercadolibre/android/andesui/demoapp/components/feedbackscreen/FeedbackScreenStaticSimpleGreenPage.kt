@@ -5,12 +5,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.feedback.screen.AndesFeedbackScreenView
-import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
+import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
+import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
-import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenType
 
 class FeedbackScreenStaticSimpleGreenPage {

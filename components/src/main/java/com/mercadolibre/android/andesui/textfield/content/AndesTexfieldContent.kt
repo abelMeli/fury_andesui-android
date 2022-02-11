@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.textfield.content
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible states an [AndesTextfield] can take because it's an enum, as you can see.
  * But as a bonus it gives you the proper implementation so you don't have to make any mapping.
@@ -14,7 +16,7 @@ enum class AndesTextfieldLeftContent {
     ICON;
 
     companion object {
-        fun fromString(value: String): AndesTextfieldLeftContent = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesTextfieldLeftContent = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val leftContent get() = getAndesTextfieldLeftContent()
@@ -38,7 +40,7 @@ enum class AndesTextfieldRightContent {
     CHECKBOX;
 
     companion object {
-        fun fromString(value: String): AndesTextfieldRightContent = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesTextfieldRightContent = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val rightContent get() = getAndesTextfieldRightContent()

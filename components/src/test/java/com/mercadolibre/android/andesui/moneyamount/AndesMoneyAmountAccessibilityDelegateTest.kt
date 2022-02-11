@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
 import android.os.Build
+import android.text.SpannableStringBuilder
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
@@ -130,5 +131,58 @@ class AndesMoneyAmountAccessibilityDelegateTest {
         nodeInfo = andesMoneyAmount.createAccessibilityNodeInfo()
         Assert.assertNotNull(nodeInfo)
         Assert.assertEquals("1234 Reales with 17 Centavos", nodeInfo.contentDescription)
+    }
+
+    @Test
+    fun `USD, Plural Amount, Plural Decimal, Positive, MX, suffix`() {
+        andesMoneyAmount.amount = 1234.17
+        andesMoneyAmount.currency = AndesMoneyAmountCurrency.BRL
+        andesMoneyAmount.country = AndesCountry.MX
+        andesMoneyAmount.type = AndesMoneyAmountType.POSITIVE
+        andesMoneyAmount.setSuffix(SpannableStringBuilder("/unidad"), "por unidad")
+
+        nodeInfo = andesMoneyAmount.createAccessibilityNodeInfo()
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertEquals("1234 Reales with 17 Centavos por unidad", nodeInfo.contentDescription)
+    }
+
+
+    @Test
+    fun `USD, Singular Amount, Plural Decimal, Positive, MX, suffix`() {
+        andesMoneyAmount.amount = 1.17
+        andesMoneyAmount.currency = AndesMoneyAmountCurrency.BRL
+        andesMoneyAmount.country = AndesCountry.MX
+        andesMoneyAmount.type = AndesMoneyAmountType.POSITIVE
+        andesMoneyAmount.setSuffix(SpannableStringBuilder("/unidad"), "por unidad")
+
+        nodeInfo = andesMoneyAmount.createAccessibilityNodeInfo()
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertEquals("one Real with 17 Centavos por unidad", nodeInfo.contentDescription)
+    }
+
+    @Test
+    fun `USD, Singular Amount, Singular Decimal, Positive, MX, suffix`() {
+        andesMoneyAmount.amount = 1.01
+        andesMoneyAmount.currency = AndesMoneyAmountCurrency.BRL
+        andesMoneyAmount.country = AndesCountry.MX
+        andesMoneyAmount.type = AndesMoneyAmountType.POSITIVE
+        andesMoneyAmount.setSuffix(SpannableStringBuilder("/unidad"), "por unidad")
+
+        nodeInfo = andesMoneyAmount.createAccessibilityNodeInfo()
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertEquals("one Real with one Centavo por unidad", nodeInfo.contentDescription)
+    }
+
+    @Test
+    fun `USD, Plural Amount, Singular Decimal, Positive, MX, suffix`() {
+        andesMoneyAmount.amount = 1234.01
+        andesMoneyAmount.currency = AndesMoneyAmountCurrency.BRL
+        andesMoneyAmount.country = AndesCountry.MX
+        andesMoneyAmount.type = AndesMoneyAmountType.POSITIVE
+        andesMoneyAmount.setSuffix(SpannableStringBuilder("/unidad"), "por unidad")
+
+        nodeInfo = andesMoneyAmount.createAccessibilityNodeInfo()
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertEquals("1234 Reales with one Centavo por unidad", nodeInfo.contentDescription)
     }
 }

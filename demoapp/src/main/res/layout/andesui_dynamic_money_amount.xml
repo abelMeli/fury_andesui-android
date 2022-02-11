@@ -30,6 +30,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_vertical_thumbnail"
+
+
+            app:andesShowIcon="true"
+
+
             app:layout_constraintEnd_toEndOf="@+id/message"
             app:layout_constraintStart_toStartOf="@+id/message"
             app:layout_constraintTop_toBottomOf="@+id/message" />
@@ -151,6 +156,33 @@
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
         <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/demoapp_money_amount_suffix"
+            app:layout_constraintStart_toStartOf="@+id/message"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/demoapp_money_amount_show_icon"
+            app:layout_constraintStart_toStartOf="@+id/message"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/demoapp_money_amount_show_discount_icon"
+            app:layout_constraintStart_toStartOf="@+id/message"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -166,6 +198,14 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView18"
             app:layout_constraintEnd_toEndOf="@+id/message"
             app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+        <Spinner
+            android:id="@+id/spinner_suffix"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+            app:layout_constraintEnd_toEndOf="@+id/message"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
 
         <Spinner
             android:id="@+id/spinner_money_amount_type"
@@ -211,6 +251,25 @@
             app:layout_constraintEnd_toStartOf="@+id/change_button"
             app:layout_constraintTop_toTopOf="@+id/change_button" />
 
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
+            android:id="@+id/switch_currency_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:andesSwitchStatus="checked"
+            app:layout_constraintBottom_toBottomOf="@+id/textView22"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_suffix"
+            app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
+            android:id="@+id/switch_discount_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_suffix"
+            app:layout_constraintTop_toTopOf="@+id/textView23" />
+
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/change_button"
             android:layout_width="@dimen/button_clear_width"
@@ -222,13 +281,13 @@
             app:andesButtonText="@string/andes_message_showcase_change"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/spinner_type"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/priceGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="textView30,textView17,spinner_country,andes_money_amount,money_amount_price,spinner_size,textView15,textView17,textView19,spinner_currency,spinner_style,textView18,spinner_type"
+            app:constraint_referenced_ids="textView22,switch_currency_icon,spinner_suffix,textView21,textView30,textView17,spinner_country,andes_money_amount,money_amount_price,spinner_size,textView15,textView17,textView19,spinner_currency,spinner_style,textView18,spinner_type"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -239,7 +298,7 @@
             android:id="@+id/discountGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="andes_money_amount_discount,textView15,spinner_size,money_amount_discount"
+            app:constraint_referenced_ids="textView23,switch_discount_icon,andes_money_amount_discount,textView15,spinner_size,money_amount_discount"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

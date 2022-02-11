@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.button.hierarchy
 
 import com.mercadolibre.android.andesui.button.AndesButton
+import java.util.Locale
 
 /**
  * Utility class that does two things: Defines the possible hierarchies an [AndesButton] can take because it's an enum, as you can see.
@@ -16,7 +17,7 @@ enum class AndesButtonHierarchy {
     LOUD;
 
     companion object {
-        fun fromString(value: String): AndesButtonHierarchy = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesButtonHierarchy = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val hierarchy get() = getAndesButtonHierarchy()

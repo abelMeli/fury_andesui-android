@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.linearprogress.factory
 
 import android.content.Context
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.linearprogress.size.AndesLinearProgressSizeInterface
 
@@ -50,14 +51,14 @@ internal object AndesLinearProgressConfigurationFactory {
 
     private fun resolveIndicatorTint(context: Context, tint: Int): Int {
         if (tint == 0) {
-            return context.resources.getColor(R.color.andes_accent_color_500)
+            return ContextCompat.getColor(context, R.color.andes_accent_color_500)
         }
         return tint
     }
 
     private fun resolveTrackTint(context: Context, tint: Int): Int {
         if (tint == 0) {
-            return context.resources.getColor(R.color.andes_gray_100)
+            return ContextCompat.getColor(context, R.color.andes_gray_100)
         }
         return tint
     }

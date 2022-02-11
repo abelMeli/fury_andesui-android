@@ -2,8 +2,8 @@ package com.mercadolibre.android.andesui.tag
 
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.toAndesColor
-import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
 import com.mercadolibre.android.andesui.tag.choice.mode.AndesTagChoiceMode
+import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
 import com.mercadolibre.android.andesui.tag.factory.AndesChoiceTagConfigurationFactory
 import com.mercadolibre.android.andesui.tag.factory.AndesTagChoiceAttrs
 import com.mercadolibre.android.andesui.tag.size.AndesTagSize

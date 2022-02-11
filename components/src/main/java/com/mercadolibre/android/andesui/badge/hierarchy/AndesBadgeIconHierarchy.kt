@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.badge.hierarchy
 
 import com.mercadolibre.android.andesui.badge.AndesBadgeIconPill
+import java.util.Locale
 
 /**
  * Utility class that does two things: Defines the possible hierarchies an [AndesBadgeIconPill] can take because it's an enum, as you can see.
@@ -15,7 +16,7 @@ enum class AndesBadgeIconHierarchy {
     SECONDARY;
 
     companion object {
-        fun fromString(value: String): AndesBadgeIconHierarchy = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesBadgeIconHierarchy = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val hierarchy get() = getAndesBadgeIconHierarchy()

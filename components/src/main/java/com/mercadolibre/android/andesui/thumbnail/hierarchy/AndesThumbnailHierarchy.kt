@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.thumbnail.hierarchy
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible hierarchies an [AndesThumbnail] can take because it's an
  * enum, as you can see.
@@ -15,7 +17,7 @@ enum class AndesThumbnailHierarchy {
     LOUD;
 
     companion object {
-        fun fromString(value: String): AndesThumbnailHierarchy = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesThumbnailHierarchy = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val hierarchy get() = getAndesThumbnailHierarchy()

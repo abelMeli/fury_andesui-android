@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.progress.size
 
+import java.util.Locale
+
 enum class AndesProgressSize {
     SMALL,
     MEDIUM,
@@ -7,7 +9,7 @@ enum class AndesProgressSize {
     XLARGE;
 
     companion object {
-        fun fromString(value: String): AndesProgressSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesProgressSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesButtonSize()

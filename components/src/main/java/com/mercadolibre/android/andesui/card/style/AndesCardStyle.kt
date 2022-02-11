@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.card.style
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible styles an [AndesCard] can take
  * because it's an enum, as you can see.
@@ -12,7 +14,7 @@ enum class AndesCardStyle {
     OUTLINE;
 
     companion object {
-        fun fromString(value: String): AndesCardStyle = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesCardStyle = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val style get() = getAndesCardStyle()

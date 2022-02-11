@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.progress.factory
 
 import android.content.Context
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.progress.size.AndesProgressSize
 import com.mercadolibre.android.andesui.progress.size.AndesProgressSizeInterface
@@ -29,7 +30,7 @@ internal object AndesProgressConfigurationFactory {
 
     private fun resolveColor(context: Context, tint: Int): Int {
         if (tint == 0) {
-            return context.resources.getColor(R.color.andes_accent_color_500)
+            return ContextCompat.getColor(context, R.color.andes_accent_color_500)
         }
         return tint
     }

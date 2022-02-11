@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.tag.size
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible sizes an [AndesTag] can take because it's an enum, as you can see.
  * But as a bonus it gives you the proper implementation so you don't have to make any mapping.
@@ -13,7 +15,7 @@ enum class AndesTagSize {
     LARGE;
 
     companion object {
-        fun fromString(value: String): AndesTagSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesTagSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesTagSize()

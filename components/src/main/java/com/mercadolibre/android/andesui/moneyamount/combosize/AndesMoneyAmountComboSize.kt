@@ -1,11 +1,13 @@
 package com.mercadolibre.android.andesui.moneyamount.combosize
 
+import java.util.Locale
+
 enum class AndesMoneyAmountComboSize {
     SIZE_24,
     SIZE_36;
 
     companion object {
-        fun fromString(value: String): AndesMoneyAmountComboSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesMoneyAmountComboSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getAndesMoneyAmountComboSize()

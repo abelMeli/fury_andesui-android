@@ -19,4 +19,50 @@
     <dimen name="andes_text_size_52">52sp</dimen>
     <dimen name="andes_text_size_56">56sp</dimen>
     <dimen name="andes_text_size_60">60sp</dimen>
+
+    <dimen name="andes_money_amount_logo_size_9">9dp</dimen>
+    <dimen name="andes_money_amount_logo_size_11">11dp</dimen>
+    <dimen name="andes_money_amount_logo_size_13">13dp</dimen>
+    <dimen name="andes_money_amount_logo_size_15">15dp</dimen>
+    <dimen name="andes_money_amount_logo_size_16">16dp</dimen>
+    <dimen name="andes_money_amount_logo_size_17">17dp</dimen>
+    <dimen name="andes_money_amount_logo_size_20">20dp</dimen>
+    <dimen name="andes_money_amount_logo_size_22">22dp</dimen>
+    <dimen name="andes_money_amount_logo_size_24">24dp</dimen>
+    <dimen name="andes_money_amount_logo_size_27">27dp</dimen>
+    <dimen name="andes_money_amount_logo_size_28">28dp</dimen>
+    <dimen name="andes_money_amount_logo_size_32">32dp</dimen>
+    <dimen name="andes_money_amount_logo_size_34">34dp</dimen>
+    <dimen name="andes_money_amount_logo_size_38">38dp</dimen>
+    <dimen name="andes_money_amount_logo_size_41">41dp</dimen>
+    <dimen name="andes_money_amount_logo_size_43">43dp</dimen>
+
+    <dimen name="andes_money_amount_suffix_size_9">9dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_10">10dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_12">12dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_13">13dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_16">16dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_18">18dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_21">21dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_24">24dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_26">26dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_28">28dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_32">32dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_34">34dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_36">36dp</dimen>
+    <dimen name="andes_money_amount_suffix_size_38">38dp</dimen>
+
+    <dimen name="andes_money_amount_padding_2">2dp</dimen>
+    <dimen name="andes_money_amount_padding_3">3dp</dimen>
+    <dimen name="andes_money_amount_padding_4">4dp</dimen>
+    <dimen name="andes_money_amount_padding_5">5dp</dimen>
+    <dimen name="andes_money_amount_padding_6">6dp</dimen>
+    <dimen name="andes_money_amount_padding_7">7dp</dimen>
+    <dimen name="andes_money_amount_padding_8">8dp</dimen>
+    <dimen name="andes_money_amount_padding_10">10dp</dimen>
+    <dimen name="andes_money_amount_padding_11">11dp</dimen>
+    <dimen name="andes_money_amount_padding_12">12dp</dimen>
+    <dimen name="andes_money_amount_padding_13">13dp</dimen>
+    <dimen name="andes_money_amount_padding_14">14dp</dimen>
+    <dimen name="andes_money_amount_padding_15">15dp</dimen>
 </resources>

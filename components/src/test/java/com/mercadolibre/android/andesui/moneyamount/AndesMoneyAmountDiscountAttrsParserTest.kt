@@ -36,7 +36,7 @@ class AndesMoneyAmountDiscountAttrsParserTest {
                 .addAttribute(R.attr.andesMoneyAmountDiscountSize, entry.key)
                 .build()
             val andesMoneyAmountAttrs = attrsParser.parse(context, attrs)
-            andesMoneyAmountAttrs.andesMoneyAmountSize assertEquals entry.value
+            andesMoneyAmountAttrs.discountSize assertEquals entry.value
         }
     }
 
@@ -50,8 +50,8 @@ class AndesMoneyAmountDiscountAttrsParserTest {
                 .build()
 
         val andesMoneyAmountAttrs = attrsParser.parse(context, attrs)
-        Assert.assertEquals(size, andesMoneyAmountAttrs.andesMoneyAmountSize)
-        Assert.assertEquals(50, andesMoneyAmountAttrs.andesMoneyDiscount)
+        Assert.assertEquals(size, andesMoneyAmountAttrs.discountSize)
+        Assert.assertEquals(50, andesMoneyAmountAttrs.discount)
     }
 
     @Test
@@ -62,7 +62,7 @@ class AndesMoneyAmountDiscountAttrsParserTest {
             .build()
 
         val andesMoneyAmountAttrs = attrsParser.parse(context, attrs)
-        Assert.assertEquals(size, andesMoneyAmountAttrs.andesMoneyAmountSize)
-        Assert.assertEquals(0, andesMoneyAmountAttrs.andesMoneyDiscount)
+        Assert.assertEquals(size, andesMoneyAmountAttrs.discountSize)
+        Assert.assertEquals(0, andesMoneyAmountAttrs.discount)
     }
 }

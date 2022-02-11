@@ -35,7 +35,7 @@ internal object AndesNeutralMessageType : AndesMessageTypeInterface() {
             IconProvider(context).loadIcon("andes_ui_feedback_info_16") as BitmapDrawable,
             context,
             R.color.andes_white.toAndesColor(),
-            hierarchy.iconBackgroundColor(this)?.colorInt(context),
+            hierarchy.iconBackgroundColor(this).colorInt(context),
             context.resources.getDimension(R.dimen.andes_message_icon_diameter).toInt()
     )
 
@@ -77,7 +77,7 @@ internal object AndesSuccessMessageType : AndesMessageTypeInterface() {
             IconProvider(context).loadIcon("andes_ui_feedback_success_16") as BitmapDrawable,
             context,
             R.color.andes_white.toAndesColor(),
-            hierarchy.iconBackgroundColor(this)?.colorInt(context),
+            hierarchy.iconBackgroundColor(this).colorInt(context),
             context.resources.getDimension(R.dimen.andes_message_icon_diameter).toInt()
     )
 
@@ -119,7 +119,7 @@ internal object AndesWarningMessageType : AndesMessageTypeInterface() {
             IconProvider(context).loadIcon("andes_ui_feedback_warning_16") as BitmapDrawable,
             context,
             R.color.andes_white.toAndesColor(),
-            hierarchy.iconBackgroundColor(this)?.colorInt(context),
+            hierarchy.iconBackgroundColor(this).colorInt(context),
             context.resources.getDimension(R.dimen.andes_message_icon_diameter).toInt()
     )
 
@@ -161,7 +161,7 @@ internal object AndesErrorMessageType : AndesMessageTypeInterface() {
             IconProvider(context).loadIcon("andes_ui_feedback_warning_16") as BitmapDrawable,
             context,
             R.color.andes_white.toAndesColor(),
-            hierarchy.iconBackgroundColor(this)?.colorInt(context),
+            hierarchy.iconBackgroundColor(this).colorInt(context),
             context.resources.getDimension(R.dimen.andes_message_icon_diameter).toInt()
     )
 

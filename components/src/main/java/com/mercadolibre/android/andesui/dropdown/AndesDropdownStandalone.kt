@@ -47,7 +47,7 @@ class AndesDropdownStandalone : ConstraintLayout {
         get() = andesDropdownAttrs.andesDropdownSize
         set(value) {
             andesDropdownAttrs = andesDropdownAttrs.copy(andesDropdownSize = value)
-            updateDynamicComponents(createConfig())
+            updateDynamicComponents()
         }
 
     /**
@@ -192,7 +192,7 @@ class AndesDropdownStandalone : ConstraintLayout {
      *
      * @param config current AndesListConfiguration
      */
-    private fun updateDynamicComponents(config: AndesDropdownConfiguration) {
+    private fun updateDynamicComponents() {
         setupLabelComponent()
     }
 

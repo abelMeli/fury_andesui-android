@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.timepicker.minutesInterval
 
+import java.util.Locale
+
 /**
  * Utility class that does two things: Defines the possible states an [AndesTimePicker] can take because it's an enum,
  * as you can see.
@@ -17,7 +19,7 @@ enum class AndesTimePickerInterval {
     MINUTES_60;
 
     companion object {
-        fun fromString(value: String): AndesTimePickerInterval = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesTimePickerInterval = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val interval get() = getAndesTimePickerFormat()

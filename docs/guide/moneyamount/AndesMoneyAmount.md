@@ -4,7 +4,7 @@ AndesMoneyAmount is used to refer to the value of an item or to a specific amoun
 [See Andes UI component in frontify](https://company-161429.frontify.com/d/kxHCRixezmfK/n-a#/components/money-amount)
 
 ```kotlin
-class AndesMoneyAmount : androidx.appcompat.widget.AppCompatTextView
+class AndesMoneyAmount : ConstraintLayout
 ```
 
 Basic Sample Programatically
@@ -28,7 +28,8 @@ Basic Sample XML
         app:andesMoneyAmountSize="size_20"
         app:andesMoneyAmountStyle="normal"
         app:andesMoneyAmountType="negative"
-        app:andesShowZerosDecimal="true" />
+        app:andesShowZerosDecimal="true"
+        app:andesShowIcon="true" />
 
 ```
 
@@ -44,6 +45,7 @@ Basic Sample XML
 | app:andesMoneyAmountCountry | Represents the country decimal and thousand separator style: **AR**, **BR**, **CL**, **CO**, **MX**, **CR**, **PE**, **EC**, **PA**, **DO**, **UY**, **VE**, **BO**, **PY**, **GT**, **HN**, **NI**, **SV**, **PR**, **CU** |
 | app:andesMoneyAmount | Amount number to be shown (float) |
 | app:andesShowZerosDecimal | Show decimal part when it is exactly 0: **true**, **false** |
+| app:andesShowIcon | Show currency icon: **true**, **false** |
 
 <br/>
 
@@ -79,6 +81,16 @@ Basic Sample XML
 | country: [AndesCountry](#andescountry) | **get():** retrieves the country decimal and thousand separator style. <br/> **set(value: AndesCountry):** updates country to change decimal and thousand separator style. |
 | decimalsStyle: [AndesMoneyAmountDecimalsStyle](#andesmoneyamountdecimalsstyle) | **get():** retrieves the style of the decimal part.  <br/> **set(value: AndesMoneyAmountDecimalsStyle):** updates the style of the decimal part. |
 | showZerosDecimal: Boolean | **get():** retrieves if the decimal part is displayed or not. <br/> **set(value: Boolean):** updates visibility of amount decimal part. |
+| andesShowIcon: Boolean | **get():** retrieves if the currency icon is displayed or not. <br/> **set(value: Boolean):** updates visibility of currency icon. |
+
+<br/>
+
+## Functions
+| Return type | Method |
+| -------- | ------- |
+| Unit | **setSuffix(suffix: SpannableString, suffixAccessibility: String)**: update the suffix with its respective accessibility |
+| Unit | **setTextColor(color: AndesColor)**: updates the text color of the currency |
+| Unit | **setTextColor(@ColorRes color: Int)**: updates the text color of the currency |
 
 <br/>
 

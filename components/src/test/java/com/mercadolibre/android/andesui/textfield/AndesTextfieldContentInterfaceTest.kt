@@ -1,4 +1,5 @@
 package com.mercadolibre.android.andesui.textfield
+
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.widget.TextView

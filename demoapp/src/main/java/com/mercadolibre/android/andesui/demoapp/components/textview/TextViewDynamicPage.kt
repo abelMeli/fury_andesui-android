@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
@@ -109,9 +110,9 @@ class TextViewDynamicPage {
             bodyLinks = bodyLink
             bodyBolds = bodyBold
             if (selectedColor is AndesTextViewColor.Inverted) {
-                setBackgroundColor(resources.getColor(R.color.andes_accent_color))
+                setBackgroundColor(ContextCompat.getColor(context, R.color.andes_accent_color))
             } else {
-                setBackgroundColor(resources.getColor(R.color.andes_transparent))
+                setBackgroundColor(ContextCompat.getColor(context, R.color.andes_transparent))
             }
             checkboxInvertedLink.status
             isLinkColorInverted = checkboxInvertedLink.status == AndesCheckboxStatus.SELECTED

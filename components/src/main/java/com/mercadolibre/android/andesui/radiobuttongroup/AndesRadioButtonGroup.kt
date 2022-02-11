@@ -1,19 +1,19 @@
 package com.mercadolibre.android.andesui.radiobuttongroup
 
 import android.content.Context
-import androidx.annotation.Nullable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import androidx.annotation.Nullable
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.radiobutton.AndesRadioButton
 import com.mercadolibre.android.andesui.radiobutton.align.AndesRadioButtonAlign
 import com.mercadolibre.android.andesui.radiobutton.status.AndesRadioButtonStatus
 import com.mercadolibre.android.andesui.radiobuttongroup.distribution.AndesRadioButtonGroupDistribution
-import com.mercadolibre.android.andesui.radiobuttongroup.factory.AndesRadioButtonGroupConfigurationFactory
 import com.mercadolibre.android.andesui.radiobuttongroup.factory.AndesRadioButtonGroupAttrs
 import com.mercadolibre.android.andesui.radiobuttongroup.factory.AndesRadioButtonGroupAttrsParser
 import com.mercadolibre.android.andesui.radiobuttongroup.factory.AndesRadioButtonGroupConfiguration
+import com.mercadolibre.android.andesui.radiobuttongroup.factory.AndesRadioButtonGroupConfigurationFactory
 
 class AndesRadioButtonGroup : LinearLayout {
 

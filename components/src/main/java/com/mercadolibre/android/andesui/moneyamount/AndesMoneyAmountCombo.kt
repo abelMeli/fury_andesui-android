@@ -8,13 +8,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
+import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper.getCurrency
 import com.mercadolibre.android.andesui.moneyamount.accessibility.AndesMoneyAmountComboAccessibilityDelegate
+import com.mercadolibre.android.andesui.moneyamount.combosize.AndesMoneyAmountComboSize
+import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboAttrs
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboAttrsParser
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboConfiguration
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboConfigurationFactory
-import com.mercadolibre.android.andesui.moneyamount.combosize.AndesMoneyAmountComboSize
-import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
 
 class AndesMoneyAmountCombo : ConstraintLayout {
@@ -71,6 +72,7 @@ class AndesMoneyAmountCombo : ConstraintLayout {
         set(value) {
             andesMoneyAmountComboAttrs = andesMoneyAmountComboAttrs.copy(andesMoneyAmountCurrency = value)
             createConfig().also {
+                validateData()
                 setupAmount(it)
                 setupPreviousAmount(it)
                 setupAccessibility()
@@ -137,6 +139,7 @@ class AndesMoneyAmountCombo : ConstraintLayout {
     }
 
     private fun setupComponents(config: AndesMoneyAmountComboConfiguration) {
+        validateData()
         initComponent()
         setupViewId()
         setupAmount(config)
@@ -166,8 +169,15 @@ class AndesMoneyAmountCombo : ConstraintLayout {
         )
     }
 
+    private fun validateData() {
+        val currencyInfo = getCurrency(andesMoneyAmountComboAttrs.andesMoneyAmountCurrency)
+        if (currencyInfo.isCrypto) {
+            throw IllegalArgumentException(context.resources.getString(R.string.andes_money_amount_combo_error_currency))
+        }
+    }
+
     private fun initComponent() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_money_amount, this)
+        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_money_amount_combo, this)
         andesAmount = container.findViewById(R.id.andes_money_amount_combo_amount)
         andesPreviousAmount = container.findViewById(R.id.andes_money_amount_combo_previous_amount)
         andesDiscount = container.findViewById(R.id.andes_money_amount_discount)
@@ -178,6 +188,7 @@ class AndesMoneyAmountCombo : ConstraintLayout {
         andesAmount.amount = config.amount
         andesAmount.currency = config.currency
         andesAmount.country = config.country
+        andesAmount.showZerosDecimal = false
     }
 
     private fun setupPreviousAmount(config: AndesMoneyAmountComboConfiguration) {
@@ -188,6 +199,7 @@ class AndesMoneyAmountCombo : ConstraintLayout {
             andesPreviousAmount.amount = config.previousAmount
             andesPreviousAmount.type = AndesMoneyAmountType.PREVIOUS
             andesPreviousAmount.size = config.previousAmountSize
+            andesAmount.showZerosDecimal = false
         } else {
             andesPreviousAmount.visibility = GONE
             andesPreviousAmount.amount = ANDES_PREVIOUS_DEFAULT_VALUE

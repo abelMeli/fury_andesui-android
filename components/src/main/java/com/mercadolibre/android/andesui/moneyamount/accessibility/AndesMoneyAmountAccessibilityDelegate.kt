@@ -9,11 +9,13 @@ import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
 import com.mercadolibre.android.andesui.currency.AndesCurrencyInfo
 import com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
 import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils
+import com.mercadolibre.android.andesui.moneyamount.factory.amount.AndesMoneyAmountAttrs
 import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
 import java.text.DecimalFormatSymbols
 
 internal class AndesMoneyAmountAccessibilityDelegate constructor(
-    private val andesMoneyAmount: AndesMoneyAmount
+    private val andesMoneyAmount: AndesMoneyAmount,
+    private val attrs: AndesMoneyAmountAttrs
 ) : View.AccessibilityDelegate() {
 
     override fun onInitializeAccessibilityNodeInfo(host: View?, info: AccessibilityNodeInfo?) {
@@ -27,14 +29,15 @@ internal class AndesMoneyAmountAccessibilityDelegate constructor(
             andesMoneyAmount.amount,
             isCombo = false,
             showZerosDecimal = andesMoneyAmount.showZerosDecimal,
-            countryInfo = countryInfo
+            countryInfo = countryInfo,
+            suffixAccessibility = attrs.andesSuffixAccessibility
         )
     }
 
     companion object {
         private const val EMPTY = ""
         private const val ONE = "1"
-        private const val ZERO = "0"
+        private const val ZERO = 0
 
         @Suppress("LongParameterList")
         internal fun generateMoneyAmountContentDescriptionText(
@@ -44,12 +47,14 @@ internal class AndesMoneyAmountAccessibilityDelegate constructor(
             amount: Double,
             isCombo: Boolean,
             showZerosDecimal: Boolean,
-            countryInfo: AndesCountryInfo
+            countryInfo: AndesCountryInfo,
+            suffixAccessibility: String?
         ): String {
             val currencyMessage = generateAmountText(resources, currency, amount, showZerosDecimal, countryInfo)
             val negativeMessage = generateNegativeDescriptionText(resources, type)
             val previousMessage = generatePreviousDescriptionText(resources, type, isCombo)
-            return "$previousMessage $negativeMessage $currencyMessage".trim()
+            val suffixMessage = suffixAccessibility ?: ""
+            return "$previousMessage $negativeMessage $currencyMessage $suffixMessage".trim()
         }
 
         private fun generateAmountText(
@@ -64,24 +69,38 @@ internal class AndesMoneyAmountAccessibilityDelegate constructor(
             val amount = splittedAmount[0]
             var decimal = EMPTY
             if (splittedAmount.size > 1) {
-                decimal = splittedAmount[1].toInt().toString()
+                decimal = splittedAmount[1]
             }
 
             var result = if (amount == ONE) {
-                "${resources.getString(R.string.andes_money_amount_one)} ${resources.getString(currency.singularDescription)}"
+                "${resources.getString(R.string.andes_money_amount_one)} ${resolveResourceOrEmpty(resources, currency.singularDescription)}"
             } else {
-                "$amount ${resources.getString(currency.pluralDescription)}"
+                "$amount ${resolveResourceOrEmpty(resources, currency.pluralDescription)}"
             }
 
-            if (decimal == ONE) {
-                result += " ${resources.getString(R.string.andes_money_amount_with_accessibility)} " +
-                        "${resources.getString(R.string.andes_money_amount_one)} ${resources.getString(currency.decimalSingularDescription)}"
-            } else if (decimal != EMPTY && (decimal != ZERO || showZerosDecimal)) {
-                result += " ${resources.getString(R.string.andes_money_amount_with_accessibility)} " +
-                        "$decimal ${resources.getString(currency.decimalPluralDescription)}"
+            if (decimal != EMPTY && (!checkIfDecimalIsZero(decimal) || showZerosDecimal)) {
+                result += " ${resources.getString(R.string.andes_money_amount_with_accessibility)}"
+
+                if (!currency.isCrypto) {
+                    decimal = decimal.toInt().toString()
+                }
+
+                result += if (decimal == ONE) {
+                    " ${resources.getString(R.string.andes_money_amount_one)} ${resolveResourceOrEmpty(resources, currency.decimalSingularDescription)}"
+                } else {
+                    " $decimal ${resolveResourceOrEmpty(resources, currency.decimalPluralDescription)}"
+                }
             }
 
             return result
+        }
+
+        private fun checkIfDecimalIsZero(decimal: String): Boolean {
+            return if (decimal.isEmpty()) false else decimal.toInt() == ZERO
+        }
+
+        private fun resolveResourceOrEmpty(resources: Resources, resource: Int?): String {
+            return if (resource == null) EMPTY else resources.getString(resource)
         }
 
         private fun getSplittedAmount(amount: Double, currency: AndesCurrencyInfo, countryInfo: AndesCountryInfo): List<String> {

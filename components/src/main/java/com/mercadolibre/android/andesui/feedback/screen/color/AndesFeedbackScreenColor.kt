@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.feedback.screen.color
 
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
+import java.util.Locale
 
 enum class AndesFeedbackScreenColor(internal val color: AndesBadgeIconType) {
     GREEN(AndesBadgeIconType.SUCCESS),
@@ -8,6 +9,6 @@ enum class AndesFeedbackScreenColor(internal val color: AndesBadgeIconType) {
     RED(AndesBadgeIconType.ERROR);
 
     companion object {
-        fun fromString(value: String): AndesFeedbackScreenColor = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesFeedbackScreenColor = valueOf(value.toUpperCase(Locale.ROOT))
     }
 }

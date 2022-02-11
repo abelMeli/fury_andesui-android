@@ -48,4 +48,23 @@
     <string name="andes_currency_cent_plural" translatable="false">Cents</string>
     <string name="andes_currency_centesimo_singular" translatable="false">Centésimo</string>
     <string name="andes_currency_centesimo_plural" translatable="false">Centésimos</string>
+
+    <string name="andes_money_amount_error_decimal_format" translatable="false">
+        This decimal style is not valid for cryptocurrency
+    </string>
+    <string name="andes_money_amount_error_size" translatable="false">
+        This size is not valid for superscript select a higher value
+    </string>
+    <string name="andes_money_amount_error_suffix_size" translatable="false">
+        This size is not valid if has suffix
+    </string>
+    <string name="andes_money_amount_error_discount" translatable="false">
+        The discount must be a value between 0 and 100
+    </string>
+    <string name="andes_money_amount_error_discount_size" translatable="false">
+        This size is not valid for discount with icon
+    </string>
+    <string name="andes_money_amount_combo_error_currency" translatable="false">
+        This currency is not valid for AndesMoneyAmountCombo
+    </string>
 </resources>

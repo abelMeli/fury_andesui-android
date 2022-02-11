@@ -17,13 +17,13 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
-import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
-import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
+import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
-import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
+import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
+import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenType
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink

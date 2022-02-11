@@ -4,7 +4,7 @@ AndesMoneyAmountDiscount is used to refer to the value of a discount.
 [See Andes UI component in frontify](https://company-161429.frontify.com/d/kxHCRixezmfK/n-a#/components/money-amount)
 
 ```kotlin
-class AndesMoneyAmountDiscount : androidx.appcompat.widget.AppCompatTextView
+class AndesMoneyAmountDiscount : ConstraintLayout
 ```
 
 Basic Sample Programatically
@@ -43,14 +43,16 @@ Basic Sample XML
 | --- |
 | AndesMoneyAmount(context: Context, attrs: AttributeSet?)  |
 | AndesMoneyAmount(context: Context, discount: Int, size: AndesMoneyAmountSize) |
+| AndesMoneyAmount(context: Context, discount: Int, icon: Drawable, size: AndesMoneyAmountSize) |
 
 <br/>
 
-##### AndesMoneyAmount(context: Context, discount: Int, size: AndesMoneyAmountSize)
+##### AndesMoneyAmount(context: Context, discount: Int, icon: Drawable, size: AndesMoneyAmountSize)
 | Parameter | Description |
 | -------- | ------- |
 | context | **Context** |
 | discount | **Int**: amount to display. It must be a number between 0 and 100. |
+| icon | **Drawable**: discount icon. The icon can be applied from size 12 to 32 |
 | size | **[AndesMoneyAmountSize](#andesmoneyamountsize)**: discount text size. |
 
 <br/>
@@ -60,6 +62,14 @@ Basic Sample XML
 | -------- | ------- |
 | discount: Int | **get():** retrieves discount value.. <br/> **set(value: Double):** updates discount number displayed. |
 | size: [AndesMoneyAmountSize](#andesmoneyamountsize) | **get():** retrieves text size. <br/> **set(value: AndesMoneyAmountSize):** updates text size. |
+| icon: Drawable | **get():** retrieves icon. <br/> **set(value: Drawable):** updates the displayed icon. |
+
+<br/>
+
+## Functions
+| Return type | Method |
+| -------- | ------- |
+| Unit | setSuffix() |
 
 <br/>
 

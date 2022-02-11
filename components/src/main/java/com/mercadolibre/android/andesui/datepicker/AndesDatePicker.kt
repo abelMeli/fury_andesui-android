@@ -2,10 +2,10 @@ package com.mercadolibre.android.andesui.datepicker
 
 import android.content.Context
 import android.os.Build
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.databinding.AndesLayoutDatepickerBinding
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrParser
@@ -148,9 +148,8 @@ class AndesDatePicker : ConstraintLayout {
     }
 
     private fun convertStringToDate(time: String, format: String): Date {
-        val format = SimpleDateFormat(format)
-        val date = format.parse(time)
-        return date
+        val dateFormat = SimpleDateFormat(format)
+        return dateFormat.parse(time)
     }
 
     fun setDateAppearance(appearance: Int) {

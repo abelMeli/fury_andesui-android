@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.dropdown.size
 
+import java.util.Locale
+
 /**
  * This class handle the Dropdown size, based on {SMALL, MEDIUM, LARGE} values
  */
@@ -9,7 +11,7 @@ enum class AndesDropdownSize {
     LARGE;
 
     companion object {
-        fun fromString(value: String): AndesDropdownSize = valueOf(value.toUpperCase())
+        fun fromString(value: String): AndesDropdownSize = valueOf(value.toUpperCase(Locale.ROOT))
     }
 
     internal val size get() = getDropDownSize()

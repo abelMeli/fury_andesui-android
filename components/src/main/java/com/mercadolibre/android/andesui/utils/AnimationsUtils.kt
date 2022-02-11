@@ -3,7 +3,6 @@ package com.mercadolibre.android.andesui.utils
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.View
-import com.mercadolibre.android.andesui.utils.AnimationsUtils.Position
 
 /**
  * AnimationsUtils is a object that helps when you want to make an fade input [fadeIn] or fade output [fadeOut] animation in a view.

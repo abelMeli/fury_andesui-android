@@ -2,8 +2,10 @@ package com.mercadolibre.android.andesui.moneyamount.factory.amount
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.text.SpannableStringBuilder
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
@@ -21,7 +23,11 @@ internal data class AndesMoneyAmountAttrs(
     val andesMoneyAmountType: AndesMoneyAmountType,
     val andesMoneyAmountDecimalsStyle: AndesMoneyAmountDecimalsStyle,
     val andesMoneyAmountCurrency: AndesMoneyAmountCurrency,
-    val andesMoneyAmountCountry: AndesCountry
+    val andesMoneyAmountCountry: AndesCountry,
+    val andesShowIcon: Boolean,
+    val andesSuffix: SpannableStringBuilder? = null,
+    val andesSuffixAccessibility: String? = null,
+    val andesTextColor: AndesColor? = null
 )
 
 /**
@@ -81,6 +87,10 @@ internal object AndesMoneyAmountAttrsParser {
     private const val ANDES_MONEY_AMOUNT_CURRENCY_NIO = 4020
     private const val ANDES_MONEY_AMOUNT_CURRENCY_CUC = 4021
     private const val ANDES_MONEY_AMOUNT_CURRENCY_VES = 4022
+    private const val ANDES_MONEY_AMOUNT_CURRENCY_BTC = 4023
+    private const val ANDES_MONEY_AMOUNT_CURRENCY_ETH = 4024
+    private const val ANDES_MONEY_AMOUNT_CURRENCY_MCN = 4025
+    private const val ANDES_MONEY_AMOUNT_CURRENCY_USDP = 4026
 
     private const val ANDES_MONEY_AMOUNT_COUNTRY_AR = 5001
     private const val ANDES_MONEY_AMOUNT_COUNTRY_BR = 5002
@@ -112,7 +122,8 @@ internal object AndesMoneyAmountAttrsParser {
             andesMoneyAmountDecimalsStyle = resolveStyle(typedArray),
             andesMoneyAmountCurrency = resolveCurrency(typedArray),
             andesMoneyAmountCountry = resolveCountry(typedArray),
-            andesShowZerosDecimal = typedArray.getBoolean(R.styleable.AndesMoneyAmount_andesShowZerosDecimal, false)
+            andesShowZerosDecimal = typedArray.getBoolean(R.styleable.AndesMoneyAmount_andesShowZerosDecimal, false),
+            andesShowIcon = typedArray.getBoolean(R.styleable.AndesMoneyAmount_andesShowIcon, false)
         ).also { typedArray.recycle() }
     }
 
@@ -167,6 +178,10 @@ internal object AndesMoneyAmountAttrsParser {
             ANDES_MONEY_AMOUNT_CURRENCY_NIO -> AndesMoneyAmountCurrency.NIO
             ANDES_MONEY_AMOUNT_CURRENCY_CUC -> AndesMoneyAmountCurrency.CUC
             ANDES_MONEY_AMOUNT_CURRENCY_VES -> AndesMoneyAmountCurrency.VES
+            ANDES_MONEY_AMOUNT_CURRENCY_BTC -> AndesMoneyAmountCurrency.BTC
+            ANDES_MONEY_AMOUNT_CURRENCY_ETH -> AndesMoneyAmountCurrency.ETH
+            ANDES_MONEY_AMOUNT_CURRENCY_MCN -> AndesMoneyAmountCurrency.MCN
+            ANDES_MONEY_AMOUNT_CURRENCY_USDP -> AndesMoneyAmountCurrency.USDP
             else -> AndesMoneyAmountCurrency.ARS
         }
 

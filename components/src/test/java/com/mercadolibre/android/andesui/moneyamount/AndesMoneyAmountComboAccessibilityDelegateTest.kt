@@ -96,4 +96,12 @@ class AndesMoneyAmountComboAccessibilityDelegateTest {
         Assert.assertNotNull(nodeInfo)
         Assert.assertEquals("Now: 1350 Pesos,  ", nodeInfo.contentDescription)
     }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `Combo with crypto currency throws exception`() {
+        andesMoneyAmountCombo.amount = 1350.0
+        andesMoneyAmountCombo.currency = AndesMoneyAmountCurrency.BTC
+        andesMoneyAmountCombo.country = AndesCountry.MX
+        andesMoneyAmountCombo.size = AndesMoneyAmountComboSize.SIZE_24
+    }
 }

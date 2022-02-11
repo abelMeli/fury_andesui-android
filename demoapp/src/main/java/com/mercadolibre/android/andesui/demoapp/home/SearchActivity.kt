@@ -1,13 +1,12 @@
 package com.mercadolibre.android.andesui.demoapp.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.widget.doAfterTextChanged
-import com.mercadolibre.android.andesui.demoapp.utils.SafeIntent
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mercadolibre.android.andesui.demoapp.R
@@ -15,6 +14,7 @@ import com.mercadolibre.android.andesui.demoapp.databinding.ActivitySearchBindin
 import com.mercadolibre.android.andesui.demoapp.home.model.Section
 import com.mercadolibre.android.andesui.demoapp.home.utils.setupAndesList
 import com.mercadolibre.android.andesui.demoapp.home.viewmodel.SearchViewModel
+import com.mercadolibre.android.andesui.demoapp.utils.SafeIntent
 import com.mercadolibre.android.andesui.demoapp.utils.replaceWith
 
 class SearchActivity : AppCompatActivity() {

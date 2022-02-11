@@ -1,15 +1,15 @@
 package com.mercadolibre.android.andesui.demoapp.utils
 
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.util.TypedValue
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.annotation.ArrayRes
-import android.app.Activity
-import android.view.inputmethod.InputMethodManager
 
 fun Context.getInDp(value: Float): Int {
     return TypedValue.applyDimension(

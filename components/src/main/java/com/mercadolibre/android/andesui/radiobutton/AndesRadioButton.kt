@@ -2,13 +2,13 @@ package com.mercadolibre.android.andesui.radiobutton
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import androidx.annotation.Nullable
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RadioButton
+import androidx.annotation.Nullable
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.databinding.AndesLayoutRadiobuttonBinding
 import com.mercadolibre.android.andesui.radiobutton.accessibility.AndesRadioButtonAccessibilityDelegate

@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.moneyamount.factory.discount
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
@@ -10,8 +11,9 @@ import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
  * The data class that contains the public components of the money amount discount.
  */
 internal data class AndesMoneyAmountDiscountAttrs(
-    val andesMoneyDiscount: Int,
-    val andesMoneyAmountSize: AndesMoneyAmountSize
+    val discount: Int,
+    val discountSize: AndesMoneyAmountSize,
+    val discountIcon: Drawable?
 )
 
 /**
@@ -41,9 +43,11 @@ internal object AndesMoneyAmountDiscountAttrsParser {
 
     fun parse(context: Context, attr: AttributeSet?): AndesMoneyAmountDiscountAttrs {
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesMoneyAmountDiscount)
+        val size = resolveSize(typedArray)
         return AndesMoneyAmountDiscountAttrs(
-                andesMoneyDiscount = typedArray.getInt(R.styleable.AndesMoneyAmountDiscount_andesMoneyDiscount, DEFAULT_DISCOUNT),
-                andesMoneyAmountSize = resolveSize(typedArray)
+            discount = typedArray.getInt(R.styleable.AndesMoneyAmountDiscount_andesMoneyDiscount, DEFAULT_DISCOUNT),
+            discountSize = size,
+            discountIcon = null
         ).also { typedArray.recycle() }
     }
 

@@ -26,6 +26,6 @@ enum class AndesTextfieldCodeStyle {
     }
 
     companion object {
-        fun fromString(value: String): AndesTextfieldCodeStyle = valueOf(value.toUpperCase(Locale.getDefault()))
+        fun fromString(value: String): AndesTextfieldCodeStyle = valueOf(value.toUpperCase(Locale.ROOT))
     }
 }
