@@ -1,3 +1,7 @@
+# v4.10.1
+## 🛠 Fixes
+- AndesMoneyAmount icon asset null, instead of 0. | Author: Andes team
+
 # v4.10.0
 ## 🚀 Feature
 - `AndesMoneyAmount` added suffix, icon in discount and support to crypto currency | Author: [@jperezgonzal](https://github.com/jperezgonzal)

@@ -20,11 +20,11 @@ internal object MockConfigProvider {
     private fun mockCurrencies(): HashMap<AndesMoneyAmountCurrency, AndesCurrencyInfo> {
         val currencies = hashMapOf<AndesMoneyAmountCurrency, AndesCurrencyInfo>()
         currencies[AndesMoneyAmountCurrency.ARS] = AndesCurrencyInfo("$", 2, R.string.currency_peso_singular,
-                R.string.currency_peso_plural, R.string.currency_centavo_singular, R.string.currency_centavo_plural, null, false)
+                R.string.currency_peso_plural, R.string.currency_centavo_singular, R.string.currency_centavo_plural, 0, false)
         currencies[AndesMoneyAmountCurrency.BRL] = AndesCurrencyInfo("R$", 2, R.string.currency_real_singular,
-                R.string.currency_real_plural, R.string.currency_centavo_singular, R.string.currency_centavo_plural, null, false)
+                R.string.currency_real_plural, R.string.currency_centavo_singular, R.string.currency_centavo_plural, 0, false)
         currencies[AndesMoneyAmountCurrency.CLP] = AndesCurrencyInfo("$", 0, R.string.currency_peso_singular,
-                R.string.currency_peso_plural, R.string.currency_centavo_singular, R.string.currency_centavo_plural, null, false)
+                R.string.currency_peso_plural, R.string.currency_centavo_singular, R.string.currency_centavo_plural, 0, false)
         currencies[AndesMoneyAmountCurrency.COP] = AndesCurrencyInfo("$", 0, R.string.currency_peso_singular,
                 R.string.currency_peso_plural, R.string.currency_centavo_singular, R.string.currency_centavo_plural, null, false)
         currencies[AndesMoneyAmountCurrency.CRC] = AndesCurrencyInfo("¢", 2, R.string.currency_colon_singular,

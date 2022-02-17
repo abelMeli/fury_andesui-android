@@ -10,6 +10,10 @@ data class AndesCurrencyInfo(
     val decimalSingularDescription: Int?,
     val decimalPluralDescription: Int?,
     @DrawableRes
-    val icon: Int?,
+    internal var icon: Int?,
     val isCrypto: Boolean
-)
+) {
+    init {
+        this.icon = icon.takeIf { it != 0 }
+    }
+}
