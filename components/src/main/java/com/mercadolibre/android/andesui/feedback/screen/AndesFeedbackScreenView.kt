@@ -165,6 +165,9 @@ class AndesFeedbackScreenView : ScrollView {
     }
 
     private fun setupFeedbackBody(configBody: AndesFeedbackBodyConfiguration) {
+        if (this::body.isInitialized) {
+            container.removeView(body)
+        }
         body = configBody.view ?: View(context)
 
         if (body.id == NO_ID) {
@@ -242,8 +245,7 @@ class AndesFeedbackScreenView : ScrollView {
     private fun setupFeedbackContainer(config: AndesFeedbackScreenConfiguration) {
         isFillViewport = true
         layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
-        setBackgroundColor(config.background)
-        gradient.visibility = config.gradientVisibility
+        setupFeedbackContainerBackground(config)
     }
 
     private fun setupClose(configClose: AndesFeedbackCloseConfiguration) {
@@ -306,5 +308,24 @@ class AndesFeedbackScreenView : ScrollView {
         val nullBody = body.takeIf { body.visibility == VISIBLE }
         config = createConfig(nullBody, config.actions, type, config.header)
         setupFeedbackContainer(config)
+        setupFeedbackContainerBackground(config)
+    }
+
+    /**
+     * Replaces current feedback body with the new [View].
+     */
+    fun setFeedbackBody(body: View?) {
+        config = createConfig(body, config.actions, config.type, config.header)
+        setupFeedbackBody(config.body)
+        setContainerConstraints(config)
+        setupFeedbackContainerBackground(config)
+    }
+
+    /**
+     * Set the background.
+     */
+    private fun setupFeedbackContainerBackground(config: AndesFeedbackScreenConfiguration) {
+        setBackgroundColor(config.background)
+        gradient.visibility = config.gradientVisibility
     }
 }

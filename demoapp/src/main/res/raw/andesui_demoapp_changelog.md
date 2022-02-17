@@ -1,3 +1,7 @@
+# v4.11.0
+## 🚀 Feature
+- `AndesFeedbackScreenBody` and `AndesFeedbackScreenType.Congrats` can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)
+
 # v4.10.1
 ## 🛠 Fixes
 - AndesMoneyAmount icon asset null, instead of 0. | Author: Andes team

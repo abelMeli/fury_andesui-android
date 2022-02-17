@@ -26,11 +26,13 @@ import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScr
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenType
+import com.mercadolibre.android.andesui.message.AndesMessage
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
 import com.nhaarman.mockitokotlin2.mock
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -224,12 +226,12 @@ class AndesFeedbackScreenViewTest {
         val screenView = AndesFeedbackScreenView(
             context = activity,
             type = AndesFeedbackScreenType.Simple(
-                    AndesFeedbackScreenColor.RED
+                AndesFeedbackScreenColor.RED
             ),
             header = AndesFeedbackScreenHeader(
-                    AndesFeedbackScreenText(
-                            "Title"
-                    )
+                AndesFeedbackScreenText(
+                    "Title"
+                )
             ),
             body = null
         )
@@ -309,18 +311,49 @@ class AndesFeedbackScreenViewTest {
         }
     }
 
+    @Test
+    fun `FeedbackScreen Congrats replace body body`() {
+        val message = AndesMessage(context, body = "Body")
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Congrats,
+            header = AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "Title"
+                )
+            ),
+            body = null
+        )
+
+        startActivity(screenView)
+        screenView.setFeedbackBody(message)
+
+        val config: Any = getField("config", screenView)
+        val body: Any = getField("body", config)
+        val bodyView: View = getField("view", body)
+
+        Assert.assertNotNull(body)
+        Assert.assertEquals(message, bodyView)
+    }
+
     private fun AndesFeedbackScreenView.getDescription() =
-            findViewById<TextView>(R.id.andes_feedbackscreen_header_description)
+        findViewById<TextView>(R.id.andes_feedbackscreen_header_description)
 
     private fun AndesFeedbackScreenView.getTitle() =
-            findViewById<TextView>(R.id.andes_feedbackscreen_header_title)
+        findViewById<TextView>(R.id.andes_feedbackscreen_header_title)
 
     private fun AndesFeedbackScreenView.getHighlight() =
-            findViewById<TextView>(R.id.andes_feedbackscreen_header_highlight)
+        findViewById<TextView>(R.id.andes_feedbackscreen_header_highlight)
 
     private fun AndesFeedbackScreenView.getThumbnailBadge() =
-            findViewById<AndesThumbnailBadge>(R.id.andes_feedbackscreen_header_image)
+        findViewById<AndesThumbnailBadge>(R.id.andes_feedbackscreen_header_image)
 
     private fun AndesFeedbackScreenView.getButton() =
-            findViewById<AndesButton>(R.id.andes_feedbackscreen_button)
+        findViewById<AndesButton>(R.id.andes_feedbackscreen_button)
+
+    fun <T> getField(name: String, target: Any): T {
+        val field = target::class.java.getDeclaredField(name)
+        field.isAccessible = true
+        return field.get(target) as T
+    }
 }

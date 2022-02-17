@@ -42,7 +42,7 @@ AndesFeedbackScreenView(
 | Unit | **setFeedbackScreenHeader(header: AndesFeedbackScreenHeader)**<br/> Replaces current feedback header with the new [feedbackScreenHeader]. |
 | Unit | **setFeedbackScreenActions(actions: AndesFeedbackScreenActions)**<br/> Replaces current feedback actions with the new [feedbackScreenActions]. |
 | Unit | **setFeedbackScreenType(type: AndesFeedbackScreenType)**<br/> Replaces current feedback type with the new [feedbackScreenType]. |
-
+| Unit | **setFeedbackScreenBody(body: View?)**<br/> Replaces current feedback body with the new [View]. |
 <br/>
 
 ## About use in viewPagers
