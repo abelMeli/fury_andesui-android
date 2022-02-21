@@ -230,6 +230,7 @@
     <string name="andes_bottom_sheet_set_button" translatable="false">Set</string>
     <string name="andes_bottom_sheet_fit_content_button" translatable="false">Toggle Fit Content</string>
     <string name="andes_bottom_sheet_set_content_button" translatable="false">Toggle Margin</string>
+    <string name="andes_bottom_sheet_dimmer_content_button" translatable="false">Transparent Dimmer</string>
     <string name="andes_bottom_sheet_dummy_view" translatable="false">This is a dummy view</string>
 
 

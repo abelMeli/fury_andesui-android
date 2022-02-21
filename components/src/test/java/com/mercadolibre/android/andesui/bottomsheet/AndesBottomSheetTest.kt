@@ -1,6 +1,8 @@
 package com.mercadolibre.android.andesui.bottomsheet
 
 import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Looper.getMainLooper
 import android.view.Gravity
@@ -15,6 +17,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.activateTalkbackForTest
 import com.mercadolibre.android.andesui.assertEquals
@@ -71,12 +74,12 @@ class AndesBottomSheetTest {
         val fitContent = true
 
         andesBottomSheet = AndesBottomSheet(
-                context,
-                peekHeight,
-                AndesBottomSheetState.EXPANDED,
-                title,
-                AndesBottomSheetTitleAlignment.CENTERED,
-                fitContent
+            context,
+            peekHeight,
+            AndesBottomSheetState.EXPANDED,
+            title,
+            AndesBottomSheetTitleAlignment.CENTERED,
+            fitContent
         )
 
         assertEquals(andesBottomSheet.peekHeight, peekHeight)
@@ -451,6 +454,35 @@ class AndesBottomSheetTest {
 
         button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
         button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+
+    @Test
+    fun `when set transparent dimmer the bottom sheet get transparent color`() {
+        andesBottomSheet.setDimmerColorTransparent()
+
+        val color = (andesBottomSheet.backgroundDimView.background as ColorDrawable).color
+
+        assertEquals(Color.TRANSPARENT, color)
+    }
+
+    @Test
+    fun `when uses default dimmer the bottom sheet get gray color`() {
+        val color = (andesBottomSheet.backgroundDimView.background as ColorDrawable).color
+
+        val defaultColor = ContextCompat.getColor(context, R.color.andes_gray_800)
+
+        assertEquals(defaultColor, color)
+    }
+
+    @Test
+    fun `when set default dimmer the bottom sheet get gray color`() {
+        andesBottomSheet.setDimmerColorDefault()
+
+        val color = (andesBottomSheet.backgroundDimView.background as ColorDrawable).color
+
+        val defaultColor = ContextCompat.getColor(context, R.color.andes_gray_800)
+
+        assertEquals(defaultColor, color)
     }
 
     private fun mockFragmentManager(): FragmentManager {

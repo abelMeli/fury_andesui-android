@@ -163,6 +163,17 @@ class BottomSheetShowcaseActivity : BaseActivity(), BottomSheetListener {
         bottomSheet.setContentShadow(isShadow)
     }
 
+    fun onDimmerTransparent(view: View) {
+        val andesButton = view as AndesButton
+        if (andesButton.hierarchy == AndesButtonHierarchy.LOUD) {
+            bottomSheet.setDimmerColorTransparent()
+            andesButton.hierarchy = AndesButtonHierarchy.QUIET
+        } else {
+            bottomSheet.setDimmerColorDefault()
+            andesButton.hierarchy = AndesButtonHierarchy.LOUD
+        }
+    }
+
     private fun closeKeyboard(view: View) {
         val inputManager: InputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(view.windowToken, 0)

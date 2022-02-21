@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -70,7 +71,7 @@ class AndesBottomSheet : CoordinatorLayout {
         set(value) {
             andesBottomSheetAttrs = andesBottomSheetAttrs.copy(andesBottomSheetTitleAlignment = value)
             resolveTitleViewAlignment(createConfig())
-    }
+        }
 
     /**
      * Getter and Setter for [fitContent], if this value is false will not fit the content
@@ -89,6 +90,7 @@ class AndesBottomSheet : CoordinatorLayout {
     private lateinit var frameView: FrameLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var titleTextView: TextView
+
     @VisibleForTesting
     internal lateinit var backgroundDimView: View
     private var listener: BottomSheetListener? = null
@@ -127,13 +129,13 @@ class AndesBottomSheet : CoordinatorLayout {
         fitContent: Boolean
     ) {
         andesBottomSheetAttrs =
-                AndesBottomSheetAttrs(
-                    peekHeight,
-                    bottomSheetState,
-                    titleText,
-                    titleAlignment,
-                    fitContent
-                )
+            AndesBottomSheetAttrs(
+                peekHeight,
+                bottomSheetState,
+                titleText,
+                titleAlignment,
+                fitContent
+            )
         setupComponents(createConfig())
     }
 
@@ -293,6 +295,20 @@ class AndesBottomSheet : CoordinatorLayout {
     }
 
     /**
+     * Set the transparent color of the Dimmer
+     */
+    fun setDimmerColorTransparent() {
+        backgroundDimView.setBackgroundColor(ContextCompat.getColor(context, R.color.andes_transparent))
+    }
+
+    /**
+     * Set the default color of the Dimmer
+     */
+    fun setDimmerColorDefault() {
+        backgroundDimView.setBackgroundColor(ContextCompat.getColor(context, R.color.andes_gray_800))
+    }
+
+    /**
      * Sets the provided fragment inside of the bottomSheet
      *
      * @param fragmentManager the supportFragmentManager
@@ -300,14 +316,14 @@ class AndesBottomSheet : CoordinatorLayout {
      * @param bundle the info bundle for the fragment
      */
     fun <T> setContent(fragmentManager: FragmentManager, fragment: T, bundle: Bundle? = null)
-            where T : Fragment {
+        where T : Fragment {
         if (bundle != null) {
             fragment.arguments = bundle
         }
         fragmentManager
-                .beginTransaction()
-                .replace(frameView.id, fragment)
-                .commit()
+            .beginTransaction()
+            .replace(frameView.id, fragment)
+            .commit()
     }
 
     /**

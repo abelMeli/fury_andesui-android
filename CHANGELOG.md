@@ -1,6 +1,7 @@
 # v4.11.0
 ## 🚀 Feature
 - `AndesFeedbackScreenBody` and `AndesFeedbackScreenType.Congrats` can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)
+- Added function to define the background color of the dimmer bottom sheet, between default color and transparent color | Author: [FranciscoRMontufar](https://github.com/FranciscoRMontufar)
 
 # v4.10.1
 ## 🛠 Fixes
