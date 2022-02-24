@@ -132,6 +132,24 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
             }
         }
 
+    /**
+     * Getter and setter for [titleContentDescription].
+     */
+    var titleContentDescription: CharSequence?
+        get() = titleComponent.contentDescription
+        set(value) {
+            titleComponent.contentDescription = value
+        }
+
+    /**
+     * Getter and setter for [bodyContentDescription].
+     */
+    var bodyContentDescription: CharSequence?
+        get() = bodyComponent.contentDescription
+        set(value) {
+            bodyComponent.contentDescription = value
+        }
+
     private lateinit var andesTooltipAttrs: AndesTooltipAttrs
     private lateinit var andesTooltipLocationConfigRequired: AndesTooltipLocationConfig
     override lateinit var radiusLayout: RadiusLayout

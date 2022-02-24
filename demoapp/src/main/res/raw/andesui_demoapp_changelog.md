@@ -1,3 +1,7 @@
+# v4.12.0
+## 🚀 Feature
+- `AndesTooltip` added 2 setters to modify the contentDescription. | Authors: [@PablovskyML](https://github.com/PablovskyML)
+
 # v4.11.0
 ## 🚀 Feature
 - `AndesFeedbackScreenBody` and `AndesFeedbackScreenType.Congrats` can be implemented with Flox. | Author: [@orellanaML] (https://github.com/orellanaML)

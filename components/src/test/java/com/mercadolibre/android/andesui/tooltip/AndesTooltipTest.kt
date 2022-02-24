@@ -745,4 +745,26 @@ class AndesTooltipTest {
 
         assertEquals(bodyComponent.visibility, View.VISIBLE)
     }
+
+    @Test
+    fun `setters content description`() {
+        val body = "my body"
+        val bodyContentDescription = "bodyContentDescription"
+        val titleContentDescription = "titleContentDescription"
+        val basicTooltip = AndesTooltip(context = context, body = body)
+        basicTooltip.bodyContentDescription = bodyContentDescription
+        basicTooltip.titleContentDescription = titleContentDescription
+
+        assertEquals(bodyContentDescription, basicTooltip.bodyContentDescription)
+        assertEquals(titleContentDescription, basicTooltip.titleContentDescription)
+    }
+
+    @Test
+    fun `setters content description null`() {
+        val body = "my body"
+        val title = "my title"
+        val basicTooltip = AndesTooltip(context = context, body = body, title = title)
+        assertNull(basicTooltip.bodyContentDescription)
+        assertNull(basicTooltip.titleContentDescription)
+    }
 }
