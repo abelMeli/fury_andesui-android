@@ -101,6 +101,8 @@ AndesTooltip(
 | secondaryAction: [AndesTooltipAction](#andestooltipaction)   | **get():** retrieves tooltip secondary action data<br/> **set(value: [AndesTooltipAction](#andestooltipaction)):** updates secondary action data. |
 | linkAction: [AndesTooltipLinkAction](#andestooltiplinkaction) | **get():** retrieves tooltip link action data<br/> **set(value: [AndesTooltipLinkAction](#andestooltiplinkaction)):** updates link action data. |
 | location: [AndesTooltipLocation](#andestooltiplocation)      | **get():** retrieves tooltip location enum value configured<br/> **set(value: [AndesTooltipLocation](#andestooltiplocation)):** updates tooltip preferred location. |
+| titleContentDescription: CharSequence? | **get():** retrieves title content description<br/> **set(value: CharSequence?):** updates title content description. |
+| bodyContentDescription: CharSequence? | **get():** retrieves body content description<br/> **set(value: CharSequence?):** updates body content description. |
 
 <br/>
 
