@@ -39,7 +39,8 @@ internal data class AndesMessageConfiguration(
     val bodyLinkTextColor: AndesColor,
     val thumbnail: Drawable?,
     val bulletGapWith: Int,
-    val bulletDotSize: Int
+    val bulletDotSize: Int,
+    val bulletMarginTop: Int
 )
 
 @Suppress("TooManyFunctions")
@@ -98,7 +99,8 @@ internal object AndesMessageConfigurationFactory {
                 bodyLinkTextColor = resolveBodyLinkTextColor(andesMessageHierarchy.hierarchy, andesMessageType.type),
                 thumbnail = thumbnail,
                 bulletGapWith = resolveBulletGapWith(context),
-                bulletDotSize = resolveBulletDotSize(context)
+                bulletDotSize = resolveBulletDotSize(context),
+                bulletMarginTop = resolveBulletMarginTop(context)
             )
         }
     }
@@ -159,7 +161,12 @@ internal object AndesMessageConfigurationFactory {
         type: AndesMessageTypeInterface
     ) = hierarchy.bodyLinkTextColor(type)
 
-    private fun resolveBulletGapWith(context: Context) = context.resources.getInteger(R.integer.andes_message_bullet_gap_width)
+    private fun resolveBulletGapWith(context: Context) =
+        context.resources.getDimensionPixelSize(R.dimen.andes_tab_indicator_corner)
 
-    private fun resolveBulletDotSize(context: Context) = context.resources.getInteger(R.integer.andes_message_bullet_dot_size)
+    private fun resolveBulletDotSize(context: Context) =
+        context.resources.getDimensionPixelSize(R.dimen.andes_message_bullet_dot_size)
+
+    private fun resolveBulletMarginTop(context: Context) =
+        context.resources.getDimensionPixelSize(R.dimen.andes_message_bullet_margin_top)
 }

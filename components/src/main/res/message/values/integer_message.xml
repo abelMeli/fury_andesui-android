@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <integer name="andes_message_bullet_gap_width">6</integer>
-    <integer name="andes_message_bullet_dot_size">10</integer>
-
-</resources>

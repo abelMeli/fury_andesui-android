@@ -23,6 +23,7 @@
     <dimen name="andes_message_righticon_guideline_bottom_margin">32dp</dimen>
 
     <dimen name="andes_message_pipe_width">4dp</dimen>
-    <dimen name="andes_message_bullet_top_margin">4dp</dimen>
-
+    <dimen name="andes_message_bullet_margin_top">4dp</dimen>
+    <dimen name="andes_message_bullet_gap_width">8dp</dimen>
+    <dimen name="andes_message_bullet_dot_size">10px</dimen>
 </resources>

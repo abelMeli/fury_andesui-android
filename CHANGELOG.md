@@ -1,3 +1,6 @@
+# v4.13.0
+- `AndesMessage` fix bullets styles and body links | Authors [@mingkao-meli](https://github.com/mingkao-meli)
+
 # v4.12.0
 ## 🚀 Feature
 - `AndesTooltip` added 2 setters to modify the contentDescription. | Authors: [@PablovskyML](https://github.com/PablovskyML)

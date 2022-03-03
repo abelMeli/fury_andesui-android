@@ -20,9 +20,7 @@ class AndesBulletSpannable(
         return@lazy path
     }
 
-    override fun getLeadingMargin(first: Boolean): Int {
-        return (2 * radius + 2 * gapWidth)
-    }
+    override fun getLeadingMargin(first: Boolean) = 2 * radius + 2 * gapWidth
 
     override fun drawLeadingMargin(
         canvas: Canvas,
