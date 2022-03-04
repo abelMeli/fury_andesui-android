@@ -114,3 +114,6 @@ ajcore*.txt
 ## Ignoring Release Process Client
 *.hprof
 rp
+
+## Code quality
+code_quality_service/
