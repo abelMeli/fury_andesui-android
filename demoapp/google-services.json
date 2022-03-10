@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:650073515710:android:93c515c803541bcf84e0ef",
+        "mobilesdk_app_id": "1:650073515710:android:f44bb2164ede351a84e0ef",
         "android_client_info": {
           "package_name": "com.mercadolibre.android.andesui.demoapp"
         }
@@ -43,7 +43,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:650073515710:android:40ba73cc3a2f34ee84e0ef",
+        "mobilesdk_app_id": "1:650073515710:android:d7875954cdb03b4e84e0ef",
         "android_client_info": {
           "package_name": "com.mercadolibre.android.andesui.demoapp.debug"
         }
@@ -79,7 +79,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:650073515710:android:39ade1e3fa6462be84e0ef",
+        "mobilesdk_app_id": "1:650073515710:android:7b2faa4cde40b70f84e0ef",
         "android_client_info": {
           "package_name": "com.mercadolibre.android.andesui.demoapp.mds.testapp"
         }

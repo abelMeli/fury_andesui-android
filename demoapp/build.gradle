@@ -23,21 +23,6 @@ android {
         proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
 
-    signingConfigs {
-        debug {
-            keyAlias "ci-key-alias"
-            keyPassword "andesui"
-            storeFile file("key-debug.keystore")
-            storePassword "andesui"
-        }
-        release {
-            keyAlias "ci-key-alias"
-            keyPassword "andesui"
-            storeFile file("key-release.keystore")
-            storePassword "andesui"
-        }
-    }
-
     buildTypes {
         def config = { k -> "\"${project.properties.get(k)}\"" }
         debug {
@@ -50,7 +35,6 @@ android {
 
             resValue("string", "andesui_demoapp_version", "v${libraryVersion}")
             signingConfig signingConfigs.debug
-
         }
         release {
             initWith(buildTypes.debug)
@@ -60,7 +44,8 @@ android {
             shrinkResources true
 
             applicationIdSuffix ''
-            signingConfig signingConfigs.release
+
+            signingConfig signingConfigs.debug
         }
         mds {
             initWith(buildTypes.debug)
@@ -76,6 +61,8 @@ android {
             if (project.hasProperty('mdsVersionNameSuffix')) {
                 versionNameSuffix "${project.mdsVersionNameSuffix}"
             }
+
+            signingConfig signingConfigs.debug
         }
     }
 
