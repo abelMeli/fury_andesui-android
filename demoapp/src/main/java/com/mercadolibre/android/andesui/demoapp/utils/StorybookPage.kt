@@ -28,7 +28,8 @@ internal enum class StorybookPage(val link: String) {
     ANDESTEXTVIEW("$HOME/?path=/story/typography--andes-typography"),
     ANDESTABS("$HOME/?path=/story/tabs--andes-default-tabs"),
     ANDESMONEYAMOUNT("$HOME/?path=/story/money-amount--andes-money-amount"),
-    ANDESSLIDER("$HOME/?path=/story/slider--andes-slider-default");
+    ANDESSLIDER("$HOME/?path=/story/slider--andes-slider-default"),
+    ANDESBUTTONGROUP("$HOME/?path=/story/button-button--andes-button");
 
     companion object {
         fun getStorybookPage(string: String): StorybookPage? = try {

@@ -27,7 +27,8 @@ internal enum class AndesSpecs(val link: String) {
     THUMBNAIL("$COMPONENT_PREFIX/thumbnail-1589997379"),
     SWITCH("$COMPONENT_PREFIX/switch"),
     TEXTVIEW("$FOUNDATIONS_PREFIX/typography"),
-    SLIDER("$COMPONENT_PREFIX/slider")
+    SLIDER("$COMPONENT_PREFIX/slider"),
+    BUTTONGROUP("$COMPONENT_PREFIX/button-1584453489")
 }
 
 internal fun launchSpecs(context: Context, specs: AndesSpecs) {

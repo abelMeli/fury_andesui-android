@@ -89,6 +89,7 @@ See the [Fonts & Colors page](Fonts&Colors.md) to be aware of how to use the pro
 | [AndesThumbnailBadge](thumbnail/AndesThumbnailBadge.md) | andes://thumbnail |
 | [AndesTimePicker](timepicker/AndesTimePicker.md) | andes://timepicker |
 | [AndesTooltip](tooltip/AndesTooltip.md) | andes://tooltip |
+| [AndesButtonGroup](buttongroup/AndesButtonGroup.md) | andes://buttongroup |
 
 ### Open any component deeplink in Andes Showcase App
 First you need to install [Andes Showcase App](#live-examples). Then run the following `adb` command in your terminal.

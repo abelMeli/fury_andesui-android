@@ -1,3 +1,7 @@
+# v4.15.0
+## 🚀 Feature
+- `AndesButtonGroup` component | Author: [@edgnavarro](https://github.com/edgnavarro)
+
 # v4.14.0
 ## 🚀 Feature
 - Renew google-services and useless keystore removed in demoapp

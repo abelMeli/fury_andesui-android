@@ -53,5 +53,5 @@
     <dimen name="andes_search_close_padding_end">8dp</dimen>
     <dimen name="andes_search_close_padding_bottom">4dp</dimen>
     <dimen name="andes_splash_image_size">120dp</dimen>
-
+    <dimen name="andes_buttongroup_margin_top_hiararchy">52dp</dimen>
 </resources>

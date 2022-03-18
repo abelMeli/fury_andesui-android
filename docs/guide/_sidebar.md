@@ -7,6 +7,7 @@
   ** [AndesBadgeIconPill](/badge/AndesBadgeIconPill.md)
   ** [AndesBadgePill](/badge/AndesBadgePill.md)
   * [AndesButton](/button/AndesButton.md)
+  * [AndesButtonGroup](/buttongroup/AndesButtonGroup.md)
   * [AndesCarousel](/carousel/AndesCarousel.md)
   * [AndesCheckbox](/checkbox/AndesCheckbox.md)
   * [AndesCoachmark](/coachmark/AndesCoachmark.md)

@@ -64,6 +64,8 @@
     <string name="andes_demoapp_label_rounded" translatable="false">Rounded</string>
     <string name="andes_demoapp_label_standard" translatable="false">Standard</string>
     <string name="andes_demoapp_label_more" translatable="false">More</string>
+    <string name="andes_demoapp_screen_button_group" translatable="false">Button group</string>
+
 
     <!-- Andes A11y Playground -->
     <string name="andes_demoapp_playground_lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
@@ -730,7 +732,7 @@
     <string name="andes_slider_textview_type" translatable="false">Type</string>
     <string name="andes_slider_textview_state" translatable="false">State</string>
     <string name="andes_slider_textview_steps" translatable="false">Steps</string>
-    
+
     <!-- Andes TimePicker -->
 
 
@@ -1110,4 +1112,26 @@
     <string name="andesui_demoapp_web_storybook_description" translatable="false">Webview</string>
     <string name="andesui_demoapp_web_storybook_caution_description" translatable="false">Webview (caution)</string>
     <string name="andesui_demoapp_web_storybook_not_recommended" translatable="false">Component NOT recommended to use in webviews.</string>
+
+    <!-- Button Group -->
+    <string name="andes_button_group_distribution" translatable="false">Distribution</string>
+    <string name="andes_button_group_type" translatable="false">Type</string>
+    <string name="andes_button_group_quantity" translatable="false">Button quantity</string>
+    <string name="andes_button_group_description" translatable="false">AndesButtonGroup is a container for AndesButton. They allow you to add 1 to 3 buttons distributed horizontally, vertically, auto and mixed.</string>
+    <string-array name="andes_button_group_align_spinner" translatable="false">
+        <item>Left</item>
+        <item>Right</item>
+        <item>Center</item>
+    </string-array>
+
+    <string-array name="andes_button_group_type_spinner" translatable="false">
+        <item>Full width</item>
+        <item>Responsive</item>
+    </string-array>
+
+    <string-array name="andes_button_group_quantity_spinner" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

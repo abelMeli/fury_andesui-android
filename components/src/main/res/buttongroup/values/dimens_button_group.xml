@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andes_button_group_margin_large">8dp</dimen>
+    <dimen name="andes_button_group_margin_medium">6dp</dimen>
+    <dimen name="andes_button_group_margin_small">4dp</dimen>
+    <dimen name="andes_button_group_size_large">600dp</dimen>
+    <dimen name="andes_button_group_size_small">200dp</dimen>
+</resources>

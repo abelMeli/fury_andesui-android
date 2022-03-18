@@ -603,6 +603,20 @@
         <activity
             android:name="com.mercadolibre.android.melidata.experiments.MelidataExperimentsForceActivity"
             tools:node="remove" />
+        <activity
+            android:name=".components.buttongroup.ButtonGroupShowcaseActivity"
+            android:parentActivityName=".home.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="buttongroup"
+                    android:scheme="andes" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="AndesButtonGroupStyleable" tools:ignore="ResourceName">
+        <attr name="andesButtonGroupDistribution" format="enum">
+            <enum name="horizontal" value="2000"/>
+            <enum name="vertical" value="2001"/>
+            <enum name="auto" value="2002"/>
+            <enum name="mixed" value="2003"/>
+        </attr>
+
+        <attr name="andesButtonGroupType" format="enum">
+            <enum name="full_width" value="1000"/>
+            <enum name="responsive" value="1001"/>
+        </attr>
+
+        <attr name="andesButtonGroupAlign" format="enum">
+            <enum name="left" value="3000"/>
+            <enum name="right" value="3001"/>
+            <enum name="center" value="3002"/>
+        </attr>
+    </declare-styleable>
+</resources>
