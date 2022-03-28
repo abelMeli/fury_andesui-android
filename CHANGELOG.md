@@ -1,3 +1,7 @@
+# v4.16.0
+## 🛠 Fixes
+- `AndesButtonGroup` component is hidden in the home page | Author: [@edgnavarro](https://github.com/edgnavarro)
+
 # v4.15.0
 ## 🚀 Feature
 - `AndesButtonGroup` component | Author: [@edgnavarro](https://github.com/edgnavarro)
