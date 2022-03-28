@@ -45,5 +45,5 @@ internal object AndesThumbnailBadgeConfigurationFactory {
     }
 
     private fun resolveBadgeColor(context: Context, badge: AndesThumbnailBadgeComponentInterface) =
-        badge.badgeType.type.primaryColor().colorInt(context)
+        badge.badgeType.type.thumbnailBadgeOutlineColor().colorInt(context)
 }

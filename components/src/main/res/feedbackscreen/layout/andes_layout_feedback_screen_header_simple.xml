@@ -11,11 +11,11 @@
         android:id="@+id/andes_feedbackscreen_header_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:focusableInTouchMode="false"
+        android:importantForAccessibility="no"
         android:visibility="gone"
         app:cardBackgroundColor="@color/andes_white"
         app:cardCornerRadius="@dimen/andes_card_corner_radius"
-        android:importantForAccessibility="no"
-        android:focusableInTouchMode="false"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,15 +23,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
+    <FrameLayout
         android:id="@+id/andes_feedbackscreen_header_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/andes_feedbackscreen_thumbnail_margin_bottom"
-        app:andesThumbnailBadgeComponentPillSize="size_64"
-        app:andesThumbnailBadgeComponentType="success"
-        app:andesThumbnailBadgeImage="@drawable/andes_navegacion_compras_24"
-        app:andesThumbnailBadgeType="icon"
         app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_overline"
         app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
@@ -91,5 +87,49 @@
         app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_highlight" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/andes_feedbackscreen_container_error_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/andes_feedbackscreen_error_container_margin"
+        android:background="@drawable/andes_screen_error_code_background"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
+        app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_description">
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/andes_feedbackscreen_header_error_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:paddingLeft="@dimen/andes_feedbackscreen_error_padding"
+            android:paddingBottom="@dimen/andes_feedbackscreen_error_top_bottom_padding"
+            android:paddingTop="@dimen/andes_feedbackscreen_error_top_bottom_padding"
+            android:importantForAccessibility="yes"
+            android:textColor="@color/andes_accent_color_500"
+            android:visibility="gone"
+            app:andesTextViewStyle="bodyXs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/andes_error_code_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/andes_copy_error_16"
+            android:layout_marginRight="@dimen/andes_feedbackscreen_error_image_margin_right"
+            android:visibility="gone"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/andes_feedbackscreen_header_error_code"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </merge>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="andes_feedbackscreen_close_button">Cerrar</string>
+    <string name="andes_feedbackscreen_error_code">Código:\u0020</string>
+    <string name="andes_feedbackscreen_error_code_label">Código de error</string>
+    <string name="andes_feedbackscreen_error_code_clipboard">Se copió al portapapeles:\u0020</string>
 </resources>

@@ -5,16 +5,18 @@ import android.os.Build
 import android.text.SpannableString
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
 import com.mercadolibre.android.andesui.feedback.screen.header.view.AndesFeedbackScreenCongratsHeaderView
+import com.mercadolibre.android.andesui.feedback.screen.type.AndesCongratsFeedbackScreenType
+import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackBadgeIconType
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
@@ -46,7 +48,7 @@ class AndesFeedbackScreenCongratsHeaderViewTest {
                 "Title",
                 "Overline"
             ),
-            type = AndesBadgeIconType.SUCCESS,
+            type = AndesFeedbackBadgeIconType.SUCCESS,
             hasBody = false
         )
 
@@ -65,7 +67,7 @@ class AndesFeedbackScreenCongratsHeaderViewTest {
     @Test
     fun `Header title & overline gone, description & highlight visible with links & right color`() {
         val header = AndesFeedbackScreenCongratsHeaderView(context)
-        val badgeType = AndesBadgeIconType.WARNING
+        val badgeType = AndesFeedbackBadgeIconType.WARNING
         header.setupTextComponents(
             feedbackText = AndesFeedbackScreenText(
                 "Title",
@@ -87,7 +89,7 @@ class AndesFeedbackScreenCongratsHeaderViewTest {
         with(header.getHighlight()) {
             text assertEquals "Highlight"
             visibility assertEquals View.VISIBLE
-            currentTextColor assertEquals badgeType.iconType.type.primaryColor().colorInt(context)
+            currentTextColor assertEquals badgeType.type.type.primaryColor().colorInt(context)
         }
         with(header.getDescription()) {
             text.toString() assertEquals "Description"
@@ -104,14 +106,15 @@ class AndesFeedbackScreenCongratsHeaderViewTest {
     @Test
     fun `Thumbnail set correctly`() {
         val header = AndesFeedbackScreenCongratsHeaderView(context)
-        val badgeType = AndesBadgeIconType.WARNING
+        val badgeType = AndesCongratsFeedbackScreenType
 
-        header.setupThumbnailComponent(
-            feedbackThumbnail = AndesFeedbackScreenAsset.Thumbnail(
+        header.setupAssetComponent(
+            feedbackAsset = AndesFeedbackScreenAsset.Thumbnail(
                 ContextCompat.getDrawable(context, R.drawable.andes_ui_placeholder_imagen_32)!!,
                 AndesThumbnailBadgeType.FeedbackIcon
             ),
-            type = badgeType
+            type = badgeType,
+            hasBody = true
         )
 
         header.getThumbnail().thumbnailType assertEquals AndesThumbnailBadgeType.FeedbackIcon
@@ -131,5 +134,5 @@ class AndesFeedbackScreenCongratsHeaderViewTest {
         findViewById<TextView>(R.id.andes_feedbackscreen_congrats_header_overline)
 
     private fun AndesFeedbackScreenCongratsHeaderView.getThumbnail() =
-        findViewById<AndesThumbnailBadge>(R.id.andes_feedbackscreen_congrats_header_image)
+        findViewById<FrameLayout>(R.id.andes_feedbackscreen_congrats_header_image).getChildAt(0) as AndesThumbnailBadge
 }

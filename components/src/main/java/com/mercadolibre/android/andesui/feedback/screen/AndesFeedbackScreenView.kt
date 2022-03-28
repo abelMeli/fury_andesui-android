@@ -57,6 +57,19 @@ class AndesFeedbackScreenView : ScrollView {
         setupComponents(config)
     }
 
+    internal constructor(
+        context: Context,
+        type: AndesFeedbackScreenType,
+        header: AndesFeedbackScreenHeader,
+        actions: AndesFeedbackScreenActions? = null,
+        onViewCreated: (() -> Unit)? = null
+    ) : super(context) {
+        initComponents()
+        config = createConfig(null, actions, type, header)
+        setupComponents(config)
+        onViewCreated?.invoke()
+    }
+
     private fun setupComponents(config: AndesFeedbackScreenConfiguration) {
         getInitialStatusBarColor()
         setupFeedbackContainer(config)
@@ -114,14 +127,15 @@ class AndesFeedbackScreenView : ScrollView {
      */
     fun setFeedbackScreenAsset(feedbackImage: AndesFeedbackScreenAsset?) {
         (header as? AndesFeedbackScreenHeaderView)?.apply {
-            setupThumbnailComponent(
+            setupAssetComponent(
                 AndesFeedbackScreenConfigurationFactory.resolveFeedbackThumbnail(
                     context = context,
                     feedbackImage = feedbackImage,
                     feedbackType = config.typeInterface,
                     hasBody = config.body.view != null
                 ),
-                config.typeInterface.feedbackColor
+                config.typeInterface,
+                config.body.view != null
             )
         }
     }
@@ -261,6 +275,7 @@ class AndesFeedbackScreenView : ScrollView {
             text = configButton.text
             setOnClickListener(configButton.onClick)
             visibility = configButton.visibility
+            hierarchy = configButton.hierarchy
         }
     }
 

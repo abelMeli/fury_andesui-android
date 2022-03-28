@@ -7,6 +7,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.factory.AndesBadgeIconPillAttrsParser
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
+import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -29,7 +30,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `SMALL, ERROR`() {
-        val typeError = AndesBadgeIconType.ERROR
+        val typeError = AndesBadgeType.ERROR
         val sizeSmall = AndesBadgePillSize.SMALL
 
         val attrs = Robolectric.buildAttributeSet()
@@ -45,7 +46,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `SMALL, SUCCESS`() {
-        val typeSuccess = AndesBadgeIconType.SUCCESS
+        val typeSuccess = AndesBadgeType.SUCCESS
         val sizeSmall = AndesBadgePillSize.SMALL
 
         val attrs = Robolectric.buildAttributeSet()
@@ -61,7 +62,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `SMALL, WARNING`() {
-        val typeWarning = AndesBadgeIconType.WARNING
+        val typeWarning = AndesBadgeType.WARNING
         val sizeSmall = AndesBadgePillSize.SMALL
 
         val attrs = Robolectric.buildAttributeSet()
@@ -77,7 +78,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `SMALL, HIGHLIGHT`() {
-        val typeHighlight = AndesBadgeIconType.HIGHLIGHT
+        val typeHighlight = AndesBadgeType.HIGHLIGHT
         val sizeSmall = AndesBadgePillSize.SMALL
 
         val attrs = Robolectric.buildAttributeSet()
@@ -93,7 +94,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `LARGE, ERROR`() {
-        val typeError = AndesBadgeIconType.ERROR
+        val typeError = AndesBadgeType.ERROR
         val sizeLarge = AndesBadgePillSize.LARGE
 
         val attrs = Robolectric.buildAttributeSet()
@@ -109,7 +110,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `LARGE, SUCCESS`() {
-        val typeSuccess = AndesBadgeIconType.SUCCESS
+        val typeSuccess = AndesBadgeType.SUCCESS
         val sizeLarge = AndesBadgePillSize.LARGE
 
         val attrs = Robolectric.buildAttributeSet()
@@ -125,7 +126,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `LARGE, WARNING`() {
-        val typeWarning = AndesBadgeIconType.WARNING
+        val typeWarning = AndesBadgeType.WARNING
         val sizeLarge = AndesBadgePillSize.LARGE
 
         val attrs = Robolectric.buildAttributeSet()
@@ -141,7 +142,7 @@ class AndesBadgeIconPillAttrsParserTest {
 
     @Test
     fun `LARGE, HIGHLIGHT`() {
-        val typeHighlight = AndesBadgeIconType.HIGHLIGHT
+        val typeHighlight = AndesBadgeType.HIGHLIGHT
         val sizeLarge = AndesBadgePillSize.LARGE
 
         val attrs = Robolectric.buildAttributeSet()

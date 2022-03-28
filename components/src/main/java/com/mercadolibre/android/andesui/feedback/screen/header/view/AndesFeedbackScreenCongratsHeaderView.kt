@@ -4,10 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
-import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
-import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
-import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgePillSize
 
 internal class AndesFeedbackScreenCongratsHeaderView : AndesFeedbackScreenHeaderView {
 
@@ -32,15 +28,6 @@ internal class AndesFeedbackScreenCongratsHeaderView : AndesFeedbackScreenHeader
         overline = container.findViewById(R.id.andes_feedbackscreen_congrats_header_overline)
         title = container.findViewById(R.id.andes_feedbackscreen_congrats_header_title)
         highlight = container.findViewById(R.id.andes_feedbackscreen_congrats_header_highlight)
-        thumbnailBadge = container.findViewById(R.id.andes_feedbackscreen_congrats_header_image)
-    }
-
-    override fun setupThumbnailComponent(
-        feedbackThumbnail: AndesFeedbackScreenAsset,
-        type: AndesBadgeIconType
-    ) {
-        super.setupThumbnailComponent(feedbackThumbnail, type)
-        thumbnailBadge.badgeComponent =
-            AndesThumbnailBadgeComponent.IconPill(type, AndesThumbnailBadgePillSize.SIZE_56)
+        assetContainer = container.findViewById(R.id.andes_feedbackscreen_congrats_header_image)
     }
 }

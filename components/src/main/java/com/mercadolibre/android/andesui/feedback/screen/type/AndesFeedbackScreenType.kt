@@ -7,4 +7,6 @@ sealed class AndesFeedbackScreenType(internal val type: AndesFeedbackScreenTypeI
     object Congrats : AndesFeedbackScreenType(AndesCongratsFeedbackScreenType)
 
     data class Simple(val color: AndesFeedbackScreenColor) : AndesFeedbackScreenType(AndesSimpleFeedbackScreenType(color.color))
+
+    internal data class Error(val errorCode: String?): AndesFeedbackScreenType(AndesErrorFeedbackScreenType(errorCode))
 }

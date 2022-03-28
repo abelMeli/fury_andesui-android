@@ -51,7 +51,7 @@ internal interface AndesThumbnailBadgeSize : AndesThumbnailBadgeComponentInterfa
 internal class AndesPillThumbnailBadgeComponent(
     private val text: String?,
     private val textStyleDefault: Boolean,
-    color: AndesBadgeIconType,
+    override val badgeType: AndesBadgeType,
     override val thumbnailSize: AndesThumbnailSize
 ) : AndesThumbnailBadgeSize {
 
@@ -59,8 +59,6 @@ internal class AndesPillThumbnailBadgeComponent(
         private const val CIRCLE_DIAMETER_PERCENTAGE = 0.825F
         private const val HALF_WIDTH = 2F
     }
-
-    override val badgeType by lazy { color.iconType }
 
     override fun getView(context: Context) = AndesBadgePill(
         context = context,
@@ -106,10 +104,9 @@ internal class AndesPillThumbnailBadgeComponent(
 }
 
 internal class AndesDotThumbnailBadgeComponent(
-    color: AndesBadgeIconType,
+    override val badgeType: AndesBadgeType,
     override val thumbnailSize: AndesThumbnailSize
 ) : AndesThumbnailBadgeComponentInterface {
-    override val badgeType by lazy { color.iconType }
 
     override fun getView(context: Context) =
         AndesBadgeDot(context = context, type = badgeType)
@@ -134,11 +131,19 @@ internal class AndesDotThumbnailBadgeComponent(
 }
 
 internal class AndesIconPillThumbnailBadgeComponent(
-    val color: AndesBadgeIconType,
+    override val badgeType: AndesBadgeType,
     override val thumbnailSize: AndesThumbnailSize
 ) : AndesThumbnailBadgeSize {
-    override val badgeType by lazy { color.iconType }
 
     override fun getView(context: Context) =
-        AndesBadgeIconPill(context = context, type = color, size = getBadgeSize())
+        AndesBadgeIconPill(context = context, type = badgeType, size = getBadgeSize())
+}
+
+internal class AndesFeedbackIconPillThumbnailBadgeComponent(
+    override val badgeType: AndesBadgeType,
+    override val thumbnailSize: AndesThumbnailSize
+) : AndesThumbnailBadgeSize {
+
+    override fun getView(context: Context) =
+        AndesBadgeIconPill(context = context, type = badgeType, size = getBadgeSize())
 }

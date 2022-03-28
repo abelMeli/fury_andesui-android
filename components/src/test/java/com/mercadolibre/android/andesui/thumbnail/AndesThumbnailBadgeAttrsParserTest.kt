@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
+import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.buildAttributeSet
 import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
 import com.mercadolibre.android.andesui.thumbnail.badge.factory.AndesThumbnailBadgeAttrsParser
@@ -56,7 +57,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.HIGHLIGHT
+            badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_64
         }
@@ -77,7 +78,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.HIGHLIGHT
+            badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_24
         }
@@ -98,7 +99,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.HIGHLIGHT
+            badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
             with(badge as AndesThumbnailBadgeComponent.Pill) {
                 text assertEquals null
@@ -123,7 +124,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.HIGHLIGHT
+            badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_64
         }
@@ -145,7 +146,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.SUCCESS
+            badge.color assertEquals AndesBadgeType.SUCCESS
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_40
         }
@@ -167,7 +168,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.WARNING
+            badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_48
         }
@@ -189,7 +190,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.WARNING
+            badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_56
         }
@@ -212,7 +213,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.SUCCESS
+            badge.color assertEquals AndesBadgeType.SUCCESS
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_64
         }
@@ -235,7 +236,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.WARNING
+            badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_72
         }
@@ -258,7 +259,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.ERROR
+            badge.color assertEquals AndesBadgeType.ERROR
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_80
         }
@@ -281,7 +282,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.SUCCESS
+            badge.color assertEquals AndesBadgeType.SUCCESS
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_24
         }
@@ -304,7 +305,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badge.color assertEquals AndesBadgeIconType.WARNING
+            badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
             badge.badgeComponent.thumbnailSize assertEquals AndesThumbnailSize.SIZE_32
         }
@@ -326,7 +327,7 @@ class AndesThumbnailBadgeAttrsParserTest {
         with(thumbnailBadgeAttrs) {
             image assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.ImageCircle
-            badge.color assertEquals AndesBadgeIconType.HIGHLIGHT
+            badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
         }
     }

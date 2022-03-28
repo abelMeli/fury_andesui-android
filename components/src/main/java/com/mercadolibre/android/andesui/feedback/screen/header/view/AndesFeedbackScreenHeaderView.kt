@@ -9,16 +9,20 @@ import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.view.View
 import android.view.accessibility.AccessibilityEvent
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
-import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
+import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackBadgeIconType
+import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenTypeInterface
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
 /**
@@ -30,11 +34,14 @@ import com.mercadolibre.android.andesui.typeface.getFontOrDefault
  */
 internal open class AndesFeedbackScreenHeaderView : ConstraintLayout {
 
-    protected lateinit var thumbnailBadge: AndesThumbnailBadge
+    protected lateinit var assetContainer: FrameLayout
     protected lateinit var overline: TextView
+    protected lateinit var errorImage: ImageView
+    protected lateinit var errorContainer: ConstraintLayout
     protected lateinit var description: TextView
     protected lateinit var title: TextView
     protected lateinit var highlight: TextView
+    protected lateinit var errorCode: AndesTextView
 
     constructor(context: Context) : super(context)
 
@@ -59,14 +66,14 @@ internal open class AndesFeedbackScreenHeaderView : ConstraintLayout {
 
     open fun setupTextComponents(
         feedbackText: AndesFeedbackScreenText,
-        type: AndesBadgeIconType,
+        type: AndesFeedbackBadgeIconType,
         hasBody: Boolean
     ) {
         setupTextView(overline, feedbackText.overline)
         setupDescriptionTextView(description, feedbackText.description, context)
         setupTextView(title, feedbackText.title)
         setupTextView(highlight, feedbackText.highlight)
-        highlight.setTextColor(type.iconType.type.primaryColor().colorInt(context))
+        highlight.setTextColor(type.type.type.primaryColor().colorInt(context))
 
         setupA11y()
     }
@@ -78,15 +85,14 @@ internal open class AndesFeedbackScreenHeaderView : ConstraintLayout {
         overline.typeface = context.getFontOrDefault(R.font.andes_font_regular)
     }
 
-    open fun setupThumbnailComponent(
-        feedbackThumbnail: AndesFeedbackScreenAsset,
-        type: AndesBadgeIconType
+    fun setupAssetComponent(
+        feedbackAsset: AndesFeedbackScreenAsset,
+        type: AndesFeedbackScreenTypeInterface,
+        hasBody: Boolean
     ) {
-        feedbackThumbnail.asset.let { asset ->
-            thumbnailBadge.apply {
-                image = asset.image
-                thumbnailType = asset.thumbnailBadgeType
-            }
+        feedbackAsset.asset.let { asset ->
+            assetContainer.removeAllViews()
+            assetContainer.addView(asset.getView(context, type, hasBody))
         }
     }
 

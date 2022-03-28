@@ -1,0 +1,8 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/andes_gray_040"/>
+    <corners
+        android:topLeftRadius="@dimen/andes_snackbar_errorcode_background_radius"
+        android:topRightRadius="@dimen/andes_snackbar_errorcode_background_radius"
+        android:bottomLeftRadius="@dimen/andes_snackbar_errorcode_background_radius"
+        android:bottomRightRadius="@dimen/andes_snackbar_errorcode_background_radius"/>
+</shape>

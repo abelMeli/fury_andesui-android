@@ -111,7 +111,8 @@ internal class AnalyticsHelper {
             "/feedbackscreen/simplesuccess/static",
             "/feedbackscreen/simplewarning/static",
             "/feedbackscreen/simplebody/static",
-            "/feedbackscreen/congrats/static"
+            "/feedbackscreen/congrats/static",
+            "/feedbackscreen/error/static"
         ),
         "MoneyAmountShowcaseActivity" to arrayListOf("/moneyamount/dynamic", "/moneyamount/static")
     )

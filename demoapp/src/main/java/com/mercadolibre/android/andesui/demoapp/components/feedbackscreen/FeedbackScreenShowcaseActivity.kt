@@ -35,7 +35,8 @@ class FeedbackScreenShowcaseActivity : BaseActivity() {
                 AndesuiStaticFeedbackScreenSimpleSuccessBinding.inflate(layoutInflater).root,
                 AndesuiStaticFeedbackScreenSimpleWarningBinding.inflate(layoutInflater).root,
                 AndesuiStaticFeedbackScreenSimpleBodyBinding.inflate(layoutInflater).root,
-                AndesuiStaticFeedbackScreenCongratsBinding.inflate(layoutInflater).root
+                AndesuiStaticFeedbackScreenCongratsBinding.inflate(layoutInflater).root,
+                AndesuiStaticFeedbackScreenSimpleBodyBinding.inflate(layoutInflater).root
             )
         )
         viewPager.offscreenPageLimit = OFFSCREEN_PAGES_LIMIT
@@ -60,6 +61,9 @@ class FeedbackScreenShowcaseActivity : BaseActivity() {
         FeedbackScreenStaticSimpleRedBodyPage().create(
             this,
             adapter.views[SIMPLE_ERROR_POSITION] as ConstraintLayout
+        )
+        FeedbackScreenStaticErrorPage().create(
+            adapter.views[GENERIC_ERROR_POSITION] as ConstraintLayout
         )
     }
 
@@ -150,6 +154,7 @@ class FeedbackScreenShowcaseActivity : BaseActivity() {
         private const val SIMPLE_WARNING_POSITION = 2
         private const val SIMPLE_ERROR_POSITION = 3
         private const val CONGRATS_POSITION = 4
+        private const val GENERIC_ERROR_POSITION = 5
     }
 }
 

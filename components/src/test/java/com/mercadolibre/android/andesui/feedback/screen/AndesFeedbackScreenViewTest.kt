@@ -5,6 +5,7 @@ import android.os.Build
 import android.text.SpannableString
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,6 +18,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
+import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
@@ -88,7 +90,7 @@ class AndesFeedbackScreenViewTest {
         with(screenView.getThumbnailCongrats()) {
             image assertEquals R.drawable.andes_ui_placeholder_imagen_32
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badgeComponent.color assertEquals AndesBadgeIconType.SUCCESS
+            badgeComponent.color assertEquals AndesBadgeType.SUCCESS
         }
     }
 
@@ -115,7 +117,7 @@ class AndesFeedbackScreenViewTest {
         with(screenView.getThumbnailCongrats()) {
             image assertEquals R.drawable.andes_ui_feedback_success_32
             thumbnailType assertEquals AndesThumbnailBadgeType.FeedbackIcon
-            badgeComponent.color assertEquals AndesBadgeIconType.SUCCESS
+            badgeComponent.color assertEquals AndesBadgeType.SUCCESS
         }
     }
 
@@ -142,7 +144,7 @@ class AndesFeedbackScreenViewTest {
         with(screenView.getThumbnailSimple()) {
             image assertEquals R.drawable.andes_ui_feedback_success_40
             thumbnailType assertEquals AndesThumbnailBadgeType.FeedbackIcon
-            badgeComponent.color assertEquals AndesBadgeIconType.SUCCESS
+            badgeComponent.color assertEquals AndesBadgeType.SUCCESS
         }
     }
 
@@ -171,7 +173,7 @@ class AndesFeedbackScreenViewTest {
         with(screenView.getThumbnailSimple()) {
             image assertEquals R.drawable.andes_ui_feedback_warning_40
             thumbnailType assertEquals AndesThumbnailBadgeType.FeedbackIcon
-            badgeComponent.color assertEquals AndesBadgeIconType.WARNING
+            badgeComponent.color assertEquals AndesBadgeType.WARNING
         }
     }
 
@@ -201,7 +203,7 @@ class AndesFeedbackScreenViewTest {
         with(screenView.getThumbnailSimple()) {
             image assertEquals R.drawable.andes_ui_placeholder_imagen_32
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
-            badgeComponent.color assertEquals AndesBadgeIconType.ERROR
+            badgeComponent.color assertEquals AndesBadgeType.ERROR
         }
     }
 
@@ -211,10 +213,10 @@ class AndesFeedbackScreenViewTest {
     }
 
     private fun AndesFeedbackScreenView.getThumbnailCongrats() =
-        findViewById<AndesThumbnailBadge>(R.id.andes_feedbackscreen_congrats_header_image)
+        findViewById<FrameLayout>(R.id.andes_feedbackscreen_congrats_header_image).getChildAt(0) as AndesThumbnailBadge
 
     private fun AndesFeedbackScreenView.getThumbnailSimple() =
-        findViewById<AndesThumbnailBadge>(R.id.andes_feedbackscreen_header_image)
+        findViewById<FrameLayout>(R.id.andes_feedbackscreen_header_image).getChildAt(0) as AndesThumbnailBadge
 
     private fun setupTestActivity() {
         robolectricActivity = Robolectric.buildActivity(AppCompatActivity::class.java).create()
@@ -273,7 +275,7 @@ class AndesFeedbackScreenViewTest {
         with(screenView.getHighlight()) {
             text assertEquals "New Highlight"
             visibility assertEquals View.VISIBLE
-            currentTextColor assertEquals badge.badgeComponent.color.iconType.type.primaryColor().colorInt(context)
+            currentTextColor assertEquals badge.badgeComponent.color.type.primaryColor().colorInt(context)
         }
 
     }
@@ -346,7 +348,7 @@ class AndesFeedbackScreenViewTest {
         findViewById<TextView>(R.id.andes_feedbackscreen_header_highlight)
 
     private fun AndesFeedbackScreenView.getThumbnailBadge() =
-        findViewById<AndesThumbnailBadge>(R.id.andes_feedbackscreen_header_image)
+        findViewById<FrameLayout>(R.id.andes_feedbackscreen_header_image).getChildAt(0) as AndesThumbnailBadge
 
     private fun AndesFeedbackScreenView.getButton() =
         findViewById<AndesButton>(R.id.andes_feedbackscreen_button)

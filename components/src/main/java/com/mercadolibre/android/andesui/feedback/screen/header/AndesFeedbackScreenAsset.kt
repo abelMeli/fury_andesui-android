@@ -7,5 +7,6 @@ sealed class AndesFeedbackScreenAsset(internal val asset: AndesFeedbackScreenAss
     data class Thumbnail(val image: Drawable, val badgeType: AndesThumbnailBadgeType) :
         AndesFeedbackScreenAsset(AndesThumbnailFeedbackScreenAsset(image, badgeType))
 
-    // Illustration(image, size)
+    data class Illustration(val image: Drawable, val size: AndesFeedbackScreenIllustrationSize) :
+        AndesFeedbackScreenAsset(AndesIllustrationFeedbackScreenAsset(image, size))
 }

@@ -6,9 +6,10 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgeIconHierarchy
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
+import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 
 internal data class AndesBadgeIconPillAttrs(
-    val andesBadgeType: AndesBadgeIconType,
+    val andesBadgeType: AndesBadgeType,
     val andesBadgeSize: AndesBadgePillSize,
     val andesBadgeHierarchy: AndesBadgeIconHierarchy
 )
@@ -49,7 +50,7 @@ internal object AndesBadgeIconPillAttrsParser {
             else -> AndesBadgeIconHierarchy.LOUD
         }
 
-        return AndesBadgeIconPillAttrs(type, size, hierarchy).also {
+        return AndesBadgeIconPillAttrs(type.iconType, size, hierarchy).also {
             typedArray.recycle()
         }
     }

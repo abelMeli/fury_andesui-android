@@ -26,4 +26,11 @@
 
     <dimen name="andes_feedbackscreen_congrats_gradient_size">72dp</dimen>
     <dimen name="andes_feedbackscreen_congrats_gradient_solid_size">56dp</dimen>
+
+    <dimen name="andes_feedbackscreen_error_generic_screen_width">320dp</dimen>
+    <dimen name="andes_feedbackscreen_error_screen_height">128dp</dimen>
+    <dimen name="andes_feedbackscreen_error_padding">8dp</dimen>
+    <dimen name="andes_feedbackscreen_error_top_bottom_padding">4dp</dimen>
+    <dimen name="andes_feedbackscreen_error_image_margin_right">9dp</dimen>
+    <dimen name="andes_feedbackscreen_error_container_margin">16dp</dimen>
 </resources>

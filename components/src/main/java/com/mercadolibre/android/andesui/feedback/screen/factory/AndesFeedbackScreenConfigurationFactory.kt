@@ -7,7 +7,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
-import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
@@ -50,7 +50,8 @@ internal data class AndesFeedbackBodyConfiguration(
 internal data class AndesFeedbackButtonConfiguration(
     val text: String?,
     val visibility: Int,
-    val onClick: View.OnClickListener?
+    val onClick: View.OnClickListener?,
+    val hierarchy: AndesButtonHierarchy
 )
 
 internal object AndesFeedbackScreenConfigurationFactory {
@@ -69,7 +70,7 @@ internal object AndesFeedbackScreenConfigurationFactory {
         val feedbackType = type.type
         return AndesFeedbackScreenConfiguration(
             body = resolveBodyConfiguration(body, hasBody),
-            background = resolveBackground(context, hasBody),
+            background = resolveBackground(context, hasBody, feedbackType),
             headerVerticalBias = resolveHeaderVerticalBias(hasBody),
             close = resolveCloseConfiguration(
                 context,
@@ -77,11 +78,11 @@ internal object AndesFeedbackScreenConfigurationFactory {
                 actions?.closeCallback,
                 hasBody
             ),
-            feedbackButton = resolveFeedbackButtonConfig(actions?.button),
+            feedbackButton = resolveFeedbackButtonConfig(feedbackType, actions?.button),
             typeInterface = feedbackType,
             feedbackText = header.feedbackText,
             headerView = resolveHeader(context, feedbackType, hasBody, header),
-            gradientVisibility = feedbackType.getGradientVisiblity(hasBody),
+            gradientVisibility = feedbackType.getGradientVisibility(hasBody),
             headerTopMargin = resolveHeaderTopMargin(context, feedbackType, hasBody),
             statusBarColor = resolveStatusBarColor(context, feedbackType),
             actions = actions,
@@ -115,13 +116,14 @@ internal object AndesFeedbackScreenConfigurationFactory {
             (this as? AndesFeedbackScreenHeaderView)?.let {
                 val color = feedbackType.feedbackColor
                 it.setupTextComponents(andesFeedbackScreenHeader.feedbackText, color, hasBody)
-                it.setupThumbnailComponent(
+                it.setupAssetComponent(
                     resolveFeedbackThumbnail(
                         context,
                         andesFeedbackScreenHeader.feedbackImage,
                         feedbackType,
                         hasBody
-                    ), color
+                    ), feedbackType,
+                    hasBody
                 )
             }
         }
@@ -137,9 +139,13 @@ internal object AndesFeedbackScreenConfigurationFactory {
         badgeType = AndesThumbnailBadgeType.FeedbackIcon
     )
 
-    private fun resolveFeedbackButtonConfig(feedbackButton: AndesFeedbackScreenButton?) =
+    private fun resolveFeedbackButtonConfig(
+        type: AndesFeedbackScreenTypeInterface,
+        feedbackButton: AndesFeedbackScreenButton?
+    ) =
         AndesFeedbackButtonConfiguration(
             text = feedbackButton?.text,
+            hierarchy = type.getButtonHierarchy(),
             visibility = View.VISIBLE.takeIf { feedbackButton != null } ?: View.GONE,
             onClick = feedbackButton?.onClick
         )
@@ -168,8 +174,12 @@ internal object AndesFeedbackScreenConfigurationFactory {
     private fun resolveHeaderVerticalBias(hasBody: Boolean) =
         TOP_BIAS.takeIf { hasBody } ?: MIDDLE_BIAS
 
-    private fun resolveBackground(context: Context, hasBody: Boolean) = ContextCompat.getColor(
+    private fun resolveBackground(
+        context: Context,
+        hasBody: Boolean,
+        feedbackType: AndesFeedbackScreenTypeInterface
+    ) = ContextCompat.getColor(
         context,
-        R.color.andes_bg_color_secondary.takeIf { hasBody } ?: R.color.andes_bg_color_white
+        feedbackType.getBackgroundColor(hasBody)
     )
 }

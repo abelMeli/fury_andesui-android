@@ -25,16 +25,12 @@
             android:layout_marginHorizontal="@dimen/andes_feedbackscreen_congrats_header_body_card_padding"
             android:layout_marginVertical="@dimen/andes_feedbackscreen_congrats_header_body_card_padding">
 
-            <com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
+            <FrameLayout
                 android:id="@+id/andes_feedbackscreen_congrats_header_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/andes_feedbackscreen_thumbnail_margin_start"
                 android:layout_marginBottom="@dimen/andes_feedbackscreen_thumbnail_margin_bottom"
-                app:andesThumbnailBadgeComponentPillSize="size_56"
-                app:andesThumbnailBadgeComponentType="success"
-                app:andesThumbnailBadgeImage="@drawable/andes_navegacion_compras_24"
-                app:andesThumbnailBadgeType="icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/andes_feedbackscreen_congrats_header_title"
                 app:layout_constraintTop_toTopOf="parent" />

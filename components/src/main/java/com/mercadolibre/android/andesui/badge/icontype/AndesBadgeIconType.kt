@@ -19,6 +19,16 @@ enum class AndesBadgeIconType {
 
     companion object {
         fun fromString(value: String): AndesBadgeIconType = valueOf(value.toUpperCase(Locale.ROOT))
+
+        internal fun fromAndesBadgeType(badgeType: AndesBadgeType): AndesBadgeIconType {
+            return when(badgeType) {
+                AndesBadgeType.HIGHLIGHT -> HIGHLIGHT
+                AndesBadgeType.SUCCESS -> SUCCESS
+                AndesBadgeType.WARNING -> WARNING
+                AndesBadgeType.ERROR -> ERROR
+                else -> HIGHLIGHT
+            }
+        }
     }
 
     internal val iconType get() = getAndesBadgeType()

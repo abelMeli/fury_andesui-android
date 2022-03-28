@@ -41,12 +41,44 @@ internal interface AndesBadgeTypeInterface {
     fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable? = null
 
     fun feedbackIcon(context: Context, defaultSize: Boolean): Drawable? = null
+
+    /**
+     * Returns a [AndesColor] that contains the thumbnail outline color.
+     *
+     * @return a [AndesColor] that contains the primary color data for the badge.
+     */
+    fun thumbnailBadgeOutlineColor(): AndesColor = primaryColor()
 }
 
 internal class AndesNeutralBadgeType : AndesBadgeTypeInterface {
     override fun primaryVariantColor() = R.color.andes_gray_550_solid.toAndesColor()
     override fun primaryColor() = R.color.andes_gray_550_solid.toAndesColor()
     override fun secondaryColor() = R.color.andes_gray_070_solid.toAndesColor()
+    override fun thumbnailBadgeOutlineColor() = R.color.andes_gray_250.toAndesColor()
+
+    override fun icon(context: Context, size: AndesBadgePillSize, backgroundColor: Int): Drawable {
+        val iconPath = if (size == AndesBadgePillSize.SMALL) ICON_16 else ICON_24
+        val icon = IconProvider(context).loadIcon(iconPath) as BitmapDrawable
+        return buildColoredCircularShapeWithIconDrawable(
+            icon,
+            context,
+            R.color.andes_gray_250.toAndesColor(),
+            backgroundColor,
+            size.size.height(context).toInt()
+        )
+    }
+
+    override fun feedbackIcon(context: Context, defaultSize: Boolean): Drawable? {
+        return IconProvider(context).loadIcon(
+            R.drawable.andes_ui_feedback_error_40
+                .takeIf { defaultSize } ?: R.drawable.andes_ui_feedback_error_32
+        )
+    }
+
+    private companion object {
+        const val ICON_16 = "andes_ui_feedback_error_16"
+        const val ICON_24 = "andes_ui_feedback_error_24"
+    }
 }
 
 internal class AndesHighlightBadgeType : AndesBadgeTypeInterface {

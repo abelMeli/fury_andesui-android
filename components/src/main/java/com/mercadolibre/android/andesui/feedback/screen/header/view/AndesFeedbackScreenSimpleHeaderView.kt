@@ -1,14 +1,26 @@
 package com.mercadolibre.android.andesui.feedback.screen.header.view
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
+import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
+import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackBadgeIconType
+import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBold
+import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
 import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
 import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgePillSize
 import com.mercadolibre.android.andesui.utils.elevateWithShadow
@@ -36,17 +48,20 @@ internal class AndesFeedbackScreenSimpleHeaderView : AndesFeedbackScreenHeaderVi
         val container = LayoutInflater.from(context)
             .inflate(R.layout.andes_layout_feedback_screen_header_simple, this)
 
+        errorContainer = container.findViewById(R.id.andes_feedbackscreen_container_error_code)
+        errorImage = container.findViewById(R.id.andes_error_code_image)
         overline = container.findViewById(R.id.andes_feedbackscreen_header_overline)
         description = container.findViewById(R.id.andes_feedbackscreen_header_description)
         title = container.findViewById(R.id.andes_feedbackscreen_header_title)
+        errorCode = container.findViewById(R.id.andes_feedbackscreen_header_error_code)
         highlight = container.findViewById(R.id.andes_feedbackscreen_header_highlight)
-        thumbnailBadge = container.findViewById(R.id.andes_feedbackscreen_header_image)
+        assetContainer = container.findViewById(R.id.andes_feedbackscreen_header_image)
         cardViewBody = container.findViewById(R.id.andes_feedbackscreen_header_card)
     }
 
     override fun setupTextComponents(
         feedbackText: AndesFeedbackScreenText,
-        type: AndesBadgeIconType,
+        type: AndesFeedbackBadgeIconType,
         hasBody: Boolean
     ) {
         super.setupTextComponents(feedbackText, type, hasBody)
@@ -60,13 +75,75 @@ internal class AndesFeedbackScreenSimpleHeaderView : AndesFeedbackScreenHeaderVi
         )
     }
 
-    override fun setupThumbnailComponent(
-        feedbackThumbnail: AndesFeedbackScreenAsset,
-        type: AndesBadgeIconType
-    ) {
-        super.setupThumbnailComponent(feedbackThumbnail, type)
-        thumbnailBadge.badgeComponent =
-            AndesThumbnailBadgeComponent.IconPill(type, AndesThumbnailBadgePillSize.SIZE_64)
+    internal fun setErrorCodeConfiguration(errorInfo: String?) {
+        if (errorInfo.isNullOrEmpty()) {
+            errorCode.visibility = GONE
+            errorImage.visibility = GONE
+            errorContainer.visibility = GONE
+
+        } else {
+            errorImage.setColorFilter(AndesColor(R.color.andes_accent_color_500).colorInt(context))
+            errorImage.visibility = VISIBLE
+            errorCode.visibility = VISIBLE
+            errorContainer.visibility = VISIBLE
+
+            setupSpanTextView(
+                errorCode,
+                resources.getString(R.string.andes_feedbackscreen_error_code),
+                AndesColor(R.color.andes_gray_550)
+            )
+            setupSpanTextView(
+                errorCode,
+                errorInfo,
+                AndesColor(R.color.andes_accent_color_500)
+            )
+
+            errorContainer.setOnClickListener(getOnErrorClickListener(errorInfo))
+            errorCode.setOnClickListener(getOnErrorClickListener(errorInfo))
+            errorImage.setOnClickListener(getOnErrorClickListener(errorInfo))
+            errorCode.bodyBolds = AndesBodyBolds(
+                listOf(
+                    AndesBodyBold(
+                        errorCode.text.toString().indexOf(errorInfo),
+                        errorCode.text.length
+                    )
+                )
+            )
+        }
+    }
+
+    private fun setupSpanTextView(textview: TextView, mText: String?, color: AndesColor) {
+        textview.visibility = if (mText.isNullOrEmpty()) {
+            GONE
+        } else {
+            val word: Spannable = SpannableString(mText)
+            word.setSpan(
+                ForegroundColorSpan(ContextCompat.getColor(context, color.colorRes)),
+                0,
+                word.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            textview.append(word)
+            VISIBLE
+        }
+    }
+
+    private fun getOnErrorClickListener(errorInfo: String): OnClickListener {
+        return OnClickListener {
+            val clipboardManager =
+                context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText(
+                context.getString(R.string.andes_feedbackscreen_error_code_label),
+                errorInfo
+            )
+            clipboardManager.setPrimaryClip(clip)
+
+            Toast.makeText(
+                context.applicationContext,
+                context.getString(R.string.andes_feedbackscreen_error_code_clipboard) + errorInfo,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     /**
@@ -112,15 +189,16 @@ internal class AndesFeedbackScreenSimpleHeaderView : AndesFeedbackScreenHeaderVi
     private fun setupCardView() {
         val viewHeight = height.takeIf { it > NO_HEIGHT } ?: measuredHeight
         cardViewBody.layoutParams.apply {
-            height = viewHeight - thumbnailBadge.height / 2
+            height = viewHeight - assetContainer.height / 2
         }
         cardViewBody.clipToPadding = false
         cardViewBody.visibility = VISIBLE
 
         cardViewBody.elevateWithShadow(true)
-        thumbnailBadge.elevateWithShadow()
+        assetContainer.elevateWithShadow()
         title.elevateWithShadow()
         description.elevateWithShadow()
+        errorCode.elevateWithShadow()
         highlight.elevateWithShadow()
         overline.elevateWithShadow()
     }
