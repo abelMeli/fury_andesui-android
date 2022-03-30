@@ -13,8 +13,11 @@ import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicSnackbarBinding
 import com.mercadolibre.android.andesui.snackbar.AndesSnackbar
 import com.mercadolibre.android.andesui.snackbar.action.AndesSnackbarAction
+import com.mercadolibre.android.andesui.snackbar.callback.AndesSnackbarCallback
 import com.mercadolibre.android.andesui.snackbar.duration.AndesSnackbarDuration
 import com.mercadolibre.android.andesui.snackbar.type.AndesSnackbarType
+import com.mercadolibre.android.andesui.switchandes.AndesSwitch
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 
 class SnackbarShowcaseActivity : BaseActivity() {
@@ -63,13 +66,15 @@ class SnackbarShowcaseActivity : BaseActivity() {
 
         setupAndesSnackabrVariation(variation)
 
-        hasAction.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                actionGroup.visibility = View.VISIBLE
-            } else {
-                actionGroup.visibility = View.GONE
+        hasAction.setOnStatusChangeListener(object : AndesSwitch.OnStatusChangeListener {
+            override fun onStatusChange(andesSwitch: AndesSwitchStatus) {
+                if (andesSwitch == AndesSwitchStatus.CHECKED) {
+                    actionGroup.visibility = View.VISIBLE
+                } else {
+                    actionGroup.visibility = View.GONE
+                }
             }
-        }
+        })
 
         val snackbarType = binding.snackbarType
         ArrayAdapter.createFromResource(
@@ -92,7 +97,7 @@ class SnackbarShowcaseActivity : BaseActivity() {
         }
 
         clearButton.setOnClickListener {
-            hasAction.isChecked = false
+            hasAction.status = AndesSwitchStatus.UNCHECKED
             actionGroup.visibility = View.GONE
 
             text.state = AndesTextfieldState.IDLE
@@ -172,13 +177,24 @@ class SnackbarShowcaseActivity : BaseActivity() {
             binding.snackbarText.text!!,
             selectedDuration
         )
-        if (binding.snackbarHasAction.isChecked) {
+        if (binding.snackbarHasAction.status == AndesSwitchStatus.CHECKED) {
             snackbar.action = AndesSnackbarAction(
                 binding.snackbarTextAction.text!!,
                 View.OnClickListener {
                     Toast.makeText(this, "Callback", Toast.LENGTH_SHORT).show()
                 }
             )
+        }
+
+        if (binding.snackbarHasCallbacks.status == AndesSwitchStatus.CHECKED) {
+            snackbar.addCallback(
+                object : AndesSnackbarCallback() {
+                    override fun onSnackbarDismissed() =
+                        Toast.makeText(applicationContext, "Snackbar dismissed", Toast.LENGTH_SHORT).show()
+
+                    override fun onSnackbarShown() =
+                        Toast.makeText(applicationContext, "Snackbar shown", Toast.LENGTH_SHORT).show()
+                })
         }
         snackbar.show()
     }
@@ -197,13 +213,24 @@ class SnackbarShowcaseActivity : BaseActivity() {
             binding.snackbarText.text!!,
             selectedDuration
         )
-        if (binding.snackbarHasAction.isChecked) {
+        if (binding.snackbarHasAction.status == AndesSwitchStatus.CHECKED) {
             snackbar.action = AndesSnackbarAction(
                 binding.snackbarTextAction.text!!,
                 View.OnClickListener {
                     Toast.makeText(this, "Callback", Toast.LENGTH_SHORT).show()
                 }
             )
+        }
+
+        if (binding.snackbarHasCallbacks.status == AndesSwitchStatus.CHECKED) {
+            snackbar.addCallback(
+                object : AndesSnackbarCallback() {
+                    override fun onSnackbarDismissed() =
+                        Toast.makeText(applicationContext, "Snackbar dismissed", Toast.LENGTH_SHORT).show()
+
+                    override fun onSnackbarShown() =
+                        Toast.makeText(applicationContext, "Snackbar shown", Toast.LENGTH_SHORT).show()
+                })
         }
         snackbar.show()
     }
@@ -221,7 +248,7 @@ class SnackbarShowcaseActivity : BaseActivity() {
     }
 
     private fun isValidHasAction(): Boolean {
-        return if (binding.snackbarHasAction.isChecked && binding.snackbarTextAction.text.isNullOrEmpty()) {
+        return if (binding.snackbarHasAction.status == AndesSwitchStatus.CHECKED && binding.snackbarTextAction.text.isNullOrEmpty()) {
             binding.snackbarTextAction.state = AndesTextfieldState.ERROR
             binding.snackbarTextAction.helper = getString(R.string.andes_snackbar_error)
             false

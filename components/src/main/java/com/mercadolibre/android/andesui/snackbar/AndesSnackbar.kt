@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.snackbar.action.AndesSnackbarAction
+import com.mercadolibre.android.andesui.snackbar.callback.AndesSnackbarCallback
 import com.mercadolibre.android.andesui.snackbar.duration.AndesSnackbarDuration
 import com.mercadolibre.android.andesui.snackbar.factory.AndesSnackbarAttrs
 import com.mercadolibre.android.andesui.snackbar.factory.AndesSnackbarConfiguration
@@ -346,6 +347,14 @@ class AndesSnackbar : CardView {
         freeSpace -= ANDES_SNACKBAR_PADDING * resources.getDimensionPixelSize(R.dimen.andes_snackbar_padding) // Paddings
         freeSpace -= widthText // Space occupied by the text
         return freeSpace
+    }
+
+    fun addCallback(callback: AndesSnackbarCallback) {
+        snackbar.addCallback(callback)
+    }
+
+    fun removeCallback(callback: AndesSnackbarCallback) {
+        snackbar.removeCallback(callback)
     }
 
     private fun createConfig() =

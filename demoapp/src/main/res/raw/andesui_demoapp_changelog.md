@@ -1,6 +1,7 @@
 # v4.17.0
 ## 🚀 Feature
-- Update in the `AndesTextView` docs
+- Added callbacks feature in Snackbar component. | Author: [@meligeo](https://github.com/meligeo)
+- Update in the `AndesTextView` docs. | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v4.16.0
 ## 🛠 Fixes

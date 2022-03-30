@@ -512,6 +512,7 @@
     <string name="andes_snackbar_description" translatable="false">They communicate quickly and concisely the status of an event. For more complex or extensive communications, consider the use of tooltip or message.</string>
     <string name="andes_snackbar_error" translatable="false">Required</string>
     <string name="andes_snackbar_action" translatable="false">Action</string>
+    <string name="andes_snackbar_callbacks" translatable="false">Callbacks</string>
     <string name="andes_snackbar_duration" translatable="false">Duration</string>
     <string name="andes_snackbar_text_action" translatable="false">Text action</string>
     <string-array name="andes_snackbar_type_spinner" translatable="false">

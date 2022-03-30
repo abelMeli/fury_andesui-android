@@ -74,6 +74,8 @@ This component can't be created via XML.
 | Unit | **show()** <br/> Shows the snackbar for [AndesSnackbarDuration](#andessnackbarduration) time. |
 | Unit | **dismiss()** <br/> Dismisses snackbar in case it is being displayed. |
 | Boolean | **isShown()** <br/> Retrives if the snackbar is being displayed or not. |
+| Unit | **addCallback(callback: AndesSnackbarCallback)** <br/> Add a new callback to the snackbar. |
+| Unit | **removeCallback(callback: AndesSnackbarCallback)** <br/> remove an added callback. |
 
 <br/>
 
@@ -89,6 +91,8 @@ enum class AndesSnackbarType
 | NEUTRAL | Gives a gray color style to the component<br/><img src="../resources/snackbar/neutralSnackbarExample.png" height="48"/> |
 | ERROR | Gives a red color red to the component<br/><img src="../resources/snackbar/errorSnackbarExample.png" height="48"/> |
 | SUCCESS | Gives a green color style to the component<br/><img src="../resources/snackbar/successSnackbarExample.png" height="48"/> |
+
+
 
 <br/>
 
@@ -135,6 +139,21 @@ class AndesSnackbarAction
 | -------- | ------- |
 | text: String | **get():** retrieves button displayed text. <br/> **set(value: String):** updates button displayed text. |
 | callback: View.OnClickListener | **get():** retrieves button on click callback. <br/> **set(value: String?):** updates button on click callback. |
+
+
+### AndesSnackbarCallback
+Class used to create the callback to listen the snackbar show and dismiss events.
+```kotlin
+abstract class AndesSnackbarAction
+```
+
+<br/>
+
+#### Functions
+| Return type | Method |
+| -------- | ------- |
+| Unit | **onSnackbarDismissed()**<br/> function that should be override to implement actions when snackbar is dissmissed |
+| Unit | **onSnackbarShown()**<br/> function that should be override to implement actions when snackbar is shown  |
 
 <br/>
 
