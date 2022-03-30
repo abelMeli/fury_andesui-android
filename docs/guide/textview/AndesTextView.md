@@ -108,6 +108,11 @@ sealed class AndesTextViewStyle
 | BodyS | Body small size (14sp), regular style |
 | BodyXs | Body extra small size (12sp), regular style |
 
+Since this styles do not cover all the style combinations the dev may need, both regular textView setters for the size
+(`android:textSize`) and the style (`android:textStyle`) are available to use in combination with all the
+AndesTextViewStyle values. For example, to get a text with size of `14sp` and `bold` style, we can setup the
+component with `app:andesTextViewStyle=BodyS` and `android:textStyle=bold`.
+
 <br/>
 
 | Sample image |

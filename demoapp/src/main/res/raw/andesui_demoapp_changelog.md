@@ -1,6 +1,12 @@
+# v4.17.0
+## 🚀 Feature
+- Update in the `AndesTextView` docs
+
 # v4.16.0
 ## 🛠 Fixes
 - `AndesButtonGroup` component is hidden in the home page | Author: [@edgnavarro](https://github.com/edgnavarro)
+## 🚀 Feature
+- Add new feedbackScreen variant for errors | Author: [@SofiaTejerina](https://github.com/SofiaTejerina)
 
 # v4.15.0
 ## 🚀 Feature
