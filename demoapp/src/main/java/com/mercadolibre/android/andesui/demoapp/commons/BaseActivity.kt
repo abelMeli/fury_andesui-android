@@ -124,9 +124,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun createUri(url: String): Uri {
         return Uri.Builder()
-            .scheme("meli")
-            .authority("andes")
-            .path("storybook")
+            .scheme("andes")
+            .authority("storybook")
             .appendQueryParameter(QUERY_PARAMETER_KEY, url)
             .build()
     }
