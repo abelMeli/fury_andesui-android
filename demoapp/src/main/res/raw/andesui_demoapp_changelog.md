@@ -1,5 +1,6 @@
 # v4.17.0
 ## 🚀 Feature
+- `AndesFeedbackScreen` AndesButtonGroup is integrated into the AndesFeedbackScreen component. | Author: [@edgnavarro](https://github.com/edgnavarro)
 - Added callbacks feature in Snackbar component. | Author: [@meligeo](https://github.com/meligeo)
 - Update in the `AndesTextView` docs. | Author: [@juanunzu](https://github.com/juanunzu)
 - `AndesTextView` version 2 for append texts and money amount | Author: [@meligeo](https://github.com/meligeo)

@@ -7,7 +7,9 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ScrollView
@@ -16,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.Group
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.buttongroup.AndesButtonGroup
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
 import com.mercadolibre.android.andesui.feedback.screen.factory.AndesFeedbackBodyConfiguration
 import com.mercadolibre.android.andesui.feedback.screen.factory.AndesFeedbackButtonConfiguration
@@ -34,10 +37,10 @@ class AndesFeedbackScreenView : ScrollView {
 
     private lateinit var gradient: Group
     private lateinit var close: ImageView
-    private lateinit var button: AndesButton
     private lateinit var body: View
     private lateinit var container: ConstraintLayout
     private lateinit var header: View
+    private lateinit var contentButtonGroup: ConstraintLayout
     private lateinit var config: AndesFeedbackScreenConfiguration
     private var initialStatusBarColor = 0
 
@@ -77,7 +80,8 @@ class AndesFeedbackScreenView : ScrollView {
         setupFeedbackBody(config.body)
         setContainerConstraints(config)
         setupClose(config.close)
-        setupFeedbackButton(config.feedbackButton)
+        setupFeedbackSimpleButtonGroup(config.feedbackButton)
+        setupAndesButtonGroup(config)
         setupA11y()
     }
 
@@ -152,11 +156,11 @@ class AndesFeedbackScreenView : ScrollView {
 
             with(body) {
                 importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
-                accessibilityTraversalBefore = button.id
+                accessibilityTraversalBefore = contentButtonGroup.id
                 accessibilityTraversalAfter = header.id
             }
 
-            with(button) {
+            with(contentButtonGroup) {
                 importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
                 accessibilityTraversalBefore = close.id
                 accessibilityTraversalAfter = body.id
@@ -165,7 +169,7 @@ class AndesFeedbackScreenView : ScrollView {
             with(close) {
                 importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
                 accessibilityTraversalBefore = header.id
-                accessibilityTraversalAfter = button.id
+                accessibilityTraversalAfter = contentButtonGroup.id
             }
         }
     }
@@ -203,7 +207,7 @@ class AndesFeedbackScreenView : ScrollView {
         connect(header.id, ConstraintSet.TOP, container.id, ConstraintSet.TOP)
         connect(body.id, ConstraintSet.TOP, header.id, ConstraintSet.BOTTOM)
         connect(header.id, ConstraintSet.BOTTOM, body.id, ConstraintSet.TOP)
-        connect(body.id, ConstraintSet.BOTTOM, button.id, ConstraintSet.TOP)
+        connect(body.id, ConstraintSet.BOTTOM, contentButtonGroup.id, ConstraintSet.TOP)
 
         setMargin(
             header.id,
@@ -247,7 +251,7 @@ class AndesFeedbackScreenView : ScrollView {
             ConstraintSet.BOTTOM,
             0
         )
-        connect(body.id, ConstraintSet.BOTTOM, button.id, ConstraintSet.TOP)
+        connect(body.id, ConstraintSet.BOTTOM, contentButtonGroup.id, ConstraintSet.TOP)
         connect(body.id, ConstraintSet.TOP, header.id, ConstraintSet.BOTTOM)
         connect(body.id, ConstraintSet.START, container.id, ConstraintSet.START)
         connect(body.id, ConstraintSet.END, container.id, ConstraintSet.END)
@@ -270,12 +274,25 @@ class AndesFeedbackScreenView : ScrollView {
         }
     }
 
-    private fun setupFeedbackButton(configButton: AndesFeedbackButtonConfiguration) {
-        with(button) {
-            text = configButton.text
-            setOnClickListener(configButton.onClick)
-            visibility = configButton.visibility
-            hierarchy = configButton.hierarchy
+    private fun setupFeedbackSimpleButtonGroup(configButton: AndesFeedbackButtonConfiguration) {
+        val button = AndesButtonGroup(context, listOf(
+            AndesButton(context, buttonText = configButton.text, buttonHierarchy = configButton.hierarchy).apply {
+                setOnClickListener(configButton.onClick)
+            }
+        )).apply {
+            layoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+        }
+        contentButtonGroup.removeAllViews()
+        contentButtonGroup.addView(button)
+    }
+
+    private fun setupAndesButtonGroup(config: AndesFeedbackScreenConfiguration) {
+        if (config.feedbackButton.visibility == View.GONE) {
+            contentButtonGroup.removeAllViews()
+            config.buttonGroup.andesButtonGroup?.let {
+                it.layoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+                contentButtonGroup.addView(it)
+            }
         }
     }
 
@@ -284,9 +301,9 @@ class AndesFeedbackScreenView : ScrollView {
             LayoutInflater.from(context).inflate(R.layout.andes_layout_feedback_screen, this)
 
         container = scrollView.findViewById(R.id.andes_feedback_content_constraint_layout)
-        button = scrollView.findViewById(R.id.andes_feedbackscreen_button)
         close = scrollView.findViewById(R.id.andes_feedbackscreen_close)
         gradient = scrollView.findViewById(R.id.andes_feedbackscreen_gradient)
+        contentButtonGroup = scrollView.findViewById(R.id.andes_feedbackscreen_content_buttongroup)
     }
 
     private fun createConfig(
@@ -313,7 +330,8 @@ class AndesFeedbackScreenView : ScrollView {
         val nullBody = body.takeIf { body.visibility == VISIBLE }
         config = createConfig(nullBody, actions, config.type, config.header)
         setupClose(config.close)
-        setupFeedbackButton(config.feedbackButton)
+        setupFeedbackSimpleButtonGroup(config.feedbackButton)
+        setupAndesButtonGroup(config)
     }
 
     /**

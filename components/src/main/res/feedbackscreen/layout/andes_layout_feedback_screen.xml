@@ -39,16 +39,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.mercadolibre.android.andesui.button.AndesButton
-            android:id="@+id/andes_feedbackscreen_button"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/andes_feedbackscreen_content_buttongroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/andes_feedbackscreen_content_horizontal_margin"
             android:layout_marginEnd="@dimen/andes_feedbackscreen_content_horizontal_margin"
-            android:visibility="gone"
-            app:andesButtonHierarchy="loud"
-            app:andesButtonSize="large"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/andes_feedbackscreen_gradient"

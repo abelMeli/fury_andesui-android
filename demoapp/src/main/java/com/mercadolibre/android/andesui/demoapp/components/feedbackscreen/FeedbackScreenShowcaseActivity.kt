@@ -36,6 +36,7 @@ class FeedbackScreenShowcaseActivity : BaseActivity() {
                 AndesuiStaticFeedbackScreenSimpleWarningBinding.inflate(layoutInflater).root,
                 AndesuiStaticFeedbackScreenSimpleBodyBinding.inflate(layoutInflater).root,
                 AndesuiStaticFeedbackScreenCongratsBinding.inflate(layoutInflater).root,
+                AndesuiStaticFeedbackScreenSimpleButtonBinding.inflate(layoutInflater).root,
                 AndesuiStaticFeedbackScreenSimpleBodyBinding.inflate(layoutInflater).root
             )
         )
@@ -61,6 +62,10 @@ class FeedbackScreenShowcaseActivity : BaseActivity() {
         FeedbackScreenStaticSimpleRedBodyPage().create(
             this,
             adapter.views[SIMPLE_ERROR_POSITION] as ConstraintLayout
+        )
+        FeedbackScreenStaticSimpleButtonGroupPage().create(
+            this,
+            adapter.views[SIMPLE_BUTTON_GROUP] as ConstraintLayout
         )
         FeedbackScreenStaticErrorPage().create(
             adapter.views[GENERIC_ERROR_POSITION] as ConstraintLayout
@@ -148,13 +153,14 @@ class FeedbackScreenShowcaseActivity : BaseActivity() {
     }
 
     companion object {
-        private const val OFFSCREEN_PAGES_LIMIT = 4
+        private const val OFFSCREEN_PAGES_LIMIT = 6
         private const val DYNAMIC_POSITION = 0
         private const val SIMPLE_SUCCESS_POSITION = 1
         private const val SIMPLE_WARNING_POSITION = 2
         private const val SIMPLE_ERROR_POSITION = 3
-        private const val CONGRATS_POSITION = 4
-        private const val GENERIC_ERROR_POSITION = 5
+        private const val SIMPLE_BUTTON_GROUP = 4
+        private const val CONGRATS_POSITION = 5
+        private const val GENERIC_ERROR_POSITION = 6
     }
 }
 

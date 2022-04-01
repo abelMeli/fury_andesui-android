@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
+import com.mercadolibre.android.andesui.buttongroup.AndesButtonGroup
+import com.mercadolibre.android.andesui.buttongroup.distribution.AndesButtonGroupDistribution
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.feedback.screen.AndesFeedbackScreenView
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
@@ -48,6 +52,14 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
         }
     }
 
+    private val feedbackButtonGroupQuantity by lazy {
+        intent.extras?.getString(FEEDBACK_BUTTON_GROUP)
+    }
+
+    private val buttonsHierarchy = arrayListOf<AndesButtonHierarchy>(
+        AndesButtonHierarchy.LOUD, AndesButtonHierarchy.QUIET, AndesButtonHierarchy.TRANSPARENT
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,12 +72,33 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
                     feedbackImage = getFeedbackHeaderThumbnail()
                 ),
                 body = getFeedbackBodyItems(),
-                actions = AndesFeedbackScreenActions(
-                    button = getFeedbackButtonBody(),
-                    closeCallback = getFeedbackCloseButton()
-                )
+                actions = getFeedbackScreenButtonActions()
             )
         )
+    }
+
+    private fun getFeedbackScreenActions(count: Int): AndesFeedbackScreenActions {
+        return if (count == 0) {
+            AndesFeedbackScreenActions(null, getFeedbackCloseButton())
+        } else {
+            val arrayButton = arrayListOf<AndesButton>()
+            for(i in 0 until count) {
+                arrayButton.add(AndesButton(this, buttonText = "Button ${i+1}", buttonHierarchy = buttonsHierarchy[i]))
+            }
+            AndesFeedbackScreenActions(
+                AndesButtonGroup(this, arrayButton, distribution = AndesButtonGroupDistribution.MIXED),
+                getFeedbackCloseButton()
+            )
+        }
+    }
+
+    private fun getFeedbackScreenButtonActions() : AndesFeedbackScreenActions {
+        return when (feedbackButtonGroupQuantity) {
+            NONE -> getFeedbackScreenActions(0)
+            else -> {
+                getFeedbackScreenActions(feedbackButtonGroupQuantity!!.toInt())
+            }
+        }
     }
 
     companion object {
@@ -80,6 +113,7 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
         private const val FEEDBACK_OVERLINE = "feedbackHeaderOverline"
         private const val FEEDBACK_DESCRIPTION = "feedbackHeaderDescription"
         private const val FEEDBACK_HIGHLIGHT = "feedbackHeaderHighlight"
+        private const val FEEDBACK_BUTTON_GROUP = "feedbackButtonGroup"
 
         private const val DEFAULT_HEADER_TEXT = "Default header text"
         private const val DEFAULT_HIGHLIGHT_TEXT = "Default highlighted text"
@@ -89,6 +123,10 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
                     "Default description text to test the body links."
         private const val DEFAULT_OVERLINE_TEXT = "Default overline text"
         private val VALID_BODY_LINK = AndesBodyLink(37, 47)
+        private const val NONE = "None"
+        private const val ONE_BUTTON = "1"
+        private const val TWO_BUTTON = "2"
+        private const val THREE_BUTTON = "3"
 
         fun getIntent(
             context: Context,
@@ -97,24 +135,24 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
             feedbackThumbnailSelected: String?,
             feedbackBodyMocks: Int?,
             feedbackCloseButtonEnabled: String,
-            feedbackButtonText: String?,
             feedbackHeaderOverlineSwitch: String,
             feedbackHeaderTitle: String?,
             feedbackHeaderOverline: String?,
             feedbackHeaderDescription: String?,
-            feedbackHeaderHighlight: String?
+            feedbackHeaderHighlight: String?,
+            feedbackButtonGroup: String
         ) = Intent(context, FeedbackScreenDynamicShowcase::class.java).apply {
             putExtra(FEEDBACK_TYPE, feedbackTypeSelected)
             putExtra(FEEDBACK_COLOR, feedbackColorSelected)
             putExtra(FEEDBACK_THUMBNAIL, feedbackThumbnailSelected)
             putExtra(FEEDBACK_BODY_MOCKS, feedbackBodyMocks)
             putExtra(FEEDBACK_CLOSE_BUTTON, feedbackCloseButtonEnabled)
-            putExtra(FEEDBACK_BUTTON_TEXT, feedbackButtonText)
             putExtra(FEEDBACK_OVERLINE_STATUS, feedbackHeaderOverlineSwitch)
             putExtra(FEEDBACK_TITLE, feedbackHeaderTitle)
             putExtra(FEEDBACK_OVERLINE, feedbackHeaderOverline)
             putExtra(FEEDBACK_DESCRIPTION, feedbackHeaderDescription)
             putExtra(FEEDBACK_HIGHLIGHT, feedbackHeaderHighlight)
+            putExtra(FEEDBACK_BUTTON_GROUP, feedbackButtonGroup)
         }
     }
 

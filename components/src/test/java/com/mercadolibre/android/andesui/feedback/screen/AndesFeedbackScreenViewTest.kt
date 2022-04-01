@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
@@ -24,6 +25,7 @@ import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScre
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.buttongroup.AndesButtonGroup
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
@@ -280,9 +282,8 @@ class AndesFeedbackScreenViewTest {
 
     }
 
-
     @Test
-    fun `FeedbackScreen Simple without body set actions`() {
+    fun `FeedbackScreen Simple with AndesFeedbackScreenActions deprecated constructor without body set actions`() {
         val onClick = View.OnClickListener { }
         val screenView = AndesFeedbackScreenView(
             context = activity,
@@ -308,8 +309,73 @@ class AndesFeedbackScreenViewTest {
             )
         )
 
-        with(screenView.getButton()) {
-            text assertEquals "Button"
+        with(screenView.getButtonGroup() as AndesButtonGroup) {
+            (getChildAt(0) as AndesButton).text assertEquals "Button"
+        }
+    }
+
+    @Test
+    fun `FeedbackScreen Simple without body set actions`() {
+        val onClick = View.OnClickListener { }
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Simple(
+                AndesFeedbackScreenColor.RED
+            ),
+            header = AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "Title"
+                )
+            ),
+            body = null
+        )
+
+        startActivity(screenView)
+        screenView.setFeedbackScreenActions(
+            AndesFeedbackScreenActions(
+                AndesButtonGroup(context, listOf(
+                    AndesButton(context, buttonText = "Button").apply {
+                        onClick
+                    }
+                )),
+                onClick
+            )
+        )
+
+        with(screenView.getButtonGroup() as AndesButtonGroup) {
+            (getChildAt(0) as AndesButton).text assertEquals "Button"
+        }
+    }
+
+    @Test
+    fun `FeedbackScreen Simple without body set button group actions`() {
+        val onClick = View.OnClickListener { }
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Simple(
+                AndesFeedbackScreenColor.RED
+            ),
+            header = AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "Title"
+                )
+            ),
+            body = null
+        )
+
+        startActivity(screenView)
+        screenView.setFeedbackScreenActions(
+            AndesFeedbackScreenActions(
+                AndesButtonGroup(context, listOf(
+                    AndesButton(context, buttonText = "Button"),
+                    AndesButton(context, buttonText = "Button 2")
+                )),
+                onClick
+            )
+        )
+
+        with(screenView.getButtonGroup() as AndesButtonGroup) {
+            (getChildAt(1) as AndesButton).text assertEquals "Button 2"
         }
     }
 
@@ -350,8 +416,8 @@ class AndesFeedbackScreenViewTest {
     private fun AndesFeedbackScreenView.getThumbnailBadge() =
         findViewById<FrameLayout>(R.id.andes_feedbackscreen_header_image).getChildAt(0) as AndesThumbnailBadge
 
-    private fun AndesFeedbackScreenView.getButton() =
-        findViewById<AndesButton>(R.id.andes_feedbackscreen_button)
+    private fun AndesFeedbackScreenView.getButtonGroup() =
+        findViewById<ConstraintLayout>(R.id.andes_feedbackscreen_content_buttongroup).getChildAt(0)
 
     fun <T> getField(name: String, target: Any): T {
         val field = target::class.java.getDeclaredField(name)

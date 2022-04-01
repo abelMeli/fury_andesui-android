@@ -8,9 +8,16 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
+import com.facebook.common.logging.FLog
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipelineConfig
+import com.facebook.imagepipeline.listener.RequestListener
+import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.assertIsNull
+import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.buttongroup.AndesButtonGroup
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
 import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
@@ -43,6 +50,13 @@ class AndesFeedbackScreenConfigurationTest {
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
         context.setTheme(R.style.Theme_AppCompat)
+
+        val requestListeners = setOf<RequestListener>(RequestLoggingListener())
+        val config = ImagePipelineConfig.newBuilder(context)
+            .setRequestListeners(requestListeners)
+            .build()
+        Fresco.initialize(context, config)
+        FLog.setMinimumLoggingLevel(FLog.VERBOSE)
     }
 
     @Test
@@ -286,5 +300,45 @@ class AndesFeedbackScreenConfigurationTest {
         config.statusBarColor assertEquals ContextCompat.getColor(context, R.color.andes_green_500)
         assert(config.headerView is AndesFeedbackScreenCongratsHeaderView)
         assert(config.typeInterface is AndesCongratsFeedbackScreenType)
+    }
+
+    @Test
+    fun `Feedback Simple Warning with body, button group and text with overline`() {
+        val view = View(context)
+        val onClick = View.OnClickListener { }
+        val config = AndesFeedbackScreenConfigurationFactory.create(
+            context = context,
+            body = view,
+            type = AndesFeedbackScreenType.Simple(
+                AndesFeedbackScreenColor.ORANGE
+            ),
+            actions = AndesFeedbackScreenActions(
+                AndesButtonGroup(context, listOf(
+                    AndesButton(context),
+                    AndesButton(context)
+                )),
+                onClick
+            ),
+            header = AndesFeedbackScreenHeader(
+                feedbackText = AndesFeedbackScreenText(
+                    title = "Title",
+                    overline = "Overline"
+                )
+            )
+        )
+
+        config.background assertEquals ContextCompat.getColor(
+            context,
+            R.color.andes_bg_color_secondary
+        )
+        config.body.view assertEquals view
+        config.body.visibility assertEquals View.VISIBLE
+        config.body.layoutParams.width assertEquals MATCH_PARENT
+        config.body.layoutParams.height assertEquals WRAP_CONTENT
+        config.close.visibility assertEquals View.VISIBLE
+        config.close.tintColor assertEquals ContextCompat.getColor(context, R.color.andes_gray_550)
+        config.close.onClick assertIsNull false
+        config.buttonGroup.visibility assertEquals View.VISIBLE
+        config.feedbackButton.visibility assertEquals View.GONE
     }
 }

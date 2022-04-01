@@ -169,6 +169,17 @@ Defines the actions to perform on the close and button click.
 ```kotlin
 data class AndesFeedbackScreenActions
 ```
+##### New constructor
+
+| Parameter | Description |
+| --------- | ------------- |
+| buttonGroup: [AndesButtonGroup](/buttongroup/AndesButtonGroup.md) | instance of the AndesButtonGroup component |
+| closeCallback: **View.OnClickListener?** | function to invoke when the close button is clicked. Default value is **null** |
+
+<br/>
+
+##### Deprecated constructor
+
 | Parameter | Description |
 | --------- | ------------- |
 | button: **[AndesFeedbackScreenButton](#andesfeedbackscreenbutton)?** | Object that contains the string value for the button text, and the listener for the button click. Default value is **null** |

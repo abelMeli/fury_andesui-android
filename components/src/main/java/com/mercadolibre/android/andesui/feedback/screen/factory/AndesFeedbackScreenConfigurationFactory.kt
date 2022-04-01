@@ -7,6 +7,8 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.buttongroup.AndesButtonGroup
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenActions
 import com.mercadolibre.android.andesui.feedback.screen.actions.AndesFeedbackScreenButton
@@ -32,7 +34,8 @@ internal data class AndesFeedbackScreenConfiguration(
     val statusBarColor: Int?,
     val actions: AndesFeedbackScreenActions?,
     val type: AndesFeedbackScreenType,
-    val header: AndesFeedbackScreenHeader
+    val header: AndesFeedbackScreenHeader,
+    val buttonGroup: AndesFeedbackButtonGroupConfiguration
 )
 
 internal data class AndesFeedbackCloseConfiguration(
@@ -52,6 +55,11 @@ internal data class AndesFeedbackButtonConfiguration(
     val visibility: Int,
     val onClick: View.OnClickListener?,
     val hierarchy: AndesButtonHierarchy
+)
+
+internal data class AndesFeedbackButtonGroupConfiguration(
+    val andesButtonGroup: AndesButtonGroup?,
+    val visibility: Int
 )
 
 internal object AndesFeedbackScreenConfigurationFactory {
@@ -87,7 +95,8 @@ internal object AndesFeedbackScreenConfigurationFactory {
             statusBarColor = resolveStatusBarColor(context, feedbackType),
             actions = actions,
             type = type,
-            header = header
+            header = header,
+            buttonGroup = resolveFeedbackButtonGroup(actions?.buttonGroup)
         )
     }
 
@@ -148,6 +157,12 @@ internal object AndesFeedbackScreenConfigurationFactory {
             hierarchy = type.getButtonHierarchy(),
             visibility = View.VISIBLE.takeIf { feedbackButton != null } ?: View.GONE,
             onClick = feedbackButton?.onClick
+        )
+
+    private fun resolveFeedbackButtonGroup(feedbackButtonGroup: AndesButtonGroup?) =
+        AndesFeedbackButtonGroupConfiguration(
+            feedbackButtonGroup,
+            View.VISIBLE.takeIf { feedbackButtonGroup != null } ?: View.GONE
         )
 
     private fun resolveBodyConfiguration(body: View?, hasBody: Boolean) =

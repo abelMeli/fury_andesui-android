@@ -1081,6 +1081,13 @@
         <item>Image Circle</item>
     </string-array>
 
+    <string-array name="feedbackscreen_button_group_quantity_spinner" translatable="false">
+        <item>None</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
     <!-- Andes TextView -->
     <string name="andes_textview_description" translatable="false">Component that inherits from the OS counterpart (intends to be an immediate replacement for the native TextView)</string>
     <string name="andes_textview_text" translatable="false">Andes TextView</string>

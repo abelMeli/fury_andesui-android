@@ -112,10 +112,13 @@ internal class AnalyticsHelper {
             "/feedbackscreen/simplesuccess/static",
             "/feedbackscreen/simplewarning/static",
             "/feedbackscreen/simplebody/static",
+            "/feedbackscreen/simplebuttongroup/static",
             "/feedbackscreen/congrats/static",
             "/feedbackscreen/error/static"
+
         ),
-        "MoneyAmountShowcaseActivity" to arrayListOf("/moneyamount/dynamic", "/moneyamount/static")
+        "MoneyAmountShowcaseActivity" to arrayListOf("/moneyamount/dynamic", "/moneyamount/static"),
+        "ButtonGroupShowcaseActivity" to arrayListOf("/buttongroup/dynamic")
     )
 
     fun getPath(className: String, position: Int): String? {

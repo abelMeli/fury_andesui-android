@@ -21,7 +21,6 @@ import com.mercadolibre.android.andesui.textfield.AndesTextfield
 class FeedbackScreenDynamicPage {
     private lateinit var feedbackBodyMocks: AndesTextfield
     private lateinit var feedbackColorGroup: Group
-    private lateinit var feedbackButtonText: AndesTextfield
     private lateinit var updateButton: AndesButton
     private lateinit var feedbackHeaderDescription: AndesTextarea
     private lateinit var feedbackHeaderHighlight: AndesTextfield
@@ -32,6 +31,7 @@ class FeedbackScreenDynamicPage {
     private lateinit var feedbackColorSpinner: Spinner
     private lateinit var feedbackTypeSpinner: Spinner
     private lateinit var closeButtonSwitch: AndesSwitch
+    private lateinit var feedbackButtonGroupSpinner: Spinner
 
     companion object {
         const val CONGRATS = "Congrats"
@@ -57,6 +57,7 @@ class FeedbackScreenDynamicPage {
             feedbackThumbnailSpinner,
             R.array.feedbackscreen_header_thumbnail_spinner
         )
+        setupSpinnerComponent(context, feedbackButtonGroupSpinner, R.array.feedbackscreen_button_group_quantity_spinner)
         setupOverlineSwitch()
         setupButtons(context)
     }
@@ -70,12 +71,12 @@ class FeedbackScreenDynamicPage {
                 feedbackThumbnailSpinner.selectedItem as String,
                 feedbackBodyMocks.text?.toIntOrNull(),
                 closeButtonSwitch.status.name,
-                feedbackButtonText.text,
                 feedbackHeaderOverlineSwitch.status.name,
                 feedbackHeaderTitle.text,
                 feedbackHeaderOverline.text,
                 feedbackHeaderDescription.text,
-                feedbackHeaderHighlight.text
+                feedbackHeaderHighlight.text,
+                feedbackButtonGroupSpinner.selectedItem as String
             ))
         }
     }
@@ -131,9 +132,9 @@ class FeedbackScreenDynamicPage {
         feedbackHeaderOverline = binding.feedbackscreenHeaderOverline
         feedbackHeaderHighlight = binding.andesFeedbackscreenHeaderHighlight
         feedbackHeaderDescription = binding.feedbackscreenHeaderDescription
-        feedbackButtonText = binding.feedbackscreenFinishButtonText
         feedbackBodyMocks = binding.feedbackscreenBodyContentText
         updateButton = binding.changeButton
+        feedbackButtonGroupSpinner = binding.feedbackscreenButtongroupSpinner
     }
 
     private fun setupSpinnerComponent(context: Context, spinner: Spinner, @ArrayRes content: Int) {
