@@ -7,6 +7,7 @@ import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTextviewBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTextviewMoneyAmountBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiShowcaseMainBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTextviewBinding
 
@@ -28,7 +29,8 @@ class TextViewShowcaseActivity : BaseActivity() {
         viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf(
             AndesuiDynamicTextviewBinding.inflate(layoutInflater).root,
-            AndesuiStaticTextviewBinding.inflate(layoutInflater).root
+            AndesuiStaticTextviewBinding.inflate(layoutInflater).root,
+            AndesuiDynamicTextviewMoneyAmountBinding.inflate(layoutInflater).root
         ))
     }
 
@@ -40,5 +42,6 @@ class TextViewShowcaseActivity : BaseActivity() {
         val adapter = viewPager.adapter as AndesPagerAdapter
         TextViewDynamicPage().create(this, adapter.views[0])
         TextViewStaticPage().create(this, adapter.views[1])
+        TextViewMoneyAmountDinamicPage().create(this, adapter.views[2])
     }
 }

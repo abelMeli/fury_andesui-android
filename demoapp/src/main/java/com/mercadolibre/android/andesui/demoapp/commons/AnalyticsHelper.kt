@@ -95,7 +95,8 @@ internal class AnalyticsHelper {
         ),
         "TextViewShowcaseActivity" to arrayListOf(
             "/textview/dynamic",
-            "/textview/static"
+            "/textview/static",
+            "/textview/moneyamount/dynamic"
         ),
         "ThumbnailShowcaseActivity" to arrayListOf(
             "/thumbnail/dynamic",

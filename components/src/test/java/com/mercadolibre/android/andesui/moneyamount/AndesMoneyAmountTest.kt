@@ -175,7 +175,7 @@ class AndesMoneyAmountTest {
                 0,
                 moneyAmountText.text.length,
                 Any::class.java
-            ).size assertEquals 3 // two spans: superscript + strike + size
+            ).size assertEquals 4 // two spans: amountsize + superscript + strike + size
         }
     }
 

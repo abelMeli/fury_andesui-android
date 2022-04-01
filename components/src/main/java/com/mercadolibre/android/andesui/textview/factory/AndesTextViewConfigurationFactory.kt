@@ -8,6 +8,7 @@ import com.mercadolibre.android.andesui.utils.removeBoldSpans
 import com.mercadolibre.android.andesui.utils.removeLinkSpans
 import com.mercadolibre.android.andesui.utils.toSpannableWithBolds
 import com.mercadolibre.android.andesui.utils.toSpannableWithLinks
+import com.mercadolibre.android.andesui.utils.toSpannableWithMoneyAmounts
 
 internal data class AndesTextViewConfiguration(
     val color: Int,
@@ -57,6 +58,9 @@ internal object AndesTextViewConfigurationFactory {
 				attrs.isLinkColorInverted
 			)
 			textWithLinks.toSpannableWithBolds(context, attrs.andesTextViewBodyBolds)
+				.toSpannableWithMoneyAmounts(attrs.andesTextViewTextViewMoneyAmount)
+		}.apply {
+			attrs.andesTextViewTextViewMoneyAmount = null
 		}
 	}
 

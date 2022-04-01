@@ -82,6 +82,7 @@ Basic Sample XML
 | decimalsStyle: [AndesMoneyAmountDecimalsStyle](#andesmoneyamountdecimalsstyle) | **get():** retrieves the style of the decimal part.  <br/> **set(value: AndesMoneyAmountDecimalsStyle):** updates the style of the decimal part. |
 | showZerosDecimal: Boolean | **get():** retrieves if the decimal part is displayed or not. <br/> **set(value: Boolean):** updates visibility of amount decimal part. |
 | andesShowIcon: Boolean | **get():** retrieves if the currency icon is displayed or not. <br/> **set(value: Boolean):** updates visibility of currency icon. |
+| accessibilityText: String | **get():** retrieves the accessibility text corresponding to the **text** attribute|
 
 <br/>
 

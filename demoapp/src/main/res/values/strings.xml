@@ -1097,6 +1097,8 @@
     <string name="andes_textview_clear_button_text" translatable="false">Clear</string>
     <string name="andes_textview_invert_link_color_checkbox" translatable="false">Invert link color</string>
     <string name="andes_textview_specs" translatable="false">Andes TextView Specs 📘</string>
+    <string name="andes_textview_add_text" translatable="false">Add text</string>
+    <string name="andes_textview_add_amount" translatable="false">Add amount</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

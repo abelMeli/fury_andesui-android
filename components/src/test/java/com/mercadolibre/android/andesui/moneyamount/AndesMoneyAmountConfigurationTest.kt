@@ -24,7 +24,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
-class AndesMoneyAmountConfiguration {
+class AndesMoneyAmountConfigurationTest {
 
     private var context = ApplicationProvider.getApplicationContext<Context>()
     private val configFactory = spy(AndesMoneyAmountConfigurationFactory)
@@ -161,7 +161,8 @@ class AndesMoneyAmountConfiguration {
             amount = attrs.andesMoneyAmount,
             decimalPlaces = config.currencyInfo.decimalPlaces,
             currencySymbol = config.currencyInfo.symbol,
-            country = config.countryInfo
+            country = config.countryInfo,
+            amountSize = config.amountSize.toInt()
         )
         assertEquals(false, moneyAmount.contains("-"))
     }
@@ -189,7 +190,8 @@ class AndesMoneyAmountConfiguration {
                 config.countryInfo,
                 config.currencyInfo,
                 attrs.andesShowZerosDecimal,
-                attrs.andesMoneyAmountSize.size.superScriptSize(context)
+                attrs.andesMoneyAmountSize.size.superScriptSize(context),
+                attrs.andesMoneyAmountSize.size.textSize(context)
             ),
             attrs.andesMoneyAmountType,
             null,
@@ -223,7 +225,8 @@ class AndesMoneyAmountConfiguration {
                 config.countryInfo,
                 config.currencyInfo,
                 attrs.andesShowZerosDecimal,
-                attrs.andesMoneyAmountSize.size.superScriptSize(context)
+                attrs.andesMoneyAmountSize.size.superScriptSize(context),
+                attrs.andesMoneyAmountSize.size.textSize(context)
             ),
             attrs.andesMoneyAmountType,
             null,
@@ -254,7 +257,8 @@ class AndesMoneyAmountConfiguration {
             amount = attrs.andesMoneyAmount,
             decimalPlaces = config.currencyInfo.decimalPlaces,
             currencySymbol = config.currencyInfo.symbol,
-            country = config.countryInfo
+            country = config.countryInfo,
+            amountSize = config.amountSize.toInt()
         )
         assertEquals(true, moneyAmount.contains(countryInfo.decimalSeparator))
     }
@@ -279,7 +283,8 @@ class AndesMoneyAmountConfiguration {
             amount = attrs.andesMoneyAmount,
             decimalPlaces = config.currencyInfo.decimalPlaces,
             currencySymbol = config.currencyInfo.symbol,
-            country = config.countryInfo
+            country = config.countryInfo,
+            amountSize = config.amountSize.toInt()
         )
         assertEquals(true, moneyAmount.contains(countryInfo.decimalSeparator))
     }
@@ -307,7 +312,8 @@ class AndesMoneyAmountConfiguration {
                 config.countryInfo,
                 config.currencyInfo,
                 attrs.andesShowZerosDecimal,
-                attrs.andesMoneyAmountSize.size.superScriptSize(context)
+                attrs.andesMoneyAmountSize.size.superScriptSize(context),
+                attrs.andesMoneyAmountSize.size.textSize(context)
             ),
             attrs.andesMoneyAmountType,
             null,

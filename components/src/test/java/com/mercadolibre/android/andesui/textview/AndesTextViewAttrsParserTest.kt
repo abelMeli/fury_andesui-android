@@ -46,6 +46,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -63,6 +64,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -80,6 +82,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -97,6 +100,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -114,6 +118,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -131,6 +136,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -148,6 +154,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -165,6 +172,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -182,6 +190,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -199,6 +208,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -216,6 +226,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -233,6 +244,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -250,6 +262,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -267,6 +280,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test
@@ -284,6 +298,7 @@ class AndesTextViewAttrsParserTest {
         andesTextViewAttrs.andesTextViewBodyBolds assertIsNull true
         andesTextViewAttrs.andesTextViewBodyLinks assertIsNull true
         andesTextViewAttrs.isLinkColorInverted assertEquals false
+        andesTextViewAttrs.andesTextViewTextViewMoneyAmount assertIsNull true
     }
 
     @Test

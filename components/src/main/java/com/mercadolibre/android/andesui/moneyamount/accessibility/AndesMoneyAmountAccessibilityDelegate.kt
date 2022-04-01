@@ -9,35 +9,37 @@ import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
 import com.mercadolibre.android.andesui.currency.AndesCurrencyInfo
 import com.mercadolibre.android.andesui.moneyamount.AndesMoneyAmount
 import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils
-import com.mercadolibre.android.andesui.moneyamount.factory.amount.AndesMoneyAmountAttrs
 import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
 import java.text.DecimalFormatSymbols
 
 internal class AndesMoneyAmountAccessibilityDelegate constructor(
-    private val andesMoneyAmount: AndesMoneyAmount,
-    private val attrs: AndesMoneyAmountAttrs
+    private val andesMoneyAmount: AndesMoneyAmount
 ) : View.AccessibilityDelegate() {
 
     override fun onInitializeAccessibilityNodeInfo(host: View?, info: AccessibilityNodeInfo?) {
         super.onInitializeAccessibilityNodeInfo(host, info)
-        val currencyInfo = AndesCurrencyHelper.getCurrency(andesMoneyAmount.currency)
-        val countryInfo = AndesCurrencyHelper.getCountry(andesMoneyAmount.country)
-        info?.contentDescription = generateMoneyAmountContentDescriptionText(
-            andesMoneyAmount.resources,
-            andesMoneyAmount.type,
-            currencyInfo,
-            andesMoneyAmount.amount,
-            isCombo = false,
-            showZerosDecimal = andesMoneyAmount.showZerosDecimal,
-            countryInfo = countryInfo,
-            suffixAccessibility = attrs.andesSuffixAccessibility
-        )
+        info?.contentDescription = getContentDescription(andesMoneyAmount)
     }
 
     companion object {
         private const val EMPTY = ""
         private const val ONE = "1"
         private const val ZERO = 0
+
+        internal fun getContentDescription(andesMoneyAmount: AndesMoneyAmount): String {
+            val currencyInfo = AndesCurrencyHelper.getCurrency(andesMoneyAmount.currency)
+            val countryInfo = AndesCurrencyHelper.getCountry(andesMoneyAmount.country)
+            return generateMoneyAmountContentDescriptionText(
+                andesMoneyAmount.resources,
+                andesMoneyAmount.type,
+                currencyInfo,
+                andesMoneyAmount.amount,
+                isCombo = false,
+                showZerosDecimal = andesMoneyAmount.showZerosDecimal,
+                countryInfo = countryInfo,
+                suffixAccessibility = andesMoneyAmount.getSuffixAccessibility()
+            )
+        }
 
         @Suppress("LongParameterList")
         internal fun generateMoneyAmountContentDescriptionText(

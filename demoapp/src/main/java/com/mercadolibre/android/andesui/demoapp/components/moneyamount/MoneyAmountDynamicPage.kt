@@ -293,6 +293,7 @@ class MoneyAmountDynamicPage {
                     } else {
                         textFieldPrice.state = AndesTextfieldState.IDLE
                     }
+
                     andesMoneyAmount.amount = price.toDouble()
                     andesMoneyAmount.decimalsStyle = style
                     andesMoneyAmount.type = type

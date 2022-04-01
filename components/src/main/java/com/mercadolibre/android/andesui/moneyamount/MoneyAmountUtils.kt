@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
 import android.graphics.Rect
+import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
@@ -19,8 +20,24 @@ internal object MoneyAmountUtils {
         amount: Double,
         decimalPlaces: Int,
         currencySymbol: String,
-        country: AndesCountryInfo
-    ) = "$currencySymbol ${getLocatedDecimalFormat(decimalPlaces, getSeparators(country)).format(amount)}"
+        country: AndesCountryInfo,
+        amountSize: Int,
+        transform: ((String) -> String)? = null
+    ): SpannableStringBuilder {
+        var text =  "$currencySymbol ${getLocatedDecimalFormat(decimalPlaces, getSeparators(country)).format(amount)}"
+        if (transform != null) {
+            text = transform(text)
+        }
+        return SpannableStringBuilder(text)
+            .apply {
+                setSpan(
+                    AbsoluteSizeSpan(amountSize),
+                    0,
+                    this.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+    }
 
     internal fun getLocatedDecimalFormat(decimalPlaces: Int, dfs: DecimalFormatSymbols): DecimalFormat =
         DecimalFormat().apply {

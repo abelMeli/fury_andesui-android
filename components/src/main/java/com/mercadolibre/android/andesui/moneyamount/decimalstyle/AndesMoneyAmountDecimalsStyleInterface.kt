@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.moneyamount.decimalstyle
 
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
 import com.mercadolibre.android.andesui.currency.AndesCountryInfo
 import com.mercadolibre.android.andesui.currency.AndesCurrencyInfo
 import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils
@@ -9,61 +10,86 @@ import com.mercadolibre.android.andesui.moneyamount.MoneyAmountUtils.formatAmoun
 import com.mercadolibre.android.andesui.utils.isInt
 
 internal interface AndesMoneyAmountDecimalsStyleInterface {
-    fun getAmountStyled(amount: Double, country: AndesCountryInfo, currency: AndesCurrencyInfo,
-                        showZerosDecimal: Boolean, superScriptSize: Float): SpannableStringBuilder
+    fun getAmountStyled(
+        amount: Double,
+        country: AndesCountryInfo,
+        currency: AndesCurrencyInfo,
+        showZerosDecimal: Boolean,
+        superScriptSize: Float,
+        amountSize: Float
+    ): SpannableStringBuilder
 }
 
 internal object AndesMoneyAmountStyleNone : AndesMoneyAmountDecimalsStyleInterface {
-    override fun getAmountStyled(amount: Double, country: AndesCountryInfo, currency: AndesCurrencyInfo,
-                                 showZerosDecimal: Boolean, superScriptSize: Float): SpannableStringBuilder {
-        formatAmount(
+    override fun getAmountStyled(
+        amount: Double, country:
+        AndesCountryInfo,
+        currency: AndesCurrencyInfo,
+        showZerosDecimal: Boolean,
+        superScriptSize: Float,
+        amountSize: Float
+    ): SpannableStringBuilder {
+        return formatAmount(
             amount = amount,
             decimalPlaces = 0,
             currencySymbol = currency.symbol,
-            country = country
-        ).apply {
-            return SpannableStringBuilder(this)
-        }
+            country = country,
+            amountSize = amountSize.toInt()
+        )
     }
 }
 
 internal object AndesMoneyAmountStyleNormal : AndesMoneyAmountDecimalsStyleInterface {
-    override fun getAmountStyled(amount: Double, country: AndesCountryInfo, currency: AndesCurrencyInfo,
-                                 showZerosDecimal: Boolean, superScriptSize: Float): SpannableStringBuilder {
+    override fun getAmountStyled(
+        amount: Double,
+        country: AndesCountryInfo,
+        currency: AndesCurrencyInfo,
+        showZerosDecimal: Boolean,
+        superScriptSize: Float,
+        amountSize: Float
+    ): SpannableStringBuilder {
         var decimalPlaces = currency.decimalPlaces
         if (amount.isInt() && !showZerosDecimal && !currency.isCrypto) {
             decimalPlaces = 0
         }
-        formatAmount(
+        return formatAmount(
             amount = amount,
             decimalPlaces = decimalPlaces,
             currencySymbol = currency.symbol,
-            country = country
-        ).apply {
-            return SpannableStringBuilder(this)
-        }
+            country = country,
+            amountSize = amountSize.toInt()
+        )
     }
 }
 
 internal object AndesMoneyAmountStyleSuperScript : AndesMoneyAmountDecimalsStyleInterface {
-    override fun getAmountStyled(amount: Double, country: AndesCountryInfo, currency: AndesCurrencyInfo,
-                                 showZerosDecimal: Boolean, superScriptSize: Float): SpannableStringBuilder {
+    override fun getAmountStyled(
+        amount: Double,
+        country: AndesCountryInfo,
+        currency: AndesCurrencyInfo,
+        showZerosDecimal: Boolean,
+        superScriptSize: Float,
+        amountSize: Float
+    ): SpannableStringBuilder {
         if (amount.isInt() && !showZerosDecimal) {
-            return SpannableStringBuilder(formatAmount(
+            return formatAmount(
                 amount = amount,
                 decimalPlaces = 0,
                 currencySymbol = currency.symbol,
-                country = country
-            ))
+                country = country,
+                amountSize = amountSize.toInt()
+            )
         } else {
-            var formatAmount = formatAmount(
+            return formatAmount(
                 amount = amount,
                 decimalPlaces = currency.decimalPlaces,
                 currencySymbol = currency.symbol,
-                country = country
-            )
-            formatAmount = formatAmount.replace(country.decimalSeparator.toString(), "")
-            return SpannableStringBuilder(formatAmount).apply {
+                country = country,
+                amountSize = amountSize.toInt(),
+                transform = {
+                    it.replace(country.decimalSeparator.toString(), "")
+                }
+            ).apply {
                 setSpan(
                     MoneyAmountUtils.CustomRelativeSizeSpan(superScriptSize),
                     length - currency.decimalPlaces,

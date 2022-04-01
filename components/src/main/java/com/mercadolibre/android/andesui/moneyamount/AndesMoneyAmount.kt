@@ -1,9 +1,11 @@
 package com.mercadolibre.android.andesui.moneyamount
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -28,7 +30,18 @@ import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
 import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
-class AndesMoneyAmount : ConstraintLayout {
+/**
+ * Interface that becomes the money amount in info provider.
+ */
+internal interface AndesMoneyAmountInfoProvider {
+    /**
+     * Provides the styled text for external purposes.
+     * @param color in text that is required
+     */
+    fun provideText(color: Int? = null): SpannableStringBuilder
+}
+
+class AndesMoneyAmount : ConstraintLayout, AndesMoneyAmountInfoProvider {
 
     /**
      * Getter and setter for [amount].
@@ -120,6 +133,8 @@ class AndesMoneyAmount : ConstraintLayout {
         setupMoneyAmount(createConfig())
     }
 
+    internal fun getSuffixAccessibility(): String? = andesMoneyAmountAttrs.andesSuffixAccessibility
+
     /**
      * Setter for the textColor
      */
@@ -201,7 +216,7 @@ class AndesMoneyAmount : ConstraintLayout {
 
     private fun setupAccessibility() {
         isFocusable = true
-        accessibilityDelegate = AndesMoneyAmountAccessibilityDelegate(this, andesMoneyAmountAttrs)
+        accessibilityDelegate = AndesMoneyAmountAccessibilityDelegate(this)
     }
 
     private fun setupMoneyAmount(config: AndesMoneyAmountConfiguration) {
@@ -232,10 +247,8 @@ class AndesMoneyAmount : ConstraintLayout {
     private fun setupAmount(config: AndesMoneyAmountConfiguration) {
         binding.moneyAmountText.apply {
             setTextColor(config.currencyColor.colorInt(context))
-            setTextSize(TypedValue.COMPLEX_UNIT_PX, config.amountSize)
             typeface = context.getFontOrDefault(R.font.andes_font_regular)
             text = config.amountFormatted
-            setupAccessibility()
         }
     }
 
@@ -244,6 +257,25 @@ class AndesMoneyAmount : ConstraintLayout {
     }
 
     private fun createConfig() = AndesMoneyAmountConfigurationFactory.create(context, andesMoneyAmountAttrs)
+
+    override fun provideText(color: Int?): SpannableStringBuilder = SpannableStringBuilder(binding.moneyAmountText.text).apply {
+        if (color != null) {
+            setSpan(
+                ForegroundColorSpan(color),
+                0,
+                this.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+    }
+
+    /**
+     * Method used to expose [AndesMoneyAmount] contentDescription.
+     */
+    @SuppressLint("GetContentDescriptionOverride")
+    override fun getContentDescription(): CharSequence? {
+        return AndesMoneyAmountAccessibilityDelegate.getContentDescription(this)
+    }
 
     companion object {
         private val ANDES_SIZE_DEFAULT_VALUE = AndesMoneyAmountSize.SIZE_24

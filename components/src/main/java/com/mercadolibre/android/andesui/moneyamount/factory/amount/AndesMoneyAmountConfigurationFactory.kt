@@ -42,15 +42,17 @@ internal object AndesMoneyAmountConfigurationFactory {
             val suffixPadding = andesMoneyAmountSize.size.suffixPadding(context)
             val suffixColor = resolveTextColor(andesTextColor,  R.color.andes_text_color_secondary.toAndesColor())
             val superScriptSize = andesMoneyAmountSize.size.superScriptSize(context)
+            val amountSize = andesMoneyAmountSize.size.textSize(context)
             val amount = andesMoneyAmountDecimalsStyle.style.getAmountStyled(
                 andesMoneyAmount,
                 countryInfo,
                 currencyInfo,
                 andesShowZerosDecimal,
-                superScriptSize
+                superScriptSize,
+                amountSize
             )
             AndesMoneyAmountConfiguration(
-                amountSize = andesMoneyAmountSize.size.textSize(context),
+                amountSize = amountSize,
                 iconSize = andesMoneyAmountSize.size.iconSize(context),
                 iconPadding = andesMoneyAmountSize.size.iconPadding(context),
                 showIcon = andesShowIcon,

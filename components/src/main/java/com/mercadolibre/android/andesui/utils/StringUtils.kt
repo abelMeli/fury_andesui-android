@@ -2,9 +2,12 @@ package com.mercadolibre.android.andesui.utils
 
 import android.content.Context
 import android.graphics.Typeface
+import android.text.Spannable
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
 import android.view.View
@@ -13,6 +16,7 @@ import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
+import com.mercadolibre.android.andesui.textview.moneyamount.AndesTextViewMoneyAmount
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
 /**
@@ -92,6 +96,17 @@ internal fun CharSequence?.toSpannableWithBolds(
     return spannableString
 }
 
+internal fun CharSequence?.toSpannableWithMoneyAmounts(
+    andesMoneyAmounts: AndesTextViewMoneyAmount?
+): CharSequence {
+    val spannableString = this as? SpannableString ?: SpannableString(this)
+    val moneyAmounts = SpannableStringBuilder(spannableString)
+    andesMoneyAmounts?.let { moneyAmount ->
+        moneyAmounts.append(moneyAmount.infoProvider.provideText(moneyAmount.color))
+    }
+    return moneyAmounts
+}
+
 /**
  * Takes the original spannable string and removes the ClickableSpans.
  * Use this method to clean old spans when passing a null bodyLinks object to the text.
@@ -139,3 +154,16 @@ internal fun CharSequence?.isUpperCase(): Boolean {
     }
     return true
 }
+
+internal fun CharSequence?.getRange(substring: String): IntRange? {
+    val start = this?.indexOf(substring) ?: -1
+    var range: IntRange? = null
+    if (start > -1) {
+        val end = start + substring.length
+        range = IntRange(start, end)
+    }
+    return range
+}
+
+internal fun CharSequence.isNotValidRange(range: IntRange): Boolean =
+    range.first < 0 || range.last > this.length

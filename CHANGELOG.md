@@ -2,6 +2,7 @@
 ## 🚀 Feature
 - Added callbacks feature in Snackbar component. | Author: [@meligeo](https://github.com/meligeo)
 - Update in the `AndesTextView` docs. | Author: [@juanunzu](https://github.com/juanunzu)
+- `AndesTextView` version 2 for append texts and money amount | Author: [@meligeo](https://github.com/meligeo)
 ## 🛠 Fixes
 - Fix in the uri creation needed to navigate from each component page to the web storybook | Author: [@juanunzu](https://github.com/juanunzu)
 

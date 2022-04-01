@@ -29,6 +29,11 @@ class AndesTextViewAccessibilityDelegate(private val andesTextView: AndesTextVie
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             addLinkActions(info)
         }
+        andesTextView.accessibilityText
+            .takeIf { it.isNotEmpty() && it != andesTextView.text.toString() }
+            ?.let {
+                info?.text = it
+            }
     }
 
     /**

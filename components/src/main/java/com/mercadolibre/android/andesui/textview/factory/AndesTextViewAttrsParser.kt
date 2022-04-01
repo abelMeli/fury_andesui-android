@@ -7,6 +7,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
+import com.mercadolibre.android.andesui.textview.moneyamount.AndesTextViewMoneyAmount
 import com.mercadolibre.android.andesui.textview.style.AndesTextViewStyle
 
 internal data class AndesTextViewAttrs(
@@ -15,7 +16,8 @@ internal data class AndesTextViewAttrs(
     val andesTextViewCustomStyle: Int = Typeface.NORMAL,
     val andesTextViewBodyBolds: AndesBodyBolds? = null,
     val andesTextViewBodyLinks: AndesBodyLinks? = null,
-    val isLinkColorInverted: Boolean = false
+    val isLinkColorInverted: Boolean = false,
+    var andesTextViewTextViewMoneyAmount: AndesTextViewMoneyAmount? = null
 )
 
 /**
