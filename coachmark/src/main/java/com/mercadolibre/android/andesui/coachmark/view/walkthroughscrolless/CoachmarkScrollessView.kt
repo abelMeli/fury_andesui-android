@@ -46,6 +46,7 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
     init {
         val coachmarkData = builder.coachmarkData
         coachmarkData.steps = filterEmptySteps(builder.coachmarkData) as MutableList<AndesWalkthroughCoachmarkStep>
+        lastPosition = coachmarkData.steps.size == 1
         activity = builder.activity
         statusBarColor = getStatusBarColor()
         view = coachmarkData.anchorView

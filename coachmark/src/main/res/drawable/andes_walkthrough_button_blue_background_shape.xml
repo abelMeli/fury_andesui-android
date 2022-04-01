@@ -3,5 +3,5 @@
        android:shape="rectangle">
 
     <corners android:radius="@dimen/andes_coachmark_075m"/>
-    <solid android:color="@color/andes_coachmark_next_button_blue_background"/>
+    <solid android:color="@color/andes_accent_color_700"/>
 </shape>

@@ -23,7 +23,6 @@ import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessageModel
 import com.mercadolibre.android.andesui.coachmark.presenter.CoachmarkPresenter
 import com.mercadolibre.android.andesui.coachmark.presenter.CoachmarkViewInterface
 import com.mercadolibre.android.andesui.coachmark.view.walkthroughmessage.WalkthroughMessageView
-import com.mercadolibre.android.andesui.coachmark.view.walkthroughscrolless.WalkthroughScrollessMessageView
 
 @SuppressWarnings("TooManyFunctions")
 class CoachmarkView private constructor(builder: Builder) : CoachmarkViewInterface {
@@ -39,6 +38,7 @@ class CoachmarkView private constructor(builder: Builder) : CoachmarkViewInterfa
 
     init {
         val coachmarkData = builder.coachmarkData
+        lastPosition = coachmarkData.steps.size == 1
         activity = builder.activity
         scrollView = coachmarkData.scrollView
         walkthroughMessageView = WalkthroughMessageView(activity)

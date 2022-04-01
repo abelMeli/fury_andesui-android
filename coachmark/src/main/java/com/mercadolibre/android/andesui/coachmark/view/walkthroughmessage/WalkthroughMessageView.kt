@@ -86,16 +86,14 @@ class WalkthroughMessageView @JvmOverloads constructor(
         val centerTarget = (targetRect.left + targetRect.right) / 2
         val centerTooltip: Int
 
-        val paddingTop = context.resources.getDimension(R.dimen.andes_coachmark_default_padding).toInt()
-
         when (position) {
             WalkthroughMessagePosition.BELOW -> with(binding) {
                 arcArrowTop.visibility = View.VISIBLE
                 arcArrowBottom.visibility = View.GONE
-                arcArrowTop.getGlobalVisibleRect(tooltipRect)
+                arcArrowTop.getLocalVisibleRect(tooltipRect)
                 centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
                 if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
-                    arcArrowTop.addRect(centerTooltip, tooltipRect.bottom - paddingTop, centerTarget, tooltipRect.top - paddingTop)
+                    arcArrowTop.addRect(centerTooltip, tooltipRect.bottom, centerTarget, tooltipRect.top)
                 } else {
                     arcArrowTop.visibility = View.GONE
                 }
@@ -103,10 +101,10 @@ class WalkthroughMessageView @JvmOverloads constructor(
             WalkthroughMessagePosition.ABOVE -> with(binding) {
                 arcArrowTop.visibility = View.GONE
                 arcArrowBottom.visibility = View.VISIBLE
-                arcArrowBottom.getGlobalVisibleRect(tooltipRect)
+                arcArrowBottom.getLocalVisibleRect(tooltipRect)
                 centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
                 if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
-                    arcArrowBottom.addRect(centerTooltip, tooltipRect.top - paddingTop, centerTarget, tooltipRect.bottom - paddingTop)
+                    arcArrowBottom.addRect(centerTooltip, tooltipRect.top, centerTarget, tooltipRect.bottom)
                 } else {
                     arcArrowBottom.visibility = View.GONE
                 }

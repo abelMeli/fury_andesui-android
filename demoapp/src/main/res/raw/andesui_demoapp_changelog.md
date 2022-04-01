@@ -6,6 +6,7 @@
 - `AndesTextView` version 2 for append texts and money amount | Author: [@meligeo](https://github.com/meligeo)
 ## 🛠 Fixes
 - Fix in the uri creation needed to navigate from each component page to the web storybook | Author: [@juanunzu](https://github.com/juanunzu)
+- CoachmarkView & CoachmarkScrollessView walkthrough message view position, arrow position, and finish button color fixes | Author: [@eportasML](https://github.com/eportasML)
 
 # v4.16.0
 ## 🛠 Fixes

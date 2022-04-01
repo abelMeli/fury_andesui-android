@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.accessibility.AccessibilityManager
 import androidx.annotation.DrawableRes
+import java.lang.ClassCastException
 import org.junit.Assert
 import org.mockito.internal.util.reflection.FieldSetter
 import org.robolectric.Robolectric
@@ -29,6 +30,16 @@ fun Any.getDeclaredField(name: String, clazz: Class<*> = javaClass): Field {
         clazz.getDeclaredField(name)
     } catch (e: NoSuchFieldException) {
         clazz.superclass?.let { getDeclaredField(name, it) } ?: throw e
+    }
+}
+
+fun <T> Any.getDeclaredFieldValue(name: String): T {
+    return try {
+        getDeclaredField(name).apply {
+            isAccessible = true
+        }.get(this) as T
+    } catch (e: ClassCastException) {
+        throw e
     }
 }
 
