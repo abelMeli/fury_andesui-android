@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.utils
 
+import android.app.Activity
+import android.content.ClipboardManager
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
@@ -20,6 +22,16 @@ import com.mercadolibre.android.andesui.tooltip.extensions.isActionBarVisible
 internal fun View.openKeyboard() {
     (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
             .toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+}
+
+/**
+ * Returns copied text or "null" if the clipboard is empty
+ */
+internal fun View.getTextInClipboard(): CharSequence? {
+    val manager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val pasteData = manager.primaryClip
+    val item = pasteData?.getItemAt(0)
+    return item?.text
 }
 
 internal fun View.getTopSpace(): Int {

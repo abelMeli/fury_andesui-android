@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andes_amount_field_size_large_currency">28sp</dimen>
+    <dimen name="andes_amount_field_size_medium_currency">22sp</dimen>
+    <dimen name="andes_amount_field_size_small_currency">18sp</dimen>
+    <dimen name="andes_amount_field_size_extra_small_currency">18sp</dimen>
+
+    <dimen name="andes_amount_field_size_large_horizontal_margin">8dp</dimen>
+    <dimen name="andes_amount_field_size_medium_horizontal_margin">6dp</dimen>
+    <dimen name="andes_amount_field_size_small_horizontal_margin">4dp</dimen>
+    <dimen name="andes_amount_field_size_extra_small_horizontal_margin">4dp</dimen>
+
+    <dimen name="andes_amount_field_size_large_amount">56sp</dimen>
+    <dimen name="andes_amount_field_size_medium_amount">44sp</dimen>
+    <dimen name="andes_amount_field_size_small_amount">36sp</dimen>
+    <dimen name="andes_amount_field_size_extra_small_amount">18sp</dimen>
+
+    <dimen name="andes_amount_field_size_large_suffix">36sp</dimen>
+    <dimen name="andes_amount_field_size_medium_suffix">28sp</dimen>
+    <dimen name="andes_amount_field_size_small_suffix">24sp</dimen>
+    <dimen name="andes_amount_field_size_extra_small_suffix">18sp</dimen>
+
+    <dimen name="andes_amount_field_animation_jump_half_step">8dp</dimen>
+    <dimen name="andes_amount_field_animation_jump_whole_step">12dp</dimen>
+    <dimen name="andes_amount_field_animation_jump_final_step">4dp</dimen>
+
+    <dimen name="andes_amount_field_animation_shake_half_step">8dp</dimen>
+    <dimen name="andes_amount_field_animation_shake_whole_step">16dp</dimen>
+</resources>

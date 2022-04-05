@@ -228,6 +228,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".components.amountfield.AmountFieldShowcaseActivity"
+            android:parentActivityName=".home.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="amountfield"
+                    android:scheme="andes" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".components.badge.BadgeShowcaseActivity"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>

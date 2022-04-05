@@ -6,4 +6,8 @@ internal object ScreenUtils {
     fun getScreenHeight(): Int {
         return Resources.getSystem().displayMetrics.heightPixels
     }
+
+    fun getScreenWidth(): Int {
+        return Resources.getSystem().displayMetrics.widthPixels
+    }
 }

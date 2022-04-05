@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_amount_field_int_placeholder" translatable="false">0</string>
+    <string name="andes_amount_field_decimal_placeholder" translatable="false">0%1$s%2$s</string>
+    <string name="andes_amount_field_exceeded_text">Excediste el límite máximo permitido</string>
+    <string name="andes_amount_field_error_text" translatable="false">Error</string>
+    <string name="andes_amount_field_field_is_full_announcement">Duración máxima alcanzada</string>
+</resources>

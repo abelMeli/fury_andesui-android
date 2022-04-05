@@ -21,6 +21,7 @@ internal class AnalyticsHelper {
     )
 
     private val components = mapOf(
+        "AmountFieldShowcaseActivity" to "AndesAmountFieldSimple",
         "BadgeShowcaseActivity" to "AndesBadge",
         "BottomSheetShowcaseActivity" to "AndesBottomSheet",
         "ButtonShowcaseActivity" to "AndesButton",
@@ -52,6 +53,7 @@ internal class AnalyticsHelper {
     )
 
     private val screens = mapOf(
+        "AmountFieldShowcaseActivity" to arrayListOf("/amountfield/dynamic", "/amountfield/static"),
         "BadgeShowcaseActivity" to arrayListOf("/badge/dynamic", "/badge/static"),
         "BottomSheetShowcaseActivity" to arrayListOf("/bottomsheet/dynamic"),
         "ButtonShowcaseActivity" to arrayListOf("/button/dynamic", "/button/dynamicprogress", "/button/static"),

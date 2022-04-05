@@ -4,6 +4,7 @@ import com.mercadolibre.android.andesui.demoapp.BuildConfig
 
 internal enum class StorybookPage(val link: String) {
     HOMEPAGE("$HOME/"),
+    ANDESAMOUNTFIELDSIMPLE("$HOME/?path=/story/amountfield--andes-amount-field-money"),
     ANDESCARD("$HOME/?path=/story/card-card--andes-card"),
     ANDESCAROUSEL("$HOME/?path=/story/carousel-free--andes-component"),
     ANDESCHECKBOX("$HOME/?path=/story/checkbox--andes-checkbox-default"),

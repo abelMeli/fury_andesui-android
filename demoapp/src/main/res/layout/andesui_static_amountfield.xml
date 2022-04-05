@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mercadolibre.android.andesui.textview.AndesTextView
+        android:id="@+id/static_amount_field_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="32dp"
+        android:text="¿Cuánto efectivo quieres retirar del cajero?"
+        app:andesTextViewStyle="titleL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
+        android:id="@+id/static_amount_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="64dp"
+        app:andesAmountFieldCountry="AR"
+        app:andesAmountFieldCurrency="ARS"
+        app:andesAmountFieldMaxValue="1500.00"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/static_amount_field_header" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/static_amount_field_button_fifty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="6dp"
+        app:andesButtonHierarchy="quiet"
+        app:andesButtonSize="medium"
+        app:layout_constraintEnd_toStartOf="@id/static_amount_field_button_hundred"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/static_amount_field" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/static_amount_field_button_hundred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        app:andesButtonHierarchy="quiet"
+        app:andesButtonSize="medium"
+        app:layout_constraintBottom_toBottomOf="@id/static_amount_field_button_fifty"
+        app:layout_constraintEnd_toStartOf="@id/static_amount_field_button_five_hundred"
+        app:layout_constraintStart_toEndOf="@id/static_amount_field_button_fifty"
+        app:layout_constraintTop_toTopOf="@id/static_amount_field_button_fifty" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/static_amount_field_button_five_hundred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        app:andesButtonHierarchy="quiet"
+        app:andesButtonSize="medium"
+        app:layout_constraintBottom_toBottomOf="@id/static_amount_field_button_fifty"
+        app:layout_constraintEnd_toStartOf="@id/static_amount_field_button_thousand"
+        app:layout_constraintStart_toEndOf="@id/static_amount_field_button_hundred"
+        app:layout_constraintTop_toTopOf="@id/static_amount_field_button_fifty" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/static_amount_field_button_thousand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        app:andesButtonHierarchy="quiet"
+        app:andesButtonSize="medium"
+        app:layout_constraintBottom_toBottomOf="@id/static_amount_field_button_fifty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/static_amount_field_button_five_hundred"
+        app:layout_constraintTop_toTopOf="@id/static_amount_field_button_fifty" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/static_amount_field_button_continue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/static_amount_field_button_fifty" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

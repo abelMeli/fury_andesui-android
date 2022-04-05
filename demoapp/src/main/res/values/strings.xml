@@ -39,6 +39,7 @@
     <string name="andes_demoapp_screen_bottom_sheet" translatable="false">Bottom sheet</string>
     <string name="andes_demoapp_screen_message" translatable="false">Message</string>
     <string name="andes_demoapp_screen_badge" translatable="false">Badge</string>
+    <string name="andes_demoapp_screen_amountfield" translatable="false">Amount field</string>
     <string name="andes_demoapp_screen_tag" translatable="false">Tag</string>
     <string name="andes_demoapp_screen_tabs" translatable="false">Tabs</string>
     <string name="andes_demoapp_screen_switch" translatable="false">Switch</string>
@@ -1107,6 +1108,23 @@
     <string name="andes_textview_add_text" translatable="false">Add text</string>
     <string name="andes_textview_add_amount" translatable="false">Add amount</string>
 
+    <!-- Andes AmountField -->
+    <string name="andes_amount_field_button_focused" translatable="false">State: Focused</string>
+    <string name="andes_amount_field_button_error" translatable="false">State: Error</string>
+    <string name="andes_amount_field_button_idle" translatable="false">State: Idle</string>
+    <string name="andes_amount_field_button_add_new_value" translatable="false">Set new value</string>
+    <string name="andes_amount_field_description" translatable="false">Allows the user to enter and edit money amounts and percentages in a field defined as the main screen action</string>
+    <string name="andes_amount_field_text_style_label" translatable="false">State</string>
+    <string name="andes_amount_field_text_style_placeholder" translatable="false">Select a state</string>
+    <string name="andes_amount_field_text_entry_mode_label" translatable="false">Entry mode</string>
+    <string name="andes_amount_field_text_entry_mode_placeholder" translatable="false">Select an entry mode</string>
+    <string name="andes_amount_field_text_country_label" translatable="false">Country</string>
+    <string name="andes_amount_field_text_country_placeholder" translatable="false">Select a country</string>
+    <string name="andes_amount_field_text_currency_label" translatable="false">Currency</string>
+    <string name="andes_amount_field_text_currency_placeholder" translatable="false">Select a currency</string>
+    <string name="andes_amount_field_text_type_label" translatable="false">Entry type</string>
+    <string name="andes_amount_field_text_type_placeholder" translatable="false">Select an entry type</string>
+    <string name="andes_amount_field_text_switch" translatable="false">Currency ISO value</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="feedbackscreen_body_number" translatable="false">Feedback Body mocked views</string>

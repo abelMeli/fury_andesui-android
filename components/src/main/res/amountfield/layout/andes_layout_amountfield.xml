@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/amount_field_resizable_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:focusableInTouchMode="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/amount_field_currency_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:importantForAccessibility="no"
+            android:text="$"
+            android:textSize="28sp"
+            app:andesTextViewTextColor="secondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/amount_field_edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.amountfield.utils.AndesAmountFieldEditText
+            android:id="@+id/amount_field_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/andes_transparent"
+            android:cursorVisible="true"
+            android:digits="0123456789.,"
+            android:gravity="start|center"
+            android:includeFontPadding="false"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textAlignment="textStart"
+            android:textColor="@color/andes_text_color_primary"
+            android:textColorHint="@color/andes_text_color_secondary"
+            android:textCursorDrawable="@drawable/andes_amount_field_cursor_drawable"
+            android:textSize="56sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/amount_field_suffix_text"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/amount_field_currency_symbol"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="wrap" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/amount_field_suffix_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:includeFontPadding="false"
+            android:textSize="36sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/amount_field_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/amount_field_edit_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.mercadolibre.android.andesui.badge.AndesBadgeIconPill
+        android:id="@+id/amount_field_helper_icon"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@null"
+        app:andesBadgeIconPillType="error"
+        app:layout_constraintEnd_toStartOf="@id/amount_field_helper_text"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/amount_field_helper_text" />
+
+    <com.mercadolibre.android.andesui.textview.AndesTextView
+        android:id="@+id/amount_field_helper_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:text="Helper text"
+        android:textSize="13sp"
+        app:andesTextViewTextColor="secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/amount_field_helper_icon"
+        app:layout_constraintTop_toBottomOf="@id/amount_field_resizable_group"
+        app:layout_constraintWidth_default="wrap" />
+</merge>

@@ -1,3 +1,7 @@
+# v4.18.0
+## 🚀 Feature
+- `AndesAmountFieldSimple` component | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v4.17.0
 ## 🚀 Feature
 - `AndesFeedbackScreen` AndesButtonGroup is integrated into the AndesFeedbackScreen component. | Author: [@edgnavarro](https://github.com/edgnavarro)

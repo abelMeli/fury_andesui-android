@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_amount_field_exceeded_text">Excediste el límite máximo permitido</string>
+    <string name="andes_amount_field_field_is_full_announcement">Duración máxima alcanzada</string>
+</resources>

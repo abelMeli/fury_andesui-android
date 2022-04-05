@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true">
+
+        <com.mercadolibre.android.andesui.message.AndesMessage
+            android:id="@+id/andesMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:andesMessageBodyText="@string/andes_amount_field_description"
+            app:andesMessageHierarchy="quiet"
+            app:andesMessageTitleText="@string/title_description"
+            app:andesMessageType="neutral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
+            android:id="@+id/dynamic_amount_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="32dp"
+            app:andesAmountFieldCountry="BR"
+            app:andesAmountFieldCurrency="BRL"
+            app:andesAmountFieldEntryMode="from_integer"
+            app:andesAmountFieldHelperText="Importes menores a $1000"
+            app:andesAmountFieldSuffixText="/hora"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/andesMessage" />
+
+        <View
+            android:id="@+id/dynamic_amount_field_separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/andes_gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/dynamic_amount_field_title_optional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="Optional values"
+            app:andesTextViewStyle="titleS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_separator_1" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_amount_field_textfield_helper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toStartOf="@id/dynamic_amount_field_textfield_number_decimals"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_title_optional" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_amount_field_textfield_number_decimals"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="12dp"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_amount_field_textfield_helper"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dynamic_amount_field_textfield_helper"
+            app:layout_constraintTop_toTopOf="@id/dynamic_amount_field_textfield_helper" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_amount_field_textfield_suffix"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toStartOf="@id/dynamic_amount_field_textfield_suffix_a11y"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_textfield_helper" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_amount_field_textfield_suffix_a11y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_amount_field_textfield_suffix"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dynamic_amount_field_textfield_suffix"
+            app:layout_constraintTop_toTopOf="@id/dynamic_amount_field_textfield_suffix" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/dynamic_amount_field_textfield_max_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toStartOf="@id/dynamic_amount_field_dropdown_entry_mode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_textfield_suffix" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/dynamic_amount_field_dropdown_entry_mode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="12dp"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_amount_field_textfield_max_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dynamic_amount_field_textfield_max_value"
+            app:layout_constraintTop_toTopOf="@id/dynamic_amount_field_textfield_max_value" />
+
+        <View
+            android:id="@+id/dynamic_amount_field_separator_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/andes_gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_textfield_max_value" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/dynamic_amount_field_title_obligatory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="Obligatory values"
+            app:andesTextViewStyle="titleS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_separator_2" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/dynamic_amount_field_dropdown_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/dynamic_amount_field_dropdown_country"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_title_obligatory" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/dynamic_amount_field_dropdown_country"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="12dp"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_amount_field_dropdown_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dynamic_amount_field_dropdown_state"
+            app:layout_constraintTop_toTopOf="@id/dynamic_amount_field_dropdown_state" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/dynamic_amount_field_dropdown_currency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toStartOf="@id/dynamic_amount_field_dropdown_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_dropdown_state" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/dynamic_amount_field_dropdown_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="12dp"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_amount_field_dropdown_currency"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dynamic_amount_field_dropdown_currency"
+            app:layout_constraintTop_toTopOf="@id/dynamic_amount_field_dropdown_currency" />
+
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
+            android:id="@+id/dynamic_amount_field_switch_iso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesSwitchStatus="unchecked"
+            app:andesSwitchText="@string/andes_amount_field_text_switch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_dropdown_currency" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/dynamic_amount_field_clear_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dynamic_amount_field_update_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dynamic_amount_field_switch_iso" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/dynamic_amount_field_update_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/dynamic_amount_field_clear_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dynamic_amount_field_clear_button"
+            app:layout_constraintTop_toTopOf="@id/dynamic_amount_field_clear_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

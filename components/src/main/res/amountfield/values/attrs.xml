@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="AndesAmountFieldSimpleMoney" tools:ignore="ResourceName">
+        <attr name="andesAmountFieldState" format="enum">
+            <enum name="idle" value="1000" />
+            <enum name="error" value="1001" />
+        </attr>
+        <attr name="andesAmountFieldEntryMode" format="enum">
+            <enum name="from_integer" value="2000" />
+            <enum name="from_decimal" value="2001" />
+        </attr>
+        <attr name="andesAmountFieldEntryType" format="enum">
+            <enum name="money" value="7000" />
+            <enum name="percentage" value="7001" />
+        </attr>
+        <attr name="andesAmountFieldNumberOfDecimals" format="integer" />
+        <attr name="andesAmountFieldShowCurrencyAsIsoValue" format="boolean" />
+        <attr name="andesAmountFieldCurrency" format="enum">
+            <enum name="BRL" value="4000" />
+            <enum name="UYU" value="4001" />
+            <enum name="CLP" value="4002" />
+            <enum name="CLF" value="4003" />
+            <enum name="MXN" value="4004" />
+            <enum name="DOP" value="4005" />
+            <enum name="PAB" value="4006" />
+            <enum name="COP" value="4007" />
+            <enum name="VEF" value="4008" />
+            <enum name="EUR" value="4009" />
+            <enum name="PEN" value="4010" />
+            <enum name="CRC" value="4011" />
+            <enum name="ARS" value="4012" />
+            <enum name="USD" value="4013" />
+            <enum name="BOB" value="4014" />
+            <enum name="GTQ" value="4015" />
+            <enum name="PYG" value="4016" />
+            <enum name="HNL" value="4017" />
+            <enum name="NIO" value="4018" />
+            <enum name="CUC" value="4019" />
+            <enum name="VES" value="4020" />
+            <enum name="BTC" value="4021" />
+            <enum name="ETH" value="4022" />
+            <enum name="MCN" value="4023" />
+            <enum name="USDP" value="4024" />
+        </attr>
+
+        <attr name="andesAmountFieldCountry" format="enum">
+            <enum name="AR" value="5000" />
+            <enum name="BR" value="5001" />
+            <enum name="CL" value="5002" />
+            <enum name="CO" value="5003" />
+            <enum name="MX" value="5004" />
+            <enum name="CR" value="5005" />
+            <enum name="PE" value="5006" />
+            <enum name="EC" value="5007" />
+            <enum name="PA" value="5008" />
+            <enum name="DO" value="5009" />
+            <enum name="UY" value="5010" />
+            <enum name="VE" value="5011" />
+            <enum name="BO" value="5012" />
+            <enum name="PY" value="5013" />
+            <enum name="GT" value="5014" />
+            <enum name="HN" value="5015" />
+            <enum name="NI" value="5016" />
+            <enum name="SV" value="5017" />
+            <enum name="PR" value="5018" />
+            <enum name="CU" value="5019" />
+        </attr>
+
+        <!-- attribute for the initial value the component will have at construction. -->
+        <!-- Pass a string value formatted as a double type. Example: "1000.50". -->
+        <!-- will throw NumberFormatException when passing a string that is not formatted as double. -->
+        <attr name="andesAmountFieldInitialValue" format="string" />
+
+        <attr name="andesAmountFieldHelperText" format="string" />
+
+        <attr name="andesAmountFieldSuffixText" format="string" />
+
+        <!--alternative text to be read to the talkback when setting a suffix-->
+        <attr name="andesAmountFieldSuffixA11yText" format="string" />
+
+        <!-- attribute for the max value the component can take. Pass a string value formatted as a double type. Example: "1000.50" -->
+        <!-- will throw NumberFormatException when passing a string that is not formatted as double. -->
+        <attr name="andesAmountFieldMaxValue" format="string" />
+
+    </declare-styleable>
+</resources>

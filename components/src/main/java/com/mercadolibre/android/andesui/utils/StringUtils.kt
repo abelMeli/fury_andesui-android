@@ -18,6 +18,11 @@ import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.mercadolibre.android.andesui.textview.moneyamount.AndesTextViewMoneyAmount
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
+import java.math.BigDecimal
+
+internal const val DOT = '.'
+internal const val COMMA = ','
+internal const val ZERO = "0"
 
 /**
  * Takes the original charSequence and adds the links passed as argument to it.
@@ -153,6 +158,154 @@ internal fun CharSequence?.isUpperCase(): Boolean {
         }
     }
     return true
+}
+
+internal fun Char.isDot() = this == DOT
+
+internal fun Char.isComma() = this == COMMA
+
+internal fun CharSequence?.hasDot(): Boolean {
+    this?.let { charSequence ->
+        return charSequence.contains(DOT)
+    }
+    return false
+}
+
+internal fun CharSequence?.hasComma(): Boolean {
+    this?.let { charSequence ->
+        return charSequence.contains(COMMA)
+    }
+    return false
+}
+
+/**
+ * Return original charSequence containing only numbers.
+ * Additionally, the user can choose to keep commas, dots, or both.
+ */
+internal fun CharSequence.removeNonNumberChars(
+    keepCommas: Boolean = false,
+    keepDots: Boolean = false
+): CharSequence {
+    val commaInRegex = ",".takeIf {keepCommas} ?: ""
+    val dotInRegex = ".".takeIf {keepDots} ?: ""
+    return this.replace(Regex("[^0-9$dotInRegex$commaInRegex]+"), "")
+}
+
+/**
+ * Return original charSequence containing only numbers and the chosen separator
+ */
+private fun CharSequence.removeNonNumberChars(separatorToKeep: Char): String {
+    return this.replace(Regex("[^0-9$separatorToKeep]+"), "")
+}
+
+/**
+ * Takes an initial charSequence formatted as amount (with decimal and thousand separators)
+ * and removes the thousand separators, making it ready to be used in, for example, a BigDecimal
+ * constructor.
+ */
+internal fun CharSequence.deformatAmount(decimalSeparator: Char, numberOfDecimals: Int = 0): String {
+    if (length == 0) {
+        var zeroReturn: CharSequence = "0"
+        if (numberOfDecimals > 0) {
+            zeroReturn = zeroReturn.append(DOT)
+            (0 until numberOfDecimals).forEach { _ ->
+                zeroReturn = zeroReturn.append('0')
+            }
+        }
+        return zeroReturn.toString()
+    }
+    return if (decimalSeparator.isComma()) {
+        this.removeNonNumberChars(keepCommas = true).replace(Regex(","), ".")
+    } else {
+        this.removeNonNumberChars(keepDots = true).toString()
+    }
+}
+
+/**
+ * Takes an initial charSequence that can contain anything and cleans all non-number values, also
+ * keeping the decimal separator.
+ * Additionally, removes any extra decimal separator, so the resultant string has only one.
+ * Finally, replaces the comma decimal separator (if set) with a dot separator.
+ * Returns a string ready to be used in, for example, a BigDecimal constructor.
+ */
+internal fun CharSequence.formatPastedText(decimalSeparator: Char): String {
+    var formattedText = ""
+
+    // remove non number chars and thousand separators
+    val valueWithoutNonNumberChars = removeNonNumberChars(decimalSeparator)
+
+    // keep only one decimal separator
+    run loop@{
+        valueWithoutNonNumberChars.forEach { char ->
+            if (formattedText.hasDecimalSeparator(decimalSeparator) && char == decimalSeparator) return@loop
+            formattedText += char
+        }
+    }
+
+    formattedText = formattedText.replace(Regex(","), ".").normalize()
+    return formattedText
+}
+
+/**
+ * Takes an initial charSequence formatted as double and trims it according to the passed [maxValue].
+ * Example: "1000.00".limitValueByMax()
+ */
+internal fun CharSequence.limitValueByMax(maxValue: String, decimalSeparator: Char, numberOfDecimals: Int): String {
+    var returnText = ""
+
+    run loop@{
+        this.forEach {
+            if (returnText.normalize().toBigDecimal() <= maxValue.toBigDecimal()) {
+                returnText += it
+            } else return@loop
+        }
+    }
+
+    return returnText.formatAmount(decimalSeparator, numberOfDecimals)
+}
+
+private fun CharSequence.normalize(): String {
+    var value = this
+    if (value.isEmpty()) {
+        return "0"
+    }
+    if (value.last().isDot()) {
+        value = value.append('0')
+        return value.toString()
+    }
+    return value.toString()
+}
+
+private fun CharSequence.hasDecimalSeparator(decimalSeparator: Char): Boolean {
+    return if (decimalSeparator.isComma()) {
+        this.hasComma()
+    } else {
+        this.hasDot()
+    }
+}
+
+/**
+ * Takes an initial charSequence formatted as a double value and formats it as an amount value.
+ *
+ * Example: input = "123456.78" output = "123.456,78" or "123,456.78" according to the chosen [decimalSeparator]
+ * @throws NumberFormatException when called over a string that is not formatted as double.
+ */
+internal fun CharSequence.formatAmount(decimalSeparator: Char, numberOfDecimals: Int): String {
+    val formatter = AmountUtils.getAmountFormatter(numberOfDecimals, decimalSeparator)
+    return if (this.isNotEmpty()) {
+        formatter.format(BigDecimal(this.toString()))
+    } else {
+        formatter.format(BigDecimal(ZERO))
+    }
+}
+
+/**
+ * Appends [newChar] at the end of the charSequence and returns result
+ */
+internal fun CharSequence.append(newChar: Char): CharSequence {
+    val stringBuffer = StringBuffer(this)
+    stringBuffer.append(newChar)
+    return stringBuffer
 }
 
 internal fun CharSequence?.getRange(substring: String): IntRange? {
