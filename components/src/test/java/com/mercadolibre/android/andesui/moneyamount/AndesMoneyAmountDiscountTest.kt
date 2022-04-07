@@ -127,4 +127,14 @@ class AndesMoneyAmountDiscountTest {
             }
         }
     }
+
+    @Test
+    fun `AndesMoneyAmountDiscount getContent works correctly`() {
+        val andesDiscount = AndesMoneyAmountDiscount(
+            context = context,
+            discount = 10,
+            size = AndesMoneyAmountSize.SIZE_12
+        )
+        andesDiscount.contentDescription assertEquals "10 ${andesDiscount.resources.getString(R.string.andes_money_amount_discount_accessibility)}"
+    }
 }

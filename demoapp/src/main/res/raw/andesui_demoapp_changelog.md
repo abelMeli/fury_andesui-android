@@ -1,3 +1,7 @@
+# v4.19.0
+## 🚀 Feature
+- AndesMoneyAmountDiscount method used to expose contentDescription | Author: [@egeribon](https://github.com/egeribon)
+
 # v4.18.0
 ## 🚀 Feature
 - `AndesAmountFieldSimple` component | Author: [@juanunzu](https://github.com/juanunzu)

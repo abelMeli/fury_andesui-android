@@ -174,6 +174,17 @@ class AndesMoneyAmountDiscount : ConstraintLayout {
         return TextView::class.java.name
     }
 
+    /**
+     * Method used to expose [AndesMoneyAmountDiscount] contentDescription.
+     */
+    @SuppressLint("GetContentDescriptionOverride")
+    override fun getContentDescription(): CharSequence? {
+        return AndesMoneyAmountDiscountAccessibilityDelegate.generateMoneyAmountDiscountContentDescriptionText(
+            this.discount,
+            this.resources
+        )
+    }
+
     companion object {
         private val ANDES_SIZE_DEFAULT_VALUE = AndesMoneyAmountSize.SIZE_24
         const val DISCOUNT_0 = 0
