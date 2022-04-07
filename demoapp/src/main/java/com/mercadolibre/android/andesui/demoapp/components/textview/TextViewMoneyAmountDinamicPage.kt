@@ -239,32 +239,29 @@ class TextViewMoneyAmountDinamicPage {
         val setupStyle = resolveStyle(spinnerStyle)
         val setupCurrency = resolveCurrency(spinnerCurrency)
         val setupCountry = resolveCountry(spinnerCountry)
-        val currencyInfo = AndesCurrencyHelper.getCurrency(setupCurrency)
         val suffix = spinnerSuffix.selectedItem
-        val error = getMessageError(context, setupStyle, setupSize, currencyInfo.isCrypto, suffix != SUFFIX_NONE )
         val price = textFieldAmount.text.toString()
-
-        error?.let { errorMessage ->
+        var moneyAmount: AndesMoneyAmount? = null
+        try {
+            moneyAmount = AndesMoneyAmount(
+                context,
+                price.toDouble(),
+                setupCurrency,
+                true,
+                setupSize,
+                setupType,
+                setupStyle,
+                setupCountry
+            )
+        } catch (exception: IllegalArgumentException) {
             AndesSnackbar(
-                context, textView, AndesSnackbarType.ERROR, errorMessage, AndesSnackbarDuration.NORMAL
+                context, textView, AndesSnackbarType.ERROR, exception.message ?: "Error", AndesSnackbarDuration.NORMAL
             ).show()
-            return
         }
 
-        val moneyAmount = AndesMoneyAmount(
-            context,
-            price.toDouble(),
-            setupCurrency,
-            true,
-            setupSize,
-            setupType,
-            setupStyle,
-            setupCountry
-        )
-
         when (suffix) {
-            SUFFIX_NONE -> { moneyAmount.setSuffix(null, null) }
-            SUFFIX_UNIT -> { moneyAmount.setSuffix(SpannableStringBuilder("/unidad"), "por unidad.") }
+            SUFFIX_NONE -> { moneyAmount?.setSuffix(null, null) }
+            SUFFIX_UNIT -> { moneyAmount?.setSuffix(SpannableStringBuilder("/unidad"), "por unidad.") }
         }
 
         textView.apply {
@@ -277,10 +274,9 @@ class TextViewMoneyAmountDinamicPage {
                 textFieldAmount.state = AndesTextfieldState.IDLE
             }
 
-            append(
-                moneyAmount,
-                selectedColor
-            )
+            moneyAmount?.let {
+                append(it, selectedColor)
+            }
         }
         updateA11y()
     }
@@ -327,24 +323,6 @@ class TextViewMoneyAmountDinamicPage {
     private fun clearText() {
         textView.clear()
         updateA11y()
-    }
-
-    private fun getMessageError(
-        context: Context, style: AndesMoneyAmountDecimalsStyle,
-        size: AndesMoneyAmountSize, isCrypto: Boolean, hasSuffix: Boolean): String? {
-
-        if (style == AndesMoneyAmountDecimalsStyle.SUPERSCRIPT &&
-            (size == AndesMoneyAmountSize.SIZE_12 || size == AndesMoneyAmountSize.SIZE_14)) {
-            return context.getString(R.string.andes_money_amount_error_size)
-        }
-        if (isCrypto && style != AndesMoneyAmountDecimalsStyle.NORMAL) {
-            return context.getString(R.string.andes_money_amount_error_decimal_format)
-        }
-        if (size == AndesMoneyAmountSize.SIZE_12 && hasSuffix) {
-            return context.getString(R.string.andes_money_amount_error_suffix_size)
-        }
-
-        return null
     }
 
     private fun resolveSize(spinner: Spinner): AndesMoneyAmountSize {

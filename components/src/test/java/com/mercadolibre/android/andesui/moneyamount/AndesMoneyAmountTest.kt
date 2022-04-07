@@ -44,15 +44,19 @@ class AndesMoneyAmountTest {
         )
     }
 
-    @Test(expected = IllegalArgumentException::class)
-    fun `Build SUPERSCRIPT, SIZE_14 throws exception`() {
-        AndesMoneyAmount(
+
+    fun `Build SUPERSCRIPT, SIZE_14 not throws exception`() {
+        val moneyAmount = AndesMoneyAmount(
             context = context,
             amount = 100.0,
             currency = AndesMoneyAmountCurrency.ARS,
             size = AndesMoneyAmountSize.SIZE_14,
             style = AndesMoneyAmountDecimalsStyle.SUPERSCRIPT
         )
+        val binding = AndesLayoutMoneyAmountBinding.bind(moneyAmount.getChildAt(0))
+        with(binding) {
+            moneyAmountText.text.toString() assertEquals "$ 100"
+        }
     }
 
     @Test(expected = IllegalArgumentException::class)

@@ -88,7 +88,7 @@ internal object AndesMoneyAmountConfigurationFactory {
     private fun resolveValidData(currency: AndesCurrencyInfo, decimalsStyle: AndesMoneyAmountDecimalsStyle,
                                  suffix: SpannableStringBuilder?, size: AndesMoneyAmountSize): ERROR {
         if (decimalsStyle == AndesMoneyAmountDecimalsStyle.SUPERSCRIPT &&
-            (size == AndesMoneyAmountSize.SIZE_12 || size == AndesMoneyAmountSize.SIZE_14)) {
+            (size == AndesMoneyAmountSize.SIZE_12)) {
             return ERROR.SIZE
         }
         if (currency.isCrypto && decimalsStyle != AndesMoneyAmountDecimalsStyle.NORMAL) {

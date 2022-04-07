@@ -359,7 +359,7 @@ class MoneyAmountDynamicPage {
         when (variant) {
             "Price" -> {
                 if (style == AndesMoneyAmountDecimalsStyle.SUPERSCRIPT &&
-                    (size == AndesMoneyAmountSize.SIZE_12 || size == AndesMoneyAmountSize.SIZE_14)) {
+                    (size == AndesMoneyAmountSize.SIZE_12)) {
                     return context.getString(R.string.andes_money_amount_error_size)
                 }
                 if (isCrypto && style != AndesMoneyAmountDecimalsStyle.NORMAL) {

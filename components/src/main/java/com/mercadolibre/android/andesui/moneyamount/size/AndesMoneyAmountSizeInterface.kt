@@ -25,7 +25,7 @@ internal object AndesMoneyAmountSize12 : AndesMoneyAmountSizeInterface {
 
 internal object AndesMoneyAmountSize14 : AndesMoneyAmountSizeInterface {
     override fun textSize(context: Context) = context.resources.getDimension(R.dimen.andes_text_size_14)
-    override fun superScriptSize(context: Context) = 0F
+    override fun superScriptSize(context: Context) = context.resources.getDimension(R.dimen.andes_text_size_10)
     override fun iconSize(context: Context) = context.resources.getDimension(R.dimen.andes_money_amount_logo_size_11)
     override fun discountIconSize(context: Context) = context.resources.getDimension(R.dimen.andes_money_amount_logo_size_16)
     override fun iconPadding(context: Context) = context.resources.getDimension(R.dimen.andes_money_amount_padding_3)

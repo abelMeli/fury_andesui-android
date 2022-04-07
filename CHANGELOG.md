@@ -1,6 +1,7 @@
 # v4.18.0
 ## 🚀 Feature
 - `AndesAmountFieldSimple` component | Author: [@juanunzu](https://github.com/juanunzu)
+- `AndesMoneyAmount` enable super script for AndesMoneyAmountSize SIZE_14 | Author: [@meligeo](https://github.com/meligeo)
 
 # v4.17.0
 ## 🚀 Feature

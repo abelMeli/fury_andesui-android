@@ -189,7 +189,7 @@ enum class AndesMoneyAmountDecimalsStyle
 | ----------- | ----------- |
 | NONE | It will remove decimal part from the amount rounding to an Integer amount.<br/><img src="../resources/moneyamount/moneyAmountDecimalStyleNone.png" height="28"/> |
 | NORMAL | It will show decimal part with [AndesCountry](#andescountry) decimal separator.<br/><img src="../resources/moneyamount/moneyAmountDecimalStyleNormal.png" height="28"/>  |
-| SUPERSCRIPT | It will show decimal part as a superscript (this style does not work for SIZE_12 and SIZE_14).<br/><img src="../resources/moneyamount/moneyAmountDecimalStyleSuperscript.png" height="28"/>  |
+| SUPERSCRIPT | It will show decimal part as a superscript (this style does not work for SIZE_12).<br/><img src="../resources/moneyamount/moneyAmountDecimalStyleSuperscript.png" height="28"/>  |
 
 <br/>
 
