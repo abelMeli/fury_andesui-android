@@ -75,8 +75,8 @@ enum class AndesCheckboxAlign
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| LEFT | Aligns checkbox to the left of the displayed text<br/><img src="../resources/checkbox/checkedCheckboxExample.png" height="24"/> |
-| RIGHT | Aligns checkbox to the right of the displayed text<br/><img src="../resources/checkbox/checkboxRightExample.png" height="24"/> |
+| LEFT | Aligns checkbox to the left of the displayed text<br/><img src="resources/checkbox/checkedCheckboxExample.png" height="24"/> |
+| RIGHT | Aligns checkbox to the right of the displayed text<br/><img src="resources/checkbox/checkboxRightExample.png" height="24"/> |
 
 <br/>
 
@@ -94,9 +94,9 @@ enum class AndesCheckboxStatus
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| SELECTED | Checkbox filled with a check sign<br/><img src="../resources/checkbox/checkedCheckboxExample.png" height="24"/> |
-| UNSELECTED | Checkbox unfilled<br/><img src="../resources/checkbox/uncheckedCheckboxExample.png" height="24"/> |
-| UNDEFINED | Checkvox filled with a minus sign<br/><img src="../resources/checkbox/undefinedCheckboxExample.png" height="24"/> |
+| SELECTED | Checkbox filled with a check sign<br/><img src="resources/checkbox/checkedCheckboxExample.png" height="24"/> |
+| UNSELECTED | Checkbox unfilled<br/><img src="resources/checkbox/uncheckedCheckboxExample.png" height="24"/> |
+| UNDEFINED | Checkvox filled with a minus sign<br/><img src="resources/checkbox/undefinedCheckboxExample.png" height="24"/> |
 
 <br/>
 
@@ -114,9 +114,9 @@ enum class AndesCheckboxType
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| IDLE | Default status of the checkbox<br/><img src="../resources/checkbox/uncheckedCheckboxExample.png" height="24"/> |
-| DISABLED | Checkbox can not be modified<br/><img src="../resources/checkbox/checkboxDisabledExample.png" height="24"/> |
-| ERROR | Checkbox with red color until user selects it<br/><img src="../resources/checkbox/checkboxErrorExample.png" height="24"/> |
+| IDLE | Default status of the checkbox<br/><img src="resources/checkbox/uncheckedCheckboxExample.png" height="24"/> |
+| DISABLED | Checkbox can not be modified<br/><img src="resources/checkbox/checkboxDisabledExample.png" height="24"/> |
+| ERROR | Checkbox with red color until user selects it<br/><img src="resources/checkbox/checkboxErrorExample.png" height="24"/> |
 
 <br/>
 

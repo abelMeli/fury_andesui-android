@@ -62,8 +62,8 @@ sealed class AndesFloatingMenuWidth
 ```
 | Values | Description |
 | --------- | ------------- |
-| Fixed | Gives parent view width to the floating menu.<br/><img src="../resources/floatingmenu/rowsSmallFixed.png" width="100">|
-| Custom | **Custom(val width: Int)**: Gives a custom width size in pixels to the floating menu.<br/><img src="../resources/floatingmenu/rowsMediumLeft.png" width="100">|
+| Fixed | Gives parent view width to the floating menu.<br/><img src="resources/floatingmenu/rowsSmallFixed.png" width="100">|
+| Custom | **Custom(val width: Int)**: Gives a custom width size in pixels to the floating menu.<br/><img src="resources/floatingmenu/rowsMediumLeft.png" width="100">|
 
 <br/>
 
@@ -74,9 +74,9 @@ sealed class AndesFloatingMenuRows
 ```
 | Values | Description |
 | --------- | ------------- |
-| Small | Gives a height of 3.5 rows to the floating menu.<br/><img src="../resources/floatingmenu/rowsSmallFixed.png" width="100"> |
-| Medium | Gives a height of 5.5 rows to the floating menu.<br/><img src="../resources/floatingmenu/rowsMediumRight.png" width="100"> |
-| Max | Gives max possible height to the floating menu.<br/><img src="../resources/floatingmenu/rowsMaxFixed.png" width="100"> |
+| Small | Gives a height of 3.5 rows to the floating menu.<br/><img src="resources/floatingmenu/rowsSmallFixed.png" width="100"> |
+| Medium | Gives a height of 5.5 rows to the floating menu.<br/><img src="resources/floatingmenu/rowsMediumRight.png" width="100"> |
+| Max | Gives max possible height to the floating menu.<br/><img src="resources/floatingmenu/rowsMaxFixed.png" width="100"> |
 
 <br/>
 
@@ -94,8 +94,8 @@ sealed class AndesFloatingMenuOrientation
 ```
 | Values | Description |
 | --------- | ------------- |
-| Left | Floating menu will be showed from the end of the trigger to the left if possible. If not it will be showed with Right configuration.<br/><img src="../resources/floatingmenu/rowsMediumLeft.png" width="100"> |
-| Right | Floating menu will be showed from the start of the trigger to the right if possible. If not it will be showed with Left configuration.<br/><img src="../resources/floatingmenu/rowsMediumRight.png" width="100"> |
+| Left | Floating menu will be showed from the end of the trigger to the left if possible. If not it will be showed with Right configuration.<br/><img src="resources/floatingmenu/rowsMediumLeft.png" width="100"> |
+| Right | Floating menu will be showed from the start of the trigger to the right if possible. If not it will be showed with Left configuration.<br/><img src="resources/floatingmenu/rowsMediumRight.png" width="100"> |
 
 <br/>
 
@@ -131,6 +131,6 @@ interface OnDismissListener
 <br/>
 
 ## Screenshots
-<img src="../resources/floatingmenu/example1.png" width="250">
-<img src="../resources/floatingmenu/example2.png" width="250">
-<img src="../resources/floatingmenu/example3.png" width="250">
+<img src="resources/floatingmenu/example1.png" width="250">
+<img src="resources/floatingmenu/example2.png" width="250">
+<img src="resources/floatingmenu/example3.png" width="250">

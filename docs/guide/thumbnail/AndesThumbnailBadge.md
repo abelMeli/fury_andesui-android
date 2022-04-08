@@ -81,8 +81,8 @@ sealed class AndesThumbnailBadgeType
 ```
 | Values | Description |
 | ----------- | ----------- |
-| Icon | Default rounded image with a tinted icon inside<br/><img src="../resources/thumbnail/iconIconPillHighlight.png" height="48"/> |
-| ImageCircle | Rounded image without tint<br/><img src="../resources/thumbnail/imageCircleIconPillHightlight.png" height="48"/> |
+| Icon | Default rounded image with a tinted icon inside<br/><img src="resources/thumbnail/iconIconPillHighlight.png" height="48"/> |
+| ImageCircle | Rounded image without tint<br/><img src="resources/thumbnail/imageCircleIconPillHightlight.png" height="48"/> |
 
 <br/>
 
@@ -99,9 +99,9 @@ sealed class AndesThumbnailBadgeComponent
 ```
 | Values | Description |
 | ----------- | ----------- |
-| Pill | **Pill(color: AndesBadgeIconType, text: String?, textStyleDefault: Boolean, thumbnailSize: [AndesThumbnailBadgePillSize](#andesthumbnailbadgepillsize))**: <br/>- color: badge, outline and thumbnail tint color.<br/>- text: pill text content. Default value: **null**<br/>- textStyleDefault: sets pill text in uppercase: **true**, **false**. Default value: **true**.<br/>- thumbnailSize: defines thumbnail display size in dp. Default value: **SIZE_64**<br/><img src="../resources/thumbnail/iconPillHighlight.png" height="48"/> |
-| Dot |**Dot(color: AndesBadgeIconType, thumbnailSize: [AndesThumbnailBadgeDotSize](#andesthumbnailbadgedotSize))**:<br/>- color: badge, outline and thumbnail tint color.<br/>- thumbnailSize: defines thumbnail display size in dp. Default value: **SIZE_24**<br/><img src="../resources/thumbnail/iconDotHighlight.png" height="48"/> |
-| IconPill | **Dot(color: AndesBadgeIconType, thumbnailSize: [AndesThumbnailBadgePillSize](#andesthumbnailbadgepillsize))**:<br/>- color: badge, outline and thumbnail tint color.<br/>- thumbnailSize: defines thumbnail display size in dp. Default value: **SIZE_64**<br/><img src="../resources/thumbnail/iconIconPillHighlight.png" height="48"/> |
+| Pill | **Pill(color: AndesBadgeIconType, text: String?, textStyleDefault: Boolean, thumbnailSize: [AndesThumbnailBadgePillSize](#andesthumbnailbadgepillsize))**: <br/>- color: badge, outline and thumbnail tint color.<br/>- text: pill text content. Default value: **null**<br/>- textStyleDefault: sets pill text in uppercase: **true**, **false**. Default value: **true**.<br/>- thumbnailSize: defines thumbnail display size in dp. Default value: **SIZE_64**<br/><img src="resources/thumbnail/iconPillHighlight.png" height="48"/> |
+| Dot |**Dot(color: AndesBadgeIconType, thumbnailSize: [AndesThumbnailBadgeDotSize](#andesthumbnailbadgedotSize))**:<br/>- color: badge, outline and thumbnail tint color.<br/>- thumbnailSize: defines thumbnail display size in dp. Default value: **SIZE_24**<br/><img src="resources/thumbnail/iconDotHighlight.png" height="48"/> |
+| IconPill | **Dot(color: AndesBadgeIconType, thumbnailSize: [AndesThumbnailBadgePillSize](#andesthumbnailbadgepillsize))**:<br/>- color: badge, outline and thumbnail tint color.<br/>- thumbnailSize: defines thumbnail display size in dp. Default value: **SIZE_64**<br/><img src="resources/thumbnail/iconIconPillHighlight.png" height="48"/> |
 
 <br/>
 
@@ -149,4 +149,4 @@ enum class AndesThumbnailBadgeDotSize
 <br/>
 
 ## Screenshots
-<img src="../resources/thumbnail/thumbnailBadgeExample.png" width="300">
+<img src="resources/thumbnail/thumbnailBadgeExample.png" width="300">

@@ -82,9 +82,9 @@ enum class AndesThumbnailHierarchy
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| DEFAULT | Paints the drawable with black and the background with white color<br/><img src="../resources/thumbnail/iconDefaultExample.png" height="48"/> |
-| QUIET | Paints the drawable with the main color and the background with a lighter color<br/><img src="../resources/thumbnail/iconQuietExample.png" height="48"/> |
-| LOUD | Paints the drawable with white and the background with the main color<br/><img src="../resources/thumbnail/iconLoudExample.png" height="48"/> |
+| DEFAULT | Paints the drawable with black and the background with white color<br/><img src="resources/thumbnail/iconDefaultExample.png" height="48"/> |
+| QUIET | Paints the drawable with the main color and the background with a lighter color<br/><img src="resources/thumbnail/iconQuietExample.png" height="48"/> |
+| LOUD | Paints the drawable with white and the background with the main color<br/><img src="resources/thumbnail/iconLoudExample.png" height="48"/> |
 
 <br/>
 
@@ -102,9 +102,9 @@ enum class AndesThumbnailType
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| ICON | Default rounded image with a tinted icon inside<br/><img src="../resources/thumbnail/iconDefaultExample.png" height="48"/> |
-| IMAGE_CIRCLE | Rounded image & behaves as [AndesThumbnailHierarchy.DEFAULT](#andesthumbnailhierarchy)<br/><img src="../resources/thumbnail/imageCircleExample.png" height="48"/> |
-| IMAGE_SQUARE | Squared image with rounded corners & behaves as [AndesThumbnailHierarchy.DEFAULT](#andesthumbnailhierarchy)<br/><img src="../resources/thumbnail/imageSquareExample.png" height="48"/> |
+| ICON | Default rounded image with a tinted icon inside<br/><img src="resources/thumbnail/iconDefaultExample.png" height="48"/> |
+| IMAGE_CIRCLE | Rounded image & behaves as [AndesThumbnailHierarchy.DEFAULT](#andesthumbnailhierarchy)<br/><img src="resources/thumbnail/imageCircleExample.png" height="48"/> |
+| IMAGE_SQUARE | Squared image with rounded corners & behaves as [AndesThumbnailHierarchy.DEFAULT](#andesthumbnailhierarchy)<br/><img src="resources/thumbnail/imageSquareExample.png" height="48"/> |
 
 <br/>
 
@@ -145,8 +145,8 @@ enum class AndesThumbnailState
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| DISABLED | Thumbnail component will be tinted with gray<br/><img src="../resources/thumbnail/iconDisabledExample.png" height="48"/> |
-| ENABLED | Thumbnail component  will be tinte according to the color and [hierarchy](#andesthumbnailhierarchy) defined<br/><img src="../resources/thumbnail/iconDefaultExample.png" height="48"/>  |
+| DISABLED | Thumbnail component will be tinted with gray<br/><img src="resources/thumbnail/iconDisabledExample.png" height="48"/> |
+| ENABLED | Thumbnail component  will be tinte according to the color and [hierarchy](#andesthumbnailhierarchy) defined<br/><img src="resources/thumbnail/iconDefaultExample.png" height="48"/>  |
 
 <br/>
 
@@ -158,4 +158,4 @@ enum class AndesThumbnailState
 <br/>
 
 ## Screenshots
-<img src="../resources/thumbnail/thumbnailExample.png" width="300">
+<img src="resources/thumbnail/thumbnailExample.png" width="300">

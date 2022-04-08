@@ -63,5 +63,5 @@ AndesAutosuggest(context)
 <br/>
 
 ## Screenshots
-<img src="../resources/autosuggest/server-loading.png" width="250">
-<img src="../resources/autosuggest/server-loaded.png" width="250">
+<img src="resources/autosuggest/server-loading.png" width="250">
+<img src="resources/autosuggest/server-loaded.png" width="250">

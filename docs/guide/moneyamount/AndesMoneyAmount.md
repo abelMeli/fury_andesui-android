@@ -104,9 +104,9 @@ enum class AndesMoneyAmountType
 ```
 | Values | Description |
 | ----------- | ----------- |
-| POSITIVE | Default type to display a positive amount.<br/><img src="../resources/moneyamount/moneyAmountStylePositive.png" height="28"/> |
-| NEGATIVE | Type used to display a negative amount. It will add a minus prefix.<br/><img src="../resources/moneyamount/moneyAmountStyleNegative.png" height="28"/> |
-| PREVIOUS | Type used to display a previous amount. It will set a strike out the displayed text. <br/><img src="../resources/moneyamount/moneyAmountStylePrevious.png" height="28"/> |
+| POSITIVE | Default type to display a positive amount.<br/><img src="resources/moneyamount/moneyAmountStylePositive.png" height="28"/> |
+| NEGATIVE | Type used to display a negative amount. It will add a minus prefix.<br/><img src="resources/moneyamount/moneyAmountStyleNegative.png" height="28"/> |
+| PREVIOUS | Type used to display a previous amount. It will set a strike out the displayed text. <br/><img src="resources/moneyamount/moneyAmountStylePrevious.png" height="28"/> |
 
 <br/>
 
@@ -187,9 +187,9 @@ enum class AndesMoneyAmountDecimalsStyle
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| NONE | It will remove decimal part from the amount rounding to an Integer amount.<br/><img src="../resources/moneyamount/moneyAmountDecimalStyleNone.png" height="28"/> |
-| NORMAL | It will show decimal part with [AndesCountry](#andescountry) decimal separator.<br/><img src="../resources/moneyamount/moneyAmountDecimalStyleNormal.png" height="28"/>  |
-| SUPERSCRIPT | It will show decimal part as a superscript (this style does not work for SIZE_12).<br/><img src="../resources/moneyamount/moneyAmountDecimalStyleSuperscript.png" height="28"/>  |
+| NONE | It will remove decimal part from the amount rounding to an Integer amount.<br/><img src="resources/moneyamount/moneyAmountDecimalStyleNone.png" height="28"/> |
+| NORMAL | It will show decimal part with [AndesCountry](#andescountry) decimal separator.<br/><img src="resources/moneyamount/moneyAmountDecimalStyleNormal.png" height="28"/>  |
+| SUPERSCRIPT | It will show decimal part as a superscript (this style does not work for SIZE_12).<br/><img src="resources/moneyamount/moneyAmountDecimalStyleSuperscript.png" height="28"/>  |
 
 <br/>
 
@@ -237,4 +237,4 @@ enum class AndesCountry
 <br/>
 
 ## Screenshots
-<img src="../resources/moneyamount/moneyAmountExample.png" width="300">
+<img src="resources/moneyamount/moneyAmountExample.png" width="300">

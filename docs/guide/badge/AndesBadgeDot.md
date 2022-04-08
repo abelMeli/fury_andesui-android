@@ -60,11 +60,11 @@ enum class AndesBadgeType
 ```
 | Enum Values | Description |
 | --------- | ------------- |
-| NEUTRAL | Gives a gray color style to the component<br/><img src="../resources/badge/dot/dotNeutral.png" height="15"/> |
-| HIGHLIGHT | Gives a blue color style to the component<br/><img src="../resources/badge/dot/dotHighlight.png" height="15"/> |
-| SUCCESS | Gives a green color style to the component<br/><img src="../resources/badge/dot/dotSuccess.png" height="15"/> |
-| WARNING | Gives an orange color style to the component<br/><img src="../resources/badge/dot/dotWarning.png" height="15"/> |
-| ERROR | Gives a red color style to the component<br/><img src="../resources/badge/dot/dotError.png" height="15"/> |
+| NEUTRAL | Gives a gray color style to the component<br/><img src="resources/badge/dot/dotNeutral.png" height="15"/> |
+| HIGHLIGHT | Gives a blue color style to the component<br/><img src="resources/badge/dot/dotHighlight.png" height="15"/> |
+| SUCCESS | Gives a green color style to the component<br/><img src="resources/badge/dot/dotSuccess.png" height="15"/> |
+| WARNING | Gives an orange color style to the component<br/><img src="resources/badge/dot/dotWarning.png" height="15"/> |
+| ERROR | Gives a red color style to the component<br/><img src="resources/badge/dot/dotError.png" height="15"/> |
 
 <br/>
 
@@ -76,4 +76,4 @@ enum class AndesBadgeType
 <br/>
 
 ## Screenshots
-<img src="../resources/badge/dot/dotExamples.png" width="300">
+<img src="resources/badge/dot/dotExamples.png" width="300">

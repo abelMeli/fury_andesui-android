@@ -69,10 +69,10 @@ enum class AndesBadgeIconType
 ```
 | Enum Values | Description |
 | --------- | ------------- |
-| HIGHLIGHT | Gives a blue color style to the component<br/><img src="../resources/badge/iconpill/highlightLarge.png" height="24"/> |
-| SUCCESS | Gives a green color style to the component<br/><img src="../resources/badge/iconpill/successLarge.png" height="24"/> |
-| WARNING | Gives an orange color style to the component<br/><img src="../resources/badge/iconpill/warningLarge.png" height="24"/> |
-| ERROR | Gives a red color style to the component<br/><img src="../resources/badge/iconpill/errorLarge.png" height="30"/> |
+| HIGHLIGHT | Gives a blue color style to the component<br/><img src="resources/badge/iconpill/highlightLarge.png" height="24"/> |
+| SUCCESS | Gives a green color style to the component<br/><img src="resources/badge/iconpill/successLarge.png" height="24"/> |
+| WARNING | Gives an orange color style to the component<br/><img src="resources/badge/iconpill/warningLarge.png" height="24"/> |
+| ERROR | Gives a red color style to the component<br/><img src="resources/badge/iconpill/errorLarge.png" height="30"/> |
 
 <br/>
 
@@ -90,8 +90,8 @@ enum class AndesBadgePillSize
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| SMALL | Small badge size<br/><img src="../resources/badge/iconpill/highlightSmall.png" height="18"/> |
-| LARGE | Large badge size<br/><img src="../resources/badge/iconpill/highlightLarge.png" height="24"/> |
+| SMALL | Small badge size<br/><img src="resources/badge/iconpill/highlightSmall.png" height="18"/> |
+| LARGE | Large badge size<br/><img src="resources/badge/iconpill/highlightLarge.png" height="24"/> |
 
 <br/>
 
@@ -109,8 +109,8 @@ enum class AndesBadgeIconHierarchy
 ```
 | Enum Values | Description |
 | --------- | ------------- |
-| LOUD | Gives the primary color specified in badge type style<br/><img src="../resources/badge/iconpill/errorLoud.png" height="24"/> |
-| SECONDARY | Gives the primary variant color specified in badge type style<br/><img src="../resources/badge/iconpill/errorSecondary.png" height="24"/> |
+| LOUD | Gives the primary color specified in badge type style<br/><img src="resources/badge/iconpill/errorLoud.png" height="24"/> |
+| SECONDARY | Gives the primary variant color specified in badge type style<br/><img src="resources/badge/iconpill/errorSecondary.png" height="24"/> |
 
 <br/>
 
@@ -122,4 +122,4 @@ enum class AndesBadgeIconHierarchy
 <br/>
 
 ## Screenshots
-<img src="../resources/badge/iconpill/badgeIconPillExample.png" width="300">
+<img src="resources/badge/iconpill/badgeIconPillExample.png" width="300">

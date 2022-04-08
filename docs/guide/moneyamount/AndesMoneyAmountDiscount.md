@@ -108,4 +108,4 @@ enum class AndesMoneyAmountSize
 <br/>
 
 ## Screenshots
-<img src="../resources/moneyamount/moneyAmountExample.png" width="300">
+<img src="resources/moneyamount/moneyAmountExample.png" width="300">

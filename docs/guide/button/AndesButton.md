@@ -95,9 +95,9 @@ enum class AndesButtonHierarchy
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| TRANSPARENT | Button text tinted with main color and background transparent<br/><img src="../resources/button/transparentButtonExample.png" height="48"/> |
-| QUIET | Button text tinted with main color and background with a lighter one<br/><img src="../resources/button/quietButtonExample.png" height="48"/> |
-| LOUD | Button text tinted with white and background with main color<br/><img src="../resources/button/loudButtonExample.png" height="48"/> |
+| TRANSPARENT | Button text tinted with main color and background transparent<br/><img src="resources/button/transparentButtonExample.png" height="48"/> |
+| QUIET | Button text tinted with main color and background with a lighter one<br/><img src="resources/button/quietButtonExample.png" height="48"/> |
+| LOUD | Button text tinted with white and background with main color<br/><img src="resources/button/loudButtonExample.png" height="48"/> |
 
 <br/>
 
@@ -115,9 +115,9 @@ enum class AndesButtonSize
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| SMALL | Button height 24dp<br/><img src="../resources/button/smallSizeButtonExample.png" height="24"/> |
-| MEDIUM | Button height 32dp<br/><img src="../resources/button/mediumSizeButtonExample.png" height="32"/> |
-| LARGE | Button height 48dp<br/><img src="../resources/button/loudButtonExample.png" height="48"/> |
+| SMALL | Button height 24dp<br/><img src="resources/button/smallSizeButtonExample.png" height="24"/> |
+| MEDIUM | Button height 32dp<br/><img src="resources/button/mediumSizeButtonExample.png" height="32"/> |
+| LARGE | Button height 48dp<br/><img src="resources/button/loudButtonExample.png" height="48"/> |
 
 <br/>
 
@@ -164,8 +164,8 @@ enum class AndesButtonIconOrientation
 ```
 | Enum Values | Description |
 | ----------- | ----------- |
-| LEFT | Icon position at the left of the button text<br/><img src="../resources/button/leftIconButtonExample.png" height="48"/> |
-| RIGHT | Icon position at the right of the button text<br/><img src="../resources/button/rightIconButtonExample.png" height="48"/> |
+| LEFT | Icon position at the left of the button text<br/><img src="resources/button/leftIconButtonExample.png" height="48"/> |
+| RIGHT | Icon position at the right of the button text<br/><img src="resources/button/rightIconButtonExample.png" height="48"/> |
 
 <br/>
 
@@ -192,4 +192,4 @@ enum class AndesButtonProgressAction
 <br/>
 
 ## Screenshots
-<img src="../resources/button/buttonExample.png" width="300">
+<img src="resources/button/buttonExample.png" width="300">

@@ -75,8 +75,8 @@ sealed class AndesTabsType
 ```
 | Values | Description |
 | ----------- | ----------- |
-| FullWidth | Will fill the available width in screen with all [AndesTabItems](#andestabitem). It is not recommended to use this type when the number of items is large.<br/><img src="../resources/tabs/tabsFullWidth.png" height="48"/> |
-| LeftAlign | **LeftAlign(overflowMode: Boolean):** will add [AndesTabItems](#andestabitem) to the screen starting from the left. In case the number of items is bigger than the available space, the container will scroll in order to show all items. overflowMode will show a shadow at the end of the screen, the default value is false.<br/><img src="../resources/tabs/tabsLeftAlign.png" height="48"/> |
+| FullWidth | Will fill the available width in screen with all [AndesTabItems](#andestabitem). It is not recommended to use this type when the number of items is large.<br/><img src="resources/tabs/tabsFullWidth.png" height="48"/> |
+| LeftAlign | **LeftAlign(overflowMode: Boolean):** will add [AndesTabItems](#andestabitem) to the screen starting from the left. In case the number of items is bigger than the available space, the container will scroll in order to show all items. overflowMode will show a shadow at the end of the screen, the default value is false.<br/><img src="resources/tabs/tabsLeftAlign.png" height="48"/> |
 
 <br/>
 
@@ -123,4 +123,4 @@ interface OnTabChangedListener
 <br/>
 
 ## Screenshots
-<img src="../resources/tabs/tabsExample.png" width="300">
+<img src="resources/tabs/tabsExample.png" width="300">
