@@ -16,6 +16,8 @@ import com.mercadolibre.android.andesui.assertIsNull
 import com.mercadolibre.android.andesui.buildAttributeSet
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
+import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
+import com.mercadolibre.android.andesui.utils.getSuffixComponent
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import com.mercadolibre.android.andesui.utils.configureTextDimensionUtilsExtraSmallText
 import com.mercadolibre.android.andesui.utils.configureTextDimensionUtilsLargeText
@@ -220,6 +222,44 @@ class AndesAmountFieldSimpleTest {
         amountField.suffixText assertEquals "suffix text"
         amountField.suffixA11yText assertEquals "suffix text for a11y"
         amountField.maxValue assertEquals "10000.00"
+    }
+
+    @Test
+    fun `given empty component with money type, when setting a value, then currency color is correctly set`() {
+        amountField = AndesAmountFieldSimple(context)
+
+        amountField.value = "1000.00"
+
+        amountField.getSuffixComponent().getTextColor() assertEquals AndesTextViewColor.Secondary
+    }
+
+    @Test
+    fun `given empty component with money type, when setting and deleting a value, then currency color is correctly set`() {
+        amountField = AndesAmountFieldSimple(context)
+
+        amountField.emulateTypingWithKeyboard("1")
+        amountField.emulateDeleteKeyPressed()
+
+        amountField.getSuffixComponent().getTextColor() assertEquals AndesTextViewColor.Secondary
+    }
+
+    @Test
+    fun `given empty component with percentage type, when setting a value, then currency color is correctly set`() {
+        amountField = AndesAmountFieldSimple(context = context, entryType = AndesAmountFieldEntryType.PERCENTAGE)
+
+        amountField.value = "1000.00"
+
+        amountField.getSuffixComponent().getTextColor() assertEquals AndesTextViewColor.Primary
+    }
+
+    @Test
+    fun `given empty component with percentage type, when setting and deleting a value, then currency color is correctly set`() {
+        amountField = AndesAmountFieldSimple(context = context, entryType = AndesAmountFieldEntryType.PERCENTAGE)
+
+        amountField.emulateTypingWithKeyboard("1")
+        amountField.emulateDeleteKeyPressed()
+
+        amountField.getSuffixComponent().getTextColor() assertEquals AndesTextViewColor.Secondary
     }
 
     @Test

@@ -107,6 +107,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             createConfig().let {
                 setupCurrencyComponent(it)
                 setupSuffixComponent(it)
+                resizeComponentIfNeeded()
             }
         }
 
@@ -437,7 +438,6 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
     private fun setupSuffixComponent(config: AndesAmountFieldSimpleMoneyConfiguration) {
         suffixTextView.apply {
             text = config.suffixText
-            setTextColor(config.suffixTextColor)
         }
     }
 
@@ -469,12 +469,13 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
     /**
      * Function called every time the text in the component changes.
      * We need this method to be able to resize the view when the text does not fit in the screen.
-     * This method also colorizes the currency symbol according to the chars entered in the field.
+     * This method also colorizes the currency symbol and the suffix text according to the chars entered in the field.
      */
     override fun resizeComponentIfNeeded() {
         val newText = internalEditText.text?.toString() ?: ""
         val config = createConfig()
         setupCurrencyColor(newText.length)
+        setupSuffixColor(config, newText.length)
         hidePlaceholderWhenTextPresent(config, newText.length)
 
         val textToMeasure = newText.takeIf { it.isNotEmpty() } ?: config.placeholder
@@ -521,6 +522,14 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             currencyTextView.setTextColor(AndesTextViewColor.Secondary)
         } else {
             currencyTextView.setTextColor(AndesTextViewColor.Primary)
+        }
+    }
+
+    private fun setupSuffixColor(config: AndesAmountFieldSimpleMoneyConfiguration, textLength: Int) {
+        if (textLength == 0) {
+            suffixTextView.setTextColor(config.suffixTextColorForEmptyField)
+        } else {
+            suffixTextView.setTextColor(config.suffixTextColor)
         }
     }
 

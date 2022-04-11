@@ -9,6 +9,7 @@ import com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
 import com.mercadolibre.android.andesui.amountfield.size.AndesAmountFieldSize
 import com.mercadolibre.android.andesui.amountfield.utils.AndesAmountFieldEditText
 import com.mercadolibre.android.andesui.amountfield.utils.TextDimensionUtils
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import io.mockk.every
 import io.mockk.mockkObject
 
@@ -52,6 +53,10 @@ internal fun AndesAmountFieldSimple.emulateTypingWithKeyboard(valueToEnter: Stri
 
 internal fun AndesAmountFieldSimple.emulateDeleteKeyPressed() {
     getInternalEditTextComponent().emulateDeleteKeyPressed()
+}
+
+internal fun AndesAmountFieldSimple.getSuffixComponent(): AndesTextView {
+    return findViewById(R.id.amount_field_suffix_text)
 }
 
 internal fun configureTextDimensionUtilsLargeText(context: Context) {
