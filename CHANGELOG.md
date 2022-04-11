@@ -1,4 +1,4 @@
-# v4.19.0
+# v4.19.1
 ## 🚀 Feature
 - AndesMoneyAmountDiscount method used to expose contentDescription | Author: [@egeribon](https://github.com/egeribon)
 ## 🛠 Fixes
