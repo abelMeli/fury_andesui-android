@@ -3,6 +3,7 @@
 - AndesMoneyAmountDiscount method used to expose contentDescription | Author: [@egeribon](https://github.com/egeribon)
 ## 🛠 Fixes
 - Fix in the suffix text color for the `PERCENTAGE` variant in the `AndesAmountFieldSimple` component | Author: [@juanunzu](https://github.com/juanunzu)
+- Fix BottomSheet hashmap  `NoSuchElementException` when views are added after locking container childs | Author: [@eportasML](https://github.com/eportasML)
 
 # v4.18.0
 ## 🚀 Feature

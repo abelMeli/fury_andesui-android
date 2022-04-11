@@ -48,6 +48,7 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
 @LooperMode(LooperMode.Mode.PAUSED)
 class AndesBottomSheetTest {
+    private lateinit var rl: RelativeLayout
     private var context = RuntimeEnvironment.application
     private lateinit var andesBottomSheet: AndesBottomSheet
     private lateinit var activity: AppCompatActivity
@@ -422,6 +423,28 @@ class AndesBottomSheetTest {
     }
 
     @Test
+    fun `check that all siblings have the default importantForAccessibility, when the expanded and collapsed method is invoked after add new view to container`() {
+        activateTalkbackForTest(context)
+        val button3 = Button(context).apply {
+            id = 10
+            importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        }
+
+        andesBottomSheet.halfExpand()
+        shadowOf(getMainLooper()).idle()
+
+        rl.addView(button3)
+        
+        andesBottomSheet.collapse()
+        shadowOf(getMainLooper()).idle()
+
+        button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        button3.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+
+
+    @Test
     fun `check that all siblings have the importantForAccessibility with IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS, when status is halfExpand`() {
         activateTalkbackForTest(context)
 
@@ -445,6 +468,29 @@ class AndesBottomSheetTest {
 
         button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
         button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+
+    @Test
+    fun `check that all siblings have the default importantForAccessibility, when the expanded, halfExpanded and collapsed method is invoked  after add new view to container`() {
+        activateTalkbackForTest(context)
+        val button3 = Button(context).apply {
+            id = 10
+            importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        }
+        
+        andesBottomSheet.expand()
+        shadowOf(getMainLooper()).idle()
+
+        rl.addView(button3)
+
+        andesBottomSheet.halfExpand()
+        shadowOf(getMainLooper()).idle()
+        andesBottomSheet.collapse()
+        shadowOf(getMainLooper()).idle()
+
+        button1.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        button2.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        button3.importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_YES
     }
 
     @Test
@@ -499,7 +545,7 @@ class AndesBottomSheetTest {
     private fun setupTestActivity() {
         val robolectricActivity = Robolectric.buildActivity(AppCompatActivity::class.java).create()
         activity = robolectricActivity.get()
-        val rl = RelativeLayout(activity).apply {
+        rl = RelativeLayout(activity).apply {
             layoutParams = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT

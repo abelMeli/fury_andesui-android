@@ -263,11 +263,11 @@ class AndesBottomSheet : CoordinatorLayout {
         if (a11yManager.isEnabled) {
             (parent as? ViewGroup)?.let { viewGroup ->
                 for (i in 0 until viewGroup.childCount) {
-                    if (viewGroup.getChildAt(i) != this) {
-                        viewGroup.getChildAt(i).importantForAccessibility =
-                            importantForAccessibilityValue.getValue(
-                                viewGroup.getChildAt(i).id
-                            )
+                    val child = viewGroup.getChildAt(i)
+                    if (child != this) {
+                        importantForAccessibilityValue[child.id]?.let {
+                            child.importantForAccessibility = it
+                        }
                     }
                 }
             }
@@ -278,15 +278,12 @@ class AndesBottomSheet : CoordinatorLayout {
         if (a11yManager.isEnabled) {
             (parent as? ViewGroup)?.let { viewGroup ->
                 for (i in 0 until viewGroup.childCount) {
-                    if (viewGroup.getChildAt(i) != this) {
-                        if (importantForAccessibilityValue.count() < viewGroup.childCount - 1) {
-                            importantForAccessibilityValue.put(
-                                viewGroup.getChildAt(i).id,
-                                viewGroup.getChildAt(i).importantForAccessibility
-                            )
+                    val child = viewGroup.getChildAt(i)
+                    if (child != this) {
+                        if (importantForAccessibilityValue[child.id] == null) {
+                            importantForAccessibilityValue[child.id] = child.importantForAccessibility
                         }
-                        viewGroup.getChildAt(i).importantForAccessibility =
-                            IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+                        child.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
                     }
                 }
             }
@@ -316,7 +313,7 @@ class AndesBottomSheet : CoordinatorLayout {
      * @param bundle the info bundle for the fragment
      */
     fun <T> setContent(fragmentManager: FragmentManager, fragment: T, bundle: Bundle? = null)
-        where T : Fragment {
+            where T : Fragment {
         if (bundle != null) {
             fragment.arguments = bundle
         }
