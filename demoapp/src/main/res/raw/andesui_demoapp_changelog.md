@@ -1,3 +1,7 @@
+# v4.19.2
+## 🛠 Fixes
+- AndesTextView textStyle="bold" font inconsistency | Author: [@eportasML](https://github.com/eportasML)
+
 # v4.19.1
 ## 🚀 Feature
 - AndesMoneyAmountDiscount method used to expose contentDescription | Author: [@egeribon](https://github.com/egeribon)

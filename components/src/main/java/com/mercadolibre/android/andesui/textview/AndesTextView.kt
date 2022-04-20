@@ -160,7 +160,7 @@ class AndesTextView : AppCompatTextView {
     }
 
     private fun setupFont(config: AndesTextViewConfiguration) {
-        setTypeface(config.textFont, config.textStyle)
+        typeface = config.textFont
     }
 
     private fun setupText(config: AndesTextViewConfiguration) {

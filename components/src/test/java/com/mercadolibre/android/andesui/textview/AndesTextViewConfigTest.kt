@@ -46,7 +46,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xl)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -64,7 +63,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xl)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -82,7 +80,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xl)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -100,7 +97,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xl)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -118,7 +114,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xl)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -136,7 +131,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xl)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -154,7 +148,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xl)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -172,7 +165,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_l)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -190,7 +182,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_m)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -208,7 +199,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_s)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -226,7 +216,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_title_font_size_xs)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_title_font_weight
     }
 
@@ -244,7 +233,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_regular)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_body_font_size_l)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_body_font_weight
     }
 
@@ -262,7 +250,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_regular)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_body_font_size_m)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_body_font_weight
     }
 
@@ -280,7 +267,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_regular)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_body_font_size_s)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_body_font_weight
     }
 
@@ -298,7 +284,24 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_regular)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_body_font_size_xs)
-        config.textStyle assertEquals Typeface.NORMAL
+        config.textWeight assertEquals R.dimen.andes_body_font_weight
+    }
+
+    @Test
+    fun `color primary, style body_m, textStyle bold`() {
+        attrs = AndesTextViewAttrs(
+            AndesTextViewColor.Primary,
+            AndesTextViewStyle.BodyM,
+            Typeface.BOLD
+        )
+
+        val config = configFactory.create(context, attrs, "")
+
+        config.color assertEquals R.color.andes_text_color_primary.toColor(context)
+        config.lineHeight assertEquals context.resources.getDimensionPixelSize(R.dimen.andes_body_line_height_m)
+        config.spannedText assertEquals SpannableString("")
+        config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_semibold)
+        config.textSize assertEquals context.resources.getDimension(R.dimen.andes_body_font_size_m)
         config.textWeight assertEquals R.dimen.andes_body_font_weight
     }
 
@@ -316,7 +319,6 @@ class AndesTextViewConfigTest {
         config.spannedText assertEquals SpannableString("")
         config.textFont assertEquals context.getFontOrDefault(R.font.andes_font_regular)
         config.textSize assertEquals context.resources.getDimension(R.dimen.andes_textview_body_font_size_xs)
-        config.textStyle assertEquals Typeface.NORMAL
         config.textWeight assertEquals R.dimen.andes_body_font_weight
     }
 
