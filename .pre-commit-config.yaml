@@ -1,11 +1,11 @@
 repos:
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.1.0
+    rev: v2.3.0
     hooks:
       - id: pretty-format-java
         args: [--autofix]
   - repo: https://github.com/mercadolibre/fury_code-quality-pre-commit-java
-    rev: 1.0.0
+    rev: 1.0.1
     hooks:
       - id: checkstyle
         args:
