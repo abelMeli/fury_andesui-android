@@ -8,11 +8,11 @@ When submitting code, please make every effort to follow existing conventions an
 ## Get involved in how the library actually works.
 There are many ways to get involved with Andes UI.
 - You already started with the right foot by reading this Contributing file ;)
-- You can fly from here and land on the [Documentation](/docs/guide/README.md) page
+- You can fly from here and land on the [Documentation](https://furydocs.io/andesui-android/latest/guide).
 - Now you're ready to watch a movie. Well, is not exactly a movie, but is a video. A tech talk, to be honest.
 A tech talk we gave at Mercado Libre that serves as an onboarding to the internals of this library. [Watch it here!](https://drive.google.com/open?id=1a8KBwlILW-JOnrO8cEGuQ7CNYSORJg4A)
 - Oh, I see! You want to get your hands dirty. Fork this repo, run the Showcase App and start developing a new Andes component. Or maybe you can improve an existing one.
-- In case you are developing a new component (or planning to do so), keep in mind the creation of a new RFC, [see here for more info!](/docs/guide/RFC)
+- In case you are developing a new component (or planning to do so), keep in mind the creation of a new RFC, [see here for more info!](https://furydocs.io/andesui-android/latest/guide/#/RFC)
 - After that, you're ready to use our Android Studio template for creating new components: setup a name and choose between some configuration attributes, and you're done! See the [docs](/docs/guide/template-plugin) to download the plugin and learn about the configuration and usage of the template.
 
 # I want to develop a new component or to fix an existing one
@@ -20,6 +20,7 @@ Nice, we like you! Andes UI is a collaborative project, so we need the help of e
 We expect to be all aboard this boat... and we are a lot. That's why we have some rules!
 
 ## Happy path of your new code
+- Read our [contributing overview](https://meli.workplace.com/notes/andes-ui/c%C3%B3mo-contribuir-en-andes-ui/2559399620854933) all platforms.
 - You start by forking this Andes repo.
 - You make the necessary changes and you test them in the Showcase App.
     - If it's a new component then you'll have to add a new Button inside the main page of the Showcase App that links to a new Activity that will be the showcase of that new component. You also will have to add that Activity, based on the existing one. Be aware that all the sample activities have a deeplink. For example, the deeplink of the Button Showcase is `meli://andes/button`. Checkout the Showcase App's manifest file. Be sure to follow the existing way of developing those showcases. Or propose us a radical new way :D

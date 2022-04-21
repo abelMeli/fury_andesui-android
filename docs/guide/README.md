@@ -4,6 +4,14 @@ Andes UI is a library which contains all the UI components defined with its func
 
 From IT (native + web) in conjunction with UX, we are looking forward to creating conventions to refer to each component so everybody could understand and talks about the same.
 
+
+* Android Usage & API Docs ==> You're here!
+* [Design guidelines](https://company-161429.frontify.com/d/kxHCRixezmfK/n-a) (Frontify)
+
+Are you lost? Try these...
+* [iOS version](https://github.com/mercadolibre/fury_andesui-ios)
+* [React version](https://github.com/mercadolibre/frontend-andes_ui)
+
 ### Live examples
 Install our Showcase App via Meli Store and enjoy it!
 

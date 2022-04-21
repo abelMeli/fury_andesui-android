@@ -1,11 +1,11 @@
 # Andes template Plugin
 
-This plugin will help you to create a new Andes Component. You only need to specify a name and choose between a few options
+This Android Studio plugin will help you to create a new Andes Component. You only need to specify a name and choose between a few options
 and the plugin will create all the needed classes to manage your new component.
 
 ## How to install the plugin
-- Download the .jar file present in this directory
-- Install it entering in Android Studio -> Preferences -> Plugins -> Install Plugin from Disk...
+- Download the .jar file present in this directory (`/docs/guide/template-plugin`)
+- Install it by entering in Android Studio -> Preferences -> Plugins -> Install Plugin from Disk...
 - Restart IDE
 - Run Build -> Rebuild project
 - The plugin is now ready for use!
