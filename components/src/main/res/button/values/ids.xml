@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="andes_button_container" type="id"/>
+    <item name="andes_button_text" type="id"/>
+    <item name="andes_button_progress_text" type="id"/>
+    <item name="andes_button_icon_left" type="id"/>
+    <item name="andes_button_icon_right" type="id"/>
+    <item name="andes_button_progress_indeterminate" type="id"/>
+    <item name="andes_button_progress_determinate" type="id"/>
+</resources>

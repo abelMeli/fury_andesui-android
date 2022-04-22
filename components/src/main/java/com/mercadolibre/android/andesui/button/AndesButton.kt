@@ -362,20 +362,20 @@ class AndesButton : ConstraintLayout {
      */
     private fun initComponents() {
         componentContainer = ConstraintLayout(context)
-        componentContainer.id = View.generateViewId()
+        componentContainer.id = R.id.andes_button_container
         textComponent = TextView(context)
-        textComponent.id = View.generateViewId()
+        textComponent.id = R.id.andes_button_text
         progressLoadingTextComponent = TextView(context)
-        progressLoadingTextComponent.id = View.generateViewId()
+        progressLoadingTextComponent.id = R.id.andes_button_progress_text
         leftIconComponent = SimpleDraweeView(context)
-        leftIconComponent.id = View.generateViewId()
+        leftIconComponent.id = R.id.andes_button_icon_left
         rightIconComponent = SimpleDraweeView(context)
-        rightIconComponent.id = View.generateViewId()
+        rightIconComponent.id = R.id.andes_button_icon_right
         loadingView = AndesProgressIndicatorIndeterminate(context)
-        loadingView.id = View.generateViewId()
+        loadingView.id = R.id.andes_button_progress_indeterminate
         progressView = AndesButtonProgressIndicatorDeterminate(context)
         progressView.visibility = View.GONE
-        progressView.id = View.generateViewId()
+        progressView.id = R.id.andes_button_progress_determinate
     }
 
     /**
@@ -620,8 +620,8 @@ class AndesButton : ConstraintLayout {
      */
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is SavedState) {
-            isLoading = state.isLoading
             super.onRestoreInstanceState(state.superState)
+            isLoading = state.isLoading
             return
         }
         super.onRestoreInstanceState(state)

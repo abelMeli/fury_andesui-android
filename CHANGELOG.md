@@ -1,6 +1,7 @@
 # v4.20.0
 ## 🚀 Feature
 - Improvements in contributing docs | Author: [@barriosnahuel](https://github.com/barriosnahuel)
+- Changed AndesButton internal ids | Author: [@eportasML](https://github.com/eportasML)
 
 # v4.19.2
 ## 🛠 Fixes
