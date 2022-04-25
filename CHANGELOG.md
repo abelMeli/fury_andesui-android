@@ -1,6 +1,7 @@
 # v4.21.0
 ## 🚀 Feature
 - AndesTextfield open TextContextMenuItemListener for listen copy, paste or cut events| Author: [@andresfegarc](https://github.com/andresfegarc)
+- Added Andes icons for debit card pay and charge | Author: [@franco-bobadilla](https://github.com/franco-bobadilla)
 
 # v4.20.0
 ## 🚀 Feature
