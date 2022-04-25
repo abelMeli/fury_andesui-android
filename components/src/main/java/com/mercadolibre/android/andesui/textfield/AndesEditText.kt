@@ -9,13 +9,13 @@ import androidx.appcompat.widget.AppCompatEditText
  */
 internal class AndesEditText : AppCompatEditText {
 
-    private var contextMenuListener: OnTextContextMenuItemListener = object : OnTextContextMenuItemListener {}
+    private var contextMenuListener: TextContextMenuItemListener = object : TextContextMenuItemListener {}
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    fun setOnTextContextMenuItemListener(contextMenuListener: OnTextContextMenuItemListener) {
+    fun setTextContextMenuItemListener(contextMenuListener: TextContextMenuItemListener) {
         this.contextMenuListener = contextMenuListener
     }
 
@@ -34,14 +34,5 @@ internal class AndesEditText : AppCompatEditText {
         }
 
         return consumed || super.onTextContextMenuItem(id)
-    }
-
-    /**
-     * Interface for listen the actions of copy, cut and paste.
-     */
-    internal interface OnTextContextMenuItemListener {
-        fun onCut(): Boolean = false
-        fun onPaste(): Boolean = false
-        fun onCopy(): Boolean = false
     }
 }

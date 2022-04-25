@@ -5,6 +5,7 @@ import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -22,7 +23,7 @@ class AndesEditTextTest {
 
     private var context = RuntimeEnvironment.application
     private lateinit var andesEditText: AndesEditText
-    @Mock private lateinit var textContextMenuItemListener: AndesEditText.OnTextContextMenuItemListener
+    @Mock private lateinit var textContextMenuItemListener: TextContextMenuItemListener
 
     companion object {
         @JvmStatic
@@ -36,11 +37,12 @@ class AndesEditTextTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         andesEditText = AndesEditText(context)
-        andesEditText.setOnTextContextMenuItemListener(textContextMenuItemListener)
     }
 
     @Test
     fun `when paste text`() {
+        andesEditText.setTextContextMenuItemListener(textContextMenuItemListener)
+
         `when`(textContextMenuItemListener.onPaste()).thenReturn(true)
         val expected = true
         val actual = andesEditText.onTextContextMenuItem(android.R.id.paste)
@@ -51,6 +53,7 @@ class AndesEditTextTest {
 
     @Test
     fun `when copy text`() {
+        andesEditText.setTextContextMenuItemListener(textContextMenuItemListener)
         `when`(textContextMenuItemListener.onCopy()).thenReturn(true)
         val expected = true
         val actual = andesEditText.onTextContextMenuItem(android.R.id.copy)
@@ -61,6 +64,7 @@ class AndesEditTextTest {
 
     @Test
     fun `when cut text`() {
+        andesEditText.setTextContextMenuItemListener(textContextMenuItemListener)
         `when`(textContextMenuItemListener.onCut()).thenReturn(true)
         val expected = true
         val actual = andesEditText.onTextContextMenuItem(android.R.id.cut)
@@ -71,8 +75,8 @@ class AndesEditTextTest {
 
     @Test
     fun `when OnTextContextMenuItemListener not implemented`() {
-        val mock = mock<AndesEditText.OnTextContextMenuItemListener>()
-        andesEditText.setOnTextContextMenuItemListener(mock)
+        val mock = mock<TextContextMenuItemListener>()
+        andesEditText.setTextContextMenuItemListener(mock)
         var actual = andesEditText.onTextContextMenuItem(android.R.id.paste)
 
         assertEquals(true, actual)
@@ -90,5 +94,17 @@ class AndesEditTextTest {
         assertEquals(true, actual)
         actual = verify(mock).onCut()
         assertEquals(false, actual)
+    }
+
+    @Test
+    fun `when setTextContextMenuItemListener not performed then use default behaviour`() {
+        val copyPerformed = andesEditText.onTextContextMenuItem(android.R.id.copy)
+        assertTrue(copyPerformed)
+
+        val pastePerformed = andesEditText.onTextContextMenuItem(android.R.id.paste)
+        assertTrue(pastePerformed)
+
+        val cutPerformed  = andesEditText.onTextContextMenuItem(android.R.id.cut)
+        assertTrue(cutPerformed)
     }
 }

@@ -969,10 +969,10 @@ class AndesTextfield : ConstraintLayout {
      * Set contextMenuItemListener for textComponent
      * Only visible for internal development
      */
-    internal fun setAndesTextContextMenuItemListener(
-        contextMenuItemListener: AndesEditText.OnTextContextMenuItemListener
+    fun setTextContextMenuItemListener(
+        contextMenuItemListener: TextContextMenuItemListener
     ) {
-        textComponent.setOnTextContextMenuItemListener(contextMenuItemListener)
+        textComponent.setTextContextMenuItemListener(contextMenuItemListener)
     }
 
     /**

@@ -213,6 +213,17 @@ class AndesTextfieldTest {
     }
 
     @Test
+    fun `when setTextContextMenuItemListener then textComponent listener set`() {
+        val listener = object : TextContextMenuItemListener {}
+        val spiedTextComponent = spy(AndesEditText(context))
+        textfield.textComponent = spiedTextComponent
+
+        textfield.setTextContextMenuItemListener(listener)
+
+        verify(spiedTextComponent, times(1)).setTextContextMenuItemListener(listener)
+    }
+
+    @Test
     fun `textfield with maxlines`() {
         textfield.maxLines = 3
 

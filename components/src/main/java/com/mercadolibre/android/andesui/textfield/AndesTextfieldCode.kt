@@ -431,7 +431,7 @@ class AndesTextfieldCode : ConstraintLayout {
     }
 
     private fun setOnCreateContextMenuListenerTextField(textfield: AndesTextfield, indexView: Int) {
-        textfield.setAndesTextContextMenuItemListener(object : AndesEditText.OnTextContextMenuItemListener {
+        textfield.setTextContextMenuItemListener(object : TextContextMenuItemListener {
             override fun onPaste(): Boolean {
                 val clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager?
                 val textToPaste = clipboard?.primaryClip?.getItemAt(0)?.text

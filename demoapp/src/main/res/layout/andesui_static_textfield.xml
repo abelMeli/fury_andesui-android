@@ -112,7 +112,28 @@
             android:inputType="text"
             app:andesTextfieldLabel="@string/andes_textfield_label_text"
             app:andesTextfieldLeftContent="prefix"
-            app:andesTextfieldPlaceholder="@string/andes_textfield_placeholder_text"
+            app:andesTextfieldPlaceholder="@string/andes_textfield_placeholder_text" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/andesTextfield5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
+            android:inputType="text"
+            app:andesTextfieldLabel="@string/andes_textfield_context_menu_item"
+            app:andesTextfieldPlaceholder="@string/andes_textfield_paste_placeholder"
+            app:andesTextfieldHelper="@string/andes_textfield_paste_help"
+            app:andesTextfieldState="idle" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/andesTextfield6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
+            android:inputType="text"
+            app:andesTextfieldLabel="@string/andes_textfield_context_menu_item_custom_behaviour"
+            app:andesTextfieldPlaceholder="@string/andes_textfield_paste_placeholder"
+            app:andesTextfieldHelper="@string/andes_textfield_paste_help"
             app:andesTextfieldState="idle" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield

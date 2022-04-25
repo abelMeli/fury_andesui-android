@@ -612,6 +612,10 @@
     <string name="andes_counter_text" translatable="false">Counter:</string>
     <string name="andes_mask_hint" translatable="false">Mascara: ##-###-######-#</string>
     <string name="andes_textfield_input_type" translatable="false">Input Type:</string>
+    <string name="andes_textfield_context_menu_item" translatable="false">Context menú item</string>
+    <string name="andes_textfield_context_menu_item_custom_behaviour" translatable="false">Context menú item custom behaviour</string>
+    <string name="andes_textfield_paste_placeholder" translatable="false">Pegar</string>
+    <string name="andes_textfield_paste_help" translatable="false">Has foco para pegar</string>
     <string-array name="andes_textfield_state_spinner" translatable="false">
         <item>Neutral</item>
         <item>Success</item>

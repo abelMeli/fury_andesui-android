@@ -66,7 +66,6 @@ andesTexfield.setupAction(text: String, onClickListener: OnClickListener)
 andesTexfield.setupRightIcon(iconPath: String)
 andesTextfield.setupPrefix(text: String)
 andesTextfield.setRightIcon(iconPath: String, listener: OnClickListener? = null, colorIcon: Int? = R.color.andes_gray_800, hideWhenType: Boolean = false)
-
 ```
 
 Also values can be changed in run time.
@@ -76,6 +75,20 @@ Also values can be changed in run time.
 andesTexfield.helper = "Helper"
 andesTexfield.state= "AndesTextfieldState.DISABLED
 ...
+```
+
+Besides that you can register a TextContextMenuItemListener to listen the actions copy, paste or cut in the textField.
+note that once the event is listened to, a boolean should be returned indicating whether the event was consumed.
+
+* If it returns false(default) indicates that the event action has not been consumed and the default behavior will be executed.
+* If it returns true(custom) indicates that the event has already been consumed and the default behavior does not need to be executed.
+
+```
+andesTexfield.setTextContextMenuItemListener(object : TextContextMenuItemListener {
+            override fun onPaste(): Boolean {
+                return false
+            }
+        })
 ```
 
 # Andes Textarea

@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.demoapp.components.textfield
 
+import android.content.ClipboardManager
 import android.content.Context
 import android.text.Editable
 import android.text.InputType
@@ -20,6 +21,7 @@ import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTextfie
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.textfield.AndesTextfieldCode
+import com.mercadolibre.android.andesui.textfield.TextContextMenuItemListener
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLink
@@ -322,6 +324,29 @@ object InflateTextfieldHelper {
         // Set text
         val textfield4 = binding.andesTextfield4
         textfield4.text = context.resources.getString(R.string.andes_textfield_placeholder)
+
+        // Set setTextContextMenuItemListener with default paste behaviour
+        val textfield5 = binding.andesTextfield5
+        textfield5.setTextContextMenuItemListener(object : TextContextMenuItemListener {
+            override fun onPaste(): Boolean {
+                Toast.makeText(context.applicationContext, "default paste performed", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        })
+
+        // Set setTextContextMenuItemListener with custom paste behaviour
+        val textfield6 = binding.andesTextfield6
+        textfield6.setTextContextMenuItemListener(object : TextContextMenuItemListener {
+            override fun onPaste(): Boolean {
+                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                val textToPaste = clipboard?.primaryClip?.getItemAt(0)?.text?.trim()
+                val formattedText =  textToPaste.toString().toUpperCase(Locale.getDefault())
+                textfield6.text = formattedText
+                textfield6.setSelection(formattedText.length)
+                Toast.makeText(context.applicationContext, "custom paste performed", Toast.LENGTH_SHORT).show()
+                return true
+            }
+        })
 
         // Set left icon
         val textViewLeftIcon = binding.textViewLeftIcon
