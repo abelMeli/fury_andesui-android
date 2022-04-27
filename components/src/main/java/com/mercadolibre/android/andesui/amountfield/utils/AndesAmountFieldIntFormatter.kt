@@ -96,13 +96,12 @@ internal class AndesAmountFieldIntFormatter(
             return
         }
 
-        checkIfValueIsExceeded(editable)
-
         if (didEnterSeparator) {
             manageDecimalSeparatorInput(editable)
         } else {
             manageNumberInput(editable)
         }
+        checkIfValueIsExceeded(editable)
     }
 
     /**

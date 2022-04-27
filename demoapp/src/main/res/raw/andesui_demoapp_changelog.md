@@ -2,6 +2,8 @@
 ## 🚀 Feature
 - AndesTextfield open TextContextMenuItemListener for listen copy, paste or cut events| Author: [@andresfegarc](https://github.com/andresfegarc)
 - Added Andes icons for debit card pay and charge | Author: [@franco-bobadilla](https://github.com/franco-bobadilla)
+## 🛠 Fixes
+- Fix in the int formatter for the `AndesAmountFieldSimple` | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v4.20.0
 ## 🚀 Feature
