@@ -17,11 +17,12 @@ internal interface AndesTooltipLocationInterface {
     val arrowHeight: Int
     val arrowBorder: Int
     val arrowImageInnerPadding: Int
-    val paddingWithArrow: Int
+    val paddingWithArrowHorizontal: Int
+    val paddingWithArrowVertical: Int
     val elevation: Int
     val frameLayoutContainer: FrameLayout
     val radiusLayout: RadiusLayout
-    val andesTooltipSize: AndesTooltipSize
 
+    val andesTooltipSize: AndesTooltipSize
     fun showDropDown(target: View, xOff: Int, yOff: Int, locationConfig: AndesTooltipLocationConfig)
 }

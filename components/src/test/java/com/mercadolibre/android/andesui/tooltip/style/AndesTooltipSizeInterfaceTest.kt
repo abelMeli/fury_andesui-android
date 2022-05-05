@@ -41,10 +41,10 @@ class AndesTooltipSizeInterfaceTest {
         val mockView = spy(View(context))
 
         val returnedArrowData = AndesTooltipSize.FULL_SIZE.type.getTooltipXOffForSize(mockView, tooltipMeasures)
-        val expectedPoint = tooltipMeasures.paddingWithArrow +
+        val expectedPoint = tooltipMeasures.paddingWithArrowHorizontal +
             tooltipMeasures.arrowWidth / 2 +
             tooltipMeasures.arrowBorder -
-            tooltipMeasures.paddingWithArrow
+            tooltipMeasures.paddingWithArrowHorizontal
 
         assertEquals(ArrowPositionId.LEFT, returnedArrowData.positionInSide)
         assertEquals(expectedPoint, returnedArrowData.point)

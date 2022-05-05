@@ -185,8 +185,11 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
     override val tooltipMeasuredHeight: Int
         get() = container.measuredHeight
 
-    override val paddingWithArrow: Int
-        get() = context.resources.getDimensionPixelOffset(R.dimen.andes_tooltip_padding_with_arrow)
+    override val paddingWithArrowHorizontal: Int
+        get() = context.resources.getDimensionPixelOffset(R.dimen.andes_tooltip_padding_with_arrow_horizontal)
+
+    override val paddingWithArrowVertical: Int
+        get() = context.resources.getDimensionPixelSize(R.dimen.andes_tooltip_padding_with_arrow_vertical)
 
     override val arrowImageInnerPadding: Int
         get() = context.resources.getDimensionPixelOffset(R.dimen.andes_tooltip_arrow_inner_margin)
@@ -414,9 +417,12 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
     }
 
     private fun initializeAndesTooltipContent(config: AndesTooltipConfiguration) {
-        with(frameLayoutContainer) {
-            setPadding(paddingWithArrow, paddingWithArrow, paddingWithArrow, paddingWithArrow)
-        }
+        frameLayoutContainer.setPadding(
+            paddingWithArrowHorizontal,
+            paddingWithArrowVertical,
+            paddingWithArrowHorizontal,
+            paddingWithArrowVertical
+        )
         initTooltipTitle(config)
         initTooltipBody(config)
         initDismiss(config)

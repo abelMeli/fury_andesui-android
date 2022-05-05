@@ -29,7 +29,9 @@ object AndesTooltipLocationInterfaceImplTest : AndesTooltipLocationInterface {
         get() = 90
     override val arrowImageInnerPadding: Int
         get() = 11
-    override val paddingWithArrow: Int
+    override val paddingWithArrowHorizontal: Int
+        get() = 26
+    override val paddingWithArrowVertical: Int
         get() = 21
     override val elevation: Int
         get() = 31

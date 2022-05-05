@@ -1,3 +1,7 @@
+# v4.21.1
+## 🛠 Fixes
+- AndesTooltip FULL_SIZE max width and arrow horizontal alignment fixed | Author: [@eportasML](https://github.com/eportasML)
+
 # v4.21.0
 ## 🚀 Feature
 - AndesTextfield open TextContextMenuItemListener for listen copy, paste or cut events| Author: [@andresfegarc](https://github.com/andresfegarc)

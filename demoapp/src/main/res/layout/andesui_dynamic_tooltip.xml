@@ -6,7 +6,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/andes_tooltip_container">
 
         <com.mercadolibre.android.andesui.message.AndesMessage
             android:id="@+id/message"
@@ -31,6 +32,7 @@
             android:layout_marginTop="24dp"
             app:andesButtonHierarchy="loud"
             app:andesButtonSize="medium"
+            android:layout_marginHorizontal="16dp"
             app:andesButtonText="@string/andes_tooltip_trigger_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -241,6 +243,20 @@
             app:layout_constraintStart_toStartOf="@+id/body_text"
             app:layout_constraintTop_toBottomOf="@+id/secondary_action_text" />
 
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/tooltip_position"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:inputType="numberDecimal"
+            app:andesTextfieldPlaceholder="@string/andes_tooltip_position"
+            app:andesTextfieldHelper="@string/andes_tooltip_position_helper"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@+id/dismissable_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/dismissable_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/link_action_text" />
+
+
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/change_button"
             android:layout_width="0dp"
@@ -253,7 +269,7 @@
             app:andesButtonText="@string/andes_message_showcase_change"
             app:layout_constraintEnd_toStartOf="@+id/clear_button"
             app:layout_constraintStart_toStartOf="@+id/body_text"
-            app:layout_constraintTop_toBottomOf="@+id/link_action_text" />
+            app:layout_constraintTop_toBottomOf="@+id/tooltip_position" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/clear_button"

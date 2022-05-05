@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.isEmpty
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
@@ -69,6 +71,7 @@ class TooltipShowcaseActivity : BaseActivity() {
         val update = binding.changeButton
         val clear = binding.clearButton
         val tooltip = binding.andesTooltipButton
+        val targetBias = binding.tooltipPosition
 
         val mainActionConfig = binding.mainActionConfig
         val secondaryActionConfig = binding.secondaryActionConfig
@@ -80,6 +83,7 @@ class TooltipShowcaseActivity : BaseActivity() {
         val primaryActionSpinner = binding.primaryActionSpinner
         val spinnerSecondAction = binding.secondaryActionSpinner
 
+        targetBias.text = getString(R.string.andes_tooltip_position_default)
         body.text = getString(R.string.andes_tooltip_message)
         checkboxDismiss.status = AndesCheckboxStatus.UNSELECTED
 
@@ -233,6 +237,18 @@ class TooltipShowcaseActivity : BaseActivity() {
                         secondaryActionText.text.toString(),
                         getHierarchyBySpinner(spinnerSecondAction)
                 )
+            }
+
+            val bias = if (targetBias.text.isNullOrEmpty()) {
+                0.5f
+            } else {
+                targetBias.text!!.toFloat() / 100
+            }
+
+            ConstraintSet().apply {
+                clone(binding.andesTooltipContainer)
+                setHorizontalBias(tooltip.id, bias)
+                applyTo(binding.andesTooltipContainer)
             }
         }
 
