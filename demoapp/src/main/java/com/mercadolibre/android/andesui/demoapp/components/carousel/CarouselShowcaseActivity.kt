@@ -73,6 +73,7 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         val clearButton = binding.clearButton
         val changeButton = binding.changeButton
         val scrollButton = binding.scrollButton
+        val smoothScrollButton = binding.smoothScrollButton
         val scrollEditText: AppCompatEditText = binding.scrollEditText
         val carousel = binding.andesCarousel
         val checkboxCentered = binding.checkboxCentered
@@ -96,6 +97,15 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
                     if (scrollEditText.text?.toString().isNullOrBlank()) 0
                     else scrollEditText.text?.toString()?.toInt()
                 carousel.scrollToPosition(position ?: 0)
+            }
+        }
+
+        smoothScrollButton.setOnClickListener {
+            scrollEditText.text?.toString()?.apply {
+                val position =
+                    if (scrollEditText.text?.toString().isNullOrBlank()) 0
+                    else scrollEditText.text?.toString()?.toInt()
+                carousel.smoothScrollToPosition(position ?: 0)
             }
         }
 

@@ -102,9 +102,9 @@
             android:layout_marginStart="8dp"
             android:inputType="number"
             android:hint="@string/andesui_demoapp_scroll_position_hint"
-            app:layout_constraintBottom_toBottomOf="@+id/scroll_button"
-            app:layout_constraintStart_toEndOf="@+id/scroll_button"
-            app:layout_constraintTop_toTopOf="@+id/scroll_button" />
+            app:layout_constraintBottom_toBottomOf="@+id/smooth_scroll_button"
+            app:layout_constraintStart_toEndOf="@+id/smooth_scroll_button"
+            app:layout_constraintTop_toTopOf="@+id/smooth_scroll_button" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/scroll_button"
@@ -116,6 +116,18 @@
             app:andesButtonText="@string/andesui_demoapp_scroll_button"
             app:layout_constraintStart_toStartOf="@+id/checkbox_centered"
             app:layout_constraintTop_toBottomOf="@+id/checkbox_centered" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/smooth_scroll_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            android:layout_marginStart="8dp"
+            app:andesButtonText="@string/andesui_demoapp_smooth_scroll_button"
+            app:layout_constraintBottom_toBottomOf="@+id/scroll_button"
+            app:layout_constraintStart_toEndOf="@+id/scroll_button"
+            app:layout_constraintTop_toTopOf="@+id/scroll_button"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

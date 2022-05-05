@@ -13,6 +13,7 @@
     <string name="change_body" translatable="false">Body text</string>
     <string name="andesui_demoapp_clear_button" translatable="false">Clear</string>
     <string name="andesui_demoapp_scroll_button" translatable="false">Scroll to</string>
+    <string name="andesui_demoapp_smooth_scroll_button" translatable="false">Smooth Scroll to</string>
     <string name="andesui_demoapp_scroll_position_hint" translatable="false">Position</string>
     <string name="andesui_demoapp_web_storybook" translatable="false">WebView 🌐</string>
     <string-array name="hierarchy_spinner">

@@ -10,6 +10,7 @@ import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrs
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselConfigurationFactory
 import com.mercadolibre.android.andesui.carousel.margin.AndesCarouselMargin
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert
 import org.junit.Test
@@ -18,6 +19,7 @@ import org.mockito.Mockito.spy
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
@@ -179,6 +181,28 @@ class AndesCarouselTest {
         carousel.scrollToPosition(1)
 
         verify(carousel).scrollToPosition(1)
+    }
+
+    @Test
+    fun `test scrollToPosition carousel`() {
+        val carousel = AndesCarousel(context, true, AndesCarouselMargin.NONE)
+        var recyclerViewMock: RecyclerView = mock()
+        ReflectionHelpers.setField(carousel, "recyclerViewComponent", recyclerViewMock)
+
+        carousel.scrollToPosition(10)
+
+        verify(recyclerViewMock).scrollToPosition(10)
+    }
+
+    @Test
+    fun `test smoothScrollToPosition carousel`() {
+        val carousel = AndesCarousel(context, true, AndesCarouselMargin.NONE)
+        var recyclerViewMock: RecyclerView = mock()
+        ReflectionHelpers.setField(carousel, "recyclerViewComponent", recyclerViewMock)
+
+        carousel.smoothScrollToPosition(10)
+
+        verify(recyclerViewMock).smoothScrollToPosition(10)
     }
 
     companion object {
