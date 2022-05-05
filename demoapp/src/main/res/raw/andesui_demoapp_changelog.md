@@ -1,8 +1,6 @@
 # v4.22.0
 ## 🚀 Feature
 - Refactor scrollToPosition feature in carousel component. | Author: [AnaisML](https://github.com/AnaisML)
-
-# v4.21.1
 ## 🛠 Fixes
 - AndesTooltip FULL_SIZE max width and arrow horizontal alignment fixed | Author: [@eportasML](https://github.com/eportasML)
 
