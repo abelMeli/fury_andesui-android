@@ -1,3 +1,7 @@
+# v4.22.1
+## 🛠 Fixes
+- AndesAmountField Error state color fix | Author: Andes team
+
 # v4.22.0
 ## 🚀 Feature
 - Refactor scrollToPosition feature in carousel component. | Author: [AnaisML](https://github.com/AnaisML)

@@ -120,8 +120,8 @@ internal class AndesAmountFieldDecimalFormatter(
      * Call after finishing the editable work.
      */
     private fun close(editable: Editable) {
-        amountListener.onAmountChanged(isExceeded)
         resizingListener.resizeComponentIfNeeded()
+        amountListener.onAmountChanged(isExceeded)
         editable.filters = filters
         isRunning = false
     }

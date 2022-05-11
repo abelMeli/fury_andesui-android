@@ -37,6 +37,7 @@ import com.mercadolibre.android.andesui.utils.ScreenUtils
 import com.mercadolibre.android.andesui.utils.deformatAmount
 import com.mercadolibre.android.andesui.utils.formatAmount
 import com.mercadolibre.android.andesui.utils.formatPastedText
+import com.mercadolibre.android.andesui.utils.inputLength
 import java.math.BigDecimal
 
 class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListener {
@@ -337,6 +338,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         setupInternalEditText(config)
         setupCurrencyComponent(config)
         setupSuffixComponent(config)
+        setupSuffixColor(config)
         setupHelperComponent(config)
         callStateActions(config)
         setupInternalListeners(config)
@@ -401,10 +403,9 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         internalEditText.onTextPasteCallback = object : OnTextPasteCallback {
             override fun onTextPaste(pastedText: CharSequence) {
                 val formattedText = formatPastedText(config, pastedText)
-                onTextPastedListener?.onTextPasted(
-                    formattedText.deformatAmount(config.decimalSeparator, config.numberOfDecimals)
-                )
-                forceNewValue(formattedText)
+                val newValue = formattedText.deformatAmount(config.decimalSeparator, config.numberOfDecimals)
+                onTextPastedListener?.onTextPasted(newValue)
+                forceNewValue(formattedText, maxValue?.let { newValue.toBigDecimal() > it.toBigDecimal() } ?: false)
                 resizeComponentIfNeeded()
             }
         }
@@ -474,10 +475,6 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
     override fun resizeComponentIfNeeded() {
         val newText = internalEditText.text?.toString() ?: ""
         val config = createConfig()
-        setupCurrencyColor(newText.length)
-        setupSuffixColor(config, newText.length)
-        hidePlaceholderWhenTextPresent(config, newText.length)
-
         val textToMeasure = newText.takeIf { it.isNotEmpty() } ?: config.placeholder
         val currencyText = config.currencySymbol
         val suffixText = config.suffixText ?: ""
@@ -517,16 +514,16 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         }
     }
 
-    private fun setupCurrencyColor(textLength: Int) {
-        if (textLength == 0) {
+    private fun setupCurrencyColor() {
+        if (internalEditText.inputLength() == 0) {
             currencyTextView.setTextColor(AndesTextViewColor.Secondary)
         } else {
             currencyTextView.setTextColor(AndesTextViewColor.Primary)
         }
     }
 
-    private fun setupSuffixColor(config: AndesAmountFieldSimpleMoneyConfiguration, textLength: Int) {
-        if (textLength == 0) {
+    private fun setupSuffixColor(config: AndesAmountFieldSimpleMoneyConfiguration) {
+        if (internalEditText.inputLength() == 0) {
             suffixTextView.setTextColor(config.suffixTextColorForEmptyField)
         } else {
             suffixTextView.setTextColor(config.suffixTextColor)
@@ -578,6 +575,12 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             internalEditText
                 .text?.deformatAmount(config.decimalSeparator, config.numberOfDecimals)
 
+        hidePlaceholderWhenTextPresent(config, internalEditText.inputLength())
+        setupCurrencyColor()
+        setupSuffixColor(config)
+
+        onTextChangedListener?.onTextChanged(valueFormattedToBigDecimalString)
+
         config.maxValue?.let {
             if (isExceeded) {
                 if (state != AndesAmountFieldState.AmountExceeded) {
@@ -589,7 +592,6 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
                 }
             }
         }
-        onTextChangedListener?.onTextChanged(valueFormattedToBigDecimalString)
     }
 
     private fun getTextInString(): String? {
@@ -605,7 +607,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
                 // format string
                 val formattedValue =
                     it.formatAmount(config.decimalSeparator, config.numberOfDecimals)
-                forceNewValue(formattedValue)
+                forceNewValue(formattedValue, false)
             }
         }
     }
@@ -620,12 +622,12 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
     /**
      * Takes an already formatted value and passes into the internal edittext as it is.
      */
-    private fun forceNewValue(newValue: String) {
+    private fun forceNewValue(newValue: String, isExceeded: Boolean) {
         internalEditText.apply {
             text?.clear()
             removeTextChangedListener(internalFormatter)
             append(newValue)
-            onTextChangedListener?.onTextChanged(newValue)
+            onAmountChanged(isExceeded)
             addTextChangedListener(internalFormatter)
         }
     }

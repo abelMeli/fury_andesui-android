@@ -7,6 +7,7 @@ import android.view.ActionMode
 import androidx.appcompat.widget.AppCompatEditText
 import com.mercadolibre.android.andesui.utils.AnimationsUtils.jump
 import com.mercadolibre.android.andesui.utils.getTextInClipboard
+import com.mercadolibre.android.andesui.utils.inputLength
 
 internal class AndesAmountFieldEditText(context: Context, attrs: AttributeSet?) : AppCompatEditText(context, attrs) {
 
@@ -29,7 +30,7 @@ internal class AndesAmountFieldEditText(context: Context, attrs: AttributeSet?) 
     override fun onSelectionChanged(selStart: Int, selEnd: Int) {
         val thereIsNoSelection = selEnd - selStart == 0
         when {
-            thereIsNoSelection && selStart != text?.length ?: 0 -> {
+            thereIsNoSelection && selStart != inputLength() -> {
                 relocateCursorAtTheEnd()
             }
             else -> super.onSelectionChanged(selStart, selEnd)
@@ -40,7 +41,7 @@ internal class AndesAmountFieldEditText(context: Context, attrs: AttributeSet?) 
      * Method needed to keep the cursor locked at the end of the field
      */
     private fun relocateCursorAtTheEnd() {
-        setSelection(text?.length ?: 0)
+        setSelection(inputLength())
     }
 
     override fun onTextContextMenuItem(id: Int): Boolean {

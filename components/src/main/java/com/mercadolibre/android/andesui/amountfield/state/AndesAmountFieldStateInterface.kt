@@ -34,15 +34,21 @@ internal open class AndesAmountFieldErrorState : AndesAmountFieldStateInterface 
     override fun getHelperTextStyle() = Typeface.BOLD
     override fun getActions() = { viewParent: ViewGroup ->
         val initialCurrencyColor = getInitialCurrencyColor(viewParent)
+        val initialSuffixColor = getInitialSuffixColor(viewParent)
         setErrorColorToEachView(viewParent)
         viewParent.shake {
-            setIdleColorToEachView(viewParent, initialCurrencyColor)
+            setIdleColorToEachView(viewParent, initialCurrencyColor, initialSuffixColor)
         }
     }
 
     private fun getInitialCurrencyColor(viewParent: ViewGroup): AndesTextViewColor {
         val currencyTextView: AndesTextView = viewParent.findViewById(R.id.amount_field_currency_symbol)
         return currencyTextView.getTextColor()
+    }
+
+    private fun getInitialSuffixColor(viewParent: ViewGroup): AndesTextViewColor {
+        val suffixTextView: AndesTextView = viewParent.findViewById(R.id.amount_field_suffix_text)
+        return suffixTextView.getTextColor()
     }
 
     private fun setErrorColorToEachView(viewParent: ViewGroup) {
@@ -60,7 +66,7 @@ internal open class AndesAmountFieldErrorState : AndesAmountFieldStateInterface 
         }
     }
 
-    private fun setIdleColorToEachView(viewParent: ViewGroup, oldCurrencyColor: AndesTextViewColor) {
+    private fun setIdleColorToEachView(viewParent: ViewGroup, oldCurrencyColor: AndesTextViewColor, oldSuffixColor: AndesTextViewColor) {
         val editText: AndesAmountFieldEditText = viewParent.findViewById(R.id.amount_field_edit_text)
         val currencyTextView: AndesTextView = viewParent.findViewById(R.id.amount_field_currency_symbol)
         val suffixTextView: AndesTextView = viewParent.findViewById(R.id.amount_field_suffix_text)
@@ -71,7 +77,7 @@ internal open class AndesAmountFieldErrorState : AndesAmountFieldStateInterface 
         editText.setTextColor(primaryColor)
         editText.setHintTextColor(secondaryColor)
         currencyTextView.setTextColor(oldCurrencyColor)
-        suffixTextView.setTextColor(secondaryColor)
+        suffixTextView.setTextColor(oldSuffixColor)
     }
 }
 

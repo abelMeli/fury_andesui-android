@@ -387,6 +387,28 @@ class AndesAmountFieldSimpleTest {
     }
 
     @Test
+    fun `given component with maxvalue set and entrymode int, when reaching max value and change state after type, then input is blocked`() {
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            entryMode = AndesAmountFieldEntryMode.DECIMAL,
+            maxValue = "1000.00"
+        )
+
+        amountField.onTextChangedListener = object : OnTextChangeListener {
+            override fun onTextChanged(newText: String?) {
+                if (newText!!.toBigDecimal() > amountField.maxValue!!.toBigDecimal()) {
+                    amountField.state = AndesAmountFieldState.Error
+                }
+            }
+        }
+
+        amountField.emulateTypingWithKeyboard("12345678")
+
+        amountField.state assertEquals AndesAmountFieldState.AmountExceeded
+        amountField.value assertEquals "1234.56"
+    }
+
+    @Test
     fun `given component with maxvalue reached, when deleting text, then state is restored to idle`() {
         amountField = AndesAmountFieldSimple(
             context = context,

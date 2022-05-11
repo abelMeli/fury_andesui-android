@@ -7,11 +7,8 @@ import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.amountfield.entrymode.AndesAmountFieldEntryMode
-import com.mercadolibre.android.andesui.amountfield.entrymode.AndesAmountFieldEntryModeInt
 import com.mercadolibre.android.andesui.amountfield.entrytype.AndesAmountFieldEntryType
 import com.mercadolibre.android.andesui.amountfield.size.AndesAmountFieldSize
-import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldAmountExceededState
-import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldErrorState
 import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldIdleState
 import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
 import com.mercadolibre.android.andesui.amountfield.utils.AmountListener
