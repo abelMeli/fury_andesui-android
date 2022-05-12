@@ -1,6 +1,7 @@
 # v4.22.1
 ## 🛠 Fixes
 - AndesAmountField Error state color fix | Author: Andes team
+- AndesAmountField sidebar entry | Author: [@eportasML](https://github.com/eportasML)
 
 # v4.22.0
 ## 🚀 Feature

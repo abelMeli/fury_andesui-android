@@ -1,6 +1,7 @@
 - [Introduction](/)
 - [A11yPlayground](/a11y-playground/A11yPlayground.md)
 - Components
+  * [AndesAmountField](/amountfield/AndesAmountFieldSimple.md)
   * [AndesAutosuggest](/autosuggest/AndesAutosuggest.md)
   * Badge
   ** [AndesBadgeDot](/badge/AndesBadgeDot.md)
