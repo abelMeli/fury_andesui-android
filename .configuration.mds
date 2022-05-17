@@ -1,7 +1,7 @@
 {
   "platform": "Android",
   "type": "testapp",
-  "module": "demoapp",
+  "module": ":demoapp",
   "description": "Release AndesUI",
   "build_type": "Local"
 }
