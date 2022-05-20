@@ -1,3 +1,7 @@
+# v4.22.3
+## 🛠 Fixes
+- Circle machine_size | Author: [@eportasML](https://github.com/eportasML)
+
 # v4.22.2
 ## 🛠 Fixes
 - MDS job on build-public workflow fix | Author: [@eportasML](https://github.com/eportasML)
