@@ -12,6 +12,7 @@ import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrPa
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrs
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerConfiguration
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerConfigurationFactory
+import com.mercadolibre.android.andesui.datepicker.startofweek.AndesDatePickerStartOfWeek
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -57,6 +58,15 @@ class AndesDatePicker : ConstraintLayout {
         set(value) {
             andesDatePickerAttrs = andesDatePickerAttrs.copy(andesDatePickerMaxDate = value)
             setupComponents(createConfig())
+        }
+
+    /**
+     * Getter and setter for [startOfWeek].
+     */
+    var startOfWeek: AndesDatePickerStartOfWeek
+        get() = AndesDatePickerStartOfWeek.fromInt(binding.calendarView.firstDayOfWeek)
+        set(value) {
+            binding.calendarView.firstDayOfWeek = value.value
         }
 
     /**
@@ -144,7 +154,10 @@ class AndesDatePicker : ConstraintLayout {
     }
 
     private fun getNow(): Date {
-        return convertStringToDate(SimpleDateFormat(DATE_FORMAT).format(Calendar.getInstance().time), DATE_FORMAT)
+        return convertStringToDate(
+            SimpleDateFormat(DATE_FORMAT).format(Calendar.getInstance().time),
+            DATE_FORMAT
+        )
     }
 
     private fun convertStringToDate(time: String, format: String): Date {

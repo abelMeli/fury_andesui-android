@@ -11,6 +11,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrs
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerConfigurationFactory
+import com.mercadolibre.android.andesui.datepicker.startofweek.AndesDatePickerStartOfWeek
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -33,20 +34,20 @@ class AndesDatePickerTest {
         context = ApplicationProvider.getApplicationContext()
         val requestListeners = setOf<RequestListener>(RequestLoggingListener())
         val config = ImagePipelineConfig
-                .newBuilder(context)
-                // other setters
-                .setRequestListeners(requestListeners)
-                .build()
+            .newBuilder(context)
+            // other setters
+            .setRequestListeners(requestListeners)
+            .build()
         Fresco.initialize(context, config)
     }
 
     @Test
     fun `attr btn enabled`() {
         attrs = AndesDatePickerAttrs(
-                andesDatePickerText = "aplicar",
-                andesDatePickerMinDate = "01/01/2020",
-                andesDatePickerMaxDate = "31/12/2020",
-                andesBtnVisibility = true
+            andesDatePickerText = "aplicar",
+            andesDatePickerMinDate = "01/01/2020",
+            andesDatePickerMaxDate = "31/12/2020",
+            andesBtnVisibility = true
         )
         val config = configFactory.create(attrs)
         Assert.assertEquals(config.text, "aplicar")
@@ -58,10 +59,10 @@ class AndesDatePickerTest {
     @Test
     fun `attr btn disabled`() {
         attrs = AndesDatePickerAttrs(
-                andesDatePickerText = "aplicar",
-                andesDatePickerMinDate = "01/01/2020",
-                andesDatePickerMaxDate = "31/12/2020",
-                andesBtnVisibility = false
+            andesDatePickerText = "aplicar",
+            andesDatePickerMinDate = "01/01/2020",
+            andesDatePickerMaxDate = "31/12/2020",
+            andesBtnVisibility = false
         )
         val config = configFactory.create(attrs)
         Assert.assertEquals(config.text, "aplicar")
@@ -144,6 +145,38 @@ class AndesDatePickerTest {
         datePicker.setupMaxDate(maxDate.time.time)
         datePicker.selectDate(selectDate.timeInMillis)
         Assert.assertNotEquals(selectDate.time.time, datePicker.calendarView().date)
+    }
+
+    @Test
+    fun testAndesDatePickerChangeStartOfWeekToSunday() {
+        val datePicker = AndesDatePicker(context)
+        datePicker.calendarView().firstDayOfWeek = 2
+        Assert.assertEquals(2, datePicker.calendarView().firstDayOfWeek)
+        datePicker.startOfWeek = AndesDatePickerStartOfWeek.SUNDAY
+        Assert.assertEquals(1, datePicker.calendarView().firstDayOfWeek)
+    }
+
+    @Test
+    fun testAndesDatePickerChangeStartOfWeekToMonday() {
+        val datePicker = AndesDatePicker(context)
+        datePicker.calendarView().firstDayOfWeek = 1
+        Assert.assertEquals(1, datePicker.calendarView().firstDayOfWeek)
+        datePicker.startOfWeek = AndesDatePickerStartOfWeek.MONDAY
+        Assert.assertEquals(2, datePicker.calendarView().firstDayOfWeek)
+    }
+
+    @Test
+    fun testAndesDatePickerGetSundayAsStartOfWeek() {
+        val datePicker = AndesDatePicker(context)
+        datePicker.calendarView().firstDayOfWeek = 1
+        Assert.assertEquals(AndesDatePickerStartOfWeek.SUNDAY, datePicker.startOfWeek)
+    }
+
+    @Test
+    fun testAndesDatePickerGetMondayAsStartOfWeek() {
+        val datePicker = AndesDatePicker(context)
+        datePicker.calendarView().firstDayOfWeek = 2
+        Assert.assertEquals(AndesDatePickerStartOfWeek.MONDAY, datePicker.startOfWeek)
     }
 
     private fun AndesDatePicker.calendarView(): CalendarView = findViewById(R.id.calendarView)

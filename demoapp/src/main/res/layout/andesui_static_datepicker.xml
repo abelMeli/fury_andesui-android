@@ -49,6 +49,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.mercadolibre.android.andesui.switchandes.AndesSwitch
+            android:id="@+id/andesSwitchStartingDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/andes_textfield_margin"
+            app:andesSwitchStatus="unchecked"
+            app:andesSwitchText="@string/andes_datepicker_switch_starting_day"
+            app:andesSwitchType="enabled"
+            app:layout_constraintEnd_toEndOf="@+id/andesDatePicker"
+            app:layout_constraintStart_toStartOf="@+id/andesDatePicker"
+            app:layout_constraintTop_toBottomOf="@id/andesDatePicker" />
+
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/andesTextfieldMinDate"
             android:layout_width="match_parent"
@@ -58,9 +70,9 @@
             app:andesTextfieldCounter="10"
             app:andesTextfieldLabel="@string/andes_datepicker_min_date_label"
             app:andesTextfieldPlaceholder="@string/andes_datepicker_placeholder"
-            app:layout_constraintEnd_toEndOf="@+id/andesDatePicker"
-            app:layout_constraintStart_toStartOf="@+id/andesDatePicker"
-            app:layout_constraintTop_toBottomOf="@id/andesDatePicker" />
+            app:layout_constraintEnd_toEndOf="@+id/andesSwitchStartingDay"
+            app:layout_constraintStart_toStartOf="@+id/andesSwitchStartingDay"
+            app:layout_constraintTop_toBottomOf="@id/andesSwitchStartingDay" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/andesTextfieldMaxDate"
@@ -78,8 +90,8 @@
             android:id="@+id/andesTextfieldSetDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="@dimen/andes_textfield_helper_date_marginTop"
+            android:layout_marginEnd="8dp"
             android:inputType="date"
             app:andesTextfieldCounter="10"
             app:andesTextfieldLabel="@string/andes_datepicker_set_date_label"

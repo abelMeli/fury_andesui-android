@@ -59,3 +59,12 @@ There are two ways to use AndesButton: XML or programmatically.
  Sets the maximal allowed date.
 
 <img src="https://user-images.githubusercontent.com/17315076/100236434-6ecd6680-2f0c-11eb-8c8d-9702b8a5ac01.gif" width="230" height="450"/>
+
+
+ Sets which day of the week it should start with.
+
+```
+ datepicker.startOfWeek = AndesDatePickerStartOfWeek.SUNDAY
+```
+
+<img src="https://user-images.githubusercontent.com/92759355/168887566-f3c28316-b87a-477c-bea6-c7fbd7e88c2f.gif" width="230" height="450"/>

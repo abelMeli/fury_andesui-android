@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.mercadolibre.android.andesui.datepicker.AndesDatePicker
+import com.mercadolibre.android.andesui.datepicker.startofweek.AndesDatePickerStartOfWeek
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticDatepickerBinding
+import com.mercadolibre.android.andesui.switchandes.AndesSwitch
+import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -31,9 +34,11 @@ class DatePickerShowcaseActivity : BaseActivity() {
 
     private fun initViewPager() {
         viewPager = baseBinding.andesuiViewpager
-        viewPager.adapter = AndesPagerAdapter(listOf(
-            AndesuiStaticDatepickerBinding.inflate(layoutInflater).root
-        ))
+        viewPager.adapter = AndesPagerAdapter(
+            listOf(
+                AndesuiStaticDatepickerBinding.inflate(layoutInflater).root
+            )
+        )
     }
 
     private fun attachIndicator() {
@@ -54,6 +59,7 @@ class DatePickerShowcaseActivity : BaseActivity() {
         val inputMinDate = binding.andesTextfieldMinDate
         val inputMaxDate = binding.andesTextfieldMaxDate
         val inputSetDate = binding.andesTextfieldSetDate
+        val switchStartingDay = binding.andesSwitchStartingDay
         datepicker.setupButtonVisibility(false)
         datepicker.setupButtonText("Aplicar")
 
@@ -80,12 +86,20 @@ class DatePickerShowcaseActivity : BaseActivity() {
             if (setterMax != null && setterMax.isNotEmpty() && isValid(setterMax, "dd/MM/yyyy")) {
                 datepicker.setupMaxDate(convertStringToDate(setterMax, "dd/MM/yyyy").time)
             } else {
-                Toast.makeText(applicationContext, "la fecha maxima no es una fecha valida", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    "la fecha maxima no es una fecha valida",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             if (setterMin != null && setterMin.isNotEmpty() && isValid(setterMin, "dd/MM/yyyy")) {
                 datepicker.setupMinDate(convertStringToDate(setterMin, "dd/MM/yyyy").time)
             } else {
-                Toast.makeText(applicationContext, "la fecha minima no es una fecha valida", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    "la fecha minima no es una fecha valida",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -111,8 +125,21 @@ class DatePickerShowcaseActivity : BaseActivity() {
             }
         }
 
+        switchStartingDay.setOnStatusChangeListener(object : AndesSwitch.OnStatusChangeListener {
+            override fun onStatusChange(andesSwitch: AndesSwitchStatus) {
+                if (andesSwitch == AndesSwitchStatus.CHECKED) {
+                    switchStartingDay.status = AndesSwitchStatus.UNCHECKED
+                    datepicker.startOfWeek = AndesDatePickerStartOfWeek.SUNDAY
+                } else {
+                    switchStartingDay.status = AndesSwitchStatus.CHECKED
+                    datepicker.startOfWeek = AndesDatePickerStartOfWeek.MONDAY
+                }
+            }
+        })
+
         datepicker.setDateAppearance(R.style.Andes_CalendarDateDemo)
         datepicker.setWeekDayAppearance(R.style.Andes_CalendarDateWeekDemo)
+
 
         datepicker.setDateListener(object : AndesDatePicker.ApplyDatePickerClickListener {
             override fun onDateApply(date: Calendar) {

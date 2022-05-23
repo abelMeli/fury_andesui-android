@@ -344,6 +344,7 @@
     <string name="andes_datepicker_btn_send" translatable="false">Set MIN MAX Date</string>
     <string name="andes_datepicker_btn_date" translatable="false">Set selected day</string>
     <string name="andes_datepicker_btn_reset" translatable="false">Reset</string>
+    <string name="andes_datepicker_switch_starting_day" translatable="false">Start on Sunday</string>
 
 
     <!-- Andes Coachmark -->

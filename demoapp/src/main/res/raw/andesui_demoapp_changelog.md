@@ -1,3 +1,7 @@
+# v4.23.0
+## 🚀 Feature
+- Added a switch to choose which day of the week it should start with on Andes DatePicker component
+
 # v4.22.3
 ## 🛠 Fixes
 - Circle machine_size | Author: [@eportasML](https://github.com/eportasML)
