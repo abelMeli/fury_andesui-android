@@ -1,6 +1,7 @@
 # v4.23.0
 ## 🚀 Feature
 - Added a switch to choose which day of the week it should start with on Andes DatePicker component
+- Added Iconography entry to docs | Author: [@eportasML](https://github.com/eportasML)
 
 # v4.22.3
 ## 🛠 Fixes

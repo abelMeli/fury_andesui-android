@@ -65,6 +65,9 @@ See the [Setup page](Setup.md) to apply production styles in Mercado Libre & Mer
 ## Fonts & Colors
 See the [Fonts & Colors page](Fonts&Colors.md) to be aware of how to use the proper Colors and Fonts with AndesUI.
 
+## Iconography
+Check the [Iconography page](Iconography.md) to read about where to find our icons and how to add a new one.
+
 ## Components
 | Component | Deeplink |
 | -------- | -------- |
