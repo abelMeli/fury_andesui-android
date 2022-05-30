@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.coachmark.view.walkthroughscrolless
 
-import android.os.Build
 import android.os.Looper
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -10,6 +9,7 @@ import com.mercadolibre.android.andesui.coachmark.R
 import com.mercadolibre.android.andesui.coachmark.model.AndesScrollessWalkthroughCoachmark
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStep
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStyle
+import com.mercadolibre.android.andesui.coachmark.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.coachmark.utils.assertEquals
 import com.mercadolibre.android.andesui.coachmark.utils.getDeclaredFieldValue
 import org.junit.Before
@@ -23,7 +23,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 @LooperMode(LooperMode.Mode.PAUSED)
 class CoachmarkScrollessViewTest {
 

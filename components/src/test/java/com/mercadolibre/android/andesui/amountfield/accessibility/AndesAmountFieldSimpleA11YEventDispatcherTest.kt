@@ -1,11 +1,11 @@
 package com.mercadolibre.android.andesui.amountfield.accessibility
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
 import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
@@ -17,7 +17,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesAmountFieldSimpleA11YEventDispatcherTest {
 
     private lateinit var context: Context

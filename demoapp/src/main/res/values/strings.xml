@@ -90,7 +90,7 @@
     <string name="andes_demoapp_playground_cd_second" translatable="false">Second red circle</string>
     <string name="andes_demoapp_playground_ata_title" translatable="false">Accessibility Traversal After</string>
     <string name="andes_demoapp_playground_ata_body" translatable="false">Param needed to manage the navigation order of the different layout components.</string>
-    <string name="andes_demoapp_playground_ata_tv" translatable="false">The navigation in the first three elements is set by xml. The rest is set in the activity, by code. To set this parameter in devices with API minor than 22, the only way is to use the code option. For more info please refer to the activity code.</string>
+    <string name="andes_demoapp_playground_ata_tv" translatable="false">The navigation in the first three elements is set by xml. The rest is set in the activity, by code. Since api 23 its possible to use xml and code without any restriction</string>
     <string name="andes_demoapp_playground_nf_title" translatable="false">Next Focus (up/down/left/right)</string>
     <string name="andes_demoapp_playground_nf_body" translatable="false">This params are needed to manage the navigation when the user has peripheral controllers, such as external keyboards, switches, and more.</string>
     <string name="andes_demoapp_playground_nf_tv_first" translatable="false">Values set by xml</string>

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.message
 
 import android.graphics.drawable.Drawable
-import android.os.Build
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.hierarchy.BackgroundColorConfig
 import com.mercadolibre.android.andesui.color.toAndesColor
@@ -9,6 +8,7 @@ import com.mercadolibre.android.andesui.message.factory.AndesMessageAttrs
 import com.mercadolibre.android.andesui.message.factory.AndesMessageConfigurationFactory
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +19,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesMessageConfigurationLoudTest {
 
     private var context = RuntimeEnvironment.application

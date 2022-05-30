@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.tabs
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
@@ -12,6 +11,7 @@ import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTabsAccessibilityDelegateTest {
 
     private val tabItems: List<AndesTabItem> = listOf(

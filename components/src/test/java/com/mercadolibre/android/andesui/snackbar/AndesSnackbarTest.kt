@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.snackbar
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -12,6 +11,7 @@ import com.mercadolibre.android.andesui.snackbar.action.AndesSnackbarAction
 import com.mercadolibre.android.andesui.snackbar.callback.AndesSnackbarCallback
 import com.mercadolibre.android.andesui.snackbar.duration.AndesSnackbarDuration
 import com.mercadolibre.android.andesui.snackbar.type.AndesSnackbarType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
@@ -25,7 +25,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesSnackbarTest {
 
     lateinit var context: Context

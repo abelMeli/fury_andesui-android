@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.dropdown
 
 import android.content.Context
-import android.os.Build
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
@@ -13,6 +12,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +22,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesDropDownFormAccessibilityDelegateTest {
 
     private lateinit var context: Context

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.button
 
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.common.logging.FLog
@@ -16,6 +15,7 @@ import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIconOrientat
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.buttonprogress.status.AndesButtonProgressAction
 import com.mercadolibre.android.andesui.icons.IconProvider
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -29,7 +29,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesButtonTest {
     private var context = RuntimeEnvironment.application
     private lateinit var andesButton: AndesButton

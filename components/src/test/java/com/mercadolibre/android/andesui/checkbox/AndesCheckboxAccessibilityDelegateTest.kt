@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.checkbox
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
@@ -12,9 +11,9 @@ import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.actionLinkIdList
 import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -29,7 +28,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesCheckboxAccessibilityDelegateTest {
 
     private val defaultText: String = "Test"
@@ -135,7 +134,18 @@ class AndesCheckboxAccessibilityDelegateTest {
 
         spiedA11yDelegate.onInitializeAccessibilityNodeInfo(andesCheckbox, nodeInfo)
 
-        verify(nodeInfo, never()).addAction(any<AccessibilityNodeInfo.AccessibilityAction>())
+        verify(nodeInfo, times(1)).addAction(any<AccessibilityNodeInfo.AccessibilityAction>())
+    }
+
+    @Test
+    fun `verify action is correctly set for error unselected checkbox`() {
+        andesCheckbox.type = AndesCheckboxType.ERROR
+        nodeInfo = spy(andesCheckbox.createAccessibilityNodeInfo())
+        val spiedA11yDelegate = andesCheckbox.accessibilityDelegate as AndesCheckboxAccessibilityDelegate
+
+        spiedA11yDelegate.onInitializeAccessibilityNodeInfo(andesCheckbox, nodeInfo)
+
+        verify(nodeInfo, times(2)).addAction(any<AccessibilityNodeInfo.AccessibilityAction>())
     }
 
     @Test

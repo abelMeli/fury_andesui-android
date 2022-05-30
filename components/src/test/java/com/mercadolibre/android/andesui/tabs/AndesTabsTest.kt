@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.tabs
 
 import android.content.Context
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -9,6 +8,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTabsTest {
 
     private lateinit var context: Context

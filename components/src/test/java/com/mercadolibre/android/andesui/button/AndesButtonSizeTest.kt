@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.button
 
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.factory.IconConfig
@@ -9,6 +8,7 @@ import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchyInt
 import com.mercadolibre.android.andesui.button.size.AndesLargeButtonSize
 import com.mercadolibre.android.andesui.button.size.AndesMediumButtonSize
 import com.mercadolibre.android.andesui.button.size.AndesSmallButtonSize
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNull
 import org.assertj.core.api.Assertions.assertThat
@@ -23,7 +23,7 @@ import org.robolectric.annotation.Config
 const val ANDES_ICON = "andes_navegacion_ajustes"
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesLargeButtonSizeTest {
 
     private var andesLargeButtonSize = Mockito.spy(AndesLargeButtonSize())
@@ -82,7 +82,7 @@ class AndesLargeButtonSizeTest {
 }
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesMediumButtonSizeTest {
     private var andesMediumButtonSize = Mockito.spy(AndesMediumButtonSize())
     private var context = RuntimeEnvironment.application
@@ -139,7 +139,7 @@ class AndesMediumButtonSizeTest {
 }
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesSmallButtonSizeTest {
     private var andesSmallButtonSize = Mockito.spy(AndesSmallButtonSize())
     private var context = RuntimeEnvironment.application

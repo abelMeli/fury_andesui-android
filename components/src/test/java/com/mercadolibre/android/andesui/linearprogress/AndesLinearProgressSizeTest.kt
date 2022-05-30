@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.linearprogress
 
-import android.os.Build
 import com.mercadolibre.android.andesui.linearprogress.size.AndesLargeLinearProgressSize
 import com.mercadolibre.android.andesui.linearprogress.size.AndesSmallLinearProgressSize
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
 import junit.framework.TestCase
 import org.junit.Assert
@@ -13,7 +13,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesLinearProgressSizeTest : TestCase() {
 
     private var context = RuntimeEnvironment.application

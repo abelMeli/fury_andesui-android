@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.timepicker
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -12,6 +11,7 @@ import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.timepicker.minutesInterval.AndesTimePickerInterval
 import com.mercadolibre.android.andesui.timepicker.state.AndesTimePickerState
 import com.mercadolibre.android.andesui.timepicker.type.AndesTimePickerType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.BeforeClass
@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTimePickerTest {
 
     private lateinit var context: Context

@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.thumbnail
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
@@ -24,6 +23,7 @@ import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadge
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,7 +31,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesThumbnailBadgeConfigurationFactoryTest {
 
     private lateinit var context: Context

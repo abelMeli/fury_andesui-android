@@ -1,12 +1,12 @@
 package com.mercadolibre.android.andesui.amountfield.utils
 
 import android.content.Context
-import android.os.Build
 import android.widget.EditText
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.assertIsNull
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import com.mercadolibre.android.andesui.utils.emulateTypingWithKeyboard
 import com.mercadolibre.android.andesui.utils.getInternalEditTextComponent
@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesAmountFieldEditTextTest {
 
     private lateinit var context: Context

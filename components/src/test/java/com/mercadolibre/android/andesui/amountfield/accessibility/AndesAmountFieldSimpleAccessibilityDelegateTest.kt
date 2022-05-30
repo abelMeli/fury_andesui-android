@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.amountfield.accessibility
 
 import android.content.Context
-import android.os.Build
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
@@ -10,6 +9,7 @@ import com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
 import com.mercadolibre.android.andesui.amountfield.entrytype.AndesAmountFieldEntryType
 import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
 import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import org.junit.Before
 import org.junit.Test
@@ -19,7 +19,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesAmountFieldSimpleAccessibilityDelegateTest {
 
     private lateinit var context: Context

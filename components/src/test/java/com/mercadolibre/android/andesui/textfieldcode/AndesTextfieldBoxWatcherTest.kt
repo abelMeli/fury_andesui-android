@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.textfieldcode
 
-import android.os.Build
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import com.facebook.soloader.SoLoader
@@ -8,6 +7,7 @@ import com.mercadolibre.android.andesui.textfield.textwatcher.AndesCodeFocusMana
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesCodeTextChangedHandler
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesTextfieldBoxWatcher
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesTextfieldBoxWatcher.Companion.DIRTY_CHARACTER
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
@@ -24,7 +24,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTextfieldBoxWatcherTest {
     @Mock
     private lateinit var focusManagement: AndesCodeFocusManagement

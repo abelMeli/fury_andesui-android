@@ -1,11 +1,11 @@
 package com.mercadolibre.android.andesui.checkbox
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.checkbox.accessibility.AndesCheckboxAccessibilityEventDispatcher
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -16,7 +16,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesCheckboxAccessibilityEventDispatcherTest {
 
     private lateinit var context: Context

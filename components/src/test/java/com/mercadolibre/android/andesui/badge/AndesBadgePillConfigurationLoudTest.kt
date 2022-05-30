@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.badge
 
-import android.os.Build
 import android.view.ViewGroup
 import android.widget.TextView
 import com.mercadolibre.android.andesui.R
@@ -11,6 +10,7 @@ import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgePillHierarchy
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.color.toAndesColor
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +21,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesBadgePillConfigurationLoudTest {
 
     private var context = RuntimeEnvironment.application

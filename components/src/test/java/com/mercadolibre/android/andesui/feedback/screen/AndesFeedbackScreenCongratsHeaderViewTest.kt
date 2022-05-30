@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.feedback.screen
 
 import android.content.Context
-import android.os.Build
 import android.text.SpannableString
 import android.text.style.ClickableSpan
 import android.view.View
@@ -21,6 +20,7 @@ import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Before
 import org.junit.Test
@@ -29,7 +29,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesFeedbackScreenCongratsHeaderViewTest {
 
     private lateinit var context: Context

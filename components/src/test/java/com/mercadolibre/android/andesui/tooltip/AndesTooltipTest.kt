@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.tooltip
 
 import android.app.Activity
-import android.os.Build
 import android.view.View
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -19,6 +18,7 @@ import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.location.BottomAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.After
 import org.junit.Assert.assertNull
@@ -42,7 +42,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTooltipTest {
     private var context = RuntimeEnvironment.application
 

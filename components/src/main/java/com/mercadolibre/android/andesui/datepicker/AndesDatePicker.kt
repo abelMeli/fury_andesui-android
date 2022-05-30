@@ -134,10 +134,6 @@ class AndesDatePicker : ConstraintLayout {
      */
     private fun initComponents() {
         onCheckedChangeListener(binding.andesBtnSelectDate)
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
-            binding.calendarView.layoutParams.width = WIDTH
-            binding.calendarView.layoutParams.height = HEIGHT
-        }
     }
 
     /**

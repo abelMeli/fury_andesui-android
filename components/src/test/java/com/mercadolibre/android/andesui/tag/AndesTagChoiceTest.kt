@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.tag
 
 import android.content.Context
-import android.os.Build
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.test.core.app.ApplicationProvider
@@ -15,6 +14,7 @@ import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
 import com.mercadolibre.android.andesui.tag.leftcontent.LeftContent
 import com.mercadolibre.android.andesui.tag.leftcontent.LeftContentDot
 import com.mercadolibre.android.andesui.tag.size.AndesTagSize
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
@@ -23,7 +23,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTagChoiceTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
 

@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.textfieldcode
 
-import android.os.Build
 import com.mercadolibre.android.andesui.textfield.textwatcher.AndesCodeFocusManagement
 import com.mercadolibre.android.andesui.textfield.textwatcher.NextFocus
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -15,7 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import org.robolectric.annotation.Config
 
 @RunWith(MockitoJUnitRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesCodeFocusManagementTest {
 
     @Mock private lateinit var onNextFocus: NextFocus

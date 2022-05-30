@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.coachmark.view
 
-import android.os.Build
+import com.mercadolibre.android.andesui.coachmark.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.coachmark.view.walkthroughmessage.ArcArrow
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -10,7 +10,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class ArcArrowTest {
 
     private var context = RuntimeEnvironment.application

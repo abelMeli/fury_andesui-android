@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.combosize.AndesMoneyAmountComboSize
@@ -9,6 +8,7 @@ import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCur
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboAttrs
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboConfigurationFactory
 import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import org.junit.Assert
 import org.junit.Assert.assertEquals
@@ -19,7 +19,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesMoneyAmountComboConfiguration {
 
     init {

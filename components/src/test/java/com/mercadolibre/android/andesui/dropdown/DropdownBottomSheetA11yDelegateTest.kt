@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.dropdown
 
 import android.content.Context
-import android.os.Build
 import android.os.Looper.getMainLooper
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
@@ -20,6 +19,7 @@ import com.mercadolibre.android.andesui.dropdown.utils.DropdownBottomSheetDialog
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -31,7 +31,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 @LooperMode(LooperMode.Mode.PAUSED)
 class DropdownBottomSheetA11yDelegateTest {
 

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.amountfield
 
 import android.content.Context
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
@@ -17,6 +16,7 @@ import com.mercadolibre.android.andesui.buildAttributeSet
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.getSuffixComponent
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import com.mercadolibre.android.andesui.utils.configureTextDimensionUtilsExtraSmallText
@@ -40,7 +40,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesAmountFieldSimpleTest {
 
     private lateinit var context: Context

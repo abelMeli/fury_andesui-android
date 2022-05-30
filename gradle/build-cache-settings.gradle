@@ -1,6 +1,6 @@
 buildCache {
-    local(DirectoryBuildCache) {
-        removeUnusedEntriesAfterDays = 30
+	local {
+		enabled = true
     }
     remote(HttpBuildCache) {
         enabled = true

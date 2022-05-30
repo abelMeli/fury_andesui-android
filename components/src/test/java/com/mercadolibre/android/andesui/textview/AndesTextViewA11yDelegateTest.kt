@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.textview
 
 import android.content.Context
-import android.os.Build
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
@@ -9,6 +8,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.actionLinkIdList
 import com.mercadolibre.android.andesui.utils.toA11yAction
 import org.junit.Assert
@@ -20,7 +20,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTextViewA11yDelegateTest {
 
     private lateinit var context: Context

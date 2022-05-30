@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.radiobutton
 
-import android.os.Build
 import android.widget.RadioButton
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.toAndesColor
@@ -9,6 +8,7 @@ import com.mercadolibre.android.andesui.radiobutton.factory.AndesRadioButtonAttr
 import com.mercadolibre.android.andesui.radiobutton.factory.AndesRadioButtonConfigurationFactory
 import com.mercadolibre.android.andesui.radiobutton.status.AndesRadioButtonStatus
 import com.mercadolibre.android.andesui.radiobutton.type.AndesRadioButtonType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +18,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesRadioButtonTest {
 
     private var context = RuntimeEnvironment.application

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.switchandes
 
 import android.content.Context
-import android.os.Build
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
@@ -10,6 +9,7 @@ import com.mercadolibre.android.andesui.switchandes.accessibility.AndesSwitchAcc
 import com.mercadolibre.android.andesui.switchandes.align.AndesSwitchAlign
 import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -22,7 +22,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesSwitchAccessibilityDelegateTest {
 
     private lateinit var context: Context

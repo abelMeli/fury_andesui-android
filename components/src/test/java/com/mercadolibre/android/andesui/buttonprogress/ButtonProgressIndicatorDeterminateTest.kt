@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.buttonprogress
 
-import android.os.Build
 import android.view.View
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
@@ -10,6 +9,7 @@ import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.button.hierarchy.AndesLoudButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.AndesTransparentButtonHierarchy
 import com.mercadolibre.android.andesui.buttonprogress.factory.AndesButtonProgressConfigurationFactory
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -23,7 +23,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class ButtonProgressIndicatorDeterminateTest {
     private var context = RuntimeEnvironment.application
     private lateinit var buttonProgress: AndesButtonProgressIndicatorDeterminate

@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.floatingmenu.rows
 
 import android.content.Context
 import android.graphics.Rect
-import android.os.Build
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
@@ -14,6 +13,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.spy
@@ -26,7 +26,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP], qualifiers = "w720dp-h1600dp-mdpi")
+@Config(sdk = [TEST_ANDROID_VERSION_CODE], qualifiers = "w720dp-h1600dp-mdpi")
 class AndesFloatingMenuHeightCalculatorTest {
 
     private val applicationContext: Context = ApplicationProvider.getApplicationContext()

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.floatingmenu
 
 import android.content.Context
-import android.os.Build
 import android.view.View
 import android.widget.Button
 import android.widget.RelativeLayout
@@ -21,6 +20,7 @@ import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.spy
@@ -36,7 +36,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(
-    sdk = [Build.VERSION_CODES.LOLLIPOP],
+    sdk = [TEST_ANDROID_VERSION_CODE],
     qualifiers = "w720dp-h1600dp-mdpi",
     shadows = [ShadowPopupWindowDismissible::class]
 )

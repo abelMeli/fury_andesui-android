@@ -1,13 +1,13 @@
 package com.mercadolibre.android.andesui.coachmark.presenter
 
 import android.graphics.Rect
-import android.os.Build
 import androidx.core.widget.NestedScrollView
 import android.view.View
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmark
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStep
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStyle
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessagePosition
+import com.mercadolibre.android.andesui.coachmark.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.Before
 import org.junit.Test
@@ -20,7 +20,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class CoachmarkPresenterTest {
 
     @Mock

@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.floatingmenu.factory
 
 import android.content.Context
 import android.graphics.Rect
-import android.os.Build
 import android.view.View
 import android.widget.Button
 import android.widget.RelativeLayout
@@ -22,6 +21,7 @@ import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.spy
@@ -34,7 +34,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP], qualifiers = "w720dp-h1600dp-mdpi")
+@Config(sdk = [TEST_ANDROID_VERSION_CODE], qualifiers = "w720dp-h1600dp-mdpi")
 class AndesFloatingMenuConfigFactoryTest {
 
     private val applicationContext: Context = ApplicationProvider.getApplicationContext()

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.feedback
 
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
@@ -14,6 +13,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.feedback.screen.AndesFeedbackScreenFactory
 import com.mercadolibre.android.andesui.feedback.screen.error.AndesFeedbackScreenErrorComponent
 import com.mercadolibre.android.andesui.feedback.screen.error.AndesFeedbackScreenErrorData
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -24,7 +24,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesFeedbackScreenFactoryTest {
     private val configFactory = Mockito.spy(AndesFeedbackScreenFactory)
 

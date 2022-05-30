@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.message
 
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.text.SpannableString
 import android.text.style.ClickableSpan
 import android.view.View
@@ -21,6 +20,7 @@ import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.type.AndesMessageType
 import com.mercadolibre.android.andesui.textview.AndesTextView
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.BeforeClass
@@ -33,7 +33,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesMessageTest {
 
     private var context = RuntimeEnvironment.application

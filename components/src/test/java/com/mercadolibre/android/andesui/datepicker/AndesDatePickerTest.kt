@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.datepicker
 
 import android.content.Context
-import android.os.Build
 import android.widget.CalendarView
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -12,6 +11,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerAttrs
 import com.mercadolibre.android.andesui.datepicker.factory.AndesDatePickerConfigurationFactory
 import com.mercadolibre.android.andesui.datepicker.startofweek.AndesDatePickerStartOfWeek
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -23,7 +23,7 @@ import java.util.Calendar
 import java.util.Date
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesDatePickerTest {
     private val configFactory = Mockito.spy(AndesDatePickerConfigurationFactory)
     private lateinit var attrs: AndesDatePickerAttrs

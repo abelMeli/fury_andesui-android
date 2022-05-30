@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.buttongroup
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.view.ViewGroup
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -16,6 +15,7 @@ import com.mercadolibre.android.andesui.buttongroup.align.AndesButtonGroupAlign
 import com.mercadolibre.android.andesui.buttongroup.factory.AndesButtonGroupAttrs
 import com.mercadolibre.android.andesui.buttongroup.factory.AndesButtonGroupConfigurationFactory
 import com.mercadolibre.android.andesui.buttongroup.type.AndesButtonGroupType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +24,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesButtonGroupConfigurationFactoryTest {
 
     private lateinit var context: Context

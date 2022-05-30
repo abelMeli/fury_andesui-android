@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.textview
 
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.widget.LinearLayout
@@ -30,6 +29,7 @@ import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBold
 import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.mercadolibre.android.andesui.textview.style.AndesTextViewStyle
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import junit.framework.Assert.assertFalse
 import org.junit.Assert
@@ -41,7 +41,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP], qualifiers = "es")
+@Config(sdk = [TEST_ANDROID_VERSION_CODE], qualifiers = "es")
 class AndesTextViewTest {
 
     private lateinit var context: Context

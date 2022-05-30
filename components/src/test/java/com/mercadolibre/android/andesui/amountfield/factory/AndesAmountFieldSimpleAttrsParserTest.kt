@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.amountfield.factory
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.amountfield.entrymode.AndesAmountFieldEntryMode
@@ -13,6 +12,7 @@ import com.mercadolibre.android.andesui.assertIsNull
 import com.mercadolibre.android.andesui.buildAttributeSet
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesAmountFieldSimpleAttrsParserTest {
 
     private lateinit var context: Context

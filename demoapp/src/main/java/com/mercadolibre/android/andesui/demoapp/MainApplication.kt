@@ -20,10 +20,6 @@ class MainApplication : Application() {
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            Settings.System.putInt(base.contentResolver, "show_touches", 1)
-        }
     }
 
     override fun onCreate() {

@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.switchandes
 
-import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -12,6 +11,7 @@ import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchComponent
 import com.mercadolibre.android.andesui.switchandes.factory.AndesSwitchConfigurationFactory
 import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 import com.mercadolibre.android.andesui.switchandes.type.AndesSwitchType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Assert
 import org.junit.Test
@@ -22,7 +22,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesSwitchTest {
 
     private var context = RuntimeEnvironment.application

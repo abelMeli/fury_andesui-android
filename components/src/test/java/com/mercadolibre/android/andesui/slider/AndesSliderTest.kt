@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.slider
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
@@ -9,8 +8,7 @@ import com.mercadolibre.android.andesui.assertIsNull
 import com.mercadolibre.android.andesui.slider.state.AndesSliderState
 import com.mercadolibre.android.andesui.slider.steps.AndesSliderSteps
 import com.mercadolibre.android.andesui.slider.type.AndesSliderType
-import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.verify
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
@@ -20,7 +18,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesSliderTest {
 
     private lateinit var andesSlider: AndesSlider

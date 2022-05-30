@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.slider
 
 import android.content.Context
-import android.os.Build
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
@@ -13,7 +12,7 @@ import com.mercadolibre.android.andesui.slider.factory.AndesSliderAttrsParser
 import com.mercadolibre.android.andesui.slider.state.AndesSliderState
 import com.mercadolibre.android.andesui.slider.steps.AndesSliderSteps
 import com.mercadolibre.android.andesui.slider.type.AndesSliderType
-import com.mercadolibre.android.andesui.textview.AndesTextView
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.toBitmap
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesSliderAttrsParserTest {
 
     private lateinit var context: Context

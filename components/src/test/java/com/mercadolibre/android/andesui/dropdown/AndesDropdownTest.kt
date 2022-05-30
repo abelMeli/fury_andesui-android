@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.dropdown
 
-import android.os.Build
 import android.widget.Spinner
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -14,6 +13,7 @@ import com.mercadolibre.android.andesui.dropdown.size.AndesDropdownSize
 import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.doNothing
 import com.nhaarman.mockitokotlin2.spy
 import org.junit.Assert
@@ -27,7 +27,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesDropdownTest {
     private var context = RuntimeEnvironment.application
     private lateinit var andesDropdownAttrs: AndesDropdownAttrs

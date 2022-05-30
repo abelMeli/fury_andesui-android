@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.textfield
 
-import android.os.Build
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.textfield.maskTextField.TextFieldMaskWatcher
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.BeforeClass
 import org.junit.Test
@@ -11,7 +11,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class TextFieldMaskWatcherTest {
 
     companion object {

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.card
 
 import android.animation.LayoutTransition
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -14,6 +13,7 @@ import com.mercadolibre.android.andesui.card.padding.AndesCardPadding
 import com.mercadolibre.android.andesui.card.style.AndesCardStyle
 import com.mercadolibre.android.andesui.card.type.AndesCardType
 import com.mercadolibre.android.andesui.color.toAndesColor
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -28,7 +28,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesCardTest {
     lateinit var view: View
 

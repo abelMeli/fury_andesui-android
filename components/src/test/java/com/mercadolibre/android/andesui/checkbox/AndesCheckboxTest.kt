@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.checkbox
 
-import android.os.Build
 import android.view.MotionEvent
 import androidx.test.core.view.MotionEventBuilder
 import com.mercadolibre.android.andesui.R
@@ -17,6 +16,7 @@ import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertFalse
@@ -30,7 +30,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesCheckboxTest {
 
     private var context = RuntimeEnvironment.application

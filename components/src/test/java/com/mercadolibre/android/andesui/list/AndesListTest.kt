@@ -2,7 +2,6 @@ package com.mercadolibre.android.andesui.list
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
@@ -10,6 +9,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -23,7 +23,7 @@ import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesListTest {
     val context: Context = ApplicationProvider.getApplicationContext()
     private lateinit var robolectricActivity: ActivityController<AppCompatActivity>

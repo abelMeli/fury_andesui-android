@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.tooltip.location
 
-import android.os.Build
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -8,7 +8,7 @@ import org.robolectric.ParameterizedRobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTooltipArrowLocationTest(
     private val tooltipSideId: ArrowPositionId,
     private val positionInSideId: ArrowPositionId,

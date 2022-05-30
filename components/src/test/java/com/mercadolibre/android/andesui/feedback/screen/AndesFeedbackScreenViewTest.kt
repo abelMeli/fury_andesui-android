@@ -1,11 +1,12 @@
 package com.mercadolibre.android.andesui.feedback.screen
 
 import android.content.Context
-import android.os.Build
 import android.text.SpannableString
 import android.text.style.ClickableSpan
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +19,6 @@ import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
@@ -35,7 +35,9 @@ import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLink
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.mock
+import junit.framework.TestCase.assertTrue
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -46,7 +48,7 @@ import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesFeedbackScreenViewTest {
     private lateinit var robolectricActivity: ActivityController<AppCompatActivity>
     private lateinit var activity: AppCompatActivity
@@ -279,7 +281,6 @@ class AndesFeedbackScreenViewTest {
             visibility assertEquals View.VISIBLE
             currentTextColor assertEquals badge.badgeComponent.color.type.primaryColor().colorInt(context)
         }
-
     }
 
     @Test
@@ -395,13 +396,75 @@ class AndesFeedbackScreenViewTest {
 
         startActivity(screenView)
         screenView.setFeedbackBody(message)
+        screenView.setFeedbackBody(message)
+        screenView.setFeedbackBody(message)
 
         val config: Any = getField("config", screenView)
         val body: Any = getField("body", config)
         val bodyView: View = getField("view", body)
+        val viewGroup: ViewGroup = bodyView.parent as ViewGroup
 
+        Assert.assertEquals(7, viewGroup.childCount)
         Assert.assertNotNull(body)
         Assert.assertEquals(message, bodyView)
+    }
+
+    @Test
+    fun `FeedbackScreen Simple replace body  and replace header repeatedly`() {
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Simple(
+                AndesFeedbackScreenColor.RED
+            ),
+            header = AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "Title"
+                )
+            ),
+            body = null
+        )
+        val feedbackScreenHeader = AndesFeedbackScreenHeader(
+            AndesFeedbackScreenText(
+                "New Title",
+                AndesFeedbackScreenTextDescription(
+                    "New Description",
+                    AndesBodyLinks(arrayListOf(AndesBodyLink(1, 2), AndesBodyLink(3, 4)), mock())
+                ),
+                "New Highlight"
+            )
+        )
+        startActivity(screenView)
+        screenView.setFeedbackBody(View(context))
+        screenView.setFeedbackScreenHeader(feedbackScreenHeader)
+        screenView.setFeedbackScreenHeader(feedbackScreenHeader)
+
+        val config: Any = getField("config", screenView)
+        val body: Any = getField("body", config)
+        val bodyView: View = getField("view", body)
+        val viewGroup: ViewGroup = bodyView.parent as ViewGroup
+
+        7 assertEquals viewGroup.childCount
+    }
+
+    @Test
+    fun `FeedbackScreen status bar color is reset when scrollview is removed`() {
+        val layout = LinearLayout(context)
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Congrats,
+            header = AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "Title"
+                )
+            ),
+            body = null
+        )
+
+        layout.addView(screenView)
+        startActivity(layout)
+        layout.removeView(screenView)
+
+        assertTrue(activity.window.statusBarColor == 0)
     }
 
     private fun AndesFeedbackScreenView.getDescription() =

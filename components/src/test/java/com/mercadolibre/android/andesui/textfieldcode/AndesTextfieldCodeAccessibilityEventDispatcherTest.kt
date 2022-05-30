@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.textfieldcode
 
 import android.content.Context
-import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -11,6 +10,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.textfield.AndesTextfieldCode
 import com.mercadolibre.android.andesui.textfield.accessibility.AndesTextfieldCodeAccessibilityEventDispatcher
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -21,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTextfieldCodeAccessibilityEventDispatcherTest {
 
     private lateinit var context: Context

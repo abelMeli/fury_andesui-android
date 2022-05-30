@@ -1,4 +1,7 @@
-# v4.23.0
+# v5.0.0
+## Migrated
+- Migration Kotlin 1.5.32 and Gradle 7.4. | Author: [@meligeo](https://github.com/meligeo)
+- Migration to the min API 23. | Author: [@meligeo](https://github.com/meligeo)
 ## 🚀 Feature
 - Added a switch to choose which day of the week it should start with on Andes DatePicker component
 - Added Iconography entry to docs | Author: [@eportasML](https://github.com/eportasML)

@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.textfield
 
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import android.widget.TextView
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -24,6 +23,7 @@ import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldContentI
 import com.mercadolibre.android.andesui.textfield.content.AndesClearTextfieldContent
 import com.mercadolibre.android.andesui.textfield.content.AndesValidatedTextfieldContent
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.buildColoredAndesBitmapDrawable
 import junit.framework.Assert.assertEquals
 import org.assertj.core.api.Assertions.assertThat
@@ -36,7 +36,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTextfieldContentInterfaceTest {
     private var context = RuntimeEnvironment.application
     private lateinit var contentInterface: AndesTextfieldContentInterface

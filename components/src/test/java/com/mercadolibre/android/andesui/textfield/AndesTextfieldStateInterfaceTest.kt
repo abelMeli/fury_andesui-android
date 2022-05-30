@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.textfield
 
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
@@ -17,6 +16,7 @@ import com.mercadolibre.android.andesui.textfield.state.AndesIdleTextfieldState
 import com.mercadolibre.android.andesui.textfield.state.AndesErrorTextfieldState
 import com.mercadolibre.android.andesui.textfield.state.AndesDisabledTextfieldState
 import com.mercadolibre.android.andesui.textfield.state.AndesReadonlyTextfieldState
+import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.buildColoredCircularShapeWithIconDrawable
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNull
@@ -30,7 +30,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.LOLLIPOP])
+@Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTextfieldStateInterfaceTest {
     private var context = RuntimeEnvironment.application
     private lateinit var stateInterface: AndesTextfieldStateInterface
