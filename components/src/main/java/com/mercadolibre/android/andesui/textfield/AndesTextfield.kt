@@ -850,12 +850,28 @@ class AndesTextfield : ConstraintLayout {
      * Set the left content to icon and provides an interface to give the icon path.
      */
     fun setLeftIcon(iconPath: String) {
+        setLeftIcon(iconPath, R.color.andes_gray_550)
+    }
+
+    /**
+     * Set the left content to icon and provides an interface to give the icon path.
+     */
+    fun setLeftIcon(
+        iconPath: String,
+        colorIcon: Int?
+    ) {
         leftContent = AndesTextfieldLeftContent.ICON
         val leftIcon: SimpleDraweeView = leftComponent.getChildAt(0) as SimpleDraweeView
+
+        var color: AndesColor? = null
+        if (colorIcon != null) {
+            color = colorIcon.toAndesColor()
+        }
+
         leftIcon.setImageDrawable(buildColoredAndesBitmapDrawable(
             IconProvider(context).loadIcon(iconPath) as BitmapDrawable,
             context,
-            color = R.color.andes_gray_550.toAndesColor())
+            color = color)
         )
     }
 

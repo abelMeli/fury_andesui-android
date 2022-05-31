@@ -64,6 +64,18 @@ class AndesTextfieldTest {
     }
 
     @Test
+    fun `set left icon with color`() {
+        textfield.setLeftIcon("andes_navegacion_categorias_24", R.color.andes_accent_color_100)
+        assertEquals(textfield.leftContent, AndesTextfieldLeftContent.ICON)
+    }
+
+    @Test
+    fun `set left icon with null color`() {
+        textfield.setLeftIcon("andes_navegacion_categorias_24", null)
+        assertEquals(textfield.leftContent, AndesTextfieldLeftContent.ICON)
+    }
+
+    @Test
     fun `set right icon`() {
         textfield.setRightIcon("andes_navegacion_categorias_24", hideWhenType = false)
         textfield.text = "1149778767"

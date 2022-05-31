@@ -1,3 +1,7 @@
+# v5.1.0
+## 🚀 Feature
+- Added the possibility of set a the left icon color for AndesTextField
+
 # v5.0.0
 ## Migrated
 - Migration Kotlin 1.5.32 and Gradle 7.4. | Author: [@meligeo](https://github.com/meligeo)
