@@ -17,7 +17,6 @@ import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
-import com.mercadolibre.android.andesui.utils.getSuffixComponent
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import com.mercadolibre.android.andesui.utils.configureTextDimensionUtilsExtraSmallText
 import com.mercadolibre.android.andesui.utils.configureTextDimensionUtilsLargeText
@@ -28,6 +27,8 @@ import com.mercadolibre.android.andesui.utils.emulateDeleteKeyPressed
 import com.mercadolibre.android.andesui.utils.emulatePasteEvent
 import com.mercadolibre.android.andesui.utils.emulateTypingWithKeyboard
 import com.mercadolibre.android.andesui.utils.getInternalEditTextComponent
+import com.mercadolibre.android.andesui.utils.getInternalHelperTextComponent
+import com.mercadolibre.android.andesui.utils.getSuffixComponent
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
@@ -668,6 +669,31 @@ class AndesAmountFieldSimpleTest {
         amountField.size assertEquals AndesAmountFieldSize.EXTRA_SMALL
     }
 
+    @Test
+    fun `given component with maxvalue and exceededHelperText, helper component should show exceededHelperText`() {
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            maxValue = "1000.00",
+            exceededHelperText = "Amount exceeded"
+        )
+        amountField.emulateTypingWithKeyboard("1000.1")
+
+        amountField.state assertEquals AndesAmountFieldState.AmountExceeded
+        amountField.getInternalHelperTextComponent().text.toString() assertEquals "Amount exceeded"
+    }
+
+    @Test
+    fun `given component with maxvalue and exceededHelperText null, helper component should show default exceeded helper text`() {
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            maxValue = "1000.00"
+        )
+        amountField.emulateTypingWithKeyboard("1000.1")
+
+        amountField.state assertEquals AndesAmountFieldState.AmountExceeded
+        amountField.getInternalHelperTextComponent().text.toString() assertEquals context.getString(R.string.andes_amount_field_exceeded_text)
+    }
+
     private fun provideTextChangeCallback(): OnTextChangeListener {
         return spy(
             object : OnTextChangeListener {
@@ -695,5 +721,4 @@ class AndesAmountFieldSimpleTest {
         activity.setContentView(amountField)
         robolectricActivity.start().postCreate(null).resume().visible()
     }
-
 }

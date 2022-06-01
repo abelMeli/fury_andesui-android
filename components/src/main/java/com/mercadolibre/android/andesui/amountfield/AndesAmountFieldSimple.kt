@@ -32,12 +32,12 @@ import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCur
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import com.mercadolibre.android.andesui.utils.limitValueByMax
 import com.mercadolibre.android.andesui.utils.ScreenUtils
 import com.mercadolibre.android.andesui.utils.deformatAmount
 import com.mercadolibre.android.andesui.utils.formatAmount
 import com.mercadolibre.android.andesui.utils.formatPastedText
 import com.mercadolibre.android.andesui.utils.inputLength
+import com.mercadolibre.android.andesui.utils.limitValueByMax
 import java.math.BigDecimal
 
 class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListener {
@@ -171,6 +171,16 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         }
 
     /**
+     * Getter and setter for the [helperText] value.
+     */
+    var exceededHelperText: CharSequence?
+        get() = andesAmountFieldAttrs.andesAmountFieldExceededHelperText
+        set(value) {
+            andesAmountFieldAttrs = andesAmountFieldAttrs.copy(andesAmountFieldExceededHelperText = value)
+            setupHelperComponent(createConfig())
+        }
+
+    /**
      * Getter and setter for the [suffixText] value.
      */
     var suffixText: CharSequence?
@@ -276,6 +286,41 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         suffix: CharSequence? = null,
         suffixA11yText: String? = null,
         maxValue: String? = null
+    ) : this(
+        context,
+        state,
+        entryMode,
+        entryType,
+        currency,
+        showCurrencyAsIsoValue,
+        country,
+        numberOfDecimals,
+        initialValue,
+        helperText,
+        null,
+        suffix,
+        suffixA11yText,
+        maxValue
+    )
+
+    /**
+     * Default code constructor
+     */
+    constructor(
+        context: Context,
+        state: AndesAmountFieldState = AndesAmountFieldState.Idle,
+        entryMode: AndesAmountFieldEntryMode? = null,
+        entryType: AndesAmountFieldEntryType = AndesAmountFieldEntryType.MONEY,
+        currency: AndesMoneyAmountCurrency = AndesMoneyAmountCurrency.ARS,
+        showCurrencyAsIsoValue: Boolean = false,
+        country: AndesCountry = AndesCountry.AR,
+        numberOfDecimals: Int? = null,
+        initialValue: String? = null,
+        helperText: CharSequence? = null,
+        exceededHelperText: CharSequence? = null,
+        suffix: CharSequence? = null,
+        suffixA11yText: String? = null,
+        maxValue: String? = null
     ) : super(context) {
         initAttrs(
             state,
@@ -288,6 +333,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             numberOfDecimals,
             initialValue,
             helperText,
+            exceededHelperText,
             suffix,
             suffixA11yText,
             maxValue
@@ -310,6 +356,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         numberOfDecimals: Int?,
         initialValue: String?,
         helperText: CharSequence?,
+        exceededHelperText: CharSequence?,
         suffix: CharSequence?,
         suffixA11yText: String?,
         maxValue: String?
@@ -325,6 +372,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             numberOfDecimals,
             initialValue,
             helperText,
+            exceededHelperText,
             suffix,
             suffixA11yText,
             maxValue

@@ -35,6 +35,10 @@ internal fun AndesAmountFieldSimple.getInternalEditTextComponent(): AndesAmountF
     return findViewById(R.id.amount_field_edit_text)
 }
 
+internal fun AndesAmountFieldSimple.getInternalHelperTextComponent(): AndesTextView {
+    return findViewById(R.id.amount_field_helper_text)
+}
+
 internal fun EditText.emulateDeleteKeyPressed() {
     if (text.isNotEmpty()) {
         text.replace(text.length -1, text.length, "")

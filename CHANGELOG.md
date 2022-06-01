@@ -1,3 +1,7 @@
+# v5.2.0
+## 🚀 Feature
+- Added property exceededHelperText to AndesAmountFieldSimple | Author: [@jtabaresr](https://github.com/jtabaresr)
+
 # v5.1.0
 ## 🚀 Feature
 - Added the possibility of set a the left icon color for AndesTextField

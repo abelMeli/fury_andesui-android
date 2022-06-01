@@ -8,9 +8,7 @@ import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
 import com.mercadolibre.android.andesui.amountfield.utils.AmountListener
 import com.mercadolibre.android.andesui.amountfield.utils.ResizingListener
 import com.mercadolibre.android.andesui.country.AndesCountry
-import com.mercadolibre.android.andesui.currency.AndesCountryInfo
 import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
-import com.mercadolibre.android.andesui.currency.AndesCurrencyInfo
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 
@@ -79,7 +77,7 @@ internal object AndesAmountFieldSimpleMoneyConfigFactory {
                 suffixTextColor = andesAmountFieldEntryType.entryType.getSuffixTextColor(),
                 suffixTextColorForEmptyField = AndesTextViewColor.Secondary,
                 stateActions = andesAmountFieldState.state.getActions(),
-                helperText = resolveHelperText(context, andesAmountFieldHelperText, andesAmountFieldState),
+                helperText = resolveHelperText(context, andesAmountFieldHelperText, andesAmountFieldExceededHelperText, andesAmountFieldState),
                 helperTextColor = andesAmountFieldState.state.getHelperTextColor(),
                 helperTextStyle = andesAmountFieldState.state.getHelperTextStyle(),
                 helperIconVisibility = andesAmountFieldState.state.getIconVisibility(),
@@ -108,13 +106,18 @@ internal object AndesAmountFieldSimpleMoneyConfigFactory {
     private fun resolveHelperText(
         context: Context,
         andesAmountFieldHelperText: CharSequence?,
+        andesAmountFieldExceededHelperText: CharSequence?,
         andesAmountFieldState: AndesAmountFieldState
     ): CharSequence? {
-        return if (andesAmountFieldState.state.getExceededHelperText(context) != null) {
-            andesAmountFieldState.state.getExceededHelperText(context)
-        } else {
-            andesAmountFieldHelperText
+        var text = andesAmountFieldHelperText
+        if (andesAmountFieldState == AndesAmountFieldState.AmountExceeded) {
+            text = if (andesAmountFieldExceededHelperText.isNullOrBlank()) {
+                andesAmountFieldState.state.getExceededHelperText(context)
+            } else {
+                andesAmountFieldExceededHelperText
+            }
         }
+        return text
     }
 
     private fun resolveEntryMode(

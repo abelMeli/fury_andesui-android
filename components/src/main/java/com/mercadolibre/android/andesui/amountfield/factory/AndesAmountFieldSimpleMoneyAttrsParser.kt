@@ -21,6 +21,7 @@ internal data class AndesAmountFieldSimpleMoneyAttrs(
     val andesAmountFieldNumberOfDecimals: Int?,
     val andesAmountFieldInitialValue: String?,
     val andesAmountFieldHelperText: CharSequence?,
+    val andesAmountFieldExceededHelperText: CharSequence?,
     val andesAmountFieldSuffixText: CharSequence?,
     val andesAmountFieldSuffixA11yText: String?,
     val andesAmountFieldMaxValue: String?
@@ -90,37 +91,45 @@ internal object AndesAmountFieldSimpleMoneyAttrsParser {
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.AndesAmountFieldSimpleMoney)
 
-        val state = when (typedArray.getInt(
-            R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldState,
-            VALUE_NOT_SELECTED
-        )) {
+        val state = when (
+            typedArray.getInt(
+                R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldState,
+                VALUE_NOT_SELECTED
+            )
+        ) {
             STATE_IDLE -> AndesAmountFieldState.Idle
             STATE_ERROR -> AndesAmountFieldState.Error
             else -> AndesAmountFieldState.Idle
         }
 
-        val entryMode = when (typedArray.getInt(
-            R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldEntryMode,
-            VALUE_NOT_SELECTED
-        )) {
+        val entryMode = when (
+            typedArray.getInt(
+                R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldEntryMode,
+                VALUE_NOT_SELECTED
+            )
+        ) {
             ENTRY_MODE_DECIMAL -> AndesAmountFieldEntryMode.DECIMAL
             ENTRY_MODE_INT -> AndesAmountFieldEntryMode.INT
             else -> null
         }
 
-        val entryType = when (typedArray.getInt(
-            R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldEntryType,
-            VALUE_NOT_SELECTED
-        )) {
+        val entryType = when (
+            typedArray.getInt(
+                R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldEntryType,
+                VALUE_NOT_SELECTED
+            )
+        ) {
             ENTRY_TYPE_MONEY -> AndesAmountFieldEntryType.MONEY
             ENTRY_TYPE_PERCENTAGE -> AndesAmountFieldEntryType.PERCENTAGE
             else -> AndesAmountFieldEntryType.MONEY
         }
 
-        val currency = when (typedArray.getInt(
-            R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldCurrency,
-            VALUE_NOT_SELECTED
-        )) {
+        val currency = when (
+            typedArray.getInt(
+                R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldCurrency,
+                VALUE_NOT_SELECTED
+            )
+        ) {
             CURRENCY_BRL -> AndesMoneyAmountCurrency.BRL
             CURRENCY_UYU -> AndesMoneyAmountCurrency.UYU
             CURRENCY_CLP -> AndesMoneyAmountCurrency.CLP
@@ -149,10 +158,12 @@ internal object AndesAmountFieldSimpleMoneyAttrsParser {
             else -> AndesMoneyAmountCurrency.ARS
         }
 
-        val country = when (typedArray.getInt(
-            R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldCountry,
-            VALUE_NOT_SELECTED
-        )) {
+        val country = when (
+            typedArray.getInt(
+                R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldCountry,
+                VALUE_NOT_SELECTED
+            )
+        ) {
             COUNTRY_AR -> AndesCountry.AR
             COUNTRY_BR -> AndesCountry.BR
             COUNTRY_CL -> AndesCountry.CL
@@ -203,6 +214,9 @@ internal object AndesAmountFieldSimpleMoneyAttrsParser {
         val helperText =
             typedArray.getString(R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldHelperText)
 
+        val exceededHelperText =
+            typedArray.getString(R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldExceededHelperText)
+
         val suffixText =
             typedArray.getString(R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldSuffixText)
 
@@ -223,6 +237,7 @@ internal object AndesAmountFieldSimpleMoneyAttrsParser {
             andesAmountFieldNumberOfDecimals = numberOfDecimals,
             andesAmountFieldInitialValue = initialValue,
             andesAmountFieldHelperText = helperText,
+            andesAmountFieldExceededHelperText = exceededHelperText,
             andesAmountFieldSuffixText = suffixText,
             andesAmountFieldSuffixA11yText = suffixA11yText,
             andesAmountFieldMaxValue = maxValue

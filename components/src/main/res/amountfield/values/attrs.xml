@@ -73,6 +73,8 @@
 
         <attr name="andesAmountFieldHelperText" format="string" />
 
+        <attr name="andesAmountFieldExceededHelperText" format="string" />
+
         <attr name="andesAmountFieldSuffixText" format="string" />
 
         <!--alternative text to be read to the talkback when setting a suffix-->

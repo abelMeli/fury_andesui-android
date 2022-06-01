@@ -60,6 +60,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             null,
             null,
             null,
+            null,
             null
         )
 
@@ -106,6 +107,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             3,
             "1000.00",
             "helper",
+            "exceeded helper",
             "suffix",
             "suffix for a11y",
             "3000.00"
@@ -154,6 +156,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             null,
             "1000.00",
             "helper",
+            "exceeded helper",
             "suffix",
             "suffix for a11y",
             "3000.00"
@@ -176,7 +179,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
         config.suffixText assertEquals "suffix"
         config.suffixTextColor assertEquals AndesTextViewColor.Secondary
         Assertions.assertThat(config.stateActions).usingRecursiveComparison().isEqualTo(state.state.getActions())
-        config.helperText assertEquals "You have exceeded the maximum allowed limit"
+        config.helperText assertEquals "exceeded helper"
         config.helperTextColor assertEquals AndesTextViewColor.Negative
         config.helperTextStyle assertEquals Typeface.BOLD
         config.helperIconVisibility assertEquals View.VISIBLE
@@ -201,6 +204,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             0,
             "1000.00",
             "helper",
+            "",
             "suffix",
             "suffix for a11y",
             "3000.00"
@@ -222,7 +226,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
         config.placeholder assertEquals "0"
         config.suffixText assertEquals "suffix"
         config.suffixTextColor assertEquals AndesTextViewColor.Secondary
-        config.helperText assertEquals "You have exceeded the maximum allowed limit"
+        config.helperText assertEquals context.getString(R.string.andes_amount_field_exceeded_text)
         config.helperTextColor assertEquals AndesTextViewColor.Negative
         config.helperTextStyle assertEquals Typeface.BOLD
         config.helperIconVisibility assertEquals View.VISIBLE
@@ -247,6 +251,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             null,
             "1000.00",
             "helper",
+            "exceeded helper",
             "suffix",
             null,
             "3000.00"
@@ -268,7 +273,7 @@ class AndesAmountFieldSimpleConfigFactoryTest {
         config.placeholder assertEquals "0,00"
         config.suffixText assertEquals "%"
         config.suffixTextColor assertEquals AndesTextViewColor.Primary
-        config.helperText assertEquals "You have exceeded the maximum allowed limit"
+        config.helperText assertEquals "exceeded helper"
         config.helperTextColor assertEquals AndesTextViewColor.Negative
         config.helperTextStyle assertEquals Typeface.BOLD
         config.helperIconVisibility assertEquals View.VISIBLE
