@@ -1,8 +1,12 @@
 package com.mercadolibre.android.andesui.button
 
+import android.animation.Animator
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.TextUtils
@@ -297,6 +301,164 @@ class AndesButton : ConstraintLayout {
 
         background = config.background
         stateListAnimator = null
+    }
+
+    /**
+     * Method to animate the transition between the colors of the button from the current
+     * [hierarchy] to the ones present in the passed [newHierarchy]. Only exposed for use in the
+     * AndesModal carousel variant
+     */
+    internal fun transitionIntoNewHierarchy(newHierarchy: AndesButtonHierarchy, durationInMillis: Int) {
+        if (newHierarchy == hierarchy) return
+
+        transitionBackgroundColor(newHierarchy, durationInMillis)
+        transitionIconColor(newHierarchy, durationInMillis)
+        transitionTextColor(newHierarchy, durationInMillis)
+    }
+
+    private fun transitionBackgroundColor(newHierarchy: AndesButtonHierarchy, durationInMillis: Int) {
+        val backgroundAnimation = generateBackgroundAnimation(newHierarchy)
+        background = backgroundAnimation
+        backgroundAnimation.startTransition(durationInMillis)
+    }
+
+    private fun transitionIconColor(newHierarchy: AndesButtonHierarchy, durationInMillis: Int) {
+        val config = createConfig()
+
+        val currentLeftIcon = config.iconConfig?.leftIcon
+        val currentRightIcon = config.iconConfig?.rightIcon
+        val isIconLeft = currentLeftIcon != null
+
+        val iconBackgroundCrossfader = generateIconAnimation(
+            newHierarchy,
+            currentLeftIcon,
+            currentRightIcon,
+            isIconLeft
+        ) ?: return
+
+        val iconImageView = if (isIconLeft) {
+            leftIconComponent
+        } else {
+            rightIconComponent
+        }
+
+        iconImageView.setImageDrawable(iconBackgroundCrossfader)
+        iconBackgroundCrossfader.startTransition(durationInMillis)
+    }
+
+    private fun transitionTextColor(newHierarchy: AndesButtonHierarchy, durationInMillis: Int) {
+        val textColorAnimation = generateTextColorAnimator(newHierarchy, durationInMillis.toLong())
+        textColorAnimation.start()
+    }
+
+    /**
+     * Returns a new [TransitionDrawable] to use as background. This class contains the button
+     * background values from the current hierarchy and the passed [newHierarchy].
+     *
+     * To animate, call [TransitionDrawable.startTransition]
+     */
+    private fun generateBackgroundAnimation(newHierarchy: AndesButtonHierarchy): TransitionDrawable {
+        val currentBackground = hierarchy.hierarchy.background(context, size.size.cornerRadius(context))
+        val newBackground = newHierarchy.hierarchy.background(context, size.size.cornerRadius(context))
+
+        val backgrounds = arrayOf(
+            currentBackground,
+            newBackground
+        )
+
+        return TransitionDrawable(backgrounds).apply {
+            isCrossFadeEnabled = true
+        }
+    }
+
+    /**
+     * Returns a new [TransitionDrawable] that contains the icon background values from the current
+     * hierarchy and the passed [newHierarchy]. To animate, call [TransitionDrawable.startTransition]
+     */
+    private fun generateIconAnimation(
+        newHierarchy: AndesButtonHierarchy,
+        currentLeftIcon: Drawable?,
+        currentRightIcon: Drawable?,
+        isIconLeft: Boolean
+    ): TransitionDrawable? {
+
+        val currentIconBackground = when {
+            currentLeftIcon != null -> currentLeftIcon
+            currentRightIcon != null -> currentRightIcon
+            else -> null
+        } ?: return null
+
+        val newIconConfig = size.size.iconConfig(
+            newHierarchy.hierarchy,
+            andesButtonAttrs.andesButtonLeftIconPath,
+            andesButtonAttrs.andesButtonRightIconPath,
+            andesButtonAttrs.andesButtonLeftDrawable,
+            andesButtonAttrs.andesButtonRightDrawable,
+            context
+        )
+
+        val newIconBackground = if (isIconLeft) {
+            newIconConfig?.leftIcon
+        } else {
+            newIconConfig?.rightIcon
+        }
+
+        val iconBackgrounds = arrayOf(
+            currentIconBackground,
+            newIconBackground
+        )
+
+        return TransitionDrawable(iconBackgrounds)
+    }
+
+    /**
+     * Animator to transition from the current text color to the new value according to the passed
+     * [newHierarchy]
+     */
+    private fun generateTextColorAnimator(
+        newHierarchy: AndesButtonHierarchy,
+        animationDuration: Long
+    ): ValueAnimator {
+        val currentTextColor = hierarchy
+            .hierarchy
+            .textColor(context)
+            .getColorForState(intArrayOf(android.R.attr.state_enabled), 0)
+        val newTextColor = newHierarchy
+            .hierarchy
+            .textColor(context)
+            .getColorForState(intArrayOf(android.R.attr.state_enabled), 0)
+
+        val animator = ValueAnimator.ofObject(
+            ArgbEvaluator(),
+            currentTextColor,
+            newTextColor
+        )
+
+        animator.apply {
+            duration = animationDuration
+            addUpdateListener {
+                textComponent.setTextColor((it.animatedValue) as Int)
+            }
+            addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator?) {
+                    // no op
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    hierarchy = newHierarchy
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                    // no op
+                }
+
+                override fun onAnimationRepeat(animation: Animator?) {
+                    // no op
+                }
+            })
+        }
+
+        return animator
     }
 
     private fun setupA11yDelegate() {

@@ -1,3 +1,7 @@
+# v5.3.0
+## 🚀 Feature
+- Added internal method to animate `AndesButton` transitions from different hierarchies | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v5.2.0
 ## 🚀 Feature
 - Added property exceededHelperText to AndesAmountFieldSimple | Author: [@jtabaresr](https://github.com/jtabaresr)
