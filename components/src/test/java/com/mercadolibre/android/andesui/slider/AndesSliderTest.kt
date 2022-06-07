@@ -2,12 +2,14 @@ package com.mercadolibre.android.andesui.slider
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import com.google.android.material.slider.LabelFormatter
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.assertIsNull
 import com.mercadolibre.android.andesui.slider.state.AndesSliderState
 import com.mercadolibre.android.andesui.slider.steps.AndesSliderSteps
 import com.mercadolibre.android.andesui.slider.type.AndesSliderType
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -16,6 +18,8 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric.buildAttributeSet
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import java.text.NumberFormat.getCurrencyInstance
+import java.text.NumberFormat.getPercentInstance
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [TEST_ANDROID_VERSION_CODE])
@@ -74,6 +78,40 @@ class AndesSliderTest {
             text.toString() assertEquals "Title"
             text assertIsNull false
         }
+    }
+
+    @Test
+    fun `andes slider label currency formatted`() {
+        val label = andesSlider.findViewById<AndesTextView>(R.id.andes_slider_label_value)
+
+        label.text.toString().assertEquals("25")
+
+        andesSlider.setValueLabelFormatter { value ->
+            with(getCurrencyInstance()) {
+                minimumFractionDigits = 0
+                format(value)
+            }
+        }
+
+        label.text.toString().assertEquals("$25")
+    }
+
+    @Test
+    fun `andes slider label percent formatted`() {
+        val attrs = buildAttributeSet()
+            .addAttribute(R.attr.andesSliderValue, "0.25")
+            .build()
+
+        andesSlider = AndesSlider(context, attrs).apply {
+            setValueLabelFormatter { value ->
+                with(getPercentInstance()) {
+                    format(value)
+                }
+            }
+        }
+
+        val label = andesSlider.findViewById<AndesTextView>(R.id.andes_slider_label_value)
+        label.text.toString().assertEquals("25%")
     }
 
     companion object {

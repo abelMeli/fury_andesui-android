@@ -9,8 +9,10 @@ import android.widget.FrameLayout
 import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import com.google.android.material.slider.LabelFormatter
 import com.google.android.material.slider.Slider
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.databinding.AndesLayoutSliderBinding
 import com.mercadolibre.android.andesui.slider.accessibility.AndesSliderAccessibilityDelegate
 import com.mercadolibre.android.andesui.slider.accessibility.AndesSliderAccessibilityEventDispatcher
 import com.mercadolibre.android.andesui.slider.factory.AndesSliderAttrs
@@ -29,14 +31,13 @@ import com.mercadolibre.android.andesui.tooltip.extensions.visible
 @Suppress("TooManyFunctions")
 class AndesSlider : ConstraintLayout {
 
-    private lateinit var sliderTitle: AndesTextView
-    private lateinit var labelValue: AndesTextView
-    private lateinit var slider: Slider
-    private lateinit var leftContent: FrameLayout
-    private lateinit var rightContent: FrameLayout
     private lateinit var andesSliderAttrs: AndesSliderAttrs
     private var onValueChangeListener: OnValueChangedListener? = null
     private val a11yEventDispatcher by lazy { AndesSliderAccessibilityEventDispatcher() }
+    private val binding by lazy {
+        AndesLayoutSliderBinding.inflate(LayoutInflater.from(context), this)
+    }
+    private var formatter: LabelFormatter? = null
 
     /**
      * Getter and setter for [text].
@@ -167,21 +168,21 @@ class AndesSlider : ConstraintLayout {
 
     private fun setupLeftContent(config: AndesSliderConfiguration) {
         if (config.leftComponent != null) {
-            leftContent.removeAllViews()
-            leftContent.addView(config.leftComponent)
-            leftContent.visibility = View.VISIBLE
+            binding.andesSliderLeftComponent.removeAllViews()
+            binding.andesSliderLeftComponent.addView(config.leftComponent)
+            binding.andesSliderLeftComponent.visibility = View.VISIBLE
         } else {
-            leftContent.visibility = View.GONE
+            binding.andesSliderLeftComponent.visibility = View.GONE
         }
     }
 
     private fun setupRightContent(config: AndesSliderConfiguration) {
         if (config.rightComponent != null) {
-            rightContent.removeAllViews()
-            rightContent.addView(config.rightComponent)
-            rightContent.visibility = View.VISIBLE
+            binding.andesSliderRightComponent.removeAllViews()
+            binding.andesSliderRightComponent.addView(config.rightComponent)
+            binding.andesSliderRightComponent.visibility = View.VISIBLE
         } else {
-            rightContent.visibility = View.GONE
+            binding.andesSliderRightComponent.visibility = View.GONE
         }
     }
 
@@ -207,7 +208,6 @@ class AndesSlider : ConstraintLayout {
     }
 
     private fun setupComponents(config: AndesSliderConfiguration) {
-        initComponents()
         setupViewId()
         setupTitleComponent(config)
         setupLimitsComponent(config)
@@ -230,17 +230,8 @@ class AndesSlider : ConstraintLayout {
         }
     }
 
-    private fun initComponents() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_slider, this)
-        slider = container.findViewById(R.id.andes_slider)
-        sliderTitle = container.findViewById(R.id.andes_slider_title)
-        labelValue = container.findViewById(R.id.andes_slider_label_value)
-        leftContent = container.findViewById(R.id.andes_slider_left_component)
-        rightContent = container.findViewById(R.id.andes_slider_right_component)
-    }
-
     private fun setupTitleComponent(config: AndesSliderConfiguration) {
-        with(sliderTitle) {
+        with(binding.andesSliderTitle) {
             if (!config.text.isNullOrEmpty()) {
                 text = config.text
                 visible(true)
@@ -251,38 +242,38 @@ class AndesSlider : ConstraintLayout {
     }
 
     private fun setupLabelValueComponent(config: AndesSliderConfiguration) {
-        slider.value = config.value
-        labelValue.text = config.value.toInt().toString()
-        slider.post { updateValueLabelPosition() }
+        binding.andesSlider.value = config.value
+        resolveFormatter(config.value)
+        binding.andesSlider.post { updateValueLabelPosition() }
     }
 
     private fun setupLimitsComponent(config: AndesSliderConfiguration) {
-        slider.valueFrom = config.min
-        slider.valueTo = config.max
+        binding.andesSlider.valueFrom = config.min
+        binding.andesSlider.valueTo = config.max
     }
 
     private fun setupStateComponent(config: AndesSliderConfiguration) {
-        slider.isEnabled = config.state.type.isEnabled()
+        binding.andesSlider.isEnabled = config.state.type.isEnabled()
     }
 
     private fun setupStepsComponent(config: AndesSliderConfiguration) {
-        slider.stepSize = config.jumpSteps
-        slider.isTickVisible = config.isTickVisible
+        binding.andesSlider.stepSize = config.jumpSteps
+        binding.andesSlider.isTickVisible = config.isTickVisible
     }
 
     private fun setupBackgroundComponent(config: AndesSliderConfiguration) {
-        labelValue.setTextColor(config.state.type.textColor(context).colorInt(context))
-        slider.haloTintList = ColorStateList.valueOf(config.state.type.haloColor(context).colorInt(context))
-        slider.trackActiveTintList = ColorStateList.valueOf(config.state.type.trackActiveColor(context).colorInt(context))
-        slider.trackInactiveTintList = ColorStateList.valueOf(config.state.type.trackInactiveColor(context).colorInt(context))
-        slider.thumbTintList = ColorStateList.valueOf(config.state.type.thumbColor(context).colorInt(context))
-        slider.thumbStrokeColor = ColorStateList.valueOf(config.state.type.thumbStrokeColor(context).colorInt(context))
+        binding.andesSliderLabelValue.setTextColor(config.state.type.textColor(context).colorInt(context))
+        binding.andesSlider.haloTintList = ColorStateList.valueOf(config.state.type.haloColor(context).colorInt(context))
+        binding.andesSlider.trackActiveTintList = ColorStateList.valueOf(config.state.type.trackActiveColor(context).colorInt(context))
+        binding.andesSlider.trackInactiveTintList = ColorStateList.valueOf(config.state.type.trackInactiveColor(context).colorInt(context))
+        binding.andesSlider.thumbTintList = ColorStateList.valueOf(config.state.type.thumbColor(context).colorInt(context))
+        binding.andesSlider.thumbStrokeColor = ColorStateList.valueOf(config.state.type.thumbStrokeColor(context).colorInt(context))
     }
 
     private fun setupSliderWatcher(config: AndesSliderConfiguration) {
-        slider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+        binding.andesSlider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) {
-                labelValue.visibility = INVISIBLE
+                binding.andesSliderLabelValue.visibility = INVISIBLE
                 slider.thumbStrokeColor =
                     ColorStateList.valueOf(config.state.type.thumbColor(context).colorInt(context))
             }
@@ -291,12 +282,12 @@ class AndesSlider : ConstraintLayout {
                 slider.thumbStrokeColor = ColorStateList.valueOf(
                     config.state.type.thumbStrokeColor(context).colorInt(context)
                 )
-                labelValue.text = slider.value.toInt().toString()
-                labelValue.visibility = VISIBLE
+                resolveFormatter(slider.value)
+                binding.andesSliderLabelValue.visibility = VISIBLE
             }
         })
 
-        slider.addOnChangeListener { _, value, _ ->
+        binding.andesSlider.addOnChangeListener { _, value, _ ->
             this.value = value
             onValueChangeListener?.onValueChanged(value)
             a11yEventDispatcher.notifyA11yChangedValue(
@@ -308,26 +299,39 @@ class AndesSlider : ConstraintLayout {
     }
 
     private fun updateValueLabelPosition() {
-        val valueRangeSize = slider.valueTo - slider.valueFrom
-        val valuePercentStart = (slider.value - slider.valueFrom) / valueRangeSize
-        val valuePercentEnd = (slider.valueTo - slider.value) / valueRangeSize
+        val valueRangeSize = binding.andesSlider.valueTo - binding.andesSlider.valueFrom
+        val valuePercentStart = (binding.andesSlider.value - binding.andesSlider.valueFrom) / valueRangeSize
+        val valuePercentEnd = (binding.andesSlider.valueTo - binding.andesSlider.value) / valueRangeSize
 
-        val start = (valuePercentStart * slider.trackWidth).toInt()
-        val end = (valuePercentEnd * slider.trackWidth).toInt()
+        val start = (valuePercentStart * binding.andesSlider.trackWidth).toInt()
+        val end = (valuePercentEnd * binding.andesSlider.trackWidth).toInt()
 
         val constraintSet = ConstraintSet()
         constraintSet.clone(this)
         constraintSet.connect(
             R.id.andes_slider_label_value, ConstraintSet.START,
-            slider.id, ConstraintSet.START,
+            binding.andesSlider.id, ConstraintSet.START,
             start
         )
         constraintSet.connect(
             R.id.andes_slider_label_value, ConstraintSet.END,
-            slider.id, ConstraintSet.END,
+            binding.andesSlider.id, ConstraintSet.END,
             end
         )
         constraintSet.applyTo(this)
+    }
+
+    /**
+     * Set a custom format to current displayed value.
+     */
+    fun setValueLabelFormatter(labelFormatter: LabelFormatter) {
+        formatter = labelFormatter
+        binding.andesSlider.setLabelFormatter(formatter)
+        resolveFormatter(binding.andesSlider.value)
+    }
+
+    private fun resolveFormatter(value: Float) {
+        binding.andesSliderLabelValue.text = formatter?.getFormattedValue(value) ?: value.toInt().toString()
     }
 
     override fun getAccessibilityClassName(): CharSequence {

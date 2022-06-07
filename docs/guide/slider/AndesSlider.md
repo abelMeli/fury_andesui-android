@@ -89,6 +89,7 @@ Basic Sample XML
 | Return type | Method |
 | -------- | ------- |
 | Unit | **setOnValueChangedListener(listener: [OnValueChangedListener](#onvaluechangedlistener)**<br/> Set a callback to listen when a [AndesSlider](#andesslider)'s value is changed. |
+| Unit | **setValueLabelFormatter(labelFormatter: LabelFormatter)**<br/> Set a custom format to current displayed value. |
 
 <br/>
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
+import com.google.android.material.slider.LabelFormatter
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
@@ -23,6 +24,8 @@ import com.mercadolibre.android.andesui.switchandes.AndesSwitch
 import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
+import java.text.NumberFormat
+import java.util.Currency
 
 class SliderShowcaseActivity : BaseActivity() {
 
@@ -146,6 +149,17 @@ class SliderShowcaseActivity : BaseActivity() {
 
         container.findViewById<AndesButton>(R.id.andesui_demoapp_andes_slider_specs_button)
             .setOnClickListener { launchSpecs(it.context, AndesSpecs.SLIDER) }
+
+        setFormatter(slider)
+    }
+
+    private fun setFormatter(slider: AndesSlider) {
+        slider.setValueLabelFormatter(LabelFormatter { value ->
+            val format = NumberFormat.getCurrencyInstance()
+            format.maximumFractionDigits = 0
+            format.currency = Currency.getInstance("USD")
+            format.format(value.toDouble())
+        })
     }
 
     private fun sliderSteps(item: String): AndesSliderSteps {
