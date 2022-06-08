@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -275,6 +276,16 @@ class AndesMoneyAmount : ConstraintLayout, AndesMoneyAmountInfoProvider {
     @SuppressLint("GetContentDescriptionOverride")
     override fun getContentDescription(): CharSequence? {
         return AndesMoneyAmountAccessibilityDelegate.getContentDescription(this)
+    }
+
+    /**
+     * method used to intercept the click event in order to send it to the parent layout
+     */
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            return false
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     companion object {

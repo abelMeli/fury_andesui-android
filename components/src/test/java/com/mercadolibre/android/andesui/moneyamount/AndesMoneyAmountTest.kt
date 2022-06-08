@@ -3,9 +3,11 @@ package com.mercadolibre.android.andesui.moneyamount
 import android.content.Context
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.view.MotionEventBuilder
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.color.AndesColor
@@ -17,9 +19,12 @@ import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
 import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
@@ -330,6 +335,56 @@ class AndesMoneyAmountTest {
             moneyAmount.size = AndesMoneyAmountSize.SIZE_12
             moneyAmount.setSuffix(SpannableStringBuilder("/unidad"), "por unidad.")
         }
+    }
+
+    @Test
+    fun `dispatchTouchEvent, sends MotionEvent To Parent`() {
+        val moneyAmount = Mockito.spy(
+            AndesMoneyAmount(
+                context = context,
+                amount = 1234.0,
+                showZerosDecimal = false,
+                type = AndesMoneyAmountType.POSITIVE,
+                style = AndesMoneyAmountDecimalsStyle.NONE,
+                currency = AndesMoneyAmountCurrency.ARS,
+                country = AndesCountry.UY
+            )
+        )
+        val clickMotionEvent = MotionEventBuilder
+            .newBuilder()
+            .setAction(MotionEvent.ACTION_DOWN)
+            .build()
+
+        clickMotionEvent.action assertEquals MotionEvent.ACTION_DOWN
+        val isEventIntercepted = moneyAmount.dispatchTouchEvent(clickMotionEvent)
+
+        Assert.assertFalse(isEventIntercepted)
+        verify(moneyAmount, times(1)).dispatchTouchEvent(clickMotionEvent)
+    }
+
+    @Test
+    fun `dispatchTouchEvent, not sends MotionEvent To Parent`() {
+        val moneyAmount = Mockito.spy(
+            AndesMoneyAmount(
+                context = context,
+                amount = 1234.0,
+                showZerosDecimal = false,
+                type = AndesMoneyAmountType.POSITIVE,
+                style = AndesMoneyAmountDecimalsStyle.NONE,
+                currency = AndesMoneyAmountCurrency.ARS,
+                country = AndesCountry.UY
+            )
+        )
+        val clickMotionEvent = MotionEventBuilder
+            .newBuilder()
+            .setAction(MotionEvent.ACTION_UP)
+            .build()
+
+        clickMotionEvent.action assertEquals MotionEvent.ACTION_UP
+        val isEventIntercepted = moneyAmount.dispatchTouchEvent(clickMotionEvent)
+
+        Assert.assertFalse(isEventIntercepted)
+        verify(moneyAmount, times(1)).dispatchTouchEvent(clickMotionEvent)
     }
 
     fun AndesLayoutMoneyAmountBinding.moneyAmountText(): TextView =

@@ -2,6 +2,8 @@
 ## 🚀 Feature
 - Added internal method to animate `AndesButton` transitions from different hierarchies | Author: [@juanunzu](https://github.com/juanunzu)
 - Add label formatter for AndesSlider
+## 🛠 Fixes
+- `AndesMoneyAmount` bug in the click events | Author: [@edgnavarro](https://github.com/edgnavarro)
 
 # v5.2.0
 ## 🚀 Feature
@@ -15,7 +17,6 @@
 ## Migrated
 - Migration Kotlin 1.5.32 and Gradle 7.4. | Author: [@meligeo](https://github.com/meligeo)
 - Migration to the min API 23. | Author: [@meligeo](https://github.com/meligeo)
-
 ## 🚀 Feature
 - Added a switch to choose which day of the week it should start with on Andes DatePicker component
 - Added Iconography entry to docs | Author: [@eportasML](https://github.com/eportasML)

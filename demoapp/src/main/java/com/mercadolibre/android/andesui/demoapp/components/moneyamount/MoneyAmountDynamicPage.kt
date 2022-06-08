@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.constraintlayout.widget.Group
 import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
 import com.mercadolibre.android.andesui.demoapp.R
@@ -29,7 +28,6 @@ import com.mercadolibre.android.andesui.switchandes.AndesSwitch
 import com.mercadolibre.android.andesui.switchandes.status.AndesSwitchStatus
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
-import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 
 @Suppress("TooManyFunctions")
 class MoneyAmountDynamicPage {
