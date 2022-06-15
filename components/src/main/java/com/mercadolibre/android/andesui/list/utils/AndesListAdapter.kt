@@ -297,6 +297,7 @@ class AndesListAdapter(
                 andesListItemAvatar.visibility = View.VISIBLE
                 andesListItemAvatar.size = itemConfig.thumbnailSize
                 andesListItemAvatar.image = it
+                andesListItemAvatar.type = itemConfig.avatarType
 
                 showSpaceBetweenAssetAndTitle(itemConfig.separatorThumbnailWidth)
 

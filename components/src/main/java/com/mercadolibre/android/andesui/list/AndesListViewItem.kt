@@ -7,6 +7,7 @@ import com.mercadolibre.android.andesui.list.factory.AndesListViewItemConfigurat
 import com.mercadolibre.android.andesui.list.factory.AndesListViewItemConfigurationFactory
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
+import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 
 @Suppress("LongParameterList")
 open class AndesListViewItem {
@@ -34,6 +35,7 @@ open class AndesListViewItem {
     internal var iconContentDescription: String? = null
     internal var avatar: Drawable? = null
     internal var avatarContentDescription: String? = null
+    internal var avatarType: AndesThumbnailType = AndesThumbnailType.ICON
     internal var showSubtitle: Boolean = true
 
     companion object {
@@ -50,6 +52,7 @@ open class AndesListViewItem {
         iconContentDescription: String?,
         avatar: Drawable?,
         avatarContentDescription: String?,
+        avatarType: AndesThumbnailType,
         titleMaxLines: Int
     ) {
         this.title = title
@@ -76,6 +79,7 @@ open class AndesListViewItem {
         this.iconContentDescription = iconContentDescription
         this.avatar = avatar
         this.avatarContentDescription = avatarContentDescription
+        this.avatarType = avatarType
         this.titleMaxLines = titleMaxLines
         this.showSubtitle = config.showSubtitle
     }
@@ -96,6 +100,35 @@ class AndesListViewItemSimple @JvmOverloads constructor(
     titleMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
 ) : AndesListViewItem() {
 
+    constructor(
+        context: Context,
+        title: String,
+        subtitle: String? = null,
+        itemDividerEnabled: Boolean = false,
+        itemSelected: Boolean = false,
+        size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
+        icon: Drawable? = null,
+        iconContentDescription: String? = null,
+        avatar: Drawable? = null,
+        avatarContentDescription: String? = null,
+        avatarType: AndesThumbnailType = AndesThumbnailType.ICON,
+        titleMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
+    ) : this(
+        context,
+        title,
+        subtitle,
+        itemDividerEnabled,
+        itemSelected,
+        size,
+        icon,
+        iconContentDescription,
+        avatar,
+        avatarContentDescription,
+        titleMaxLines
+    ) {
+        this.avatarType = avatarType
+    }
+
     init {
         val config = AndesListViewItemConfigurationFactory.create(context, size)
         this.andesListViewItemSimpleConfig(
@@ -108,6 +141,7 @@ class AndesListViewItemSimple @JvmOverloads constructor(
             iconContentDescription,
             avatar,
             avatarContentDescription,
+            avatarType,
             titleMaxLines
         )
     }
@@ -122,6 +156,7 @@ class AndesListViewItemSimple @JvmOverloads constructor(
         iconContentDescription: String?,
         avatar: Drawable?,
         avatarContentDescription: String?,
+        avatarType: AndesThumbnailType,
         titleMaxLines: Int
     ) {
 
@@ -135,6 +170,7 @@ class AndesListViewItemSimple @JvmOverloads constructor(
             iconContentDescription,
             avatar,
             avatarContentDescription,
+            avatarType,
             titleMaxLines
         )
     }
@@ -156,6 +192,35 @@ class AndesListViewItemChevron @JvmOverloads constructor(
 ) : AndesListViewItem() {
     internal var chevronSize: Int = 0
 
+    constructor(
+        context: Context,
+        title: String,
+        subtitle: String? = null,
+        itemDividerEnabled: Boolean = false,
+        itemSelected: Boolean = false,
+        size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
+        icon: Drawable? = null,
+        iconContentDescription: String? = null,
+        avatar: Drawable? = null,
+        avatarContentDescription: String? = null,
+        avatarType: AndesThumbnailType = AndesThumbnailType.ICON,
+        titleMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
+    ) : this(
+        context,
+        title,
+        subtitle,
+        itemDividerEnabled,
+        itemSelected,
+        size,
+        icon,
+        iconContentDescription,
+        avatar,
+        avatarContentDescription,
+        titleMaxLines
+    ) {
+        this.avatarType = avatarType
+    }
+
     init {
         val config = AndesListViewItemConfigurationFactory.create(context, size)
         this.andesListViewItemSimpleConfig(
@@ -168,6 +233,7 @@ class AndesListViewItemChevron @JvmOverloads constructor(
             iconContentDescription,
             avatar,
             avatarContentDescription,
+            avatarType,
             titleMaxLines
         )
     }
@@ -182,6 +248,7 @@ class AndesListViewItemChevron @JvmOverloads constructor(
         iconContentDescription: String?,
         avatar: Drawable?,
         avatarContentDescription: String?,
+        avatarType: AndesThumbnailType,
         titleMaxLines: Int
     ) {
         super.andesListViewItemConfig(
@@ -194,6 +261,7 @@ class AndesListViewItemChevron @JvmOverloads constructor(
             iconContentDescription,
             avatar,
             avatarContentDescription,
+            avatarType,
             titleMaxLines
         )
         this.chevronSize = config.chevronSize

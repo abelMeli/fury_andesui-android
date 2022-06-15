@@ -54,6 +54,7 @@ SomeActivity : AppCompatActivity(), AndesListDelegate {
                         size = AndesListViewItemSize.MEDIUM,
                         icon = ContextCompat.getDrawable(this, R.drawable.andes_envio_envio_24),
                         avatar = ContextCompat.getDrawable(this, R.drawable.andes_otros_almanaque_20),
+                        avatarType = AndesThumbnailType.IMAGE_CIRCLE,
                         titleMaxLines = 50,
                         itemSelected = false
                 )

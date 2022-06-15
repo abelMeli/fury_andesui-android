@@ -1,3 +1,7 @@
+# v5.4.0
+## 🚀 Feature
+- Added AndesThumbnailType for AndesList
+
 # v5.3.0
 ## 🚀 Feature
 - Added internal method to animate `AndesButton` transitions from different hierarchies | Author: [@juanunzu](https://github.com/juanunzu)

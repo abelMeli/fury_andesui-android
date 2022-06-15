@@ -4,11 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
+import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
 import org.junit.Before
@@ -124,6 +127,67 @@ class AndesListTest {
     }
 
     @Test
+    fun `AndesList list item with avatarType Default`() {
+        // GIVEN
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemSimple(activity, "test")
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.MEDIUM, AndesListType.SIMPLE)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val firstItem =
+            andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.andes_list_item_asset))
+        Assert.assertEquals(AndesThumbnailType.ICON, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
+    @Test
+    fun `AndesList list item with avatarType ImageCircle`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemSimple(activity, "test", avatar = drawable, avatarType = AndesThumbnailType.IMAGE_CIRCLE)
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.MEDIUM, AndesListType.SIMPLE)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val firstItem =
+            andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.andes_list_item_asset))
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
+    @Test
     fun `AndesList type chevron`() {
         // GIVEN
         val andesListDelegate = object : AndesListDelegate {
@@ -150,6 +214,38 @@ class AndesListTest {
             andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.andes_thumbnail_chevron))
+        Assert.assertEquals(AndesThumbnailType.ICON, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
+    @Test
+    fun `AndesList type chevron with avatarType ImageCircle`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemChevron(activity, "test", avatar = drawable, avatarType = AndesThumbnailType.IMAGE_CIRCLE)
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.CHEVRON)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val firstItem =
+            andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.andes_thumbnail_chevron))
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
     }
 
     @Test
