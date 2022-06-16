@@ -1,6 +1,8 @@
 # v5.4.0
 ## 🚀 Feature
 - Added AndesThumbnailType for AndesList
+## 🛠 Fixes
+- TestingUtils package refactor
 
 # v5.3.0
 ## 🚀 Feature

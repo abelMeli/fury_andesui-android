@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.view.MotionEventBuilder
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.databinding.AndesLayoutMoneyAmountBinding

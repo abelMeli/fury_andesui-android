@@ -3,9 +3,9 @@ package com.mercadolibre.android.andesui.thumbnail
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
-import com.mercadolibre.android.andesui.buildAttributeSet
+import com.mercadolibre.android.andesui.utils.buildAttributeSet
 import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
 import com.mercadolibre.android.andesui.thumbnail.badge.factory.AndesThumbnailBadgeAttrsParser
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType

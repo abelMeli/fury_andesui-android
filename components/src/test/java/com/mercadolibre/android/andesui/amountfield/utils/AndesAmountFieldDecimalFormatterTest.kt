@@ -3,7 +3,7 @@ package com.mercadolibre.android.andesui.amountfield.utils
 import android.content.Context
 import android.widget.EditText
 import androidx.test.core.app.ApplicationProvider
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.emulateDeleteKeyPressed
 import com.mercadolibre.android.andesui.utils.emulateTypingWithKeyboard

@@ -6,8 +6,8 @@ import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.assertIsNull
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.mercadolibre.android.andesui.slider.AndesSlider
 import com.mercadolibre.android.andesui.slider.state.AndesSliderState
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE

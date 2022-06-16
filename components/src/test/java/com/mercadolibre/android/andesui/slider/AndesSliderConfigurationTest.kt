@@ -5,8 +5,8 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.assertIsNull
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.mercadolibre.android.andesui.slider.factory.AndesSliderAttrs
 import com.mercadolibre.android.andesui.slider.factory.AndesSliderConfigurationFactory
 import com.mercadolibre.android.andesui.slider.state.AndesSliderState

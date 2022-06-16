@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.thumbnail
 
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState

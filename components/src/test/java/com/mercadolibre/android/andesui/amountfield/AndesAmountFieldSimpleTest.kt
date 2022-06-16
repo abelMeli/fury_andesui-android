@@ -10,9 +10,9 @@ import com.mercadolibre.android.andesui.amountfield.listener.OnTextChangeListene
 import com.mercadolibre.android.andesui.amountfield.listener.OnTextPasteListener
 import com.mercadolibre.android.andesui.amountfield.size.AndesAmountFieldSize
 import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
-import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.assertIsNull
-import com.mercadolibre.android.andesui.buildAttributeSet
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertIsNull
+import com.mercadolibre.android.andesui.utils.buildAttributeSet
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor

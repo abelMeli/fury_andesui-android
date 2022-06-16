@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.tag
 
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
 import com.mercadolibre.android.andesui.tag.leftcontent.AndesTagLeftContent
 import com.mercadolibre.android.andesui.tag.rightcontent.AndesTagRightContent

@@ -3,7 +3,6 @@ package com.mercadolibre.android.andesui.utils
 import android.content.Context
 import android.widget.EditText
 import androidx.test.core.app.ApplicationProvider
-import com.mercadolibre.android.andesui.assertEquals
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Before
 import org.junit.Test

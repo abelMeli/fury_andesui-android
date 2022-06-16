@@ -18,8 +18,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.activateTalkbackForTest
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.activateTalkbackForTest
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetContentMargin
 import com.mercadolibre.android.andesui.bottomsheet.state.AndesBottomSheetState
 import com.mercadolibre.android.andesui.bottomsheet.title.AndesBottomSheetTitleAlignment

@@ -5,7 +5,7 @@ import android.graphics.Typeface
 import android.text.SpannableString
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.color.toColor
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.mercadolibre.android.andesui.textview.factory.AndesTextViewAttrs

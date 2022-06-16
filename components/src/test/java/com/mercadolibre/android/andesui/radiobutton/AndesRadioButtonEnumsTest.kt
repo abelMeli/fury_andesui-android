@@ -1,7 +1,6 @@
 package com.mercadolibre.android.andesui.radiobutton
 
-import android.os.Build
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.radiobutton.align.AndesRadioButtonAlign
 import com.mercadolibre.android.andesui.radiobutton.status.AndesRadioButtonStatus
 import com.mercadolibre.android.andesui.radiobutton.type.AndesRadioButtonType

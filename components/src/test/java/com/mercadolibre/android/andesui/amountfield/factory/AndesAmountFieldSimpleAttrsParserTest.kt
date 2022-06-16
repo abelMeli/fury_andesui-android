@@ -7,9 +7,9 @@ import com.mercadolibre.android.andesui.amountfield.entrymode.AndesAmountFieldEn
 import com.mercadolibre.android.andesui.amountfield.entrytype.AndesAmountFieldEntryType
 import com.mercadolibre.android.andesui.amountfield.size.AndesAmountFieldSize
 import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
-import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.assertIsNull
-import com.mercadolibre.android.andesui.buildAttributeSet
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertIsNull
+import com.mercadolibre.android.andesui.utils.buildAttributeSet
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE

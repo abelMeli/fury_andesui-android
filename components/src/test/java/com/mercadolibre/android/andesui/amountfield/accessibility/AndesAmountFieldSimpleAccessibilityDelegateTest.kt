@@ -8,7 +8,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
 import com.mercadolibre.android.andesui.amountfield.entrytype.AndesAmountFieldEntryType
 import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import org.junit.Before

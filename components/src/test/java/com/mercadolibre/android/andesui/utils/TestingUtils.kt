@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui
+package com.mercadolibre.android.andesui.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -6,8 +6,6 @@ import android.text.SpannableString
 import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
-import com.mercadolibre.android.andesui.utils.ClickableSpanWithText
-import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import org.junit.Assert
 import org.mockito.internal.util.reflection.FieldSetter
 import org.robolectric.Robolectric

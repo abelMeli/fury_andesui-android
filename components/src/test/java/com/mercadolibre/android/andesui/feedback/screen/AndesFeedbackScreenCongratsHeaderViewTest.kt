@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription

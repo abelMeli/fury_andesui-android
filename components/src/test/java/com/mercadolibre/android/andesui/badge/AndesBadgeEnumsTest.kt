@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.badge
 
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.badge.border.AndesBadgePillBorder
 import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgeIconHierarchy
 import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgePillHierarchy

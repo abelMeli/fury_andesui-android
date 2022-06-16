@@ -10,12 +10,12 @@ import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.floatingmenu.AndesFloatingMenu
-import com.mercadolibre.android.andesui.getPrivateField
+import com.mercadolibre.android.andesui.utils.getPrivateField
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
-import com.mercadolibre.android.andesui.setPrivateField
+import com.mercadolibre.android.andesui.utils.setPrivateField
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.nhaarman.mockitokotlin2.doAnswer

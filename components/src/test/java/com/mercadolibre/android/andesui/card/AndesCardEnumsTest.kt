@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.card
 
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.card.bodyPadding.AndesCardBodyPadding
 import com.mercadolibre.android.andesui.card.hierarchy.AndesCardHierarchy
 import com.mercadolibre.android.andesui.card.padding.AndesCardPadding

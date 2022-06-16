@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.checkbox
 
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.checkbox.align.AndesCheckboxAlign
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.checkbox.type.AndesCheckboxType

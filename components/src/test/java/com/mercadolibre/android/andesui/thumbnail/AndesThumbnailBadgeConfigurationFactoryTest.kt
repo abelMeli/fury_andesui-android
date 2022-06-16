@@ -5,7 +5,7 @@ import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.badge.AndesBadgeDot
 import com.mercadolibre.android.andesui.badge.AndesBadgeIconPill
 import com.mercadolibre.android.andesui.badge.AndesBadgePill

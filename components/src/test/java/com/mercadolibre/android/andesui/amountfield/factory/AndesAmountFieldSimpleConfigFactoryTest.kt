@@ -14,8 +14,8 @@ import com.mercadolibre.android.andesui.amountfield.utils.AmountListener
 import com.mercadolibre.android.andesui.amountfield.utils.AndesAmountFieldDecimalFormatter
 import com.mercadolibre.android.andesui.amountfield.utils.AndesAmountFieldIntFormatter
 import com.mercadolibre.android.andesui.amountfield.utils.ResizingListener
-import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.assertIsNull
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor

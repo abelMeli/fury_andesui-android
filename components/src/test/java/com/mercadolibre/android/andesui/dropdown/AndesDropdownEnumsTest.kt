@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.dropdown
 
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.dropdown.size.AndesDropdownSize
 import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType

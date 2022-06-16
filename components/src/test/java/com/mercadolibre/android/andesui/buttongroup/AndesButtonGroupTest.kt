@@ -10,8 +10,8 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.buildAttributeSet
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.buildAttributeSet
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.buttongroup.align.AndesButtonGroupAlign

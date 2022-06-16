@@ -18,7 +18,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScreenColor
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset

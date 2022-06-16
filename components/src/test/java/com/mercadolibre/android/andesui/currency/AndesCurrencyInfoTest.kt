@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.currency
 
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
-import com.mercadolibre.android.andesui.assertIsNull
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertIsNull
 import org.junit.Test
 
 class AndesCurrencyInfoTest {

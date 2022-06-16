@@ -3,7 +3,7 @@ package com.mercadolibre.android.andesui.buttongroup
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.buttongroup.distribution.AndesButtonGroupDistribution
 import com.mercadolibre.android.andesui.buttongroup.factory.AndesButtonGroupAttrsParser
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE

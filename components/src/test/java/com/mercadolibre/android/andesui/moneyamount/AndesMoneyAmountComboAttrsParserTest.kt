@@ -3,7 +3,7 @@ package com.mercadolibre.android.andesui.moneyamount
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.combosize.AndesMoneyAmountComboSize
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency

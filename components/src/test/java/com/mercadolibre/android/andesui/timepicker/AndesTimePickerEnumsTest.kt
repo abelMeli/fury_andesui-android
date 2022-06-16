@@ -1,6 +1,6 @@
 package com.mercadolibre.android.andesui.timepicker
 
-import com.mercadolibre.android.andesui.assertEquals
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.timepicker.minutesInterval.AndesTimePickerInterval
 import com.mercadolibre.android.andesui.timepicker.state.AndesTimePickerState
 import com.mercadolibre.android.andesui.timepicker.type.AndesTimePickerType
