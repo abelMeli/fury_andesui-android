@@ -1,5 +1,7 @@
 # v5.4.0
 ## 🚀 Feature
+- `AndesSearchbox` component | Author: [@maquinteros](https://github.com/maquinteros)
+- Added searchable support to `AndesDropdownForm` `AndesDropdownStandalone` `AndesFloatingMenu` | Author: [@maquinteros](https://github.com/maquinteros)
 - Added AndesThumbnailType for AndesList
 ## 🛠 Fixes
 - TestingUtils package refactor

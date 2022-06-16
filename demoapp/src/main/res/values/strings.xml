@@ -46,6 +46,7 @@
     <string name="andes_demoapp_screen_switch" translatable="false">Switch</string>
     <string name="andes_demoapp_screen_list" translatable="false">List</string>
     <string name="andes_demoapp_screen_dropdown" translatable="false">Dropdown</string>
+    <string name="andes_demoapp_screen_searchbox" translatable="false">Searchbox</string>
     <string name="andes_demoapp_screen_checkbox" translatable="false">Checkbox</string>
     <string name="andes_demoapp_screen_textview" translatable="false">Typography</string>
     <string name="andes_demoapp_screen_carousel" translatable="false">Carousel</string>
@@ -356,11 +357,14 @@
     <string name="andes_dropdown_title" translatable="false">Titulo</string>
     <string name="andes_dropdown_place_holder" translatable="false">Place Holder</string>
     <string name="andes_dropdown_helper" translatable="false">Helper</string>
+    <string name="andes_dropdown_search" translatable="false">Searchbox Place Holder</string>
     <string name="andes_dropdown_form_title" translatable="false">AndesDropdownForm</string>
     <string name="andes_dropdown_standalone_title" translatable="false">AndesDropdownStandalone</string>
     <string name="andes_dropdown_title_placeholder" translatable="false">Set a Dropdown Title text…</string>
     <string name="andes_dropdown_ph_placeholder" translatable="false">Set a Dropdown Placeholder text…</string>
     <string name="andes_dropdown_helper_placeholder" translatable="false">Set a Dropdown Helper text…</string>
+    <string name="andes_dropdown_search_placeholder" translatable="false">Set a Dropdown Searchbox Placeholder text…</string>
+
 
     <string-array name="andes_dropdown_state_spinner" translatable="false">
         <item>Enabled</item>
@@ -485,6 +489,12 @@
         <item>Left</item>
         <item>Right</item>
     </string-array>
+
+    <!-- Andes Searchbox -->
+    <string name="andes_searchbox_title" translatable="false">AndesSearchbox</string>
+    <string name="andes_searchbox_description" translatable="false">Component used to improve the selection of options in dropdown menus when the number of menu items is very large.</string>
+    <string name="andes_searchbox_ph_placeholder" translatable="false">Set a Searchbox Placeholder text…</string>
+
 
     <!-- Andes Switch -->
     <string name="andes_switch_description" translatable="false">Allows the user to inmediately turn ON or OFF a preference or functionality.</string>

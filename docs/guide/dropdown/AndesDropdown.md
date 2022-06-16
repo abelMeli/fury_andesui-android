@@ -64,3 +64,14 @@ Set the items that our dropdown will be shown
 andesDropdown.listItems.addAll(items) 
 ```
 
+Add the searchbox that our dropdown will be shown
+
+```
+andesDropdown.addSearchable(AndesSearchbox(context))
+```
+
+Remove the searchbox shown in our dropdown menu
+
+```
+andesDropdown.removeSearchable()
+```

@@ -5,6 +5,7 @@ import android.view.View
 import com.mercadolibre.android.andesui.dropdown.utils.DropdownBottomSheetDialog
 import com.mercadolibre.android.andesui.floatingmenu.AndesFloatingMenu
 import com.mercadolibre.android.andesui.list.AndesList
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 
 /**
  * interface responsible for the creation and implementation of the different
@@ -13,18 +14,19 @@ import com.mercadolibre.android.andesui.list.AndesList
  * for this actions to each menu implementation.
  */
 internal interface AndesDropdownMenuInterface {
-    fun createMenu(context: Context, andesList: AndesList, theme: Int)
+    fun createMenu(context: Context, andesList: AndesList, theme: Int, andesSearchbox: AndesSearchbox?)
     fun showMenu(view: View)
     fun dismissMenu()
     fun setOnShowListener(onShowListener: () -> Unit)
     fun setOnDismissListener(onDismissListener: () -> Unit)
+    fun updateComponent(parentView: View)
 }
 
 internal class AndesDropdownMenuTypeBottomSheet : AndesDropdownMenuInterface {
     private lateinit var bottomSheet: DropdownBottomSheetDialog
 
-    override fun createMenu(context: Context, andesList: AndesList, theme: Int) {
-        bottomSheet = DropdownBottomSheetDialog(context, theme, andesList.delegate)
+    override fun createMenu(context: Context, andesList: AndesList, theme: Int, andesSearchbox: AndesSearchbox?) {
+        bottomSheet = DropdownBottomSheetDialog(context, theme, andesList, andesSearchbox)
     }
 
     override fun showMenu(view: View) {
@@ -46,13 +48,17 @@ internal class AndesDropdownMenuTypeBottomSheet : AndesDropdownMenuInterface {
             onDismissListener.invoke()
         }
     }
+
+    override fun updateComponent(parentView: View) {
+        // no-op
+    }
 }
 
 internal class AndesDropdownMenuTypeFloatingMenu : AndesDropdownMenuInterface {
     private lateinit var floatingMenu: AndesFloatingMenu
 
-    override fun createMenu(context: Context, andesList: AndesList, theme: Int) {
-         floatingMenu = AndesFloatingMenu(context, andesList)
+    override fun createMenu(context: Context, andesList: AndesList, theme: Int, andesSearchbox: AndesSearchbox?) {
+        floatingMenu = AndesFloatingMenu(context, andesList, andesSearchbox)
     }
 
     override fun showMenu(view: View) {
@@ -77,5 +83,13 @@ internal class AndesDropdownMenuTypeFloatingMenu : AndesDropdownMenuInterface {
                 onDismissListener.invoke()
             }
         })
+    }
+
+    /**
+     * Update floatingMenu size and measures according to the current contents the component is
+     * displaying
+     */
+    override fun updateComponent(parentView: View) {
+        floatingMenu.update(parentView)
     }
 }

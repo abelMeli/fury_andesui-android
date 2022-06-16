@@ -19,14 +19,16 @@ AndesFloatingMenu(context, andesList)
 | Summary |
 | --- |
 | [AndesFloatingMenu](#andesfloatingmenucontext-context-andeslist-andeslist-width-andesfloatingmenuwidth-rows-andesfloatingmenurows-orientation-andesfloatingmenuorientation)(context: Context, andesList: AndesList, width: [AndesFloatingMenuWidth](#andesfloatingmenuwidth), rows: [AndesFloatingMenuRows](#andesfloatingmenurows), orientation: [AndesFloatingMenuOrientation](#andesfloatingmenuorientation)) |
+| [AndesFloatingMenu](#andesfloatingmenucontext-context-andeslist-andeslist-width-andesfloatingmenuwidth-rows-andesfloatingmenurows-orientation-andesfloatingmenuorientation)(context: Context, andesList: AndesList, andesSearchbox: AndesSearchbox? = null, width: [AndesFloatingMenuWidth](#andesfloatingmenuwidth), rows: [AndesFloatingMenuRows](#andesfloatingmenurows), orientation: [AndesFloatingMenuOrientation](#andesfloatingmenuorientation)) |
 
 <br/>
 
-##### AndesFloatingMenu(context: Context, andesList: AndesList, width: AndesFloatingMenuWidth, rows: AndesFloatingMenuRows, orientation: AndesFloatingMenuOrientation)
+##### AndesFloatingMenu(context: Context, andesList: AndesList, andesSearchbox: AndesSearchbox? = null, width: AndesFloatingMenuWidth, rows: AndesFloatingMenuRows, orientation: AndesFloatingMenuOrientation)
 | Parameter | Description |
 | -------- | ------- |
 | context | **Context**|
 | andesList | **AndesList**: list of actionable rows. |
+| andesSearchbox | **AndesSearchbox**: in case of using searchbox. |
 | width | **[AndesFloatingMenuWidth](#andesfloatingmenuwidth)**: floating menu width type. |
 | rows | **[AndesFloatingMenuRows](#andesfloatingmenurows)**: floating menu max rows showed without scrolling. |
 | orientation | **[AndesFloatingMenuOrientation](#andesfloatingmenuorientation)**: floating menu horizontal required orientation. |

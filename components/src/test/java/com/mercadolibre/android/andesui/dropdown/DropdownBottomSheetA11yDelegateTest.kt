@@ -58,7 +58,7 @@ class DropdownBottomSheetA11yDelegateTest {
         bottomSheet = DropdownBottomSheetDialog(
             context,
             theme,
-            createCustomDelegate()
+            AndesList(context)
         )
         triggerButton = Button(context)
         setupActivityForTest()

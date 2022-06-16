@@ -24,6 +24,7 @@ import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 
 @Suppress("TooManyFunctions")
@@ -40,8 +41,10 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
     private lateinit var editTextTitle: AndesTextfield
     private lateinit var editTextPlaceHolder: AndesTextfield
     private lateinit var editTextHelper: AndesTextfield
+    private lateinit var editTextSearchPlaceHolder: AndesTextfield
     private lateinit var checkboxStarter: AndesCheckbox
     private lateinit var checkboxIndeterminate: AndesCheckbox
+    private lateinit var checkboxSearchable: AndesCheckbox
     private lateinit var stateSpinner: Spinner
     private lateinit var menuTypeSpinner: Spinner
 
@@ -97,10 +100,13 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
         editTextTitle = binding.editTextDropdownLabel
         editTextPlaceHolder = binding.editTextDropdownPlaceHolder
         editTextHelper = binding.editTextDropdownHelper
+        editTextSearchPlaceHolder = binding.editTextDropdownSearchPlaceholder
         checkboxStarter = binding.checkboxDropdownStartingItem
         checkboxStarter.text = "Starting Item 0"
         checkboxIndeterminate = binding.checkboxDropdownIndeterminate
         checkboxIndeterminate.text = "Set Indeterminate"
+        checkboxSearchable = binding.checkboxDropdownSearchable
+        checkboxSearchable.text = "Searchable"
 
         stateSpinner = binding.dropdownStateSpinner
         val stateAdapter = ArrayAdapter(
@@ -149,6 +155,8 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
 
         andesDropdownStandalone.setItems(getFakeList())
 
+        andesDropdownStandalone.addSearchable(AndesSearchbox(this))
+
         andesDropdownStandalone.delegate = this
 
         spinnerType.setSelection(1) // medium value
@@ -188,16 +196,19 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
         editTextTitle.text = ""
         editTextPlaceHolder.text = ""
         editTextHelper.text = ""
+        editTextSearchPlaceHolder.text = ""
         stateSpinner.setSelection(0)
         menuTypeSpinner.setSelection(0)
         checkboxIndeterminate.status = AndesCheckboxStatus.UNSELECTED
         checkboxStarter.status = AndesCheckboxStatus.UNSELECTED
+        checkboxSearchable.status = AndesCheckboxStatus.UNSELECTED
 
         andesDropDownForm.apply {
             label = andesDropDownLabel
             helper = andesDropDownHelper
             placeholder = andesDropDownPlaceHolder
             setItems(getFakeList())
+            removeSearchable()
             menuType = AndesDropdownMenuType.BOTTOMSHEET
             state = AndesDropdownState.ENABLED
         }
@@ -219,6 +230,14 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
         }
     }
 
+    private fun checkboxSearchableClick() {
+        if (checkboxSearchable.status == AndesCheckboxStatus.SELECTED) {
+            andesDropDownForm.addSearchable(AndesSearchbox(this, editTextSearchPlaceHolder.text.toString()))
+        } else {
+            andesDropDownForm.removeSearchable()
+        }
+    }
+
     private fun update() {
         andesDropDownForm.label = editTextTitle.text.toString()
         andesDropDownForm.placeholder = editTextPlaceHolder.text.toString()
@@ -227,6 +246,7 @@ class DropdownShowcaseActivity : BaseActivity(), AndesDropdownDelegate {
         andesDropDownForm.state = AndesDropdownState.fromString(stateSpinner.selectedItem.toString().toUpperCase())
         andesDropDownForm.menuType = AndesDropdownMenuType.fromString(menuTypeSpinner.selectedItem.toString().toUpperCase())
         checkboxIndeterminateClick()
+        checkboxSearchableClick()
     }
 
     private fun getFakeList(): List<AndesDropDownItem> {

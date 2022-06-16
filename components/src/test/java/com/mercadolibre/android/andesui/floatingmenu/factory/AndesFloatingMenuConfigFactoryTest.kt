@@ -21,6 +21,7 @@ import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
@@ -42,6 +43,7 @@ class AndesFloatingMenuConfigFactoryTest {
         applicationContext.resources.getDimensionPixelSize(R.dimen.andes_floatingmenu_yoffset)
     private lateinit var trigger: Button
     private lateinit var andesList: AndesList
+    private lateinit var andesSearchbox: AndesSearchbox
 
     @Before
     fun setUp() {
@@ -191,6 +193,20 @@ class AndesFloatingMenuConfigFactoryTest {
         Assert.assertEquals(offset, config.yOffset)
     }
 
+    @Test
+    fun `Config created req LEFT-BOTTOM then LEFT-BOTTOM with AndesSearchbox`() {
+        trigger.layoutParams = setupTriggerSizeAndPosition(200, 100, 100)
+        val attrs = AndesFloatingMenuAttrs(
+                AndesFloatingMenuRows.Small,
+                AndesFloatingMenuWidth.Custom(100),
+                AndesFloatingMenuOrientation.Left
+        )
+        val spyTrigger = createSpyTrigger(trigger)
+        val config = AndesFloatingMenuConfigFactory.create(attrs, andesList, andesSearchbox, spyTrigger)
+        Assert.assertEquals(R.style.Andes_FloatingMenuBottomAnimation, config.animation)
+        Assert.assertEquals(offset, config.yOffset)
+    }
+
     private fun setupTestActivity() {
         val robolectricActivity = Robolectric.buildActivity(AppCompatActivity::class.java).create()
         val activity = robolectricActivity.get()
@@ -219,6 +235,7 @@ class AndesFloatingMenuConfigFactoryTest {
 
             override fun getDataSetSize(andesList: AndesList): Int = 5
         }
+        andesSearchbox = AndesSearchbox(activity)
     }
 
     private fun setupTriggerSizeAndPosition(

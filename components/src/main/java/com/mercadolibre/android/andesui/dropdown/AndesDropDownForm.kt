@@ -17,14 +17,17 @@ import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfigurat
 import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
+import com.mercadolibre.android.andesui.dropdown.utils.filterList
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
+import com.mercadolibre.android.andesui.utils.replaceWith
 
 @SuppressWarnings("TooManyFunctions")
 class AndesDropDownForm : ConstraintLayout {
@@ -32,8 +35,10 @@ class AndesDropDownForm : ConstraintLayout {
     private lateinit var andesDropdownAttrs: AndesDropdownAttrs
     private lateinit var andesTextfield: AndesTextfield
     private lateinit var andesList: AndesList
+    private var andesSearchbox: AndesSearchbox? = null
     private lateinit var container: View
     private var listItems: List<AndesDropDownItem> = listOf()
+    private var filteredItems: MutableList<AndesDropDownItem> = mutableListOf()
 
     /**
      * Getter and setter for [label].
@@ -194,7 +199,7 @@ class AndesDropDownForm : ConstraintLayout {
     private fun setupMenuType(config: AndesDropdownConfiguration) {
         createList(config)
         with(config.menuType) {
-            createMenu(context, andesList, R.style.Andes_BottomSheetDialog)
+            createMenu(context, andesList, R.style.Andes_BottomSheetDialog, andesSearchbox)
             setOnShowListener {
                 setChevronIcon(ICON_CHEVRON_UP, config.iconColor)
             }
@@ -235,14 +240,16 @@ class AndesDropDownForm : ConstraintLayout {
     private fun createAndesListDelegate(config: AndesDropdownConfiguration): AndesListDelegate {
         return object : AndesListDelegate {
             override fun onItemClick(andesList: AndesList, position: Int) {
-                selectItem(position)
+                val pos = listItems.indexOf(filteredItems[position])
+                selectItem(pos)
                 andesList.refreshListAdapter()
-                delegate.onItemSelected(this, position)
+                delegate.onItemSelected(this, pos)
                 config.menuType.dismissMenu()
+                andesSearchbox?.clearSearch()
             }
 
             override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
-                val item = listItems[position]
+                val item = filteredItems[position]
 
                 return AndesListViewItemSimple(
                     context,
@@ -253,7 +260,7 @@ class AndesDropDownForm : ConstraintLayout {
                 )
             }
 
-            override fun getDataSetSize(andesList: AndesList): Int = listItems.size
+            override fun getDataSetSize(andesList: AndesList): Int = filteredItems.size
         }
     }
 
@@ -284,6 +291,7 @@ class AndesDropDownForm : ConstraintLayout {
      */
     fun setItems(listItems: List<AndesDropDownItem>, defaultPosition: Int = -1) {
         this.listItems = listItems
+        this.filteredItems.replaceWith(this.listItems)
         if (this.listItems.isNotEmpty() && defaultPosition > -1 && defaultPosition < this.listItems.size) {
             selectItem(defaultPosition)
         } else {
@@ -295,6 +303,34 @@ class AndesDropDownForm : ConstraintLayout {
      * Gets the list of items
      */
     fun getItems(): List<AndesDropDownItem> = listItems
+
+    /**
+     * Add the AndesSearchbox
+     */
+    fun addSearchable(andesSearchbox: AndesSearchbox) {
+        this.andesSearchbox = andesSearchbox
+        val config = createConfig()
+        setupSearchBox(config)
+        setupMenuType(config)
+    }
+
+    /**
+     * Remove the AndesSearchbox
+     */
+    fun removeSearchable() {
+        this.andesSearchbox = null
+        setupMenuType(createConfig())
+    }
+
+    private fun setupSearchBox(config: AndesDropdownConfiguration) {
+        andesSearchbox?.onTextChangedListener = object : AndesSearchbox.OnTextChangedListener {
+            override fun onTextChanged(text: String) {
+                filteredItems.replaceWith(filterList(text, getItems()))
+                andesList.refreshListAdapter()
+                config.menuType.updateComponent(this@AndesDropDownForm)
+            }
+        }
+    }
 
     /**
      * Gets data from the config and sets to the AndesTextField Helper component.

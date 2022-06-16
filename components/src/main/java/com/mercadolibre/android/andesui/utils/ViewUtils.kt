@@ -12,7 +12,6 @@ import androidx.annotation.IdRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.buttongroup.utils.*
 import com.mercadolibre.android.andesui.tooltip.extensions.displaySize
 import com.mercadolibre.android.andesui.tooltip.extensions.getActionBarHeight
 import com.mercadolibre.android.andesui.tooltip.extensions.getStatusBarHeight
@@ -172,4 +171,17 @@ internal fun ViewGroup.getAllChildren(): List<View> {
         viewList.add(getChildAt(childIndex))
     }
     return viewList
+}
+
+internal fun <T> MutableList<T>.replaceWith(items: List<T>) {
+    with(this) {
+        clear()
+        addAll(items)
+    }
+}
+
+internal fun View.hideKeyboard() {
+    (context.getSystemService(
+            Activity.INPUT_METHOD_SERVICE
+    ) as? InputMethodManager)?.hideSoftInputFromWindow(windowToken, 0)
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@drawable/andes_searchbox_background"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ImageView
+        android:id="@+id/andes_searchbox_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/andes_searchbox_search_margin_start"
+        android:layout_marginTop="@dimen/andes_searchbox_margin_top"
+        android:layout_marginEnd="@dimen/andes_searchbox_search_margin_end"
+        android:layout_marginBottom="@dimen/andes_searchbox_margin_bottom"
+        android:src="@drawable/andes_control_y_accion_buscar_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/andes_searchbox_edittext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/andes_gray_550" />
+
+    <EditText
+        android:id="@+id/andes_searchbox_edittext"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColor="@color/andes_text_color_secondary"
+        android:textSize="@dimen/andes_textview_body_font_size_s"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/andes_searchbox_close"
+        app:layout_constraintStart_toEndOf="@+id/andes_searchbox_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:hint="@string/andes_searchbox_placeholder_default" />
+
+    <ImageView
+        android:id="@+id/andes_searchbox_close"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/andes_searchbox_close_margin_start"
+        android:layout_marginTop="@dimen/andes_searchbox_margin_top"
+        android:layout_marginEnd="@dimen/andes_searchbox_close_margin_end"
+        android:layout_marginBottom="@dimen/andes_searchbox_margin_bottom"
+        android:contentDescription="@string/andes_searchbox_right_content_clear"
+        android:scaleType="centerInside"
+        android:src="@drawable/andes_ui_close_16"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/andes_searchbox_edittext"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="@dimen/andes_searchbox_close_margin_gone_end"
+        app:tint="@color/andes_gray_550"
+        tools:visibility="visible" />
+</merge>

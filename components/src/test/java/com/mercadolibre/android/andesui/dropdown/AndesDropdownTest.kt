@@ -12,6 +12,7 @@ import com.mercadolibre.android.andesui.dropdown.factory.AndesDropdownConfigurat
 import com.mercadolibre.android.andesui.dropdown.size.AndesDropdownSize
 import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.doNothing
@@ -216,5 +217,145 @@ class AndesDropdownTest {
         val a11yClassName = dropdown.accessibilityClassName
 
         Assert.assertEquals(Spinner::class.java.name, a11yClassName)
+    }
+
+    @Test
+    fun `test dropdownform add searchable constructor with type bottomsheet`() {
+        val dropdown = AndesDropDownForm(
+                context,
+                AndesDropdownMenuType.BOTTOMSHEET,
+                "label",
+                "helper",
+                "placeholder"
+        )
+        dropdown.addSearchable(AndesSearchbox(context, "Search"))
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+    }
+
+    @Test
+    fun `test dropdownform add searchable constructor with type floatingmenu`() {
+        val dropdown = AndesDropDownForm(
+                context,
+                AndesDropdownMenuType.FLOATINGMENU,
+                "label",
+                "helper",
+                "placeholder"
+        )
+        dropdown.addSearchable(AndesSearchbox(context, "Search"))
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.FLOATINGMENU)
+    }
+
+    @Test
+    fun `test dropdownform remove searchable constructor with type bottomsheet`() {
+        val dropdown = AndesDropDownForm(
+                context,
+                AndesDropdownMenuType.BOTTOMSHEET,
+                "label",
+                "helper",
+                "placeholder"
+        )
+        dropdown.removeSearchable()
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+    }
+
+    @Test
+    fun `test dropdownform remove searchable constructor with type floatingmenu`() {
+        val dropdown = AndesDropDownForm(
+                context,
+                AndesDropdownMenuType.FLOATINGMENU,
+                "label",
+                "helper",
+                "placeholder"
+        )
+        dropdown.removeSearchable()
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.FLOATINGMENU)
+    }
+
+    @Test
+    fun `test dropdownstandalone add searchable constructor with type bottomsheet`() {
+        val dropdown = AndesDropdownStandalone(
+                context,
+                AndesDropdownMenuType.BOTTOMSHEET,
+                AndesDropdownSize.MEDIUM
+        )
+        dropdown.addSearchable(AndesSearchbox(context, "Search"))
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+    }
+
+    @Test
+    fun `test dropdownstandalone add searchable constructor with type floatingmenu`() {
+        val dropdown = AndesDropdownStandalone(
+                context,
+                AndesDropdownMenuType.FLOATINGMENU,
+                AndesDropdownSize.MEDIUM
+        )
+        dropdown.addSearchable(AndesSearchbox(context, "Search"))
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.FLOATINGMENU)
+    }
+
+    @Test
+    fun `test dropdownstandalone remove searchable constructor with type bottomsheet`() {
+        val dropdown = AndesDropdownStandalone(
+                context,
+                AndesDropdownMenuType.BOTTOMSHEET,
+                AndesDropdownSize.MEDIUM
+        )
+        dropdown.removeSearchable()
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.BOTTOMSHEET)
+    }
+
+    @Test
+    fun `test dropdownstandalone remove searchable constructor with type floatingmenu`() {
+        val dropdown = AndesDropdownStandalone(
+                context,
+                AndesDropdownMenuType.FLOATINGMENU,
+                AndesDropdownSize.MEDIUM
+        )
+        dropdown.removeSearchable()
+        Assert.assertEquals(dropdown.menuType, AndesDropdownMenuType.FLOATINGMENU)
+    }
+
+    @Test
+    fun `test dropdownform add searchable constructor and filter items`() {
+        val items = getFakeList()
+        val andesSearchbox = AndesSearchbox(context, "Search")
+        val dropdown = AndesDropDownForm(
+                context,
+                AndesDropdownMenuType.BOTTOMSHEET,
+                "label",
+                "helper",
+                "placeholder"
+        )
+        dropdown.addSearchable(andesSearchbox)
+        dropdown.setItems(items)
+        andesSearchbox.onTextChangedListener?.onTextChanged("test2")
+        Assert.assertEquals(dropdown.getItems(), items)
+    }
+
+    @Test
+    fun `test dropdownstandalone add searchable constructor and filter items`() {
+        val items = getFakeList()
+        val andesSearchbox = AndesSearchbox(context, "Search")
+        val dropdown = AndesDropdownStandalone(
+                context,
+                AndesDropdownMenuType.BOTTOMSHEET,
+                AndesDropdownSize.MEDIUM
+        )
+        dropdown.addSearchable(andesSearchbox)
+        dropdown.setItems(items)
+        andesSearchbox.onTextChangedListener?.onTextChanged("test2")
+        Assert.assertEquals(dropdown.getItems(), items)
+    }
+
+    private fun getFakeList(): List<AndesDropDownItem> {
+        val listItems: MutableList<AndesDropDownItem> = mutableListOf()
+
+        var item: AndesDropDownItem?
+        for (i in 1..10) {
+            item = AndesDropDownItem()
+            item.title = "test$i"
+            listItems.add(item)
+        }
+        return listItems
     }
 }

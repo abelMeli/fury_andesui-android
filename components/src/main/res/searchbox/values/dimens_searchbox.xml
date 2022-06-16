@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andes_searchbox_container_padding">8dp</dimen>
+    <dimen name="andes_searchbox_search_margin_end">4dp</dimen>
+    <dimen name="andes_searchbox_search_margin_start">8dp</dimen>
+    <dimen name="andes_searchbox_close_size">24dp</dimen>
+    <dimen name="andes_searchbox_close_margin_gone_end">8dp</dimen>
+    <dimen name="andes_searchbox_close_margin_start">4dp</dimen>
+    <dimen name="andes_searchbox_close_margin_end">8dp</dimen>
+    <dimen name="andes_searchbox_margin_top">8dp</dimen>
+    <dimen name="andes_searchbox_margin_bottom">8dp</dimen>
+</resources>

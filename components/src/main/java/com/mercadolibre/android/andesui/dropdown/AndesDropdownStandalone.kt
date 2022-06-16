@@ -22,13 +22,16 @@ import com.mercadolibre.android.andesui.dropdown.state.AndesDropdownState
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuType
 import com.mercadolibre.android.andesui.dropdown.type.AndesDropdownMenuTypeBottomSheet
 import com.mercadolibre.android.andesui.dropdown.utils.AndesDropdownDelegate
+import com.mercadolibre.android.andesui.dropdown.utils.filterList
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
+import com.mercadolibre.android.andesui.utils.replaceWith
 
 @SuppressWarnings("TooManyFunctions")
 class AndesDropdownStandalone : ConstraintLayout {
@@ -36,9 +39,12 @@ class AndesDropdownStandalone : ConstraintLayout {
     private lateinit var andesDropdownAttrs: AndesDropdownAttrs
     private lateinit var andesDropDownStandaloneChevron: ImageView
     private lateinit var andesDropDownStandaloneContent: TextView
+    private lateinit var andesList: AndesList
+    private var andesSearchbox: AndesSearchbox? = null
     private val chevronUpIcon: Drawable? = ContextCompat.getDrawable(context, R.drawable.andes_ui_chevron_up_12)
     private val chevronDownIcon: Drawable? = ContextCompat.getDrawable(context, R.drawable.andes_ui_chevron_down_12)
     private var listItems: List<AndesDropDownItem> = listOf()
+    private var filteredItems: MutableList<AndesDropDownItem> = mutableListOf()
 
     /**
      * Getter and setter for [size].
@@ -120,9 +126,10 @@ class AndesDropdownStandalone : ConstraintLayout {
      * It will create either a floating menu or a bottom sheet dialog.
      */
     private fun setupMenuType(config: AndesDropdownConfiguration) {
+        createList(config)
         if (config.menuType is AndesDropdownMenuTypeBottomSheet) {
             with(config.menuType) {
-                createMenu(context, createList(config), R.style.Andes_BottomSheetDialog)
+                createMenu(context, andesList, R.style.Andes_BottomSheetDialog, andesSearchbox)
                 setOnShowListener {
                     andesDropDownStandaloneChevron.setImageDrawable(chevronUpIcon)
                 }
@@ -141,12 +148,13 @@ class AndesDropdownStandalone : ConstraintLayout {
     /**
      * this method reates the andesList to display and adds the delegate to it
      */
-    private fun createList(config: AndesDropdownConfiguration) = AndesList(
-            context,
-            AndesListViewItemSize.SMALL,
-            AndesListType.SIMPLE
-        ).apply {
-        delegate = createAndesListDelegate(config)
+    private fun createList(config: AndesDropdownConfiguration){
+        andesList = AndesList(
+                context,
+                AndesListViewItemSize.SMALL,
+                AndesListType.SIMPLE
+        )
+        andesList.delegate = createAndesListDelegate(config)
     }
 
     /**
@@ -157,14 +165,16 @@ class AndesDropdownStandalone : ConstraintLayout {
     private fun createAndesListDelegate(config: AndesDropdownConfiguration): AndesListDelegate {
         return object : AndesListDelegate {
             override fun onItemClick(andesList: AndesList, position: Int) {
-                selectItem(position)
+                val pos = listItems.indexOf(filteredItems[position])
+                selectItem(pos)
                 andesList.refreshListAdapter()
-                delegate.onItemSelected(this, position)
+                delegate.onItemSelected(this, pos)
                 config.menuType.dismissMenu()
+                andesSearchbox?.clearSearch()
             }
 
             override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
-                val item = listItems[position]
+                val item = filteredItems[position]
 
                 return AndesListViewItemSimple(
                     context,
@@ -175,7 +185,7 @@ class AndesDropdownStandalone : ConstraintLayout {
                 )
             }
 
-            override fun getDataSetSize(andesList: AndesList): Int = listItems.size
+            override fun getDataSetSize(andesList: AndesList): Int = filteredItems.size
         }
     }
 
@@ -201,7 +211,7 @@ class AndesDropdownStandalone : ConstraintLayout {
      */
     fun setItems(listItems: List<AndesDropDownItem>) {
         this.listItems = listItems
-
+        this.filteredItems.replaceWith(this.listItems)
         if (this.listItems.isNotEmpty()) {
             selectItem(0)
         }
@@ -211,6 +221,32 @@ class AndesDropdownStandalone : ConstraintLayout {
      * Gets the list of items
      */
     fun getItems(): List<AndesDropDownItem> = listItems
+
+    /**
+     * Add the AndesSearchbox
+     */
+    fun addSearchable(andesSearchbox: AndesSearchbox) {
+        this.andesSearchbox = andesSearchbox
+        setupSearchBox()
+        setupMenuType(createConfig())
+    }
+
+    /**
+     * Remove the AndesSearchbox
+     */
+    fun removeSearchable() {
+        this.andesSearchbox = null
+        setupMenuType(createConfig())
+    }
+
+    private fun setupSearchBox() {
+        andesSearchbox?.onTextChangedListener = object : AndesSearchbox.OnTextChangedListener {
+            override fun onTextChanged(text: String) {
+                filteredItems.replaceWith(filterList(text, getItems()))
+                andesList.refreshListAdapter()
+            }
+        }
+    }
 
     /**
      * Creates all the views that are part of this Dropdown.

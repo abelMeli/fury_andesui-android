@@ -19,6 +19,7 @@ import com.mercadolibre.android.andesui.floatingmenu.width.AndesFloatingMenuWidt
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.mock
@@ -68,7 +69,20 @@ class AndesFloatingMenuTest {
         val reqWidth = AndesFloatingMenuWidth.Fixed
         val reqRows = AndesFloatingMenuRows.Medium
 
-        val floatingMenu = AndesFloatingMenu(activity, andesList, reqWidth, reqRows, reqOrientation)
+        val floatingMenu = AndesFloatingMenu(activity, andesList, null, reqWidth, reqRows, reqOrientation)
+
+        Assert.assertEquals(reqOrientation, floatingMenu.orientation)
+        Assert.assertEquals(reqWidth, floatingMenu.width)
+        Assert.assertEquals(reqRows, floatingMenu.rows)
+    }
+
+    @Test
+    fun `FloatingMenu created correctly with searchbox`() {
+        val reqOrientation = AndesFloatingMenuOrientation.Left
+        val reqWidth = AndesFloatingMenuWidth.Fixed
+        val reqRows = AndesFloatingMenuRows.Medium
+
+        val floatingMenu = AndesFloatingMenu(activity, andesList, AndesSearchbox(applicationContext, "search"), reqWidth, reqRows, reqOrientation)
 
         Assert.assertEquals(reqOrientation, floatingMenu.orientation)
         Assert.assertEquals(reqWidth, floatingMenu.width)

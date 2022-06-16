@@ -49,7 +49,8 @@ internal class AnalyticsHelper {
         "TabsShowcaseActivity" to "AndesTabs",
         "FeedbackScreenShowcaseActivity" to "AndesFeedbackScreenView",
         "MoneyAmountShowcaseActivity" to "AndesMoneyAmount",
-        "ButtonGroupShowcaseActivity" to "AndesButtonGroup"
+        "ButtonGroupShowcaseActivity" to "AndesButtonGroup",
+        "SearchboxShowcaseActivity" to "AndesSearchbox"
     )
 
     private val screens = mapOf(
@@ -120,7 +121,8 @@ internal class AnalyticsHelper {
 
         ),
         "MoneyAmountShowcaseActivity" to arrayListOf("/moneyamount/dynamic", "/moneyamount/static"),
-        "ButtonGroupShowcaseActivity" to arrayListOf("/buttongroup/dynamic")
+        "ButtonGroupShowcaseActivity" to arrayListOf("/buttongroup/dynamic"),
+        "SearchboxShowcaseActivity" to arrayListOf("/searchbox/dynamic")
     )
 
     fun getPath(className: String, position: Int): String? {

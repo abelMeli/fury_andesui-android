@@ -17,9 +17,10 @@ internal fun calculateFloatingMenuHeightVector(
     parentView: View,
     rowHeight: Int,
     actualRows: Int,
-    maxVisibleRows: Int?
+    maxVisibleRows: Int?,
+    searchboxHeight: Int = 0
 ): AndesFloatingMenuOrientationVector {
-    val desiredHeight = calculateDesiredHeight(rowHeight, actualRows, maxVisibleRows)
+    val desiredHeight = calculateDesiredHeight(rowHeight, actualRows, maxVisibleRows, searchboxHeight)
 
     val requiredOrientation = AndesFloatingMenuVerticalOrientation.Bottom.orientation
     val requiredMaxSpace = requiredOrientation.getMaxAvailableSpace(parentView)
@@ -36,11 +37,11 @@ internal fun calculateFloatingMenuHeightVector(
         )
         oppositeMaxSpace <= requiredMaxSpace -> AndesFloatingMenuOrientationVector(
             requiredOrientation,
-            calculateLargestHeightAvailable(requiredMaxSpace, rowHeight)
+            calculateLargestHeightAvailable(requiredMaxSpace, rowHeight, searchboxHeight)
         )
         else -> AndesFloatingMenuOrientationVector(
             oppositeOrientation,
-            calculateLargestHeightAvailable(oppositeMaxSpace, rowHeight)
+            calculateLargestHeightAvailable(oppositeMaxSpace, rowHeight, searchboxHeight)
         )
     }
 }
@@ -48,16 +49,16 @@ internal fun calculateFloatingMenuHeightVector(
 /**
  * Retrieves largest height that matches the condition of showing half of the next row.
  */
-private fun calculateLargestHeightAvailable(heightAvailable: Int, rowHeight: Int): Int {
-    return ((getMaxRowsToShow(heightAvailable, rowHeight)) * rowHeight).toInt()
+private fun calculateLargestHeightAvailable(heightAvailable: Int, rowHeight: Int, searchboxHeight: Int): Int {
+    return (((getMaxRowsToShow(heightAvailable, rowHeight, searchboxHeight)) * rowHeight).toInt() + searchboxHeight)
         .coerceAtLeast(min(heightAvailable, rowHeight))
 }
 
-private fun getMaxRowsToShow(heightAvailable: Int, rowHeight: Int): Float =
-    (heightAvailable.toFloat() / rowHeight).roundToInt() - HALF_ROW
+private fun getMaxRowsToShow(heightAvailable: Int, rowHeight: Int, searchboxHeight: Int): Float =
+    ((heightAvailable - searchboxHeight).toFloat() / rowHeight).roundToInt() - HALF_ROW
 
-private fun calculateDesiredHeight(rowHeight: Int, actualRows: Int, maxVisibleRows: Int?): Int {
-    return (rowHeight * getMinRows(actualRows, maxVisibleRows)).toInt()
+private fun calculateDesiredHeight(rowHeight: Int, actualRows: Int, maxVisibleRows: Int?, searchboxHeight: Int): Int {
+    return (rowHeight * getMinRows(actualRows, maxVisibleRows)).toInt() + searchboxHeight
 }
 
 private fun getMinRows(actualRows: Int, maxVisibleRows: Int?): Float {

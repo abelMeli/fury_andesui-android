@@ -11,9 +11,10 @@ import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.databinding.AndesLayoutDropdownBottomSheetBinding
 import com.mercadolibre.android.andesui.dropdown.accessibility.DropdownBottomSheetDialogAccessibilityDelegate
 import com.mercadolibre.android.andesui.list.AndesList
-import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
+import com.mercadolibre.android.andesui.searchbox.AndesSearchbox
 import com.mercadolibre.android.andesui.utils.ScreenUtils
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 
@@ -21,14 +22,17 @@ import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 internal class DropdownBottomSheetDialog(
     context: Context,
     theme: Int,
-    private val andesListDelegate: AndesListDelegate
+    private val andesList: AndesList,
+    private val andesSearchbox: AndesSearchbox? = null
 ) : BottomSheetDialog(context, theme) {
     internal var containerView: ConstraintLayout? = null; private set
     private var dragIndicator: View? = null
-    internal var andesList: AndesList? = null
     private var bottomSheet: FrameLayout? = null
+    private lateinit var frameLayout: FrameLayout
+    private lateinit var frameLayoutList: FrameLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private val a11yManager = context.getAccessibilityManager()
+    private val binding by lazy { AndesLayoutDropdownBottomSheetBinding.inflate(layoutInflater) }
 
     companion object {
         private const val fullScreenHeight = ConstraintLayout.LayoutParams.MATCH_PARENT
@@ -37,12 +41,13 @@ internal class DropdownBottomSheetDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.andes_layout_dropdown_bottom_sheet)
+        setContentView(binding.root)
 
         window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
         initComponents()
         configAndesList()
+        configAndesSearchbox()
         initBottomSheetBehavior()
         resolveDragIndicator()
         resolveBottomSheetBackground()
@@ -51,14 +56,23 @@ internal class DropdownBottomSheetDialog(
     }
 
     private fun initComponents() {
-        andesList = findViewById(R.id.andesListDropdown)
-        dragIndicator = findViewById(R.id.andes_bottom_sheet_drag_indicator)
-        containerView = findViewById(R.id.andes_dropdown_bottom_sheet_container)
         bottomSheet = findViewById(com.google.android.material.R.id.design_bottom_sheet)
+        containerView = binding.andesDropdownBottomSheetContainer
+        dragIndicator = binding.andesBottomSheetDragIndicator
+        frameLayout = binding.andesBottomSheetFrameView
+        frameLayoutList = binding.andesBottomSheetFrameViewList
     }
 
     private fun configAndesList() {
-        andesList?.delegate = andesListDelegate
+        frameLayoutList.addView(andesList)
+    }
+
+    private fun configAndesSearchbox() {
+        andesSearchbox?.let {
+            (it.parent as? ViewGroup)?.removeView(it)
+            frameLayout.addView(it)
+            frameLayout.visibility = View.VISIBLE
+        }
     }
 
     private fun setA11yDelegate() {
@@ -128,7 +142,7 @@ internal class DropdownBottomSheetDialog(
      * accessibility events the user may perform over the component.
      */
     private fun setBottomSheetCallback() {
-        bottomSheetBehavior.setBottomSheetCallback(createBottomSheetCallback())
+        bottomSheetBehavior.addBottomSheetCallback(createBottomSheetCallback())
     }
 
     private fun initBottomSheetBehavior() {
