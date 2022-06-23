@@ -51,6 +51,10 @@ internal fun EditText.emulateTypingWithKeyboard(valueToEnter: String) {
     }
 }
 
+internal fun AndesAmountFieldSimple.emulateOnClick() {
+    this.performClick()
+}
+
 internal fun AndesAmountFieldSimple.emulateTypingWithKeyboard(valueToEnter: String) {
     getInternalEditTextComponent().emulateTypingWithKeyboard(valueToEnter)
 }

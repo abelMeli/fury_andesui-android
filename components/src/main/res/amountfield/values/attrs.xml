@@ -84,5 +84,7 @@
         <!-- will throw NumberFormatException when passing a string that is not formatted as double. -->
         <attr name="andesAmountFieldMaxValue" format="string" />
 
+        <attr name="andesAmountFieldIsEditable" format="boolean" />
+
     </declare-styleable>
 </resources>

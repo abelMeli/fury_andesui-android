@@ -24,6 +24,7 @@ import com.mercadolibre.android.andesui.utils.configureTextDimensionUtilsMediumT
 import com.mercadolibre.android.andesui.utils.configureTextDimensionUtilsSmallText
 import com.mercadolibre.android.andesui.utils.emulateCopyEventToClipboard
 import com.mercadolibre.android.andesui.utils.emulateDeleteKeyPressed
+import com.mercadolibre.android.andesui.utils.emulateOnClick
 import com.mercadolibre.android.andesui.utils.emulatePasteEvent
 import com.mercadolibre.android.andesui.utils.emulateTypingWithKeyboard
 import com.mercadolibre.android.andesui.utils.getInternalEditTextComponent
@@ -246,7 +247,10 @@ class AndesAmountFieldSimpleTest {
 
     @Test
     fun `given empty component with percentage type, when setting a value, then currency color is correctly set`() {
-        amountField = AndesAmountFieldSimple(context = context, entryType = AndesAmountFieldEntryType.PERCENTAGE)
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            entryType = AndesAmountFieldEntryType.PERCENTAGE
+        )
 
         amountField.value = "1000.00"
 
@@ -255,7 +259,10 @@ class AndesAmountFieldSimpleTest {
 
     @Test
     fun `given empty component with percentage type, when setting and deleting a value, then currency color is correctly set`() {
-        amountField = AndesAmountFieldSimple(context = context, entryType = AndesAmountFieldEntryType.PERCENTAGE)
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            entryType = AndesAmountFieldEntryType.PERCENTAGE
+        )
 
         amountField.emulateTypingWithKeyboard("1")
         amountField.emulateDeleteKeyPressed()
@@ -691,7 +698,85 @@ class AndesAmountFieldSimpleTest {
         amountField.emulateTypingWithKeyboard("1000.1")
 
         amountField.state assertEquals AndesAmountFieldState.AmountExceeded
-        amountField.getInternalHelperTextComponent().text.toString() assertEquals context.getString(R.string.andes_amount_field_exceeded_text)
+        amountField.getInternalHelperTextComponent().text.toString() assertEquals context.getString(
+            R.string.andes_amount_field_exceeded_text
+        )
+    }
+
+    @Test
+    fun `given component without isFieldEnabled, component should showed enabled`() {
+        amountField = AndesAmountFieldSimple(
+            context = context
+        )
+
+        amountField.isEditable assertEquals true
+        amountField.getInternalEditTextComponent().isEnabled assertEquals true
+    }
+
+    @Test
+    fun `given component with isFieldEnabled true, component should showed enabled`() {
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            isEditable = true
+        )
+
+        amountField.isEditable assertEquals true
+        amountField.getInternalEditTextComponent().isEnabled assertEquals true
+    }
+
+    @Test
+    fun `given component with isFieldEnabled false, component should showed not enabled`() {
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            isEditable = false
+        )
+
+        amountField.isEditable assertEquals false
+        amountField.getInternalEditTextComponent().isEnabled assertEquals false
+    }
+
+    @Test
+    fun `given component with isFieldEnabled false and set true, component should showed enabled`() {
+        amountField = AndesAmountFieldSimple(
+            context = context,
+            isEditable = false
+        )
+        amountField.isEditable = true
+
+        amountField.isEditable assertEquals true
+        amountField.getInternalEditTextComponent().isEnabled assertEquals true
+    }
+
+    @Test
+    fun `given component without focus, component should has not focus`() {
+        amountField = AndesAmountFieldSimple(
+            context = context
+        )
+
+        amountField.focus assertEquals false
+        amountField.getInternalEditTextComponent().hasFocus() assertEquals false
+    }
+
+    @Test
+    fun `given component with focus true, component should has focus`() {
+        amountField = AndesAmountFieldSimple(
+            context = context
+        )
+        amountField.focus = true
+
+        amountField.focus assertEquals true
+        amountField.getInternalEditTextComponent().hasFocus() assertEquals true
+    }
+
+    @Test
+    fun `given component and do on click, component should has focus`() {
+        amountField = AndesAmountFieldSimple(
+            context = context
+        )
+        amountField.emulateOnClick()
+
+        amountField.focus assertEquals true
+        amountField.getInternalEditTextComponent().hasFocus() assertEquals true
     }
 
     private fun provideTextChangeCallback(): OnTextChangeListener {

@@ -39,6 +39,7 @@ Basic Sample XML
 | app:andesAmountFieldSuffixText | Value that defines the suffix text to add to the right of the component |
 | app:andesAmountFieldSuffixA11yText | Value that defines the text the Talkback should read instead of the suffix value |
 | app:andesAmountFieldMaxValue | Value that defines if the component will have a max numeric value to display |
+| app:andesAmountFieldIsEditable | Value that defines if the component is enabled |
 
 <br/>
 
@@ -46,11 +47,11 @@ Basic Sample XML
 | Summary |
 | --- |
 | AndesAmountFieldSimple(context: Context, attrs: AttributeSet?) |
-| [AndesAmountFieldSimple](#context-context-state-andesamountfieldstate-entrymode-andesamountfieldentrymode-entrytype-andesamountfieldentrytype-currency-andesmoneyamountcurrency-showcurrencyasisovalue-boolean-country-andescountry-numberofdecimals-int-initialvalue-string-helpertext-charsequence-suffix-charsequence-suffixa11ytext-string-maxvalue-string)(context: Context, state: [AndesAmountFieldState](#andesamountfieldstate), entryMode: [AndesAmountFieldEntryMode](#andesamountfieldentrymode), entryType: [AndesAmountFieldEntryType](#andesamountfieldentrytype), currency: [AndesMoneyAmountCurrency](https://github.com/mercadolibre/fury_andesui-android/blob/master/docs/guide/moneyamount/AndesMoneyAmount.md#andesmoneyamountcurrency), showCurrencyAsIsoValue: Boolean, country: [AndesCountry](https://github.com/mercadolibre/fury_andesui-android/blob/master/docs/guide/moneyamount/AndesMoneyAmount.md#andescountry), numberOfDecimals: Int?, initialValue: String?, helperText: CharSequence?, suffix: CharSequence?, suffixA11yText: String?, maxValue: String?)|
+| [AndesAmountFieldSimple](#context-context-state-andesamountfieldstate-entrymode-andesamountfieldentrymode-entrytype-andesamountfieldentrytype-currency-andesmoneyamountcurrency-showcurrencyasisovalue-boolean-country-andescountry-numberofdecimals-int-initialvalue-string-helpertext-charsequence-suffix-charsequence-suffixa11ytext-string-maxvalue-string)(context: Context, state: [AndesAmountFieldState](#andesamountfieldstate), entryMode: [AndesAmountFieldEntryMode](#andesamountfieldentrymode), entryType: [AndesAmountFieldEntryType](#andesamountfieldentrytype), currency: [AndesMoneyAmountCurrency](https://github.com/mercadolibre/fury_andesui-android/blob/master/docs/guide/moneyamount/AndesMoneyAmount.md#andesmoneyamountcurrency), showCurrencyAsIsoValue: Boolean, country: [AndesCountry](https://github.com/mercadolibre/fury_andesui-android/blob/master/docs/guide/moneyamount/AndesMoneyAmount.md#andescountry), numberOfDecimals: Int?, initialValue: String?, helperText: CharSequence?, suffix: CharSequence?, suffixA11yText: String?, maxValue: String?, isEditable: Boolean)|
 
 <br/>
 
-##### AndesAmountFieldSimple(context: Context, state: AndesAmountFieldState, entryMode: AndesAmountFieldEntryMode, entryType: AndesAmountFieldEntryType, currency: AndesMoneyAmountCurrency, showCurrencyAsIsoValue: Boolean, country: AndesCountry, numberOfDecimals: Int?, initialValue: String?, helperText: CharSequence?, suffix: CharSequence?, suffixA11yText: String?, maxValue: String?)
+##### AndesAmountFieldSimple(context: Context, state: AndesAmountFieldState, entryMode: AndesAmountFieldEntryMode, entryType: AndesAmountFieldEntryType, currency: AndesMoneyAmountCurrency, showCurrencyAsIsoValue: Boolean, country: AndesCountry, numberOfDecimals: Int?, initialValue: String?, helperText: CharSequence?, suffix: CharSequence?, suffixA11yText: String?, maxValue: String?, isEditable: Boolean)
 | Parameter | Description |
 | -------- | ------- |
 | context | **Context**|
@@ -66,6 +67,7 @@ Basic Sample XML
 | suffix | **CharSequence?**: suffix text to show at the right of the component. Default value is **null** |
 | suffixA11yText | **String?**: Value that defines the text the Talkback should read instead of the suffix value. Default value is **null** |
 | maxValue | **String?**: max numeric value the component can take. Default value is **null**. To see more info about the data type, see [here](#about-the-amount-data-types) |
+| isEditable | **Boolean**: value that defines if component is enabled. Default value is **True** |
 
 <br/>
 
@@ -86,6 +88,8 @@ Basic Sample XML
 | suffixA11yText: String? | **get():** retrieves the text to be read by the Talkback instead of the suffix text, or null if not set. <br/> **set(value: String?):** keeps value as new text to read, or marks the suffix text as value to be read when passing null |
 | maxValue: | **get():** returns the max value the component can take, or null if not set. <br/> **set(value: String?):** updates component max value, or removes max limit if the passed value is null. Throws NumberFormatException when passing a string that is not formatted as double. To see more info about the data type, see [here](#about-the-amount-data-types) |
 | numberOfDecimals: Int? | **get():** returns the decimal places the component can show, or null if not set. <br/> **set(value: Int?):** updates decimal places the component can take, or sets the default value for the selected currency if the passed value is null |
+| isEditable: Boolean | **get():** returns if component is enabled. <br/> **set(value: Boolean):** updates if component is enabled/disabled, the component can show it enabled/disabled|
+| focus: Boolean | **get():** returns if component has focus. <br/> **set(value: Boolean):** updates focus component|
 
 <br/>
 

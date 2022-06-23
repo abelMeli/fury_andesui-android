@@ -1,3 +1,8 @@
+# v5.5.0
+## 🚀 Feature
+- Add focus property to AndesAmountFieldSimple | Author: [@jhjimenez](https://github.com/jhjimenez07)
+- Add isFieldEnabled property to AndesAmountFieldSimple
+
 # v5.4.0
 ## 🚀 Feature
 - `AndesSearchbox` component | Author: [@maquinteros](https://github.com/maquinteros)

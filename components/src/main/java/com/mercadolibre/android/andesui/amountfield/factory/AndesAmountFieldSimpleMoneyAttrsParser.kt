@@ -24,7 +24,8 @@ internal data class AndesAmountFieldSimpleMoneyAttrs(
     val andesAmountFieldExceededHelperText: CharSequence?,
     val andesAmountFieldSuffixText: CharSequence?,
     val andesAmountFieldSuffixA11yText: String?,
-    val andesAmountFieldMaxValue: String?
+    val andesAmountFieldMaxValue: String?,
+    val andesAmountFieldIsEditable: Boolean,
 )
 
 internal object AndesAmountFieldSimpleMoneyAttrsParser {
@@ -226,6 +227,9 @@ internal object AndesAmountFieldSimpleMoneyAttrsParser {
         val maxValue =
             typedArray.getString(R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldMaxValue)
 
+        val isEditable =
+            typedArray.getBoolean(R.styleable.AndesAmountFieldSimpleMoney_andesAmountFieldIsEditable, true)
+
         return AndesAmountFieldSimpleMoneyAttrs(
             andesAmountFieldState = state,
             andesAmountFieldEntryMode = entryMode,
@@ -240,7 +244,8 @@ internal object AndesAmountFieldSimpleMoneyAttrsParser {
             andesAmountFieldExceededHelperText = exceededHelperText,
             andesAmountFieldSuffixText = suffixText,
             andesAmountFieldSuffixA11yText = suffixA11yText,
-            andesAmountFieldMaxValue = maxValue
+            andesAmountFieldMaxValue = maxValue,
+            andesAmountFieldIsEditable = isEditable
         ).also {
             typedArray.recycle()
         }

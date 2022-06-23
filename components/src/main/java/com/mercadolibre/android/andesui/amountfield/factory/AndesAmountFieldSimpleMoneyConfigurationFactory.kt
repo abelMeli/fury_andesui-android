@@ -33,7 +33,8 @@ internal data class AndesAmountFieldSimpleMoneyConfiguration(
     val editTextSize: Float,
     val currencyTextSize: Float,
     val suffixTextSize: Float,
-    val resizableComponentsHorizontalMargin: Int
+    val resizableComponentsHorizontalMargin: Int,
+    val isEditable: Boolean
 )
 
 internal object AndesAmountFieldSimpleMoneyConfigFactory {
@@ -86,7 +87,8 @@ internal object AndesAmountFieldSimpleMoneyConfigFactory {
                 editTextSize = andesAmountFieldSize.size.amountSize(context),
                 currencyTextSize = andesAmountFieldSize.size.currencySize(context),
                 suffixTextSize = andesAmountFieldSize.size.suffixSize(context),
-                resizableComponentsHorizontalMargin = andesAmountFieldSize.size.horizontalMargin(context)
+                resizableComponentsHorizontalMargin = andesAmountFieldSize.size.horizontalMargin(context),
+                isEditable = andesAmountFieldIsEditable
             )
         }
     }

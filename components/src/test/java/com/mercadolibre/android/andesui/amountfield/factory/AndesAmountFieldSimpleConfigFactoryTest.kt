@@ -61,7 +61,8 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             null,
             null,
             null,
-            null
+            null,
+            true
         )
 
         val config = configFactory.create(
@@ -110,7 +111,8 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             "exceeded helper",
             "suffix",
             "suffix for a11y",
-            "3000.00"
+            "3000.00",
+            true
         )
 
         val config = configFactory.create(
@@ -159,7 +161,8 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             "exceeded helper",
             "suffix",
             "suffix for a11y",
-            "3000.00"
+            "3000.00",
+            true
         )
 
         val config = configFactory.create(
@@ -207,7 +210,8 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             "",
             "suffix",
             "suffix for a11y",
-            "3000.00"
+            "3000.00",
+            true
         )
 
         val config = configFactory.create(
@@ -254,7 +258,8 @@ class AndesAmountFieldSimpleConfigFactoryTest {
             "exceeded helper",
             "suffix",
             null,
-            "3000.00"
+            "3000.00",
+            true
         )
 
         val config = configFactory.create(

@@ -239,6 +239,26 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             }
         }
 
+    /**
+     * Getter and setter for the [focus] value.
+     */
+    var focus: Boolean
+        get() = internalEditText.hasFocus()
+        set(value) {
+            setFocusToInternalEditText(value)
+        }
+
+    /**
+     * Getter and setter for the [isEditable] value.
+     */
+    var isEditable: Boolean
+        get() = andesAmountFieldAttrs.andesAmountFieldIsEditable
+        set(value) {
+            andesAmountFieldAttrs =
+                andesAmountFieldAttrs.copy(andesAmountFieldIsEditable = value)
+            setupEnabled(createConfig())
+        }
+
     internal var size: AndesAmountFieldSize
         get() = andesAmountFieldAttrs.andesAmountFieldSize
         private set(value) {
@@ -321,6 +341,43 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         suffix: CharSequence? = null,
         suffixA11yText: String? = null,
         maxValue: String? = null
+    ) : this(
+        context,
+        state,
+        entryMode,
+        entryType,
+        currency,
+        showCurrencyAsIsoValue,
+        country,
+        numberOfDecimals,
+        initialValue,
+        helperText,
+        exceededHelperText,
+        suffix,
+        suffixA11yText,
+        maxValue,
+        true
+    )
+
+    /**
+     * Default code constructor
+     */
+    constructor(
+        context: Context,
+        state: AndesAmountFieldState = AndesAmountFieldState.Idle,
+        entryMode: AndesAmountFieldEntryMode? = null,
+        entryType: AndesAmountFieldEntryType = AndesAmountFieldEntryType.MONEY,
+        currency: AndesMoneyAmountCurrency = AndesMoneyAmountCurrency.ARS,
+        showCurrencyAsIsoValue: Boolean = false,
+        country: AndesCountry = AndesCountry.AR,
+        numberOfDecimals: Int? = null,
+        initialValue: String? = null,
+        helperText: CharSequence? = null,
+        exceededHelperText: CharSequence? = null,
+        suffix: CharSequence? = null,
+        suffixA11yText: String? = null,
+        maxValue: String? = null,
+        isEditable: Boolean = true
     ) : super(context) {
         initAttrs(
             state,
@@ -336,7 +393,8 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             exceededHelperText,
             suffix,
             suffixA11yText,
-            maxValue
+            maxValue,
+            isEditable
         )
     }
 
@@ -359,7 +417,8 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         exceededHelperText: CharSequence?,
         suffix: CharSequence?,
         suffixA11yText: String?,
-        maxValue: String?
+        maxValue: String?,
+        isFieldEnabled: Boolean
     ) {
         andesAmountFieldAttrs = AndesAmountFieldSimpleMoneyAttrs(
             state,
@@ -375,7 +434,8 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
             exceededHelperText,
             suffix,
             suffixA11yText,
-            maxValue
+            maxValue,
+            isFieldEnabled
         )
         setupComponents(createConfig())
     }
@@ -413,6 +473,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         setupTypeface()
         setupInitialValue(config)
         setupTextAlignment(config)
+        setupEnabled(config)
     }
 
     /**
@@ -442,6 +503,10 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
 
     private fun setupTextAlignment(config: AndesAmountFieldSimpleMoneyConfiguration) {
         internalEditText.textAlignment = config.textAlignment
+    }
+
+    private fun setupEnabled(config: AndesAmountFieldSimpleMoneyConfiguration) {
+        internalEditText.isEnabled = config.isEditable
     }
 
     /**
@@ -504,7 +569,15 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
 
     private fun setInternalClickListener() {
         setOnClickListener {
+            setFocusToInternalEditText()
+        }
+    }
+
+    private fun setFocusToInternalEditText(focus: Boolean = true) {
+        if (focus) {
             internalEditText.requestFocus()
+        } else {
+            internalEditText.clearFocus()
         }
     }
 
