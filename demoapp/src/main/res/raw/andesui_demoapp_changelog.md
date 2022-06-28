@@ -1,3 +1,7 @@
+# v5.6.0
+## 🚀 Feature
+- AndesMoneyAmount semibold | Author: [@eportasML](https://github.com/eportasML)
+
 # v5.5.0
 ## 🚀 Feature
 - Add focus property to AndesAmountFieldSimple | Author: [@jhjimenez](https://github.com/jhjimenez07)

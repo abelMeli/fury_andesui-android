@@ -46,6 +46,7 @@ Basic Sample XML
 | app:andesMoneyAmount | Amount number to be shown (float) |
 | app:andesShowZerosDecimal | Show decimal part when it is exactly 0: **true**, **false** |
 | app:andesShowIcon | Show currency icon: **true**, **false** |
+| app:andesSemibold | Show amount and suffix as semibold: **true**, **false** |
 
 <br/>
 
@@ -83,6 +84,7 @@ Basic Sample XML
 | showZerosDecimal: Boolean | **get():** retrieves if the decimal part is displayed or not. <br/> **set(value: Boolean):** updates visibility of amount decimal part. |
 | andesShowIcon: Boolean | **get():** retrieves if the currency icon is displayed or not. <br/> **set(value: Boolean):** updates visibility of currency icon. |
 | accessibilityText: String | **get():** retrieves the accessibility text corresponding to the **text** attribute|
+| semiBold: Boolean | **get():** retrieves if the font icon is semibold or not. <br/> **set(value: Boolean):** updates typeface of amount and suffix texts. |
 
 <br/>
 

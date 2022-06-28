@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.moneyamount.factory.amount
 
 import android.content.Context
 import android.text.SpannableStringBuilder
+import androidx.annotation.FontRes
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
@@ -29,7 +30,8 @@ internal data class AndesMoneyAmountConfiguration(
     val suffixAccessibility: String?,
     val suffixSize: Float,
     val suffixPadding: Float,
-    val amountFormatted: SpannableStringBuilder
+    val amountFormatted: SpannableStringBuilder,
+    @FontRes val amountTypeface: Int
 )
 
 internal object AndesMoneyAmountConfigurationFactory {
@@ -76,7 +78,8 @@ internal object AndesMoneyAmountConfigurationFactory {
                     suffixSize = suffixSize,
                     suffixPadding = suffixPadding,
                     suffixColor = suffixColor
-                )
+                ),
+                amountTypeface = R.font.andes_font_regular.takeIf { !andesSemiBold } ?: R.font.andes_font_semibold
             )
         }
     }

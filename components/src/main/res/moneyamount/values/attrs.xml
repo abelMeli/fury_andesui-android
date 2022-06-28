@@ -90,6 +90,8 @@
 
         <attr name="andesShowIcon" format="boolean" />
 
+        <attr name="andesSemibold" format="boolean" />
+
     </declare-styleable>
 
 

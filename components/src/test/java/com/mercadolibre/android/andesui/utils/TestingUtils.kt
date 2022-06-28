@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.utils
 
 import android.content.Context
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.style.CharacterStyle
@@ -47,6 +48,13 @@ infix fun Drawable.assertEquals(@DrawableRes expected: Int) {
 }
 
 infix fun <T> T.assertEquals(expected: T) = Assert.assertEquals(expected, this)
+
+infix fun Typeface.assertEquals(expected: Typeface) {
+    val expectedFontDesc = shadowOf(expected).fontDescription
+    val actualFontDesc = shadowOf(this).fontDescription
+    actualFontDesc.familyName assertEquals expectedFontDesc.familyName
+    actualFontDesc.style assertEquals expectedFontDesc.style
+}
 
 infix fun <T> T.assertIsNull(expectedNull: Boolean) = if (expectedNull) {
     Assert.assertNull(this)

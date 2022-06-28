@@ -59,6 +59,8 @@ class MoneyAmountDynamicPage {
     private lateinit var switchIcon: AndesSwitch
     private lateinit var switchDiscountIcon: AndesSwitch
 
+    private lateinit var switchSemibold: AndesSwitch
+
     fun create(context: Context, container: View) {
         initComponents(container)
         setupSpinners(context)
@@ -89,6 +91,7 @@ class MoneyAmountDynamicPage {
         clearButton = binding.clearButton
         switchIcon = binding.switchCurrencyIcon
         switchDiscountIcon = binding.switchDiscountIcon
+        switchSemibold = binding.switchSemibold
     }
 
     private fun setupSpinners(context: Context) {
@@ -249,6 +252,7 @@ class MoneyAmountDynamicPage {
 
         switchIcon.status = AndesSwitchStatus.CHECKED
         switchDiscountIcon.status = AndesSwitchStatus.UNCHECKED
+        switchSemibold.status = AndesSwitchStatus.UNCHECKED
     }
 
     private fun setupButtons(context: Context) {
@@ -299,6 +303,7 @@ class MoneyAmountDynamicPage {
                     andesMoneyAmount.size = size
                     andesMoneyAmount.country = country
                     andesMoneyAmount.showIcon = switchIcon.status == AndesSwitchStatus.CHECKED
+                    andesMoneyAmount.semiBold = switchSemibold.status == AndesSwitchStatus.CHECKED
                     when (suffix) {
                         SUFFIX_NONE -> { andesMoneyAmount.setSuffix(null, null) }
                         SUFFIX_UNIT -> { andesMoneyAmount.setSuffix(SpannableStringBuilder("/unidad"), "por unidad.") }

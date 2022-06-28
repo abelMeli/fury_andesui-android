@@ -80,6 +80,7 @@
         app:andesMoneyAmountSize="size_20"
         app:andesMoneyAmountStyle="normal"
         app:andesMoneyAmountType="negative"
+        app:andesSemibold="true"
         app:andesShowZerosDecimal="true"
         app:layout_constraintStart_toStartOf="@+id/vertical_5"
         app:layout_constraintTop_toBottomOf="@+id/andesMoneyAmount" />
@@ -88,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:andesMoneyAmount="1234.56"
+        app:andesSemibold="false"
         app:andesMoneyAmountCurrency="BRL"
         app:andesMoneyAmountSize="size_24"
         app:andesMoneyAmountStyle="none"

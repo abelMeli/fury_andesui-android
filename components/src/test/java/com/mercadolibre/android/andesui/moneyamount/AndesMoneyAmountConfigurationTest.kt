@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.moneyamount
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
@@ -322,5 +323,45 @@ class AndesMoneyAmountConfigurationTest {
             AndesColor(R.color.andes_bg_color_primary)
         )
         assertEquals(false, moneyAmount.contains(countryInfo.decimalSeparator))
+    }
+
+    @Test
+    fun `attr semibold true return semibold typeface config`() {
+        attrs = AndesMoneyAmountAttrs(
+            andesMoneyAmount = 1234.00,
+            andesShowZerosDecimal = false,
+            andesMoneyAmountSize = AndesMoneyAmountSize.SIZE_48,
+            andesMoneyAmountType = AndesMoneyAmountType.fromString("POSITIVE"),
+            andesMoneyAmountDecimalsStyle = AndesMoneyAmountDecimalsStyle.NORMAL,
+            andesMoneyAmountCurrency = AndesMoneyAmountCurrency.CLF,
+            andesMoneyAmountCountry = AndesCountry.AR,
+            andesShowIcon = false,
+            andesSuffix = null,
+            andesSuffixAccessibility = null,
+            andesSemiBold = true
+        )
+        val config = configFactory.create(context, attrs)
+
+        R.font.andes_font_semibold assertEquals config.amountTypeface
+    }
+
+    @Test
+    fun `attr semibold false return regular typeface config`() {
+        attrs = AndesMoneyAmountAttrs(
+            andesMoneyAmount = 1234.00,
+            andesShowZerosDecimal = false,
+            andesMoneyAmountSize = AndesMoneyAmountSize.SIZE_48,
+            andesMoneyAmountType = AndesMoneyAmountType.fromString("POSITIVE"),
+            andesMoneyAmountDecimalsStyle = AndesMoneyAmountDecimalsStyle.NORMAL,
+            andesMoneyAmountCurrency = AndesMoneyAmountCurrency.CLF,
+            andesMoneyAmountCountry = AndesCountry.AR,
+            andesShowIcon = false,
+            andesSuffix = null,
+            andesSuffixAccessibility = null,
+            andesSemiBold = false
+        )
+        val config = configFactory.create(context, attrs)
+
+        R.font.andes_font_regular assertEquals config.amountTypeface
     }
 }

@@ -27,7 +27,8 @@ internal data class AndesMoneyAmountAttrs(
     val andesShowIcon: Boolean,
     val andesSuffix: SpannableStringBuilder? = null,
     val andesSuffixAccessibility: String? = null,
-    val andesTextColor: AndesColor? = null
+    val andesTextColor: AndesColor? = null,
+    val andesSemiBold: Boolean = false
 )
 
 /**
@@ -123,7 +124,8 @@ internal object AndesMoneyAmountAttrsParser {
             andesMoneyAmountCurrency = resolveCurrency(typedArray),
             andesMoneyAmountCountry = resolveCountry(typedArray),
             andesShowZerosDecimal = typedArray.getBoolean(R.styleable.AndesMoneyAmount_andesShowZerosDecimal, false),
-            andesShowIcon = typedArray.getBoolean(R.styleable.AndesMoneyAmount_andesShowIcon, false)
+            andesShowIcon = typedArray.getBoolean(R.styleable.AndesMoneyAmount_andesShowIcon, false),
+            andesSemiBold = typedArray.getBoolean(R.styleable.AndesMoneyAmount_andesSemibold, false),
         ).also { typedArray.recycle() }
     }
 

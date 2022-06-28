@@ -110,6 +110,7 @@ class AndesMoneyAmountAttrsParserTest {
             .addAttribute(R.attr.andesMoneyAmountCountry, "BR")
             .addAttribute(R.attr.andesMoneyAmount, "1234.56")
             .addAttribute(R.attr.andesShowZerosDecimal, "true")
+            .addAttribute(R.attr.andesSemibold, "true")
             .build()
 
         val andesMoneyAmountAttrs = attrsParser.parse(context, attrs)
@@ -120,6 +121,7 @@ class AndesMoneyAmountAttrsParserTest {
         country assertEquals andesMoneyAmountAttrs.andesMoneyAmountCountry
         true assertEquals andesMoneyAmountAttrs.andesShowZerosDecimal
         Assert.assertEquals(1234.56, andesMoneyAmountAttrs.andesMoneyAmount, 1.0)
+        true assertEquals andesMoneyAmountAttrs.andesSemiBold
     }
 
     @Test
@@ -137,5 +139,6 @@ class AndesMoneyAmountAttrsParserTest {
         type assertEquals andesMoneyAmountAttrs.andesMoneyAmountType
         style assertEquals andesMoneyAmountAttrs.andesMoneyAmountDecimalsStyle
         currency assertEquals andesMoneyAmountAttrs.andesMoneyAmountCurrency
+        false assertEquals andesMoneyAmountAttrs.andesSemiBold
     }
 }

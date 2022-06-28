@@ -926,6 +926,7 @@
     <string name="demoapp_money_amount_description" translatable="false">It is used to refer to the value of an item or a specific amount of money.</string>
     <string name="demoapp_money_amount_suffix" translatable="false">Suffix</string>
     <string name="demoapp_money_amount_show_icon" translatable="false">Show currency icon</string>
+    <string name="demoapp_money_amount_semibold" translatable="false">Semibold</string>
     <string name="demoapp_money_amount_show_discount_icon" translatable="false">With icon</string>
 
     <string name="demoapp_money_amount_title" translatable="false">MoneyAmount</string>

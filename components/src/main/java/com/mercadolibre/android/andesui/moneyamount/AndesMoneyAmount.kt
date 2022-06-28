@@ -125,6 +125,16 @@ class AndesMoneyAmount : ConstraintLayout, AndesMoneyAmountInfoProvider {
         }
 
     /**
+     * Getter and setter for amount and suffix typeface.
+     */
+    var semiBold: Boolean
+        get() = andesMoneyAmountAttrs.andesSemiBold
+        set(value) {
+            andesMoneyAmountAttrs = andesMoneyAmountAttrs.copy(andesSemiBold = value)
+            setupAmount(createConfig())
+        }
+
+    /**
      * Setter for [suffix] with your accessibility.
      */
     fun setSuffix(suffix: SpannableStringBuilder?, suffixAccessibility: String?) {
@@ -248,7 +258,7 @@ class AndesMoneyAmount : ConstraintLayout, AndesMoneyAmountInfoProvider {
     private fun setupAmount(config: AndesMoneyAmountConfiguration) {
         binding.moneyAmountText.apply {
             setTextColor(config.currencyColor.colorInt(context))
-            typeface = context.getFontOrDefault(R.font.andes_font_regular)
+            typeface = context.getFontOrDefault(config.amountTypeface)
             text = config.amountFormatted
         }
     }

@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.view.MotionEvent
@@ -17,10 +18,13 @@ import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCur
 import com.mercadolibre.android.andesui.moneyamount.decimalstyle.AndesMoneyAmountDecimalsStyle
 import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
 import com.mercadolibre.android.andesui.moneyamount.type.AndesMoneyAmountType
+import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
+import io.mockk.every
+import io.mockk.mockkStatic
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -387,7 +391,45 @@ class AndesMoneyAmountTest {
         verify(moneyAmount, times(1)).dispatchTouchEvent(clickMotionEvent)
     }
 
+    @Test
+    fun `set semibold changes moneyamount text typeface`() {
+        // GIVEN
+        setupTypeface()
+        val moneyAmount = AndesMoneyAmount(
+            context = context,
+            amount = 1234.0,
+            currency = AndesMoneyAmountCurrency.ARS
+        )
+        val binding = AndesLayoutMoneyAmountBinding.bind(moneyAmount.getChildAt(0))
+
+        // WHEN
+        moneyAmount.semiBold = true
+
+        // THEN
+        binding.moneyAmountText().typeface assertEquals Typeface.DEFAULT_BOLD
+    }
+
+    @Test
+    fun `default moneyamount text typeface is regular`() {
+        // GIVEN
+        setupTypeface()
+        val moneyAmount = AndesMoneyAmount(
+            context = context,
+            amount = 1234.0,
+            currency = AndesMoneyAmountCurrency.ARS
+        )
+        val binding = AndesLayoutMoneyAmountBinding.bind(moneyAmount.getChildAt(0))
+
+        // THEN
+        binding.moneyAmountText().typeface assertEquals Typeface.DEFAULT
+    }
+
     fun AndesLayoutMoneyAmountBinding.moneyAmountText(): TextView =
         root.findViewById(R.id.money_amount_text)
 
+    private fun setupTypeface() {
+        mockkStatic("com.mercadolibre.android.andesui.typeface.FontKtxKt")
+        every { context.getFontOrDefault(R.font.andes_font_semibold) } returns Typeface.DEFAULT_BOLD
+        every { context.getFontOrDefault(R.font.andes_font_regular) } returns Typeface.DEFAULT
+    }
 }
