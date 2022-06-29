@@ -1,18 +1,20 @@
 package com.mercadolibre.android.andesui.utils
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.style.CharacterStyle
 import android.util.AttributeSet
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.DrawableRes
+import java.lang.reflect.Field
 import org.junit.Assert
 import org.mockito.internal.util.reflection.FieldSetter
 import org.robolectric.Robolectric
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.AttributeSetBuilder
-import java.lang.reflect.Field
 
 /** Returns the value of the private field [this].[name]. */
 inline fun <reified T> Any.getPrivateField(name: String) = getDeclaredField(name).run {
@@ -89,4 +91,9 @@ internal fun CharSequence?.getClickableSpans(): List<ClickableSpanWithText> {
     if (this !is SpannableString) return emptyList()
     val spans = getSpans(0, length, ClickableSpanWithText::class.java)
     return spans.map { it }
+}
+
+internal fun Context.isSoftKeyboardVisible(): Boolean {
+    val shadowManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    return shadowOf(shadowManager).isSoftInputVisible
 }

@@ -194,6 +194,12 @@ enum class AndesCountry
 To see more info, click [here](https://github.com/mercadolibre/fury_andesui-android/blob/master/docs/guide/moneyamount/AndesMoneyAmount.md#andescountry)
 <br/>
 
+## Functions
+| Return type | Method |
+| -------- | ------- |
+| Unit | **closeKeyboard()**<br/> Closes the soft keyboard. Note that this method does not interfere 
+with the internal edit text focus status.  |
+
 ## About the amount data types
 You may wonder why in this component we chose to handle all the numeric values as strings instead of, for example, doubles or floats.
 This is because, by the nature of the component, we need to parse from a regular number value ("1234567.89") to an amount-formatted value

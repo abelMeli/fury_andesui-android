@@ -1,5 +1,6 @@
 # v5.6.0
 ## 🚀 Feature
+- Add method to handle keyboard visibility in AndesAmountFieldSimple | Author: [@juanunzu](https://github.com/juanunzu)
 - AndesMoneyAmount semibold | Author: [@eportasML](https://github.com/eportasML)
 
 # v5.5.0

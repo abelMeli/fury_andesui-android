@@ -32,6 +32,7 @@ import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCur
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
+import com.mercadolibre.android.andesui.utils.hideKeyboard
 import com.mercadolibre.android.andesui.utils.ScreenUtils
 import com.mercadolibre.android.andesui.utils.deformatAmount
 import com.mercadolibre.android.andesui.utils.formatAmount
@@ -268,7 +269,7 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         }
 
     private lateinit var andesAmountFieldAttrs: AndesAmountFieldSimpleMoneyAttrs
-    private lateinit var internalEditText: AndesAmountFieldEditText
+    private val internalEditText: AndesAmountFieldEditText by lazy { binding.amountFieldEditText }
     private lateinit var suffixTextView: AndesTextView
     private lateinit var helperTextView: AndesTextView
     private lateinit var helperIcon: AndesBadgeIconPill
@@ -454,7 +455,6 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
     }
 
     private fun initComponents() {
-        internalEditText = binding.amountFieldEditText
         suffixTextView = binding.amountFieldSuffixText
         helperTextView = binding.amountFieldHelperText
         helperIcon = binding.amountFieldHelperIcon
@@ -790,6 +790,14 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         amountListener = this,
         attrs = andesAmountFieldAttrs
     )
+
+    /**
+     * Closes the soft keyboard. Note that this function does not remove the focus from the
+     * edit text.
+     */
+    fun closeKeyboard() {
+        internalEditText.hideKeyboard()
+    }
 
     private companion object {
         private val ZERO = BigDecimal(0)

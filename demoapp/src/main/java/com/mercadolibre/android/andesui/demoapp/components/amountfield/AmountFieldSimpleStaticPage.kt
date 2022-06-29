@@ -21,24 +21,28 @@ class AmountFieldSimpleStaticPage {
             text = "$ 50"
             setOnClickListener {
                 binding.staticAmountField.value = "50.00"
+                binding.staticAmountField.closeKeyboard()
             }
         }
         binding.staticAmountFieldButtonHundred.apply {
             text = "$ 100"
             setOnClickListener {
                 binding.staticAmountField.value = "100.00"
+                binding.staticAmountField.closeKeyboard()
             }
         }
         binding.staticAmountFieldButtonFiveHundred.apply {
             text = "$ 500"
             setOnClickListener {
                 binding.staticAmountField.value = "500.00"
+                binding.staticAmountField.closeKeyboard()
             }
         }
         binding.staticAmountFieldButtonThousand.apply {
             text = "$ 1000"
             setOnClickListener {
                 binding.staticAmountField.value = "1000.00"
+                binding.staticAmountField.closeKeyboard()
             }
         }
     }

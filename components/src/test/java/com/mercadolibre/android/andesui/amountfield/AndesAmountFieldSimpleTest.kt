@@ -13,6 +13,8 @@ import com.mercadolibre.android.andesui.amountfield.state.AndesAmountFieldState
 import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.mercadolibre.android.andesui.utils.buildAttributeSet
+import com.mercadolibre.android.andesui.utils.isSoftKeyboardVisible
+import com.mercadolibre.android.andesui.utils.openKeyboard
 import com.mercadolibre.android.andesui.country.AndesCountry
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColor
@@ -777,6 +779,25 @@ class AndesAmountFieldSimpleTest {
 
         amountField.focus assertEquals true
         amountField.getInternalEditTextComponent().hasFocus() assertEquals true
+    }
+
+    @Test
+    fun `given component, when opening and hiding keyboard, then keyboard is hidden`() {
+        amountField = AndesAmountFieldSimple(context)
+
+        amountField.openKeyboard()
+        amountField.closeKeyboard()
+
+        context.isSoftKeyboardVisible() assertEquals false
+    }
+
+    @Test
+    fun `given component, when opening keyboard, then keyboard is visible`() {
+        amountField = AndesAmountFieldSimple(context)
+
+        amountField.openKeyboard()
+
+        context.isSoftKeyboardVisible() assertEquals true
     }
 
     private fun provideTextChangeCallback(): OnTextChangeListener {
