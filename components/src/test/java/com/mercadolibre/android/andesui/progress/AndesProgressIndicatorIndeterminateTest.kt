@@ -1,26 +1,46 @@
 package com.mercadolibre.android.andesui.progress
 
+import android.content.Context
+import android.os.Looper
 import androidx.core.content.ContextCompat
+import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressAttrs
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressConfigurationFactory
 import com.mercadolibre.android.andesui.progress.size.AndesProgressSize
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [TEST_ANDROID_VERSION_CODE])
+@LooperMode(LooperMode.Mode.PAUSED)
 class AndesProgressIndicatorIndeterminateTest {
-    private var context = RuntimeEnvironment.application
+    private val context = ApplicationProvider.getApplicationContext<Context>()
     private lateinit var andesProgress: AndesProgressIndicatorIndeterminate
     private lateinit var andesProgressAttrs: AndesProgressAttrs
     private val configFactory = spy(AndesProgressConfigurationFactory)
+
+    @Test
+    fun `AndesProgress start from xml`() {
+        val attrs = Robolectric.buildAttributeSet()
+            .addAttribute(R.attr.andesProgressStart, "true")
+            .build()
+
+        andesProgress = spy(AndesProgressIndicatorIndeterminate(context, attrs))
+
+        andesProgress.loadingSpinner().stop()
+        // Verify stop end?
+        shadowOf(Looper.getMainLooper()).idle()
+    }
 
     @Test
     fun `Only context constructor`() {
@@ -74,4 +94,7 @@ class AndesProgressIndicatorIndeterminateTest {
         assertEquals(config.size, 16F)
         assertEquals(config.tint, ContextCompat.getColor(context, R.color.andes_yellow_ml_500))
     }
+
+    private fun AndesProgressIndicatorIndeterminate.loadingSpinner() =
+        andesProgress.findViewById<LoadingSpinner>(R.id.andes_progress_indeterminate_spinner)
 }

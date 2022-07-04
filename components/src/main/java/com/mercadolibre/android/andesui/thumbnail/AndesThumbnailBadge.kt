@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
 import com.mercadolibre.android.andesui.thumbnail.badge.factory.AndesThumbnailBadgeAttrs
@@ -158,7 +159,7 @@ class AndesThumbnailBadge : ConstraintLayout {
         )
         addView(thumbnail)
 
-        outlineView = View(context).apply { id = View.generateViewId() }
+        outlineView = View(context).apply { id = R.id.andes_thumbnail_badge_outline }
         addView(outlineView)
 
         createBadgeComponent(config)

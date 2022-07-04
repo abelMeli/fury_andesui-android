@@ -2,6 +2,8 @@
 ## 🚀 Feature
 - Add method to handle keyboard visibility in AndesAmountFieldSimple | Author: [@juanunzu](https://github.com/juanunzu)
 - AndesMoneyAmount semibold | Author: [@eportasML](https://github.com/eportasML)
+## 🛠 Fixes
+- Fix AndesProgressIndicatorIndeterminate and AndesThumbnailBadge component id | Author: [@eportasML](https://github.com/eportasML)
 
 # v5.5.0
 ## 🚀 Feature

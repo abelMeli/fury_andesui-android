@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.progress.accessibility.AndesProgressIndicatorAccessibilityEventDispatcher
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressAttrs
 import com.mercadolibre.android.andesui.progress.factory.AndesProgressAttrsParser
@@ -15,7 +16,7 @@ import com.mercadolibre.android.andesui.progress.size.AndesProgressSize
 class AndesProgressIndicatorIndeterminate : ConstraintLayout {
 
     private lateinit var andesProgressAttr: AndesProgressAttrs
-    private lateinit var progressComponent: LoadingSpinner
+    private val progressComponent: LoadingSpinner = LoadingSpinner(context)
     private val a11yEventDispatcher by lazy { AndesProgressIndicatorAccessibilityEventDispatcher() }
 
     var tint: Int
@@ -68,19 +69,16 @@ class AndesProgressIndicatorIndeterminate : ConstraintLayout {
         setupComponents(createConfig())
     }
 
-    private fun initComponents(config: AndesProgressConfiguration) {
-        progressComponent = LoadingSpinner(context)
-        if (config.start) start()
-    }
-
     private fun setupComponents(config: AndesProgressConfiguration) {
-        initComponents(config)
+        if (config.start) {
+            start()
+        }
 
         if (id == NO_ID) {
             id = View.generateViewId()
         }
 
-        progressComponent.id = View.generateViewId()
+        progressComponent.id = R.id.andes_progress_indeterminate_spinner
 
         setupColor(config)
         setupSize(config)
