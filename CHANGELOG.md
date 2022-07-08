@@ -1,3 +1,7 @@
+# v5.6.1
+## 🛠 Fixes
+- Remove `kotlin-android-extensions` plugin from all modules and replace it with `kotlin-parcelize`
+
 # v5.6.0
 ## 🚀 Feature
 - Add method to handle keyboard visibility in AndesAmountFieldSimple | Author: [@juanunzu](https://github.com/juanunzu)

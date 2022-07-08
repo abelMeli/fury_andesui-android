@@ -2,13 +2,13 @@ package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.moneyamount.size.AndesMoneyAmountSize
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
-import kotlinx.android.synthetic.main.andes_layout_money_amount.view.money_amount_text
-import kotlinx.android.synthetic.main.andes_layout_money_amount.view.money_amount_icon
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,8 +28,8 @@ class AndesMoneyAmountDiscountTest {
             discount = 10,
             size = AndesMoneyAmountSize.SIZE_12
         )
-        andesDiscount.money_amount_text.text.toString() assertEquals "10% OFF"
-        andesDiscount.money_amount_text.textSize assertEquals context.resources.getDimension(R.dimen.andes_text_size_12)
+        andesDiscount.getTextComponent().text.toString() assertEquals "10% OFF"
+        andesDiscount.getTextComponent().textSize assertEquals context.resources.getDimension(R.dimen.andes_text_size_12)
     }
 
     @Test
@@ -60,7 +60,7 @@ class AndesMoneyAmountDiscountTest {
             size = AndesMoneyAmountSize.SIZE_12
         )
         andesDiscount.discount = 100
-        andesDiscount.money_amount_text.text.toString() assertEquals "100% OFF"
+        andesDiscount.getTextComponent().text.toString() assertEquals "100% OFF"
     }
 
     @Test
@@ -71,7 +71,7 @@ class AndesMoneyAmountDiscountTest {
             size = AndesMoneyAmountSize.SIZE_12
         )
         andesDiscount.discount = 0
-        andesDiscount.money_amount_text.text.toString() assertEquals "0% OFF"
+        andesDiscount.getTextComponent().text.toString() assertEquals "0% OFF"
     }
 
     @Test
@@ -83,8 +83,8 @@ class AndesMoneyAmountDiscountTest {
                 size = AndesMoneyAmountSize.SIZE_12,
                 icon = it
             )
-            andesDiscount.money_amount_text.text.toString() assertEquals "10% OFF"
-            andesDiscount.money_amount_icon.visibility assertEquals View.VISIBLE
+            andesDiscount.getTextComponent().text.toString() assertEquals "10% OFF"
+            andesDiscount.getIconComponent().visibility assertEquals View.VISIBLE
         }
     }
 
@@ -95,8 +95,8 @@ class AndesMoneyAmountDiscountTest {
             discount = 10,
             size = AndesMoneyAmountSize.SIZE_12
         )
-        andesDiscount.money_amount_text.text.toString() assertEquals "10% OFF"
-        andesDiscount.money_amount_icon.visibility assertEquals View.GONE
+        andesDiscount.getTextComponent().text.toString() assertEquals "10% OFF"
+        andesDiscount.getIconComponent().visibility assertEquals View.GONE
     }
 
     @Test
@@ -138,3 +138,9 @@ class AndesMoneyAmountDiscountTest {
         andesDiscount.contentDescription assertEquals "10 ${andesDiscount.resources.getString(R.string.andes_money_amount_discount_accessibility)}"
     }
 }
+
+private fun AndesMoneyAmountDiscount.getTextComponent() =
+    findViewById<AndesTextView>(R.id.money_amount_text)
+
+private fun AndesMoneyAmountDiscount.getIconComponent() =
+    findViewById<AppCompatImageView>(R.id.money_amount_icon)
