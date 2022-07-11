@@ -35,7 +35,11 @@ class AndesTagSimple : ConstraintLayout {
         get() = andesTagAttrs.andesTagType
         set(value) {
             andesTagAttrs = andesTagAttrs.copy(andesTagType = value)
-            setupBackgroundComponents(createConfig())
+            createConfig().let {
+                setupBackgroundComponents(it)
+                setupTitleColor(it)
+                setupRightContent(it)
+            }
         }
 
     /**
@@ -45,8 +49,10 @@ class AndesTagSimple : ConstraintLayout {
         get() = andesTagAttrs.andesTagSize
         set(value) {
             andesTagAttrs = andesTagAttrs.copy(andesTagSize = value)
-            setupBackgroundComponents(createConfig())
-            setupTitleComponent(createConfig())
+            createConfig().let {
+                setupBackgroundComponents(it)
+                setupTitleComponent(it)
+            }
         }
 
     /**
@@ -80,9 +86,10 @@ class AndesTagSimple : ConstraintLayout {
                 andesTagAttrs = andesTagAttrs.copy(leftContent = andesTagLeftContent)
             }
 
-            val config = createConfig()
-            setupLeftContent(config)
-            setupTitleComponent(config)
+            createConfig().let {
+                setupLeftContent(it)
+                setupTitleComponent(it)
+            }
         }
 
     /**
@@ -99,9 +106,10 @@ class AndesTagSimple : ConstraintLayout {
                 andesTagAttrs = andesTagAttrs.copy(rightContent = null)
             }
 
-            val config = createConfig()
-            setupRightContent(config)
-            setupTitleComponent(config)
+            createConfig().let {
+                setupRightContent(it)
+                setupTitleComponent(it)
+            }
         }
 
     fun setupDismsissableCallback(onClickListener: OnClickListener) {
@@ -195,7 +203,7 @@ class AndesTagSimple : ConstraintLayout {
                 text = config.text
                 typeface = context.getFontOrDefault(R.font.andes_font_regular)
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, size.size.textSize(context))
-                setTextColor(config.textColor.colorInt(context))
+                setupTitleColor(config)
             }
 
             val constraintSet = ConstraintSet()
@@ -204,6 +212,10 @@ class AndesTagSimple : ConstraintLayout {
             constraintSet.setMargin(R.id.simpleTagText, ConstraintSet.END, config.rightContent.content.rightMarginText(context, size))
             constraintSet.applyTo(binding.andesTagContainer)
         }
+    }
+
+    private fun setupTitleColor(config: AndesTagSimpleConfiguration) {
+        binding.simpleTagText.setTextColor(config.textColor.colorInt(context))
     }
 
     private fun setupLeftContent(config: AndesTagSimpleConfiguration) {

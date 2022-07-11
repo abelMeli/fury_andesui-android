@@ -1,3 +1,7 @@
+# v5.6.2
+## 🛠 Fixes
+- AndesTagSimple type update text color fix | Author: [@eportasML](https://github.com/eportasML)
+
 # v5.6.1
 ## 🛠 Fixes
 - Remove `kotlin-android-extensions` plugin from all modules and replace it with `kotlin-parcelize`

@@ -1,13 +1,17 @@
 package com.mercadolibre.android.andesui.tag
 
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.GradientDrawable
 import android.view.View
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.mercadolibre.android.andesui.databinding.AndesLayoutSimpleTagBinding
+import com.mercadolibre.android.andesui.shadows.AndesShadowGradientDrawable
 import com.mercadolibre.android.andesui.tag.leftcontent.LeftContent
 import com.mercadolibre.android.andesui.tag.leftcontent.LeftContentDot
 import com.mercadolibre.android.andesui.tag.size.AndesTagSize
@@ -20,6 +24,8 @@ import org.mockito.Mockito.any
 import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.robolectric.shadow.api.Shadow.extract
+import org.robolectric.shadows.ShadowPorterDuffColorFilter
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [TEST_ANDROID_VERSION_CODE])
@@ -141,6 +147,33 @@ class AndesTagSimpleTest {
             isDismissable assertEquals true
             binding.rightContent.childCount assertEquals 1
             verify(mockDismissCallback).onClick(any())
+        }
+    }
+
+    @Test
+    @Config(shadows = [AndesShadowGradientDrawable::class])
+    fun `TagSimple type change colors`() {
+        // GIVEN
+        val tagText = "Test"
+        val tagSimple = AndesTagSimple(context = context, text = tagText, type = AndesTagType.NEUTRAL)
+        tagSimple.isDismissable = true
+
+        // WHEN
+        val newType = AndesTagType.HIGHLIGHT
+        tagSimple.type = newType
+
+        // THEN
+        val binding = AndesLayoutSimpleTagBinding.bind(tagSimple)
+        with(newType.type) {
+            val tagBackground: AndesShadowGradientDrawable = extract(tagSimple.background as GradientDrawable)
+            tagBackground.lastSetColor assertEquals backgroundColor().colorInt(context)
+            tagBackground.lastSetStrokeColor assertEquals borderColor().colorInt(context)
+
+            binding.simpleTagText.textColors.defaultColor assertEquals textColor().colorInt(context)
+
+            val colorFilter: ShadowPorterDuffColorFilter =
+                extract(((binding.rightContent.getChildAt(0) as ImageView).drawable as BitmapDrawable).colorFilter)
+            colorFilter.color assertEquals dismissColor().colorInt(context)
         }
     }
 
