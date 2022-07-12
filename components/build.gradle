@@ -46,7 +46,8 @@ android {
                            'src/main/res/bottomsheet', 'src/main/res/carousel', 'src/main/res/datepicker',
                            'src/main/res/dropdown', 'src/main/res/switchandes', 'src/main/res/floatingmenu', 'src/main/res/tabs',
                            'src/main/res/timepicker', 'src/main/res/linearprogress', 'src/main/res/feedbackscreen', 'src/main/res/moneyamount',
-                           'src/main/res/textview', 'src/main/res/slider', 'src/main/res/buttongroup', 'src/main/res/amountfield', 'src/main/res/searchbox']
+                           'src/main/res/textview', 'src/main/res/slider', 'src/main/res/buttongroup', 'src/main/res/amountfield', 'src/main/res/searchbox',
+                           'src/main/res/modal', 'src/main/res/stickyscroll', 'src/main/res/pageviewer']
         }
         test {
             res.srcDirs = ['src/test/res']
@@ -61,6 +62,7 @@ android {
 
 dependencies {
     implementation prod.kotlinStdlib
+    implementation coroutines.core
     implementation prod.supportLibraryAppCompatV7
     implementation prod.supportLibraryDesign
     api prod.supportConstraintLayout

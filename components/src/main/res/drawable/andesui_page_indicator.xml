@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/andes_gray_100" />
+    <corners android:radius="@dimen/andes_indicator_size" />
+    <size
+        android:width="@dimen/andes_indicator_size"
+        android:height="@dimen/andes_indicator_size" />
+</shape>

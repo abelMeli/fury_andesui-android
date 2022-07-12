@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <item name="andes_modal_button_group_id" type="id" tools:ignore="ResourceName" />
+    <item name="andes_button_id" type="id" tools:ignore="ResourceName" />
+    <item name="content_frame" type="id" tools:ignore="ResourceName" />
+</resources>

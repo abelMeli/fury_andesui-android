@@ -100,6 +100,12 @@ dependencies {
     implementation(showcase.webkit) {
         exclude group: "com.google.android.gms"
     }
+    implementation(showcase.odr) {
+        force true
+    }
+    implementation(showcase.uiComponents) {
+        force true
+    }
 
     implementation prod.fresco
 

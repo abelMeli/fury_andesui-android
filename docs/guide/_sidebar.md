@@ -38,6 +38,8 @@
   ** [AndesThumbnailBadge](/thumbnail/AndesThumbnailBadge.md)
   * [AndesTimePicker](/timepicker/AndesTimePicker.md)
   * [AndesTooltip](/tooltip/AndesTooltip.md)
+- About ODR usage and asynchronous image loading
+  * [ODR usage](/images/Images.md)
 - Contributing
   * [Contributing guidelines](https://github.com/mercadolibre/fury_andesui-android/blob/master/CONTRIBUTING.md)
   * [Android Studio plugin](/template-plugin/README.md)

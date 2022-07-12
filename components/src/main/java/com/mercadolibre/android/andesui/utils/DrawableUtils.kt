@@ -15,9 +15,14 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
+import android.util.Log
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import com.mercadolibre.android.andesui.color.AndesColor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Receives a [BitmapDrawable] which will suffer some look overhauling that includes scaling and tinting based on received params such as size, color,
@@ -174,4 +179,24 @@ internal fun buildRing(@ColorInt ringColor: Int, @Px ringWidth: Int) = GradientD
     cornerRadii = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
     setColor(Color.TRANSPARENT)
     setStroke(ringWidth, ringColor)
+}
+
+/**
+ * Method that allows us to retrieve a drawable by calling a suspend function that will return it
+ * from inside a coroutine. Once the drawable is available, it will be passed in the [block] as the
+ * argument.
+ *
+ * To see an example, check [com.mercadolibre.android.andesui.modal.views.AndesModalImageComponent.setDrawableSuspended]
+ */
+internal fun setDrawableSuspending(suspendedDrawable: (suspend () -> Drawable?), block: (Drawable?) -> Unit) {
+    CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val suspendDrawable = suspendedDrawable()
+            withContext(Dispatchers.Main) {
+                block(suspendDrawable)
+            }
+        } catch (error: Throwable) {
+            Log.e("DrawableUtils", "Error resolving suspended drawable", error)
+        }
+    }
 }

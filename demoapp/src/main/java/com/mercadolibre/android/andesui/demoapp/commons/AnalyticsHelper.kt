@@ -50,6 +50,8 @@ internal class AnalyticsHelper {
         "FeedbackScreenShowcaseActivity" to "AndesFeedbackScreenView",
         "MoneyAmountShowcaseActivity" to "AndesMoneyAmount",
         "ButtonGroupShowcaseActivity" to "AndesButtonGroup",
+        "ModalShowcaseActivity" to "AndesModal",
+        "StickyScrollViewShowcaseActivity" to "AndesStickyScrollView",
         "SearchboxShowcaseActivity" to "AndesSearchbox"
     )
 
@@ -122,6 +124,12 @@ internal class AnalyticsHelper {
         ),
         "MoneyAmountShowcaseActivity" to arrayListOf("/moneyamount/dynamic", "/moneyamount/static"),
         "ButtonGroupShowcaseActivity" to arrayListOf("/buttongroup/dynamic"),
+        "ModalShowcaseActivity" to arrayListOf("/modal/card/dynamic", "/modal/full/dynamic"),
+        "StickyScrollViewShowcaseActivity" to arrayListOf(
+            "/stickyscroll/dialogfragment/dynamic",
+            "/stickyscroll/stickyview/static",
+            "/stickyscroll/notstickyview/static"
+        ),
         "SearchboxShowcaseActivity" to arrayListOf("/searchbox/dynamic")
     )
 

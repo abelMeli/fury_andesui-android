@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/andes_bg_color_white" />
+    <corners android:bottomLeftRadius="@dimen/andes_modal_radius"
+        android:bottomRightRadius="@dimen/andes_modal_radius"/>
+    <padding
+        android:bottom="@dimen/andes_modal_margin_16"
+        android:top="@dimen/andes_modal_margin_16"
+        android:left="@dimen/andes_modal_margin_24"
+        android:right="@dimen/andes_modal_margin_24" />
+</shape>

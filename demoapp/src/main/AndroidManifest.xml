@@ -633,6 +633,40 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".components.modal.ModalShowcaseActivity"
+            android:configChanges="screenSize|orientation"
+            android:parentActivityName=".home.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="modal"
+                    android:scheme="andes" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".components.stickyscroll.StickyScrollViewShowcaseActivity"
+            android:parentActivityName=".home.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="stickyscroll"
+                    android:scheme="andes" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".components.modal.ModalFullShowcaseActivity"
+            android:configChanges="screenSize|orientation"
+            android:exported="false"/>
+        <activity
             android:name=".components.searchbox.SearchboxShowcaseActivity"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>

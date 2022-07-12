@@ -22,6 +22,8 @@ ext {
     webkitConfigProviderVersion = "19.+"
     webkitVersion = "1.+"
     mockkVersion = "1.10.3-jdk8"
+    odrVersion = "9.+"
+    uiComponentsVersion = "14.+"
 
     firebase = [
             bom : "com.google.firebase:firebase-bom:$firebaseBomVersion",
@@ -58,7 +60,9 @@ ext {
             markwon: "io.noties.markwon:core:$markwonVersion",
             leakCanary: "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
             webkitConfigProvider: "com.mercadolibre.android.configuration.provider:webkit-configurator:$webkitConfigProviderVersion",
-            webkit: "com.mercadolibre.android.mlwebkit:webkit-component:$webkitVersion"
+            webkit: "com.mercadolibre.android.mlwebkit:webkit-component:$webkitVersion",
+            odr: "com.mercadolibre.android.on.demand.resources:core:$odrVersion",
+            uiComponents: "com.mercadolibre.android.uicomponents:resource-provider:$uiComponentsVersion"
     ]
 
     coroutines = [

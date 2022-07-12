@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.mercadolibre.android.andesui.message.AndesMessage
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/button_margin_vertical"
+        android:layout_marginTop="@dimen/button_margin_vertical"
+        android:layout_marginEnd="@dimen/button_margin_vertical"
+        app:andesMessageBodyText="@string/andes_button_group_description"
+        app:andesMessageHierarchy="quiet"
+        app:andesMessageTitleText="@string/title_description"
+        app:andesMessageType="neutral"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+        android:id="@+id/sticky_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:andesCheckboxStatus="undefined"
+        app:andesCheckboxText="@string/andesui_demoapp_sticky_header"
+        app:layout_constraintTop_toBottomOf="@+id/message"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+        android:id="@+id/sticky_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:andesCheckboxStatus="undefined"
+        app:andesCheckboxText="@string/andesui_demoapp_sticky_footer"
+        app:layout_constraintTop_toBottomOf="@+id/sticky_header"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/change_button"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
+        app:andesButtonHierarchy="loud"
+        app:andesButtonSize="large"
+        app:andesButtonText="@string/andesui_demoapp_text_open_dialog"
+        app:layout_constraintEnd_toStartOf="@+id/clear_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sticky_footer" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/clear_button"
+        android:layout_width="@dimen/button_clear_width"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:andesButtonHierarchy="loud"
+        app:andesButtonSize="large"
+        app:andesButtonText="@string/andesui_demoapp_clear_button"
+        app:layout_constraintBottom_toBottomOf="@+id/change_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/change_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

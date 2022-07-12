@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andes_modal_card_close_button_margin_end">24dp</dimen>
+    <dimen name="andes_modal_card_close_button_margin_vertical">17dp</dimen>
+
+    <dimen name="andes_modal_image_width">224dp</dimen>
+    <dimen name="andes_modal_full_image_width">320dp</dimen>
+    <dimen name="andes_modal_full_large_image_height">320dp</dimen>
+
+    <dimen name="andes_modal_image_small_height">80dp</dimen>
+    <dimen name="andes_modal_image_medium_height">128dp</dimen>
+
+    <dimen name="andes_modal_image_thumbnail_size">80dp</dimen>
+    <dimen name="andes_modal_margin_48">48dp</dimen>
+    <dimen name="andes_modal_margin_32">32dp</dimen>
+    <dimen name="andes_modal_margin_24">24dp</dimen>
+    <dimen name="andes_modal_margin_22">22dp</dimen>
+    <dimen name="andes_modal_margin_20">20dp</dimen>
+    <dimen name="andes_modal_margin_18">18dp</dimen>
+    <dimen name="andes_modal_margin_16">16dp</dimen>
+    <dimen name="andes_modal_margin_12">12dp</dimen>
+    <dimen name="andes_modal_margin_8">8dp</dimen>
+    <dimen name="andes_modal_margin_5">5dp</dimen>
+    <dimen name="andes_modal_margin_4">4dp</dimen>
+
+    <dimen name="andes_modal_radius">6dp</dimen>
+    <dimen name="andes_modal_page_indicator_separator">4dp</dimen>
+    <dimen name="andes_modal_min_height_header">56dp</dimen>
+</resources>

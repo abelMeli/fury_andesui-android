@@ -882,6 +882,37 @@ class AndesButtonGroupTest {
         buttonGroup.type assertEquals type
     }
 
+    @Test
+    fun `given creation with three buttons, when calling buttons amount, then return is three`() {
+        val buttonGroup = AndesButtonGroup(
+            context,
+            listOf(
+                AndesButton(context),
+                AndesButton(context),
+                AndesButton(context)
+            )
+        )
+
+        val buttonsAmount = buttonGroup.getButtonsAmount()
+
+        3 assertEquals buttonsAmount
+    }
+
+    @Test
+    fun `given creation with button, when getting button, then button is the same`() {
+        val testButton = AndesButton(context)
+        val buttonGroup = AndesButtonGroup(
+            context,
+            listOf(
+                testButton
+            )
+        )
+
+        val button = buttonGroup.getButton(0)
+
+        testButton assertEquals button
+    }
+
     private fun createAndesButtonGroup(
         buttons: List<AndesButton>,
         distribution: AndesButtonGroupDistribution = AndesButtonGroupDistribution.HORIZONTAL,

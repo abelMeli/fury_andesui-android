@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/andes_white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp">
+
+        <com.mercadolibre.android.andesui.message.AndesMessage
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:andesMessageBodyText="@string/andesui_demoapp_dynamic_modal_card_description"
+            app:andesMessageHierarchy="quiet"
+            app:andesMessageTitleText="@string/title_description"
+            app:andesMessageType="neutral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/modal_trigger_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            app:andesButtonText="@string/andesui_demoapp_dynamic_modal_card_trigger_button_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/message" />
+
+        <View
+            android:id="@+id/separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/andes_gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/modal_trigger_button" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/modal_type_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/separator_1" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/buttons_amount_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/modal_type_dropdown" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/content_variation_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttons_amount_dropdown" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/header_title_tf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/content_variation_dropdown" />
+
+        <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+            android:id="@+id/pages_amount_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:AndesDropdownMenuType="floatingmenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_title_tf" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/header_fixed_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxText="@string/andesui_demoapp_dynamic_modal_card_checkbox_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pages_amount_dropdown" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/button_group_fixed_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxText="@string/andesui_demoapp_dynamic_modal_card_checkbox_buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pages_amount_dropdown" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/dismissible_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxStatus="selected"
+            app:andesCheckboxText="@string/andesui_demoapp_dynamic_modal_card_checkbox_dismiss"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_fixed_checkbox" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/modal_description_textfield"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:inputType="textCapWords|textCapSentences"
+            android:visibility="gone"
+            android:layout_marginHorizontal="16dp"
+            app:andesTextfieldLabel="@string/andesui_demoapp_dynamic_modal_full_a11y_modal_description"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dismissible_checkbox" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/large_content_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxStatus="unselected"
+            app:andesCheckboxText="@string/andesui_demoapp_dynamic_modal_card_checkbox_large_content"
+            app:layout_constraintBottom_toBottomOf="@id/dismissible_checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dismissible_checkbox" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

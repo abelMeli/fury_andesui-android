@@ -115,6 +115,51 @@ object AnimationsUtils {
     }
 
     /**
+     * Method that perform an animation out (fade out) on a view
+     *
+     * @param view view to animate
+     * @param to the direction of the animation
+     * @param delay delay to execute de animation.
+     * @param changeVisibility determinate if the visibility property must change or not.
+     * @param onFinishAnimation lambda block to invoke at the end of the animation
+     */
+    @Suppress("LongParameterList")
+    fun fadeOut(
+        view: View,
+        to: Position,
+        duration: Long,
+        delay: Long,
+        changeVisibility: Boolean,
+        onFinishAnimation: (() -> Unit)?
+    ) {
+        if (view.alpha > ALPHA_THRESHOLD) {
+            view.animate().cancel()
+            when (to) {
+                Position.CENTER ->
+                    doFadeCenter(view, duration, delay, Fade.OUT, changeVisibility) {
+                        onFinishAnimation?.invoke()
+                    }
+                Position.LEFT ->
+                    doFadeLeft(view, duration, delay, Fade.OUT, changeVisibility) {
+                        onFinishAnimation?.invoke()
+                    }
+                Position.TOP ->
+                    doFadeTop(view, duration, delay, Fade.OUT, changeVisibility) {
+                        onFinishAnimation?.invoke()
+                    }
+                Position.RIGHT ->
+                    doFadeRight(view, duration, delay, Fade.OUT, changeVisibility) {
+                        onFinishAnimation?.invoke()
+                    }
+                Position.BOTTOM ->
+                    doFadeBottom(view, duration, delay, Fade.OUT, changeVisibility) {
+                        onFinishAnimation?.invoke()
+                    }
+            }
+        }
+    }
+
+    /**
      * Method that performs a "shake" animation over the chosen view.
      * To see the animation in action see [this link](https://www.figma.com/proto/Kd1wiAh2jetqnR0ZJ2EEUY/Amount-field?node-id=2%3A11423&viewport=332%2C48%2C0.6&scaling=min-zoom&starting-point-node-id=935%3A184590&show-proto-sidebar=1)
      *
@@ -259,7 +304,14 @@ object AnimationsUtils {
         }
     }
 
-    private fun doFadeCenter(view: View, duration: Long, delay: Long, fade: Fade, changeVisibility: Boolean) {
+    private fun doFadeCenter(
+        view: View,
+        duration: Long,
+        delay: Long,
+        fade: Fade,
+        changeVisibility: Boolean,
+        onFinishAnimation: (() -> Unit)? = null
+    ) {
         when (fade) {
             Fade.IN -> {
                 view.animate()
@@ -273,6 +325,7 @@ object AnimationsUtils {
 
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -289,6 +342,7 @@ object AnimationsUtils {
 
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
+                            onFinishAnimation?.invoke()
                             setOnAnimationEnd(view, changeVisibility)
                         }
                     })
@@ -298,7 +352,14 @@ object AnimationsUtils {
         }
     }
 
-    private fun doFadeLeft(view: View, duration: Long, delay: Long, fade: Fade, changeVisibility: Boolean) {
+    private fun doFadeLeft(
+        view: View,
+        duration: Long,
+        delay: Long,
+        fade: Fade,
+        changeVisibility: Boolean,
+        onFinishAnimation: (() -> Unit)? = null
+    ) {
         when (fade) {
             Fade.IN -> {
                 view.translationX = LEFT_END_MOVE_ANIMATION
@@ -314,6 +375,7 @@ object AnimationsUtils {
 
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -334,6 +396,7 @@ object AnimationsUtils {
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
                             setOnAnimationEnd(view, changeVisibility)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -342,7 +405,14 @@ object AnimationsUtils {
         }
     }
 
-    private fun doFadeTop(view: View, duration: Long, delay: Long, fade: Fade, changeVisibility: Boolean) {
+    private fun doFadeTop(
+        view: View,
+        duration: Long,
+        delay: Long,
+        fade: Fade,
+        changeVisibility: Boolean,
+        onFinishAnimation: (() -> Unit)? = null
+    ) {
         when (fade) {
             Fade.IN -> {
                 view.translationY = TOP_END_MOVE_ANIMATION
@@ -358,6 +428,7 @@ object AnimationsUtils {
 
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -378,6 +449,7 @@ object AnimationsUtils {
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
                             setOnAnimationEnd(view, changeVisibility)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -386,7 +458,14 @@ object AnimationsUtils {
         }
     }
 
-    private fun doFadeRight(view: View, duration: Long, delay: Long, fade: Fade, changeVisibility: Boolean) {
+    private fun doFadeRight(
+        view: View,
+        duration: Long,
+        delay: Long,
+        fade: Fade,
+        changeVisibility: Boolean,
+        onFinishAnimation: (() -> Unit)? = null
+    ) {
         when (fade) {
             Fade.IN -> {
                 view.translationX = RIGHT_END_MOVE_ANIMATION
@@ -402,6 +481,7 @@ object AnimationsUtils {
 
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -422,6 +502,7 @@ object AnimationsUtils {
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
                             setOnAnimationEnd(view, changeVisibility)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -430,7 +511,14 @@ object AnimationsUtils {
         }
     }
 
-    private fun doFadeBottom(view: View, duration: Long, delay: Long, fade: Fade, changeVisibility: Boolean) {
+    private fun doFadeBottom(
+        view: View,
+        duration: Long,
+        delay: Long,
+        fade: Fade,
+        changeVisibility: Boolean,
+        onFinishAnimation: (() -> Unit)? = null
+    ) {
         when (fade) {
             Fade.IN -> {
                 view.translationY = BOTTOM_END_MOVE_ANIMATION
@@ -446,6 +534,7 @@ object AnimationsUtils {
 
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)
@@ -466,6 +555,7 @@ object AnimationsUtils {
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
                             setOnAnimationEnd(view, changeVisibility)
+                            onFinishAnimation?.invoke()
                         }
                     })
                     .setStartDelay(delay)

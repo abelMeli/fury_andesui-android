@@ -11,6 +11,7 @@ import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.mercadolibre.android.andesui.demoapp.mock.MockConfigProvider
+import com.mercadolibre.android.on.demand.resources.core.RemoteResources
 import com.mercadolibre.android.webkit.configurator.WebKitConfigurator
 
 /**
@@ -32,6 +33,8 @@ class MainApplication : Application() {
                 .build()
         Fresco.initialize(this, config)
         FLog.setMinimumLoggingLevel(FLog.VERBOSE)
+
+        RemoteResources.initialize(this)
 
         MockConfigProvider.configure()
 

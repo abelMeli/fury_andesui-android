@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/andes_white"
+    android:minHeight="@dimen/andes_modal_margin_24"
+    android:paddingStart="@dimen/andes_modal_margin_24"
+    android:paddingEnd="@dimen/andes_modal_margin_8">
+
+    <com.mercadolibre.android.andesui.textview.AndesTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/andes_modal_margin_12"
+        android:paddingVertical="@dimen/andes_modal_margin_18"
+        app:andesTextViewStyle="titleS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/closeImageview"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="wrap"
+        tools:text="@string/andes_button_text" />
+
+    <ImageView
+        android:id="@+id/closeImageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/andes_feedbackscreen_close_button"
+        android:padding="@dimen/andes_modal_margin_16"
+        android:src="@drawable/andes_ic_close"
+        android:layout_marginVertical="@dimen/andes_modal_margin_8"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

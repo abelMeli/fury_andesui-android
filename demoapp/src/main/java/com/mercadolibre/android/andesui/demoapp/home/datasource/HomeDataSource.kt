@@ -68,6 +68,7 @@ object HomeDataSource {
         Section("Money amount", "andes://moneyamount"),
         Section("Switch", "andes://switch"),
         Section("Amount Field", "andes://amountfield"),
+        Section("Modal", "andes://modal"),
         Section("Searchbox", "andes://searchbox")
     ).sortedBy { it.name }
 

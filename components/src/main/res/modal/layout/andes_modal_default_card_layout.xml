@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/andes_modal_close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingLeft="@dimen/andes_modal_margin_32"
+        android:paddingVertical="@dimen/andes_modal_margin_16"
+        android:contentDescription="@string/andes_feedbackscreen_close_button"
+        android:src="@drawable/andes_ic_close" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/single_content"
+            layout="@layout/andes_modal_single_content_layout" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content_button_group_fixed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/andes_modal_content_button_background"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+</LinearLayout>

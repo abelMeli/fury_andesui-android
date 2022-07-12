@@ -150,4 +150,98 @@ class AnimationsUtilsTest {
         Assert.assertTrue(view.alpha > 0f)
         Assert.assertTrue(view.translationY < 100f)
     }
+
+    @Test
+    fun `test FadeOut with finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.CENTER, 0L, 0L, false) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha <= 1f)
+        testBoolean assertEquals true
+    }
+
+    @Test
+    fun `test FadeOut with Change Visibility and finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.CENTER, 0L, 0L, true) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha <= 1f)
+        Assert.assertTrue(view.visibility == View.GONE)
+        testBoolean assertEquals true
+    }
+
+    @Test
+    fun `test FadeOut with Previous FadedOut and finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        view.alpha = 0f
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.CENTER, 0L, 0L, false) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha == 0f)
+        testBoolean assertEquals false
+    }
+
+    @Test
+    fun `test FadeOut with Center Position and finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.CENTER, 0L, 0L, false) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha <= 1f)
+        testBoolean assertEquals true
+    }
+
+    @Test
+    fun `test FadeOut with Left Position and finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.LEFT, 0L, 0L, false) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha <= 1f)
+        Assert.assertTrue(view.translationX <= 0f)
+        testBoolean assertEquals true
+    }
+
+    @Test
+    fun `test FadeOut with Top Position and finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.TOP, 0L, 0L, false) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha < 1f)
+        Assert.assertTrue(view.translationY < 0f)
+        testBoolean assertEquals true
+    }
+
+    @Test
+    fun `test FadeOut with Right Position and finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.RIGHT, 0L, 0L, false) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha <= 1f)
+        Assert.assertTrue(view.translationX >= 0f)
+        testBoolean assertEquals true
+    }
+
+    @Test
+    fun `test FadeOut with Bottom Position and finish callback`() {
+        var testBoolean = false
+        view = View(context)
+        AnimationsUtils.fadeOut(view, AnimationsUtils.Position.BOTTOM, 0L, 0L, false) {
+            testBoolean = true
+        }
+        Assert.assertTrue(view.alpha < 1f)
+        Assert.assertTrue(view.translationY > 0f)
+        testBoolean assertEquals true
+    }
 }

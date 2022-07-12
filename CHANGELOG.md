@@ -1,4 +1,7 @@
-# v5.6.2
+# v5.7.0
+## 🚀 Feature
+- AndesStickyScrollView New internal component for andes| Author: [@edgnavarro](https://github.com/edgnavarro)
+- New component: `AndesModal` | Author: Andes team
 ## 🛠 Fixes
 - AndesTagSimple type update text color fix | Author: [@eportasML](https://github.com/eportasML)
 

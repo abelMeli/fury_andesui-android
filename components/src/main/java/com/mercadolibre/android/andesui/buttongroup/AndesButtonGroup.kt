@@ -199,6 +199,10 @@ class AndesButtonGroup : ConstraintLayout {
         }
     }
 
+    internal fun getButtonsAmount() = andesButtonList.size
+
+    internal fun getButton(index: Int) = andesButtonList[index]
+
     companion object {
         private val DISTRIBUTION_DEFAULT = AndesButtonGroupDistribution.HORIZONTAL
         private val TYPE_DEFAULT = AndesButtonGroupType.FullWidth
