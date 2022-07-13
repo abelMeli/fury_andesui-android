@@ -7,8 +7,6 @@
     <dimen name="andes_snackbar_bottom_margin">8dp</dimen>
     <dimen name="andes_snackbar_errorcode_top_margin">8dp</dimen>
 
-    <dimen name="andes_snackbar_text">14sp</dimen>
-
     <dimen name="andes_snackbar_padding">16dp</dimen>
     <dimen name="andes_snackbar_text_action_height">32dp</dimen>
 

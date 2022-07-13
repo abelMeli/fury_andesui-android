@@ -24,6 +24,7 @@ import androidx.core.view.ViewCompat
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
+import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
 import com.mercadolibre.android.andesui.tooltip.extensions.displaySize
@@ -156,8 +157,8 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
     override lateinit var frameLayoutContainer: FrameLayout
 
     private lateinit var constraintContainer: ConstraintLayout
-    private lateinit var titleComponent: TextView
-    private lateinit var bodyComponent: TextView
+    private lateinit var titleComponent: AndesTextView
+    private lateinit var bodyComponent: AndesTextView
     private lateinit var dismissComponent: SimpleDraweeView
     private lateinit var primaryActionComponent: AndesButton
     private lateinit var secondaryActionComponent: AndesButton

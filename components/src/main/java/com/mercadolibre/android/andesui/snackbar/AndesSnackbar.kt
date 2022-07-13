@@ -239,14 +239,10 @@ class AndesSnackbar : CardView {
      */
     private fun setupMessageComponent(config: AndesSnackbarConfiguration) {
         val layout = snackbar.view as Snackbar.SnackbarLayout
-        val title = layout.findViewById<TextView>(R.id.tv_message)
+        val title = layout.findViewById<AndesTextView>(R.id.tv_message)
         val snackConstraint = layout.findViewById<ConstraintLayout>(R.id.snack_constraint)
         title.text = andesSnackbarAttrs.andesSnackbarText
         title.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        title.setTextSize(
-            TypedValue.COMPLEX_UNIT_PX,
-            context.resources.getDimension(R.dimen.andes_snackbar_text)
-        )
         title.setTextColor(config.textColor.colorInt(context))
 
         snackConstraint.setPadding(
@@ -263,9 +259,9 @@ class AndesSnackbar : CardView {
     private fun setupActionComponent() {
         if (andesSnackbarAttrs.andesSnackbarAction != null) {
             val layout = snackbar.view as Snackbar.SnackbarLayout
-            val bottomButton = layout.findViewById<TextView>(R.id.bottomButton)
-            val rightButton = layout.findViewById<TextView>(R.id.rightButton)
-            val title = layout.findViewById<TextView>(R.id.tv_message)
+            val bottomButton = layout.findViewById<AndesTextView>(R.id.bottomButton)
+            val rightButton = layout.findViewById<AndesTextView>(R.id.rightButton)
+            val title = layout.findViewById<AndesTextView>(R.id.tv_message)
 
             rightButton.text = andesSnackbarAttrs.andesSnackbarAction!!.text
             rightButton.typeface = context.getFontOrDefault(R.font.andes_font_semibold)

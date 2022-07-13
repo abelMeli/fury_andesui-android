@@ -31,11 +31,12 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content">
 
-        <TextView
+        <com.mercadolibre.android.andesui.textview.AndesTextView
             android:id="@+id/andes_tooltip_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/andes_tooltip_title_margin_top"
+            app:andesTextViewStyle="bodyM"
             app:layout_goneMarginBottom="@dimen/andes_tooltip_title_layout_gone_margin_bottom"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toTopOf="parent"
@@ -46,11 +47,12 @@
             tools:maxWidth="@dimen/andes_tooltip_text_max_width"
             tools:visibility="visible"/>
 
-        <TextView
+        <com.mercadolibre.android.andesui.textview.AndesTextView
             android:id="@+id/andes_tooltip_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/andes_tooltip_body_margin_top"
+            app:andesTextViewStyle="bodyS"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintTop_toBottomOf="@id/andes_tooltip_title"
             app:layout_constraintLeft_toLeftOf="parent"

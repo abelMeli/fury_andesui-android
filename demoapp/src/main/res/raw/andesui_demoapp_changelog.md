@@ -4,6 +4,8 @@
 - New component: `AndesModal` | Author: Andes team
 ## 🛠 Fixes
 - AndesTagSimple type update text color fix | Author: [@eportasML](https://github.com/eportasML)
+- AndesSnackbar changed TextView to AndesTextView
+- AndesTooltip changed TextView to AndesTextView
 
 # v5.6.1
 ## 🛠 Fixes
