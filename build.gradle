@@ -40,4 +40,12 @@ allprojects {
     // It's our convention to keep all modules in the same GitHub repository with the same group and version.
     group = libraryGroupId
     version = libraryVersion
+
+    tasks.withType(Test) {
+        maxParallelForks = 4        // Do not exceed 4 threads
+        forkEvery = 80              // Do not exceed 80 test blocks
+        failFast = true             // Prepare quick fail
+        maxHeapSize = "2048m"       // Do not exceed the maximum memory
+        minHeapSize = "1024m"       // Do not exceed the maximum minimum memory
+    }
 }
