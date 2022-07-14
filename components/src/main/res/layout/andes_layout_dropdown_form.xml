@@ -4,6 +4,7 @@
     android:id="@+id/andes_dropdown_form_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
     android:importantForAccessibility="yes">
 
     <com.mercadolibre.android.andesui.textfield.AndesTextfield

@@ -4,6 +4,7 @@
 - New component: `AndesModal` | Author: Andes team
 ## 🛠 Fixes
 - AndesTagSimple type update text color fix | Author: [@eportasML](https://github.com/eportasML)
+- AndesDropDown The API level 24 dropdown opens automatically | Author: [@edgnavarro](https://github.com/edgnavarro)
 - AndesSnackbar changed TextView to AndesTextView
 - AndesTooltip changed TextView to AndesTextView
 
