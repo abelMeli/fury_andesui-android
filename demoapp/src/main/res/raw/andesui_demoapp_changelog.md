@@ -2,11 +2,13 @@
 ## 🚀 Feature
 - AndesStickyScrollView New internal component for andes| Author: [@edgnavarro](https://github.com/edgnavarro)
 - New component: `AndesModal` | Author: Andes team
+- Replace the mocked Andes configurator in our showcase app with the real configurator | Author: [@juanunzu](https://github.com/juanunzu)
 ## 🛠 Fixes
 - AndesTagSimple type update text color fix | Author: [@eportasML](https://github.com/eportasML)
 - AndesDropDown The API level 24 dropdown opens automatically | Author: [@edgnavarro](https://github.com/edgnavarro)
 - AndesSnackbar changed TextView to AndesTextView
 - AndesTooltip changed TextView to AndesTextView
+- Fix in `AndesMoneyAmount` attrs parser (handling of AndesCountry default value) | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v5.6.1
 ## 🛠 Fixes

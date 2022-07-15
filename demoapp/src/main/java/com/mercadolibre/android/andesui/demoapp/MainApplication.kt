@@ -2,15 +2,13 @@ package com.mercadolibre.android.andesui.demoapp
 
 import android.app.Application
 import android.content.Context
-import android.os.Build
-import android.provider.Settings
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.mercadolibre.android.andesui.demoapp.mock.MockConfigProvider
+import com.mercadolibre.android.andesui.configurator.AndesConfigurator
 import com.mercadolibre.android.on.demand.resources.core.RemoteResources
 import com.mercadolibre.android.webkit.configurator.WebKitConfigurator
 
@@ -36,7 +34,7 @@ class MainApplication : Application() {
 
         RemoteResources.initialize(this)
 
-        MockConfigProvider.configure()
+        AndesConfigurator().configure(this)
 
         WebKitConfigurator().configure(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(applicationContext)

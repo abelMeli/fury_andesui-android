@@ -41,7 +41,7 @@ internal object AndesMoneyAmountAttrsParser {
     private const val DEFAULT_TYPE = 2000
     private const val DEFAULT_STYLE = 3001
     private const val DEFAULT_CURRENCY = 4014
-    private const val DEFAULT_COUNTRY = 5001
+    private const val NO_COUNTRY = -1
 
     private const val ANDES_MONEY_AMOUNT_SIZE_12 = 1000
     private const val ANDES_MONEY_AMOUNT_SIZE_14 = 1001
@@ -188,7 +188,7 @@ internal object AndesMoneyAmountAttrsParser {
         }
 
     private fun resolveCountry(typedArray: TypedArray): AndesCountry =
-        when (typedArray.getInt(R.styleable.AndesMoneyAmount_andesMoneyAmountCountry, DEFAULT_COUNTRY)) {
+        when (typedArray.getInt(R.styleable.AndesMoneyAmount_andesMoneyAmountCountry, NO_COUNTRY)) {
             ANDES_MONEY_AMOUNT_COUNTRY_AR -> AndesCountry.AR
             ANDES_MONEY_AMOUNT_COUNTRY_BR -> AndesCountry.BR
             ANDES_MONEY_AMOUNT_COUNTRY_CL -> AndesCountry.CL

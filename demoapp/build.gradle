@@ -106,6 +106,9 @@ dependencies {
     implementation(showcase.uiComponents) {
         force true
     }
+    implementation(showcase.andesConfigurator) {
+        force true
+    }
 
     implementation prod.fresco
 

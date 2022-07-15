@@ -5,10 +5,12 @@ import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.country.AndesCountry
+import com.mercadolibre.android.andesui.currency.AndesCurrencyHelper
 import com.mercadolibre.android.andesui.moneyamount.combosize.AndesMoneyAmountComboSize
 import com.mercadolibre.android.andesui.moneyamount.currency.AndesMoneyAmountCurrency
 import com.mercadolibre.android.andesui.moneyamount.factory.combo.AndesMoneyAmountComboAttrsParser
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
+import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -26,6 +28,7 @@ class AndesMoneyAmountComboAttrsParserTest {
 
     @Before
     fun setup() {
+        MockConfigProvider.configure()
         context = ApplicationProvider.getApplicationContext()
     }
 
@@ -93,5 +96,15 @@ class AndesMoneyAmountComboAttrsParserTest {
         Assert.assertEquals(0, andesMoneyAmountAttrs.andesMoneyDiscount)
         Assert.assertEquals(0.0, andesMoneyAmountAttrs.andesMoneyPreviousAmount, 1.0)
         Assert.assertEquals(0.0, andesMoneyAmountAttrs.andesMoneyAmount, 1.0)
+    }
+
+    @Test
+    fun `given attrs without country, when parsing, then current site is called`() {
+        val attrs = Robolectric.buildAttributeSet()
+            .build()
+
+        val andesMoneyAmountAttrs = attrsParser.parse(context, attrs)
+
+        AndesCurrencyHelper.currentCountry assertEquals andesMoneyAmountAttrs.andesMoneyAmountCountry
     }
 }
