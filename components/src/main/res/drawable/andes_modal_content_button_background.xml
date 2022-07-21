@@ -5,7 +5,6 @@
         android:bottomRightRadius="@dimen/andes_modal_radius"/>
     <padding
         android:bottom="@dimen/andes_modal_margin_16"
-        android:top="@dimen/andes_modal_margin_16"
         android:left="@dimen/andes_modal_margin_24"
         android:right="@dimen/andes_modal_margin_24" />
 </shape>

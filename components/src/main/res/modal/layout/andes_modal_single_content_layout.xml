@@ -54,9 +54,11 @@
             android:gravity="center"
             app:andesTextViewStyle="bodyM"
             app:andesTextViewTextColor="primary"
+            app:layout_constraintBottom_toTopOf="@id/content_button_group"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_goneMarginBottom="@dimen/andes_modal_margin_24"
             tools:text="Sub Title" />
 
         <LinearLayout
@@ -67,6 +69,8 @@
             android:layout_marginTop="@dimen/andes_modal_margin_32"
             android:layout_marginBottom="@dimen/andes_modal_margin_24"
             android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_title" />

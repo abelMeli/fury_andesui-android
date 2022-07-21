@@ -102,13 +102,13 @@ class AndesModalCardDefaultConfigTest {
     }
 
     @Test
-    fun `dismissible false, buttongroupfixed true, buttongroupcreator, contentvariation small, content, headerfixed true, dismiss callback, show callback `() {
+    fun `dismissible false, buttongroupfixed false, buttongroupcreator, contentvariation small, content, headerfixed true, dismiss callback, show callback `() {
         val callback = { /*no-op*/ }
         val buttonGroupCreator = provideButtonGroupCreator(context)
         val content = provideContent(context)
         arguments = AndesModalCardDefaultFragmentArguments(
             isDismissible = false,
-            isButtonGroupFixed = true,
+            isButtonGroupFixed = false,
             buttonGroupCreator = buttonGroupCreator,
             onDismissCallback = callback,
             onModalShowCallback = callback,
@@ -119,9 +119,9 @@ class AndesModalCardDefaultConfigTest {
 
         config = AndesModalCardDefaultConfigFactory.create(arguments)
 
-        config.isButtonGroupFixed assertEquals true
+        config.isButtonGroupFixed assertEquals false
         Assertions.assertThat(config.scrollViewOutlineProvider).usingRecursiveComparison()
-            .isEqualTo(AndesModalCorners.TOP_CORNERS.corners.getOutlineProvider())
+            .isEqualTo(AndesModalCorners.ALL_CORNERS.corners.getOutlineProvider())
         config.isHeaderFixed assertEquals true
         config.buttonGroupCreator assertEquals buttonGroupCreator
         config.contentVariation assertEquals AndesModalCardContentVariation.SMALL_ILLUSTRATION

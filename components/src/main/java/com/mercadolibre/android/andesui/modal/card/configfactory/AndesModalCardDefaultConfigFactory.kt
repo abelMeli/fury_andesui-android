@@ -33,7 +33,10 @@ internal object AndesModalCardDefaultConfigFactory {
         return with(fragmentArguments) {
             AndesModalCardDefaultConfig(
                 isButtonGroupFixed = isButtonGroupFixed,
-                scrollViewOutlineProvider = resolveOutlineProvider(isButtonGroupFixed),
+                scrollViewOutlineProvider = resolveOutlineProvider(
+                    isButtonGroupFixed,
+                    buttonGroupCreator
+                ),
                 isHeaderFixed = isHeaderFixed,
                 buttonGroupCreator = buttonGroupCreator,
                 contentVariation = contentVariation,
@@ -73,11 +76,14 @@ internal object AndesModalCardDefaultConfigFactory {
             View.GONE
         }
 
-    private fun resolveOutlineProvider(isButtonGroupFixed: Boolean): ViewOutlineProvider {
-        val cornerType: AndesModalCorners = if (isButtonGroupFixed) {
-            AndesModalCorners.TOP_CORNERS
-        } else {
-            AndesModalCorners.ALL_CORNERS
+    private fun resolveOutlineProvider(
+        isButtonGroupFixed: Boolean,
+        buttonGroupCreator: AndesButtonGroupCreator?
+    ): ViewOutlineProvider {
+        val cornerType = when {
+            buttonGroupCreator == null -> AndesModalCorners.ALL_CORNERS
+            isButtonGroupFixed -> AndesModalCorners.TOP_CORNERS
+            else -> AndesModalCorners.ALL_CORNERS
         }
         return cornerType.corners.getOutlineProvider()
     }

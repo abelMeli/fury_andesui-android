@@ -1,3 +1,7 @@
+# v5.7.1
+## 🛠 Fixes
+- Fix in buttonGroup bottom margin for `AndesModal` card default version | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v5.7.0
 ## 🚀 Feature
 - AndesStickyScrollView New internal component for andes| Author: [@edgnavarro](https://github.com/edgnavarro)
