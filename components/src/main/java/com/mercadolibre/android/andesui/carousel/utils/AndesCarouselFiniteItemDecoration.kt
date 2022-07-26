@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * AndesCarouselPaddingItemDecoration: override the itemDecoration to recyclerview which uses in AndesCarousel
  */
-class AndesCarouselMarginItemDecoration(private val margin: Int) : RecyclerView.ItemDecoration() {
+internal class AndesCarouselFiniteItemDecoration(private val margin: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,

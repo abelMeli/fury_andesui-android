@@ -48,7 +48,8 @@ ext {
             mockitoInline: "org.mockito:mockito-inline:$mockitoInline",
             robolectric  : "org.robolectric:robolectric:$robolectric",
             soloader     : "com.facebook.soloader:soloader:$soloaderVersion",
-            mockk        : "io.mockk:mockk:$mockkVersion"
+            mockk        : "io.mockk:mockk:$mockkVersion",
+            coroutines   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     ]
 
     showcase = [

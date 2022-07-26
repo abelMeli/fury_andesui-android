@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.android.andesui.carousel.AndesCarousel
+import com.mercadolibre.android.andesui.carousel.accessibility.AndesCarouselViewItemAccessibilityDelegate
 
 /**
  * AndesCarouselAdapter: custom adapter to define the items of AndesCarousel
@@ -31,6 +32,9 @@ class AndesCarouselAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(andesCarouselView: AndesCarousel, position: Int, delegate: AndesCarouselDelegate) {
             delegate.bind(andesCarouselView, itemView, position)
+
+            itemView.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+            itemView.accessibilityDelegate = AndesCarouselViewItemAccessibilityDelegate(position)
         }
     }
 }

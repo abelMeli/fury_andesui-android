@@ -41,11 +41,12 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
 
         initViewPager()
         attachIndicator()
-        loadViews()
 
         snappedlist = getDataSetSnapped()
         freelist = getDataSetFree()
         dynamicList = getDataSetSnapped()
+
+        loadViews()
     }
 
     override fun getAppBarTitle() = resources.getString(R.string.andes_demoapp_screen_carousel)
@@ -77,6 +78,9 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         val scrollEditText: AppCompatEditText = binding.scrollEditText
         val carousel = binding.andesCarousel
         val checkboxCentered = binding.checkboxCentered
+        val checkboxInfinite = binding.checkboxInfinite
+        val checkboxAutoplay = binding.checkboxAutoplay
+        val textFieldAutoplaySpeed = binding.textfieldAutoplaySpeed
 
         dynamicCarouselId = carousel.id
         carousel.delegate = this
@@ -114,7 +118,12 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
             carousel.margin = AndesCarouselMargin.DEFAULT
 
             checkboxCentered.status = AndesCheckboxStatus.SELECTED
+            checkboxInfinite.status = AndesCheckboxStatus.UNSELECTED
+            checkboxAutoplay.status = AndesCheckboxStatus.UNSELECTED
+            textFieldAutoplaySpeed.text = ""
             marginSpinner.setSelection(0)
+            carousel.autoplay = false
+            carousel.autoplaySpeed = 3000
         }
 
         changeButton.setOnClickListener {
@@ -129,6 +138,18 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
             }
             carousel.center = checkboxCentered.status == AndesCheckboxStatus.SELECTED
             carousel.margin = margin
+            carousel.infinite = checkboxInfinite.status == AndesCheckboxStatus.SELECTED
+            carousel.autoplay = checkboxAutoplay.status == AndesCheckboxStatus.SELECTED
+            textFieldAutoplaySpeed.text?.toLongOrNull()?.let {
+                carousel.autoplaySpeed = it
+            }
+        }
+
+        checkboxAutoplay.setupCallback {
+            carousel.autoplay = checkboxAutoplay.status == AndesCheckboxStatus.SELECTED
+            textFieldAutoplaySpeed.text?.toLongOrNull()?.let {
+                carousel.autoplaySpeed = it
+            }
         }
     }
 

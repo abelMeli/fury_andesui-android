@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/andes_white">
@@ -10,6 +9,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:isScrollContainer="true">
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/checkbox_centered"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxStatus="selected"
+            app:andesCheckboxText="@string/andes_carousel_center"
+            app:layout_constraintEnd_toEndOf="@+id/margin_spinner"
+            app:layout_constraintStart_toStartOf="@+id/checkbox_enabled"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_infinite" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/checkbox_autoplay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxStatus="unselected"
+            app:andesCheckboxText="@string/andes_carousel_autoplay"
+            app:layout_constraintEnd_toEndOf="@+id/margin_spinner"
+            app:layout_constraintStart_toStartOf="@+id/checkbox_enabled"
+            app:layout_constraintTop_toBottomOf="@+id/margin_spinner" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/checkbox_infinite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxStatus="unselected"
+            app:andesCheckboxText="@string/andes_carousel_infinite"
+            app:layout_constraintEnd_toEndOf="@+id/margin_spinner"
+            app:layout_constraintStart_toStartOf="@+id/checkbox_enabled"
+            app:layout_constraintTop_toBottomOf="@+id/textfield_autoplay_speed" />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/textfield_autoplay_speed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:inputType="numberDecimal"
+            app:andesTextfieldPlaceholder="@string/andes_carousel_autoplay_speed"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@+id/message"
+            app:layout_constraintStart_toStartOf="@+id/message"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_autoplay"/>
 
         <com.mercadolibre.android.andesui.message.AndesMessage
             android:id="@+id/message"
@@ -58,18 +105,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/checkbox_enabled"
             app:layout_constraintTop_toTopOf="@+id/checkbox_enabled" />
-
-        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
-            android:id="@+id/checkbox_centered"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:andesCheckboxAlign="right"
-            app:andesCheckboxStatus="selected"
-            app:andesCheckboxText="@string/andes_carousel_center"
-            app:layout_constraintEnd_toEndOf="@+id/margin_spinner"
-            app:layout_constraintStart_toStartOf="@+id/checkbox_enabled"
-            app:layout_constraintTop_toBottomOf="@+id/checkbox_enabled" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/change_button"

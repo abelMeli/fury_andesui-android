@@ -298,6 +298,9 @@
     <string name="andes_carousel_description" translatable="false">Groups and manipulates a horizontal sequence of content.</string>
     <string name="andes_carousel_margin" translatable="false">Margin</string>
     <string name="andes_carousel_center" translatable="false">Center</string>
+    <string name="andes_carousel_infinite" translatable="false">Infinite</string>
+    <string name="andes_carousel_autoplay" translatable="false">Autoplay</string>
+    <string name="andes_carousel_autoplay_speed" translatable="false">Autoplay Speed</string>
     <string-array name="andes_carousel_margin_spinner" translatable="false">
         <item>Default</item>
         <item>XSmall</item>

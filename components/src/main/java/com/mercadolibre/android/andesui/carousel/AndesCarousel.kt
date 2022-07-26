@@ -5,28 +5,49 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.carousel.accessibility.AndesCarouselAccessibilityDelegate
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrParser
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrs
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselConfiguration
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselConfigurationFactory
 import com.mercadolibre.android.andesui.carousel.margin.AndesCarouselMargin
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAdapter
+import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOff
+import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOn
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
-import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselMarginItemDecoration
+import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselLayoutManager
+import com.mercadolibre.android.andesui.databinding.AndesLayoutCarouselBinding
+import com.mercadolibre.android.andesui.databinding.AndesLayoutFeedbackScreenBinding
+import com.mercadolibre.android.andesui.utils.getAccessibilityManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 
 @Suppress("TooManyFunctions")
 class AndesCarousel : ConstraintLayout {
 
     private lateinit var andesCarouselAttrs: AndesCarouselAttrs
-    private lateinit var recyclerViewComponent: RecyclerView
-    private lateinit var viewManager: LinearLayoutManager
+    private val binding: AndesLayoutCarouselBinding by lazy {
+        AndesLayoutCarouselBinding.inflate(LayoutInflater.from(context), this, true)
+    }
+    private var recyclerViewComponent: RecyclerView = binding.andesCarouselRecyclerview
+    private val accessibilityManager = context.getAccessibilityManager()
+    private val viewManager: AndesCarouselLayoutManager by lazy {
+        AndesCarouselLayoutManager(context) {
+            accessibilityManager.isEnabled
+        }
+    }
     private lateinit var andesCarouselDelegate: AndesCarouselDelegate
-    private lateinit var marginItemDecoration: AndesCarouselMarginItemDecoration
+    private lateinit var marginItemDecoration: RecyclerView.ItemDecoration
     private lateinit var snapHelper: PagerSnapHelper
+    private val componentCoroutineScope: CoroutineScope by lazy {
+        CoroutineScope(Dispatchers.Default)
+    }
+    private var autoplayJob: Job? = null
 
     /**
      * Getter and setter for [margin].
@@ -57,6 +78,37 @@ class AndesCarousel : ConstraintLayout {
             andesCarouselDelegate = value
             val carouselAdapter = AndesCarouselAdapter(this, value)
             recyclerViewComponent.adapter = carouselAdapter
+            setupAutoplay(createConfig())
+        }
+
+    /**
+     * Getter and setter for [infinite].
+     */
+    var infinite: Boolean
+        get() = andesCarouselAttrs.andesCarouselInfinite
+        set(value) {
+            andesCarouselAttrs = andesCarouselAttrs.copy(andesCarouselInfinite = value)
+            setUpRecyclerViewAsInfinite(createConfig())
+        }
+
+    /**
+     * Getter and setter for [autoplay].
+     */
+    var autoplay: Boolean
+        get() = andesCarouselAttrs.andesCarouselAutoplay
+        set(value) {
+            andesCarouselAttrs = andesCarouselAttrs.copy(andesCarouselAutoplay = value)
+            setupAutoplay(createConfig())
+        }
+
+    /**
+     * Getter and setter for [autoplaySpeed].
+     */
+    var autoplaySpeed: Long
+        get() = andesCarouselAttrs.andesCarouselAutoplaySpeed
+        set(value) {
+            andesCarouselAttrs = andesCarouselAttrs.copy(andesCarouselAutoplaySpeed = value)
+            setupAutoplay(createConfig())
         }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -68,7 +120,18 @@ class AndesCarousel : ConstraintLayout {
         center: Boolean = false,
         margin: AndesCarouselMargin = AndesCarouselMargin.DEFAULT
     ) : super(context) {
-        initAttrs(center, margin)
+        initAttrs(center, margin, infinite = false, autoplay = false, autoplaySpeed = 3000)
+    }
+
+    constructor(
+        context: Context,
+        center: Boolean = false,
+        margin: AndesCarouselMargin = AndesCarouselMargin.DEFAULT,
+        infinite: Boolean = false,
+        autoplay: Boolean = false,
+        autoplaySpeed: Long
+    ) : super(context) {
+        initAttrs(center, margin, infinite, autoplay, autoplaySpeed)
     }
 
     /**
@@ -99,6 +162,7 @@ class AndesCarousel : ConstraintLayout {
     override fun onDetachedFromWindow() {
         recyclerViewComponent.clearOnScrollListeners()
         super.onDetachedFromWindow()
+        componentCoroutineScope.cancel()
     }
 
     /**
@@ -113,9 +177,12 @@ class AndesCarousel : ConstraintLayout {
 
     private fun initAttrs(
         center: Boolean,
-        margin: AndesCarouselMargin
+        margin: AndesCarouselMargin,
+        infinite: Boolean,
+        autoplay: Boolean,
+        autoplaySpeed: Long
     ) {
-        andesCarouselAttrs = AndesCarouselAttrs(center, margin)
+        andesCarouselAttrs = AndesCarouselAttrs(center, margin, infinite, autoplay, autoplaySpeed)
         setupComponents(createConfig())
     }
 
@@ -126,8 +193,15 @@ class AndesCarousel : ConstraintLayout {
     private fun setupComponents(config: AndesCarouselConfiguration) {
         initComponents()
         setupViewId()
-        updateDynamicComponents()
+        updateDynamicComponents(config)
         updateComponentsAlignment(config)
+        setupA11y()
+    }
+
+    private fun setupA11y() {
+        recyclerViewComponent.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+        recyclerViewComponent.
+            setAccessibilityDelegateCompat(AndesCarouselAccessibilityDelegate(recyclerViewComponent) { delegate.getDataSetSize(this) })
     }
 
     /**
@@ -135,21 +209,18 @@ class AndesCarousel : ConstraintLayout {
      * After a view is created then a view id is added to it.
      */
     private fun initComponents() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_carousel, this)
-        recyclerViewComponent = container.findViewById(R.id.andes_carousel_recyclerview)
-        marginItemDecoration = AndesCarouselMarginItemDecoration(createConfig().margin)
         snapHelper = PagerSnapHelper()
     }
 
     /**
-     * Update recyclerview
+     * Update recyclerview.
      */
-    private fun updateDynamicComponents() {
-        setupRecyclerViewComponent()
+    private fun updateDynamicComponents(config: AndesCarouselConfiguration) {
+        setupRecyclerViewComponent(config)
     }
 
     /**
-     * Update attributes of recyclerview
+     * Update attributes of recyclerview.
      */
     private fun updateComponentsAlignment(config: AndesCarouselConfiguration) {
         setupCenterRecyclerView(config)
@@ -157,13 +228,21 @@ class AndesCarousel : ConstraintLayout {
     }
 
     /**
-     * Set recyclerview
+     * Set recyclerview.
      */
-    private fun setupRecyclerViewComponent() {
-        viewManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    private fun setupRecyclerViewComponent(config: AndesCarouselConfiguration) {
+        viewManager.isInfinite = config.infinite
         recyclerViewComponent.layoutManager = viewManager
         recyclerViewComponent.overScrollMode = View.OVER_SCROLL_NEVER
         recyclerViewComponent.clipToPadding = false
+        if (config.infinite) {
+            smoothScrollToPosition(0)
+        }
+    }
+
+    private fun setUpRecyclerViewAsInfinite(config: AndesCarouselConfiguration) {
+        viewManager.isInfinite = config.infinite
+        setupMarginRecyclerView(config)
     }
 
     /**
@@ -185,11 +264,26 @@ class AndesCarousel : ConstraintLayout {
             recyclerViewComponent.removeItemDecoration(marginItemDecoration)
         }
 
-        marginItemDecoration = AndesCarouselMarginItemDecoration(config.margin)
+        marginItemDecoration = config.itemDecoration
         recyclerViewComponent.addItemDecoration(marginItemDecoration)
 
         val padding = config.padding
         recyclerViewComponent.setPadding(padding, 0, padding, 0)
+    }
+
+    private fun setupAutoplay(config: AndesCarouselConfiguration) {
+        val strategy = if (config.autoplay) {
+            AndesCarouselAutoplayOn
+        } else {
+            AndesCarouselAutoplayOff
+        }
+        autoplayJob = strategy.execute(
+            autoplayJob,
+            config,
+            componentCoroutineScope,
+            recyclerViewComponent,
+            recyclerViewComponent.adapter?.itemCount ?: 0
+        ) { accessibilityManager.isEnabled }
     }
 
     /**

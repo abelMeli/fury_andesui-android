@@ -22,6 +22,9 @@ You can personalize custom attributes like andesCarouselCenter and andesCarousel
     android:layout_marginTop="24dp"
     app:andesCarouselCenter="true"
     app:andesCarouselMargin=“defaultMargin”
+    app:andesCarouselInfinite=“true”
+    app:andesCarouselAutoplay=“true”
+    app:andesCarouselAutoplaySpeed=“500”
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/andesMessage" />
@@ -47,11 +50,16 @@ newCarousel.scrollToPosition(position)
 
 ### NOTE: 
 It's important to mention that in case of no attributes were specified, the carousel by default will be andesCarouselCenter in false and andesCarouselMargin in default. 
+Also, andesCarouselInfinite as False, andesCarouselAutoplay as False and andesCarouselAutoplaySpeed as 3000, autoplay and atuplaySpeed
+just work when andesCarouselInfinite is set as true.
 
 Also values can be changed in run time.
 andesCarousel.center = true
 andesCarousel.margin = AndesCarouselMargin.DEFAULT
 andesCarousel.delegate = (a object that implements AndesCarouselDelegate)
+carousel.infinite = true
+carousel.autoplay = false
+carousel.autoplaySpeed = 500 (Slides will change every 500 milliseconds)
 
 ## Example:
 My activity implements AndesCarouselDelegate so I have to implement the methods “bind - getLayoutItem - getDataSetSize - onClickItem”

@@ -49,14 +49,15 @@ android {
                            'src/main/res/textview', 'src/main/res/slider', 'src/main/res/buttongroup', 'src/main/res/amountfield', 'src/main/res/searchbox',
                            'src/main/res/modal', 'src/main/res/stickyscroll', 'src/main/res/pageviewer']
         }
-        test {
-            res.srcDirs = ['src/test/res']
-        }
     }
 
     buildFeatures {
         viewBinding true
     }
+}
+
+tasks.withType(Test) {
+    android.sourceSets.main.res.srcDirs += 'src/test/res'
 }
 
 
@@ -68,6 +69,8 @@ dependencies {
     api prod.supportConstraintLayout
     api prod.supportCardView
     api prod.fresco
+    implementation coroutines.core
+    implementation coroutines.android
 
     testImplementation test.runner
     testImplementation test.soloader
@@ -77,4 +80,7 @@ dependencies {
     testImplementation test.robolectric
     testImplementation test.mockitoInline
     testImplementation test.mockk
+    testImplementation test.coroutines
+    testImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+
 }

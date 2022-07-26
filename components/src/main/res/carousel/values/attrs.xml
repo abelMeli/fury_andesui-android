@@ -10,5 +10,8 @@
             <enum name="medium" value="104" />
             <enum name="large" value="105" />
         </attr>
+        <attr name="andesCarouselInfinite" format="boolean"/>
+        <attr name="andesCarouselAutoplay" format="boolean"/>
+        <attr name="andesCarouselAutoplaySpeed" format="integer"/>
     </declare-styleable>
 </resources>

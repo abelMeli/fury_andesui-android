@@ -9,19 +9,20 @@
         android:id="@+id/andes_loud_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/button_margin_vertical"
-            android:text="@string/andes_carousel_centered" />
+            android:text="@string/andes_carousel_not_centered" />
 
         <com.mercadolibre.android.andesui.carousel.AndesCarousel
             android:id="@+id/carousel_snapped"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:andesCarouselAutoplay="true"
+            app:andesCarouselInfinite="true"
             app:andesCarouselCenter="false"
             app:andesCarouselMargin="defaultMargin" />
 
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/button_margin_vertical"
             android:layout_marginBottom="@dimen/button_margin_vertical"
-            android:text="@string/andes_carousel_not_centered" />
+            android:text="@string/andes_carousel_centered" />
 
         <com.mercadolibre.android.andesui.carousel.AndesCarousel
             android:id="@+id/carousel_free"
