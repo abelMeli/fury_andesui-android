@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mercadolibre.android.andesui.textview.AndesTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Evaluate your score"
+        app:andesTextViewStyle="titleM"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.mercadolibre.android.andesui.textfield.AndesTextfield
+        android:id="@+id/dni_textfield"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="100dp"
+        android:inputType="number"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@id/dni_tooltip_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <ImageView
+        android:id="@+id/dni_tooltip_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/andes_tooltip_static_focusable_data"
+        android:padding="16dp"
+        android:src="@drawable/andes_ui_info_16"
+        app:layout_constraintBottom_toBottomOf="@id/dni_textfield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dni_textfield"
+        app:layout_constraintTop_toTopOf="@id/dni_textfield"
+        app:tint="@color/andes_accent_color" />
+
+    <LinearLayout
+        android:id="@+id/credit_score_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:focusable="true"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dni_textfield">
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/credit_score_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:text="Your credit score is:"
+            app:andesTextViewStyle="bodyL" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/credit_score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:importantForAccessibility="no"
+            android:text="0"
+            app:andesTextViewStyle="titleL" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/credit_tooltip_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@string/andes_tooltip_static_focusable_credit"
+        android:padding="16dp"
+        android:src="@drawable/andes_ui_info_16"
+        app:layout_constraintBottom_toBottomOf="@id/credit_score_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/credit_score_layout"
+        app:layout_constraintTop_toTopOf="@id/credit_score_layout"
+        app:tint="@color/andes_accent_color" />
+
+    <LinearLayout
+        android:id="@+id/avg_score_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:focusable="true"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/credit_score_layout">
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/avg_score_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:text="Your average score is:"
+            app:andesTextViewStyle="bodyL" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/avg_score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:importantForAccessibility="no"
+            android:text="0"
+            app:andesTextViewStyle="titleL" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/avg_tooltip_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@string/andes_tooltip_static_focusable_avg"
+        android:padding="16dp"
+        android:src="@drawable/andes_ui_info_16"
+        app:layout_constraintBottom_toBottomOf="@id/avg_score_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avg_score_layout"
+        app:layout_constraintTop_toTopOf="@id/avg_score_layout"
+        app:tint="@color/andes_accent_color" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

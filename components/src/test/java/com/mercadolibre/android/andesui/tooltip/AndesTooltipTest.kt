@@ -1,24 +1,36 @@
 package com.mercadolibre.android.andesui.tooltip
 
 import android.app.Activity
+import android.content.Context
+import android.os.Looper.getMainLooper
 import android.view.View
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
+import com.mercadolibre.android.andesui.tooltip.factory.Constants.NO_A11Y_ACTION
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.location.BottomAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
+import com.mercadolibre.android.andesui.utils.activateTalkbackForTest
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertNotEquals
+import com.mercadolibre.android.andesui.utils.getActionId
+import com.mercadolibre.android.andesui.utils.getBodyWindow
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.After
 import org.junit.Assert.assertNull
@@ -37,19 +49,22 @@ import org.mockito.Mockito.times
 import org.mockito.Mockito.never
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesTooltipTest {
-    private var context = RuntimeEnvironment.application
+    private lateinit var context: Context
+    private lateinit var activity: Activity
 
     private val title = "My title"
     private val body = "my body"
     private val isDismissible = false
     private val location = AndesTooltipLocation.BOTTOM
+    private lateinit var trigger: View
 
     companion object {
         @JvmStatic
@@ -61,6 +76,7 @@ class AndesTooltipTest {
 
     @Before
     fun setUp() {
+        context = ApplicationProvider.getApplicationContext()
         val requestListeners = setOf<RequestListener>(RequestLoggingListener())
         val config = ImagePipelineConfig.newBuilder(context)
                 // other setters
@@ -68,6 +84,16 @@ class AndesTooltipTest {
                 .build()
         Fresco.initialize(context, config)
         FLog.setMinimumLoggingLevel(FLog.VERBOSE)
+        trigger = View(context)
+        setupActivityForTesting()
+    }
+
+    private fun setupActivityForTesting() {
+        val robolectricActivity = Robolectric.buildActivity(AppCompatActivity::class.java).create()
+        activity = robolectricActivity.get()
+        activity.setTheme(R.style.Theme_AppCompat)
+        activity.setContentView(trigger)
+        robolectricActivity.start().postCreate(null).resume().visible()
     }
 
     @After
@@ -600,20 +626,20 @@ class AndesTooltipTest {
     }
 
     @Test
+    @LooperMode(LooperMode.Mode.PAUSED)
     fun `should dismiss tooltip`() {
-        val tooltip = spy(AndesTooltip(
-                context = context,
-                title = title,
-                body = body
-        ))
+        val tooltip = AndesTooltip(
+            context = activity,
+            title = title,
+            body = body
+        )
+        val bodyWindow = tooltip.getBodyWindow()
 
-        val bodyWindow: PopupWindow = mock()
-        ReflectionHelpers.setField(tooltip, "bodyWindow", bodyWindow)
-        ReflectionHelpers.setField(tooltip, "isShowing", true)
-
+        tooltip.show(trigger)
+        shadowOf(getMainLooper()).idle()
         tooltip.dismiss()
 
-        verify(bodyWindow).dismiss()
+        bodyWindow.isShowing assertEquals false
     }
 
     @Test
@@ -627,7 +653,6 @@ class AndesTooltipTest {
 
         val mockTarget: View = spy(AndesButton(activity))
 
-        ReflectionHelpers.setField(tooltip, "isShowing", false)
         ReflectionHelpers.setField(tooltip, "context", null)
         `when`(mockTarget.isAttachedToWindow).thenReturn(true)
 
@@ -644,7 +669,6 @@ class AndesTooltipTest {
 
         val mockTarget: View = spy(AndesButton(context))
 
-        ReflectionHelpers.setField(tooltip, "isShowing", false)
         ReflectionHelpers.setField(tooltip, "context", context)
         `when`(mockTarget.isAttachedToWindow).thenReturn(true)
 
@@ -662,7 +686,6 @@ class AndesTooltipTest {
 
         val mockTarget: View = spy(AndesButton(activity))
 
-        ReflectionHelpers.setField(tooltip, "isShowing", false)
         `when`(mockTarget.isAttachedToWindow).thenReturn(true)
         activity.finish()
 
@@ -670,35 +693,29 @@ class AndesTooltipTest {
     }
 
     @Test
+    @LooperMode(LooperMode.Mode.PAUSED)
     fun `should not show tooltip when tooltip is already showing`() {
-        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
         val tooltip = spy(AndesTooltip(
             context = activity,
             title = title,
             body = body
         ))
 
-        val mockTarget: View = spy(AndesButton(activity))
+        tooltip.show(trigger)
+        shadowOf(getMainLooper()).idle()
 
-        ReflectionHelpers.setField(tooltip, "isShowing", true)
-        `when`(mockTarget.isAttachedToWindow).thenReturn(true)
-
-        assertEquals(tooltip.canShowTooltip(mockTarget), false)
+        assertEquals(tooltip.canShowTooltip(trigger), false)
     }
 
     @Test
     fun `should not show tooltip when target is not attached to activity`() {
-        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
         val tooltip = spy(AndesTooltip(
             context = activity,
             title = title,
             body = body
         ))
 
-        val mockTarget: View = spy(AndesButton(activity))
-
-        ReflectionHelpers.setField(tooltip, "isShowing", false)
-        `when`(mockTarget.isAttachedToWindow).thenReturn(false)
+        val mockTarget: View = AndesButton(context)
 
         assertEquals(tooltip.canShowTooltip(mockTarget), false)
     }
@@ -714,7 +731,6 @@ class AndesTooltipTest {
 
         val mockTarget: View = spy(AndesButton(activity))
 
-        ReflectionHelpers.setField(tooltip, "isShowing", false)
         `when`(mockTarget.isAttachedToWindow).thenReturn(true)
 
         assertEquals(tooltip.canShowTooltip(mockTarget), true)
@@ -766,5 +782,58 @@ class AndesTooltipTest {
         val basicTooltip = AndesTooltip(context = context, body = body, title = title)
         assertNull(basicTooltip.bodyContentDescription)
         assertNull(basicTooltip.titleContentDescription)
+    }
+
+    @Test
+    fun `given tooltip focusable, when changing to not focusable, getter returns correct value`() {
+        val tooltip = AndesTooltip(
+            context = activity,
+            title = "title",
+            body = "body"
+        )
+
+        tooltip.shouldGainA11yFocus = false
+
+        tooltip.shouldGainA11yFocus assertEquals false
+    }
+
+    @Test
+    @LooperMode(LooperMode.Mode.PAUSED)
+    fun `given tooltip with a11y on and focus false, when showing, then a11y action is added`() {
+        activateTalkbackForTest(context)
+        val tooltip = AndesTooltip(
+            context = activity,
+            title = "title",
+            body = "body",
+            shouldGainA11yFocus = false
+        )
+
+        tooltip.show(trigger)
+        shadowOf(getMainLooper()).idle()
+        val actionId = tooltip.getActionId()
+
+        actionId assertNotEquals NO_A11Y_ACTION
+    }
+
+    @Test
+    @LooperMode(LooperMode.Mode.PAUSED)
+    fun `given tooltip with a11y on and focus false, when calling action over trigger, no new action is added`() {
+        activateTalkbackForTest(context)
+        val tooltip = AndesTooltip(
+            context = activity,
+            title = "title",
+            body = "body",
+            shouldGainA11yFocus = false
+        )
+        tooltip.show(trigger)
+        shadowOf(getMainLooper()).idle()
+        tooltip.dismiss()
+        val originalActionId = tooltip.getActionId()
+
+        ViewCompat.performAccessibilityAction(trigger, originalActionId, null)
+        shadowOf(getMainLooper()).idle()
+        val newActionId = tooltip.getActionId()
+
+        originalActionId assertEquals newActionId
     }
 }

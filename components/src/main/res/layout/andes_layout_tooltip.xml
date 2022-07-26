@@ -50,6 +50,7 @@
         <com.mercadolibre.android.andesui.textview.AndesTextView
             android:id="@+id/andes_tooltip_body"
             android:layout_width="match_parent"
+            android:accessibilityTraversalAfter="@id/andes_tooltip_title"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/andes_tooltip_body_margin_top"
             app:andesTextViewStyle="bodyS"
@@ -70,6 +71,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:contentDescription="@string/andes_tooltip_dismiss_label"
             tools:visibility="visible"/>
 
         <androidx.constraintlayout.widget.Barrier
@@ -83,6 +85,7 @@
             android:id="@+id/andes_tooltip_primary_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:accessibilityTraversalAfter="@id/andes_tooltip_body"
             android:layout_marginTop="@dimen/andes_tooltip_buttons_margin_top"
             android:layout_marginEnd="@dimen/andes_tooltip_main_button_margin_right"
             app:andesButtonHierarchy="loud"
@@ -100,6 +103,8 @@
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/andes_tooltip_secondary_action"
             android:layout_width="wrap_content"
+            android:accessibilityTraversalAfter="@id/andes_tooltip_primary_action"
+            android:accessibilityTraversalBefore="@id/andes_tooltip_dismiss"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/andes_tooltip_buttons_margin_top"
             app:andesButtonHierarchy="quiet"
@@ -115,7 +120,9 @@
             android:id="@+id/andes_tooltip_link_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:accessibilityTraversalAfter="@id/andes_tooltip_body"
             android:layout_marginTop="@dimen/andes_tooltip_link_margin_top"
+            android:accessibilityTraversalBefore="@id/andes_tooltip_dismiss"
             android:textColor="@color/andes_accent_color_500"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/andes_tooltip_body"

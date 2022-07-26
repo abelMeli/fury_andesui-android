@@ -3,15 +3,21 @@ package com.mercadolibre.android.andesui.tooltip.factory
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.view.View
+import androidx.core.view.ViewCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.BackgroundColorConfig
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipAction
 import com.mercadolibre.android.andesui.tooltip.actions.AndesTooltipLinkAction
+import com.mercadolibre.android.andesui.tooltip.factory.Constants.NO_A11Y_ACTION
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
+import com.mercadolibre.android.andesui.utils.getAccessibilityManager
+
+internal typealias A11yAction = () -> Unit
 
 internal data class AndesTooltipConfiguration(
     val backgroundColor: AndesColor,
@@ -38,13 +44,16 @@ internal data class AndesTooltipConfiguration(
     val linkActionTextColor: AndesColor?,
     val linkActionIsUnderlined: Boolean,
     val tooltipLocation: AndesTooltipLocation,
-    val isDynamicWidth: Boolean
+    val isDynamicWidth: Boolean,
+    val isFocusableAndTouchable: Boolean,
+    val triggerA11yAction: (View, A11yAction) -> Int
 )
 
 @Suppress("TooManyFunctions")
 internal object AndesTooltipConfigurationFactory {
 
     fun create(context: Context, andesMessageAttrs: AndesTooltipAttrs): AndesTooltipConfiguration {
+        val isA11yEnabled = context.getAccessibilityManager().isEnabled
         return with(andesMessageAttrs) {
             AndesTooltipConfiguration(
                 backgroundColor = resolveBackgroundColor(style),
@@ -71,9 +80,30 @@ internal object AndesTooltipConfigurationFactory {
                     linkActionTextColor = resolveLinkActionTextColor(style),
                     linkActionIsUnderlined = resolveBodyLinkIsUnderlined(style),
                     tooltipLocation = tooltipLocation,
-                    isDynamicWidth = mainAction == null
+                    isDynamicWidth = mainAction == null,
+                    isFocusableAndTouchable = resolveIsFocusableAndTouchable(shouldGainA11yFocus, isA11yEnabled),
+                    triggerA11yAction = resolveTriggerA11yAction(context, shouldGainA11yFocus)
             )
         }
+    }
+
+    private fun resolveTriggerA11yAction(context: Context, shouldGainA11yFocus: Boolean) = { trigger: View, action: A11yAction ->
+        var actionId = NO_A11Y_ACTION
+        if (!shouldGainA11yFocus) {
+            actionId = ViewCompat.addAccessibilityAction(
+                trigger,
+                context.resources.getString(R.string.andes_tooltip_action_more_info)
+            ) { _, _ ->
+                action()
+                true
+            }
+        }
+        actionId
+    }
+
+    private fun resolveIsFocusableAndTouchable(shouldGainA11yFocus: Boolean, isA11yEnabled: Boolean): Boolean {
+        if (!isA11yEnabled) return true
+        return shouldGainA11yFocus
     }
 
     private fun resolveBackgroundColor(style: AndesTooltipStyle) = style.type.backgroundColor()

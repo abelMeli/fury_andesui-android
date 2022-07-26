@@ -109,7 +109,7 @@ internal class AnalyticsHelper {
             "/thumbnail/static"
         ),
         "TimePickerShowcaseActivity" to arrayListOf("/timepicker/dynamic", "/timepicker/static"),
-        "TooltipShowcaseActivity" to arrayListOf("/tooltip/dynamic", "/tooltip/static"),
+        "TooltipShowcaseActivity" to arrayListOf("/tooltip/dynamic", "/tooltip/static", "/tooltip/static/focusable", "/tooltip/static/notfocusable"),
         "SwitchShowcaseActivity" to arrayListOf("/switch/dynamic", "/switch/static"),
         "TabsShowcaseActivity" to arrayListOf("/tabs/dynamic", "/tabs/static"),
         "FeedbackScreenShowcaseActivity" to arrayListOf(

@@ -32,6 +32,8 @@ import com.mercadolibre.android.andesui.tooltip.extensions.visible
 import com.mercadolibre.android.andesui.tooltip.factory.AndesTooltipAttrs
 import com.mercadolibre.android.andesui.tooltip.factory.AndesTooltipConfiguration
 import com.mercadolibre.android.andesui.tooltip.factory.AndesTooltipConfigurationFactory
+import com.mercadolibre.android.andesui.tooltip.factory.Constants
+import com.mercadolibre.android.andesui.tooltip.factory.Constants.NO_A11Y_ACTION
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocationInterface
@@ -151,6 +153,18 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
             bodyComponent.contentDescription = value
         }
 
+    /**
+     * Only for a11y purposes. Sets whether the component will gain accessibility focus and keep
+     * it until is dismissed or the component info is added to the target view and the navigation
+     * order keeps unaltered.
+     */
+    var shouldGainA11yFocus: Boolean
+        get() = andesTooltipAttrs.shouldGainA11yFocus
+        set(value) {
+            andesTooltipAttrs = andesTooltipAttrs.copy(shouldGainA11yFocus = value)
+            setupFocusableAndTouchable(createConfig(andesTooltipAttrs))
+        }
+
     private lateinit var andesTooltipAttrs: AndesTooltipAttrs
     private lateinit var andesTooltipLocationConfigRequired: AndesTooltipLocationConfig
     override lateinit var radiusLayout: RadiusLayout
@@ -164,9 +178,10 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
     private lateinit var secondaryActionComponent: AndesButton
     private lateinit var linkActionComponent: TextView
     private lateinit var arrowComponent: AppCompatImageView
+    private var onDismisslistener: (() -> Unit)? = null
+    private var a11yActionId = NO_A11Y_ACTION
 
     private val bodyWindow: PopupWindow
-    private var isShowing = false
 
     override val bodyWindowHeight: Int
         get() = bodyWindow.height
@@ -246,7 +261,8 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
                 tooltipLocation = tooltipLocation,
                 mainAction = mainAction,
                 secondaryAction = secondaryAction,
-                andesTooltipSize = andesTooltipSize
+                andesTooltipSize = andesTooltipSize,
+                shouldGainA11yFocus = DEFAULT_SHOW_GAIN_A11Y_FOCUS_VALUE
         )
         initComponents(andesTooltipAttrs)
     }
@@ -273,13 +289,41 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
                 isDismissible = isDismissible,
                 tooltipLocation = tooltipLocation,
                 linkAction = linkAction,
-                andesTooltipSize = andesTooltipSize
+                andesTooltipSize = andesTooltipSize,
+                shouldGainA11yFocus = DEFAULT_SHOW_GAIN_A11Y_FOCUS_VALUE
+        )
+        initComponents(andesTooltipAttrs)
+    }
+
+    @Suppress("LongParameterList")
+    constructor(
+        context: Context,
+        style: AndesTooltipStyle = STYLE_DEFAULT,
+        title: String? = TITLE_DEFAULT,
+        body: String,
+        isDismissible: Boolean = IS_DISMISSIBLE_DEFAULT,
+        tooltipLocation: AndesTooltipLocation = TIP_ORIENTATION_DEFAULT,
+        mainAction: AndesTooltipAction? = MAIN_ACTION_DEFAULT,
+        secondaryAction: AndesTooltipAction? = SECONDARY_ACTION_DEFAULT,
+        andesTooltipSize: AndesTooltipSize = DEFAULT_SIZE_STYLE,
+        shouldGainA11yFocus: Boolean = DEFAULT_SHOW_GAIN_A11Y_FOCUS_VALUE
+    ) : this(context) {
+        andesTooltipAttrs = AndesTooltipAttrs(
+            style = style,
+            title = title,
+            body = body,
+            isDismissible = isDismissible,
+            tooltipLocation = tooltipLocation,
+            mainAction = mainAction,
+            secondaryAction = secondaryAction,
+            andesTooltipSize = andesTooltipSize,
+            shouldGainA11yFocus = shouldGainA11yFocus
         )
         initComponents(andesTooltipAttrs)
     }
 
     internal fun canShowTooltip(target: View) =
-            !isShowing && context is Activity && !context.isFinishing && ViewCompat.isAttachedToWindow(target)
+        !bodyWindow.isShowing && context is Activity && !context.isFinishing && ViewCompat.isAttachedToWindow(target)
 
     /**
      * After AndesTooltip is built, this show(target: View) method will present the tooltip on the screen.
@@ -309,10 +353,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
      * After AndesTooltip is shown, this dismiss() method will dismiss the tooltip on the screen.
      */
     fun dismiss() {
-        if (isShowing) {
-            isShowing = false
-            bodyWindow.dismiss()
-        }
+        bodyWindow.dismiss()
     }
 
     /**
@@ -320,10 +361,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
      * @param callback void method with no params which will be invoked when the tooltip is dismissed.*/
     @Suppress("unused")
     fun setOnAndesTooltipDismissListener(callback: (() -> Unit)? = null) {
-        bodyWindow.setOnDismissListener {
-            this@AndesTooltip.dismiss()
-            callback?.invoke()
-        }
+        onDismisslistener = callback
     }
 
     private fun initComponents(attrs: AndesTooltipAttrs) {
@@ -361,6 +399,15 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         initializeBackground(config)
         initializeAndesTooltipWindow(config)
         initializeAndesTooltipContent(config)
+        setupOnDismissListener()
+        setupFocusableAndTouchable(config)
+        setupAnimation()
+    }
+
+    private fun setupOnDismissListener() {
+        bodyWindow.setOnDismissListener {
+            onDismisslistener?.invoke()
+        }
     }
 
     private fun initializeArrow(
@@ -530,12 +577,16 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         }
     }
 
-    private fun applyAndesTooltipAnimation() {
+    private fun setupAnimation() {
         bodyWindow.animationStyle = R.style.Andes_FadeWindowAnimation
     }
 
+    private fun setupFocusableAndTouchable(config: AndesTooltipConfiguration) {
+        bodyWindow.isFocusable = config.isFocusableAndTouchable
+        bodyWindow.isTouchable = config.isFocusableAndTouchable
+    }
+
     override fun showDropDown(target: View, xOff: Int, yOff: Int, locationConfig: AndesTooltipLocationConfig) {
-        isShowing = true
         var attrs = andesTooltipAttrs
 
         bodyWindow.showAsDropDown(target, xOff, yOff)
@@ -547,16 +598,31 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         val config = AndesTooltipConfigurationFactory.create(context, attrs)
         initializeArrow(locationConfig, config, xOff)
         setupComponents(config)
-        applyAndesTooltipAnimation()
+        setupA11y(config, target)
+    }
+
+    private fun setupA11y(config: AndesTooltipConfiguration, target: View) {
+        if (a11yActionId == NO_A11Y_ACTION) {
+            a11yActionId = config.triggerA11yAction(target) {
+                val currentDismissCallback = onDismisslistener
+                onDismisslistener = null
+                bodyWindow.dismiss()
+                onDismisslistener = currentDismissCallback
+                shouldGainA11yFocus = true
+                show(target)
+            }
+        }
     }
 
     companion object {
         private val STYLE_DEFAULT = AndesTooltipStyle.LIGHT
         private val TIP_ORIENTATION_DEFAULT = AndesTooltipLocation.TOP
         private val TITLE_DEFAULT = null
+        private val MAIN_ACTION_DEFAULT = null
         private val SECONDARY_ACTION_DEFAULT = null
         private val LINK_ACTION_DEFAULT = null
         private val DEFAULT_SIZE_STYLE = AndesTooltipSize.DYNAMIC
         private const val IS_DISMISSIBLE_DEFAULT = true
+        private const val DEFAULT_SHOW_GAIN_A11Y_FOCUS_VALUE = true
     }
 }

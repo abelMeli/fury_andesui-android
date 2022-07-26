@@ -134,23 +134,38 @@
             android:id="@+id/dismissable_checkbox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:andesCheckboxAlign="right"
             app:andesCheckboxStatus="unselected"
-            app:andesCheckboxText="@string/dismissable"
-            app:layout_constraintEnd_toEndOf="@+id/action_type_spinner"
-            app:layout_constraintStart_toStartOf="@+id/textView23"
+            app:andesCheckboxText="@string/dismissible"
+            app:layout_constraintEnd_toStartOf="@id/focusable_checkbox"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/focusable_checkbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:andesCheckboxAlign="left"
+            app:andesCheckboxStatus="unselected"
+            app:andesCheckboxText="@string/focusable"
+            app:layout_constraintBottom_toBottomOf="@id/dismissable_checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dismissable_checkbox"
+            app:layout_constraintTop_toTopOf="@id/dismissable_checkbox" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/title_text"
             android:layout_width="0dp"
             android:layout_height="51dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:inputType="text"
             app:andesTextfieldPlaceholder="@string/change_text"
             app:andesTextfieldRightContent="clear"
-            app:layout_constraintEnd_toEndOf="@+id/dismissable_checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/dismissable_checkbox"
             app:layout_constraintTop_toBottomOf="@+id/dismissable_checkbox" />
 
@@ -159,10 +174,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:inputType="text"
             app:andesTextareaMaxLines="3"
             app:andesTextareaPlaceholder="@string/change_body"
-            app:layout_constraintEnd_toEndOf="@+id/title_text"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/title_text"
             app:layout_constraintTop_toBottomOf="@+id/title_text" />
 
@@ -248,11 +264,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:inputType="numberDecimal"
-            app:andesTextfieldPlaceholder="@string/andes_tooltip_position"
             app:andesTextfieldHelper="@string/andes_tooltip_position_helper"
+            app:andesTextfieldPlaceholder="@string/andes_tooltip_position"
             app:andesTextfieldRightContent="clear"
-            app:layout_constraintEnd_toEndOf="@+id/dismissable_checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/dismissable_checkbox"
             app:layout_constraintTop_toBottomOf="@+id/link_action_text" />
 

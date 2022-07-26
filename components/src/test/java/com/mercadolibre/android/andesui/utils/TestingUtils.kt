@@ -51,6 +51,8 @@ infix fun Drawable.assertEquals(@DrawableRes expected: Int) {
 
 infix fun <T> T.assertEquals(expected: T) = Assert.assertEquals(expected, this)
 
+infix fun <T> T.assertNotEquals(expected: T) = Assert.assertNotEquals(expected, this)
+
 infix fun Typeface.assertEquals(expected: Typeface) {
     val expectedFontDesc = shadowOf(expected).fontDescription
     val actualFontDesc = shadowOf(this).fontDescription

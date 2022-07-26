@@ -1,3 +1,7 @@
+# v5.8.0
+## 🚀 Feature
+- `AndesTooltip` accessibility improvements | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v5.7.1
 ## 🛠 Fixes
 - Fix in buttonGroup bottom margin for `AndesModal` card default version | Author: [@juanunzu](https://github.com/juanunzu)

@@ -1,8 +1,9 @@
 <resources>
     <!-- Generic -->
-    <string name="andes_message_title" translatable="false">Attention! 👇</string>
-    <string name="title_description" translatable="false">Attention! 👇</string>
-    <string name="dismissable" translatable="false">Dismissible</string>
+    <string name="andes_message_title" translatable="false">Atention! 👇</string>
+    <string name="title_description" translatable="false">Atention! 👇</string>
+    <string name="dismissible" translatable="false">Dismissible</string>
+    <string name="focusable" translatable="false">Focusable</string>
     <string name="bullet" translatable="false">Bullet</string>
     <string name="andes_message_start_progress_loading" translatable="false">Start</string>
     <string name="andes_message_pause_progress_loading" translatable="false">Pause</string>
@@ -774,6 +775,10 @@
     <string name="andes_tooltip_position" translatable="false">Target position</string>
     <string name="andes_tooltip_position_helper" translatable="false">From 0 to 100 where 0 is left and 100 right</string>
     <string name="andes_tooltip_position_default" translatable="false">50</string>
+    <string name="andes_tooltip_static_focusable_data" translatable="false">Why do we need this data?</string>
+    <string name="andes_tooltip_static_focusable_credit" translatable="false">How do we calculate the credit?</string>
+    <string name="andes_tooltip_static_focusable_avg" translatable="false">How do we calculate the average?</string>
+    <string name="andes_tooltip_static_not_focusable_info" translatable="false">In this section you can check your current sales values. All the data integrated into one common section.</string>
     <string-array name="andes_tooltip_style_spinner" translatable="false">
         <item>Light</item>
         <item>Dark</item>

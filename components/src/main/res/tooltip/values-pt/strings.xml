@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_tooltip_dismiss_label">fechar pop-up</string>
+    <string name="andes_tooltip_action_more_info">Mais informações</string>
+</resources>

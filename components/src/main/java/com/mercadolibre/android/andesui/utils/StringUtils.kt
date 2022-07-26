@@ -2,12 +2,10 @@ package com.mercadolibre.android.andesui.utils
 
 import android.content.Context
 import android.graphics.Typeface
-import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
-import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
 import android.view.View

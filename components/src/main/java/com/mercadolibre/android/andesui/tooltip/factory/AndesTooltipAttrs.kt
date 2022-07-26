@@ -15,5 +15,6 @@ internal data class AndesTooltipAttrs(
     val secondaryAction: AndesTooltipAction? = null,
     val linkAction: AndesTooltipLinkAction? = null,
     val tooltipLocation: AndesTooltipLocation,
-    val andesTooltipSize: AndesTooltipSize
+    val andesTooltipSize: AndesTooltipSize,
+    val shouldGainA11yFocus: Boolean
 )

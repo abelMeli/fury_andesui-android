@@ -89,6 +89,41 @@ AndesTooltip(
 
 <br/>
 
+
+### Constructor with value for `shouldGainA11yFocus`
+
+It builds an AndesTooltip with the passed value for the `shouldGainA11yFocus` parameter.
+
+```kotlin
+AndesTooltip(
+    context: Context,
+    style: AndesTooltipStyle,
+    title: String?,
+    body: String,
+    isDismissible: Boolean,
+    tooltipLocation: AndesTooltipLocation,
+    mainAction: AndesTooltipAction,
+    secondaryAction: AndesTooltipAction?,
+    andesTooltipSize: AndesTooltipSize,
+    shouldGainA11yFocus: Boolean
+)
+```
+
+| Parameter        | Description                                                  |
+| ---------------- | ------------------------------------------------------------ |
+| context          | **Context**                                                  |
+| style            | **[AndesTooltipStyle](#andestooltipstyle)**: this value cannot be null. Default style is **LIGHT** |
+| title            | **String?**: this value can be null. Default is **null**.    |
+| body             | **String**: this value cannot be null.                       |
+| isDismissible    | **Boolean**: this value can be null. Default is **true**. <br/>It will show or not the `x` icon in the tooltip, although it will dismiss the tooltip if you scroll the screen. |
+| tooltipLocation  | **[AndesTooltipLocation](#andestooltiplocation)**: this value cannot be null. Default style is **TOP**. <br/>It will set the preferred tooltip location in regard to the target view, which means that if not passed, the tooltip will be rendered on the top of the target by default. |
+| mainAction       | **[AndesTooltipAction](#andestooltipaction)**: this value cannot be null. <br/>It will config the action and style of AndesTooltip main action. |
+| secondaryAction  | **[AndesTooltipAction?](#andestooltipaction)**: this value can be null. <br/>It will config the action and style of AndesTooltip secondary action. This can be rendered if mainAction does exists. |
+| andesTooltipSize | **[AndesTooltipAction?](#andestooltipaction)**: this value can be null. <br/>It will config the action and style of AndesTooltip secondary action. This can be rendered if mainAction does exists. |
+| shouldGainA11yFocus | **Boolean**: this value cannot be null. <br/> This value will tell the a11y services if the component should gain focus at the moment of being displayed on screen. |
+
+<br/>
+
 ## Properties
 
 | Property                                                     | Summary                                                      |
@@ -103,6 +138,7 @@ AndesTooltip(
 | location: [AndesTooltipLocation](#andestooltiplocation)      | **get():** retrieves tooltip location enum value configured<br/> **set(value: [AndesTooltipLocation](#andestooltiplocation)):** updates tooltip preferred location. |
 | titleContentDescription: CharSequence? | **get():** retrieves title content description<br/> **set(value: CharSequence?):** updates title content description. |
 | bodyContentDescription: CharSequence? | **get():** retrieves body content description<br/> **set(value: CharSequence?):** updates body content description. |
+| shouldGainA11yFocus: Boolean | **get():** retrieves whether the component is focusable for a11y services or not<br/> **set(value: Boolean):** updates focusable value. |
 
 <br/>
 
@@ -261,3 +297,31 @@ enum class AndesTooltipLocation
 
 The value passed by constructor will be set as preferred location, but, if AndesTooltip has no enough space to be rendered, it will be rendered in the opposite location or the remaining locations. For example: If the AndesTooltip location is **BOTTOM** and there is not enough space, AndesTooltip will try to render itself on **TOP** of the target. Even if there is not enough space on **TOP** location, it will try in **LEFT** and then in **RIGHT**. In the final case if there is no space anywhere it will not be rendered. **It is highly recommended to always pass UX preferred location.**
 
+## Behavior with accessibility services
+
+To be accessibility compliant, the tooltip has the `shouldGainA11yFocus` property that allows the component 
+to modify its behavior regarding the focus state (see: [properties: shouldGainA11yFocus](#properties)).
+This value will only affect the tooltip behavior when being displayed in a device with the accessibility features enabled.
+
+In order to understand when to use each config, we should check if the tooltip we want to show in screen
+will be opened automatically at the beginning of the navigation (for example, when a screen has finished
+loading, meaning has reached `onViewCreated()`, `onResume()` or any other lifecycle callbacks) or if it will
+be displayed under a user interaction (for example, when a user clicks over an information icon,
+a button or a link).
+
+Both cases are explained in this examples:
+
+| `shouldGainA11yFocus` = true |
+| - |
+| ![tooltip-focusable](https://user-images.githubusercontent.com/81258246/180026587-03b3d4a6-c298-4cf3-8ff3-fc133eaf26ba.gif) |
+
+With this config, the focus before and after showing the tooltip will be in the same element (the
+anchor view, or the trigger).
+
+| `shouldGainA11yFocus` = false |
+| - |
+| ![tooltip-not-focusable](https://user-images.githubusercontent.com/81258246/180026649-d558a290-a5ec-4460-8c67-a240d8827b62.gif) |
+
+- When the component is not focusable, it will be ignored by the a11y services, but it can be accessed when focusing over the anchor view
+  and triggering the "More Info" custom action. After that the component will behave as the focusable version (it will
+  steal the focus and keep it inside the tooltip until dismissed). 

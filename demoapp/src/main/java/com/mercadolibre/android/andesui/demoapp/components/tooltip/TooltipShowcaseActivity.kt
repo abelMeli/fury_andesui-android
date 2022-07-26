@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.view.isEmpty
+import androidx.viewpager.widget.ViewPager
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.demoapp.R
@@ -14,6 +14,8 @@ import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTooltipBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipFocusableBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipNotFocusableBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.setupAdapter
@@ -30,6 +32,8 @@ class TooltipShowcaseActivity : BaseActivity() {
 
     private lateinit var andesTooltipToShow: AndesTooltip
     private lateinit var viewPager: CustomViewPager
+    private var appBarTitle = ""
+    private lateinit var notFocusablePage: TooltipNotFocusablePage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +49,32 @@ class TooltipShowcaseActivity : BaseActivity() {
         viewPager = baseBinding.andesuiViewpager
         viewPager.adapter = AndesPagerAdapter(listOf(
             AndesuiDynamicTooltipBinding.inflate(layoutInflater).root,
-            AndesuiStaticTooltipBinding.inflate(layoutInflater).root
+            AndesuiStaticTooltipBinding.inflate(layoutInflater).root,
+            AndesuiStaticTooltipFocusableBinding.inflate(layoutInflater).root,
+            AndesuiStaticTooltipNotFocusableBinding.inflate(layoutInflater).root
         ))
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) = Unit
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) = Unit
+            override fun onPageSelected(position: Int) {
+                appBarTitle = when (position) {
+                    0, 1 -> "Tooltip"
+                    2 -> "Tooltip: Focusable"
+                    3 -> "Tooltip: Not Focusable"
+                    else -> "Tooltip"
+                }
+                updateAppBarTitle(appBarTitle)
+                if (position == 3) {
+                    notFocusablePage.showTooltip()
+                } else {
+                    notFocusablePage.dismissTooltip()
+                }
+            }
+        })
     }
 
     private fun attachIndicator() {
@@ -57,12 +85,16 @@ class TooltipShowcaseActivity : BaseActivity() {
         val adapter = viewPager.adapter as AndesPagerAdapter
         addDynamicPage(adapter.views[0])
         addStaticPage(adapter.views[1])
+        TooltipFocusablePage().create(adapter.views[2])
+        notFocusablePage = TooltipNotFocusablePage()
+        notFocusablePage.create(adapter.views[3])
     }
 
     @Suppress("LongMethod")
     private fun addDynamicPage(container: View) {
         val binding = AndesuiDynamicTooltipBinding.bind(container)
         val checkboxDismiss = binding.dismissableCheckbox
+        val checkboxFocusable = binding.focusableCheckbox
         val title = binding.titleText
         val body = binding.bodyText
         val primaryActionText = binding.primaryActionText
@@ -159,6 +191,7 @@ class TooltipShowcaseActivity : BaseActivity() {
             primaryActionText.text = null
             secondaryActionText.text = null
             checkboxDismiss.status = AndesCheckboxStatus.UNSELECTED
+            checkboxFocusable.status = AndesCheckboxStatus.UNSELECTED
 
             andesTooltipToShow = AndesTooltip(
                     context = this,
@@ -253,6 +286,7 @@ class TooltipShowcaseActivity : BaseActivity() {
         }
 
         tooltip.setOnClickListener {
+            andesTooltipToShow.shouldGainA11yFocus = checkboxFocusable.status == AndesCheckboxStatus.SELECTED
             andesTooltipToShow.show(it)
         }
     }
