@@ -1,5 +1,6 @@
 #5.8.0
 ## 🚀 Feature
+- Enhance text field accessibility | Author: [@meligeo](https://github.com/meligeo
 - Can enable and create AndesCarousel as Infinite | Author: [@meligeo](https://github.com/meligeo)
 - `AndesTooltip` accessibility improvements | Author: [@juanunzu](https://github.com/juanunzu)
 

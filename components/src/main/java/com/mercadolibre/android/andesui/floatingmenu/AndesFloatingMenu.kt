@@ -8,7 +8,9 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethod
 import android.widget.FrameLayout
+import android.widget.ListPopupWindow
 import android.widget.PopupWindow
 import androidx.core.view.ViewCompat
 import com.mercadolibre.android.andesui.R
@@ -208,6 +210,13 @@ class AndesFloatingMenu(
 
     internal fun setFocusable(isFocusable: Boolean) {
         floatingMenu.isFocusable = isFocusable
+    }
+
+    /**
+     * Disables the AndesFloatingMenu to work with some input method.
+     */
+    internal fun disableInputMethod() {
+        floatingMenu.inputMethodMode = ListPopupWindow.INPUT_METHOD_NOT_NEEDED
     }
 
     private fun getConfig(parentView: View) = AndesFloatingMenuConfigFactory.create(

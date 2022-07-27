@@ -96,7 +96,6 @@ class AndesListAdapter(
                 is AndesListViewItemSimple -> bindSimpleItem(andesListItemConfig, dividerEnabled)
                 is AndesListViewItemChevron -> bindChevronItem(andesListItemConfig, dividerEnabled)
             }
-
             itemView.accessibilityDelegate = AndesListViewItemAccessibilityDelegate(andesListItemConfig)
         }
 

@@ -77,6 +77,20 @@ class AndesFloatingMenuTest {
     }
 
     @Test
+    fun `FloatingMenu created correctly when disable keyboard`() {
+        val reqOrientation = AndesFloatingMenuOrientation.Left
+        val reqWidth = AndesFloatingMenuWidth.Fixed
+        val reqRows = AndesFloatingMenuRows.Medium
+
+        val floatingMenu = AndesFloatingMenu(activity, andesList, null, reqWidth, reqRows, reqOrientation)
+        floatingMenu.disableInputMethod()
+
+        Assert.assertEquals(reqOrientation, floatingMenu.orientation)
+        Assert.assertEquals(reqWidth, floatingMenu.width)
+        Assert.assertEquals(reqRows, floatingMenu.rows)
+    }
+
+    @Test
     fun `FloatingMenu created correctly with searchbox`() {
         val reqOrientation = AndesFloatingMenuOrientation.Left
         val reqWidth = AndesFloatingMenuWidth.Fixed

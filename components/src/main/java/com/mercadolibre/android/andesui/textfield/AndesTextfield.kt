@@ -31,6 +31,7 @@ import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
+import com.mercadolibre.android.andesui.databinding.AndesLayoutTextfieldBinding
 import com.mercadolibre.android.andesui.icons.IconProvider
 import com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
 import com.mercadolibre.android.andesui.textfield.accessibility.AndesTextfieldAccessibilityDelegate
@@ -241,16 +242,19 @@ class AndesTextfield : ConstraintLayout {
             if (value != null) setupTextComponentTouchAction() else clearTextComponentTouchAction()
         }
 
+    private val binding by lazy {
+        AndesLayoutTextfieldBinding.inflate(LayoutInflater.from(context), this, true)
+    }
     private lateinit var andesTextfieldAttrs: AndesTextfieldAttrs
-    private lateinit var textfieldContainer: ConstraintLayout
-    internal lateinit var textContainer: ConstraintLayout
-    private lateinit var labelComponent: TextView
-    private lateinit var helperComponent: TextView
-    private lateinit var counterComponent: TextView
-    internal lateinit var textComponent: AndesEditText
-    private lateinit var iconComponent: SimpleDraweeView
-    internal lateinit var leftComponent: FrameLayout
-    private lateinit var rightComponent: FrameLayout
+    private var textfieldContainer: ConstraintLayout = binding.andesTextfieldContainer
+    internal var textContainer: ConstraintLayout = binding.andesTextfieldTextContainer
+    private var labelComponent: TextView = binding.andesTextfieldLabel
+    private var helperComponent: TextView = binding.andesTextfieldHelper
+    private var counterComponent: TextView = binding.andesTextfieldCounter
+    internal var textComponent: AndesEditText = binding.andesTextfieldEdittext
+    private var iconComponent: SimpleDraweeView = binding.andesTextfieldIcon
+    internal var leftComponent: FrameLayout = binding.andesTextfieldLeftComponent
+    internal var rightComponent: FrameLayout = binding.andesTextfieldRightComponent
     private var maskWatcher: TextFieldMaskWatcher? = null
     private var hiddenText: String? = EMPTY_STRING
     private val a11yEventDispatcher by lazy { AndesTextfieldAccessibilityEventDispatcher() }
@@ -364,17 +368,7 @@ class AndesTextfield : ConstraintLayout {
      * After a view is created then a view id is added to it.
      */
     private fun initComponents() {
-        val container = LayoutInflater.from(context).inflate(R.layout.andes_layout_textfield, this, true)
 
-        textfieldContainer = container.findViewById(R.id.andes_textfield_container)
-        textContainer = container.findViewById(R.id.andes_textfield_text_container)
-        labelComponent = container.findViewById(R.id.andes_textfield_label)
-        helperComponent = container.findViewById(R.id.andes_textfield_helper)
-        counterComponent = container.findViewById(R.id.andes_textfield_counter)
-        iconComponent = container.findViewById(R.id.andes_textfield_icon)
-        textComponent = container.findViewById(R.id.andes_textfield_edittext)
-        leftComponent = container.findViewById(R.id.andes_textfield_left_component)
-        rightComponent = container.findViewById(R.id.andes_textfield_right_component)
     }
 
     private fun setupViewId() {
@@ -688,7 +682,7 @@ class AndesTextfield : ConstraintLayout {
     private fun setupRightComponentNavigation() {
         rightContent?.let {
             when (it) {
-                AndesTextfieldRightContent.SUFFIX, AndesTextfieldRightContent.CLEAR,
+                AndesTextfieldRightContent.CLEAR,
                 AndesTextfieldRightContent.ACTION, AndesTextfieldRightContent.CHECKBOX -> {
                     rightComponent.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
                     rightComponent.isFocusable = true

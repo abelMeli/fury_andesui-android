@@ -124,7 +124,9 @@ class AndesAutosuggest : ConstraintLayout, AndesListDelegate {
         delegate = this@AndesAutosuggest
     }
 
-    private val andesFloatingMenu = AndesFloatingMenu(context, andesList, rows = AndesFloatingMenuRows.Max)
+    private val andesFloatingMenu = AndesFloatingMenu(context, andesList, rows = AndesFloatingMenuRows.Max).also {
+        it.disableInputMethod()
+    }
     private val textfield: AndesTextfield
 
     private val accessibilityManager by lazy { getSystemService(context, AccessibilityManager::class.java) }

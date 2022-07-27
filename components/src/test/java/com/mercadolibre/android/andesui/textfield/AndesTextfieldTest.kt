@@ -4,6 +4,8 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.view.View
+import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
@@ -15,6 +17,7 @@ import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
+import com.mercadolibre.android.andesui.utils.buildAttributeSet
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doNothing
 import com.nhaarman.mockitokotlin2.spy
@@ -37,14 +40,6 @@ class AndesTextfieldTest {
     private var context = RuntimeEnvironment.application
     private lateinit var textfield: AndesTextfield
 
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun beforeClass() {
-            SoLoader.setInTestMode()
-        }
-    }
-
     @Before
     fun setUp() {
         val requestListeners = setOf<RequestListener>(RequestLoggingListener())
@@ -55,6 +50,21 @@ class AndesTextfieldTest {
         Fresco.initialize(context, config)
         FLog.setMinimumLoggingLevel(FLog.VERBOSE)
         textfield = AndesTextfield(context)
+    }
+
+    @Test
+    fun `create text field by xml`() {
+        val attrSet = buildAttributeSet {
+            addAttribute(R.attr.andesTextfieldMaxLines, "1")
+        }
+        textfield = AndesTextfield(context, attrSet, 0)
+        textfield.textContainer = ConstraintLayout(context)
+        textfield.leftComponent = FrameLayout(context)
+        textfield.rightComponent = FrameLayout(context)
+        assertEquals(1, textfield.maxLines)
+        assertNotNull(textfield.textContainer)
+        assertNotNull(textfield.leftComponent)
+        assertNotNull(textfield.rightComponent)
     }
 
     @Test
@@ -240,5 +250,13 @@ class AndesTextfieldTest {
         textfield.maxLines = 3
 
         assertEquals(InputType.TYPE_TEXT_FLAG_MULTI_LINE, textfield.inputType)
+    }
+
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun beforeClass() {
+            SoLoader.setInTestMode()
+        }
     }
 }

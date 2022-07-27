@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/andes_textfield_label"
+        android:labelFor="@+id/andes_textfield_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/andes_textfield_label_paddingLeft"

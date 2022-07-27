@@ -13,6 +13,7 @@ import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.textfield.accessibility.AndesTextfieldAccessibilityDelegate
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
+import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
@@ -60,13 +61,17 @@ class AndesTextfieldAccessibilityDelegateTest {
         val label = "label"
         val helper = "helper"
         val prefix = "prefix"
+        val suffix = "suffix"
         val counter = 10
         val counterText = "máximo número de caracteres: 10"
         val placeholder = "placeholder"
+
         textfield.label = label
         textfield.helper = helper
         textfield.leftContent = AndesTextfieldLeftContent.PREFIX
+        textfield.rightContent = AndesTextfieldRightContent.SUFFIX
         textfield.setPrefix(prefix)
+        textfield.setSuffix(suffix)
         textfield.counter = counter
         textfield.placeholder = placeholder
         nodeInfo = textfield.createAccessibilityNodeInfo()
@@ -75,7 +80,7 @@ class AndesTextfieldAccessibilityDelegateTest {
         a11yDelegate.onInitializeAccessibilityNodeInfo(textfield, nodeInfo)
 
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$label, $helper, $counterText. $prefix, $placeholder", nodeInfo.contentDescription)
+        Assert.assertEquals("$label, $helper, $prefix, $placeholder $suffix, ,$counterText.", nodeInfo.contentDescription)
         Assert.assertNotEquals("other text", nodeInfo.contentDescription)
     }
 
@@ -87,13 +92,14 @@ class AndesTextfieldAccessibilityDelegateTest {
         a11yDelegate.onInitializeAccessibilityNodeInfo(textfield, nodeInfo)
 
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals(", , . , ", nodeInfo.contentDescription)
+        Assert.assertEquals("     .", nodeInfo.contentDescription)
         Assert.assertNotEquals("other text", nodeInfo.contentDescription)
     }
 
     @Test
     fun `onInitializeAccessibilityNodeInfo works correctly with state idle, with entered text, with counter`() {
-        textfield.text = "entered text"
+        val enteredText = "entered text"
+        textfield.text = enteredText
         textfield.counter = 30
         val counterText = "Caracteres ingresados: ${textfield.text?.length} de ${textfield.counter}"
         nodeInfo = textfield.createAccessibilityNodeInfo()
@@ -102,7 +108,7 @@ class AndesTextfieldAccessibilityDelegateTest {
         a11yDelegate.onInitializeAccessibilityNodeInfo(textfield, nodeInfo)
 
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals(", , $counterText. , ", nodeInfo.contentDescription)
+        Assert.assertEquals("   $enteredText  ,$counterText.", nodeInfo.contentDescription)
         Assert.assertNotEquals("other text", nodeInfo.contentDescription)
     }
 
@@ -125,7 +131,7 @@ class AndesTextfieldAccessibilityDelegateTest {
         a11yDelegate.onInitializeAccessibilityNodeInfo(textfield, nodeInfo)
 
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$label. $prefix, $placeholder", nodeInfo.contentDescription)
+        Assert.assertEquals("$label, $prefix, $placeholder", nodeInfo.contentDescription)
         Assert.assertNotEquals("other text", nodeInfo.contentDescription)
     }
 
@@ -150,7 +156,30 @@ class AndesTextfieldAccessibilityDelegateTest {
         a11yDelegate.onInitializeAccessibilityNodeInfo(textfield, nodeInfo)
 
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$label, $errorText, $helper, $counterText. $prefix, $placeholder", nodeInfo.contentDescription)
+        Assert.assertEquals("$label, $errorText, $helper, $prefix, $placeholder  ,$counterText.", nodeInfo.contentDescription)
+        Assert.assertNotEquals("other text", nodeInfo.contentDescription)
+    }
+
+    @Test
+    fun `onInitializeAccessibilityNodeInfo works correctly with state Error when empty values`() {
+        val label = null
+        val helper = null
+        val prefix = ""
+        val counter = 0
+        val placeholder = null
+        textfield.label = label
+        textfield.helper = helper
+        textfield.setPrefix(prefix)
+        textfield.counter = counter
+        textfield.placeholder = placeholder
+        textfield.state = AndesTextfieldState.ERROR
+        nodeInfo = textfield.createAccessibilityNodeInfo()
+        a11yDelegate = textfield.accessibilityDelegate as AndesTextfieldAccessibilityDelegate
+
+        a11yDelegate.onInitializeAccessibilityNodeInfo(textfield, nodeInfo)
+
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertEquals(" Error,  ,   .", nodeInfo.contentDescription)
         Assert.assertNotEquals("other text", nodeInfo.contentDescription)
     }
 }
