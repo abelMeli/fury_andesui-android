@@ -4,11 +4,6 @@
     <dimen name="andes_feedbackscreen_congrats_header_margin_top">56dp</dimen>
     <dimen name="andes_feedbackscreen_thumbnail_margin_bottom">16dp</dimen>
     <dimen name="andes_feedbackscreen_thumbnail_margin_start">16dp</dimen>
-    <dimen name="andes_feedbackscreen_header_title_size">24sp</dimen>
-    <dimen name="andes_feedbackscreen_congrats_header_title_size">20sp</dimen>
-    <dimen name="andes_feedbackscreen_header_highlight_size">16sp</dimen>
-    <dimen name="andes_feedbackscreen_header_description_size">16sp</dimen>
-    <dimen name="andes_feedbackscreen_header_overline_size">14sp</dimen>
     <dimen name="andes_feedbackscreen_close_icon_margin">4dp</dimen>
 
 

@@ -262,7 +262,7 @@ class AndesFeedbackScreenViewTest {
         val badge = screenView.getThumbnailBadge()
 
         with(screenView.getTitle()) {
-            text assertEquals "New Title"
+            text.toString() assertEquals "New Title"
             visibility assertEquals View.VISIBLE
         }
         with(screenView.getDescription()) {
@@ -277,7 +277,7 @@ class AndesFeedbackScreenViewTest {
         }
 
         with(screenView.getHighlight()) {
-            text assertEquals "New Highlight"
+            text.toString() assertEquals "New Highlight"
             visibility assertEquals View.VISIBLE
             currentTextColor assertEquals badge.badgeComponent.color.type.primaryColor().colorInt(context)
         }

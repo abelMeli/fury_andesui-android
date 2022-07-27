@@ -44,7 +44,7 @@ class AndesFeedbackScreenFactoryTest {
         val errorCode: TextView = view.findViewById(R.id.andes_feedbackscreen_header_error_code)
 
 
-        Assert.assertEquals(title.text, "Title")
+        Assert.assertEquals(title.text.toString(), "Title")
         Assert.assertEquals(description.text.toString(), "Description")
         Assert.assertEquals(errorCode.text.toString(), "Code: DFE01-1234567")
     }

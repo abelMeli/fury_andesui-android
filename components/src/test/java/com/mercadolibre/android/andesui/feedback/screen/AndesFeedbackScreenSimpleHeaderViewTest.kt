@@ -57,11 +57,11 @@ class AndesFeedbackScreenSimpleHeaderViewTest {
         header.getDescription().visibility assertEquals View.GONE
         header.getHighlight().visibility assertEquals View.GONE
         with(header.getTitle()) {
-            text assertEquals "Title"
+            text.toString() assertEquals "Title"
             visibility assertEquals View.VISIBLE
         }
         with(header.getOverline()) {
-            text assertEquals "Overline"
+            text.toString() assertEquals "Overline"
             visibility assertEquals View.VISIBLE
         }
     }
@@ -85,11 +85,11 @@ class AndesFeedbackScreenSimpleHeaderViewTest {
 
         header.getOverline().visibility assertEquals View.GONE
         with(header.getTitle()) {
-            text assertEquals "Title"
+            text.toString() assertEquals "Title"
             visibility assertEquals View.VISIBLE
         }
         with(header.getHighlight()) {
-            text assertEquals "Highlight"
+            text.toString() assertEquals "Highlight"
             visibility assertEquals View.VISIBLE
             currentTextColor assertEquals badgeType.type.type.primaryColor().colorInt(context)
         }

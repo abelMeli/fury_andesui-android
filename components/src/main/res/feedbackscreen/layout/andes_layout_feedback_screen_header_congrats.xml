@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toEndOf="@id/andes_feedbackscreen_congrats_header_title"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.mercadolibre.android.andesui.textview.AndesTextView
                 android:id="@+id/andes_feedbackscreen_congrats_header_overline"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,51 +43,51 @@
                 android:textColor="@color/andes_text_color_primary"
                 android:importantForAccessibility="yes"
                 android:focusableInTouchMode="true"
-                android:textSize="@dimen/andes_feedbackscreen_header_overline_size"
+                app:andesTextViewStyle="bodyS"
                 app:layout_constraintBottom_toTopOf="@id/andes_feedbackscreen_congrats_header_title"
                 app:layout_constraintEnd_toEndOf="@id/andes_feedbackscreen_congrats_header_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
+            <com.mercadolibre.android.andesui.textview.AndesTextView
                 android:id="@+id/andes_feedbackscreen_congrats_header_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/andes_text_color_primary"
                 android:importantForAccessibility="yes"
                 android:focusableInTouchMode="true"
-                android:textSize="@dimen/andes_feedbackscreen_congrats_header_title_size"
+                app:andesTextViewStyle="titleS"
                 app:layout_constraintBottom_toTopOf="@id/andes_feedbackscreen_congrats_header_highlight"
                 app:layout_constraintEnd_toStartOf="@id/andes_feedbackscreen_congrats_header_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/andes_feedbackscreen_congrats_header_overline"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
+            <com.mercadolibre.android.andesui.textview.AndesTextView
                 android:id="@+id/andes_feedbackscreen_congrats_header_highlight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/andes_feedbackscreen_congrats_header_body_padding_vertical"
                 android:textColor="@color/andes_text_color_primary"
-                android:textSize="@dimen/andes_feedbackscreen_header_highlight_size"
                 android:importantForAccessibility="yes"
                 android:focusableInTouchMode="true"
+                app:andesTextViewStyle="titleXs"
                 app:layout_constraintBottom_toTopOf="@id/andes_feedbackscreen_congrats_header_description"
                 app:layout_constraintEnd_toEndOf="@id/andes_feedbackscreen_congrats_header_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/andes_feedbackscreen_congrats_header_title"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
+            <com.mercadolibre.android.andesui.textview.AndesTextView
                 android:id="@+id/andes_feedbackscreen_congrats_header_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/andes_feedbackscreen_congrats_header_body_padding_vertical"
                 android:textColor="@color/andes_text_color_primary"
-                android:textSize="@dimen/andes_feedbackscreen_header_description_size"
                 android:importantForAccessibility="yes"
                 android:focusableInTouchMode="true"
+                app:andesTextViewStyle="bodyM"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/andes_feedbackscreen_congrats_header_title"
                 app:layout_constraintStart_toStartOf="parent"

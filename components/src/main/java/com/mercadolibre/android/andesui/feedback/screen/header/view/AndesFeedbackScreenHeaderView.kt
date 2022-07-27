@@ -55,7 +55,6 @@ internal open class AndesFeedbackScreenHeaderView : ConstraintLayout {
 
     protected open fun setupComponents() {
         setupViewId()
-        setupTypeface()
         setupLayout()
     }
 
@@ -76,13 +75,6 @@ internal open class AndesFeedbackScreenHeaderView : ConstraintLayout {
         highlight.setTextColor(type.type.type.primaryColor().colorInt(context))
 
         setupA11y()
-    }
-
-    private fun setupTypeface() {
-        title.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
-        highlight.typeface = context.getFontOrDefault(R.font.andes_font_semibold)
-        description.typeface = context.getFontOrDefault(R.font.andes_font_regular)
-        overline.typeface = context.getFontOrDefault(R.font.andes_font_regular)
     }
 
     fun setupAssetComponent(

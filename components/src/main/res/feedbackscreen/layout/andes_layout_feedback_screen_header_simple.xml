@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.mercadolibre.android.andesui.textview.AndesTextView
         android:id="@+id/andes_feedbackscreen_header_overline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,27 +41,27 @@
         android:importantForAccessibility="yes"
         android:focusableInTouchMode="true"
         android:textColor="@color/andes_text_color_primary"
-        android:textSize="@dimen/andes_feedbackscreen_header_overline_size"
+        app:andesTextViewStyle="bodyS"
         app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_title"
         app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_image" />
 
-    <TextView
+    <com.mercadolibre.android.andesui.textview.AndesTextView
         android:id="@+id/andes_feedbackscreen_header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/andes_text_color_primary"
-        android:textSize="@dimen/andes_feedbackscreen_header_title_size"
         android:importantForAccessibility="yes"
         android:focusableInTouchMode="true"
+        app:andesTextViewStyle="titleM"
         app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_highlight"
         app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_overline"/>
 
-    <TextView
+    <com.mercadolibre.android.andesui.textview.AndesTextView
         android:id="@+id/andes_feedbackscreen_header_highlight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,13 +69,13 @@
         android:importantForAccessibility="yes"
         android:focusableInTouchMode="true"
         android:textColor="@color/andes_text_color_primary"
-        android:textSize="@dimen/andes_feedbackscreen_header_highlight_size"
+        app:andesTextViewStyle="titleXs"
         app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_description"
         app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_title" />
 
-    <TextView
+    <com.mercadolibre.android.andesui.textview.AndesTextView
         android:id="@+id/andes_feedbackscreen_header_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
         android:importantForAccessibility="yes"
         android:focusableInTouchMode="true"
         android:textColor="@color/andes_text_color_primary"
-        android:textSize="@dimen/andes_feedbackscreen_header_description_size"
+        app:andesTextViewStyle="bodyM"
         app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintTop_toBottomOf="@+id/andes_feedbackscreen_header_highlight" />

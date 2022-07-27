@@ -3,6 +3,7 @@
 - Enhance text field accessibility | Author: [@meligeo](https://github.com/meligeo
 - Can enable and create AndesCarousel as Infinite | Author: [@meligeo](https://github.com/meligeo)
 - `AndesTooltip` accessibility improvements | Author: [@juanunzu](https://github.com/juanunzu)
+- `FeedbackScreen` now uses `AndesTextView` instead of regular android's TextViews | Author: [@PatoCode045](https://github.com/PatoCode045)
 
 # v5.7.1
 ## 🛠 Fixes
