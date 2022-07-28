@@ -164,7 +164,7 @@ class AndesTextView : AppCompatTextView {
     }
 
     private fun setupText(config: AndesTextViewConfiguration) {
-        movementMethod = LinkMovementMethod.getInstance()
+        movementMethod = config.movementMethod
         text = config.spannedText
     }
 

@@ -2,8 +2,8 @@ package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
 import android.graphics.Typeface
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.text.SpannedString
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -184,11 +184,11 @@ class AndesMoneyAmountTest {
         val binding = AndesLayoutMoneyAmountBinding.bind(moneyAmount.getChildAt(0))
         with(binding) {
             moneyAmountText.text.toString() assertEquals "$ 1,23415"
-            (moneyAmountText.text as SpannableString).getSpans(
+            (moneyAmountText.text as SpannedString).getSpans(
                 0,
                 moneyAmountText.text.length,
                 Any::class.java
-            ).size assertEquals 4 // two spans: amountsize + superscript + strike + size
+            ).size assertEquals 3 // three spans: amountsize + superscript + strike
         }
     }
 

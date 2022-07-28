@@ -2,7 +2,10 @@ package com.mercadolibre.android.andesui.textview.factory
 
 import android.content.Context
 import android.graphics.Typeface
+import android.text.method.LinkMovementMethod
+import android.text.method.MovementMethod
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColorInterface
 import com.mercadolibre.android.andesui.textview.style.AndesTextViewStyle
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
@@ -19,7 +22,8 @@ internal data class AndesTextViewConfiguration(
     val textFont: Typeface,
     val lineHeight: Int,
     val spannedText: CharSequence,
-    private val text: CharSequence?
+    private val text: CharSequence?,
+    val movementMethod: MovementMethod?
 )
 
 internal object AndesTextViewConfigurationFactory {
@@ -33,10 +37,14 @@ internal object AndesTextViewConfigurationFactory {
                 textFont = resolveTypeface(context, andesTextViewStyle, andesTextViewCustomStyle),
                 lineHeight = resolveLineHeight(context, andesTextViewStyle),
                 spannedText = resolveSpannedText(context, this, text),
-                text = text
+                text = text,
+                movementMethod = resolveMovementMethod(andesTextViewBodyLinks)
             )
         }
     }
+
+    private fun resolveMovementMethod(andesTextViewBodyLinks: AndesBodyLinks?) =
+        LinkMovementMethod.getInstance().takeIf { andesTextViewBodyLinks != null }
 
     private fun resolveColor(context: Context, color: AndesTextViewColorInterface): Int = color.getColor(context)
 

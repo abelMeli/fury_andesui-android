@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.textview
 
 import android.content.Context
 import android.graphics.Color
+import android.text.method.LinkMovementMethod
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.widget.LinearLayout
@@ -32,6 +33,8 @@ import com.mercadolibre.android.andesui.textview.style.AndesTextViewStyle
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.MockConfigProvider
 import junit.framework.Assert.assertFalse
+import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -87,6 +90,7 @@ class AndesTextViewTest {
         textView.bodyBolds assertIsNull true
         textView.bodyLinks assertIsNull true
         textView.isLinkColorInverted assertEquals false
+        textView.movementMethod assertIsNull true
     }
 
     @Test
@@ -100,6 +104,7 @@ class AndesTextViewTest {
         textView.bodyBolds assertIsNull true
         textView.bodyLinks assertIsNull true
         textView.isLinkColorInverted assertEquals false
+        textView.movementMethod assertIsNull true
     }
 
     @Test
@@ -121,6 +126,7 @@ class AndesTextViewTest {
         textView.bodyLinks assertIsNull false
         textView.isLinkColorInverted assertEquals true
         textView.text.hasSpans() assertEquals true
+        assertThat(textView.movementMethod).usingRecursiveComparison().isEqualTo(LinkMovementMethod.getInstance())
 
         val hasBodyBoldSpan = textView.text.getSpans().stream().anyMatch {
             it is StyleSpan
