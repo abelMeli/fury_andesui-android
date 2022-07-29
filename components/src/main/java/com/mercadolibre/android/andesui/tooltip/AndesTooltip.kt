@@ -336,7 +336,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
             if (canShowTooltip(target)) {
                 container.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
                 bodyWindow.width = tooltipMeasuredWidth
-                bodyWindow.height = tooltipMeasuredHeight
+                bodyWindow.height = FrameLayout.LayoutParams.WRAP_CONTENT
                 constraintContainer.layoutParams = FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.MATCH_PARENT,
                         FrameLayout.LayoutParams.MATCH_PARENT

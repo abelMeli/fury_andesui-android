@@ -6,6 +6,7 @@
 - `FeedbackScreen` now uses `AndesTextView` instead of regular android's TextViews | Author: [@PatoCode045](https://github.com/PatoCode045)
 ## 🛠 Fixes
 - Fix in `AndesTextView` that was causing a malfunction when setting it as singleline and using ellipsize end | Author: [@juanunzu](https://github.com/juanunzu)
+- Fixed Tooltip height | Author: [@paulav88] (https://github.com/paulav88)
 
 # v5.7.1
 ## 🛠 Fixes
