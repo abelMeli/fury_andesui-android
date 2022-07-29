@@ -94,6 +94,7 @@ class MessageShowcaseActivity : BaseActivity() {
         val secondaryActionText = binding.secondaryActionText
         val linkActionText = binding.linkActionText
         val changeMessage = binding.message
+        val headingCheckbox = binding.headingCheckbox
 
         val links = listOf(
                 AndesBodyLink(4, 11),
@@ -127,6 +128,7 @@ class MessageShowcaseActivity : BaseActivity() {
             changeMessage.hierarchy = AndesMessageHierarchy.fromString(hierarchySpinner.selectedItem.toString())
             changeMessage.bodyLinks = null
             changeMessage.bullets = null
+            changeMessage.a11yTitleIsHeader = headingCheckbox.status == AndesCheckboxStatus.SELECTED
 
             if (primaryActionText.text.toString().isNotEmpty()) {
                 changeMessage.setupPrimaryAction(

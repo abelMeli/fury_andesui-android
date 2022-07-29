@@ -19,7 +19,8 @@ AndesMessage(
     isDismissable = false,
     bodyLinks = null,
     thumbnail = null,
-    bullets = null
+    bullets = null,
+    isHeadingEnable = false
 )
 ```
 
@@ -37,7 +38,8 @@ Basic Sample XML
             app:andesMessageHierarchy="quiet"
             app:andesMessageType="warning"
             app:andesMessageTitleText="@string/title_text"
-            app:andesMessageThumbnail="@drawable/icon" />
+            app:andesMessageThumbnail="@drawable/icon"
+            app:andesMessageA11yTitleIsHeader="true"/>
 ```
 <br/>
 
@@ -50,6 +52,7 @@ Basic Sample XML
 | app:andesMessageType | property for handling the feedback needed through color. Possible values: **neutral**, **success**, **warning**, **error** |
 | app:andesMessageTitleText | text to display in the title of the message. |
 | app:andesMessageThumbnail | drawable to display in the message. |
+| app:andesMessageA11yTitleIsHeader | boolean value used to indicate if the title is heading. |
 
 <br/>
 
@@ -59,6 +62,7 @@ Basic Sample XML
 | AndesMessage(context: Context, attrs: AttributeSet?) |
 | AndesMessage(context: Context, attrs: AttributeSet?, defStyleAttr: Int) |
 | [AndesMessage](#andesmessagecontext-context-hierarchy-andesmessagehierarchy-type-andesmessagetype-body-string-title-string-isDismissable-boolean-bodyLinks-andesbodylinks-thumbnail-drawable)(context: Context, hierarchy: [AndesMessageHierarchy](#andesmessagehierarchy), type: [AndesMessageType](#andesmessagetype), body: String, title: String?, isDismissable: Boolean, bodyLinks: [AndesBodyLinks](#andesbodylinks), thumbnail: Drawable?, bullets: List<AndesBullet>?)|
+| [AndesMessage](#andesmessagecontext-context-hierarchy-andesmessagehierarchy-type-andesmessagetype-body-string-title-string-isDismissable-boolean-bodyLinks-andesbodylinks-thumbnail-drawable)(context: Context, hierarchy: [AndesMessageHierarchy](#andesmessagehierarchy), type: [AndesMessageType](#andesmessagetype), body: String, title: String?, isDismissable: Boolean, bodyLinks: [AndesBodyLinks](#andesbodylinks), thumbnail: Drawable?, bullets: List<AndesBullet>?, isHeadingEnable: Boolean)|
 
 <br/>
 
@@ -88,6 +92,7 @@ Basic Sample XML
 | bodyLinks: AndesBodyLinks| **get():** retrieves body links, or null if is not set. <br/> **set(value: AndesBodyLinks):** updates link values. |
 | thumbnail: Drawable? | **get():** retrieves the drawable object shown in the component body, or null if is not set. <br/> **set(value: Drawable?):** updates component drawable shown in the body. |
 | bullet: List<AndesBullet>? | **get():** retrieves a list of AndesBullet, or null if is not set. <br/> **set(value: List<AndesBullet>?):** updates bullet span values. |
+| a11yTitleIsHeader: Boolean | **get():**: retrieves true or false according if the title can be heading or not. <br/> **set(value: Boolean):** updates component.|
 
 <br/>
 

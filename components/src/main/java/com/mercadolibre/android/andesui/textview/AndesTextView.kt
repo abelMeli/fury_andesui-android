@@ -1,11 +1,9 @@
 package com.mercadolibre.android.andesui.textview
 
 import android.content.Context
-import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
-import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
@@ -163,6 +161,10 @@ class AndesTextView : AppCompatTextView {
         typeface = config.textFont
     }
 
+    /**
+     * The movementMethod property is set to detect links in text only when the bodyLinks is not null,
+     * because when accessibility was on it was announcing all AndesTextViews as actionable elements.
+     */
     private fun setupText(config: AndesTextViewConfiguration) {
         movementMethod = config.movementMethod
         text = config.spannedText

@@ -20,7 +20,8 @@ internal data class AndesMessageAttrs(
     val isDismissable: Boolean,
     val bodyLinks: AndesBodyLinks?,
     val thumbnail: Drawable?,
-    val bullets: List<AndesBullet>?
+    val bullets: List<AndesBullet>?,
+    val a11yTitleIsHeader: Boolean
 )
 
 /**
@@ -61,7 +62,8 @@ internal object AndesMessageAttrsParser {
                 isDismissable = typedArray.getBoolean(R.styleable.AndesMessage_andesMessageDismissable, false),
                 bodyLinks = null,
                 thumbnail = typedArray.getDrawable(R.styleable.AndesMessage_andesMessageThumbnail),
-                bullets = null
+                bullets = null,
+                a11yTitleIsHeader = typedArray.getBoolean(R.styleable.AndesMessage_andesMessageA11yTitleIsHeader, false),
         ).also { typedArray.recycle() }
     }
 }

@@ -40,7 +40,8 @@ internal data class AndesMessageConfiguration(
     val thumbnail: Drawable?,
     val bulletGapWith: Int,
     val bulletDotSize: Int,
-    val bulletMarginTop: Int
+    val bulletMarginTop: Int,
+    val a11yTitleIsHeader: Boolean
 )
 
 @Suppress("TooManyFunctions")
@@ -100,7 +101,8 @@ internal object AndesMessageConfigurationFactory {
                 thumbnail = thumbnail,
                 bulletGapWith = resolveBulletGapWith(context),
                 bulletDotSize = resolveBulletDotSize(context),
-                bulletMarginTop = resolveBulletMarginTop(context)
+                bulletMarginTop = resolveBulletMarginTop(context),
+                a11yTitleIsHeader = a11yTitleIsHeader
             )
         }
     }

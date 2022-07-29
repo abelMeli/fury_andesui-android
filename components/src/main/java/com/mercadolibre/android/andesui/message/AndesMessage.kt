@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
 import com.facebook.drawee.view.SimpleDraweeView
 import com.mercadolibre.android.andesui.BuildConfig
 import com.mercadolibre.android.andesui.R
@@ -105,6 +106,17 @@ class AndesMessage : CardView {
             setupBodyComponent(createConfig())
         }
 
+    /**
+     * Getter and setter for [a11yTitleIsHeader].
+     * Because it is not in all cases necessary for the title to be a heading.
+     */
+    var a11yTitleIsHeader: Boolean
+        get() = andesMessageAttrs.a11yTitleIsHeader
+        set(value) {
+            andesMessageAttrs = andesMessageAttrs.copy(a11yTitleIsHeader = value)
+            setupA11yHeading(createConfig())
+        }
+
     private lateinit var messageContainer: ConstraintLayout
     private lateinit var titleComponent: TextView
     lateinit var bodyComponent: TextView
@@ -148,6 +160,7 @@ class AndesMessage : CardView {
         initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, null)
     }
 
+    @Suppress("unused", "LongParameterList")
     constructor(
         context: Context,
         hierarchy: AndesMessageHierarchy = HIERARCHY_DEFAULT,
@@ -160,6 +173,22 @@ class AndesMessage : CardView {
         bullets: List<AndesBullet>?
     ) : super(context) {
         initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bullets)
+    }
+
+    @Suppress("unused", "LongParameterList")
+    constructor(
+        context: Context,
+        hierarchy: AndesMessageHierarchy = HIERARCHY_DEFAULT,
+        type: AndesMessageType = STATE_DEFAULT,
+        body: String,
+        title: String? = TITLE_DEFAULT,
+        isDismissable: Boolean = IS_DISMISSIBLE_DEFAULT,
+        bodyLinks: AndesBodyLinks? = null,
+        thumbnail: Drawable? = null,
+        bullets: List<AndesBullet>?,
+        isHeadingEnable: Boolean
+    ) : super(context) {
+        initAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bullets, isHeadingEnable)
     }
 
     /**
@@ -182,9 +211,20 @@ class AndesMessage : CardView {
         isDismissable: Boolean,
         bodyLinks: AndesBodyLinks?,
         thumbnail: Drawable?,
-        bullets: List<AndesBullet>?
+        bullets: List<AndesBullet>?,
+        isHeadingEnable: Boolean = false
     ) {
-        andesMessageAttrs = AndesMessageAttrs(hierarchy, type, body, title, isDismissable, bodyLinks, thumbnail, bullets)
+        andesMessageAttrs = AndesMessageAttrs(
+            hierarchy,
+            type,
+            body,
+            title,
+            isDismissable,
+            bodyLinks,
+            thumbnail,
+            bullets,
+            isHeadingEnable
+        )
         val config = AndesMessageConfigurationFactory.create(context, andesMessageAttrs)
         setupComponents(config)
     }
@@ -205,6 +245,7 @@ class AndesMessage : CardView {
         setupColorComponents(config)
         setupDismissable(config)
         setupThumbnail(config.thumbnail)
+        setupA11yHeading(config)
     }
 
     private fun setupColorComponents(config: AndesMessageConfiguration) {
@@ -339,9 +380,7 @@ class AndesMessage : CardView {
 
     private fun setupDismissable(config: AndesMessageConfiguration) {
         dismissableComponent.setImageDrawable(config.dismissableIcon)
-        dismissableComponent.contentDescription = context
-            .resources
-            .getString(R.string.andes_message_dismiss_button_content_description)
+        dismissableComponent.contentDescription = context.resources.getString(R.string.andes_message_dismiss_button_content_description)
 
         if (config.isDismissable) {
             dismissableComponent.visibility = View.VISIBLE
@@ -432,6 +471,10 @@ class AndesMessage : CardView {
 
         spannableString.setSpan(clickableSpan, 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         return spannableString
+    }
+
+    private fun setupA11yHeading(config: AndesMessageConfiguration) {
+        ViewCompat.setAccessibilityHeading(titleComponent, config.a11yTitleIsHeader)
     }
 
     fun setupDismissableCallback(onClickListener: OnClickListener) {

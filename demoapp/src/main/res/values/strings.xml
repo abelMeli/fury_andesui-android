@@ -5,6 +5,7 @@
     <string name="dismissible" translatable="false">Dismissible</string>
     <string name="focusable" translatable="false">Focusable</string>
     <string name="bullet" translatable="false">Bullet</string>
+    <string name="a11y_heading" translatable="false">A11y Title header</string>
     <string name="andes_message_start_progress_loading" translatable="false">Start</string>
     <string name="andes_message_pause_progress_loading" translatable="false">Pause</string>
     <string name="andes_message_resume_progress_loading" translatable="false">Resume</string>

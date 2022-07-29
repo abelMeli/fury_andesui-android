@@ -3,6 +3,7 @@ package com.mercadolibre.android.andesui.textview.accessibility
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.utils.createActionList
