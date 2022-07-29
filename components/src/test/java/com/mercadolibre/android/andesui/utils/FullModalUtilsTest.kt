@@ -1,13 +1,11 @@
 package com.mercadolibre.android.andesui.utils
 
 import android.view.View
-import androidx.viewpager2.widget.ViewPager2
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.buttongroup.AndesButtonGroup
-import com.mercadolibre.android.andesui.modal.full.adapter.AndesModalFullPagerAdapter
 import com.mercadolibre.android.andesui.modal.full.fragment.AndesModalBaseFragment
 import com.mercadolibre.android.andesui.modal.full.fragment.AndesModalFullCarouselFragment
 import com.mercadolibre.android.andesui.modal.views.AndesModalHeaderTypeComponent
@@ -56,12 +54,11 @@ internal fun AndesModalBaseFragment<*>.scrollToPosition(newPosition: Int) {
 internal fun AndesModalBaseFragment<*>.getScrollComponent(): AndesStickyScrollView? =
     view?.findViewById(R.id.scroll_view)
 
-internal fun AndesModalBaseFragment<*>.getViewPagerComponent(): ViewPager2? =
+internal fun AndesModalBaseFragment<*>.getViewPagerComponent(): ViewPager? =
     view?.findViewById(R.id.view_pager)
 
 internal fun AndesModalFullCarouselFragment.getViewHolderForPosition(pagePosition: Int): View {
-    val recyclerView = getViewPagerComponent()?.getChildAt(0) as RecyclerView
-    val viewHolder =
-        recyclerView.findViewHolderForAdapterPosition(pagePosition) as AndesModalFullPagerAdapter.AndesModalFullViewHolder
-    return viewHolder.itemView
+    val viewPager = getViewPagerComponent()
+        ?: error("ViewPager must be not null")
+    return viewPager.getChildAt(pagePosition)
 }

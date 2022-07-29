@@ -13,8 +13,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
-import com.mercadolibre.android.andesui.utils.assertEquals
-import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
@@ -26,13 +24,15 @@ import com.mercadolibre.android.andesui.modal.common.AndesButtonGroupData
 import com.mercadolibre.android.andesui.modal.common.AndesModalContent
 import com.mercadolibre.android.andesui.modal.common.contentvariation.AndesModalCardContentVariation
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
-import com.mercadolibre.android.andesui.utils.setDrawableSuspending
-import com.mercadolibre.android.andesui.utils.getViewHolderForPosition
+import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.mercadolibre.android.andesui.utils.getButtonGroupComponent
 import com.mercadolibre.android.andesui.utils.getCloseButtonComponent
+import com.mercadolibre.android.andesui.utils.getViewHolderForPosition
 import com.mercadolibre.android.andesui.utils.getViewPagerComponent
 import com.mercadolibre.android.andesui.utils.provideButtonGroupCreator
 import com.mercadolibre.android.andesui.utils.provideContent
+import com.mercadolibre.android.andesui.utils.setDrawableSuspending
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
@@ -98,7 +98,7 @@ class AndesModalCardCarouselFragmentTest {
 
         modal.isVisible assertEquals true
         modal.getCloseButtonComponent()?.visibility assertEquals View.VISIBLE
-        modal.getViewPagerComponent()?.adapter?.itemCount assertEquals contentList.size
+        modal.getViewPagerComponent()?.adapter?.count assertEquals contentList.size
         modal.getButtonGroupComponent() assertIsNull true
     }
 
@@ -123,7 +123,7 @@ class AndesModalCardCarouselFragmentTest {
 
         modal.isVisible assertEquals true
         modal.getCloseButtonComponent()?.visibility assertEquals View.GONE
-        modal.getViewPagerComponent()?.adapter?.itemCount assertEquals contentList.size
+        modal.getViewPagerComponent()?.adapter?.count assertEquals contentList.size
         modal.getButtonGroupComponent() assertIsNull false
         modal.getButtonGroupComponent()?.visibility assertEquals View.VISIBLE
     }

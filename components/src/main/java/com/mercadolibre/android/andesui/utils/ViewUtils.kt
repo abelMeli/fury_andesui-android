@@ -1,8 +1,8 @@
 package com.mercadolibre.android.andesui.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipboardManager
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.view.View
@@ -184,4 +184,14 @@ internal fun View.hideKeyboard() {
     (context.getSystemService(
             Activity.INPUT_METHOD_SERVICE
     ) as? InputMethodManager)?.hideSoftInputFromWindow(windowToken, 0)
+}
+
+/**
+ * Returns all siblings from the caller view, or an empty list if the view is not attached
+ * to a parent
+ */
+fun View.getAllSiblings(): List<View> {
+    val viewParent = parent as? ViewGroup ?: return listOf()
+    val allViews = viewParent.getAllChildren()
+    return allViews.filter { it != this }
 }

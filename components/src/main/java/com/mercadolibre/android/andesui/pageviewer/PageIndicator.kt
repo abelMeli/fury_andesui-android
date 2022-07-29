@@ -10,13 +10,14 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.databinding.AndesuiPageviewerDotBinding
 import com.mercadolibre.android.andesui.databinding.AndesuiPageviewerLayoutBinding
 
 /**
- * Page indicator component to be used paired with a [ViewPager2].
+ * Page indicator component to be used paired with a [ViewPager] or a [ViewPager2].
  *
  * See the specs in [figma](https://www.figma.com/file/ma8IQUYi9IS8zc8C0rAzEB/Components-specifications?node-id=2373%3A262213)
  * (Page viewer)
@@ -48,6 +49,37 @@ internal class PageIndicator @JvmOverloads constructor(
         })
         val pagerAdapter = viewPager.adapter ?: return
         repeat(pagerAdapter.itemCount - 1) {
+            val dot = createDot()
+            addView(dot)
+            addView(createSeparator())
+            dots.add(dot)
+        }
+
+        val lastDot = createDot()
+        addView(lastDot)
+        dots.add(lastDot)
+
+        setSelected(viewPager.currentItem)
+    }
+
+    /**
+     * Attaches the view pager to the page indicator.
+     *
+     * @param viewPager the viewPager where's being attached to.
+     */
+    fun attach(viewPager: ViewPager, onPageSelectedCallback: ((position: Int) -> Unit)? = null) {
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
+
+            override fun onPageSelected(position: Int) {
+                setSelected(position)
+                onPageSelectedCallback?.invoke(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) = Unit
+        })
+        val pagerAdapter = viewPager.adapter ?: return
+        repeat(pagerAdapter.count - 1) {
             val dot = createDot()
             addView(dot)
             addView(createSeparator())

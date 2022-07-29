@@ -17,7 +17,7 @@ import com.mercadolibre.android.andesui.modal.card.configfactory.AndesModalCardC
 import com.mercadolibre.android.andesui.modal.common.AndesButtonGroupCreator
 import com.mercadolibre.android.andesui.modal.common.AndesModalContent
 import com.mercadolibre.android.andesui.modal.common.contentvariation.AndesModalCardContentVariation
-import com.mercadolibre.android.andesui.pageviewer.AndesModalPagerAdapter
+import com.mercadolibre.android.andesui.modal.card.adapter.AndesModalCardPagerAdapter
 import com.mercadolibre.android.andesui.utils.pagetransformer.AndesFadeOutTransformer
 
 /**
@@ -98,8 +98,8 @@ class AndesModalCardCarouselFragment : AndesDialogFragment() {
 
     private fun setupViewPager(config: AndesModalCardCarouselConfig) {
         config.contentList?.let {
-            binding.viewPager.setPageTransformer(AndesFadeOutTransformer())
-            binding.viewPager.adapter = AndesModalPagerAdapter(it, config)
+            binding.viewPager.setPageTransformer(false, AndesFadeOutTransformer())
+            binding.viewPager.adapter = AndesModalCardPagerAdapter(it, config)
             binding.pageIndicator.attach(binding.viewPager) { position ->
                 onPageSelectedCallback?.invoke(position)
                 setupMainActionButton(config, position)

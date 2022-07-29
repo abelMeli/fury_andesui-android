@@ -89,7 +89,7 @@ class AndesModalFullCarouselFragment :
 
     private fun setupViewPager(config: AndesModalFullCarouselConfig) {
         config.contentList?.let {
-            binding.viewPager.setPageTransformer(AndesFadeOutTransformer())
+            binding.viewPager.setPageTransformer(false, AndesFadeOutTransformer())
             binding.viewPager.adapter = AndesModalFullPagerAdapter(it, config, this)
             binding.pageIndicator.attach(binding.viewPager) { position ->
                 onPageSelectedCallback?.invoke(position)

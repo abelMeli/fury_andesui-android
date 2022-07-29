@@ -3,6 +3,7 @@
 - `AndesTextfield` accessibility improvements | Author: [@meligeo](https://github.com/meligeo)
 - Can enable and create AndesCarousel as Infinite | Author: [@meligeo](https://github.com/meligeo)
 - `AndesTooltip` accessibility improvements | Author: [@juanunzu](https://github.com/juanunzu)
+- `AndesModal` accessibility improvements | Author: [@juanunzu](https://github.com/juanunzu)
 - `FeedbackScreen` now uses `AndesTextView` instead of regular android's TextViews | Author: [@PatoCode045](https://github.com/PatoCode045)
 ## 🛠 Fixes
 - Fix in `AndesTextView` that was causing a malfunction when setting it as singleline and using ellipsize end | Author: [@juanunzu](https://github.com/juanunzu)

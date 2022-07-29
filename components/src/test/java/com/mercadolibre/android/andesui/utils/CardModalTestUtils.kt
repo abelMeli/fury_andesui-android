@@ -4,8 +4,7 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager.widget.ViewPager
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.buttongroup.AndesButtonGroup
@@ -21,7 +20,6 @@ import com.mercadolibre.android.andesui.modal.common.AndesModalContent
 import com.mercadolibre.android.andesui.modal.common.AndesModalInterface
 import com.mercadolibre.android.andesui.modal.views.AndesModalHeaderTypeComponent
 import com.mercadolibre.android.andesui.modal.views.AndesModalImageComponent
-import com.mercadolibre.android.andesui.pageviewer.AndesModalPagerAdapter
 import com.mercadolibre.android.andesui.stickyscrollview.AndesStickyScrollView
 import com.mercadolibre.android.andesui.textview.AndesTextView
 
@@ -53,7 +51,7 @@ internal fun AndesDialogFragment.getCloseButtonComponent(): View? {
     return view?.findViewById(R.id.andes_modal_close_button)
 }
 
-internal fun AndesDialogFragment.getViewPagerComponent(): ViewPager2? {
+internal fun AndesDialogFragment.getViewPagerComponent(): ViewPager? {
     return if (this is AndesModalCardCarouselFragment) {
         view?.findViewById(R.id.view_pager)
     } else null
@@ -134,8 +132,7 @@ internal fun AndesModalHeaderTypeComponent.getTitleComponent(): AndesTextView =
     findViewById(R.id.title)
 
 internal fun AndesModalCardCarouselFragment.getViewHolderForPosition(pagePosition: Int): View {
-    val recyclerView = getViewPagerComponent()?.getChildAt(0) as RecyclerView
-    val viewHolder =
-        recyclerView.findViewHolderForAdapterPosition(pagePosition) as AndesModalPagerAdapter.AndesModalViewHolder
-    return viewHolder.itemView
+    val viewPager = getViewPagerComponent()
+        ?: error("ViewPager must be not null")
+    return viewPager.getChildAt(pagePosition)
 }

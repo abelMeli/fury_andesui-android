@@ -100,7 +100,7 @@ class ModalFullShowcaseActivity : FragmentActivity() {
     private fun showCarouselModal(bundle: Bundle) {
         val buttonsAmount = bundle.getString(BUTTONS_AMOUNT) ?: "0"
         val contentVariation =
-            bundle.getParcelable(CONTENT_VARIATION)
+            bundle.getSerializable(CONTENT_VARIATION) as? AndesModalFullContentVariation
                 ?: AndesModalFullContentVariation.NONE
         val pagesAmount = bundle.getString(PAGES_AMOUNT) ?: "2"
         val isHeaderFixed = bundle.getBoolean(IS_HEADER_FIXED, false)
@@ -140,7 +140,7 @@ class ModalFullShowcaseActivity : FragmentActivity() {
     private fun showDefaultModal(bundle: Bundle) {
         val buttonsAmount = bundle.getString(BUTTONS_AMOUNT) ?: "0"
         val contentVariation =
-            bundle.getParcelable(CONTENT_VARIATION)
+            bundle.getSerializable(CONTENT_VARIATION) as? AndesModalFullContentVariation
                 ?: AndesModalFullContentVariation.NONE
         val isHeaderFixed = bundle.getBoolean(IS_HEADER_FIXED, false)
         val isButtonGroupFixed = bundle.getBoolean(IS_BUTTONGROUP_FIXED, false)

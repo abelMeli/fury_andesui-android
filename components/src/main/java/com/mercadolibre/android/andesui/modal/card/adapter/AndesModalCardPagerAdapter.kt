@@ -1,9 +1,9 @@
-package com.mercadolibre.android.andesui.pageviewer
+package com.mercadolibre.android.andesui.modal.card.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import com.mercadolibre.android.andesui.databinding.AndesModalSingleContentLayoutBinding
 import com.mercadolibre.android.andesui.modal.card.configfactory.AndesModalCardCarouselConfig
 import com.mercadolibre.android.andesui.modal.common.AndesModalContent
@@ -11,28 +11,34 @@ import com.mercadolibre.android.andesui.modal.full.headertype.AndesModalFullHead
 import com.mercadolibre.android.andesui.modal.full.headertype.AndesModalFullHeaderType
 import com.mercadolibre.android.andesui.modal.views.AndesModalImageComponent
 
-internal class AndesModalPagerAdapter(
+internal class AndesModalCardPagerAdapter(
     private val views: List<AndesModalContent>,
     private val config: AndesModalCardCarouselConfig
-) : RecyclerView.Adapter<AndesModalPagerAdapter.AndesModalViewHolder>() {
+) : PagerAdapter() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AndesModalViewHolder {
+    override fun getCount() = views.size
+
+    override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
+        container.removeView(view as? View)
+    }
+
+    override fun isViewFromObject(view: View, other: Any) = view == other
+
+    override fun instantiateItem(parent: ViewGroup, position: Int): View {
         val viewBinding = AndesModalSingleContentLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return AndesModalViewHolder(viewBinding)
+
+        val holder = AndesModalCarouselView(viewBinding)
+        holder.bind(views[position])
+        val view = holder.getView()
+        parent.addView(view)
+        return view
     }
 
-    override fun onBindViewHolder(andesModalViewHolder: AndesModalViewHolder, position: Int) {
-        andesModalViewHolder.bind(views[position])
-    }
-
-    override fun getItemCount() = views.size
-
-    inner class AndesModalViewHolder(private val binding: AndesModalSingleContentLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    internal inner class AndesModalCarouselView(private val binding: AndesModalSingleContentLayoutBinding) {
 
         private val SINGLE_LINE = 1
         private var initialTitleLineCount = 0
@@ -44,6 +50,8 @@ internal class AndesModalPagerAdapter(
             setupHeader(content)
             setupScrollListener()
         }
+
+        fun getView() = binding.root
 
         private fun setupContentBody(content: AndesModalContent) {
             binding.apply {

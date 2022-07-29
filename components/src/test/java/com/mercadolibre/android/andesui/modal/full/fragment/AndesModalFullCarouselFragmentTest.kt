@@ -9,8 +9,6 @@ import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
@@ -23,18 +21,17 @@ import com.mercadolibre.android.andesui.databinding.AndesModalBaseFullLayoutBind
 import com.mercadolibre.android.andesui.modal.AndesModal
 import com.mercadolibre.android.andesui.modal.common.AndesModalContent
 import com.mercadolibre.android.andesui.modal.common.contentvariation.AndesModalFullContentVariation
-import com.mercadolibre.android.andesui.modal.full.adapter.AndesModalFullPagerAdapter
 import com.mercadolibre.android.andesui.modal.views.AndesModalHeaderTypeComponent
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.utils.assertIsNull
 import com.mercadolibre.android.andesui.utils.getButtonGroupComponent
+import com.mercadolibre.android.andesui.utils.getViewHolderForPosition
 import com.mercadolibre.android.andesui.utils.getViewPagerComponent
 import com.mercadolibre.android.andesui.utils.provideButtonGroupCreator
 import com.mercadolibre.android.andesui.utils.provideContent
 import com.mercadolibre.android.andesui.utils.provideOtherContent
-import com.mercadolibre.android.andesui.utils.getViewHolderForPosition
 import com.mercadolibre.android.andesui.utils.setDrawableSuspending
 import io.mockk.every
 import io.mockk.mockk
@@ -92,7 +89,7 @@ class AndesModalFullCarouselFragmentTest {
         shadowOf(Looper.getMainLooper()).idle()
 
         fragment.isVisible assertEquals true
-        fragment.getViewPagerComponent()?.adapter?.itemCount assertEquals contentList.size
+        fragment.getViewPagerComponent()?.adapter?.count assertEquals contentList.size
         fragment.getButtonGroupComponent() assertIsNull true
     }
 
@@ -116,7 +113,7 @@ class AndesModalFullCarouselFragmentTest {
         shadowOf(Looper.getMainLooper()).idle()
 
         fragment.isVisible assertEquals true
-        fragment.getViewPagerComponent()?.adapter?.itemCount assertEquals contentList.size
+        fragment.getViewPagerComponent()?.adapter?.count assertEquals contentList.size
         fragment.getButtonGroupComponent() assertIsNull false
         fragment.getButtonGroupComponent()?.visibility assertEquals View.VISIBLE
     }
@@ -166,8 +163,6 @@ class AndesModalFullCarouselFragmentTest {
         val pageSelectedCallback = { _: Int -> }
         val buttonGroupCreator = provideButtonGroupCreator(context)
 
-        var viewPager: ViewPager2? = null
-
         fragment = AndesModal.fullBuilder(contentList)
             .withContentVariation(AndesModalFullContentVariation.THUMBNAIL)
             .withIsHeaderFixed(true)
@@ -186,22 +181,13 @@ class AndesModalFullCarouselFragmentTest {
         fragment.getViewPagerComponent()?.setCurrentItem(SECOND_PAGE, false)
         shadowOf(Looper.getMainLooper()).idle()
 
-        // Setup viewPager
-        viewPager = fragment.getViewPagerComponent()
-
-        val recyclerView = viewPager?.getChildAt(FIRST_PAGE) as RecyclerView
-        // we need to recalculate the Measure and Layout
-        recyclerView.requestLayout()
-
         // get the second ViewHolder
-        val viewHolder = recyclerView.findViewHolderForAdapterPosition(SECOND_PAGE) as AndesModalFullPagerAdapter.AndesModalFullViewHolder
+        val viewHolder = (fragment as AndesModalFullCarouselFragment).getViewHolderForPosition(SECOND_PAGE)
 
         // get text to check
-        var titleText = viewHolder.itemView
-            .findViewById<AndesTextView>(R.id.title).text.toString()
+        val titleText = viewHolder.findViewById<AndesTextView>(R.id.title).text.toString()
 
-        var subTitleText = viewHolder.itemView
-            .findViewById<AndesTextView>(R.id.sub_title).text.toString()
+        val subTitleText = viewHolder.findViewById<AndesTextView>(R.id.sub_title).text.toString()
 
         contentList[SECOND_PAGE].title assertEquals titleText
         contentList[SECOND_PAGE].subtitle assertEquals subTitleText
@@ -229,8 +215,6 @@ class AndesModalFullCarouselFragmentTest {
         val contentList =
             arrayListOf(provideContent(context), provideOtherContent(context))
 
-        var viewPager: ViewPager2? = null
-
         fragment = AndesModal.fullBuilder(contentList)
             .withContentVariation(AndesModalFullContentVariation.THUMBNAIL)
             .withIsHeaderFixed(true)
@@ -238,23 +222,16 @@ class AndesModalFullCarouselFragmentTest {
             .build()
 
         (fragment as AndesModalFullCarouselFragment).show(activity, R.id.content_frame)
-
         shadowOf(Looper.getMainLooper()).idle()
 
-        fragment.getViewPagerComponent()?.setCurrentItem(SECOND_PAGE, false)
+        val viewPager = fragment.getViewPagerComponent()
 
-        viewPager = fragment.getViewPagerComponent()
-
-        val recyclerView = viewPager?.getChildAt(FIRST_PAGE) as RecyclerView
-
+        viewPager?.setCurrentItem(SECOND_PAGE, false)
         shadowOf(Looper.getMainLooper()).idle()
 
-        recyclerView.requestLayout()
+        val viewHolder = (fragment as AndesModalFullCarouselFragment).getViewHolderForPosition(SECOND_PAGE)
 
-        val viewHolder = recyclerView.findViewHolderForAdapterPosition(SECOND_PAGE) as AndesModalFullPagerAdapter.AndesModalFullViewHolder
-
-        var headerType = viewHolder.itemView
-            .findViewById<AndesModalHeaderTypeComponent>(R.id.header_type)
+        val headerType = viewHolder.findViewById<AndesModalHeaderTypeComponent>(R.id.header_type)
 
         val closeButton = headerType.findViewById<ImageView>(R.id.closeImageview)
 

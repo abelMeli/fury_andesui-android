@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/andes_bg_color_white">
 
-    <androidx.viewpager2.widget.ViewPager2
+    <com.mercadolibre.android.andesui.pageviewer.AndesViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

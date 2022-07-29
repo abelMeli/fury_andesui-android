@@ -1,10 +1,10 @@
 package com.mercadolibre.android.andesui.utils.pagetransformer
 
 import android.view.View
-import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager.widget.ViewPager
 import kotlin.math.abs
 
-internal class AndesFadeOutTransformer : ViewPager2.PageTransformer {
+internal class AndesFadeOutTransformer : ViewPager.PageTransformer {
     override fun transformPage(page: View, position: Float) {
         page.alpha = if (position < POSITION_LEFT) {
             // This page is way off-screen to the left.

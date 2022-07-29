@@ -16,11 +16,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager2.widget.ViewPager2
+    <com.mercadolibre.android.andesui.pageviewer.AndesViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/andes_bg_color_white"
+        app:andesViewPagerShouldMeasure="true"
         app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
         <com.mercadolibre.android.andesui.pageviewer.PageIndicator
             android:id="@+id/page_indicator"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/andes_modal_pageviewer_height"
             android:layout_gravity="center"
             android:background="@color/andes_white"
             android:gravity="center" />

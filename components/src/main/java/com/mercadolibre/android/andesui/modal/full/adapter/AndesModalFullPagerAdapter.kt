@@ -3,7 +3,7 @@ package com.mercadolibre.android.andesui.modal.full.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import com.mercadolibre.android.andesui.databinding.AndesModalBaseFullLayoutBinding
 import com.mercadolibre.android.andesui.modal.common.AndesModalContent
 import com.mercadolibre.android.andesui.modal.common.contentvariation.AndesModalFullContentVariation
@@ -16,27 +16,33 @@ internal class AndesModalFullPagerAdapter(
     private val views: List<AndesModalContent>,
     private val configuration: AndesModalFullCarouselConfig,
     private val listener: AndesModalFullCloseListener? = null
-) : RecyclerView.Adapter<AndesModalFullPagerAdapter.AndesModalFullViewHolder>() {
+) : PagerAdapter() {
 
     private var wasTitleVisible = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AndesModalFullViewHolder {
-        val binding = AndesModalBaseFullLayoutBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
+    override fun getCount() = views.size
+
+    override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
+        container.removeView(view as? View)
+    }
+
+    override fun isViewFromObject(view: View, other: Any) = view == other
+
+    override fun instantiateItem(container: ViewGroup, position: Int): View {
+        val viewBinding = AndesModalBaseFullLayoutBinding.inflate(
+            LayoutInflater.from(container.context),
+            container,
             false
         )
-        return AndesModalFullViewHolder(binding)
+
+        val holder = AndesModalFullCarouselView(viewBinding)
+        holder.bind(views[position])
+        val view = holder.getView()
+        container.addView(view)
+        return view
     }
 
-    override fun onBindViewHolder(andesModalViewHolder: AndesModalFullViewHolder, position: Int) {
-        andesModalViewHolder.bind(views[position])
-    }
-
-    override fun getItemCount() = views.size
-
-    inner class AndesModalFullViewHolder(private val binding: AndesModalBaseFullLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    internal inner class AndesModalFullCarouselView(private val binding: AndesModalBaseFullLayoutBinding) {
         fun bind(content: AndesModalContent) {
             setupContentBody(content)
             setupContentVariation()
@@ -44,6 +50,8 @@ internal class AndesModalFullPagerAdapter(
             setupScrollListener()
             setupDismissibleAction()
         }
+
+        fun getView() = binding.root
 
         private fun setupScrollListener() {
             binding.scrollView.setScrollViewListener(
