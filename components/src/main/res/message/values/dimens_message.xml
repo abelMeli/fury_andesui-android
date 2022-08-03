@@ -10,7 +10,7 @@
     <dimen name="andes_message_icon_diameter">16dp</dimen>
     <dimen name="andes_message_thumbnail_diameter">48dp</dimen>
 
-    <dimen name="andes_message_distance_title_body">8dp</dimen>
+    <dimen name="andes_message_distance_title_body">4dp</dimen>
     <dimen name="andes_message_distance_thumbnail_body">16dp</dimen>
     <dimen name="andes_message_guideline_text_start">48dp</dimen>
     <dimen name="andes_message_guideline_text_end">48dp</dimen>

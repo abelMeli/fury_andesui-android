@@ -1,4 +1,8 @@
-#5.8.0
+# v5.9.0
+## 🛠 Fixes
+- Fixed Message margin | Author: [@MLcaro](https://github.com/MLcaro)
+
+# v5.8.0
 ## 🚀 Feature
 - `AndesTextfield` accessibility improvements | Author: [@meligeo](https://github.com/meligeo)
 - Can enable and create AndesCarousel as Infinite | Author: [@meligeo](https://github.com/meligeo)
@@ -8,6 +12,7 @@
 - AndesMessage accessibility improvements | Author: [@edgnavarro](https://github.com/edgnavarro)
 ## 🛠 Fixes
 - Fix in `AndesTextView` that was causing a malfunction when setting it as singleline and using ellipsize end | Author: [@juanunzu](https://github.com/juanunzu)
+- Fixed Tooltip height | Author: [@paulav88] (https://github.com/paulav88)
 
 # v5.7.1
 ## 🛠 Fixes
