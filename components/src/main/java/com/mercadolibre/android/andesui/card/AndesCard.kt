@@ -7,13 +7,9 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.card.bodyPadding.AndesCardBodyPadding
 import com.mercadolibre.android.andesui.card.factory.AndesCardAttrParser
@@ -24,6 +20,7 @@ import com.mercadolibre.android.andesui.card.hierarchy.AndesCardHierarchy
 import com.mercadolibre.android.andesui.card.padding.AndesCardPadding
 import com.mercadolibre.android.andesui.card.style.AndesCardStyle
 import com.mercadolibre.android.andesui.card.type.AndesCardType
+import com.mercadolibre.android.andesui.databinding.AndesLayoutCardBinding
 
 @Suppress("TooManyFunctions")
 class AndesCard : CardView {
@@ -142,15 +139,10 @@ class AndesCard : CardView {
         cardListener = null
     }
 
-    private lateinit var andesCardContainer: ViewGroup
-    private lateinit var andesCardTitle: TextView
-    private lateinit var andesCardPipe: View
-    private lateinit var andesCardView: FrameLayout
-    private lateinit var andesCardLinkTitle: TextView
-    private lateinit var andesCardLinkIcon: ImageView
-    private lateinit var andesGroupTitle: Group
-    private lateinit var andesGroupLink: Group
-    private lateinit var andesGroupCard: Group
+    private val binding: AndesLayoutCardBinding = AndesLayoutCardBinding.inflate(
+        LayoutInflater.from(context),
+        this
+    )
 
     private lateinit var andesCardAttrs: AndesCardAttrs
     private var cardListener: OnClickListener? = null
@@ -178,7 +170,7 @@ class AndesCard : CardView {
      * @param layoutTransition the desired layout transition to be set on the card
      */
     fun setAnimateLayoutChanges(layoutTransition: LayoutTransition?) {
-        andesCardContainer.layoutTransition = layoutTransition
+        binding.andesCardContainer.layoutTransition = layoutTransition
     }
 
     /**
@@ -212,30 +204,12 @@ class AndesCard : CardView {
      * Is like a choreographer 😉
      */
     private fun setupComponents(config: AndesCardConfiguration) {
-        initComponents()
         setupViewId()
 
         setupBackgroundComponent(config)
         setupPipeComponent(config)
         setupTitleComponent(config)
         setupCardViewComponent(config)
-    }
-
-    /**
-     * Creates all the views that are part of this andesCard.
-     * After a view is created then a view id is added to it.
-     */
-    private fun initComponents() {
-        val layout = LayoutInflater.from(context).inflate(R.layout.andes_layout_card, this)
-        andesCardContainer = layout.findViewById(R.id.andes_card_container)
-        andesCardTitle = layout.findViewById(R.id.andes_card_title)
-        andesCardPipe = layout.findViewById(R.id.andes_card_pipe)
-        andesCardView = layout.findViewById(R.id.andes_card_view)
-        andesCardLinkTitle = layout.findViewById(R.id.andes_card_title_link)
-        andesCardLinkIcon = layout.findViewById(R.id.andes_link_icon)
-        andesGroupTitle = layout.findViewById(R.id.group_title)
-        andesGroupLink = layout.findViewById(R.id.group_link)
-        andesGroupCard = layout.findViewById(R.id.group_card)
     }
 
     /**
@@ -256,7 +230,7 @@ class AndesCard : CardView {
         radius = context.resources.getDimension(R.dimen.andes_card_corner_radius)
 
         // Set listeners
-        andesGroupCard.referencedIds.forEach { id ->
+        binding.groupCard.referencedIds.forEach { id ->
             rootView.findViewById<View>(id).setOnClickListener {
                 cardListener?.onClick(it)
             }
@@ -283,17 +257,17 @@ class AndesCard : CardView {
      * Gets data from the config and sets to the cardView of this card.
      */
     private fun setupCardViewComponent(config: AndesCardConfiguration) {
-        val params = andesCardView.layoutParams as MarginLayoutParams
+        val params = binding.andesCardView.layoutParams as MarginLayoutParams
         params.setMargins(
                 config.bodyPadding.bodyPadding.bodyPaddingSize(context),
                 config.bodyPadding.bodyPadding.bodyPaddingSize(context),
                 config.bodyPadding.bodyPadding.bodyPaddingSize(context),
                 config.bodyPadding.bodyPadding.bodyPaddingSize(context)
         )
-        andesCardView.layoutParams = params
-        andesCardView.removeAllViews()
+        binding.andesCardView.layoutParams = params
+        binding.andesCardView.removeAllViews()
         if (cardView != null) {
-            andesCardView.addView(cardView)
+            binding.andesCardView.addView(cardView)
         }
     }
 
@@ -301,29 +275,23 @@ class AndesCard : CardView {
      * Gets data from the config and sets to the pipe color of this card.
      */
     private fun setupPipeComponent(config: AndesCardConfiguration) {
-        if (andesCardAttrs.andesCardHierarchy == AndesCardHierarchy.PRIMARY) {
-            andesCardPipe.visibility = andesCardAttrs.andesCardType.type.pipeVisibility()
-            andesCardPipe.setBackgroundColor(config.pipeColor.colorInt(context))
-        } else {
-            andesCardPipe.visibility = View.GONE
-        }
+        binding.andesCardPipe.setBackgroundColor(config.pipeColor.colorInt(context))
+        binding.andesCardPipe.visibility = config.pipeVisibility
     }
 
     /**
      * Gets data from the config and sets to the title of this card.
      */
     private fun setupTitleComponent(config: AndesCardConfiguration) {
-        if (andesCardAttrs.andesCardTitle.isNullOrEmpty()) {
-            andesCardTitle.text = null
-            andesGroupTitle.visibility = View.GONE
-        } else {
-            andesGroupTitle.visibility = View.VISIBLE
-            andesCardTitle.text = andesCardAttrs.andesCardTitle
-            andesCardTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.titleSize)
-            andesCardTitle.typeface = config.titleTypeface
-            andesCardTitle.setTextColor(config.titleColor.colorInt(context))
-            andesCardTitle.height = config.titleHeight
-            andesCardTitle.setPadding(config.titlePadding, 0, config.titlePadding, 0)
+        binding.groupTitle.visibility = config.titleVisibility
+        binding.andesCardTitle.apply {
+            text = config.title
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, config.titleSize)
+            typeface = config.titleTypeface
+            setTextColor(config.titleColor.colorInt(context))
+            height = config.titleHeight
+            setPadding(config.titlePadding, 0, config.titlePadding, 0)
+            ViewCompat.setAccessibilityHeading(this, true)
         }
     }
 
@@ -331,22 +299,17 @@ class AndesCard : CardView {
      * Gets data from the config and sets to the link of this card.
      */
     private fun setupLinkComponent(config: AndesCardConfiguration) {
-        if (andesCardAttrs.linkText.isNullOrEmpty() || andesCardAttrs.andesCardHierarchy != AndesCardHierarchy.PRIMARY) {
-            andesGroupLink.visibility = View.GONE
-            andesCardLinkTitle.text = null
-        } else {
-            andesGroupLink.visibility = View.VISIBLE
-            andesCardLinkTitle.text = andesCardAttrs.linkText
-            andesCardLinkTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.titleSize)
-            andesCardLinkTitle.typeface = config.titleTypeface
-            andesCardLinkTitle.setTextColor(config.linkColor.colorInt(context))
-            andesCardLinkTitle.height = config.titleHeight
-            andesCardLinkTitle.setPadding(config.titlePadding, 0, 0, 0)
-            andesCardLinkIcon.setPadding(0, 0, config.titlePadding, 0)
-            andesGroupLink.referencedIds.forEach { id ->
-                rootView.findViewById<View>(id).setOnClickListener {
-                    andesCardAttrs.linkAction?.onClick(it)
-                }
+        binding.andesCardTitleLink.text = andesCardAttrs.linkText
+        binding.andesCardTitleLink.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.titleSize)
+        binding.andesCardTitleLink.typeface = config.titleTypeface
+        binding.andesCardTitleLink.setTextColor(config.linkColor.colorInt(context))
+        binding.andesCardTitleLink.height = config.titleHeight
+        binding.andesCardTitleLink.setPadding(config.titlePadding, 0, 0, 0)
+        binding.andesLinkIcon.setPadding(0, 0, config.titlePadding, 0)
+        binding.groupLink.visibility = config.groupLinkVisibility
+        binding.groupLink.referencedIds.forEach { id ->
+            rootView.findViewById<View>(id).setOnClickListener {
+                andesCardAttrs.linkAction?.onClick(it)
             }
         }
     }

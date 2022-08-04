@@ -1,5 +1,6 @@
 # v5.9.0
 ## 🛠 Fixes
+- AndesCard heading option added | Author: [@edgnavarro](https://github.com/edgnavarro)
 - Fixed Message margin | Author: [@MLcaro](https://github.com/MLcaro)
 
 # v5.8.0

@@ -3,7 +3,11 @@ package com.mercadolibre.android.andesui.card
 import android.animation.LayoutTransition
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.card.bodyPadding.AndesCardBodyPadding
 import com.mercadolibre.android.andesui.card.factory.AndesCardAttrs
@@ -14,15 +18,13 @@ import com.mercadolibre.android.andesui.card.style.AndesCardStyle
 import com.mercadolibre.android.andesui.card.type.AndesCardType
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
-import com.nhaarman.mockitokotlin2.verify
+import com.mercadolibre.android.andesui.utils.assertEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
 import org.mockito.Mockito.spy
-import org.mockito.internal.util.reflection.FieldSetter
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
@@ -55,6 +57,46 @@ class AndesCardTest {
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.titleSize, context.resources.getDimension(R.dimen.andes_card_title_size))
+        assertEquals(config.title, "Title")
+    }
+
+    @Test
+    fun `Card title GONE`() {
+        attrs = AndesCardAttrs(
+            View(context),
+            AndesCardType.NONE,
+            AndesCardPadding.NONE,
+            AndesCardBodyPadding.NONE,
+            AndesCardStyle.ELEVATED,
+            "",
+            AndesCardHierarchy.PRIMARY
+        )
+        val config = configFactory.create(context, attrs)
+        config.titleVisibility assertEquals View.GONE
+    }
+
+    @Test
+    fun `Card title VISIBLE`() {
+        attrs = AndesCardAttrs(
+            View(context),
+            AndesCardType.NONE,
+            AndesCardPadding.NONE,
+            AndesCardBodyPadding.NONE,
+            AndesCardStyle.ELEVATED,
+            "Title",
+            AndesCardHierarchy.PRIMARY
+        )
+        val config = configFactory.create(context, attrs)
+        config.titleVisibility assertEquals View.VISIBLE
+    }
+
+    @Test
+    fun `Card title with heading`() {
+        val andesCard = AndesCard(context, view, AndesCardType.NONE, AndesCardPadding.NONE, "title",
+            AndesCardStyle.ELEVATED, AndesCardHierarchy.PRIMARY)
+
+        val title = andesCard.findViewById<TextView>(R.id.andes_card_title)
+        ViewCompat.isAccessibilityHeading(title) assertEquals true
     }
 
     @Test
@@ -267,6 +309,7 @@ class AndesCardTest {
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.pipeColor, R.color.andes_transparent.toAndesColor())
+        assertEquals(config.pipeVisibility, View.GONE)
     }
 
     @Test
@@ -278,10 +321,11 @@ class AndesCardTest {
                 AndesCardBodyPadding.XLARGE,
                 AndesCardStyle.OUTLINE,
                 "Title",
-                AndesCardHierarchy.SECONDARY
+                AndesCardHierarchy.PRIMARY
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.pipeColor, R.color.andes_green_500.toAndesColor())
+        assertEquals(config.pipeVisibility, View.VISIBLE)
     }
 
     @Test
@@ -293,10 +337,11 @@ class AndesCardTest {
                 AndesCardBodyPadding.XLARGE,
                 AndesCardStyle.OUTLINE,
                 "Title",
-                AndesCardHierarchy.SECONDARY
+                AndesCardHierarchy.PRIMARY
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.pipeColor, R.color.andes_red_500.toAndesColor())
+        assertEquals(config.pipeVisibility, View.VISIBLE)
     }
 
     @Test
@@ -308,10 +353,11 @@ class AndesCardTest {
                 AndesCardBodyPadding.XLARGE,
                 AndesCardStyle.OUTLINE,
                 "Title",
-                AndesCardHierarchy.SECONDARY
+                AndesCardHierarchy.PRIMARY
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.pipeColor, R.color.andes_orange_500.toAndesColor())
+        assertEquals(config.pipeVisibility, View.VISIBLE)
     }
 
     @Test
@@ -323,10 +369,11 @@ class AndesCardTest {
                 AndesCardBodyPadding.XLARGE,
                 AndesCardStyle.OUTLINE,
                 "Title",
-                AndesCardHierarchy.SECONDARY
+                AndesCardHierarchy.PRIMARY
         )
         val config = configFactory.create(context, attrs)
         assertEquals(config.pipeColor, R.color.andes_accent_color_500.toAndesColor())
+        assertEquals(config.pipeVisibility, View.VISIBLE)
     }
 
     @Test
@@ -340,12 +387,11 @@ class AndesCardTest {
                 AndesCardStyle.OUTLINE,
                 AndesCardHierarchy.SECONDARY
         )
-        val mockContainer = mock(ViewGroup::class.java)
-        FieldSetter.setField(andesCard, andesCard.javaClass.getDeclaredField("andesCardContainer"), mockContainer)
+        val viewGroup = andesCard.findViewById<ViewGroup>(R.id.andes_card_container)
 
         andesCard.setAnimateLayoutChanges(layoutTransition)
 
-        verify(mockContainer).setLayoutTransition(layoutTransition)
+        viewGroup.layoutTransition assertEquals layoutTransition
     }
 
     @Test
@@ -358,12 +404,75 @@ class AndesCardTest {
                 AndesCardStyle.OUTLINE,
                 AndesCardHierarchy.SECONDARY
         )
-        val mockContainer = mock(ViewGroup::class.java)
-        FieldSetter.setField(andesCard, andesCard.javaClass.getDeclaredField("andesCardContainer"), mockContainer)
 
+        val viewGroup = andesCard.findViewById<ViewGroup>(R.id.andes_card_container)
         andesCard.setAnimateLayoutChanges(LayoutTransition())
         andesCard.setAnimateLayoutChanges(null)
 
-        assertNull(mockContainer.layoutTransition)
+        assertNull(viewGroup.layoutTransition)
+    }
+
+    @Test
+    fun `AndesCard Check links when the hierarchy isn't primary`() {
+        val andesCard = AndesCard(context,
+            View(context),
+            AndesCardType.HIGHLIGHT,
+            AndesCardPadding.XLARGE,
+            "Title",
+            AndesCardStyle.OUTLINE,
+            AndesCardHierarchy.SECONDARY
+        )
+
+        val groupLink = andesCard.findViewById<Group>(R.id.group_link)
+        val andesCardTitleLink = andesCard.findViewById<TextView>(R.id.andes_card_title_link)
+        andesCard.setLinkAction("", View.OnClickListener {})
+        andesCard.hierarchy = AndesCardHierarchy.SECONDARY
+
+        View.GONE assertEquals groupLink.visibility
+        andesCardTitleLink.text assertEquals ""
+    }
+
+    @Test
+    fun `AndesCard Check links when the hierarchy is primary`() {
+        attrs = AndesCardAttrs(
+            View(context),
+            AndesCardType.NONE,
+            AndesCardPadding.NONE,
+            AndesCardBodyPadding.NONE,
+            AndesCardStyle.ELEVATED,
+            "Title",
+            AndesCardHierarchy.PRIMARY,
+            "My link"
+        )
+
+        val andesCard = AndesCard(context,
+            View(context),
+            AndesCardType.HIGHLIGHT,
+            AndesCardPadding.NONE,
+            "",
+            AndesCardStyle.OUTLINE,
+            AndesCardHierarchy.PRIMARY
+        )
+
+        val groupLink = andesCard.findViewById<Group>(R.id.group_link)
+        val andesCardTitleLink = andesCard.findViewById<TextView>(R.id.andes_card_title_link)
+        val andesCardIconLink = andesCard.findViewById<ImageView>(R.id.andes_link_icon)
+        val pipeView = andesCard.findViewById<View>(R.id.andes_card_pipe)
+
+        andesCard.setLinkAction(attrs.linkText.orEmpty(), View.OnClickListener {})
+        andesCard.hierarchy = AndesCardHierarchy.PRIMARY
+
+        val config = configFactory.create(context, attrs)
+
+        andesCardTitleLink.invalidate()
+
+        groupLink.visibility assertEquals View.VISIBLE
+        andesCardTitleLink.text assertEquals attrs.linkText
+        andesCardTitleLink.textSize assertEquals config.titleSize
+        andesCardTitleLink.typeface assertEquals config.titleTypeface
+        andesCardTitleLink.currentTextColor assertEquals config.linkColor.colorInt(context)
+        andesCardTitleLink.paddingStart assertEquals config.titlePadding
+        andesCardIconLink.paddingEnd assertEquals config.titlePadding
+        pipeView.visibility assertEquals View.VISIBLE
     }
 }
