@@ -205,6 +205,16 @@
             app:andesBadgePillText="@string/andes_demoapp_label_standard"
             app:andesBadgePillType="warning" />
 
+        <com.mercadolibre.android.andesui.badge.AndesBadgePill
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/badge_margin_vertical"
+            app:andesBadgePillBorder="cornerLeft"
+            app:andesBadgePillHierarchy="loud"
+            app:andesBadgePillSize="large"
+            app:andesBadgePillText="@string/andes_demoapp_label_corner_left"
+            app:andesBadgePillType="highlight" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

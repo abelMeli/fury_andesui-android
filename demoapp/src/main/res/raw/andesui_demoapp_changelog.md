@@ -1,4 +1,6 @@
 # v5.9.0
+## 🚀 Feature
+- New Badge Pill Border: `Corner Left` | Author: [@yesiddiaz] (https://github.com/yesiddiaz)
 ## 🛠 Fixes
 - AndesCard heading option added | Author: [@edgnavarro](https://github.com/edgnavarro)
 - Fixed Message margin | Author: [@MLcaro](https://github.com/MLcaro)

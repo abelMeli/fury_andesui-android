@@ -14,7 +14,8 @@ import java.util.Locale
 enum class AndesBadgePillBorder {
     CORNER,
     ROUNDED,
-    STANDARD;
+    STANDARD,
+    CORNER_LEFT;
 
     companion object {
         fun fromString(value: String): AndesBadgePillBorder = valueOf(value.toUpperCase(Locale.ROOT))
@@ -27,6 +28,7 @@ enum class AndesBadgePillBorder {
             CORNER -> AndesCornerBadgeBorder()
             ROUNDED -> AndesRoundedBadgeBorder()
             STANDARD -> AndesStandardBadgeBorder()
+            CORNER_LEFT -> AndesCornerLeftBadgeBorder()
         }
     }
 }

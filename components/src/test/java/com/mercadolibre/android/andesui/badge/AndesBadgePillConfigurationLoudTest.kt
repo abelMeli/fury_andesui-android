@@ -11,6 +11,7 @@ import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
+import com.mercadolibre.android.andesui.utils.assertEquals
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -194,6 +195,23 @@ class AndesBadgePillConfigurationLoudTest {
         val params = ReflectionHelpers.getField<TextView>(andesBadgePill, "badgeTitle")
         val layout = params.layoutParams as ViewGroup.MarginLayoutParams
         assertEquals(2, layout.topMargin)
+    }
+
+    @Test
+    fun `Pill, Loud, Highlight, Corner Left, Large check borders`() {
+        attrs = AndesBadgePillAttrs(
+            AndesBadgePillHierarchy.LOUD, AndesBadgeType.HIGHLIGHT,
+            AndesBadgePillBorder.CORNER_LEFT, AndesBadgePillSize.LARGE, "Title", false
+        )
+        val config = configFactory.create(context, attrs)
+        val topStartRadius = config.backgroundRadius[0]
+        val bottomStartRadius = config.backgroundRadius[1]
+        val bottomEndRadius = config.backgroundRadius[2]
+        val topEndRadius = config.backgroundRadius[3]
+        topStartRadius assertEquals 12.0F
+        bottomStartRadius assertEquals 0.0F
+        bottomEndRadius assertEquals 12.0F
+        topEndRadius assertEquals 0.0F
     }
 
     companion object {

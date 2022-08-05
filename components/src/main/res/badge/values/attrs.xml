@@ -23,6 +23,7 @@
             <enum name="corner" value="4000" />
             <enum name="rounded" value="4001" />
             <enum name="standard" value="4002" />
+            <enum name="cornerLeft" value="4003" />
         </attr>
 
         <attr name="andesBadgePillText" format="reference" />

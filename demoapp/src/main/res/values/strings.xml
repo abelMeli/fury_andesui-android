@@ -68,6 +68,7 @@
     <string name="andes_demoapp_label_corner" translatable="false">Corner</string>
     <string name="andes_demoapp_label_rounded" translatable="false">Rounded</string>
     <string name="andes_demoapp_label_standard" translatable="false">Standard</string>
+    <string name="andes_demoapp_label_corner_left" translatable="false">Corner Left</string>
     <string name="andes_demoapp_label_more" translatable="false">More</string>
     <string name="andes_demoapp_screen_button_group" translatable="false">Button group</string>
     <string name="andes_demoapp_screen_modal" translatable="false">Modal</string>
@@ -584,6 +585,7 @@
         <item>Standard</item>
         <item>Corner</item>
         <item>Rounded</item>
+        <item>Corner Left</item>
     </string-array>
 
     <!-- Andes Tabs -->

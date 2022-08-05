@@ -193,6 +193,7 @@ class BadgeShowcaseActivity : BaseActivity() {
                         "Standard" -> AndesBadgePillBorder.STANDARD
                         "Corner" -> AndesBadgePillBorder.CORNER
                         "Rounded" -> AndesBadgePillBorder.ROUNDED
+                        "Corner Left" -> AndesBadgePillBorder.CORNER_LEFT
                         else -> AndesBadgePillBorder.STANDARD
                     }
 
