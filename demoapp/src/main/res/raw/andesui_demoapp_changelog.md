@@ -2,6 +2,7 @@
 ## 🚀 Feature
 - New Badge Pill Border: `Corner Left` | Author: [@yesiddiaz] (https://github.com/yesiddiaz)
 ## 🛠 Fixes
+- Fixed Message constraint bullet buttons | Author: [@MLcaro](https://github.com/MLcaro)
 - AndesCard heading option added | Author: [@edgnavarro](https://github.com/edgnavarro)
 - Fixed Message margin | Author: [@MLcaro](https://github.com/MLcaro)
 
