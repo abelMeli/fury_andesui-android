@@ -15,6 +15,7 @@ internal class AndesSwitchAccessibilityDelegate(private val andesSwitch: AndesSw
         super.onInitializeAccessibilityNodeInfo(host, info)
         addActionIfNeeded(info, andesSwitch)
         info?.text = generateContentDescriptionText(andesSwitch)
+        info?.contentDescription = ""
     }
 
     @VisibleForTesting
