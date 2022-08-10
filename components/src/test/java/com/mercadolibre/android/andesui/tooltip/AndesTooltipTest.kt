@@ -627,7 +627,7 @@ class AndesTooltipTest {
         tooltip.show(mockTarget)
 
         verify(locationConfig).canBuildTooltipInRequiredLocation(mockTarget)
-        verify(tooltip).showDropDown(mockTarget, -30, 0, locationConfig)
+        verify(tooltip).showDropDown(mockTarget, -34, 0, locationConfig)
     }
 
     @Test

@@ -20,9 +20,10 @@
     <dimen name="andes_tooltip_dismiss_margin_left">8dp</dimen>
     <dimen name="andes_tooltip_dismiss_size">16dp</dimen>
 
-    <dimen name="andes_tooltip_arrow_width">20dp</dimen>
-    <dimen name="andes_tooltip_arrow_height">14dp</dimen>
-    <dimen name="andes_tooltip_arrow_border">10dp</dimen>
+    <dimen name="andes_tooltip_arrow_width">24dp</dimen>
+    <dimen name="andes_tooltip_arrow_height">13dp</dimen>
+    <!--   andes_tooltip_arrow_border = 10dp - arrow asset transparent size (4dp) -->
+    <dimen name="andes_tooltip_arrow_border">6dp</dimen>
     <dimen name="andes_tooltip_arrow_inner_margin">2dp</dimen>
     <dimen name="andes_tooltip_padding_with_arrow_horizontal">16dp</dimen>
     <dimen name="andes_tooltip_padding_with_arrow_vertical">13dp</dimen>

@@ -13,6 +13,7 @@ import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTooltipBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicTooltipPositionBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipFocusableBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticTooltipNotFocusableBinding
@@ -51,7 +52,8 @@ class TooltipShowcaseActivity : BaseActivity() {
             AndesuiDynamicTooltipBinding.inflate(layoutInflater).root,
             AndesuiStaticTooltipBinding.inflate(layoutInflater).root,
             AndesuiStaticTooltipFocusableBinding.inflate(layoutInflater).root,
-            AndesuiStaticTooltipNotFocusableBinding.inflate(layoutInflater).root
+            AndesuiStaticTooltipNotFocusableBinding.inflate(layoutInflater).root,
+            AndesuiDynamicTooltipPositionBinding.inflate(layoutInflater).root
         ))
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) = Unit
@@ -88,6 +90,7 @@ class TooltipShowcaseActivity : BaseActivity() {
         TooltipFocusablePage().create(adapter.views[2])
         notFocusablePage = TooltipNotFocusablePage()
         notFocusablePage.create(adapter.views[3])
+        TooltipDynamicPositionPage().create(adapter.views[4])
     }
 
     @Suppress("LongMethod")

@@ -99,13 +99,14 @@ internal object AndesTooltipSizeDynamic : AndesTooltipSizeInterface() {
             (canArrowLeft) -> {
                 AndesTooltipArrowData(
                     positionInSide = ArrowPositionId.LEFT,
-                    point = (targetWidth / 2 - tooltip.arrowWidth - tooltip.arrowBorder)
+                    point = targetWidth / 2 - tooltip.arrowWidth / 2 - tooltip.arrowBorder - tooltip.paddingWithArrowHorizontal
                 )
             }
             else -> {
                 AndesTooltipArrowData(
                     positionInSide = ArrowPositionId.RIGHT,
-                    point = (-tooltip.tooltipMeasuredWidth + targetWidth / 2 + tooltip.arrowWidth + tooltip.arrowBorder)
+                    point = -tooltip.tooltipMeasuredWidth + targetWidth / 2 + tooltip.arrowWidth / 2 +
+                            tooltip.arrowBorder + tooltip.paddingWithArrowHorizontal
                 )
             }
         }

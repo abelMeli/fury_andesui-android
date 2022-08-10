@@ -1,3 +1,7 @@
+# v5.9.1
+## 🛠 Fixes
+- `AndesTooltip` arrow position fix | Author: [@eportasML](https://github.com/eportasML)
+
 # v5.9.0
 ## 🚀 Feature
 - New Badge Pill Border: `Corner Left` | Author: [@yesiddiaz] (https://github.com/yesiddiaz)

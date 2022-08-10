@@ -216,6 +216,24 @@ mTooltip.show(targetTextView)
 
 <br/>
 
+### Border Cases
+
+When Tooltip location is Top or Bottom and the trigger is at the horizontal edge of the screen you will see that the tooltip arrow is not aligned to the center of the trigger. Why? Because any PopupWindow must be inside of the window.
+
+Posible solutions:
+- Change location to Left or Right
+- Change your window configuration:
+```kotlin
+window.setFlags(
+    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+)
+```
+| Border Case | Location Right | FLAG_LAYOUT_NO_LIMITS |
+| ---------- | ---------- | -------- |
+| <img src="https://user-images.githubusercontent.com/58984116/182922870-12239dbd-e4d6-4d20-af3f-0c99049ee23f.png" width="350"/> | <img src="https://user-images.githubusercontent.com/58984116/182922873-f80e7b74-c102-4ef5-a9bb-67bd1c596838.png" width="350"/> | <img src="https://user-images.githubusercontent.com/58984116/182922859-e0b7a897-0dad-4f85-9fea-8aac56d7a19f.png" width="300"/> |
+
+
 ## Related Classes
 
 ### AndesTooltipStyle

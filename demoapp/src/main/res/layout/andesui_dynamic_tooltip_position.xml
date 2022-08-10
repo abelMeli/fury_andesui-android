@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/andes_tooltip_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/andes_tooltip_dynamic_trigger"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Tooltip trigger"
+        android:scaleType="fitCenter"
+        android:src="@drawable/andes_ui_info_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:tint="@color/andes_accent_color_500"
+        tools:ignore="HardcodedText" />
+
+    <com.mercadolibre.android.andesui.textfield.AndesTextfield
+        android:id="@+id/andes_tooltip_dynamic_x"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        app:andesTextfieldPlaceholder="@string/andes_tooltip_dynamic_x_placeholder"
+        app:layout_constraintBottom_toTopOf="@id/andes_tooltip_dynamic_dropdown"
+        app:layout_constraintEnd_toStartOf="@+id/andes_tooltip_dynamic_y"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.mercadolibre.android.andesui.textfield.AndesTextfield
+        android:id="@+id/andes_tooltip_dynamic_y"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        app:andesTextfieldPlaceholder="@string/andes_tooltip_dynamic_y_placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/andes_tooltip_dynamic_x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/andes_tooltip_dynamic_x"
+        app:layout_constraintTop_toTopOf="@id/andes_tooltip_dynamic_x" />
+
+    <com.mercadolibre.android.andesui.dropdown.AndesDropDownForm
+        android:id="@+id/andes_tooltip_dynamic_dropdown"
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:AndesDropdownMenuType="floatingmenu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/andes_tooltip_dynamic_x"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

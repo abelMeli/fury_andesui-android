@@ -21,7 +21,7 @@ internal val tooltipHasTopSpace = fun (tooltip: AndesTooltipLocationInterface, t
     val actionBarHeight = target.getActionBarHeight() + target.getStatusBarHeight(true)
     val actionBarVisible = target.isActionBarVisible()
     val targetY = target.getViewPointOnScreen().y
-    val tooltipHeight = tooltip.bodyWindowHeight
+    val tooltipHeight = tooltip.tooltipMeasuredHeight
 
     return if (!actionBarVisible) {
         targetY - tooltipHeight > 0
@@ -33,7 +33,7 @@ internal val tooltipHasTopSpace = fun (tooltip: AndesTooltipLocationInterface, t
 internal val tooltipHasBottomSpace = fun (tooltip: AndesTooltipLocationInterface, target: View): Boolean {
     val targetY = target.getViewPointOnScreen().y
     val targetHeight = target.height
-    val tooltipHeight = tooltip.bodyWindowHeight
+    val tooltipHeight = tooltip.tooltipMeasuredHeight
     val bottomWall = tooltip.displaySizeY
 
     return targetY + targetHeight + tooltipHeight < bottomWall
@@ -82,20 +82,20 @@ internal fun getTooltipYOff(target: View, tooltip: AndesTooltipLocationInterface
     return when {
         (canArrowCenter) -> {
             AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.MIDDLE,
-                    point = -((tooltipHeight / 2) + (targetHeight / 2))
+                positionInSide = ArrowPositionId.MIDDLE,
+                point = -((tooltipHeight / 2) + (targetHeight / 2))
             )
         }
         (canArrowTop) -> {
             AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.TOP,
-                    point = -(targetHeight/2 + tooltip.arrowWidth + tooltip.arrowBorder + tooltip.arrowImageInnerPadding)
+                positionInSide = ArrowPositionId.TOP,
+                point = -(targetHeight/2 + tooltip.arrowWidth/2 + tooltip.arrowBorder + tooltip.paddingWithArrowVertical)
             )
         }
         else -> {
             AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.BOTTOM,
-                    point = -tooltipHeight + tooltip.arrowWidth / 2 - tooltip.arrowBorder + targetHeight / 2
+                positionInSide = ArrowPositionId.BOTTOM,
+                point = -tooltipHeight - targetHeight / 2 + tooltip.arrowWidth / 2 + tooltip.arrowBorder + tooltip.paddingWithArrowVertical
             )
         }
     }

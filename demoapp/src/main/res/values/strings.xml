@@ -1179,6 +1179,8 @@
     <string name="andes_button_group_type" translatable="false">Type</string>
     <string name="andes_button_group_quantity" translatable="false">Button quantity</string>
     <string name="andes_button_group_description" translatable="false">AndesButtonGroup is a container for AndesButton. They allow you to add 1 to 3 buttons distributed horizontally, vertically, auto and mixed.</string>
+    <string name="andes_tooltip_dynamic_x_placeholder" translatable="false">X %</string>
+    <string name="andes_tooltip_dynamic_y_placeholder" translatable="false">Y %</string>
     <string-array name="andes_button_group_align_spinner" translatable="false">
         <item>Left</item>
         <item>Right</item>
