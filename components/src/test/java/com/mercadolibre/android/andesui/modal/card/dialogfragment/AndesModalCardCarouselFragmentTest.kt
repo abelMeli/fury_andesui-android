@@ -272,4 +272,59 @@ class AndesModalCardCarouselFragmentTest {
             mainAction = 2
         )
     }
+
+    @Test
+    fun `given content with no subtitle, when showing modal, then subtitle is hidden`() {
+        val contentList = arrayListOf(AndesModalContent(title = "title"))
+
+        modal = AndesModal.cardBuilder(contentList).build()
+        modal.show(activity)
+        shadowOf(getMainLooper()).idle()
+
+        val firstPage = (modal as AndesModalCardCarouselFragment)
+            .getViewHolderForPosition(FIRST_PAGE)
+        val binding = AndesModalSingleContentLayoutBinding.bind(firstPage)
+
+        binding.subTitle.visibility assertEquals View.GONE
+    }
+
+    @Test
+    fun `given content with subtitle, when showing modal, then subtitle is visible`() {
+        val contentList = arrayListOf(
+            AndesModalContent(
+                title = "title",
+                subtitle = "subtitle"
+            )
+        )
+
+        modal = AndesModal.cardBuilder(contentList).build()
+        modal.show(activity)
+        shadowOf(getMainLooper()).idle()
+
+        val firstPage = (modal as AndesModalCardCarouselFragment)
+            .getViewHolderForPosition(FIRST_PAGE)
+        val binding = AndesModalSingleContentLayoutBinding.bind(firstPage)
+
+        binding.subTitle.visibility assertEquals View.VISIBLE
+    }
+
+    @Test
+    fun `given content with blank subtitle, when showing modal, then subtitle is hidden`() {
+        val contentList = arrayListOf(
+            AndesModalContent(
+                title = "title",
+                subtitle = "  "
+            )
+        )
+
+        modal = AndesModal.cardBuilder(contentList).build()
+        modal.show(activity)
+        shadowOf(getMainLooper()).idle()
+
+        val firstPage = (modal as AndesModalCardCarouselFragment)
+            .getViewHolderForPosition(FIRST_PAGE)
+        val binding = AndesModalSingleContentLayoutBinding.bind(firstPage)
+
+        binding.subTitle.visibility assertEquals View.GONE
+    }
 }

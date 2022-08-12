@@ -226,4 +226,34 @@ class AndesModalCardDefaultFragmentTest {
 
         actualImage assertEquals mockedResponse
     }
+
+    @Test
+    fun `given content with no subtitle, when showing modal, then subtitle is hidden`() {
+        val content = AndesModalContent(title = "title")
+
+        modal = AndesModal.cardBuilder(content).build()
+        modal.show(activity)
+
+        modal.getSubtitleComponent()?.visibility assertEquals View.GONE
+    }
+
+    @Test
+    fun `given content with subtitle, when showing modal, then subtitle is visible`() {
+        val content = AndesModalContent(title = "title", subtitle = "subtitle")
+
+        modal = AndesModal.cardBuilder(content).build()
+        modal.show(activity)
+
+        modal.getSubtitleComponent()?.visibility assertEquals View.VISIBLE
+    }
+
+    @Test
+    fun `given content with blank subtitle, when showing modal, then subtitle is hidden`() {
+        val content = AndesModalContent(title = "title", subtitle = "   ")
+
+        modal = AndesModal.cardBuilder(content).build()
+        modal.show(activity)
+
+        modal.getSubtitleComponent()?.visibility assertEquals View.GONE
+    }
 }

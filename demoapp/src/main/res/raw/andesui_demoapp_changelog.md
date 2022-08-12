@@ -3,6 +3,7 @@
 - New attribute for the `AndesThumbnail` to manage the image scale type | Author: [@juanunzu](https://github.com/juanunzu)
 ## 🛠 Fixes
 - `AndesTooltip` arrow position fix | Author: [@eportasML](https://github.com/eportasML)
+- Fix in title bottom margin for `AndesModal` card version with no body text | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v5.9.0
 ## 🚀 Feature
