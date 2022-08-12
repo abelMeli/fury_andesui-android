@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType.CENTER_CROP
 import android.widget.ImageView.ScaleType.FIT_CENTER
+import android.widget.ImageView.ScaleType.FIT_END
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
@@ -13,6 +14,7 @@ import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
+import com.mercadolibre.android.andesui.utils.assertEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
@@ -129,5 +131,41 @@ class AndesThumbnailTest {
         assertEquals(AndesThumbnailSize.SIZE_56.size.diameter(context).toInt(), imageFrame.layoutParams.width)
         assertEquals(AndesThumbnailSize.SIZE_56.size.diameter(context).toInt(), imageFrame.layoutParams.height)
         assertEquals(CENTER_CROP, imageFrame.scaleType)
+    }
+
+    @Test
+    fun `creating thumbnail with scale type`() {
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val thumbnail = AndesThumbnail(
+            context = context,
+            type = AndesThumbnailType.IMAGE_SQUARE,
+            hierarchy = AndesThumbnailHierarchy.QUIET,
+            accentColor = R.color.andes_accent_color_500.toAndesColor(),
+            state = AndesThumbnailState.ENABLED,
+            size = AndesThumbnailSize.SIZE_56,
+            image = drawable,
+            scaleType = ImageView.ScaleType.FIT_START
+        )
+
+        thumbnail.scaleType assertEquals ImageView.ScaleType.FIT_START
+    }
+
+    @Test
+    fun `creating thumbnail and setting new scale type`() {
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val thumbnail = AndesThumbnail(
+            context = context,
+            type = AndesThumbnailType.IMAGE_SQUARE,
+            hierarchy = AndesThumbnailHierarchy.QUIET,
+            accentColor = R.color.andes_accent_color_500.toAndesColor(),
+            state = AndesThumbnailState.ENABLED,
+            size = AndesThumbnailSize.SIZE_56,
+            image = drawable,
+            scaleType = ImageView.ScaleType.FIT_START
+        )
+
+        thumbnail.scaleType = FIT_END
+
+        thumbnail.scaleType assertEquals FIT_END
     }
 }

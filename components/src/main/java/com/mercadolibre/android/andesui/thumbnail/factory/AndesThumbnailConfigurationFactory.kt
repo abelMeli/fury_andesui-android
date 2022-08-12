@@ -2,6 +2,7 @@ package com.mercadolibre.android.andesui.thumbnail.factory
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.widget.ImageView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.color.toAndesColor
@@ -24,13 +25,16 @@ internal data class AndesThumbnailConfiguration(
     val size: Float,
     val cornerRadius: Float,
     val isImageType: Boolean,
-    val hasTint: Boolean
+    val hasTint: Boolean,
+    val clipToOutline: Boolean,
+    val scaleType: ImageView.ScaleType
 )
 
 @Suppress("TooManyFunctions")
 internal object AndesThumbnailConfigurationFactory {
 
     fun create(context: Context, andesThumbnailAttrs: AndesThumbnailAttrs): AndesThumbnailConfiguration {
+        val isImageType = resolveIsImageType(andesThumbnailAttrs.andesThumbnailType.type)
         return with(andesThumbnailAttrs) {
             AndesThumbnailConfiguration(
                 backgroundColor = resolveBackgroundColor(context, andesThumbnailState.state, andesThumbnailHierarchy,
@@ -43,11 +47,32 @@ internal object AndesThumbnailConfigurationFactory {
                 image = resolveImage(andesThumbnailImage),
                 size = resolveSize(context, andesThumbnailSize.size),
                 cornerRadius = resolveCornerRadius(context, andesThumbnailSize.size, andesThumbnailType.type),
-                isImageType = resolveIsImageType(andesThumbnailType.type),
-                hasTint = resolveHasTint(andesThumbnailType.type)
+                isImageType = isImageType,
+                hasTint = resolveHasTint(andesThumbnailType.type),
+                clipToOutline = resolveClipToOutline(isImageType),
+                scaleType = resolveScaleType(isImageType, andesThumbnailScaleType)
             )
         }
     }
+
+    /**
+     * Only the image types are allowed to modify the scale type. For the icon type we always need
+     * the FIT_CENTER scale type.
+     */
+    private fun resolveScaleType(
+        isImageType: Boolean,
+        andesThumbnailScaleType: ImageView.ScaleType
+    ): ImageView.ScaleType {
+        if (!isImageType) return ImageView.ScaleType.FIT_CENTER
+        return andesThumbnailScaleType
+    }
+
+    /**
+     * The thumbnail content should only be clipped when the type is image because when
+     * the type is icon the image will be always inside (the image dimensions are always smaller than
+     * the component).
+     */
+    private fun resolveClipToOutline(isImageType: Boolean) = isImageType
 
     private fun resolveBackgroundColor(
         context: Context,

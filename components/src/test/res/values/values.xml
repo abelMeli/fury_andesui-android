@@ -10,4 +10,6 @@
     <style name="Andes.Test.2">
         <item name="android:textStyle">italic</item>
     </style>
+    <color name="andes_test_color">@color/andes_accent_color</color>
+    <drawable name="andes_test_drawable">@drawable/andes_ui_info_16</drawable>
 </resources>

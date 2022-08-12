@@ -1,10 +1,12 @@
-# v5.9.1
+# v5.10.0
+## 🚀 Feature
+- New attribute for the `AndesThumbnail` to manage the image scale type | Author: [@juanunzu](https://github.com/juanunzu)
 ## 🛠 Fixes
 - `AndesTooltip` arrow position fix | Author: [@eportasML](https://github.com/eportasML)
 
 # v5.9.0
 ## 🚀 Feature
-- New Badge Pill Border: `Corner Left` | Author: [@yesiddiaz] (https://github.com/yesiddiaz)
+- New Badge Pill Border: `Corner Left` | Author: [@yesiddiaz](https://github.com/yesiddiaz)
 ## 🛠 Fixes
 - Fixed Message constraint bullet buttons | Author: [@MLcaro](https://github.com/MLcaro)
 - AndesCard heading option added | Author: [@edgnavarro](https://github.com/edgnavarro)
