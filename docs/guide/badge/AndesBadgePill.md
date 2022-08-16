@@ -118,6 +118,7 @@ enum class AndesBadgePillBorder
 | ROUNDED | Only bottom-left corner is rounded<br/><img src="resources/badge/pill/roundedExample.png" height="30"/> |
 | STANDARD | All badge corners are rounded<br/><img src="resources/badge/pill/highlightExample.png" height="30"/> |
 | CORNER_LEFT | Top-right and bottom-left corners are square, top-left and bottom-right corners are rounded<br/><img src="resources/badge/pill/cornerLeftExample.png" height="30"/> |
+| ROUNDED_RIGHT | Only bottom-right corner is rounded<br/><img src="resources/badge/pill/roundedRightExample.png" height="30"/> |
 
 <br/>
 

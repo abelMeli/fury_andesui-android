@@ -41,6 +41,7 @@ internal object AndesBadgePillAttrsParser {
     private const val ANDES_BADGE_PILL_BORDER_ROUNDED = "4001"
     private const val ANDES_BADGE_PILL_BORDER_STANDARD = "4002"
     private const val ANDES_BADGE_PILL_BORDER_CORNER_LEFT = "4003"
+    private const val ANDES_BADGE_PILL_BORDER_ROUNDED_RIGHT = "4004"
 
     fun parse(context: Context, attr: AttributeSet?): AndesBadgePillAttrs {
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesBadgePill)
@@ -85,6 +86,7 @@ internal object AndesBadgePillAttrsParser {
             ANDES_BADGE_PILL_BORDER_ROUNDED -> AndesBadgePillBorder.ROUNDED
             ANDES_BADGE_PILL_BORDER_STANDARD -> AndesBadgePillBorder.STANDARD
             ANDES_BADGE_PILL_BORDER_CORNER_LEFT -> AndesBadgePillBorder.CORNER_LEFT
+            ANDES_BADGE_PILL_BORDER_ROUNDED_RIGHT -> AndesBadgePillBorder.ROUNDED_RIGHT
             else -> AndesBadgePillBorder.STANDARD
         }
     }

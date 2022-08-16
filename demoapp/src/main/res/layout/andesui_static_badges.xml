@@ -199,6 +199,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/badge_margin_vertical"
+            app:andesBadgePillBorder="roundedRight"
+            app:andesBadgePillHierarchy="loud"
+            app:andesBadgePillSize="large"
+            app:andesBadgePillText="@string/andes_demoapp_label_rounded_right"
+            app:andesBadgePillType="highlight" />
+
+        <com.mercadolibre.android.andesui.badge.AndesBadgePill
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/badge_margin_vertical"
             app:andesBadgePillBorder="standard"
             app:andesBadgePillHierarchy="loud"
             app:andesBadgePillSize="large"

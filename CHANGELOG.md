@@ -1,3 +1,7 @@
+# v5.11.0
+## 🚀 Feature
+- New Badge Pill Border: `Rounded Right` | Author: [@yesiddiaz](https://github.com/yesiddiaz)
+
 # v5.10.0
 ## 🚀 Feature
 - New attribute for the `AndesThumbnail` to manage the image scale type | Author: [@juanunzu](https://github.com/juanunzu)

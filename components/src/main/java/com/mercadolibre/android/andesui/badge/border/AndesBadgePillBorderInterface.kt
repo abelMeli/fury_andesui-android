@@ -80,6 +80,17 @@ internal class AndesRoundedBadgeBorder : AndesBadgeBorderInterface {
 }
 
 /**
+ * Implementation of [AndesBadgeBorderInterface] that returns the required data but personalized for the Rounded Right Border,
+ * according to Andes specifications.
+ *
+ */
+internal class AndesRoundedRightBadgeBorder : AndesBadgeBorderInterface {
+
+    override fun bottomEndCornerRadius(size: AndesBadgeSizeInterface, context: Context): Float =
+        size.cornerRadius(context)
+}
+
+/**
  * Implementation of [AndesBadgeBorderInterface] that returns the required data but personalized for the Corner Left Border,
  * according to Andes specifications.
  *

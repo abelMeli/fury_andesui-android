@@ -15,7 +15,8 @@ enum class AndesBadgePillBorder {
     CORNER,
     ROUNDED,
     STANDARD,
-    CORNER_LEFT;
+    CORNER_LEFT,
+    ROUNDED_RIGHT;
 
     companion object {
         fun fromString(value: String): AndesBadgePillBorder = valueOf(value.toUpperCase(Locale.ROOT))
@@ -29,6 +30,7 @@ enum class AndesBadgePillBorder {
             ROUNDED -> AndesRoundedBadgeBorder()
             STANDARD -> AndesStandardBadgeBorder()
             CORNER_LEFT -> AndesCornerLeftBadgeBorder()
+            ROUNDED_RIGHT -> AndesRoundedRightBadgeBorder()
         }
     }
 }

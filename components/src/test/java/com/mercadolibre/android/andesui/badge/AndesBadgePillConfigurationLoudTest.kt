@@ -214,6 +214,23 @@ class AndesBadgePillConfigurationLoudTest {
         topEndRadius assertEquals 0.0F
     }
 
+    @Test
+    fun `Pill, Loud, Highlight, Rounded Right, Large check borders`() {
+        attrs = AndesBadgePillAttrs(
+            AndesBadgePillHierarchy.LOUD, AndesBadgeType.HIGHLIGHT,
+            AndesBadgePillBorder.ROUNDED_RIGHT, AndesBadgePillSize.LARGE, "Title", false
+        )
+        val config = configFactory.create(context, attrs)
+        val topStartRadius = config.backgroundRadius[0]
+        val bottomStartRadius = config.backgroundRadius[1]
+        val bottomEndRadius = config.backgroundRadius[2]
+        val topEndRadius = config.backgroundRadius[3]
+        topStartRadius assertEquals 0.0F
+        bottomStartRadius assertEquals 0.0F
+        bottomEndRadius assertEquals 12.0F
+        topEndRadius assertEquals 0.0F
+    }
+
     companion object {
         private const val SMALL_HEIGHT = 16F
         private const val LARGE_HEIGHT = 24F
