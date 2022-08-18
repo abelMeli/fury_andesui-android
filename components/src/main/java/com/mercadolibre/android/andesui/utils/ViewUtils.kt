@@ -186,6 +186,18 @@ internal fun View.hideKeyboard() {
     ) as? InputMethodManager)?.hideSoftInputFromWindow(windowToken, 0)
 }
 
+internal fun View.xStart() = x
+
+internal fun View.xMiddle() = x + width / 2f
+
+internal fun View.xEnd() = x + width
+
+internal fun View.yStart() = y
+
+internal fun View.yMiddle() = y + height / 2f
+
+internal fun View.yEnd() = y + height
+
 /**
  * Returns all siblings from the caller view, or an empty list if the view is not attached
  * to a parent

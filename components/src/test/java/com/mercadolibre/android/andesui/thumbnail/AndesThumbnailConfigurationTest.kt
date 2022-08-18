@@ -1,5 +1,6 @@
 package com.mercadolibre.android.andesui.thumbnail
 
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.toAndesColor
@@ -39,7 +40,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.ICON,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.ENABLED)
+                AndesThumbnailState.ENABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -55,6 +58,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.ICON), config.isImageType)
         assertEquals(true, config.hasTint)
+        assertEquals(ImageView.ScaleType.FIT_CENTER, config.scaleType)
     }
 
     @Test
@@ -72,7 +76,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.ICON,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.ENABLED)
+                AndesThumbnailState.ENABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -88,6 +94,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.ICON), config.isImageType)
         assertEquals(true, config.hasTint)
+        assertEquals(ImageView.ScaleType.FIT_CENTER, config.scaleType)
     }
 
     @Test
@@ -100,7 +107,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.ICON,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.ENABLED)
+                AndesThumbnailState.ENABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -116,6 +125,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.ICON), config.isImageType)
         assertEquals(true, config.hasTint)
+        assertEquals(ImageView.ScaleType.FIT_CENTER, config.scaleType)
     }
 
     @Test
@@ -128,7 +138,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.IMAGE_CIRCLE,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.ENABLED)
+                AndesThumbnailState.ENABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -144,6 +156,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.IMAGE_CIRCLE), config.isImageType)
         assertEquals(false, config.hasTint)
+        assertEquals(ImageView.ScaleType.CENTER_CROP, config.scaleType)
     }
 
     @Test
@@ -156,7 +169,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.IMAGE_SQUARE,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.ENABLED)
+                AndesThumbnailState.ENABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -172,6 +187,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.radiusSize(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.IMAGE_SQUARE), config.isImageType)
         assertEquals(false, config.hasTint)
+        assertEquals(ImageView.ScaleType.CENTER_CROP, config.scaleType)
     }
 
     // MARK - Disabled Tests
@@ -186,7 +202,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.ICON,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.DISABLED)
+                AndesThumbnailState.DISABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -202,6 +220,8 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.ICON), config.isImageType)
         assertEquals(true, config.hasTint)
+        assertEquals(ImageView.ScaleType.FIT_CENTER, config.scaleType)
+        assertEquals(ImageView.ScaleType.FIT_CENTER, config.scaleType)
     }
 
     @Test
@@ -214,7 +234,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.ICON,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.DISABLED)
+                AndesThumbnailState.DISABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -230,6 +252,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.ICON), config.isImageType)
         assertEquals(true, config.hasTint)
+        assertEquals(ImageView.ScaleType.FIT_CENTER, config.scaleType)
     }
 
     @Test
@@ -242,7 +265,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.ICON,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.DISABLED)
+                AndesThumbnailState.DISABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -258,6 +283,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.ICON), config.isImageType)
         assertEquals(true, config.hasTint)
+        assertEquals(ImageView.ScaleType.FIT_CENTER, config.scaleType)
     }
 
     @Test
@@ -270,7 +296,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.IMAGE_CIRCLE,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.DISABLED)
+                AndesThumbnailState.DISABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -286,6 +314,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.diameter(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.IMAGE_CIRCLE), config.isImageType)
         assertEquals(false, config.hasTint)
+        assertEquals(ImageView.ScaleType.CENTER_CROP, config.scaleType)
     }
 
     @Test
@@ -298,7 +327,9 @@ class AndesThumbnailConfigurationTest {
                 drawable!!,
                 AndesThumbnailType.IMAGE_SQUARE,
                 AndesThumbnailSize.SIZE_48,
-                AndesThumbnailState.DISABLED)
+                AndesThumbnailState.DISABLED,
+                ImageView.ScaleType.CENTER_CROP
+        )
 
         // Then
         val config = configFactory.create(context, attrs)
@@ -314,6 +345,7 @@ class AndesThumbnailConfigurationTest {
         assertEquals(AndesThumbnailSize.SIZE_48.size.radiusSize(context), config.cornerRadius)
         assertEquals(whichImageType(AndesThumbnailType.IMAGE_SQUARE), config.isImageType)
         assertEquals(false, config.hasTint)
+        assertEquals(ImageView.ScaleType.CENTER_CROP, config.scaleType)
     }
 
     // MARK - API Level Helpers

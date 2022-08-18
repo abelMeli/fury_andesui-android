@@ -31,9 +31,11 @@
             android:paddingBottom="@dimen/andes_modal_margin_12"
             app:andesTextViewStyle="titleS"
             app:andesTextViewTextColor="primary"
+            app:layout_constraintBottom_toTopOf="@id/sub_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_header"
+            app:layout_goneMarginBottom="@dimen/andes_modal_margin_10"
             tools:text="Title" />
 
         <com.mercadolibre.android.andesui.modal.views.AndesModalHeaderTypeComponent
@@ -73,7 +75,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sub_title" />
+            app:layout_constraintTop_toBottomOf="@id/sub_title"
+            app:layout_goneMarginTop="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

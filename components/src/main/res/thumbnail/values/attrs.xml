@@ -32,6 +32,17 @@
         <attr name="andesThumbnailImage" format="reference" />
 
         <attr name="andesThumbnailAccentColor" format="reference" />
+
+        <attr name="andesThumbnailScaleType" format="enum">
+            <enum name="center" value="5000" />
+            <enum name="centerCrop" value="5001" />
+            <enum name="centerInside" value="5002" />
+            <enum name="fitCenter" value="5003" />
+            <enum name="fitEnd" value="5004" />
+            <enum name="fitStart" value="5005" />
+            <enum name="fitXY" value="5006" />
+            <enum name="matrix" value="5007" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="AndesThumbnailBadge" tools:ignore="ResourceName">

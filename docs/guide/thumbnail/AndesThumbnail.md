@@ -37,6 +37,7 @@ Basic Sample XML
 | app:andesThumbnailState | Thumbnail status color style: **enabled**, **disabled** |
 | app:andesThumbnailImage | Drawable resource to display. |
 | app:andesThumbnailAccentColor | Thumbnail main color. |
+| app:andesThumbnailScaleType | Scale type passed to the internal imageView that hosts the image asset (valid only for **image_circle** and **image_square** types: **center**, **centerCrop**, **centerInside**, **fitCenter**, **fitEnd**, **fitStart**, **fitXY**, **matrix** |
 
 <br/>
 
@@ -44,11 +45,11 @@ Basic Sample XML
 | Summary |
 | --- |
 | AndesThumbnail(context: Context, attrs: AttributeSet?)  |
-| [AndesThumbnail](#andesthumbnailcontext-context-accentcolor-andescolor-hierarchy-andesthumbnailhierarchy-image-drawable-type-andesthumbnailtype-size-andesthumbnailsize-state-andesthumbnailstate)(context: Context, accentColor: [AndesColor](/color/AndesColor.md), hierarchy: [AndesThumbnailHierarchy](#andesthumbnailhierarchy), image: Drawable, type: [AndesThumbnailType](#andesthumbnailtype), size: [AndesThumbnailSize](#andesthumbnailsize), state: [AndesThumbnailState](#andesthumbnailstate)) |
+| [AndesThumbnail](#andesthumbnailcontext-context-accentcolor-andescolor-hierarchy-andesthumbnailhierarchy-image-drawable-type-andesthumbnailtype-size-andesthumbnailsize-state-andesthumbnailstate-scaletype-imageviewscaletype)(context: Context, accentColor: [AndesColor](/color/AndesColor.md), hierarchy: [AndesThumbnailHierarchy](#andesthumbnailhierarchy), image: Drawable, type: [AndesThumbnailType](#andesthumbnailtype), size: [AndesThumbnailSize](#andesthumbnailsize), state: [AndesThumbnailState](#andesthumbnailstate), scaleType: ImageView.ScaleType) |
 
 <br/>
 
-##### AndesThumbnail(context: Context, accentColor: AndesColor, hierarchy: AndesThumbnailHierarchy, image: Drawable, type: AndesThumbnailType, size: AndesThumbnailSize, state: AndesThumbnailState)
+##### AndesThumbnail(context: Context, accentColor: AndesColor, hierarchy: AndesThumbnailHierarchy, image: Drawable, type: AndesThumbnailType, size: AndesThumbnailSize, state: AndesThumbnailState, scaleType: ImageView.ScaleType)
 | Parameter | Description |
 | -------- | ------- |
 | context | **Context**|
@@ -58,6 +59,7 @@ Basic Sample XML
 | type | **[AndesThumbnailType](#andesthumbnailtype)**: thumbnail design type. |
 | size | **[AndesThumbnailSize](#andesthumbnailsize)**: thumbnail display size in dp. |
 | state | **[AndesThumbnailState](#andesthumbnailstate)**: thumbnail status. |
+| scaleType | **ImageView.ScaleType**: scale type for the image to display. |
 
 <br/>
 
@@ -70,6 +72,7 @@ Basic Sample XML
 | type: [AndesThumbnailType](#andesthumbnailtype) | **get():** retrieves thumbnail design type. <br/> **set(value: AndesThumbnailType):** updates thumbnail design type. |
 | size: [AndesThumbnailSize](#andesthumbnailsize) | **get():** retrieves thumbnail component size. <br/> **set(value: AndesThumbnailSize):** updates thumbnail component size. |
 | state: [AndesThumbnailState](#andesthumbnailstate) | **get():** retrieves thumbnail state style. <br/> **set(value: AndesThumbnailState):** updates thumbnail state style. |
+| scaleType: ImageView.ScaleType | **get():** retrieves thumbnail image scale type. <br/> **set(value: ImageView.ScaleType):** updates thumbnail image scale type. |
 
 <br/>
 

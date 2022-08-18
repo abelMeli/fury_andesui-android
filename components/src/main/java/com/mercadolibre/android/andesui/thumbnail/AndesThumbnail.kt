@@ -98,6 +98,21 @@ class AndesThumbnail : FrameLayout {
             setupImageColor(config)
         }
 
+    /**
+     * Getter and setter for the image [scaleType]. This parameter only affects components with
+     * image type ([AndesThumbnailType.IMAGE_CIRCLE], [AndesThumbnailType.IMAGE_SQUARE]). For the
+     * [AndesThumbnailType.ICON] this setter will have no effect.
+     */
+    var scaleType: ImageView.ScaleType
+        get() = andesThumbnailAttrs.andesThumbnailScaleType
+        set(value) {
+            andesThumbnailAttrs = andesThumbnailAttrs.copy(andesThumbnailScaleType = value)
+            createConfig().let {
+                setupClipToOutline(it)
+                setupScaleType(it)
+            }
+        }
+
     private val imageFrame by lazy { findViewById<ImageView>(R.id.andes_thumbnail_image) }
 
     private lateinit var andesThumbnailAttrs: AndesThumbnailAttrs
@@ -122,7 +137,21 @@ class AndesThumbnail : FrameLayout {
         size: AndesThumbnailSize = AndesThumbnailSize.SIZE_48,
         state: AndesThumbnailState = AndesThumbnailState.ENABLED
     ) : super(context) {
-        initAttrs(accentColor, hierarchy, image, type, size, state)
+        initAttrs(accentColor, hierarchy, image, type, size, state, DEFAULT_SCALE_TYPE)
+    }
+
+    @Suppress("LongParameterList")
+    constructor(
+        context: Context,
+        accentColor: AndesColor,
+        hierarchy: AndesThumbnailHierarchy = AndesThumbnailHierarchy.LOUD,
+        image: Drawable,
+        type: AndesThumbnailType = AndesThumbnailType.ICON,
+        size: AndesThumbnailSize = AndesThumbnailSize.SIZE_48,
+        state: AndesThumbnailState = AndesThumbnailState.ENABLED,
+        scaleType: ImageView.ScaleType = DEFAULT_SCALE_TYPE
+    ) : super(context) {
+        initAttrs(accentColor, hierarchy, image, type, size, state, scaleType)
     }
 
     /**
@@ -143,9 +172,10 @@ class AndesThumbnail : FrameLayout {
         image: Drawable,
         type: AndesThumbnailType,
         size: AndesThumbnailSize,
-        state: AndesThumbnailState
+        state: AndesThumbnailState,
+        scaleType: ImageView.ScaleType
     ) {
-        andesThumbnailAttrs = AndesThumbnailAttrs(accentColor, hierarchy, image, type, size, state)
+        andesThumbnailAttrs = AndesThumbnailAttrs(accentColor, hierarchy, image, type, size, state, scaleType)
         val config = AndesThumbnailConfigurationFactory.create(context, andesThumbnailAttrs)
         setupComponents(config)
     }
@@ -199,14 +229,18 @@ class AndesThumbnail : FrameLayout {
         val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable)
 
         imageFrame.setImageDrawable(wrappedDrawable)
-        setupImageFitAndBounds(config.isImageType)
+        setupClipToOutline(config)
+        setupScaleType(config)
         setupImageSize(config.iconSize)
         setupImageColor(config)
     }
 
-    private fun setupImageFitAndBounds(isImageType: Boolean) {
-        clipToOutline = isImageType
-        imageFrame.scaleType = if (isImageType) CENTER_CROP else FIT_CENTER
+    private fun setupScaleType(config: AndesThumbnailConfiguration) {
+        imageFrame.scaleType = config.scaleType
+    }
+
+    private fun setupClipToOutline(config: AndesThumbnailConfiguration) {
+        clipToOutline = config.clipToOutline
     }
 
     private fun setupImageColor(config: AndesThumbnailConfiguration) {
@@ -225,4 +259,8 @@ class AndesThumbnail : FrameLayout {
     }
 
     private fun createConfig() = AndesThumbnailConfigurationFactory.create(context, andesThumbnailAttrs)
+
+    private companion object {
+        val DEFAULT_SCALE_TYPE = CENTER_CROP
+    }
 }

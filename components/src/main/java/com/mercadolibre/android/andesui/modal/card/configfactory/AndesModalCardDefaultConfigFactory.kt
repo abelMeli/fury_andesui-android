@@ -22,7 +22,8 @@ internal data class AndesModalCardDefaultConfig(
     val closeButtonVisibility: Int,
     val onDismissCallback: Action?,
     val onModalShowCallback: Action?,
-    val scrollListener: ((ScrollAction) -> AndesStickyScrollListener)?
+    val scrollListener: ((ScrollAction) -> AndesStickyScrollListener)?,
+    val subTitleVisibility: Int
 )
 
 internal object AndesModalCardDefaultConfigFactory {
@@ -45,9 +46,15 @@ internal object AndesModalCardDefaultConfigFactory {
                 closeButtonVisibility = resolveCloseButtonVisibility(isDismissible),
                 onDismissCallback = onDismissCallback,
                 onModalShowCallback = onModalShowCallback,
-                scrollListener = resolveScrollListener(isHeaderFixed)
+                scrollListener = resolveScrollListener(isHeaderFixed),
+                subTitleVisibility = resolveSubTitleVisiblity(content)
             )
         }
+    }
+
+    private fun resolveSubTitleVisiblity(content: AndesModalContent?): Int {
+        if (content == null) return View.GONE
+        return if (content.subtitle.isNullOrBlank()) View.GONE else View.VISIBLE
     }
 
     private fun resolveScrollListener(isHeaderFixed: Boolean): ((ScrollAction) -> AndesStickyScrollListener)? {

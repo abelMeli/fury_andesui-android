@@ -69,6 +69,7 @@
     <string name="andes_demoapp_label_rounded" translatable="false">Rounded</string>
     <string name="andes_demoapp_label_standard" translatable="false">Standard</string>
     <string name="andes_demoapp_label_corner_left" translatable="false">Corner Left</string>
+    <string name="andes_demoapp_label_rounded_right" translatable="false">Rounded Right</string>
     <string name="andes_demoapp_label_more" translatable="false">More</string>
     <string name="andes_demoapp_screen_button_group" translatable="false">Button group</string>
     <string name="andes_demoapp_screen_modal" translatable="false">Modal</string>
@@ -586,6 +587,7 @@
         <item>Corner</item>
         <item>Rounded</item>
         <item>Corner Left</item>
+        <item>Rounded Right</item>
     </string-array>
 
     <!-- Andes Tabs -->
@@ -1179,6 +1181,8 @@
     <string name="andes_button_group_type" translatable="false">Type</string>
     <string name="andes_button_group_quantity" translatable="false">Button quantity</string>
     <string name="andes_button_group_description" translatable="false">AndesButtonGroup is a container for AndesButton. They allow you to add 1 to 3 buttons distributed horizontally, vertically, auto and mixed.</string>
+    <string name="andes_tooltip_dynamic_x_placeholder" translatable="false">X %</string>
+    <string name="andes_tooltip_dynamic_y_placeholder" translatable="false">Y %</string>
     <string-array name="andes_button_group_align_spinner" translatable="false">
         <item>Left</item>
         <item>Right</item>

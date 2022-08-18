@@ -144,6 +144,7 @@ class AndesModalCardDefaultFragment : AndesDialogFragment() {
         config.content?.let {
             binding.singleContent.title.text = it.title
             binding.singleContent.subTitle.text = it.subtitle
+            binding.singleContent.subTitle.visibility = config.subTitleVisibility
             binding.singleContent.title.post {
                 val initialTitleLineCount = binding.singleContent.title.lineCount
                 if (initialTitleLineCount == SINGLE_LINE) {

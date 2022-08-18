@@ -20,12 +20,14 @@ class AndesBadgeEnumsTest {
         val rounded = AndesBadgePillBorder.fromString("rounded")
         val standard = AndesBadgePillBorder.fromString("standard")
         val cornerLeft = AndesBadgePillBorder.fromString("corner_left")
+        val roundedRight = AndesBadgePillBorder.fromString("rounded_right")
 
         // THEN
         corner assertEquals AndesBadgePillBorder.CORNER
         rounded assertEquals AndesBadgePillBorder.ROUNDED
         standard assertEquals AndesBadgePillBorder.STANDARD
         cornerLeft assertEquals AndesBadgePillBorder.CORNER_LEFT
+        roundedRight assertEquals AndesBadgePillBorder.ROUNDED_RIGHT
     }
 
     @Test

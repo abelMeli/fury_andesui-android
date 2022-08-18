@@ -57,9 +57,13 @@ internal class AndesModalCardPagerAdapter(
             binding.apply {
                 title.text = content.title
                 subTitle.text = content.subtitle
+                subTitle.visibility = resolveVisibility(content.subtitle)
                 setupImage(content, imageHeader)
             }
         }
+
+        private fun resolveVisibility(subtitle: CharSequence?) =
+            if (subtitle.isNullOrBlank()) View.GONE else View.VISIBLE
 
         private fun setupTitleLineCount() {
             binding.title.post {
