@@ -46,6 +46,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".components.a11yplayground.A11yLandingActivity"
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="playground"
+                    android:path="/a11ylanding"
+                    android:scheme="andes" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".components.a11yplayground.SemanticViewsActivity"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
@@ -240,7 +255,6 @@
                     android:host="amountfield"
                     android:scheme="andes" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".components.badge.BadgeShowcaseActivity"
@@ -647,7 +661,6 @@
                     android:scheme="andes" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".components.stickyscroll.StickyScrollViewShowcaseActivity"
             android:parentActivityName=".home.MainActivity">
@@ -662,10 +675,10 @@
                     android:scheme="andes" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".components.modal.ModalFullShowcaseActivity"
+        <activity
+            android:name=".components.modal.ModalFullShowcaseActivity"
             android:configChanges="screenSize|orientation"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".components.searchbox.SearchboxShowcaseActivity"
             android:parentActivityName=".home.MainActivity">

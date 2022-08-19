@@ -79,6 +79,8 @@
     <!-- Andes A11y Playground -->
     <string name="andes_demoapp_playground_lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="andes_demoapp_playground_card_body" translatable="false">Explore the different APIs needed to make any layout fully accessible</string>
+    <string name="andes_demoapp_playground_message_landing_body" translatable="false">Explore our new Accessibility Landing</string>
+    <string name="andes_demoapp_playground_message_landing_title" translatable="false">✨🚀 New! 🚀✨</string>
     <string name="andes_demoapp_playground_card_title" translatable="false">Android Accessibility Playground</string>
     <string name="andes_demoapp_playground_title_content_description" translatable="false">Content Description</string>
     <string name="andes_demoapp_playground_title_live_region" translatable="false">A11y Live Region</string>

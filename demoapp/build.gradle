@@ -27,6 +27,7 @@ android {
         def config = { k -> "\"${project.properties.get(k)}\"" }
         debug {
             buildConfigField "String", "STORYBOOK_URL", config("storybook.url")
+            buildConfigField "String", "A11Y_LANDING_URL", config("a11ylanding.url")
             applicationIdSuffix '.debug'
             minifyEnabled false
             aaptOptions {
