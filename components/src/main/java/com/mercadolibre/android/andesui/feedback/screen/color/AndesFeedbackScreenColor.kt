@@ -1,6 +1,5 @@
 package com.mercadolibre.android.andesui.feedback.screen.color
 
-import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackBadgeIconType
 import java.util.Locale
 

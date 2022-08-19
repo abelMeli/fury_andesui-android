@@ -1093,6 +1093,7 @@
     <string name="andes_feedbackscreen_description" translatable="false">A screen that shows the result of a flow or a group of tasks.</string>
     <string name="feedbackscreen_type" translatable="false">Feedback Type</string>
     <string name="feedbackscreen_header_thumbnail" translatable="false">Asset</string>
+    <string name="feedbackscreen_header_illustration_size_label" translatable="false">Illustration size</string>
     <string name="feedbackscreen_color" translatable="false">Feedback Color</string>
     <string name="feedbackscreen_header_title" translatable="false">Title</string>
     <string name="feedbackscreen_header_overlined" translatable="false">Header With overline</string>
@@ -1111,12 +1112,22 @@
         <item>Orange</item>
         <item>Red</item>
     </string-array>
-    <string-array name="feedbackscreen_header_thumbnail_spinner" translatable="false">
+    <string-array name="feedbackscreen_header_thumbnail_spinner_Simple" translatable="false">
+        <item>None</item>
+        <item>Icon</item>
+        <item>Image Circle</item>
+        <item>Illustration</item>
+    </string-array>
+    <string-array name="feedbackscreen_header_thumbnail_spinner_Congrats" translatable="false">
         <item>None</item>
         <item>Icon</item>
         <item>Image Circle</item>
     </string-array>
-
+    <string-array name="feedbackscreen_header_illustration_size" translatable="false">
+        <item>Small (320x80)</item>
+        <item>Medium (320x128)</item>
+        <item>Large (320x160)</item>
+    </string-array>
     <string-array name="feedbackscreen_button_group_quantity_spinner" translatable="false">
         <item>None</item>
         <item>1</item>

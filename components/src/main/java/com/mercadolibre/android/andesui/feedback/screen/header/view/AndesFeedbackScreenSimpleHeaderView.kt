@@ -14,15 +14,11 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.color.AndesColor
-import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackBadgeIconType
 import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBold
 import com.mercadolibre.android.andesui.textview.bodybolds.AndesBodyBolds
-import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
-import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgePillSize
 import com.mercadolibre.android.andesui.utils.elevateWithShadow
 
 @Suppress("TooManyFunctions")
@@ -187,13 +183,8 @@ internal class AndesFeedbackScreenSimpleHeaderView : AndesFeedbackScreenHeaderVi
     }
 
     private fun setupCardView() {
-        val viewHeight = height.takeIf { it > NO_HEIGHT } ?: measuredHeight
-        cardViewBody.layoutParams.apply {
-            height = viewHeight - assetContainer.height / 2
-        }
         cardViewBody.clipToPadding = false
         cardViewBody.visibility = VISIBLE
-
         cardViewBody.elevateWithShadow(true)
         assetContainer.elevateWithShadow()
         title.elevateWithShadow()

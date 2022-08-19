@@ -93,7 +93,28 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/feedbackscreen_header_thumbnail"
             app:layout_constraintTop_toTopOf="@+id/feedbackscreen_header_thumbnail" />
+        <TextView
+            android:id="@+id/feedbackscreen_header_illustration_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/feedbackscreen_header_illustration_size_label"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/feedbackscreen_header_illustration_size_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feedbackscreen_header_thumbnail" />
 
+        <Spinner
+            android:id="@+id/feedbackscreen_header_illustration_size_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/feedbackscreen_header_illustration_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/feedbackscreen_header_illustration_size"
+            app:layout_constraintTop_toTopOf="@+id/feedbackscreen_header_illustration_size" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/feedbackscreen_header_title"
@@ -104,7 +125,7 @@
             app:andesTextfieldLabel="@string/feedbackscreen_header_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feedbackscreen_header_thumbnail" />
+            app:layout_constraintTop_toBottomOf="@+id/feedbackscreen_header_illustration_size" />
 
         <TextView
             android:id="@+id/feedbackscreen_header_overline_switch_text"
@@ -242,6 +263,13 @@
             android:layout_height="wrap_content"
             android:visibility="visible"
             app:constraint_referenced_ids="feedbackscreen_color,feedbackscreen_color_spinner" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/feedbackscreen_illustration_size_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="feedbackscreen_header_illustration_size,feedbackscreen_header_illustration_size_spinner" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/feedbackscreen_header_overline_group"

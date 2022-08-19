@@ -5,7 +5,8 @@
     <dimen name="andes_feedbackscreen_thumbnail_margin_bottom">16dp</dimen>
     <dimen name="andes_feedbackscreen_thumbnail_margin_start">16dp</dimen>
     <dimen name="andes_feedbackscreen_close_icon_margin">4dp</dimen>
-
+    <dimen name="andes_feedbackscreen_illustration_margin_bottom">24dp</dimen>
+    <dimen name="andes_feedbackscreen_illustration_margin_top">48dp</dimen>
 
     <dimen name="andes_feedbackscreen_header_body_card_padding">16dp</dimen>
     <dimen name="andes_feedbackscreen_header_body_padding_vertical">8dp</dimen>
@@ -24,6 +25,8 @@
 
     <dimen name="andes_feedbackscreen_error_generic_screen_width">320dp</dimen>
     <dimen name="andes_feedbackscreen_error_screen_height">128dp</dimen>
+    <dimen name="andes_feedbackscreen_error_screen_height_80">80dp</dimen>
+    <dimen name="andes_feedbackscreen_error_screen_height_160">160dp</dimen>
     <dimen name="andes_feedbackscreen_error_padding">8dp</dimen>
     <dimen name="andes_feedbackscreen_error_top_bottom_padding">4dp</dimen>
     <dimen name="andes_feedbackscreen_error_image_margin_right">9dp</dimen>

@@ -7,6 +7,13 @@
     android:clipChildren="false"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/andes_header_card_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/andes_feedbackscreen_header_card"
         android:layout_width="0dp"
@@ -20,14 +27,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/andes_header_card_guideline"
         app:layout_constraintVertical_bias="1.0" />
 
     <FrameLayout
         android:id="@+id/andes_feedbackscreen_header_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/andes_feedbackscreen_thumbnail_margin_bottom"
         app:layout_constraintBottom_toTopOf="@+id/andes_feedbackscreen_header_overline"
         app:layout_constraintEnd_toEndOf="@+id/andes_feedbackscreen_header_card"
         app:layout_constraintStart_toStartOf="@+id/andes_feedbackscreen_header_card"

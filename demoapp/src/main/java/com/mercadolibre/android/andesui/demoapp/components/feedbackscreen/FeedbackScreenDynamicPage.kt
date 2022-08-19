@@ -21,6 +21,7 @@ import com.mercadolibre.android.andesui.textfield.AndesTextfield
 class FeedbackScreenDynamicPage {
     private lateinit var feedbackBodyMocks: AndesTextfield
     private lateinit var feedbackColorGroup: Group
+    private lateinit var feedbackIllustrationSizeGroup: Group
     private lateinit var updateButton: AndesButton
     private lateinit var feedbackHeaderDescription: AndesTextarea
     private lateinit var feedbackHeaderHighlight: AndesTextfield
@@ -32,21 +33,7 @@ class FeedbackScreenDynamicPage {
     private lateinit var feedbackTypeSpinner: Spinner
     private lateinit var closeButtonSwitch: AndesSwitch
     private lateinit var feedbackButtonGroupSpinner: Spinner
-
-    companion object {
-        const val CONGRATS = "Congrats"
-        const val SIMPLE = "Simple"
-
-        const val GREEN = "Green"
-        const val ORANGE = "Orange"
-        const val RED = "Red"
-
-        const val NONE = "None"
-        const val ICON = "Icon"
-        const val IMAGE_CIRCLE = "Image Circle"
-
-        const val MAX_CHARS = 240
-    }
+    private lateinit var feedbackIllustrationSizeSpinner: Spinner
 
     fun create(context: Context, container: View) {
         initComponents(container)
@@ -55,11 +42,12 @@ class FeedbackScreenDynamicPage {
         setupSpinnerComponent(
             context,
             feedbackThumbnailSpinner,
-            R.array.feedbackscreen_header_thumbnail_spinner
+            R.array.feedbackscreen_header_thumbnail_spinner_Simple
         )
         setupSpinnerComponent(context, feedbackButtonGroupSpinner, R.array.feedbackscreen_button_group_quantity_spinner)
         setupOverlineSwitch()
         setupButtons(context)
+        setupThumbnailSpinner(context)
     }
 
     private fun setupButtons(context: Context) {
@@ -69,6 +57,7 @@ class FeedbackScreenDynamicPage {
                 feedbackColorSpinner.selectedItem as String,
                 feedbackTypeSpinner.selectedItem as String,
                 feedbackThumbnailSpinner.selectedItem as String,
+                feedbackIllustrationSizeSpinner.selectedItem as String,
                 feedbackBodyMocks.text?.toIntOrNull(),
                 closeButtonSwitch.status.name,
                 feedbackHeaderOverlineSwitch.status.name,
@@ -110,12 +99,56 @@ class FeedbackScreenDynamicPage {
                     id: Long
                 ) {
                     when (selectedItem) {
-                        CONGRATS -> feedbackColorGroup.visibility = GONE
-                        SIMPLE -> feedbackColorGroup.visibility = VISIBLE
+                        CONGRATS -> {
+                            feedbackColorGroup.visibility = GONE
+                            setupSpinnerComponent(
+                                context,
+                                feedbackThumbnailSpinner,
+                                R.array.feedbackscreen_header_thumbnail_spinner_Congrats
+                            )
+                        }
+                        SIMPLE -> {
+                            feedbackColorGroup.visibility = VISIBLE
+                            setupSpinnerComponent(
+                                context,
+                                feedbackThumbnailSpinner,
+                                R.array.feedbackscreen_header_thumbnail_spinner_Simple
+                            )
+                        }
                     }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) = Unit
+            }
+        }
+    }
+
+    private fun setupThumbnailSpinner(context: Context) {
+        setupSpinnerComponent(
+            context,
+            feedbackIllustrationSizeSpinner,
+            R.array.feedbackscreen_header_illustration_size
+        )
+        with(feedbackThumbnailSpinner) {
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (selectedItem) {
+                        NONE -> feedbackIllustrationSizeGroup.visibility = GONE
+
+                        ICON -> feedbackIllustrationSizeGroup.visibility = GONE
+
+                        IMAGE_CIRCLE -> feedbackIllustrationSizeGroup.visibility = GONE
+
+                        ILLUSTRATION -> feedbackIllustrationSizeGroup.visibility = VISIBLE
+                    }
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) = Unit
             }
         }
     }
@@ -125,8 +158,10 @@ class FeedbackScreenDynamicPage {
         closeButtonSwitch = binding.feedbackscreenCloseButtonSwitch
         feedbackTypeSpinner = binding.feedbackscreenTypeSpinner
         feedbackColorGroup = binding.feedbackscreenColorGroup
+        feedbackIllustrationSizeGroup = binding.feedbackscreenIllustrationSizeGroup
         feedbackColorSpinner = binding.feedbackscreenColorSpinner
         feedbackThumbnailSpinner = binding.feedbackscreenHeaderThumbnailSpinner
+        feedbackIllustrationSizeSpinner = binding.feedbackscreenHeaderIllustrationSizeSpinner
         feedbackHeaderTitle = binding.feedbackscreenHeaderTitle
         feedbackHeaderOverlineSwitch = binding.feedbackscreenHeaderOverlineSwitch
         feedbackHeaderOverline = binding.feedbackscreenHeaderOverline
@@ -146,5 +181,27 @@ class FeedbackScreenDynamicPage {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
+    }
+
+    companion object {
+        const val CONGRATS = "Congrats"
+        const val SIMPLE = "Simple"
+
+        const val GREEN = "Green"
+        const val ORANGE = "Orange"
+        const val RED = "Red"
+
+        const val NONE = "None"
+        const val ICON = "Icon"
+        const val IMAGE_CIRCLE = "Image Circle"
+        /**Spinner option for type of asset. */
+        const val ILLUSTRATION = "Illustration"
+        /**Spinner option for illustration size small. */
+        const val ILLUSTRATION_80 = "Small (320x80)"
+        /**Spinner option for illustration size medium. */
+        const val ILLUSTRATION_128 = "Medium (320x128)"
+        /**Spinner option for illustration size large. */
+        const val ILLUSTRATION_160 = "Large (320x160)"
+        const val MAX_CHARS = 240
     }
 }

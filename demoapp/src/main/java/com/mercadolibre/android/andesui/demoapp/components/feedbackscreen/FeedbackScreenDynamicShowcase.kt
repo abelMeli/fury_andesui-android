@@ -21,6 +21,7 @@ import com.mercadolibre.android.andesui.feedback.screen.color.AndesFeedbackScree
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenHeader
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
+import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenIllustrationSize
 import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenType
 import com.mercadolibre.android.andesui.message.AndesMessage
@@ -44,6 +45,7 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
     private val feedbackHeaderHighlight by lazy { intent.extras?.getString(FEEDBACK_HIGHLIGHT) }
     private val numberOfMocks: Int by lazy { intent.extras?.getInt(FEEDBACK_BODY_MOCKS) ?: 0 }
     private val feedbackThumbnail by lazy { intent.extras?.getString(FEEDBACK_THUMBNAIL) }
+    private val feedbackIllustrationSizes by lazy { intent.extras?.getString(FEEDBACK_ILLUSTRATION_SIZE) }
     private val feedbackType by lazy { intent.extras?.getString(FEEDBACK_TYPE) }
     private val feedbackColor by lazy { intent.extras?.getString(FEEDBACK_COLOR) }
     private val feedbackCloseButtonStatus by lazy {
@@ -101,61 +103,6 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
         }
     }
 
-    companion object {
-        private const val FEEDBACK_TYPE = "feedbackType"
-        private const val FEEDBACK_COLOR = "feedbackColor"
-        private const val FEEDBACK_THUMBNAIL = "feedbackThumbnail"
-        private const val FEEDBACK_BODY_MOCKS = "feedbackBodyMocks"
-        private const val FEEDBACK_CLOSE_BUTTON = "feedbackCloseButtonEnabled"
-        private const val FEEDBACK_BUTTON_TEXT = "feedbackButtonText"
-        private const val FEEDBACK_OVERLINE_STATUS = "feedbackHeaderOverlineSwitch"
-        private const val FEEDBACK_TITLE = "feedbackHeaderTitle"
-        private const val FEEDBACK_OVERLINE = "feedbackHeaderOverline"
-        private const val FEEDBACK_DESCRIPTION = "feedbackHeaderDescription"
-        private const val FEEDBACK_HIGHLIGHT = "feedbackHeaderHighlight"
-        private const val FEEDBACK_BUTTON_GROUP = "feedbackButtonGroup"
-
-        private const val DEFAULT_HEADER_TEXT = "Default header text"
-        private const val DEFAULT_HIGHLIGHT_TEXT = "Default highlighted text"
-        private const val DEFAULT_DESCRIPTION_TEXT =
-            "Default description text to test the body links. " +
-                    "Default description text to test the body links. Default description text to test the body links. " +
-                    "Default description text to test the body links."
-        private const val DEFAULT_OVERLINE_TEXT = "Default overline text"
-        private val VALID_BODY_LINK = AndesBodyLink(37, 47)
-        private const val NONE = "None"
-        private const val ONE_BUTTON = "1"
-        private const val TWO_BUTTON = "2"
-        private const val THREE_BUTTON = "3"
-
-        fun getIntent(
-            context: Context,
-            feedbackColorSelected: String?,
-            feedbackTypeSelected: String?,
-            feedbackThumbnailSelected: String?,
-            feedbackBodyMocks: Int?,
-            feedbackCloseButtonEnabled: String,
-            feedbackHeaderOverlineSwitch: String,
-            feedbackHeaderTitle: String?,
-            feedbackHeaderOverline: String?,
-            feedbackHeaderDescription: String?,
-            feedbackHeaderHighlight: String?,
-            feedbackButtonGroup: String
-        ) = Intent(context, FeedbackScreenDynamicShowcase::class.java).apply {
-            putExtra(FEEDBACK_TYPE, feedbackTypeSelected)
-            putExtra(FEEDBACK_COLOR, feedbackColorSelected)
-            putExtra(FEEDBACK_THUMBNAIL, feedbackThumbnailSelected)
-            putExtra(FEEDBACK_BODY_MOCKS, feedbackBodyMocks)
-            putExtra(FEEDBACK_CLOSE_BUTTON, feedbackCloseButtonEnabled)
-            putExtra(FEEDBACK_OVERLINE_STATUS, feedbackHeaderOverlineSwitch)
-            putExtra(FEEDBACK_TITLE, feedbackHeaderTitle)
-            putExtra(FEEDBACK_OVERLINE, feedbackHeaderOverline)
-            putExtra(FEEDBACK_DESCRIPTION, feedbackHeaderDescription)
-            putExtra(FEEDBACK_HIGHLIGHT, feedbackHeaderHighlight)
-            putExtra(FEEDBACK_BUTTON_GROUP, feedbackButtonGroup)
-        }
-    }
-
     private fun getFeedbackHeaderBody(): AndesFeedbackScreenText {
         return if (feedbackHeaderOverlineSwitchStatus == AndesSwitchStatus.CHECKED) {
             AndesFeedbackScreenText(
@@ -194,7 +141,6 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
                 orientation = LinearLayout.VERTICAL
-
                 val source = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 for (i in 0 until numberOfMocks) {
                     addView(
@@ -250,7 +196,28 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
                 drawable,
                 AndesThumbnailBadgeType.ImageCircle
             )
+            FeedbackScreenDynamicPage.ILLUSTRATION -> getFeedbackIllustrationSize()
             FeedbackScreenDynamicPage.NONE -> null
+            else -> null
+        }
+    }
+
+    private fun getFeedbackIllustrationSize(): AndesFeedbackScreenAsset? {
+        val drawable =
+            ContextCompat.getDrawable(this, R.drawable.andes_ui_placeholder_imagen_48)!!
+        return when (feedbackIllustrationSizes) {
+            FeedbackScreenDynamicPage.ILLUSTRATION_80 -> AndesFeedbackScreenAsset.Illustration(
+                drawable,
+                AndesFeedbackScreenIllustrationSize.Size80
+            )
+            FeedbackScreenDynamicPage.ILLUSTRATION_128 -> AndesFeedbackScreenAsset.Illustration(
+                drawable,
+                AndesFeedbackScreenIllustrationSize.Size128
+            )
+            FeedbackScreenDynamicPage.ILLUSTRATION_160 -> AndesFeedbackScreenAsset.Illustration(
+                drawable,
+                AndesFeedbackScreenIllustrationSize.Size160
+            )
             else -> null
         }
     }
@@ -266,5 +233,63 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
         FeedbackScreenDynamicPage.ORANGE -> AndesFeedbackScreenColor.ORANGE
         FeedbackScreenDynamicPage.RED -> AndesFeedbackScreenColor.RED
         else -> AndesFeedbackScreenColor.GREEN
+    }
+
+    companion object {
+        private const val FEEDBACK_TYPE = "feedbackType"
+        private const val FEEDBACK_COLOR = "feedbackColor"
+        private const val FEEDBACK_THUMBNAIL = "feedbackThumbnail"
+        private const val FEEDBACK_ILLUSTRATION_SIZE = "feedbackIllustrationSize"
+        private const val FEEDBACK_BODY_MOCKS = "feedbackBodyMocks"
+        private const val FEEDBACK_CLOSE_BUTTON = "feedbackCloseButtonEnabled"
+        private const val FEEDBACK_BUTTON_TEXT = "feedbackButtonText"
+        private const val FEEDBACK_OVERLINE_STATUS = "feedbackHeaderOverlineSwitch"
+        private const val FEEDBACK_TITLE = "feedbackHeaderTitle"
+        private const val FEEDBACK_OVERLINE = "feedbackHeaderOverline"
+        private const val FEEDBACK_DESCRIPTION = "feedbackHeaderDescription"
+        private const val FEEDBACK_HIGHLIGHT = "feedbackHeaderHighlight"
+        private const val FEEDBACK_BUTTON_GROUP = "feedbackButtonGroup"
+
+        private const val DEFAULT_HEADER_TEXT = "Default header text"
+        private const val DEFAULT_HIGHLIGHT_TEXT = "Default highlighted text"
+        private const val DEFAULT_DESCRIPTION_TEXT =
+                "Default description text to test the body links. " +
+                "Default description text to test the body links. Default description text to test the body links. " +
+                "Default description text to test the body links."
+        private const val DEFAULT_OVERLINE_TEXT = "Default overline text"
+        private val VALID_BODY_LINK = AndesBodyLink(37, 47)
+        private const val NONE = "None"
+
+        /**
+         * Creates the intent to FeedbackScreenDynamicShowcase.
+         */
+        fun getIntent(
+            context: Context,
+            feedbackColorSelected: String?,
+            feedbackTypeSelected: String?,
+            feedbackThumbnailSelected: String?,
+            feedbackIllustrationSizeSelected: String?,
+            feedbackBodyMocks: Int?,
+            feedbackCloseButtonEnabled: String,
+            feedbackHeaderOverlineSwitch: String,
+            feedbackHeaderTitle: String?,
+            feedbackHeaderOverline: String?,
+            feedbackHeaderDescription: String?,
+            feedbackHeaderHighlight: String?,
+            feedbackButtonGroup: String
+        ) = Intent(context, FeedbackScreenDynamicShowcase::class.java).apply {
+            putExtra(FEEDBACK_TYPE, feedbackTypeSelected)
+            putExtra(FEEDBACK_COLOR, feedbackColorSelected)
+            putExtra(FEEDBACK_THUMBNAIL, feedbackThumbnailSelected)
+            putExtra(FEEDBACK_ILLUSTRATION_SIZE, feedbackIllustrationSizeSelected)
+            putExtra(FEEDBACK_BODY_MOCKS, feedbackBodyMocks)
+            putExtra(FEEDBACK_CLOSE_BUTTON, feedbackCloseButtonEnabled)
+            putExtra(FEEDBACK_OVERLINE_STATUS, feedbackHeaderOverlineSwitch)
+            putExtra(FEEDBACK_TITLE, feedbackHeaderTitle)
+            putExtra(FEEDBACK_OVERLINE, feedbackHeaderOverline)
+            putExtra(FEEDBACK_DESCRIPTION, feedbackHeaderDescription)
+            putExtra(FEEDBACK_HIGHLIGHT, feedbackHeaderHighlight)
+            putExtra(FEEDBACK_BUTTON_GROUP, feedbackButtonGroup)
+        }
     }
 }
