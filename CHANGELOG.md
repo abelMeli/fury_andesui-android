@@ -4,6 +4,8 @@
 - `AndesTagChoice` and `AndesTagSimple` accessibility improvements | Author: [@yireyes](https://github.com/yireyes)
 - `AndesFeedBackScreen` illustration sizes added | Author: [@MLcaro](https://github.com/MLcaro)
 - The A11y Playground now has a direct access to the ML Desktop A11y landing page | Author: [@juanunzu](https://github.com/juanunzu)
+## 🛠 Fixes
+- Added "android:export" explicitly in all the demoapp activities.
 
 # v5.10.0
 ## 🚀 Feature
