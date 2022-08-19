@@ -8,11 +8,13 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.CheckBox
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.databinding.AndesLayoutSimpleTagBinding
+import com.mercadolibre.android.andesui.tag.accessibility.AndesTagChoiceAccessibilityDelegate
 import com.mercadolibre.android.andesui.tag.choice.AndesTagChoiceCallback
 import com.mercadolibre.android.andesui.tag.choice.mode.AndesTagChoiceMode
 import com.mercadolibre.android.andesui.tag.choice.state.AndesTagChoiceState
@@ -169,9 +171,17 @@ class AndesTagChoice : ConstraintLayout {
         setupRightContent(config)
         setupBackgroundComponents(config)
 
-        binding.andesTagContainer.setOnClickListener {
+       setOnClickListener {
             onTagClick()
         }
+
+        setupAccessibility()
+    }
+
+    private fun setupAccessibility() {
+        isFocusable = true
+        binding.andesTagContainer.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        accessibilityDelegate = AndesTagChoiceAccessibilityDelegate(this)
     }
 
     private fun onTagClick() {
@@ -325,6 +335,10 @@ class AndesTagChoice : ConstraintLayout {
     }
 
     private fun createConfig() = AndesChoiceTagConfigurationFactory.create(andesTagAttrs)
+
+    override fun getAccessibilityClassName(): CharSequence {
+        return CheckBox::class.java.name
+    }
 
     companion object {
         private val TYPE_DEFAULT = AndesTagChoiceMode.SIMPLE

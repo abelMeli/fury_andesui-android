@@ -518,6 +518,7 @@ class TagShowcaseActivity : BaseActivity() {
                         path = "andes_ui_feedback_success_24",
                         iconColor = "#FFFFFF"
                 )
+
         )
         secondColumn.addView(tagSimpleIcon, params)
 

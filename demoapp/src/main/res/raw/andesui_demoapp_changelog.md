@@ -1,6 +1,7 @@
 # v5.11.0
 ## 🚀 Feature
 - New Badge Pill Border: `Rounded Right` | Author: [@yesiddiaz](https://github.com/yesiddiaz)
+- `AndesTagChoice` and `AndesTagSimple` accessibility improvements | Author: [@yireyes](https://github.com/yireyes)
 
 # v5.10.0
 ## 🚀 Feature
