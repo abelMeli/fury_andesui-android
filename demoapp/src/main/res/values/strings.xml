@@ -406,6 +406,8 @@
     <string-array name="andes_list_type_spinner" translatable="false">
         <item>Simple</item>
         <item>Chevron</item>
+        <item>CheckBox</item>
+        <item>RadioButton</item>
     </string-array>
     <string-array name="andes_list_asset_spinner" translatable="false">
         <item>None</item>

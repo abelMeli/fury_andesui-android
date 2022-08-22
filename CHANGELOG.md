@@ -1,6 +1,7 @@
 # v5.11.0
 ## 🚀 Feature
 - New Badge Pill Border: `Rounded Right` | Author: [@yesiddiaz](https://github.com/yesiddiaz)
+- Added support to `AndesListViewItemCheckBox` `AndesListViewItemRadioButton` within `AndesList` | Author: [@maquinteros](https://github.com/maquinteros)
 - `AndesTagChoice` and `AndesTagSimple` accessibility improvements | Author: [@yireyes](https://github.com/yireyes)
 - `AndesFeedBackScreen` illustration sizes added | Author: [@MLcaro](https://github.com/MLcaro)
 - The A11y Playground now has a direct access to the ML Desktop A11y landing page | Author: [@juanunzu](https://github.com/juanunzu)

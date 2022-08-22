@@ -267,3 +267,184 @@ class AndesListViewItemChevron @JvmOverloads constructor(
         this.chevronSize = config.chevronSize
     }
 }
+
+@Suppress("LongParameterList")
+class AndesListViewItemCheckBox @JvmOverloads constructor(
+    context: Context,
+    title: String,
+    subtitle: String? = null,
+    itemDividerEnabled: Boolean = false,
+    itemSelected: Boolean = false,
+    size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
+    icon: Drawable? = null,
+    iconContentDescription: String? = null,
+    avatar: Drawable? = null,
+    avatarContentDescription: String? = null,
+    titleMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
+) : AndesListViewItem() {
+
+    constructor(
+        context: Context,
+        title: String,
+        subtitle: String? = null,
+        itemDividerEnabled: Boolean = false,
+        itemSelected: Boolean = false,
+        size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
+        icon: Drawable? = null,
+        iconContentDescription: String? = null,
+        avatar: Drawable? = null,
+        avatarContentDescription: String? = null,
+        avatarType: AndesThumbnailType = AndesThumbnailType.ICON,
+        titleMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
+    ) : this(
+        context,
+        title,
+        subtitle,
+        itemDividerEnabled,
+        itemSelected,
+        size,
+        icon,
+        iconContentDescription,
+        avatar,
+        avatarContentDescription,
+        titleMaxLines
+    ) {
+        this.avatarType = avatarType
+    }
+
+    init {
+        val config = AndesListViewItemConfigurationFactory.create(context, size)
+        this.andesListViewItemSimpleConfig(
+            title,
+            subtitle,
+            itemDividerEnabled,
+            config,
+            itemSelected,
+            icon,
+            iconContentDescription,
+            avatar,
+            avatarContentDescription,
+            avatarType,
+            titleMaxLines
+        )
+    }
+
+    private fun andesListViewItemSimpleConfig(
+        title: String,
+        subtitle: String?,
+        itemDividerEnabled: Boolean,
+        config: AndesListViewItemConfiguration,
+        itemSelected: Boolean?,
+        icon: Drawable?,
+        iconContentDescription: String?,
+        avatar: Drawable?,
+        avatarContentDescription: String?,
+        avatarType: AndesThumbnailType,
+        titleMaxLines: Int
+    ) {
+
+        super.andesListViewItemConfig(
+            title,
+            subtitle,
+            itemDividerEnabled,
+            config,
+            itemSelected,
+            icon,
+            iconContentDescription,
+            avatar,
+            avatarContentDescription,
+            avatarType,
+            titleMaxLines
+        )
+    }
+}
+
+@Suppress("LongParameterList")
+class AndesListViewItemRadioButton @JvmOverloads constructor(
+    context: Context,
+    title: String,
+    subtitle: String? = null,
+    itemDividerEnabled: Boolean = false,
+    itemSelected: Boolean = false,
+    size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
+    icon: Drawable? = null,
+    iconContentDescription: String? = null,
+    avatar: Drawable? = null,
+    avatarContentDescription: String? = null,
+    titleMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
+) : AndesListViewItem() {
+    constructor(
+        context: Context,
+        title: String,
+        subtitle: String? = null,
+        itemDividerEnabled: Boolean = false,
+        itemSelected: Boolean = false,
+        size: AndesListViewItemSize = AndesListViewItemSize.MEDIUM,
+        icon: Drawable? = null,
+        iconContentDescription: String? = null,
+        avatar: Drawable? = null,
+        avatarContentDescription: String? = null,
+        avatarType: AndesThumbnailType = AndesThumbnailType.ICON,
+        titleMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
+    ) : this(
+        context,
+        title,
+        subtitle,
+        itemDividerEnabled,
+        itemSelected,
+        size,
+        icon,
+        iconContentDescription,
+        avatar,
+        avatarContentDescription,
+        titleMaxLines
+    ) {
+        this.avatarType = avatarType
+    }
+
+    init {
+        val config = AndesListViewItemConfigurationFactory.create(context, size)
+        this.andesListViewItemSimpleConfig(
+            title,
+            subtitle,
+            itemDividerEnabled,
+            config,
+            itemSelected,
+            icon,
+            iconContentDescription,
+            avatar,
+            avatarContentDescription,
+            avatarType,
+            titleMaxLines
+        )
+    }
+
+    private fun andesListViewItemSimpleConfig(
+        title: String,
+        subtitle: String?,
+        itemDividerEnabled: Boolean,
+        config: AndesListViewItemConfiguration,
+        itemSelected: Boolean?,
+        icon: Drawable?,
+        iconContentDescription: String?,
+        avatar: Drawable?,
+        avatarContentDescription: String?,
+        avatarType: AndesThumbnailType,
+        titleMaxLines: Int
+    ) {
+
+        super.andesListViewItemConfig(
+            title,
+            subtitle,
+            itemDividerEnabled,
+            config,
+            itemSelected,
+            icon,
+            iconContentDescription,
+            avatar,
+            avatarContentDescription,
+            avatarType,
+            titleMaxLines
+        )
+    }
+}
