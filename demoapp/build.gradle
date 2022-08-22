@@ -90,39 +90,39 @@ dependencies {
     implementation project(':components')
     implementation project(':coachmark')
 
-    implementation prod.kotlinStdlib
-    implementation prod.supportConstraintLayout
-    implementation prod.supportLibraryAppCompatV7
-    implementation prod.supportLibraryDesign
-    implementation showcase.coordinatorLayout
-    implementation(showcase.webkitConfigProvider) {
+    implementation libs.misc.kotlinStdlibJdk7 
+    implementation libs.misc.constraintLayout 
+    implementation libs.misc.appCompat 
+    implementation libs.misc.material 
+    implementation libs.misc.coordinatorLayout 
+    implementation (libs.meli.configurationMl.webkit) {
         exclude group: "com.google.android.gms"
     }
-    implementation(showcase.webkit) {
+    implementation (libs.meli.mlwebkitComponents) {
         exclude group: "com.google.android.gms"
     }
-    implementation(showcase.odr) {
+    implementation (libs.meli.resourcesCore) {
         force true
     }
-    implementation(showcase.uiComponents) {
+    implementation (libs.meli.uicomponentsResourceProvider) {
         force true
     }
-    implementation(showcase.andesConfigurator) {
+    implementation (libs.meli.configurationMl.andes) {
         force true
     }
 
-    implementation prod.fresco
+    implementation libs.misc.fresco 
 
-    implementation showcase.glide
-    implementation showcase.markwon
+    implementation libs.misc.glide 
+    implementation libs.misc.markwonCore 
 
-    implementation coroutines.core
-    implementation coroutines.android
+    implementation libs.misc.kotlinxCoroutinesCore 
+    implementation libs.misc.kotlinxCoroutines 
 
-    implementation platform(firebase.bom)
-    implementation firebase.analytics
+    implementation platform (libs.misc.firebaseBom)
+    implementation libs.misc.firebaseAnalytics 
 
-    debugImplementation showcase.leakCanary
+    debugImplementation libs.misc.leakCanary 
 
 }
 

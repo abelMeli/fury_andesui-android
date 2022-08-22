@@ -62,25 +62,25 @@ tasks.withType(Test) {
 
 
 dependencies {
-    implementation prod.kotlinStdlib
-    implementation coroutines.core
-    implementation prod.supportLibraryAppCompatV7
-    implementation prod.supportLibraryDesign
-    api prod.supportConstraintLayout
-    api prod.supportCardView
-    api prod.fresco
-    implementation coroutines.core
-    implementation coroutines.android
+    implementation libs.misc.kotlinStdlibJdk7 
+    implementation libs.misc.kotlinxCoroutinesCore 
+    implementation libs.misc.appCompat 
+    implementation libs.misc.material 
+    api libs.misc.constraintLayout 
+    api libs.misc.cardview 
+    api libs.misc.fresco 
+    implementation libs.misc.kotlinxCoroutinesCore 
+    implementation libs.misc.kotlinxCoroutines 
 
-    testImplementation test.runner
-    testImplementation test.soloader
-    testImplementation test.junit4
-    testImplementation test.mockitoKotlin
-    testImplementation test.assertj
-    testImplementation test.robolectric
-    testImplementation test.mockitoInline
-    testImplementation test.mockk
-    testImplementation test.coroutines
-    testImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    testImplementation libs.misc.extJunit 
+    testImplementation libs.misc.soloader 
+    testImplementation libs.misc.junit 
+    testImplementation libs.misc.mockitoKotlin2 
+    testImplementation libs.misc.assertJ 
+    testImplementation libs.misc.robolectric 
+    testImplementation libs.misc.mockitoInline 
+    testImplementation libs.misc.mockk 
+    testImplementation libs.misc.kotlinxCoroutinesTest 
+    testImplementation libs.misc.uiAutomator 
 
 }

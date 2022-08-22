@@ -1,5 +1,3 @@
-apply from: 'dependencies.gradle'
-
 buildscript {
     // These repositories are used when building your project.
     // They are NOT used to find your module's dependencies.
