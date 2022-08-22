@@ -3,6 +3,7 @@
 - Added support to `AndesListViewItemCheckBox` `AndesListViewItemRadioButton` within `AndesList` | Author: [@maquinteros](https://github.com/maquinteros)
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).
+- Migration to the new Plugin of Gradle --> 14.+.
 
 # v5.11.0
 ## 🚀 Feature

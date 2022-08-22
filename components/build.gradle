@@ -1,22 +1,13 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'mercadolibre.gradle.config.library'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion maxApiLevel.toInteger()
-    buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion minApiLevel
-        targetSdkVersion maxApiLevel
 
         consumerProguardFiles 'proguard-rules.pro'
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     resourcePrefix 'andes'
 

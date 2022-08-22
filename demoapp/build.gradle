@@ -1,21 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'mercadolibre.gradle.config.app'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android'
-apply from: "$rootDir/gradle/dexcount.gradle"
 
 android {
-    compileSdkVersion maxApiLevel.toInteger()
-    buildToolsVersion androidBuildToolsVersion
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     defaultConfig {
         applicationId "$libraryGroupId" + ".demoapp"
-        minSdkVersion minApiLevel
-        targetSdkVersion maxApiLevel
         versionCode "$demoAppVersionCode".toInteger()
         versionName "$libraryVersion"
 
