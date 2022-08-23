@@ -18,6 +18,9 @@ import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
+import com.mercadolibre.android.andesui.list.AndesListViewItemChevron
+import com.mercadolibre.android.andesui.list.AndesListViewItemCheckBox
+import com.mercadolibre.android.andesui.list.AndesListViewItemRadioButton
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
@@ -33,6 +36,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
 
     private var itemStaticSelected: Int = -1
     private var itemDynamicSelected: Int = -1
+    private var itemDynamicChecked: MutableList<Int> = mutableListOf()
     private var dynamicTitle: String = ITEM_TITLE
     private var dynamicSubtitle: String = ITEM_SUBTITLE
     private var dynamicMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
@@ -193,6 +197,8 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
         return when (spinnerType.selectedItem) {
             "Simple" -> AndesListType.SIMPLE
             "Chevron" -> AndesListType.CHEVRON
+            "CheckBox" -> AndesListType.CHECK_BOX
+            "RadioButton" -> AndesListType.RADIO_BUTTON
             else -> AndesListType.SIMPLE
         }
     }
@@ -237,18 +243,24 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
 
     override fun onItemClick(andesList: AndesList, position: Int) {
         Toast.makeText(applicationContext, "Position of item selected $position", Toast.LENGTH_SHORT).show()
-        if (andesList.tag == andesListStatic.tag) {
-            itemStaticSelected = position
-            andesListStatic.refreshListAdapter()
-        } else {
-            itemDynamicSelected = position
+        if (andesList.type == AndesListType.CHECK_BOX) {
+            if (itemDynamicChecked.contains(position)) itemDynamicChecked.remove(position) else itemDynamicChecked.add(position)
             andesListDynamic.refreshListAdapter()
+        } else {
+            if (andesList.tag == andesListStatic.tag) {
+                itemStaticSelected = position
+                andesListStatic.refreshListAdapter()
+            } else {
+                itemDynamicSelected = position
+                andesListDynamic.refreshListAdapter()
+            }
         }
     }
 
     override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
-        return if (andesList.tag == andesListStatic.tag) {
-            AndesListViewItemSimple(
+        return when (andesList.type) {
+            AndesListType.SIMPLE -> if (andesList.tag == andesListStatic.tag) {
+                AndesListViewItemSimple(
                     context = this,
                     title = "$ITEM_TITLE $position",
                     subtitle = ITEM_SUBTITLE,
@@ -257,9 +269,9 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
                     avatar = ContextCompat.getDrawable(this, R.drawable.andes_otros_almanaque_20),
                     titleMaxLines = DEFAULT_TITLE_NUMBER_OF_LINES,
                     itemSelected = itemStaticSelected == position
-            )
-        } else {
-            AndesListViewItemSimple(
+                )
+            } else {
+                AndesListViewItemSimple(
                     context = this,
                     title = dynamicTitle,
                     subtitle = dynamicSubtitle,
@@ -268,6 +280,47 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
                     avatar = avatar,
                     titleMaxLines = dynamicMaxLines,
                     itemSelected = itemDynamicSelected == position
+                )
+            }
+            AndesListType.CHEVRON -> AndesListViewItemChevron(
+                context = this,
+                title = dynamicTitle,
+                subtitle = dynamicSubtitle,
+                size = andesList.size,
+                icon = icon,
+                avatar = avatar,
+                titleMaxLines = dynamicMaxLines,
+                itemSelected = itemDynamicSelected == position
+            )
+            AndesListType.CHECK_BOX -> AndesListViewItemCheckBox(
+                context = this,
+                title = dynamicTitle,
+                subtitle = dynamicSubtitle,
+                size = andesList.size,
+                icon = icon,
+                avatar = avatar,
+                titleMaxLines = dynamicMaxLines,
+                itemSelected = itemDynamicChecked.contains(position)
+            )
+            AndesListType.RADIO_BUTTON -> AndesListViewItemRadioButton(
+                context = this,
+                title = dynamicTitle,
+                subtitle = dynamicSubtitle,
+                size = andesList.size,
+                icon = icon,
+                avatar = avatar,
+                titleMaxLines = dynamicMaxLines,
+                itemSelected = itemDynamicSelected == position
+            )
+            else -> AndesListViewItemSimple(
+                context = this,
+                title = dynamicTitle,
+                subtitle = dynamicSubtitle,
+                size = andesList.size,
+                icon = icon,
+                avatar = avatar,
+                titleMaxLines = dynamicMaxLines,
+                itemSelected = itemDynamicSelected == position
             )
         }
     }

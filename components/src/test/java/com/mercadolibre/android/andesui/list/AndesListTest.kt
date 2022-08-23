@@ -295,6 +295,124 @@ class AndesListTest {
         verify(spyList, times(1)).refreshListAdapter()
     }
 
+    @Test
+    fun `AndesList type checkbox`() {
+        // GIVEN
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemCheckBox(activity, "test")
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.CHECK_BOX)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val firstItem = andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.checkbox_item_selected))
+        Assert.assertEquals(AndesThumbnailType.ICON, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
+    @Test
+    fun `AndesList type checkbox with avatarType ImageCircle`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemCheckBox(activity, "test", avatar = drawable, avatarType = AndesThumbnailType.IMAGE_CIRCLE)
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.CHECK_BOX)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val firstItem = andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.checkbox_item_selected))
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
+    @Test
+    fun `AndesList type radiobutton`() {
+        // GIVEN
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemRadioButton(activity, "test")
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.RADIO_BUTTON)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val firstItem = andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.radio_button_item_selected))
+        Assert.assertEquals(AndesThumbnailType.ICON, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
+    @Test
+    fun `AndesList type radiobutton with avatarType ImageCircle`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemRadioButton(activity, "test", avatar = drawable, avatarType = AndesThumbnailType.IMAGE_CIRCLE)
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.RADIO_BUTTON)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val firstItem = andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.radio_button_item_selected))
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
     private fun setContentToActivity(view: View) {
         activity.setContentView(view)
     }

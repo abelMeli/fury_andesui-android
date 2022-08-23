@@ -3,8 +3,11 @@ package com.mercadolibre.android.andesui.list.accessibility
 import android.content.res.Resources
 import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
+import androidx.annotation.VisibleForTesting
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.list.AndesListViewItem
+import com.mercadolibre.android.andesui.list.AndesListViewItemCheckBox
+import com.mercadolibre.android.andesui.list.AndesListViewItemRadioButton
 
 /**
  * Class used to resolve [AndesListViewItem] accessibility features.
@@ -18,17 +21,21 @@ internal class AndesListViewItemAccessibilityDelegate(private val andesListItem:
 
     override fun onInitializeAccessibilityNodeInfo(host: View?, info: AccessibilityNodeInfo?) {
         super.onInitializeAccessibilityNodeInfo(host, info)
-        info?.contentDescription = generateContentDescriptionText(host?.resources)
+        when (andesListItem) {
+            is AndesListViewItemCheckBox,
+            is AndesListViewItemRadioButton -> {
+                info?.contentDescription = generateContentDescriptionText()
+                info?.isCheckable = true
+                info?.isChecked = andesListItem.itemSelected == true
+            }
+            else -> {
+                info?.contentDescription = generateContentDescriptionText()
+                info?.isSelected = andesListItem.itemSelected == true
+            }
+        }
     }
 
-    private fun generateContentDescriptionText(resources: Resources?) = buildString {
-        if (andesListItem.itemSelected == true) {
-            append(
-                resources?.getString(R.string.andes_list_item_selected).orEmpty(),
-                CONTENT_DESCRIPTION_SEPARATOR
-            )
-        }
-
+    private fun generateContentDescriptionText() = buildString {
         if (andesListItem.icon != null && andesListItem.iconContentDescription != null) {
             append(andesListItem.iconContentDescription, CONTENT_DESCRIPTION_SEPARATOR)
         }

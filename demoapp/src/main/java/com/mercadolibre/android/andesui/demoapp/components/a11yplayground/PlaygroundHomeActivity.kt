@@ -15,7 +15,21 @@ class PlaygroundHomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         initActionBar()
         setupButtons()
+        setupMessage()
         AnalyticsTracker.logA11yActivityTracking(this.javaClass.simpleName)
+    }
+
+    private fun setupMessage() {
+        binding.playgroundMessageLanding.apply {
+            setupPrimaryAction("Go!") {
+                startActivity(
+                    SafeIntent(
+                        this@PlaygroundHomeActivity,
+                        "andes://playground/a11ylanding"
+                    )
+                )
+            }
+        }
     }
 
     private fun setupButtons() {

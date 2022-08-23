@@ -26,6 +26,7 @@
             android:theme="@style/AppTheme.Home" />
         <activity
             android:name=".SplashScreenActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StorybookActivity">
+        <activity android:name=".StorybookActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -46,7 +48,23 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".components.a11yplayground.A11yLandingActivity"
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="playground"
+                    android:path="/a11ylanding"
+                    android:scheme="andes" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".components.a11yplayground.SemanticViewsActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -62,6 +80,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.HeadingActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -77,6 +96,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.AnnounceForA11yActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -92,6 +112,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.A11yLiveRegionActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -107,6 +128,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.ImportantForA11yActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -122,6 +144,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.NextFocusActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -137,6 +160,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.A11yTraversalAfterActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -152,6 +176,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.ContentDescriptionActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -167,6 +192,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.PlaygroundHomeActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -187,6 +213,7 @@
 
         <activity
             android:name=".components.datepicker.DatePickerShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -201,6 +228,7 @@
         </activity>
         <activity
             android:name=".components.bottomsheet.BottomSheetShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -215,6 +243,7 @@
         </activity>
         <activity
             android:name=".home.MainActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.Home">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -229,6 +258,7 @@
         </activity>
         <activity
             android:name=".components.amountfield.AmountFieldShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -240,10 +270,10 @@
                     android:host="amountfield"
                     android:scheme="andes" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".components.badge.BadgeShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -258,6 +288,7 @@
         </activity>
         <activity
             android:name=".components.snackbar.SnackbarShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -272,6 +303,7 @@
         </activity>
         <activity
             android:name=".components.checkbox.CheckboxShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -286,6 +318,7 @@
         </activity>
         <activity
             android:name=".components.tag.TagShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -300,6 +333,7 @@
         </activity>
         <activity
             android:name=".components.button.ButtonShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -314,6 +348,7 @@
         </activity>
         <activity
             android:name=".components.progressindicator.ProgressShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -328,6 +363,7 @@
         </activity>
         <activity
             android:name=".components.linearprogressindicator.LinearProgressShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -342,6 +378,7 @@
         </activity>
         <activity
             android:name=".components.message.MessageShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -356,6 +393,7 @@
         </activity>
         <activity
             android:name=".components.textfield.TextfieldShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -370,6 +408,7 @@
         </activity>
         <activity
             android:name=".components.thumbnail.ThumbnailShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -384,6 +423,7 @@
         </activity>
         <activity
             android:name=".whatsnew.WhatsNewActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -398,6 +438,7 @@
         </activity>
         <activity
             android:name=".components.radiobutton.RadioButtonShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -412,6 +453,7 @@
         </activity>
         <activity
             android:name=".components.card.CardShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -426,6 +468,7 @@
         </activity>
         <activity
             android:name=".components.coachmark.CoachmarkShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -440,6 +483,7 @@
         </activity>
         <activity
             android:name=".components.list.ListShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -454,6 +498,7 @@
         </activity>
         <activity
             android:name=".components.dropdown.DropdownShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -468,6 +513,7 @@
         </activity>
         <activity
             android:name=".components.carousel.CarouselShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -482,6 +528,7 @@
         </activity>
         <activity
             android:name=".components.tooltip.TooltipShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -496,6 +543,7 @@
         </activity>
         <activity
             android:name=".components.slider.SliderShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -510,6 +558,7 @@
         </activity>
         <activity
             android:name=".components.switchandes.SwitchShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -524,6 +573,7 @@
         </activity>
         <activity
             android:name=".components.floatingmenu.FloatingMenuShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -538,6 +588,7 @@
         </activity>
         <activity
             android:name=".components.timepicker.TimePickerShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -552,6 +603,7 @@
         </activity>
         <activity
             android:name=".components.tabs.TabsShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -566,6 +618,7 @@
         </activity>
         <activity
             android:name=".components.feedbackscreen.FeedbackScreenShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -580,6 +633,7 @@
         </activity>
         <activity
             android:name=".components.moneyamount.MoneyAmountShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -594,6 +648,7 @@
         </activity>
         <activity
             android:name=".components.textview.TextViewShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -620,6 +675,7 @@
             tools:node="remove" />
         <activity
             android:name=".components.buttongroup.ButtonGroupShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -634,6 +690,7 @@
         </activity>
         <activity
             android:name=".components.modal.ModalShowcaseActivity"
+            android:exported="true"
             android:configChanges="screenSize|orientation"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
@@ -647,9 +704,9 @@
                     android:scheme="andes" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".components.stickyscroll.StickyScrollViewShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -662,12 +719,13 @@
                     android:scheme="andes" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".components.modal.ModalFullShowcaseActivity"
+        <activity
+            android:name=".components.modal.ModalFullShowcaseActivity"
             android:configChanges="screenSize|orientation"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".components.searchbox.SearchboxShowcaseActivity"
+            android:exported="true"
             android:parentActivityName=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

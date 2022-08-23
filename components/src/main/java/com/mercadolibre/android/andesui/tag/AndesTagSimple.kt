@@ -9,10 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityViewCommand
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.databinding.AndesLayoutSimpleTagBinding
+import com.mercadolibre.android.andesui.tag.accessibility.AndesTagChoiceAccessibilityDelegate
+import com.mercadolibre.android.andesui.tag.accessibility.AndesTagSimpleAccessibilityDelegate
 import com.mercadolibre.android.andesui.tag.factory.AndesSimpleTagConfigurationFactory
 import com.mercadolibre.android.andesui.tag.factory.AndesTagSimpleAttrs
 import com.mercadolibre.android.andesui.tag.factory.AndesTagSimpleAttrsParser
@@ -109,6 +114,7 @@ class AndesTagSimple : ConstraintLayout {
             createConfig().let {
                 setupRightContent(it)
                 setupTitleComponent(it)
+                setUpAccessibility(it)
             }
         }
 
@@ -173,6 +179,21 @@ class AndesTagSimple : ConstraintLayout {
         setupTitleComponent(config)
         setupLeftContent(config)
         setupRightContent(config)
+        setUpAccessibility(config)
+    }
+
+    private fun setUpAccessibility(config: AndesTagSimpleConfiguration){
+        accessibilityDelegate = AndesTagSimpleAccessibilityDelegate(this)
+        isFocusable = true
+        binding.andesTagContainer.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+
+        if(isDismissable){
+            ViewCompat.addAccessibilityAction(this, context.getString(R.string.andes_tag_remove)) { _, _ ->
+                binding.andesTagContainer.visibility = View.GONE
+                config.rightContentData?.dismiss?.onClickListener?.onClick(this)
+                true
+            }
+        }
     }
 
     private fun setupBackgroundComponents(config: AndesTagSimpleConfiguration) {
