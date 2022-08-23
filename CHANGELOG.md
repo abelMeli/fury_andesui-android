@@ -4,6 +4,8 @@
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).
 - Migration to the new Plugin of Gradle --> 14.+.
+## 🛠 Fixes
+- `AndesFeedbackScreenView` accessibility improvements | Author: [@yireyes](https://github.com/yireyes) 
 
 # v5.11.0
 ## 🚀 Feature
