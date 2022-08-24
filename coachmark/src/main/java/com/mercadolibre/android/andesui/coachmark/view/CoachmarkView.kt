@@ -263,6 +263,10 @@ class CoachmarkView private constructor(builder: Builder) : CoachmarkViewInterfa
         )
     }
 
+    override fun hasArrow() = false
+
+    override fun setNewMessageDimensions(height: Int) = Unit
+
     /**
      * Agrega las vistas a ser recortadas
      *
@@ -288,7 +292,7 @@ class CoachmarkView private constructor(builder: Builder) : CoachmarkViewInterfa
                 val tooltipHeight = walkthroughMessageView.getChildAt(0).height
                 val targetRect = Rect()
                 stepReferenced.view?.getGlobalVisibleRect(targetRect)
-                presenter.relocateTooltip(tooltipHeight, walkthroughMessageView.getPosition(), targetRect)
+                presenter.relocateTooltip(tooltipHeight, walkthroughMessageView.getPosition(), targetRect, baseContainer.height)
 
                 walkthroughMessageView.animate()
                     .alpha(1f)

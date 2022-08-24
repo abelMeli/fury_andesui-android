@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.coachmark.presenter
 
 import android.graphics.Rect
+import android.view.ViewGroup
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStep
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStyle
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessagePosition
@@ -159,7 +160,8 @@ internal class CoachmarkPresenter(private val view: CoachmarkViewInterface) {
     fun relocateTooltip(
         tooltipHeight: Int,
         tooltipPosition: WalkthroughMessagePosition,
-        targetRect: Rect
+        targetRect: Rect,
+        containerHeight: Int
     ) {
 
         val padding = view.getTooltipMargin().toFloat()
@@ -168,9 +170,16 @@ internal class CoachmarkPresenter(private val view: CoachmarkViewInterface) {
 
         // setY
         if (tooltipPosition == WalkthroughMessagePosition.BELOW) {
+            val newMessageHeight = if (view.hasArrow()) {
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            } else {
+                containerHeight - (y + height + padding.toInt())
+            }
             view.setWalkthroughMessageViewY((y + height + padding))
+            view.setNewMessageDimensions(newMessageHeight)
         } else {
             view.setWalkthroughMessageViewY((y - tooltipHeight - padding))
+            view.setNewMessageDimensions(ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
 
@@ -182,6 +191,7 @@ internal class CoachmarkPresenter(private val view: CoachmarkViewInterface) {
         view.cleanCoachmarkOverlayView()
         view.clearWalkthroughMessageView()
         view.setWalkthroughMessageViewY(0F)
+        view.setNewMessageDimensions(ViewGroup.LayoutParams.WRAP_CONTENT)
         view.setScrollViewPaddings(0, 0, 0, 0)
     }
 }

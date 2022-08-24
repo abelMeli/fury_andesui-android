@@ -18,6 +18,7 @@
     <dimen name="andes_coachmark_radius_arrow">24dp</dimen>
 
     <dimen name="andes_coachmark_stroke_arrow">1dp</dimen>
+    <dimen name="andes_coachmark_button_bottom_margin">24dp</dimen>
 
 
     <!--
@@ -89,6 +90,7 @@
     <dimen name="andes_coachmark_6m">48dp</dimen>
     <dimen name="andes_coachmark_arrow_margin_gone">8dp</dimen>
     <dimen name="andes_coachmark_arrow_margin">8dp</dimen>
+    <dimen name="andes_coachmark_button_horizontal_margin">24dp</dimen>
 
     <!--TextSize-->
     <dimen name="andes_coachmark_fontsize_xsmall">14sp</dimen>

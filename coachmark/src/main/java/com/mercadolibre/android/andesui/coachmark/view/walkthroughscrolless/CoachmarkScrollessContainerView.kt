@@ -29,6 +29,10 @@ class CoachmarkScrollessContainerView @JvmOverloads constructor(
         this.coachMarkContainerListener = coachMarkContainerListener
     }
 
+    fun setTitleVisibility(titleVisibility: Int) {
+        binding.counterText.visibility = titleVisibility
+    }
+
     fun setData(position: Int, size: Int) {
         binding.closeButton.setOnClickListener { coachMarkContainerListener?.onClickClose(position) }
         binding.counterText.text = context.resources.getString(

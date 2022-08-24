@@ -4,6 +4,8 @@
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).
 - Migration to the new Plugin of Gradle --> 14.+.
+## 🛠 Fixes
+- Fix in `AndesCoachmark` message vertical margins and step indicator | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v5.11.0
 ## 🚀 Feature
