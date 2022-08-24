@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.coachmark.view
+package com.mercadolibre.android.andesui.coachmark.view.walkthroughmessage
 
 import com.mercadolibre.android.andesui.coachmark.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.coachmark.view.walkthroughmessage.ArcArrow

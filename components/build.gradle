@@ -21,6 +21,9 @@ android {
     }
 
     testOptions {
+        tasks.withType(Test) {
+            jacoco.includeNoLocationClasses = true
+        }
         unitTests {
             includeAndroidResources = true
             returnDefaultValues = true

@@ -2,11 +2,13 @@ package com.mercadolibre.android.andesui.demoapp.components.coachmark
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
-import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmark
+import androidx.appcompat.widget.Toolbar
+import com.mercadolibre.android.andesui.coachmark.model.AndesScrollessWalkthroughCoachmark
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStep
 import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmarkStyle
-import com.mercadolibre.android.andesui.coachmark.view.CoachmarkView
+import com.mercadolibre.android.andesui.coachmark.view.walkthroughscrolless.CoachmarkScrollessView
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
@@ -48,7 +50,7 @@ class CoachmarkShowcaseActivity : BaseActivity() {
     @SuppressLint("SetTextI18n", "LongMethod")
     private fun addStaticPage(container: View) {
         val binding = AndesuiStaticCoachmarkBinding.bind(container)
-        binding.texto.text = "Texto a resaltar"
+        binding.texto.text = "Texto a resaltar Texto a resaltar Texto"
 
         binding.textoLargo.text = "Lorem ipsum " +
                 "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsøum Lorem ipsum Lorem ipsum " +
@@ -66,6 +68,23 @@ class CoachmarkShowcaseActivity : BaseActivity() {
                 "Lorem ipsum Lorem ipsum Lorem ipsum"
 
         val stepsNewCoachmark = ArrayList<AndesWalkthroughCoachmarkStep>()
+
+        stepsNewCoachmark.add(AndesWalkthroughCoachmarkStep(
+            "A Primer titulo",
+            "Resaltamos el primer texto",
+            "Siguiente",
+            supportActionBar?.customView?.findViewById(R.id.custom_action_bar_webview_text),
+            AndesWalkthroughCoachmarkStyle.MENU_ITEM)
+        )
+
+        stepsNewCoachmark.add(AndesWalkthroughCoachmarkStep(
+            "A Primer titulo",
+            "Resaltamos el primer texto",
+            "Siguiente",
+            baseBinding.andesuiNavBar.navigationIconView,
+            AndesWalkthroughCoachmarkStyle.HAMBURGER)
+        )
+
 
         stepsNewCoachmark.add(AndesWalkthroughCoachmarkStep(
                 "Primer titulo",
@@ -99,10 +118,7 @@ class CoachmarkShowcaseActivity : BaseActivity() {
         )
 
         stepsNewCoachmark.add(AndesWalkthroughCoachmarkStep("Quinto titulo ",
-                "Resaltamos el texto largo Resaltamos el texto largo Resaltamos el texto largo " +
-                        "Resaltamos el texto largo Resaltamos el texto largo Resaltamos el texto largo " +
-                        "Resaltamos el texto largo Resaltamos el texto largo Resaltamos el texto largo " +
-                        "Resaltamos el texto largo Resaltamos el texto largo",
+                "Resaltamos el texto largo Resaltamos el texto largo Resaltamos el texto largo",
                 "Siguiente",
                 binding.textoLargo,
                 AndesWalkthroughCoachmarkStyle.RECTANGLE)
@@ -145,9 +161,26 @@ class CoachmarkShowcaseActivity : BaseActivity() {
         )
 
         binding.actionButton.setOnClickListener {
-            CoachmarkView.Builder(this, AndesWalkthroughCoachmark(stepsNewCoachmark, binding.scrollview) {
+            CoachmarkScrollessView.Builder(this, AndesScrollessWalkthroughCoachmark(stepsNewCoachmark, binding.scrollview) {
                 println("Entro al despues de cerrar")
             }).build()
         }
     }
+
+    private val Toolbar.navigationIconView: View?
+        get() {
+            //check if contentDescription previously was set
+            val hadContentDescription = !TextUtils.isEmpty(navigationContentDescription)
+            val contentDescription = if (hadContentDescription) navigationContentDescription else "navigationIcon"
+            navigationContentDescription = contentDescription
+            val potentialViews = arrayListOf<View>()
+            //find the view based on it's content description, set programatically or with android:contentDescription
+            findViewsWithText(potentialViews, contentDescription, View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION)
+            //Clear content description if not previously present
+            if (!hadContentDescription) {
+                navigationContentDescription = null
+            }
+            //Nav icon is always instantiated at this point because calling setNavigationContentDescription ensures its existence
+            return potentialViews.firstOrNull()
+        }
 }

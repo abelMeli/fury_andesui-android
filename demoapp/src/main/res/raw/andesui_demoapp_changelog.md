@@ -6,6 +6,7 @@
 - Migration to the new Plugin of Gradle --> 14.+.
 ## 🛠 Fixes
 - `AndesFeedbackScreenView` accessibility improvements | Author: [@yireyes](https://github.com/yireyes) 
+- Fix in `AndesCoachmark` message vertical margins and step indicator | Author: [@juanunzu](https://github.com/juanunzu)
 
 # v5.11.0
 ## 🚀 Feature

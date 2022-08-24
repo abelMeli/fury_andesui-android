@@ -6,13 +6,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet
 import com.mercadolibre.android.andesui.coachmark.R
 import com.mercadolibre.android.andesui.coachmark.databinding.AndesWalkthroughScrollessMessageBinding
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessageModel
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessagePosition
+import com.mercadolibre.android.andesui.coachmark.utils.setConstraints
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
-class WalkthroughScrollessMessageView @JvmOverloads constructor(
+internal class WalkthroughScrollessMessageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -23,6 +26,11 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
     private val binding by lazy {
         AndesWalkthroughScrollessMessageBinding.inflate(LayoutInflater.from(context), this, true)
     }
+
+    var hasArrow: Boolean = false
+        private set
+        get() = (binding.arcArrowBottom.visibility == View.VISIBLE) or
+                (binding.arcArrowTop.visibility == View.VISIBLE)
 
     init {
         with(binding) {
@@ -64,6 +72,40 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
         setArrow(targetRect)
     }
 
+    fun setNewDimensions(height: Int) {
+        setNewHeight(height)
+        setNewConstraints(height)
+    }
+
+    private fun setNewConstraints(height: Int) {
+        val buttonGoneMargin: Int
+        val buttonVerticalBias: Float
+
+        if (height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            buttonGoneMargin = R.dimen.andes_coachmark_arrow_margin_gone
+            buttonVerticalBias = CENTER_BIAS
+        } else {
+            buttonGoneMargin = R.dimen.andes_coachmark_button_bottom_margin
+            buttonVerticalBias = BOTTOM_BIAS
+        }
+
+        binding.walkthroughContainer.apply {
+            setConstraints {
+                setGoneMargin(
+                    binding.walkthroughNextButton.id,
+                    ConstraintSet.BOTTOM, context.resources.getDimensionPixelSize(buttonGoneMargin)
+                )
+                setVerticalBias(binding.walkthroughNextButton.id, buttonVerticalBias)
+            }
+        }
+    }
+
+    private fun setNewHeight(height: Int) {
+        val internalParams = binding.walkthroughContainer.layoutParams
+        internalParams.height = height
+        binding.walkthroughContainer.layoutParams = internalParams
+    }
+
     private fun setPosition(overlayRect: Rect, targetRect: Rect) {
         val centerReferenceView = (targetRect.bottom + targetRect.top) / 2
         val centerScreen = (overlayRect.bottom + overlayRect.top) / 2
@@ -88,12 +130,20 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
         }
     }
 
+    private fun setupButtonWidth(isButtonFullWidth: Boolean) {
+        val buttonWidth = if (isButtonFullWidth) LayoutParams.MATCH_PARENT else LayoutParams.WRAP_CONTENT
+        val params = binding.walkthroughNextButton.layoutParams
+        params.width = buttonWidth
+        binding.walkthroughNextButton.layoutParams = params
+    }
+
     private fun setMessagePositionAbove(tooltipRect: Rect, centerTarget: Int) {
         with(binding) {
             arcArrowTop.visibility = View.GONE
             arcArrowBottom.visibility = View.VISIBLE
             arcArrowBottom.getLocalVisibleRect(tooltipRect)
             val centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
+            setupButtonWidth(false)
             if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
                 arcArrowBottom.addRect(centerTooltip, tooltipRect.top, centerTarget, tooltipRect.bottom)
             } else {
@@ -110,8 +160,10 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
             val centerTooltip = (tooltipRect.left + tooltipRect.right) / 2
             if (isNecessaryShowArrow(centerTooltip, centerTarget)) {
                 arcArrowTop.addRect(centerTooltip, tooltipRect.bottom, centerTarget, tooltipRect.top)
+                setupButtonWidth(false)
             } else {
                 arcArrowTop.visibility = View.GONE
+                setupButtonWidth(true)
             }
         }
     }
@@ -152,5 +204,10 @@ class WalkthroughScrollessMessageView @JvmOverloads constructor(
 
     interface WalkthroughButtonClicklistener {
         fun onClickNextButton(position: Int)
+    }
+
+    private companion object {
+        const val CENTER_BIAS = 0.5f
+        const val BOTTOM_BIAS = 1f
     }
 }

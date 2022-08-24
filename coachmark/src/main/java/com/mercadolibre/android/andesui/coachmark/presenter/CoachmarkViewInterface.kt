@@ -30,4 +30,8 @@ internal interface CoachmarkViewInterface {
     fun addRoundRect(stepReferenced: AndesWalkthroughCoachmarkStep)
 
     fun addCircleRect(stepReferenced: AndesWalkthroughCoachmarkStep)
+
+    fun hasArrow(): Boolean
+
+    fun setNewMessageDimensions(height: Int)
 }
