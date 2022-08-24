@@ -378,7 +378,7 @@ class AndesFeedbackScreenViewTest {
 
         with(screenView.getButtonGroup() as AndesButtonGroup) {
             (getChildAt(1) as AndesButton).text assertEquals "Button 2"
-            importantForAccessibility assertEquals ScrollView.IMPORTANT_FOR_ACCESSIBILITY_AUTO
+            importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
         }
     }
 
