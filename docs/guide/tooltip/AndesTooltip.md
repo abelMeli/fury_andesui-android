@@ -343,3 +343,11 @@ anchor view, or the trigger).
 - When the component is not focusable, it will be ignored by the a11y services, but it can be accessed when focusing over the anchor view
   and triggering the "More Info" custom action. After that the component will behave as the focusable version (it will
   steal the focus and keep it inside the tooltip until dismissed). 
+
+## Events
+- Tooltip allows the set of some events that allow you to execute a callback when they happen.
+
+| Events | Description |
+| - | - |
+| `setOnAndesTooltipDismissListener(callback: (() -> Unit)? = null)` | Executes the callback whenever the tooltip is closed, either when clicking outside the tooltip, on some action or on the close button. |
+| `setOnAndesTooltipCloseDismissListener(callback: (() -> Unit)? = null)` | Execute the callback when the close button is clicked, with this you can record when the user intentionally closed the dr tooltip. |
