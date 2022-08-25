@@ -1,6 +1,7 @@
 # v5.12.0
 ## 🚀 Feature
 - Added support to `AndesListViewItemCheckBox` `AndesListViewItemRadioButton` within `AndesList` | Author: [@maquinteros](https://github.com/maquinteros)
+- Added user close event listener in tooltip
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).
 - Migration to the new Plugin of Gradle --> 14.+.
