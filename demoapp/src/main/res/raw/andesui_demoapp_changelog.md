@@ -1,5 +1,6 @@
 # v5.12.0
 ## 🚀 Feature
+- AndesInputStepper New internal component for andes| Author: [@dbetancourtg](https://github.com/Diego-Betancourt)
 - Added support to `AndesListViewItemCheckBox` `AndesListViewItemRadioButton` within `AndesList` | Author: [@maquinteros](https://github.com/maquinteros)
 - Added user close event listener in tooltip
 ## ➡️ Migrated

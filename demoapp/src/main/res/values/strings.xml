@@ -1233,4 +1233,13 @@
     <string name="andesui_demoapp_dynamic_modal_full_trigger_button_text" translatable="false">Show full modal!</string>
     <string name="andesui_demoapp_dynamic_modal_full_a11y_modal_description" translatable="false">Modal description for a11y</string>
 
+    <!-- Andes Input Stepper -->
+    <string name="andes_demoapp_screen_inputstepper" translatable="false">Input Stepper</string>
+    <string name="andesui_demoapp_dynamic_inputstepper_step" translatable="false">Step</string>
+    <string name="andesui_demoapp_dynamic_inputstepper_value" translatable="false">Value</string>
+    <string name="andesui_demoapp_dynamic_inputstepper_max" translatable="false">Max</string>
+    <string name="andesui_demoapp_dynamic_inputstepper_min" translatable="false">Min</string>
+    <string name="andesui_demoapp_dynamic_inputstepper_mask" translatable="false">Mask</string>
+
+
 </resources>

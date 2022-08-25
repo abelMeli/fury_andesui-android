@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <com.mercadolibre.android.andesui.inputstepper.AndesInputStepper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesInputStepperMaxValue="10"
+        app:andesInputStepperMinValue="-2"
+        app:andesInputStepperSize="large"
+        app:andesInputStepperStep="2"
+        app:andesInputStepperValue="5" />
+
+    <com.mercadolibre.android.andesui.inputstepper.AndesInputStepper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesInputStepperMaxValue="10"
+        app:andesInputStepperMinValue="-2"
+        app:andesInputStepperSize="small"
+        app:andesInputStepperStep="2"
+        app:andesInputStepperValue="5" />
+
+    <com.mercadolibre.android.andesui.inputstepper.AndesInputStepper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesInputStepperMaxValue="10"
+        app:andesInputStepperMinValue="-2"
+        app:andesInputStepperSize="small"
+        app:andesInputStepperStatus="loading"
+        app:andesInputStepperStep="2"
+        app:andesInputStepperValue="5" />
+
+    <com.mercadolibre.android.andesui.inputstepper.AndesInputStepper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesInputStepperMaxValue="10"
+        app:andesInputStepperMinValue="-2"
+        app:andesInputStepperSize="large"
+        app:andesInputStepperStatus="loading"
+        app:andesInputStepperStep="2"
+        app:andesInputStepperValue="5" />
+
+    <com.mercadolibre.android.andesui.inputstepper.AndesInputStepper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesInputStepperMaxValue="10"
+        app:andesInputStepperMinValue="-2"
+        app:andesInputStepperSize="small"
+        app:andesInputStepperStatus="disabled"
+        app:andesInputStepperStep="2"
+        app:andesInputStepperValue="5" />
+
+    <com.mercadolibre.android.andesui.inputstepper.AndesInputStepper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:andesInputStepperMaxValue="10"
+        app:andesInputStepperMinValue="-2"
+        app:andesInputStepperSize="large"
+        app:andesInputStepperStatus="disabled"
+        app:andesInputStepperStep="2"
+        app:andesInputStepperValue="5" />
+
+</LinearLayout>

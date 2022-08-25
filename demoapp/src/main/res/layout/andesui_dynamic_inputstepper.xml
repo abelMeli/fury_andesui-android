@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/andes_bg_color_primary"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".components.inputstepper.InputStepperShowcaseActivity">
+
+    <com.mercadolibre.android.andesui.inputstepper.AndesInputStepper
+        android:id="@+id/base_input_stepper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:andesInputStepperMinValue="-10"
+        app:andesInputStepperMaxValue="10"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        style="@style/Andes.Title.XS"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Size" />
+
+    <RadioGroup
+        android:id="@+id/input_stepper_size_group"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/input_stepper_size_large"
+            android:checked="true"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Large"/>
+
+        <RadioButton
+            android:id="@+id/input_stepper_size_small"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Small"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/input_stepper_step"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            app:andesTextfieldLabel="@string/andesui_demoapp_dynamic_inputstepper_step"
+            android:layout_margin="8dp"/>
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/input_stepper_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            app:andesTextfieldLabel="@string/andesui_demoapp_dynamic_inputstepper_value"
+            android:layout_margin="8dp"/>
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/input_stepper_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            app:andesTextfieldLabel="@string/andesui_demoapp_dynamic_inputstepper_min"
+            android:layout_margin="8dp"/>
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/input_stepper_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            app:andesTextfieldLabel="@string/andesui_demoapp_dynamic_inputstepper_max"
+            android:layout_margin="8dp"/>
+
+    </LinearLayout>
+
+    <com.mercadolibre.android.andesui.textfield.AndesTextfield
+        android:id="@+id/input_stepper_mask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:andesTextfieldLabel="@string/andesui_demoapp_dynamic_inputstepper_mask" />
+
+    <TextView
+        style="@style/Andes.Title.XS"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status" />
+
+    <RadioGroup
+        android:id="@+id/input_stepper_status_group"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/input_stepper_status_enabled"
+            android:checked="true"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Enabled"/>
+
+        <RadioButton
+            android:id="@+id/input_stepper_status_disabled"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Disabled"/>
+
+        <RadioButton
+            android:id="@+id/input_stepper_status_loading"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Loading"/>
+
+    </RadioGroup>
+
+
+</LinearLayout>
