@@ -145,7 +145,6 @@ class AndesFeedbackScreenView : ScrollView {
             accessibilityTraversalBefore = body.id
         }
 
-
         with(body) {
             importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
             accessibilityTraversalBefore = binding.andesFeedbackscreenContentButtongroup.id
@@ -153,7 +152,7 @@ class AndesFeedbackScreenView : ScrollView {
         }
 
         with(binding.andesFeedbackscreenContentButtongroup) {
-            importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+            importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_AUTO
             accessibilityTraversalBefore = binding.andesFeedbackscreenClose.id
             accessibilityTraversalAfter = body.id
         }
