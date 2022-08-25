@@ -33,6 +33,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/a11y_home_nav_bar" />
 
+        <com.mercadolibre.android.andesui.message.AndesMessage
+            android:id="@+id/playground_message_landing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:andesMessageBodyText="@string/andes_demoapp_playground_message_landing_body"
+            app:andesMessageHierarchy="quiet"
+            app:andesMessageTitleText="@string/andes_demoapp_playground_message_landing_title"
+            app:andesMessageType="neutral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/playground_message" />
+
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/playground_content_description"
             android:layout_width="match_parent"
@@ -43,7 +58,7 @@
             app:andesButtonText="@string/andes_demoapp_playground_title_content_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/playground_message" />
+            app:layout_constraintTop_toBottomOf="@id/playground_message_landing" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/playground_next_focus"

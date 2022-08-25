@@ -10,10 +10,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.feedback.screen.header.*
 import com.mercadolibre.android.andesui.utils.assertEquals
-import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenAsset
-import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenText
-import com.mercadolibre.android.andesui.feedback.screen.header.AndesFeedbackScreenTextDescription
 import com.mercadolibre.android.andesui.feedback.screen.header.view.AndesFeedbackScreenSimpleHeaderView
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackBadgeIconType
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesSimpleFeedbackScreenType
@@ -280,6 +278,54 @@ class AndesFeedbackScreenSimpleHeaderViewTest {
         header.getThumbnail().image assertEquals R.drawable.andes_ui_placeholder_imagen_32
     }
 
+    @Test
+    fun `Illustration set small size correctly`() {
+        val header = AndesFeedbackScreenSimpleHeaderView(context)
+        val badgeType = AndesFeedbackBadgeIconType.HIGHLIGHT
+        val smallHeightInt = context.resources.getDimension(AndesFeedbackScreenIllustrationSize.Size80.height).toInt()
+        header.setupAssetComponent(
+            feedbackAsset = AndesFeedbackScreenAsset.Illustration(
+                ContextCompat.getDrawable(context, R.drawable.andes_ui_placeholder_imagen_32)!!,
+                AndesFeedbackScreenIllustrationSize.Size80
+            ),
+            type = AndesSimpleFeedbackScreenType(badgeType),
+            hasBody = false
+        )
+        header.getHeaderAsset().layoutParams.height assertEquals smallHeightInt
+    }
+
+    @Test
+    fun `Illustration set medium size correctly`() {
+        val header = AndesFeedbackScreenSimpleHeaderView(context)
+        val badgeType = AndesFeedbackBadgeIconType.HIGHLIGHT
+        val mediumHeightInt = context.resources.getDimension(AndesFeedbackScreenIllustrationSize.Size128.height).toInt()
+        header.setupAssetComponent(
+            feedbackAsset = AndesFeedbackScreenAsset.Illustration(
+                ContextCompat.getDrawable(context, R.drawable.andes_ui_placeholder_imagen_32)!!,
+                AndesFeedbackScreenIllustrationSize.Size128
+            ),
+            type = AndesSimpleFeedbackScreenType(badgeType),
+            hasBody = false
+        )
+        header.getHeaderAsset().layoutParams.height assertEquals mediumHeightInt
+    }
+
+    @Test
+    fun `Illustration set large size correctly`() {
+        val header = AndesFeedbackScreenSimpleHeaderView(context)
+        val badgeType = AndesFeedbackBadgeIconType.HIGHLIGHT
+        val largeHeightInt = context.resources.getDimension(AndesFeedbackScreenIllustrationSize.Size160.height).toInt()
+        header.setupAssetComponent(
+            feedbackAsset = AndesFeedbackScreenAsset.Illustration(
+                ContextCompat.getDrawable(context, R.drawable.andes_ui_placeholder_imagen_32)!!,
+                AndesFeedbackScreenIllustrationSize.Size160
+            ),
+            type = AndesSimpleFeedbackScreenType(badgeType),
+            hasBody = false
+        )
+        header.getHeaderAsset().layoutParams.height assertEquals largeHeightInt
+    }
+
     private fun AndesFeedbackScreenSimpleHeaderView.getDescription() =
         findViewById<TextView>(R.id.andes_feedbackscreen_header_description)
 
@@ -297,6 +343,9 @@ class AndesFeedbackScreenSimpleHeaderViewTest {
 
     private fun AndesFeedbackScreenSimpleHeaderView.getThumbnail() =
         findViewById<FrameLayout>(R.id.andes_feedbackscreen_header_image).getChildAt(0) as AndesThumbnailBadge
+
+    private fun AndesFeedbackScreenSimpleHeaderView.getHeaderAsset() =
+        findViewById<FrameLayout>(R.id.andes_feedbackscreen_header_image).getChildAt(0)
 
     companion object {
         private const val DEFAULT_PADDING = 0

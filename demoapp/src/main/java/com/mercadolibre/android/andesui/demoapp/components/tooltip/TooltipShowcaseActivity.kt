@@ -253,6 +253,10 @@ class TooltipShowcaseActivity : BaseActivity() {
                     andesTooltipSize = getSizeStyle(spinnerSizeStyle)
             )
 
+            andesTooltipToShow.setOnAndesTooltipCloseDismissListener {
+                Toast.makeText(this, "Event: Cosed by user", Toast.LENGTH_SHORT).show()
+            }
+
             if (spinnerActionType.selectedItemPosition == TOOLTIP_WITH_LINK_ACTION) {
                 andesTooltipToShow.linkAction = buildLinkAction(linkActionText.text.toString())
             }
@@ -314,6 +318,9 @@ class TooltipShowcaseActivity : BaseActivity() {
                 tooltipLocation = AndesTooltipLocation.TOP
         )
         tooltipBottom.linkAction = buildLinkAction("This link")
+        tooltipBottom.setOnAndesTooltipCloseDismissListener {
+            Toast.makeText(this, "Event: Cosed by user", Toast.LENGTH_SHORT).show()
+        }
 
         val tooltipLeft = AndesTooltip(
                 context = this,
@@ -324,6 +331,9 @@ class TooltipShowcaseActivity : BaseActivity() {
                 tooltipLocation = AndesTooltipLocation.RIGHT
         )
         tooltipLeft.mainAction = buildMainAction("Primary", AndesButtonHierarchy.LOUD)
+        tooltipLeft.setOnAndesTooltipCloseDismissListener {
+            Toast.makeText(this, "Event: Cosed by user", Toast.LENGTH_SHORT).show()
+        }
 
         val tooltipRight = AndesTooltip(
                 context = this,

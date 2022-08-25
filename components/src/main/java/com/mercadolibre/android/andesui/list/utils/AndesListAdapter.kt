@@ -16,8 +16,14 @@ import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
 import com.mercadolibre.android.andesui.list.AndesListViewItemChevron
 import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
+import com.mercadolibre.android.andesui.list.AndesListViewItemCheckBox
+import com.mercadolibre.android.andesui.list.AndesListViewItemRadioButton
+import com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.list.accessibility.AndesListViewItemAccessibilityDelegate
 import com.mercadolibre.android.andesui.list.type.AndesListType
+import com.mercadolibre.android.andesui.radiobutton.AndesRadioButton
+import com.mercadolibre.android.andesui.radiobutton.status.AndesRadioButtonStatus
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
@@ -95,6 +101,8 @@ class AndesListAdapter(
             when (andesListItemConfig) {
                 is AndesListViewItemSimple -> bindSimpleItem(andesListItemConfig, dividerEnabled)
                 is AndesListViewItemChevron -> bindChevronItem(andesListItemConfig, dividerEnabled)
+                is AndesListViewItemCheckBox -> bindCheckBoxItem(andesListItemConfig, dividerEnabled)
+                is AndesListViewItemRadioButton -> bindRadioButtonItem(andesListItemConfig, dividerEnabled)
             }
             itemView.accessibilityDelegate = AndesListViewItemAccessibilityDelegate(andesListItemConfig)
         }
@@ -126,6 +134,74 @@ class AndesListAdapter(
             setViewItemPosition(andesListItemChevron) {
                 calculateChevronTopMargin(itemConfig, andesListItemChevron)
             }
+        }
+
+        /**
+         * Build Andes List item based on AndesListViewItem configuration for type CHECKBOX.
+         *
+         * @param itemConfig current AndesListViewItem config.
+         */
+        private fun bindCheckBoxItem(itemConfig: AndesListViewItemCheckBox, dividerEnabled: Boolean) {
+            val andesCheckbox: AndesCheckbox = itemView.findViewById(R.id.checkbox_item_selected)
+            andesCheckbox.setupCallback({ itemView.callOnClick() })
+            setAndesListTitleConfiguration(itemConfig)
+
+            if (itemConfig.showSubtitle && !itemConfig.subtitle.isNullOrEmpty()) {
+                setAndesListSubtitleConfiguration(itemConfig)
+            }
+
+            itemConfig.itemSelected?.let {
+                andesCheckbox.status = if (it) AndesCheckboxStatus.SELECTED else AndesCheckboxStatus.UNSELECTED
+            }
+
+            setAndesListIconConfiguration(itemConfig)
+
+            setAndesListAvatarConfiguration(itemConfig)
+
+            if (dividerEnabled || itemConfig.itemDividerEnabled) {
+                itemDivider.visibility = VISIBLE
+            }
+
+            andesListItemContainer.setPadding(
+                itemConfig.paddingLeft - itemView.resources.getDimensionPixelSize(R.dimen.andes_list_item_selection_checkbox_margin_start),
+                itemConfig.paddingTop,
+                itemConfig.paddingRight,
+                itemConfig.paddingBottom
+            )
+        }
+
+        /**
+         * Build Andes List item based on AndesListViewItem configuration for type RADIOBUTTON.
+         *
+         * @param itemConfig current AndesListViewItem config.
+         */
+        private fun bindRadioButtonItem(itemConfig: AndesListViewItemRadioButton, dividerEnabled: Boolean) {
+            val andesRadioButton: AndesRadioButton = itemView.findViewById(R.id.radio_button_item_selected)
+            andesRadioButton.setupCallback({ itemView.callOnClick() })
+            setAndesListTitleConfiguration(itemConfig)
+
+            if (itemConfig.showSubtitle && !itemConfig.subtitle.isNullOrEmpty()) {
+                setAndesListSubtitleConfiguration(itemConfig)
+            }
+
+            itemConfig.itemSelected?.let {
+                andesRadioButton.status = if (it) AndesRadioButtonStatus.SELECTED else AndesRadioButtonStatus.UNSELECTED
+            }
+
+            setAndesListIconConfiguration(itemConfig)
+
+            setAndesListAvatarConfiguration(itemConfig)
+
+            if (dividerEnabled || itemConfig.itemDividerEnabled) {
+                itemDivider.visibility = VISIBLE
+            }
+
+            andesListItemContainer.setPadding(
+                itemConfig.paddingLeft - itemView.resources.getDimensionPixelSize(R.dimen.andes_list_item_selection_radio_button_margin_start),
+                itemConfig.paddingTop,
+                itemConfig.paddingRight,
+                itemConfig.paddingBottom
+            )
         }
 
         private fun findCommonViewsById() {

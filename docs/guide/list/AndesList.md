@@ -5,7 +5,7 @@ They are rows ordered vertically in a sequential way, with similar content and f
 
 Check the [RFC](https://docs.google.com/document/d/1lsJ_Oz-XplkwAMbINjTSdz8imvVDUqIbElZZNKsUo5Q/edit#) for more information about the definition.
 
-<img src="https://user-images.githubusercontent.com/16910904/101906186-55c4e680-3b97-11eb-9899-7f842b3a1cc3.gif" height="700"/>
+<img src="https://user-images.githubusercontent.com/101647658/185454392-ebc2a647-e67d-4a09-8b2e-c1ab389fb4c8.gif" height="700"/>
 
 # How to use
 
@@ -37,7 +37,7 @@ andesList.delegate = this
 Then we need to implement the AndesListDelegate in our Activity/Fragment where the List will be shown.
 The interface will implement 3 methods.
 1. **bind** -> In this method, we must build the objects that the list will be drawn.
-At the moment we have 2 types of objects to return in the bind method, **AndesListViewItemSimple** and **AndesListViewItemChevron**, both have the **context** and **title** as required, the other params are optional.
+At the moment we have 4 types of objects to return in the bind method, **AndesListViewItemSimple**, **AndesListViewItemChevron**, **AndesListViewItemCheckBox** and **AndesListViewItemRadioButton**, both have the **context** and **title** as required, the other params are optional.
 
 2. ****getDataSetSize**** -> The size of our list that the AndesList will draw.
 3. **onItemClick** -> This method is called every time that we click on each AndesList item.

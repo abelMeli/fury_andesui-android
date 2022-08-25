@@ -22,6 +22,9 @@
     <dimen name="andes_list_item_selection_bar_margin_start">3dp</dimen>
     <dimen name="andes_list_item_selection_bar_margin_top">2dp</dimen>
     <dimen name="andes_list_item_selection_bar_margin_bottom">2dp</dimen>
+    <dimen name="andes_list_item_selection_checkbox_margin_start">8dp</dimen>
+    <dimen name="andes_list_item_selection_radio_button_margin_start">8dp</dimen>
+    <dimen name="andes_list_item_selection_radio_button_width">32dp</dimen>
 
     <dimen name="andes_list_item_title_font_size_small">14sp</dimen>
     <dimen name="andes_list_item_title_font_size_medium">16sp</dimen>

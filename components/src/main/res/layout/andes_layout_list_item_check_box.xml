@@ -2,62 +2,136 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/andes_list_item_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="@dimen/andes_list_item_padding_left_right_small"
-    android:paddingEnd="@dimen/andes_list_item_padding_left_right_small">
+    android:importantForAccessibility="yes"
+    android:layout_height="wrap_content">
 
-    <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
-        android:id="@+id/andesCheckbox"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_view_item_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:includeFontPadding="false"
-        android:textSize="@dimen/andes_list_item_title_font_size_medium"
-        app:layout_constraintBottom_toTopOf="@+id/view_space_title_subtitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/andesCheckbox"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Row text" />
-
-    <View
-        android:id="@+id/view_space_title_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/andes_list_item_space_between_title_subtitle_medium"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_item_sub_title"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:importantForAccessibility="noHideDescendants"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_item_title" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/text_view_item_sub_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:includeFontPadding="false"
-        android:textSize="@dimen/andes_list_item_title_font_size_small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/text_view_item_title"
-        app:layout_constraintTop_toBottomOf="@+id/view_space_title_subtitle"
-        tools:text="Row text description" />
+        <View
+            android:id="@+id/view_item_selected"
+            android:layout_width="@dimen/andes_list_item_selection_bar_width"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/andes_list_item_selection_bar_margin_start"
+            android:layout_marginTop="@dimen/andes_list_item_selection_bar_margin_top"
+            android:layout_marginBottom="@dimen/andes_list_item_selection_bar_margin_bottom"
+            android:background="@drawable/andes_rectangle_rounded"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/item_divider"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/andes_list_item_divider"
-        android:background="@color/andes_gray_010"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"/>
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/checkbox_item_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/andes_list_item_selection_checkbox_margin_start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/andes_list_item_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/andes_list_item_padding_left_right_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/checkbox_item_selected"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
+                android:id="@+id/andes_list_item_asset"
+                android:layout_width="@dimen/andes_list_item_thumbnail_size_medium"
+                android:layout_height="@dimen/andes_list_item_thumbnail_size_medium"
+                app:andesThumbnailHierarchy="AndesDefault"
+                app:andesThumbnailImage="@drawable/andes_otros_almanaque_20"
+                app:andesThumbnailSize="size_40"
+                app:andesThumbnailState="enabled"
+                app:andesThumbnailType="icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/image_view_list_item_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/andesThumbnailBarrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="andes_list_item_asset,image_view_list_item_icon" />
+
+            <View
+                android:id="@+id/andesViewThumbnailSeparator"
+                android:layout_width="@dimen/andes_list_item_separator_thumbnail_width_small"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/andesThumbnailBarrier"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/andes_list_item_title_font_size_medium"
+                app:layout_constraintBottom_toTopOf="@+id/view_space_title_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/andesViewThumbnailSeparator"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Row text" />
+
+            <View
+                android:id="@+id/view_space_title_subtitle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/andes_list_item_space_between_title_subtitle_medium"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_item_sub_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/text_view_item_title"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_item_title" />
+
+            <TextView
+                android:id="@+id/text_view_item_sub_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textSize="@dimen/andes_list_item_title_font_size_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/text_view_item_title"
+                app:layout_constraintTop_toBottomOf="@+id/view_space_title_subtitle"
+                tools:text="Row text description" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/item_divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/andes_list_item_divider"
+            android:background="@color/andes_gray_010"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

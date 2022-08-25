@@ -179,6 +179,7 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
     private lateinit var linkActionComponent: TextView
     private lateinit var arrowComponent: AppCompatImageView
     private var onDismisslistener: (() -> Unit)? = null
+    private var onCloseDismisslistener: (() -> Unit)? = null
     private var a11yActionId = NO_A11Y_ACTION
 
     private val bodyWindow: PopupWindow
@@ -364,6 +365,14 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         onDismisslistener = callback
     }
 
+    /**
+     * OnCloseDismissListener for tooltip
+     * @param callback void method with no params which will be invoked when the user close
+     * the tooltip clicking in close button X.*/
+    fun setOnAndesTooltipCloseDismissListener(callback: (() -> Unit)?) {
+        onCloseDismisslistener = callback
+    }
+
     private fun initComponents(attrs: AndesTooltipAttrs) {
         radiusLayout = container.findViewById(R.id.andes_tooltip_radio_layout)
         frameLayoutContainer = container.findViewById(R.id.andes_tooltip_content)
@@ -513,7 +522,10 @@ class AndesTooltip(val context: Context) : AndesTooltipLocationInterface {
         with(dismissComponent) {
             if (config.isDismissible) {
                 setImageDrawable(config.dismissibleIcon)
-                setOnClickListener { dismiss() }
+                setOnClickListener {
+                    onCloseDismisslistener?.invoke()
+                    dismiss()
+                }
                 visible(true)
             } else {
                 visible(false)

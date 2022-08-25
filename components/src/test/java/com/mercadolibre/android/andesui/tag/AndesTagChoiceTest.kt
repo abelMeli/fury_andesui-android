@@ -48,6 +48,29 @@ class AndesTagChoiceTest {
     }
 
     @Test
+    fun `TagChoice creation with leftcontent description`() {
+        //GIVEN
+        val leftcontent = LeftContent(
+            dot = null,
+            icon = null,
+            image = null,
+            assetContentDescription = "Test"
+        )
+
+        //WHEN
+        val tagchoice = AndesTagChoice(context = context, state = AndesTagChoiceState.SELECTED)
+        tagchoice.leftContent = leftcontent
+
+
+        //THEN
+        val binding = AndesLayoutSimpleTagBinding.bind(tagchoice)
+        with(tagchoice){
+            state assertEquals AndesTagChoiceState.SELECTED
+            leftContent?.assetContentDescription assertEquals leftcontent.assetContentDescription
+        }
+    }
+
+    @Test
     fun `TagChoice creation with text`() {
         // GIVEN
         val tagText = "Test"
@@ -131,7 +154,7 @@ class AndesTagChoiceTest {
         tagChoice.callback = spiedCallback
 
         // WHEN
-        tagChoice.click()
+        tagChoice.performClick()
 
         // THEN
         val binding = AndesLayoutSimpleTagBinding.bind(tagChoice)
@@ -150,6 +173,6 @@ class AndesTagChoiceTest {
 
     private fun AndesTagChoice.click() {
         val binding = AndesLayoutSimpleTagBinding.bind(this)
-        binding.andesTagContainer().performClick()
+        binding.root.performClick()
     }
 }

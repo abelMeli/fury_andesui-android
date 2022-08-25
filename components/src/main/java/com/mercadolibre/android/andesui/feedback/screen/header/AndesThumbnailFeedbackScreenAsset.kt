@@ -1,10 +1,13 @@
 package com.mercadolibre.android.andesui.feedback.screen.header
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.view.View
-import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenTypeInterface
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
@@ -34,6 +37,16 @@ internal class AndesThumbnailFeedbackScreenAsset(
                 type.feedbackColor,
                 type.getThumbnailBadgeSize(hasBody)
             )
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(
+                    AssetsConstants.NO_MARGIN,
+                    AssetsConstants.NO_MARGIN,
+                    AssetsConstants.NO_MARGIN,
+                    context.resources.getDimensionPixelSize(R.dimen.andes_feedbackscreen_thumbnail_margin_bottom))
+            }
         }
     }
 }
@@ -42,14 +55,37 @@ internal class AndesIllustrationFeedbackScreenAsset(
     override val image: Drawable,
     private val size: AndesFeedbackScreenIllustrationSize
 ) : AndesFeedbackScreenAssetInterface {
+
     override fun getView(context: Context, type: AndesFeedbackScreenTypeInterface, hasBody: Boolean): View {
         return ImageView(context).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                context.resources.getDimensionPixelSize(size.width),
-                context.resources.getDimensionPixelSize(size.height)
-            )
+            val resources = context.resources
+            layoutParams = FrameLayout.LayoutParams(
+                resources.getDimensionPixelSize(size.width),
+                resources.getDimensionPixelSize(size.height)
+            ).apply {
+                setMargins(
+                    AssetsConstants.NO_MARGIN,
+                    resolveIllustrationTopMargin(resources, hasBody),
+                    AssetsConstants.NO_MARGIN,
+                    resources.getDimensionPixelSize(R.dimen.andes_feedbackscreen_illustration_margin_bottom)
+                )
+            }
             setImageDrawable(image)
         }
     }
 
+    private fun resolveIllustrationTopMargin(resources: Resources, hasBody: Boolean): Int =
+        resources.getDimensionPixelSize(R.dimen.andes_feedbackscreen_illustration_margin_top).takeIf {
+            hasBody
+        } ?: AssetsConstants.NO_MARGIN
+}
+
+/**
+ * object to store class constants.
+ */
+object AssetsConstants {
+    /**
+     * Declares a margin of 0dp.
+     */
+    const val NO_MARGIN = 0
 }

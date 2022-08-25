@@ -6,14 +6,17 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Guideline
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListener
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
@@ -52,19 +55,24 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
         view = coachmarkData.anchorView
         walkthroughScrollessMessageView = WalkthroughScrollessMessageView(activity)
         baseContainer = FrameLayout(activity)
-        coachmarkContainer = CoachmarkScrollessContainerView(activity)
+        coachmarkContainer = CoachmarkScrollessContainerView(activity).apply {
+            if (coachmarkData.steps.size == 1) {
+                setTitleVisibility(View.GONE)
+            }
+        }
         coachmarkOverlayView = coachmarkContainer.findViewById(R.id.coachmarkOverlayView)
+
         guideLineStatusBar = coachmarkContainer.findViewById(R.id.guideLineStatusBar)
         guideLineHeader = coachmarkContainer.findViewById(R.id.guideLineHeader)
-        guideLineStatusBar.setGuidelineBegin(getStatusBarSize().toInt())
-        guideLineHeader.setGuidelineBegin(getToolbarSize())
+        guideLineStatusBar.setGuidelineBegin(getStatusBarSize())
+        guideLineHeader.setGuidelineBegin(getToolbarSize() + getStatusBarSize())
 
         presenter = CoachmarkPresenter(this)
 
         initContainer()
         setNextView(0, coachmarkData)
         initListeners(coachmarkData, builder.onTrackingListener)
-        changeStatusBarColor(R.color.andes_gray_950)
+        changeStatusBarColor(ColorUtils.blendARGB(statusBarColor, Color.BLACK, 0.9f))
     }
 
     private fun filterEmptySteps(coachmarkData: AndesScrollessWalkthroughCoachmark): List<AndesWalkthroughCoachmarkStep> {
@@ -80,7 +88,6 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
         baseContainer.isClickable = true
         baseContainer.visibility = View.GONE
         baseContainer.alpha = 0f
-        baseContainer.fitsSystemWindows = true
         walkthroughScrollessMessageView.alpha = 0f
 
         // Crea vista por encima de lo que esta visible
@@ -298,7 +305,7 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
                     coachmarkOverlayView.postInvalidate()
                 }
 
-                setTooltipAlignment(stepReferenced)
+                setTooltipAlignment(stepReferenced, baseContainer.height)
                 stepReferenced.view?.viewTreeObserver?.removeOnPreDrawListener(this)
                 return false
             }
@@ -324,7 +331,7 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
         coachmarkOverlayView.addRect(
                 cx,
                 cy - activity.resources.getDimension(R.dimen.andes_coachmark_scrolless_toolbar_status_bar).toInt() -
-                        getStatusBarSize().toInt(),
+                        getStatusBarSize(),
                 0,
                 0,
                 true,
@@ -347,7 +354,7 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
                 stepReferenced.style == AndesWalkthroughCoachmarkStyle.HAMBURGER) {
             coachmarkContainer.getHeaderView().addRect(
                     rect.left,
-                    rect.top - getStatusBarSize().toInt(),
+                    rect.top - getStatusBarSize(),
                     rect.width(),
                     rect.height(),
                     false,
@@ -357,7 +364,7 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
             coachmarkOverlayView.addRect(
                     rect.left,
                     rect.top - activity.resources.getDimension(R.dimen.andes_coachmark_scrolless_toolbar_status_bar).toInt() -
-                            getStatusBarSize().toInt(),
+                            getStatusBarSize(),
                     rect.width(),
                     rect.height(),
                     false,
@@ -366,14 +373,14 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
         }
     }
 
-    private fun setTooltipAlignment(stepReferenced: AndesWalkthroughCoachmarkStep) {
+    private fun setTooltipAlignment(stepReferenced: AndesWalkthroughCoachmarkStep, containerHeight: Int) {
         walkthroughScrollessMessageView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
 
                 val tooltipHeight = walkthroughScrollessMessageView.getChildAt(0).height
                 val targetRect = Rect()
                 stepReferenced.view?.getGlobalVisibleRect(targetRect)
-                presenter.relocateTooltip(tooltipHeight, walkthroughScrollessMessageView.getPosition(), targetRect)
+                presenter.relocateTooltip(tooltipHeight, walkthroughScrollessMessageView.getPosition(), targetRect, containerHeight)
 
                 walkthroughScrollessMessageView.animate()
                         .alpha(1f)
@@ -391,23 +398,17 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
         })
     }
 
-    private fun getStatusBarSize(): Float {
-        var result = 0f
-        val resourceId: Int = coachmarkOverlayView.resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            result = coachmarkOverlayView.resources.getDimension(resourceId)
-        }
-        return result
+    private fun getStatusBarSize(): Int {
+        val rectangle = Rect()
+        activity.window.decorView.getWindowVisibleDisplayFrame(rectangle)
+        return rectangle.top
     }
 
     override fun getFooterHeigh(): Int {
         return activity.resources.getDimensionPixelSize(R.dimen.andes_coachmark_footer_guide_line)
     }
 
-    override fun getToolbarSize(): Int {
-        return activity.resources.getDimensionPixelSize(R.dimen.andes_coachmark_scrolless_toolbar_status_bar) +
-                getStatusBarSize().toInt()
-    }
+    override fun getToolbarSize() = (activity as? AppCompatActivity)?.supportActionBar?.height ?: 0
 
     override fun getTooltipMargin(): Int {
         return activity.resources.getDimensionPixelSize(R.dimen.andes_coachmark_walkthrought_margin)
@@ -425,6 +426,13 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
     override fun setWalkthroughMessageViewY(positionY: Float) {
         walkthroughScrollessMessageView.y = positionY
         walkthroughScrollessMessageView.postInvalidate()
+    }
+
+    override fun hasArrow() =
+        walkthroughScrollessMessageView.hasArrow
+
+    override fun setNewMessageDimensions(height: Int) {
+        walkthroughScrollessMessageView.setNewDimensions(height)
     }
 
     override fun scrollTo(scrollToY: Int) {

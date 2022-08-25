@@ -1,21 +1,12 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'mercadolibre.gradle.config.library'
 
 android {
-    compileSdkVersion maxApiLevel.toInteger()
-    buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion minApiLevel
-        targetSdkVersion maxApiLevel
 
         consumerProguardFiles 'proguard-rules.pro'
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     resourcePrefix 'andes'
 
@@ -29,6 +20,9 @@ android {
     }
 
     testOptions {
+        tasks.withType(Test) {
+            jacoco.includeNoLocationClasses = true
+        }
         unitTests {
             includeAndroidResources = true
             returnDefaultValues = true
@@ -46,16 +40,16 @@ android {
 
 dependencies {
     implementation project(':components')
-    implementation prod.kotlinStdlib
-    implementation prod.supportLibraryAppCompatV7
-    implementation prod.supportLibraryDesign
-    api prod.supportConstraintLayout
+    implementation libs.misc.kotlinStdlibJdk7 
+    implementation libs.misc.appCompat 
+    implementation libs.misc.material 
+    api libs.misc.constraintLayout 
 
     // Unit testing dependencies
-    testImplementation test.runner
-    testImplementation test.junit4
-    testImplementation test.mockitoKotlin
-    testImplementation test.assertj
-    testImplementation test.robolectric
-    testImplementation test.mockitoInline
+    testImplementation libs.misc.extJunit 
+    testImplementation libs.misc.junit 
+    testImplementation libs.misc.mockitoKotlin2 
+    testImplementation libs.misc.assertJ 
+    testImplementation libs.misc.robolectric 
+    testImplementation libs.misc.mockitoInline 
 }

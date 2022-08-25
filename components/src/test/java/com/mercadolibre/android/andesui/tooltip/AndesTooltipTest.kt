@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
@@ -840,5 +841,21 @@ class AndesTooltipTest {
         val newActionId = tooltip.getActionId()
 
         originalActionId assertEquals newActionId
+    }
+
+    @Test
+    fun `should execute callback when click in close button`() {
+        val onClickFunction: () -> Unit = spy { }
+
+        val tooltip = AndesTooltip(context = context, body = body)
+        tooltip.setOnAndesTooltipCloseDismissListener(onClickFunction)
+
+        val buttonClose = ReflectionHelpers.getField(
+            tooltip,
+            "dismissComponent"
+        ) as SimpleDraweeView
+
+        buttonClose.performClick()
+        verify(onClickFunction).invoke()
     }
 }

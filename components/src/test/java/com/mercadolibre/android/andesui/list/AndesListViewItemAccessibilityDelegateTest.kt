@@ -13,6 +13,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.facebook.soloader.SoLoader
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
+import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import org.junit.Assert
@@ -27,12 +28,13 @@ import org.robolectric.annotation.Config
 @Config(sdk = [TEST_ANDROID_VERSION_CODE])
 class AndesListViewItemAccessibilityDelegateTest {
 
+    private lateinit var context: Context
     private lateinit var activity: AppCompatActivity
     private lateinit var andesList: AndesList
 
     @Before
     fun setup() {
-        val context: Context = ApplicationProvider.getApplicationContext()
+        context = ApplicationProvider.getApplicationContext()
         SoLoader.setInTestMode()
         val requestListeners = setOf<RequestListener>(RequestLoggingListener())
         val config = ImagePipelineConfig.newBuilder(context)
@@ -114,7 +116,6 @@ class AndesListViewItemAccessibilityDelegateTest {
         // GIVEN
         val title = "Title"
         val subtitle = "Subtitle"
-        val selectedText = activity.resources.getString(R.string.andes_list_item_selected)
         buildDelegateWith(
             AndesListViewItemSimple(
                 context = activity,
@@ -129,7 +130,8 @@ class AndesListViewItemAccessibilityDelegateTest {
 
         // THEN
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$selectedText,$title,$subtitle", nodeInfo.contentDescription)
+        Assert.assertTrue(nodeInfo.isSelected)
+        Assert.assertEquals("$title,$subtitle", nodeInfo.contentDescription)
     }
 
     @Test
@@ -137,7 +139,6 @@ class AndesListViewItemAccessibilityDelegateTest {
         // GIVEN
         val title = "Title"
         val subtitle = "Subtitle"
-        val selectedText = activity.resources.getString(R.string.andes_list_item_selected)
         val icon = GradientDrawable()
         buildDelegateWith(
             AndesListViewItemSimple(
@@ -154,7 +155,8 @@ class AndesListViewItemAccessibilityDelegateTest {
 
         // THEN
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$selectedText,$title,$subtitle", nodeInfo.contentDescription)
+        Assert.assertTrue(nodeInfo.isSelected)
+        Assert.assertEquals("$title,$subtitle", nodeInfo.contentDescription)
     }
 
     @Test
@@ -162,7 +164,6 @@ class AndesListViewItemAccessibilityDelegateTest {
         // GIVEN
         val title = "Title"
         val subtitle = "Subtitle"
-        val selectedText = activity.resources.getString(R.string.andes_list_item_selected)
         val icon = GradientDrawable()
         val iconContentDescription = "Icon content"
         buildDelegateWith(
@@ -181,7 +182,8 @@ class AndesListViewItemAccessibilityDelegateTest {
 
         // THEN
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$selectedText,$iconContentDescription,$title,$subtitle", nodeInfo.contentDescription)
+        Assert.assertTrue(nodeInfo.isSelected)
+        Assert.assertEquals("$iconContentDescription,$title,$subtitle", nodeInfo.contentDescription)
     }
 
     @Test
@@ -189,7 +191,6 @@ class AndesListViewItemAccessibilityDelegateTest {
         // GIVEN
         val title = "Title"
         val subtitle = "Subtitle"
-        val selectedText = activity.resources.getString(R.string.andes_list_item_selected)
         val avatar = GradientDrawable()
         buildDelegateWith(
             AndesListViewItemSimple(
@@ -206,7 +207,8 @@ class AndesListViewItemAccessibilityDelegateTest {
 
         // THEN
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$selectedText,$title,$subtitle", nodeInfo.contentDescription)
+        Assert.assertTrue(nodeInfo.isSelected)
+        Assert.assertEquals("$title,$subtitle", nodeInfo.contentDescription)
     }
 
     @Test
@@ -214,7 +216,6 @@ class AndesListViewItemAccessibilityDelegateTest {
         // GIVEN
         val title = "Title"
         val subtitle = "Subtitle"
-        val selectedText = activity.resources.getString(R.string.andes_list_item_selected)
         val avatar = GradientDrawable()
         val avatarContentDescription = "Avatar content"
         buildDelegateWith(
@@ -233,10 +234,69 @@ class AndesListViewItemAccessibilityDelegateTest {
 
         // THEN
         Assert.assertNotNull(nodeInfo)
-        Assert.assertEquals("$selectedText,$avatarContentDescription,$title,$subtitle", nodeInfo.contentDescription)
+        Assert.assertTrue(nodeInfo.isSelected)
+        Assert.assertEquals("$avatarContentDescription,$title,$subtitle", nodeInfo.contentDescription)
     }
 
-    private fun buildDelegateWith(item: AndesListViewItemSimple) {
+    @Test
+    fun `AndesListViewItemCheckbox checked accessibility with title, subtitle and avatar with contentDescription`() {
+        // GIVEN
+        val title = "Title"
+        val subtitle = "Subtitle"
+        val avatar = GradientDrawable()
+        val avatarContentDescription = "Avatar content"
+        andesList = AndesList(context = context, type = AndesListType.CHECK_BOX)
+        activity.setContentView(andesList)
+        buildDelegateWith(
+                AndesListViewItemCheckBox(
+                        context = activity,
+                        title = title,
+                        subtitle = subtitle,
+                        itemSelected = true,
+                        avatar = avatar,
+                        avatarContentDescription = avatarContentDescription,
+                )
+        )
+
+        // WHEN
+        val nodeInfo = andesList.recyclerViewComponent.getChildAt(0).createAccessibilityNodeInfo()
+
+        // THEN
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertTrue(nodeInfo.isChecked)
+        Assert.assertEquals("$avatarContentDescription,$title,$subtitle", nodeInfo.contentDescription)
+    }
+
+    @Test
+    fun `AndesListViewItemRadioButton checked accessibility with title, subtitle and avatar with contentDescription`() {
+        // GIVEN
+        val title = "Title"
+        val subtitle = "Subtitle"
+        val avatar = GradientDrawable()
+        val avatarContentDescription = "Avatar content"
+        andesList = AndesList(context = context, type = AndesListType.RADIO_BUTTON)
+        activity.setContentView(andesList)
+        buildDelegateWith(
+                AndesListViewItemRadioButton(
+                        context = activity,
+                        title = title,
+                        subtitle = subtitle,
+                        itemSelected = true,
+                        avatar = avatar,
+                        avatarContentDescription = avatarContentDescription,
+                )
+        )
+
+        // WHEN
+        val nodeInfo = andesList.recyclerViewComponent.getChildAt(0).createAccessibilityNodeInfo()
+
+        // THEN
+        Assert.assertNotNull(nodeInfo)
+        Assert.assertTrue(nodeInfo.isChecked)
+        Assert.assertEquals("$avatarContentDescription,$title,$subtitle", nodeInfo.contentDescription)
+    }
+
+    private fun buildDelegateWith(item: AndesListViewItem) {
         andesList.delegate = object : AndesListDelegate {
             override fun onItemClick(andesList: AndesList, position: Int) {
                 // no-op
