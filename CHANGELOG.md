@@ -4,6 +4,7 @@
 - Added support to `AndesListViewItemCheckBox` `AndesListViewItemRadioButton` within `AndesList` | Author: [@maquinteros](https://github.com/maquinteros)
 - Added user close event listener in tooltip
 - Added tooltip support to `AndesTextfield` | Author: [@geroillescas](https://github.com/geroillescas)
+- Kotlin binary compatibility validator added | Author: [@eportasML](https://github.com/eportasML)
 
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).

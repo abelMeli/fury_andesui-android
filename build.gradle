@@ -19,12 +19,12 @@ buildscript {
             exclude group: 'org.jetbrains.kotlin'
         }
         classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$dexCountGradlePlugin"
-
+        classpath "org.jetbrains.kotlinx:binary-compatibility-validator:$binaryCompatibilityPlugin"
     }
 }
 
 apply plugin: 'mercadolibre.gradle.config.base'
-
+apply plugin: 'org.jetbrains.kotlinx.binary-compatibility-validator'
 
 wrapper {
     gradleVersion = gradleWrapperVersion
@@ -43,5 +43,21 @@ allprojects {
         failFast = true             // Prepare quick fail
         maxHeapSize = "2048m"       // Do not exceed the maximum memory
         minHeapSize = "1024m"       // Do not exceed the maximum minimum memory
+    }
+
+    tasks.whenTaskAdded { task ->
+        if (project.name != 'demoapp' && task.name.toLowerCase().contains('compile')) {
+            task.finalizedBy('apiDump')
+        }
+    }
+
+    apiValidation {
+        ignoredPackages += [
+             'com/mercadolibre/android/andesui/databinding',
+             'com/mercadolibre/android/andesui/coachmark/databinding',
+        ]
+        ignoredProjects += [
+                'demoapp'
+        ]
     }
 }
