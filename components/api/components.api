@@ -1635,6 +1635,7 @@ public final class com/mercadolibre/android/andesui/list/utils/AndesListAdapter 
 	public static final field SIMPLE I
 	public fun <init> (Lcom/mercadolibre/android/andesui/list/AndesList;Lcom/mercadolibre/android/andesui/list/utils/AndesListDelegate;Lcom/mercadolibre/android/andesui/list/type/AndesListType;Z)V
 	public fun getItemCount ()I
+	public fun getItemId (I)J
 	public fun getItemViewType (I)I
 	public synthetic fun onBindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)V
 	public fun onBindViewHolder (Lcom/mercadolibre/android/andesui/list/utils/AndesListAdapter$ViewHolder;I)V

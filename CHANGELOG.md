@@ -12,6 +12,7 @@
 ## 🛠 Fixes
 - `AndesFeedbackScreenView` accessibility improvements | Author: [@yireyes](https://github.com/yireyes) 
 - Fix in `AndesCoachmark` message vertical margins and step indicator | Author: [@juanunzu](https://github.com/juanunzu)
+- Fix in `AndesList` focus is lost when clicking on an item in the list with accessibility on | Author: [@edgnavarro](https://github.com/edgnavarro)
 
 # v5.11.0
 ## 🚀 Feature
