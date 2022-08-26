@@ -30,7 +30,6 @@ import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldCodeState
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.textfield.style.AndesTextfieldCodeStyle
 import java.util.Locale
-import kotlin.collections.ArrayList
 
 object InflateTextfieldHelper {
 
@@ -105,34 +104,36 @@ object InflateTextfieldHelper {
 
             textfield.state = AndesTextfieldState.valueOf(stateSpinner.selectedItem.toString().toUpperCase())
 
-            if (preffixSpinner.selectedItem.toString().toUpperCase() == NONE) {
+            val preffixSelectedItem = preffixSpinner.selectedItem.toString()
+            if (preffixSelectedItem.uppercase() == NONE) {
                 textfield.leftContent = null
             } else {
-                textfield.leftContent = AndesTextfieldLeftContent.fromString(preffixSpinner.selectedItem.toString())
+                textfield.leftContent = AndesTextfieldLeftContent.fromString(preffixSelectedItem)
             }
 
-            if (suffixSpinner.selectedItem.toString().toUpperCase() == NONE) {
+            val suffixSelectedItem = suffixSpinner.selectedItem.toString()
+            if (suffixSelectedItem.uppercase() == NONE) {
                 textfield.rightContent = null
             } else {
                 textfield.rightContent = AndesTextfieldRightContent.fromString(
-                        suffixSpinner.selectedItem.toString()
+                    suffixSpinner.selectedItem.toString()
                 )
-                if (textfield.rightContent == AndesTextfieldRightContent.ACTION) {
-                    textfield.setAction(
-                            "Button",
-                            View.OnClickListener {
-                                Toast.makeText(context.applicationContext, "Right action pressed", Toast.LENGTH_LONG).show()
-                            }
-                    )
-                } else if (textfield.rightContent == AndesTextfieldRightContent.CHECKBOX) {
-                    textfield.setCheckbox(
-                            "Checkbox", View.OnClickListener { v ->
-                        val checkbox = v as AndesCheckbox
-                        Toast.makeText(context.applicationContext, "Status: ${checkbox.status}", Toast.LENGTH_SHORT).show()
+                when (textfield.rightContent) {
+                    AndesTextfieldRightContent.ACTION -> textfield.setAction("Button") {
+                        Toast.makeText(context.applicationContext, "Right action pressed", Toast.LENGTH_LONG).show()
                     }
+                    AndesTextfieldRightContent.CHECKBOX -> textfield.setCheckbox(
+                        "Checkbox", { v ->
+                            val checkbox = v as AndesCheckbox
+                            Toast.makeText(context.applicationContext, "Status: ${checkbox.status}", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     )
-                } else if (textfield.rightContent == AndesTextfieldRightContent.INDETERMINATE) {
-                    textfield.setIndeterminate()
+                    AndesTextfieldRightContent.TOOLTIP -> textfield.setTooltip(
+                        "Tooltip"
+                    )
+                    AndesTextfieldRightContent.INDETERMINATE -> textfield.setIndeterminate()
+                    else -> Unit
                 }
             }
 
@@ -351,6 +352,9 @@ object InflateTextfieldHelper {
         // Set left icon
         val textViewLeftIcon = binding.textViewLeftIcon
         textViewLeftIcon.setLeftIcon("andes_navegacion_buscar_24")
+
+        val textViewTooltip = binding.textViewTooltip
+        textViewTooltip.setTooltip("This is a tooltip text example.")
 
         ContextCompat.getDrawable(context, com.mercadolibre.android.andesui.R.drawable.andes_navegacion_ajustes)
 

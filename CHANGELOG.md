@@ -3,6 +3,8 @@
 - AndesInputStepper New internal component for andes| Author: [@dbetancourtg](https://github.com/Diego-Betancourt)
 - Added support to `AndesListViewItemCheckBox` `AndesListViewItemRadioButton` within `AndesList` | Author: [@maquinteros](https://github.com/maquinteros)
 - Added user close event listener in tooltip
+- Added tooltip support to `AndesTextfield` | Author: [@geroillescas](https://github.com/geroillescas)
+
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).
 - Migration to the new Plugin of Gradle --> 14.+.

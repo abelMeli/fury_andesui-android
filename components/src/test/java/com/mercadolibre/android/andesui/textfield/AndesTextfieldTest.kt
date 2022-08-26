@@ -16,13 +16,15 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.checkbox.status.AndesCheckboxStatus
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldLeftContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldRightContent
+import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.buildAttributeSet
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doNothing
 import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertNull
@@ -95,7 +97,7 @@ class AndesTextfieldTest {
     @Test
     fun `set right icon hide true`() {
         textfield.setRightIcon("andes_navegacion_categorias_24", hideWhenType = true)
-                textfield.text = "1149778767"
+        textfield.text = "1149778767"
         assertEquals(textfield.rightContent, AndesTextfieldRightContent.ICON)
     }
 
@@ -150,6 +152,31 @@ class AndesTextfieldTest {
     fun `set action`() {
         textfield.setAction("action", View.OnClickListener { })
         assertEquals(textfield.rightContent, AndesTextfieldRightContent.ACTION)
+    }
+
+    @Test
+    fun `set setTooltip`() {
+        val contentDescription = "tooltipDescription"
+        textfield.setTooltip(
+            "tooltip",
+            AndesTooltipStyle.DARK,
+            AndesTooltipLocation.BOTTOM,
+            "title",
+            contentDescription
+        )
+        assertEquals(textfield.rightContent, AndesTextfieldRightContent.TOOLTIP)
+        assertEquals(contentDescription, textfield.rightComponent.getChildAt(0).contentDescription)
+    }
+
+    @Test
+    fun `set setTooltip with default params`() {
+        textfield.setTooltip("tooltip")
+
+        assertEquals(textfield.rightContent, AndesTextfieldRightContent.TOOLTIP)
+        assertEquals(
+            context.getString(R.string.andes_textfield_tooltip_content_description),
+            textfield.rightComponent.getChildAt(0).contentDescription
+        )
     }
 
     @Test

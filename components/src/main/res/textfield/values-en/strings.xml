@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="andes_textfield_right_content_clear">Clear text</string>
+    <string name="andes_textfield_tooltip_content_description">More information</string>
 </resources>

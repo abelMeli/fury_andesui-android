@@ -26,7 +26,8 @@ internal data class AndesTextfieldAttrs(
     val rightContent: AndesTextfieldRightContent?,
     val inputType: Int,
     val textWatcher: TextWatcher? = null,
-    val maxLines: Int?
+    val maxLines: Int?,
+    val rightContentDescription: String? = null
 )
 
 /**

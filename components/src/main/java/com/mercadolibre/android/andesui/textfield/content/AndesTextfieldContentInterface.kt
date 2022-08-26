@@ -29,6 +29,7 @@ internal sealed class AndesTextfieldContentInterface {
     abstract fun component(context: Context): View
     abstract fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int
     abstract fun rightMargin(context: Context): Int
+    open fun setContentDescription(context: Context, description: String?) = Unit
 }
 
 internal object AndesSuffixTextfieldContent : AndesTextfieldContentInterface() {
@@ -82,12 +83,29 @@ internal object AndesIconTextfieldContent : AndesTextfieldContentInterface() {
 }
 
 internal object AndesTooltipTextfieldContent : AndesTextfieldContentInterface() {
+    private var contentDescription: String? = null
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int = state.leftMargin(context)
 
-    override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_tooltip_right_margin).toInt()
+    override fun rightMargin(context: Context): Int =
+        context.resources.getDimension(R.dimen.andes_textfield_tooltip_right_margin).toInt()
 
     override fun component(context: Context): View {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        val tooltip = SimpleDraweeView(context)
+        tooltip.setImageDrawable(
+            buildColoredAndesBitmapDrawable(
+                IconProvider(context).loadIcon("andes_ui_helper_24") as BitmapDrawable,
+                context,
+                color = R.color.andes_accent_color.toAndesColor()
+            )
+        )
+        tooltip.contentDescription = contentDescription
+        return tooltip
+    }
+
+    override fun setContentDescription(context: Context, description: String?) {
+        contentDescription = description ?: run {
+            context.getString(R.string.andes_textfield_tooltip_content_description)
+        }
     }
 }
 

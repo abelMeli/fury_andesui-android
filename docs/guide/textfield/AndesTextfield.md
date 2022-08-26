@@ -6,7 +6,9 @@ It can be customized in terms of **State** (Enabled, Error, Disabled, Read Only)
 ![Screenshot_1585255102](https://user-images.githubusercontent.com/51792499/77694705-43633800-6f89-11ea-80e1-38b2cebca220.png)
 
 ![Screenshot_1585255906](https://user-images.githubusercontent.com/51792499/77695468-925d9d00-6f8a-11ea-9c3d-8d086f4d2d6a.png)
- 
+
+![Tooltip](https://user-images.githubusercontent.com/55748978/186741342-3462d582-807f-46d1-b395-73c90a7947e4.png)
+
 # How to use
 
 There are two ways to use AndesTexfield: XML or programmatically. 
@@ -62,11 +64,16 @@ andesTextfield.layoutParams = params
 For each content that requires an external parameter there are some functions exposed to configure that.
 
 ```
-andesTexfield.setupAction(text: String, onClickListener: OnClickListener)
-andesTexfield.setupRightIcon(iconPath: String)
-andesTextfield.setupPrefix(text: String)
+andesTextfield.setAction(text: String, onClickListener: OnClickListener)
+andesTextfield.setPrefix(text: String)
 andesTextfield.setRightIcon(iconPath: String, listener: OnClickListener? = null, colorIcon: Int? = R.color.andes_gray_800, hideWhenType: Boolean = false)
+andesTextfield.setTooltip(body: String, tooltipStyle: AndesTooltipStyle = AndesTooltipStyle.DARK, location: AndesTooltipLocation = AndesTooltipLocation.BOTTOM, title: String? = null, contentDescription: String? = null)
 ```
+You can use programmatically the method:
+- `setAction` to set `andesTexfield.state` to `AndesTextfieldState.ACTION` and receive a button title and a click callback.
+- `setPrefix` to set `andesTexfield.state` to `AndesTextfieldState.PREFIX` and receive the prefix string.
+- `setRightIcon` to set `andesTexfield.state` to `AndesTextfieldState.ICON` and receive the icon path, click listener, icon color and hideWhenType flag.
+- `setTooltip` to set `andesTexfield.state` to `AndesTextfieldState.TOOLTIP` and pass tooltips parameters like title, body, type and location. Additionally you can provide contentDescription to setup the right icon accessibility.
 
 Also values can be changed in run time.
 

@@ -45,38 +45,41 @@ internal object AndesTextfieldConfigurationFactory {
         return with(andesTextfieldAttrs) {
 
             AndesTextfieldConfiguration(
-                    labelColor = resolveLabelTextColor(state.state),
-                    labelSize = resolveLabelSize(context),
-                    labelText = label,
-                    background = resolveBackground(context, state.state),
-                    helperColor = resolveHelperTextColor(state.state),
-                    helperSize = resolveHelperSize(context),
-                    helperText = resolveHelper(state.state, helper),
-                    helperLinks = resolveHelperLinks(state.state, helperLinks),
-                    helperTypeface = resolveHelperTypeface(state.state, context),
-                    counterColor = resolveCounterTextColor(state.state),
-                    counterSize = resolveCounterSize(context),
-                    counterLength = counter,
-                    placeHolderColor = resolvePlaceHolderColor(state.state),
-                    placeHolderSize = resolvePlaceHolderSize(context),
-                    placeHolderText = placeholder,
-                    typeface = resolveTypeface(context),
-                    icon = resolveIcon(context, state.state),
-                    leftComponent = resolveLeftComponent(context, leftContent?.leftContent),
-                    rightComponent = resolveRightComponent(context, rightContent?.rightContent),
-                    leftComponentLeftMargin = resolveLeftComponentLeftMargin(
-                            context,
-                            andesTextfieldAttrs.state.state,
-                            leftContent?.leftContent
-                    ),
-                    leftComponentRightMargin = resolveLeftComponentRightMargin(context, leftContent?.leftContent),
-                    rightComponentLeftMargin = resolveRightComponentLeftMargin(
-                            context,
-                            andesTextfieldAttrs.state.state,
-                            rightContent?.rightContent
-                    ),
-                    rightComponentRightMargin = resolveRightComponentRightMargin(context, rightContent?.rightContent),
-                    maxLines = maxLines
+                labelColor = resolveLabelTextColor(state.state),
+                labelSize = resolveLabelSize(context),
+                labelText = label,
+                background = resolveBackground(context, state.state),
+                helperColor = resolveHelperTextColor(state.state),
+                helperSize = resolveHelperSize(context),
+                helperText = resolveHelper(state.state, helper),
+                helperLinks = resolveHelperLinks(state.state, helperLinks),
+                helperTypeface = resolveHelperTypeface(state.state, context),
+                counterColor = resolveCounterTextColor(state.state),
+                counterSize = resolveCounterSize(context),
+                counterLength = counter,
+                placeHolderColor = resolvePlaceHolderColor(state.state),
+                placeHolderSize = resolvePlaceHolderSize(context),
+                placeHolderText = placeholder,
+                typeface = resolveTypeface(context),
+                icon = resolveIcon(context, state.state),
+                leftComponent = resolveLeftComponent(context, leftContent?.leftContent),
+                rightComponent = rightContent?.rightContent?.let { rightContent ->
+                    rightContent.setContentDescription(context, rightContentDescription)
+                    resolveRightComponent(context, rightContent)
+                },
+                leftComponentLeftMargin = resolveLeftComponentLeftMargin(
+                    context,
+                    andesTextfieldAttrs.state.state,
+                    leftContent?.leftContent
+                ),
+                leftComponentRightMargin = resolveLeftComponentRightMargin(context, leftContent?.leftContent),
+                rightComponentLeftMargin = resolveRightComponentLeftMargin(
+                    context,
+                    andesTextfieldAttrs.state.state,
+                    rightContent?.rightContent
+                ),
+                rightComponentRightMargin = resolveRightComponentRightMargin(context, rightContent?.rightContent),
+                maxLines = maxLines
             )
         }
     }
