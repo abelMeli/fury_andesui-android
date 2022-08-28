@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="andes_inputstepper_add_content_description">Add %1$d</string>
+    <string name="andes_inputstepper_remove_content_description">Remove %1$d</string>
+</resources>

@@ -16,11 +16,12 @@ import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.color.toColor
 import com.mercadolibre.android.andesui.icons.IconProvider
+import com.mercadolibre.android.andesui.textfield.content.AndesClearTextfieldContent
 import com.mercadolibre.android.andesui.textfield.content.AndesIconTextfieldContent
 import com.mercadolibre.android.andesui.textfield.content.AndesPrefixTextfieldContent
 import com.mercadolibre.android.andesui.textfield.content.AndesSuffixTextfieldContent
 import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldContentInterface
-import com.mercadolibre.android.andesui.textfield.content.AndesClearTextfieldContent
+import com.mercadolibre.android.andesui.textfield.content.AndesTooltipTextfieldContent
 import com.mercadolibre.android.andesui.textfield.content.AndesValidatedTextfieldContent
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
@@ -103,6 +104,32 @@ class AndesTextfieldContentInterfaceTest {
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_icon_right_margin).toInt(),
                 contentInterface.leftMargin(context, AndesTextfieldState.IDLE.state))
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(icon)
+    }
+
+    @Test
+    fun `tooltip content`() {
+        contentInterface = AndesTooltipTextfieldContent
+        val description = "tooltipDescription"
+        contentInterface.setContentDescription(context, description)
+        val tooltip = SimpleDraweeView(context)
+        tooltip.setImageDrawable(
+            buildColoredAndesBitmapDrawable(
+                IconProvider(context).loadIcon("andes_ui_helper_24") as BitmapDrawable,
+                context,
+                color = R.color.andes_accent_color.toAndesColor()
+            )
+        )
+        tooltip.contentDescription = description
+
+        assertEquals(
+            context.resources.getDimension(R.dimen.andes_textfield_icon_left_margin).toInt(),
+            contentInterface.rightMargin(context)
+        )
+        assertEquals(
+            context.resources.getDimension(R.dimen.andes_textfield_icon_right_margin).toInt(),
+            contentInterface.leftMargin(context, AndesTextfieldState.IDLE.state)
+        )
+        assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(tooltip)
     }
 
     @Test

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:color="@color/andes_accent_color_500" android:state_enabled="true" />
+
+    <item android:color="@color/andes_gray_250_solid" android:state_enabled="false" />
+
+</selector>

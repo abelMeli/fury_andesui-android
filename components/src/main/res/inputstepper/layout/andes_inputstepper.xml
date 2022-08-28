@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/andes_inputstepper_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/andes_inputstepper_height_large"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@drawable/andes_inputstepper_background">
+
+    <ImageButton
+        android:id="@+id/andes_inputstepper_action_remove"
+        android:layout_width="@dimen/andes_inputstepper_action_size_large"
+        android:layout_height="@dimen/andes_inputstepper_action_size_large"
+        android:layout_margin="@dimen/andes_inputstepper_action_margin"
+        android:background="@drawable/andes_inputstepper_actions_background"
+        android:contentDescription="@string/andes_inputstepper_remove_content_description"
+        android:src="@drawable/andes_ui_restar_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/andes_inputstepper_pointer"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/andes_inputstepper_action_selector" />
+
+    <ImageButton
+        android:id="@+id/andes_inputstepper_action_add"
+        android:layout_width="@dimen/andes_inputstepper_action_size_large"
+        android:layout_height="@dimen/andes_inputstepper_action_size_large"
+        android:layout_margin="@dimen/andes_inputstepper_action_margin"
+        android:background="@drawable/andes_inputstepper_actions_background"
+        android:contentDescription="@string/andes_inputstepper_add_content_description"
+        android:src="@drawable/andes_ui_sumar_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/andes_inputstepper_pointer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/andes_inputstepper_action_selector" />
+
+    <com.mercadolibre.android.andesui.textview.AndesTextView
+        android:id="@+id/andes_inputstepper_pointer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="@dimen/andes_text_size_inputstepper_large"
+        app:andesTextViewStyle="bodyS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/andes_inputstepper_action_add"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/andes_inputstepper_action_remove"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Texto compuesto" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/andes_inputstepper_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="andes_inputstepper_action_remove,andes_inputstepper_pointer,
+        andes_inputstepper_action_add"
+        tools:visibility="visible" />
+
+    <com.mercadolibre.android.andesui.progress.AndesProgressIndicatorIndeterminate
+        android:id="@+id/andes_inputstepper_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:andesProgressSize="medium"
+        app:andesProgressStart="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

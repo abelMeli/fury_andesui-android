@@ -13,6 +13,7 @@ import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
+import com.mercadolibre.android.andesui.utils.assertEquals
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -411,6 +412,27 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.radio_button_item_selected))
         Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+    }
+
+    @Test
+    fun `AndesList hasStableIds is true`() {
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemRadioButton(activity, "test", avatar = drawable, avatarType = AndesThumbnailType.IMAGE_CIRCLE)
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.RADIO_BUTTON)
+        andesList.delegate = andesListDelegate
+        val adapter = andesList.recyclerViewComponent.adapter
+        adapter?.hasStableIds() assertEquals true
     }
 
     private fun setContentToActivity(view: View) {

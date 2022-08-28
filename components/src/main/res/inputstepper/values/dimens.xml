@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="andes_inputstepper_height_large">48dp</dimen>
+    <dimen name="andes_inputstepper_height_small">32dp</dimen>
+
+    <dimen name="andes_text_size_inputstepper_large">16sp</dimen>
+    <dimen name="andes_text_size_inputstepper_small">14sp</dimen>
+
+    <dimen name="andes_inputstepper_action_size_large">32dp</dimen>
+    <dimen name="andes_inputstepper_action_size_small">24dp</dimen>
+
+    <dimen name="andes_inputstepper_progress_size_large">24dp</dimen>
+    <dimen name="andes_inputstepper_progress_size_small">16dp</dimen>
+
+    <dimen name="andes_inputstepper_action_margin">10dp</dimen>
+
+    <dimen name="andes_inputstepper_radius">6dp</dimen>
+
+</resources>

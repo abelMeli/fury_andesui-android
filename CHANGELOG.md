@@ -1,12 +1,18 @@
 # v5.12.0
 ## 🚀 Feature
+- AndesInputStepper New internal component for andes| Author: [@dbetancourtg](https://github.com/Diego-Betancourt)
 - Added support to `AndesListViewItemCheckBox` `AndesListViewItemRadioButton` within `AndesList` | Author: [@maquinteros](https://github.com/maquinteros)
 - Added user close event listener in tooltip
+- Added tooltip support to `AndesTextfield` | Author: [@geroillescas](https://github.com/geroillescas)
+- Kotlin binary compatibility validator added | Author: [@eportasML](https://github.com/eportasML)
+
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).
 - Migration to the new Plugin of Gradle --> 14.+.
 ## 🛠 Fixes
+- `AndesFeedbackScreenView` accessibility improvements | Author: [@yireyes](https://github.com/yireyes) 
 - Fix in `AndesCoachmark` message vertical margins and step indicator | Author: [@juanunzu](https://github.com/juanunzu)
+- Fix in `AndesList` focus is lost when clicking on an item in the list with accessibility on | Author: [@edgnavarro](https://github.com/edgnavarro)
 
 # v5.11.0
 ## 🚀 Feature

@@ -155,6 +155,17 @@
             app:andesTextfieldPlaceholder="@string/andes_textfield_placeholder_text"
             app:andesTextfieldMaxLines="3" />
 
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/textViewTooltip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
+            android:inputType="text"
+            app:andesTextfieldLabel="@string/andes_textfield_label_text"
+            app:andesTextfieldRightContent="tooltip"
+            app:andesTextfieldPlaceholder="@string/andes_textfield_placeholder_text"
+            app:andesTextfieldState="idle" />
+
         <com.mercadolibre.android.andesui.textfield.AndesTextarea
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

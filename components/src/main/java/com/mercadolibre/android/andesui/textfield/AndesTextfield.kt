@@ -46,6 +46,9 @@ import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLink
 import com.mercadolibre.android.andesui.textfield.links.AndesTextfieldLinks
 import com.mercadolibre.android.andesui.textfield.maskTextField.TextFieldMaskWatcher
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
+import com.mercadolibre.android.andesui.tooltip.AndesTooltip
+import com.mercadolibre.android.andesui.tooltip.location.AndesTooltipLocation
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipStyle
 import com.mercadolibre.android.andesui.utils.buildColoredAndesBitmapDrawable
 
 @Suppress("TooManyFunctions")
@@ -775,6 +778,33 @@ class AndesTextfield : ConstraintLayout {
         action.text = text
         action.isEnabled = state != AndesTextfieldState.READONLY && state != AndesTextfieldState.DISABLED
         action.setOnClickListener(onClickListener)
+    }
+
+    /**
+     * Set the right content to tooltip and provides an interface to set tooltips attributes.
+     */
+    fun setTooltip(
+        body: String,
+        tooltipStyle: AndesTooltipStyle = AndesTooltipStyle.DARK,
+        location: AndesTooltipLocation = AndesTooltipLocation.BOTTOM,
+        title: String? = null,
+        contentDescription: String? = null,
+    ) {
+        andesTextfieldAttrs = andesTextfieldAttrs.copy(rightContentDescription = contentDescription)
+        rightContent = AndesTextfieldRightContent.TOOLTIP
+        val tooltip = AndesTooltip(
+            context = context,
+            title = title,
+            body = body,
+            isDismissible = true,
+            tooltipLocation = location,
+            style = tooltipStyle
+        )
+
+        val rightIcon: SimpleDraweeView = rightComponent.getChildAt(0) as SimpleDraweeView
+        rightIcon.setOnClickListener {
+            tooltip.show(it)
+        }
     }
 
     /**

@@ -42,6 +42,10 @@ class AndesListAdapter(
         const val RADIO_BUTTON = 3
     }
 
+    init {
+        setHasStableIds(true)
+    }
+
     override fun getItemCount() = delegate.getDataSetSize(andesList)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
@@ -69,6 +73,10 @@ class AndesListAdapter(
             AndesListType.CHECK_BOX -> CHECK_BOX
             AndesListType.RADIO_BUTTON -> RADIO_BUTTON
         }
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     internal fun changeAndesListType(listType: AndesListType) {

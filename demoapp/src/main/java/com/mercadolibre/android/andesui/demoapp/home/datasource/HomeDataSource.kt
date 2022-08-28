@@ -69,8 +69,9 @@ object HomeDataSource {
         Section("Switch", "andes://switch"),
         Section("Amount Field", "andes://amountfield"),
         Section("Modal", "andes://modal"),
-        Section("Searchbox", "andes://searchbox")
-    ).sortedBy { it.name }
+        Section("Searchbox", "andes://searchbox"),
+        Section("Input Stepper", "andes://inputstepper")
+        ).sortedBy { it.name }
 
     fun getPatternsData() = listOf(
         Section("Coach marks", "andes://coachmark"),

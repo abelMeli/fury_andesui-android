@@ -19,5 +19,6 @@
     </plurals>
     <string name="andes_textfield_chars_entered" translatable="false">Caracteres ingresados: %1$d de %2$d</string>
     <string name="andes_textfield_field_completed" translatable="false">Campo de texto completo</string>
+    <string name="andes_textfield_tooltip_content_description" translatable="false">Más información</string>
 
 </resources>

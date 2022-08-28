@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -377,6 +378,7 @@ class AndesFeedbackScreenViewTest {
 
         with(screenView.getButtonGroup() as AndesButtonGroup) {
             (getChildAt(1) as AndesButton).text assertEquals "Button 2"
+            importantForAccessibility assertEquals View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
         }
     }
 

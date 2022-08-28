@@ -53,7 +53,9 @@ internal class AnalyticsHelper {
         "ButtonGroupShowcaseActivity" to "AndesButtonGroup",
         "ModalShowcaseActivity" to "AndesModal",
         "StickyScrollViewShowcaseActivity" to "AndesStickyScrollView",
-        "SearchboxShowcaseActivity" to "AndesSearchbox"
+        "SearchboxShowcaseActivity" to "AndesSearchbox",
+        "InputStepperShowcaseActivity" to "AndesInputStepper"
+
     )
 
     private val screens = mapOf(
@@ -137,7 +139,9 @@ internal class AnalyticsHelper {
             "/stickyscroll/stickyview/static",
             "/stickyscroll/notstickyview/static"
         ),
-        "SearchboxShowcaseActivity" to arrayListOf("/searchbox/dynamic")
+        "SearchboxShowcaseActivity" to arrayListOf("/searchbox/dynamic"),
+        "InputStepperShowcaseActivity" to arrayListOf("/inputstepper/dynamic", "/inputstepper/static")
+
     )
 
     fun getPath(className: String, position: Int): String? {
