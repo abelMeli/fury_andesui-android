@@ -126,7 +126,7 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
 
     override fun bodyContentMaxWidth(context: Context) = getDisplayMaxWidthForContent(context)
 
-    override fun tooltipMeasureWidth(context: Context, view: View) = getDisplayWidth(context)
+    override fun tooltipMeasureWidth(context: Context, view: View) = view.measuredWidth
 
     override fun getArrowPoint(
         arrowLocation: AndesTooltipArrowLocation,
@@ -159,8 +159,8 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
         return when {
             (targetIsBetweenLimits) -> {
                 AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.FREE,
-                    point = targetHalfXPoint - tooltip.arrowWidth / 2
+                    positionInSide = ArrowPositionId.MIDDLE,
+                    point = ((target.measuredWidth / 2) - (tooltip.tooltipMeasuredWidth / 2))
                 )
             }
             (!mayArrowLeft) -> {
