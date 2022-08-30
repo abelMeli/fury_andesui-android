@@ -20,7 +20,6 @@ import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOn
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselLayoutManager
 import com.mercadolibre.android.andesui.databinding.AndesLayoutCarouselBinding
-import com.mercadolibre.android.andesui.databinding.AndesLayoutFeedbackScreenBinding
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -201,7 +200,13 @@ class AndesCarousel : ConstraintLayout {
     private fun setupA11y() {
         recyclerViewComponent.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
         recyclerViewComponent.
-            setAccessibilityDelegateCompat(AndesCarouselAccessibilityDelegate(recyclerViewComponent) { delegate.getDataSetSize(this) })
+        setAccessibilityDelegateCompat(AndesCarouselAccessibilityDelegate(recyclerViewComponent) {
+            if (this::andesCarouselDelegate.isInitialized) {
+                andesCarouselDelegate.getDataSetSize(this)
+            } else {
+                EMPTY_DATA_SET
+            }
+        })
     }
 
     /**
@@ -296,4 +301,8 @@ class AndesCarousel : ConstraintLayout {
     }
 
     private fun createConfig() = AndesCarouselConfigurationFactory.create(context, andesCarouselAttrs)
+
+    private companion object {
+        const val EMPTY_DATA_SET = 0
+    }
 }

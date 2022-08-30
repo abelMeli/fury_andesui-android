@@ -636,6 +636,7 @@ public final class com/mercadolibre/android/andesui/card/type/AndesCardType$Comp
 }
 
 public final class com/mercadolibre/android/andesui/carousel/AndesCarousel : androidx/constraintlayout/widget/ConstraintLayout {
+	public static final field EMPTY_DATA_SET I
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
 	public fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;)V
 	public synthetic fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
