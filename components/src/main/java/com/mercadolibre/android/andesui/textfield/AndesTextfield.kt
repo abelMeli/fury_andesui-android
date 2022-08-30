@@ -485,8 +485,10 @@ class AndesTextfield : ConstraintLayout {
     private fun setupLabelComponent(config: AndesTextfieldConfiguration) {
         if (config.labelText == null || config.labelText.isEmpty()) {
             labelComponent.visibility = View.GONE
+            labelComponent.labelFor = View.NO_ID
         } else {
             labelComponent.visibility = View.VISIBLE
+            labelComponent.labelFor = textComponent.id
             labelComponent.text = config.labelText
             labelComponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.labelSize)
         }
@@ -1038,6 +1040,8 @@ class AndesTextfield : ConstraintLayout {
             textContainer.setOnClickListener(null)
         }
     }
+
+    internal fun getInternalEditText() = binding.andesTextfieldEdittext
 
     private fun createConfig() = AndesTextfieldConfigurationFactory.create(context, andesTextfieldAttrs)
 

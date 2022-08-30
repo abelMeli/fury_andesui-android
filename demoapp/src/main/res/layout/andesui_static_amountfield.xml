@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="32dp"
+        android:labelFor="@id/static_amount_field"
         android:text="¿Cuánto efectivo quieres retirar del cajero?"
         app:andesTextViewStyle="titleL"
         app:layout_constraintEnd_toEndOf="parent"

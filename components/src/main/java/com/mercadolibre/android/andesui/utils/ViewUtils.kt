@@ -207,3 +207,20 @@ fun View.getAllSiblings(): List<View> {
     val allViews = viewParent.getAllChildren()
     return allViews.filter { it != this }
 }
+
+/**
+ * Finds and returns the view by id.
+ * The difference with the regular [View.findViewById] is that this method will scan the
+ * whole screen from the top instead of the local layout.
+ *
+ * Returns null when [this] is created with an applicationContext instead of an activity
+ *
+ * Returns null if the passed [id] does not correspond to a view in the same screen,
+ * or the referenced view is not attached yet to the screen
+ */
+internal fun View.getViewInScreenById(@IdRes id: Int): View? {
+    val activity = context as? Activity ?: return null
+    val rootView = activity.window.decorView.findViewById<View>(android.R.id.content)
+    val view = rootView.findViewById<View>(id) ?: return null
+    return view.takeUnless { it == this }
+}

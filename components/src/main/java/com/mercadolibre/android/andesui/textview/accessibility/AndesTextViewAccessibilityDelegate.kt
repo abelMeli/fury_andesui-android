@@ -3,10 +3,12 @@ package com.mercadolibre.android.andesui.textview.accessibility
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
+import com.mercadolibre.android.andesui.textfield.AndesTextfield
 import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.utils.createActionList
+import com.mercadolibre.android.andesui.utils.getViewInScreenById
 
 /**
  * class responsible for handling the component accessibility, including the correct setting of the
@@ -35,6 +37,27 @@ class AndesTextViewAccessibilityDelegate(private val andesTextView: AndesTextVie
             ?.let {
                 info?.text = it
             }
+        handleLabelFor()
+    }
+
+    /**
+     * This method will retrieve the labeled view and in case this view is either an [AndesTextfield]
+     * or an [AndesAmountFieldSimple] it will redirect the label towards the internal edit text.
+     *
+     * When the view is neither of those views (or there is no referenced view at all) the component
+     * will remain unchanged.
+     */
+    private fun handleLabelFor() {
+        val originalLabelFor = andesTextView.labelFor
+        if (originalLabelFor != View.NO_ID) {
+            val referencedView = andesTextView.getViewInScreenById(originalLabelFor) ?: return
+            val newLabelFor = when (referencedView) {
+                is AndesTextfield -> referencedView.getInternalEditText().id
+                is AndesAmountFieldSimple -> referencedView.getInternalEditText().id
+                else -> return
+            }
+            andesTextView.labelFor = newLabelFor
+        }
     }
 
     /**

@@ -213,3 +213,16 @@ a helper class like DecimalFormat.
 
 This is why we handle the `value` and `maxValue` properties as strings representations of numbers: no thousand separators, and only
 with a dot decimal separator if needed (a value like "12345" without decimal places still works).
+
+## About the accessibility label
+As you may see, this component does not have a label that brings context to sight-impaired users when
+the focus is placed over the internal `editText` component.
+From UX, the recommendation is to add a headline in the screen this component is placed, but we
+need a way to link this text with the text field.
+To improve this experience for talkback users, from version 5.13.0 onwards, the [`AndesTextView`](https://furydocs.io/andesui-android/latest/guide/#/textview/AndesTextView?id=the-androidlabelfor-property)
+will be able to be set as an accessibility label for this component. This will be particularly useful when the use-case for the amountField is to be focused as soon as the screen is opened.
+We show examples of this behavior before and after this feature.
+
+| Component without a11y label (before) | Component with a11y label (now) |
+| - | - |
+| ![no_a11y_label](https://user-images.githubusercontent.com/81258246/187286636-21005077-bd92-4bab-a914-4253a44a34b8.gif) | ![with_label_for](https://user-images.githubusercontent.com/81258246/187286619-8c8cf692-1831-446a-821c-3733560b87dc.gif) |
