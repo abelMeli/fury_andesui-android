@@ -696,6 +696,15 @@ public abstract interface class com/mercadolibre/android/andesui/carousel/utils/
 	public abstract fun onClickItem (Lcom/mercadolibre/android/andesui/carousel/AndesCarousel;I)V
 }
 
+public final class com/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration : androidx/recyclerview/widget/RecyclerView$ItemDecoration {
+	public static final field Companion Lcom/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration$Companion;
+	public fun <init> ()V
+	public fun onDrawOver (Landroid/graphics/Canvas;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
+}
+
+public final class com/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration$Companion {
+}
+
 public final class com/mercadolibre/android/andesui/checkbox/AndesCheckbox : androidx/constraintlayout/widget/ConstraintLayout {
 	public static final field Companion Lcom/mercadolibre/android/andesui/checkbox/AndesCheckbox$Companion;
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V

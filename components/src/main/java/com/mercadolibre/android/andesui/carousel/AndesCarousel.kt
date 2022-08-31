@@ -7,7 +7,6 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.carousel.accessibility.AndesCarouselAccessibilityDelegate
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrParser
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrs
@@ -19,6 +18,7 @@ import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOff
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOn
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselLayoutManager
+import com.mercadolibre.android.andesui.carousel.utils.CirclePagerIndicatorDecoration
 import com.mercadolibre.android.andesui.databinding.AndesLayoutCarouselBinding
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import kotlinx.coroutines.CoroutineScope
@@ -77,6 +77,7 @@ class AndesCarousel : ConstraintLayout {
             andesCarouselDelegate = value
             val carouselAdapter = AndesCarouselAdapter(this, value)
             recyclerViewComponent.adapter = carouselAdapter
+            recyclerViewComponent.addItemDecoration(CirclePagerIndicatorDecoration())
             setupAutoplay(createConfig())
         }
 
@@ -273,7 +274,7 @@ class AndesCarousel : ConstraintLayout {
         recyclerViewComponent.addItemDecoration(marginItemDecoration)
 
         val padding = config.padding
-        recyclerViewComponent.setPadding(padding, 0, padding, 0)
+        recyclerViewComponent.setPadding(padding, 50, padding, 0)
     }
 
     private fun setupAutoplay(config: AndesCarouselConfiguration) {
