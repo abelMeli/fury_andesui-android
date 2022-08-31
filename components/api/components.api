@@ -637,11 +637,14 @@ public final class com/mercadolibre/android/andesui/card/type/AndesCardType$Comp
 
 public final class com/mercadolibre/android/andesui/carousel/AndesCarousel : androidx/constraintlayout/widget/ConstraintLayout {
 	public static final field EMPTY_DATA_SET I
+	public static final field EMPTY_TITLE Ljava/lang/String;
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
 	public fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;)V
 	public synthetic fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;ZZJ)V
 	public synthetic fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;ZZJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;ZZJLjava/lang/String;Z)V
+	public synthetic fun <init> (Landroid/content/Context;ZLcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;ZZJLjava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun addOnScrollListener (Landroidx/recyclerview/widget/RecyclerView$OnScrollListener;)V
 	public final fun getAutoplay ()Z
 	public final fun getAutoplaySpeed ()J
@@ -649,6 +652,8 @@ public final class com/mercadolibre/android/andesui/carousel/AndesCarousel : and
 	public final fun getDelegate ()Lcom/mercadolibre/android/andesui/carousel/utils/AndesCarouselDelegate;
 	public final fun getInfinite ()Z
 	public final fun getMargin ()Lcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;
+	public final fun getPaginator ()Z
+	public final fun getTitle ()Ljava/lang/String;
 	public final fun scrollToPosition (I)V
 	public final fun setAutoplay (Z)V
 	public final fun setAutoplaySpeed (J)V
@@ -656,6 +661,8 @@ public final class com/mercadolibre/android/andesui/carousel/AndesCarousel : and
 	public final fun setDelegate (Lcom/mercadolibre/android/andesui/carousel/utils/AndesCarouselDelegate;)V
 	public final fun setInfinite (Z)V
 	public final fun setMargin (Lcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;)V
+	public final fun setPaginator (Z)V
+	public final fun setTitle (Ljava/lang/String;)V
 	public final fun smoothScrollToPosition (I)V
 }
 
@@ -700,6 +707,7 @@ public final class com/mercadolibre/android/andesui/carousel/utils/CirclePagerIn
 	public static final field Companion Lcom/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration$Companion;
 	public fun <init> ()V
 	public fun onDrawOver (Landroid/graphics/Canvas;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
+	public final fun withTitle (Ljava/lang/String;)V
 }
 
 public final class com/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration$Companion {

@@ -4,9 +4,7 @@ import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Interpolator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -21,6 +19,11 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
     private val mIndicatorHeight = (DP * 8).toInt()
 
     /**
+     * withTitle
+     */
+    private var title: String? = null
+
+    /**
      * Indicator stroke width.
      */
     private val mIndicatorStrokeWidth = DP * 2
@@ -28,7 +31,8 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
     /**
      * Indicator width.
      */
-    private val mIndicatorItemLength = DP * 2
+    private val mIndicatorItemLength = DP * 10
+
     /**
      * Padding between indicators.
      */
@@ -44,7 +48,7 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
     init {
 
         mPaint.strokeWidth = mIndicatorStrokeWidth
-        mPaint.style = Paint.Style.STROKE
+        mPaint.style = Paint.Style.FILL_AND_STROKE
         mPaint.isAntiAlias = true
     }
 
@@ -57,10 +61,18 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
         val totalLength = mIndicatorItemLength * itemCount
         val paddingBetweenItems = Math.max(0, itemCount - 1) * mIndicatorItemPadding
         val indicatorTotalWidth = totalLength + paddingBetweenItems
-        val indicatorStartX = (parent.width - indicatorTotalWidth) - 20f
+        val indicatorStartX = if (title.isNullOrEmpty()) {
+            (parent.width - indicatorTotalWidth) / 2f
+        } else {
+            (parent.width - indicatorTotalWidth) - 20f
+        }
 
         // center vertically in the allotted space
-        val indicatorPosY = 20f //parent.height - mIndicatorHeight / 2f
+        val indicatorPosY = if (title.isNullOrEmpty()) {
+            parent.height - mIndicatorHeight / 2f
+        } else {
+            40f
+        }//40f //parent.height - mIndicatorHeight / 2f
 
         drawInactiveIndicators(c, indicatorStartX, indicatorPosY, itemCount)
 
@@ -123,14 +135,11 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
         }
     }
 
-    companion object {
+    fun withTitle(title: String?) {
+        this.title = title
+    }
 
+    companion object {
         private val DP = Resources.getSystem().displayMetrics.density
     }
-    //
-    //    @Override
-    //    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-    //        super.getItemOffsets(outRect, view, parent, state);
-    //        outRect.bottom = mIndicatorHeight;
-    //    }
 }

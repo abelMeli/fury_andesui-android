@@ -157,11 +157,24 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         val binding = AndesuiStaticCarouselBinding.bind(container)
         val carouselSnapped = binding.carouselSnapped
         val carouselFree = binding.carouselFree
+        val carouselTitle = binding.carouselWithTitle
+        val carouselPaginator = binding.carouselWithPaginator
+        val carouselPaginatorAndTitle = binding.carouselWithPaginatorAndTitle
 
         snappedCarouselId = carouselSnapped.id
         freeCarouselId = carouselFree.id
         carouselSnapped.delegate = this
         carouselFree.delegate = this
+        carouselTitle.delegate = this
+        carouselPaginator.delegate = this
+        carouselPaginatorAndTitle.delegate = this
+
+        carouselPaginatorAndTitle.title = "New title"
+        carouselPaginatorAndTitle.paginator = true
+
+        carouselTitle.title = "Italia"
+
+        carouselPaginator.paginator = true
 
         binding.andesuiDemoappAndesCarouselSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.CAROUSEL)

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class AndesCarousel : ConstraintLayout {
         AndesLayoutCarouselBinding.inflate(LayoutInflater.from(context), this, true)
     }
     private var recyclerViewComponent: RecyclerView = binding.andesCarouselRecyclerview
+    private var textViewComponent: TextView = binding.andesTextview
     private val accessibilityManager = context.getAccessibilityManager()
     private val viewManager: AndesCarouselLayoutManager by lazy {
         AndesCarouselLayoutManager(context) {
@@ -77,7 +79,6 @@ class AndesCarousel : ConstraintLayout {
             andesCarouselDelegate = value
             val carouselAdapter = AndesCarouselAdapter(this, value)
             recyclerViewComponent.adapter = carouselAdapter
-            recyclerViewComponent.addItemDecoration(CirclePagerIndicatorDecoration())
             setupAutoplay(createConfig())
         }
 
@@ -111,6 +112,26 @@ class AndesCarousel : ConstraintLayout {
             setupAutoplay(createConfig())
         }
 
+    /**
+     * Getter and setter for [title].
+     */
+    var title: String?
+        get() = andesCarouselAttrs.andesCarouselTitle
+        set(value) {
+            andesCarouselAttrs = andesCarouselAttrs.copy(andesCarouselTitle = value)
+            setupTitle(createConfig())
+        }
+
+    /**
+     * Getter and setter for [paginator].
+     */
+    var paginator: Boolean
+        get() = andesCarouselAttrs.andesCarouselPaginator
+        set(value) {
+            andesCarouselAttrs = andesCarouselAttrs.copy(andesCarouselPaginator = value)
+            setupPaginator(createConfig())
+        }
+
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
     }
@@ -120,7 +141,15 @@ class AndesCarousel : ConstraintLayout {
         center: Boolean = false,
         margin: AndesCarouselMargin = AndesCarouselMargin.DEFAULT
     ) : super(context) {
-        initAttrs(center, margin, infinite = false, autoplay = false, autoplaySpeed = 3000)
+        initAttrs(
+            center,
+            margin,
+            infinite = false,
+            autoplay = false,
+            autoplaySpeed = 3000,
+            title = EMPTY_TITLE,
+            paginator = false
+        )
     }
 
     constructor(
@@ -131,7 +160,20 @@ class AndesCarousel : ConstraintLayout {
         autoplay: Boolean = false,
         autoplaySpeed: Long
     ) : super(context) {
-        initAttrs(center, margin, infinite, autoplay, autoplaySpeed)
+        initAttrs(center, margin, infinite, autoplay, autoplaySpeed, title = EMPTY_TITLE, paginator = false)
+    }
+
+    constructor(
+        context: Context,
+        center: Boolean = false,
+        margin: AndesCarouselMargin = AndesCarouselMargin.DEFAULT,
+        infinite: Boolean = false,
+        autoplay: Boolean = false,
+        autoplaySpeed: Long,
+        title: String,
+        paginator: Boolean
+    ) : super(context) {
+        initAttrs(center, margin, infinite, autoplay, autoplaySpeed, title, paginator)
     }
 
     /**
@@ -180,9 +222,11 @@ class AndesCarousel : ConstraintLayout {
         margin: AndesCarouselMargin,
         infinite: Boolean,
         autoplay: Boolean,
-        autoplaySpeed: Long
+        autoplaySpeed: Long,
+        title: String,
+        paginator: Boolean
     ) {
-        andesCarouselAttrs = AndesCarouselAttrs(center, margin, infinite, autoplay, autoplaySpeed)
+        andesCarouselAttrs = AndesCarouselAttrs(center, margin, infinite, autoplay, autoplaySpeed, title, paginator)
         setupComponents(createConfig())
     }
 
@@ -200,8 +244,7 @@ class AndesCarousel : ConstraintLayout {
 
     private fun setupA11y() {
         recyclerViewComponent.importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
-        recyclerViewComponent.
-        setAccessibilityDelegateCompat(AndesCarouselAccessibilityDelegate(recyclerViewComponent) {
+        recyclerViewComponent.setAccessibilityDelegateCompat(AndesCarouselAccessibilityDelegate(recyclerViewComponent) {
             if (this::andesCarouselDelegate.isInitialized) {
                 andesCarouselDelegate.getDataSetSize(this)
             } else {
@@ -293,6 +336,37 @@ class AndesCarousel : ConstraintLayout {
     }
 
     /**
+     * Gets data from the config and sets to the title of this carousel.
+     */
+    private fun setupTitle(config: AndesCarouselConfiguration) {
+        if (config.title.isNullOrEmpty()) {
+            textViewComponent.visibility = GONE
+        } else {
+            textViewComponent.visibility = VISIBLE
+            textViewComponent.text = config.title
+            setupMarginWithTitle(config)
+        }
+    }
+
+    /**
+     * Gets data from the config and sets to the Paginator of this carousel.
+     */
+    private fun setupPaginator(config: AndesCarouselConfiguration) {
+        if (config.paginator) {
+            val pagerIndicatorDecoration = CirclePagerIndicatorDecoration()
+            pagerIndicatorDecoration.withTitle(title)
+            recyclerViewComponent.addItemDecoration(pagerIndicatorDecoration)
+            setupMarginWithTitle(config)
+        }
+    }
+
+    private fun setupMarginWithTitle(config: AndesCarouselConfiguration) {
+        val padding = config.padding
+        recyclerViewComponent.setPadding(padding, 120, padding, padding)
+        textViewComponent.setPadding(padding, 0, padding, padding)
+    }
+
+    /**
      * Sets a view id to this andesCarousel.
      */
     private fun setupViewId() {
@@ -305,5 +379,6 @@ class AndesCarousel : ConstraintLayout {
 
     private companion object {
         const val EMPTY_DATA_SET = 0
+        const val EMPTY_TITLE = ""
     }
 }

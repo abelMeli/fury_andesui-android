@@ -13,5 +13,7 @@
         <attr name="andesCarouselInfinite" format="boolean"/>
         <attr name="andesCarouselAutoplay" format="boolean"/>
         <attr name="andesCarouselAutoplaySpeed" format="integer"/>
+        <attr name="andesCarouselTitle" format="string"/>
+        <attr name="andesCarouselPaginator" format="boolean"/>
     </declare-styleable>
 </resources>

@@ -10,7 +10,9 @@ internal data class AndesCarouselAttrs(
     val andesCarouselMargin: AndesCarouselMargin,
     val andesCarouselInfinite: Boolean,
     val andesCarouselAutoplay: Boolean,
-    val andesCarouselAutoplaySpeed: Long
+    val andesCarouselAutoplaySpeed: Long,
+    val andesCarouselTitle: String?,
+    val andesCarouselPaginator: Boolean,
 )
 
 /**
@@ -46,12 +48,16 @@ internal object AndesCarouselAttrParser {
         val infinite = typedArray.getBoolean(R.styleable.AndesCarousel_andesCarouselInfinite, false)
         val autoscroll = typedArray.getBoolean(R.styleable.AndesCarousel_andesCarouselAutoplay, false)
         val autoplaySpeed = typedArray.getInt(R.styleable.AndesCarousel_andesCarouselAutoplaySpeed, VALUE_AUTOPLAY_SPEED_NOT_SELECTED)
+        val title = typedArray.getString(R.styleable.AndesCarousel_andesCarouselTitle)
+        val paginator = typedArray.getBoolean(R.styleable.AndesCarousel_andesCarouselPaginator, false)
         return AndesCarouselAttrs(
             andesCarouselCenter = center,
             andesCarouselMargin = margin,
             andesCarouselInfinite = infinite,
             andesCarouselAutoplay = autoscroll,
-            andesCarouselAutoplaySpeed = autoplaySpeed.toLong()
+            andesCarouselAutoplaySpeed = autoplaySpeed.toLong(),
+            andesCarouselTitle = title,
+            andesCarouselPaginator =  paginator
         ).also { typedArray.recycle() }
     }
 }

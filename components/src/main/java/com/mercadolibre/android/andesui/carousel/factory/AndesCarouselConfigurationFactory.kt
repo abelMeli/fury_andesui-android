@@ -12,7 +12,9 @@ internal data class AndesCarouselConfiguration(
     val itemDecoration: RecyclerView.ItemDecoration,
     val infinite: Boolean,
     val autoplay: Boolean,
-    val autoplaySpeed: Long
+    val autoplaySpeed: Long,
+    val title: String?,
+    val paginator: Boolean
 )
 
 internal object AndesCarouselConfigurationFactory {
@@ -26,7 +28,9 @@ internal object AndesCarouselConfigurationFactory {
             itemDecoration = itemDecoration,
             infinite = andesCarouselAttrs.andesCarouselInfinite,
             autoplay = andesCarouselAttrs.andesCarouselAutoplay,
-            autoplaySpeed = andesCarouselAttrs.andesCarouselAutoplaySpeed
+            autoplaySpeed = andesCarouselAttrs.andesCarouselAutoplaySpeed,
+            title = andesCarouselAttrs.andesCarouselTitle,
+            paginator = andesCarouselAttrs.andesCarouselPaginator
         )
     }
 
