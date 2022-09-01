@@ -1,3 +1,7 @@
+# v5.13.0
+## 🚀 Feature
+- Now the `AndesTextView` can be used as label for both `AndesTextfield` and `AndesAmountFieldSimple` components | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v5.12.0
 ## 🚀 Feature
 - AndesInputStepper New internal component for andes| Author: [@dbetancourtg](https://github.com/Diego-Betancourt)
@@ -9,10 +13,12 @@
 ## ➡️ Migrated
 - Migrated to the new libraries organization implementing a version catalog (gradle/libs.toml file).
 - Migration to the new Plugin of Gradle --> 14.+.
+
 ## 🛠 Fixes
 - `AndesFeedbackScreenView` accessibility improvements | Author: [@yireyes](https://github.com/yireyes) 
 - Fix in `AndesCoachmark` message vertical margins and step indicator | Author: [@juanunzu](https://github.com/juanunzu)
 - Fix in `AndesList` focus is lost when clicking on an item in the list with accessibility on | Author: [@edgnavarro](https://github.com/edgnavarro)
+- fix exception when a11y is used when delegate it´s not initialized | Author: [@meligeo](https://github.com/meligeo)
 
 # v5.11.0
 ## 🚀 Feature

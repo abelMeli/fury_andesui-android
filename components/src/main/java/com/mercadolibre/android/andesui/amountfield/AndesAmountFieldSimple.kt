@@ -784,6 +784,8 @@ class AndesAmountFieldSimple : ConstraintLayout, ResizingListener, AmountListene
         setupMaxComponentWidth()
     }
 
+    internal fun getInternalEditText() = binding.amountFieldEditText
+
     private fun createConfig() = AndesAmountFieldSimpleMoneyConfigFactory.create(
         context = context,
         resizingListener = this,

@@ -161,3 +161,48 @@ data class AndesBodyBold
 | Accessibility | No Accessibility |
 | ----------- | ----------- |
 | ![ACCESSIBILITY TEXTVIEW 2](https://user-images.githubusercontent.com/70920226/158864407-112dbce2-4168-4458-b30d-9121db77b990.gif) | ![TEXT VIEW 2](https://user-images.githubusercontent.com/70920226/158864446-c703818f-06fd-4fd6-b621-8714cdc0cf53.gif) |
+
+## The *android:labelFor* property
+As you may know, the `textView` can be used as an accessibility label for any view. This is particularly useful
+in cases when we use this label for an `editText` component. This allows the `editText` to provide more context
+about the purpose of the text we will enter in said component.
+
+### Use
+The use is the same as the use for the native `AppCompatTextView` (or `TextView`):
+
+In xml:
+
+```xml
+<LinearLayout>
+    <com.mercadolibre.android.andesui.textview.AndesTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/amount_field"
+        android:text="Dinero a transferir" />
+
+    <com.mercadolibre.android.andesui.amountfield.AndesAmountFieldSimple
+        android:id="@+id/amount_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+```
+
+Or by code:
+
+```kotlin
+val amountField = AndesAmountFieldSimple(context).apply {
+    id = R.id.amount_field_id
+}
+val labelTextView = AndesTextView(context = context, text = "Dinero a transferir").apply {
+    labelFor = amountField.id
+}
+```
+
+When the component is used as a label for either an `AndesTextfield` or an `AndesAmountFieldSimple`,
+internally the component will redirect this pairing to the corresponding internal edit text. This way, 
+when giving focus to any of these two components, the reading of the internal edit text component
+will announce the label.
+
+To see a vid with an example of use, please refer to the [`AndesAmountFieldSimple`](https://furydocs.io/andesui-android/latest/guide/#/amountfield/AndesAmountFieldSimple?id=about-the-accessibility-label)
+page.
