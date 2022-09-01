@@ -152,7 +152,6 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
     override fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
 
         ///// full text size////
-
         val targetHalfXPoint = target.getViewPointOnScreen().x + (target.measuredWidth / 2)
 
         val minor = getValidateWidth(tooltip.tooltipMeasuredWidth)
@@ -164,7 +163,7 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
         val mayArrowRight = targetHalfXPoint <= maxRightSpace
         val targetIsBetweenLimits = mayArrowLeft && mayArrowRight
 
-        ///// dynamic text size /////
+        ///// dynamic text /////
 
         val tooltipWidth = tooltip.tooltipMeasuredWidth
         val tooltipHalf = tooltipWidth / 2
