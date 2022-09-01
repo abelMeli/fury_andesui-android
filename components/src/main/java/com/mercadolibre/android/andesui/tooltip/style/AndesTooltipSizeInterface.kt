@@ -22,7 +22,7 @@ import com.mercadolibre.android.andesui.utils.ScreenUtils
  */
 internal sealed class AndesTooltipSizeInterface {
 
-    val padding_with_arrow = 16
+    val padding = 16
 
     abstract fun titleMaxWidth(context: Context, isDismissible: Boolean): Int
 
@@ -151,6 +151,8 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
 
     override fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
 
+        ///// full text size////
+
         val targetHalfXPoint = target.getViewPointOnScreen().x + (target.measuredWidth / 2)
 
         val minor = getValidateWidth(tooltip.tooltipMeasuredWidth)
@@ -162,7 +164,7 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
         val mayArrowRight = targetHalfXPoint <= maxRightSpace
         val targetIsBetweenLimits = mayArrowLeft && mayArrowRight
 
-        ///// dynamic text /////
+        ///// dynamic text size /////
 
         val tooltipWidth = tooltip.tooltipMeasuredWidth
         val tooltipHalf = tooltipWidth / 2
@@ -178,7 +180,7 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
 
         if(minor) {
 
-            //dynamic text no full size
+            //dynamic text
             return when {
                 (canArrowCenter) -> {
                     AndesTooltipArrowData(
@@ -227,11 +229,13 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
         }
     }
 
-    private fun getValidateWidth(with: Int) = with < (ScreenUtils.getScreenWidth() - padding_with_arrow * 2) - 100
+    private fun getValidateWidth(with: Int) =
+        with < (ScreenUtils.getScreenWidth() - padding * 2) - 100
 
     private fun getDisplayWidth(context: Context) =
         context.resources.displayMetrics.widthPixels
 
     private fun getDisplayMaxWidthForContent(context: Context) =
-        getDisplayWidth(context) - context.resources.getDimensionPixelSize(R.dimen.andes_tooltip_padding_with_arrow_horizontal) * 2
+        getDisplayWidth(context) - context.resources.
+        getDimensionPixelSize(R.dimen.andes_tooltip_padding_with_arrow_horizontal) * 2
 }
