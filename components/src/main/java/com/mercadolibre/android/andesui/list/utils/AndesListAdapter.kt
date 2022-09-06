@@ -6,9 +6,11 @@ import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.android.andesui.R
@@ -97,6 +99,10 @@ class AndesListAdapter(
         private lateinit var andesListItemAvatar: AndesThumbnail
         private lateinit var andesListItemIcon: ImageView
         private lateinit var andesViewThumbnailSeparator: View
+        private lateinit var groupTitleSpaceSubtitle: Group
+        private lateinit var groupSpaceSubtitle: Group
+        private lateinit var groupTitle: Group
+        private lateinit var customViewContainer: FrameLayout
 
         fun bind(andesList: AndesList, delegate: AndesListDelegate, position: Int, dividerEnabled: Boolean) {
             val andesListItemConfig = delegate.bind(andesList, itemView, position)
@@ -122,6 +128,8 @@ class AndesListAdapter(
          */
         private fun bindSimpleItem(itemConfig: AndesListViewItemSimple, dividerEnabled: Boolean) {
             bindItemCommons(itemConfig, dividerEnabled)
+
+            setAndesContentConfiguration(itemConfig)
         }
 
         /**
@@ -176,6 +184,8 @@ class AndesListAdapter(
                 itemConfig.paddingRight,
                 itemConfig.paddingBottom
             )
+
+            setAndesContentConfiguration(itemConfig)
         }
 
         /**
@@ -210,6 +220,7 @@ class AndesListAdapter(
                 itemConfig.paddingRight,
                 itemConfig.paddingBottom
             )
+            setAndesContentConfiguration(itemConfig)
         }
 
         private fun findCommonViewsById() {
@@ -222,12 +233,16 @@ class AndesListAdapter(
             andesListItemAvatar = itemView.findViewById(R.id.andes_list_item_asset)
             andesViewThumbnailSeparator = itemView.findViewById(R.id.andesViewThumbnailSeparator)
             andesListItemIcon = itemView.findViewById(R.id.image_view_list_item_icon)
+            groupTitleSpaceSubtitle = itemView.findViewById(R.id.group_title_space_subtitle)
+            groupSpaceSubtitle = itemView.findViewById(R.id.group_space_subtitle)
+            groupTitle = itemView.findViewById(R.id.group_title)
+            customViewContainer = itemView.findViewById(R.id.custom_view_container)
         }
 
         private fun setDefaultCommonViewValues() {
             // Default view states
-            subtitleTextView.visibility = View.GONE
-            spaceTitleSubtitleView.visibility = View.GONE
+            groupTitle.visibility = View.VISIBLE
+            groupSpaceSubtitle.visibility = View.GONE
             itemDivider.visibility = View.GONE
             andesListItemSelectionView.visibility = View.GONE
             andesViewThumbnailSeparator.visibility = View.GONE
@@ -267,7 +282,7 @@ class AndesListAdapter(
                     titleTextView.viewTreeObserver.removeOnPreDrawListener(this)
 
                     val layoutParams = view.layoutParams as ConstraintLayout.LayoutParams
-                    val topMargin = functionToCalculateTopMargin()
+                    val topMargin = if (groupTitle.visibility == View.VISIBLE) functionToCalculateTopMargin() else 0
 
                     layoutParams.setMargins(
                             0,
@@ -320,6 +335,8 @@ class AndesListAdapter(
                     itemConfig.paddingRight,
                     itemConfig.paddingBottom
             )
+
+            setAndesContentConfiguration(itemConfig)
         }
 
         /**
@@ -343,7 +360,6 @@ class AndesListAdapter(
         private fun setAndesListSubtitleConfiguration(itemConfig: AndesListViewItem) {
             showSpaceBetweenTitleAndSubtitle(itemConfig.spaceTitleSubtitle)
 
-            subtitleTextView.visibility = View.VISIBLE
             subtitleTextView.text = itemConfig.subtitle
             titleTextView.typeface = itemConfig.subtitleTypeFace
             subtitleTextView.setTextColor(itemConfig.subtitleColor)
@@ -456,13 +472,30 @@ class AndesListAdapter(
         }
 
         private fun showSpaceBetweenTitleAndSubtitle(spaceHeight: Int) {
-            spaceTitleSubtitleView.visibility = View.VISIBLE
+            groupSpaceSubtitle.visibility = View.VISIBLE
             spaceTitleSubtitleView.layoutParams.height = spaceHeight
         }
 
         private fun showSpaceBetweenAssetAndTitle(spaceWidth: Int) {
             andesViewThumbnailSeparator.visibility = View.VISIBLE
             andesViewThumbnailSeparator.layoutParams.height = spaceWidth
+        }
+
+        /**
+         * Set AndesList content configuration based on AndesListViewItem data.
+         *
+         * @param itemConfig current AndesListViewItem config
+         */
+        private fun setAndesContentConfiguration(itemConfig: AndesListViewItem) {
+            customViewContainer.visibility = View.GONE
+            customViewContainer.removeAllViews()
+
+            itemConfig.content?.let {
+                customViewContainer.addView(it)
+
+                groupTitleSpaceSubtitle.visibility = View.GONE
+                customViewContainer.visibility = View.VISIBLE
+            }
         }
     }
 }

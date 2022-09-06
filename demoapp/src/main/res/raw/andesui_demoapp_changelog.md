@@ -1,6 +1,7 @@
 # v5.13.0
 ## 🚀 Feature
 - Now the `AndesTextView` can be used as label for both `AndesTextfield` and `AndesAmountFieldSimple` components | Author: [@juanunzu](https://github.com/juanunzu)
+- Added custom content in `AndesList`
 
 # v5.12.0
 ## 🚀 Feature
