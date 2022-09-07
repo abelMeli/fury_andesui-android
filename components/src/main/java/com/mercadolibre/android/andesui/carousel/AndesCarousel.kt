@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.carousel.accessibility.AndesCarouselAccessibilityDelegate
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrParser
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrs
@@ -19,8 +21,8 @@ import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOff
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOn
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselLayoutManager
-import com.mercadolibre.android.andesui.carousel.utils.CirclePagerIndicatorDecoration
 import com.mercadolibre.android.andesui.databinding.AndesLayoutCarouselBinding
+import com.mercadolibre.android.andesui.pageIndicator.PageIndicator
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +37,7 @@ class AndesCarousel : ConstraintLayout {
         AndesLayoutCarouselBinding.inflate(LayoutInflater.from(context), this, true)
     }
     private var recyclerViewComponent: RecyclerView = binding.andesCarouselRecyclerview
+    private var pageIndicator: PageIndicator = binding.pageIndicator
     private var textViewComponent: TextView = binding.andesTextview
     private val accessibilityManager = context.getAccessibilityManager()
     private val viewManager: AndesCarouselLayoutManager by lazy {
@@ -123,9 +126,9 @@ class AndesCarousel : ConstraintLayout {
         }
 
     /**
-     * Getter and setter for [paginator].
+     * Getter and setter for [usePaginator].
      */
-    var paginator: Boolean
+    var usePaginator: Boolean
         get() = andesCarouselAttrs.andesCarouselPaginator
         set(value) {
             andesCarouselAttrs = andesCarouselAttrs.copy(andesCarouselPaginator = value)
@@ -344,7 +347,8 @@ class AndesCarousel : ConstraintLayout {
         } else {
             textViewComponent.visibility = VISIBLE
             textViewComponent.text = config.title
-            setupMarginWithTitle(config)
+            val padding = config.padding
+            textViewComponent.setPadding(padding, 0, padding, 0)
         }
     }
 
@@ -353,17 +357,8 @@ class AndesCarousel : ConstraintLayout {
      */
     private fun setupPaginator(config: AndesCarouselConfiguration) {
         if (config.paginator) {
-            val pagerIndicatorDecoration = CirclePagerIndicatorDecoration()
-            pagerIndicatorDecoration.withTitle(title)
-            recyclerViewComponent.addItemDecoration(pagerIndicatorDecoration)
-            setupMarginWithTitle(config)
+            pageIndicator.attachTo(recyclerViewComponent)
         }
-    }
-
-    private fun setupMarginWithTitle(config: AndesCarouselConfiguration) {
-        val padding = config.padding
-        recyclerViewComponent.setPadding(padding, 120, padding, padding)
-        textViewComponent.setPadding(padding, 0, padding, padding)
     }
 
     /**

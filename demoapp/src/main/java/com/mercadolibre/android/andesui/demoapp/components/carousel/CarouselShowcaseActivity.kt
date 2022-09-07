@@ -170,11 +170,11 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         carouselPaginatorAndTitle.delegate = this
 
         carouselPaginatorAndTitle.title = "New title"
-        carouselPaginatorAndTitle.paginator = true
+        carouselPaginatorAndTitle.usePaginator = true
 
         carouselTitle.title = "Italia"
 
-        carouselPaginator.paginator = true
+        carouselPaginator.usePaginator = true
 
         binding.andesuiDemoappAndesCarouselSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.CAROUSEL)

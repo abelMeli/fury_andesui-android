@@ -1,4 +1,4 @@
-package com.mercadolibre.android.andesui.carousel.utils
+package com.mercadolibre.android.andesui.pageIndicator
 
 import android.content.res.Resources
 import android.graphics.Canvas
@@ -29,14 +29,29 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
     private val mIndicatorStrokeWidth = DP * 2
 
     /**
-     * Indicator width.
+     * Dots size.
      */
-    private val mIndicatorItemLength = DP * 10
+    private val mIndicatorDotsLength = DP * 5
 
     /**
-     * Padding between indicators.
+     * Padding between Dots.
      */
-    private val mIndicatorItemPadding = DP * 4
+    private val mIndicatorDotsPadding = DP * 5
+
+    /**
+     * Padding between Dots.
+     */
+    private var activePosition = 0
+
+    /**
+     * total items.
+     */
+    private var itemsTotal = 0
+
+    /**
+     * total items.
+     */
+    private var leftLast: Float = 0.0f
 
     /**
      * Some more natural animation interpolation
@@ -46,7 +61,6 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
     private val mPaint = Paint()
 
     init {
-
         mPaint.strokeWidth = mIndicatorStrokeWidth
         mPaint.style = Paint.Style.FILL_AND_STROKE
         mPaint.isAntiAlias = true
@@ -56,10 +70,11 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
         super.onDrawOver(c, parent, state)
 
         val itemCount = parent.adapter!!.itemCount
+        itemsTotal = calculateDotsTotal(itemCount)
 
         // center horizontally, calculate width and subtract half from center
-        val totalLength = mIndicatorItemLength * itemCount
-        val paddingBetweenItems = Math.max(0, itemCount - 1) * mIndicatorItemPadding
+        val totalLength = mIndicatorDotsLength * itemsTotal
+        val paddingBetweenItems = Math.max(0, itemsTotal - 1) * mIndicatorDotsPadding
         val indicatorTotalWidth = totalLength + paddingBetweenItems
         val indicatorStartX = if (title.isNullOrEmpty()) {
             (parent.width - indicatorTotalWidth) / 2f
@@ -74,11 +89,11 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
             40f
         }//40f //parent.height - mIndicatorHeight / 2f
 
-        drawInactiveIndicators(c, indicatorStartX, indicatorPosY, itemCount)
+        drawInactiveIndicators(c, indicatorStartX, indicatorPosY)
 
         // find active page (which should be highlighted)
         val layoutManager = parent.layoutManager as LinearLayoutManager?
-        val activePosition = layoutManager!!.findFirstVisibleItemPosition()
+        activePosition = layoutManager!!.findFirstVisibleItemPosition()
         if (activePosition == RecyclerView.NO_POSITION) {
             return
         }
@@ -92,20 +107,34 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
         // on swipe the active item will be positioned from [-width, 0]
         // interpolate offset for smooth animation
         val progress = mInterpolator.getInterpolation(left * -1 / width.toFloat())
+        val anteUltima = itemCount - 1
 
-        drawHighlights(c, indicatorStartX, indicatorPosY, activePosition, progress)
+        if (itemCount > MAX_DOTS) {
+            when (activePosition) {
+                in 0..2 -> {
+                    drawHighlights(c, indicatorStartX, indicatorPosY, activePosition, progress)
+                }
+                in 3..4 -> {
+                    drawHighlights(c, indicatorStartX, indicatorPosY, 3, progress)
+                }
+                5 -> {
+                    drawHighlights(c, indicatorStartX, indicatorPosY, 4, progress)
+                }
+            }
+        }
+        //drawHighlights(c, indicatorStartX, indicatorPosY, activePosition, progress)
     }
 
-    private fun drawInactiveIndicators(c: Canvas, indicatorStartX: Float, indicatorPosY: Float, itemCount: Int) {
+    private fun drawInactiveIndicators(c: Canvas, indicatorStartX: Float, indicatorPosY: Float) {
         mPaint.color = colorInactive
 
         // width of item indicator including padding
-        val itemWidth = mIndicatorItemLength + mIndicatorItemPadding
+        val itemWidth = mIndicatorDotsLength + mIndicatorDotsPadding
 
         var start = indicatorStartX
-        for (i in 0 until itemCount) {
+        for (i in 0 until itemsTotal) {
 
-            c.drawCircle(start, indicatorPosY, mIndicatorItemLength / 2f, mPaint)
+            c.drawCircle(start, indicatorPosY, mIndicatorDotsLength / 2f, mPaint)
 
             start += itemWidth
         }
@@ -118,20 +147,21 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
         mPaint.color = colorActive
 
         // width of item indicator including padding
-        val itemWidth = mIndicatorItemLength + mIndicatorItemPadding
+        val itemWidth = mIndicatorDotsLength + mIndicatorDotsPadding
 
         if (progress == 0f) {
             // no swipe, draw a normal indicator
             val highlightStart = indicatorStartX + itemWidth * highlightPosition
 
-            c.drawCircle(highlightStart, indicatorPosY, mIndicatorItemLength / 2f, mPaint)
+            c.drawCircle(highlightStart, indicatorPosY, mIndicatorDotsLength / 2f, mPaint)
 
         } else {
             val highlightStart = indicatorStartX + itemWidth * highlightPosition
             // calculate partial highlight
-            val partialLength = mIndicatorItemLength * progress + mIndicatorItemPadding * progress
+            val partialLength = mIndicatorDotsLength * progress + mIndicatorDotsPadding * progress
+            val positionNext = highlightStart + partialLength
 
-            c.drawCircle(highlightStart + partialLength, indicatorPosY, mIndicatorItemLength / 2f, mPaint)
+            c.drawCircle(positionNext, indicatorPosY, mIndicatorDotsLength / 2f, mPaint)
         }
     }
 
@@ -139,7 +169,18 @@ class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
         this.title = title
     }
 
+    private fun calculateDotsTotal(itemCount: Int): Int {
+        return if (itemCount > MAX_DOTS) {
+            MAX_DOTS
+        } else if (itemCount in 3..4) {
+            3
+        } else {
+            itemCount
+        }
+    }
+
     companion object {
         private val DP = Resources.getSystem().displayMetrics.density
+        private const val MAX_DOTS = 5
     }
 }

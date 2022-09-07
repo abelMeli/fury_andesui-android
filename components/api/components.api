@@ -652,8 +652,8 @@ public final class com/mercadolibre/android/andesui/carousel/AndesCarousel : and
 	public final fun getDelegate ()Lcom/mercadolibre/android/andesui/carousel/utils/AndesCarouselDelegate;
 	public final fun getInfinite ()Z
 	public final fun getMargin ()Lcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;
-	public final fun getPaginator ()Z
 	public final fun getTitle ()Ljava/lang/String;
+	public final fun getUsePaginator ()Z
 	public final fun scrollToPosition (I)V
 	public final fun setAutoplay (Z)V
 	public final fun setAutoplaySpeed (J)V
@@ -661,8 +661,8 @@ public final class com/mercadolibre/android/andesui/carousel/AndesCarousel : and
 	public final fun setDelegate (Lcom/mercadolibre/android/andesui/carousel/utils/AndesCarouselDelegate;)V
 	public final fun setInfinite (Z)V
 	public final fun setMargin (Lcom/mercadolibre/android/andesui/carousel/margin/AndesCarouselMargin;)V
-	public final fun setPaginator (Z)V
 	public final fun setTitle (Ljava/lang/String;)V
+	public final fun setUsePaginator (Z)V
 	public final fun smoothScrollToPosition (I)V
 }
 
@@ -701,16 +701,6 @@ public abstract interface class com/mercadolibre/android/andesui/carousel/utils/
 	public abstract fun getDataSetSize (Lcom/mercadolibre/android/andesui/carousel/AndesCarousel;)I
 	public abstract fun getLayoutItem (Lcom/mercadolibre/android/andesui/carousel/AndesCarousel;)I
 	public abstract fun onClickItem (Lcom/mercadolibre/android/andesui/carousel/AndesCarousel;I)V
-}
-
-public final class com/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration : androidx/recyclerview/widget/RecyclerView$ItemDecoration {
-	public static final field Companion Lcom/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration$Companion;
-	public fun <init> ()V
-	public fun onDrawOver (Landroid/graphics/Canvas;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
-	public final fun withTitle (Ljava/lang/String;)V
-}
-
-public final class com/mercadolibre/android/andesui/carousel/utils/CirclePagerIndicatorDecoration$Companion {
 }
 
 public final class com/mercadolibre/android/andesui/checkbox/AndesCheckbox : androidx/constraintlayout/widget/ConstraintLayout {
@@ -2211,6 +2201,43 @@ public final class com/mercadolibre/android/andesui/moneyamount/type/AndesMoneyA
 
 public final class com/mercadolibre/android/andesui/moneyamount/type/AndesMoneyAmountType$Companion {
 	public final fun fromString (Ljava/lang/String;)Lcom/mercadolibre/android/andesui/moneyamount/type/AndesMoneyAmountType;
+}
+
+public final class com/mercadolibre/android/andesui/pageIndicator/CirclePagerIndicatorDecoration : androidx/recyclerview/widget/RecyclerView$ItemDecoration {
+	public static final field Companion Lcom/mercadolibre/android/andesui/pageIndicator/CirclePagerIndicatorDecoration$Companion;
+	public fun <init> ()V
+	public fun onDrawOver (Landroid/graphics/Canvas;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
+	public final fun withTitle (Ljava/lang/String;)V
+}
+
+public final class com/mercadolibre/android/andesui/pageIndicator/CirclePagerIndicatorDecoration$Companion {
+}
+
+public final class com/mercadolibre/android/andesui/pageIndicator/DpsKt {
+	public static final fun getDp (F)I
+	public static final fun getDp (I)I
+}
+
+public class com/mercadolibre/android/andesui/pageIndicator/PageIndicator : android/view/View, com/mercadolibre/android/andesui/pageIndicator/DotManager$TargetScrollListener {
+	public static final field Companion Lcom/mercadolibre/android/andesui/pageIndicator/PageIndicator$Companion;
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun attachTo (Landroidx/recyclerview/widget/RecyclerView;)V
+	public final fun attachTo (Landroidx/viewpager/widget/ViewPager;)V
+	public final fun getCount ()I
+	protected fun onDraw (Landroid/graphics/Canvas;)V
+	protected fun onMeasure (II)V
+	protected fun onRestoreInstanceState (Landroid/os/Parcelable;)V
+	protected fun onSaveInstanceState ()Landroid/os/Parcelable;
+	public fun scrollToTarget (I)V
+	public final fun setCount (I)V
+	public final fun swipeNext ()V
+	public final fun swipePrevious ()V
+}
+
+public final class com/mercadolibre/android/andesui/pageIndicator/PageIndicator$Companion {
 }
 
 public final class com/mercadolibre/android/andesui/progress/AndesProgressIndicatorIndeterminate : androidx/constraintlayout/widget/ConstraintLayout {
