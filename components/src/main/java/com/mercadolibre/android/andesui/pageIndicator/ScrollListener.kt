@@ -2,7 +2,7 @@ package com.mercadolibre.android.andesui.pageIndicator
 
 import androidx.recyclerview.widget.RecyclerView
 
-internal class ScrollListener(private val indicator: PageIndicator) : RecyclerView.OnScrollListener() {
+internal class ScrollListener() : RecyclerView.OnScrollListener() {
     private var midPos = 0
     private var scrollX = 0
 
@@ -15,8 +15,8 @@ internal class ScrollListener(private val indicator: PageIndicator) : RecyclerVi
             val midPos = Math.floor(((scrollX + it / 2f) / it).toDouble()).toInt()
             if (this.midPos != midPos) {
                 when {
-                    this.midPos < midPos -> indicator.swipeNext()
-                    else -> indicator.swipePrevious()
+                   /* this.midPos < midPos -> indicator.swipeNext()
+                    else -> indicator.swipePrevious()*/
                 }
             }
             this.midPos = midPos

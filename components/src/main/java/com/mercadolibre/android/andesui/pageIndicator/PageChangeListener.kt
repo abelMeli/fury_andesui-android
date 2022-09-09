@@ -2,7 +2,7 @@ package com.mercadolibre.android.andesui.pageIndicator
 
 import androidx.viewpager.widget.ViewPager
 
-internal class PageChangeListener(private val indicator: PageIndicator) : ViewPager.OnPageChangeListener {
+internal class PageChangeListener() : ViewPager.OnPageChangeListener {
     private var selectedPage = 0
 
     override fun onPageScrollStateChanged(state: Int) {}
@@ -11,10 +11,10 @@ internal class PageChangeListener(private val indicator: PageIndicator) : ViewPa
 
     override fun onPageSelected(position: Int) {
         if (position != selectedPage) {
-            when {
+            /*when {
                 this.selectedPage < position -> indicator.swipeNext()
                 else -> indicator.swipePrevious()
-            }
+            }*/
         }
         selectedPage = position
     }

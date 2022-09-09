@@ -703,6 +703,49 @@ public abstract interface class com/mercadolibre/android/andesui/carousel/utils/
 	public abstract fun onClickItem (Lcom/mercadolibre/android/andesui/carousel/AndesCarousel;I)V
 }
 
+public final class com/mercadolibre/android/andesui/carouselPageIndicator/RecyclerViewAttacher : com/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator$PagerAttacher {
+	public fun <init> ()V
+	public fun <init> (I)V
+	public fun attachToPager (Lcom/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator;Landroidx/recyclerview/widget/RecyclerView;)V
+	public synthetic fun attachToPager (Lcom/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator;Ljava/lang/Object;)V
+	public fun detachFromPager ()V
+}
+
+public final class com/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator : android/view/View {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun attachToPager (Ljava/lang/Object;Lcom/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator$PagerAttacher;)V
+	public final fun attachToRecyclerView (Landroidx/recyclerview/widget/RecyclerView;)V
+	public final fun attachToRecyclerView (Landroidx/recyclerview/widget/RecyclerView;I)V
+	public final fun detachFromPager ()V
+	public final fun getDotColor ()I
+	public final fun getOrientation ()I
+	public final fun getSelectedDotColor ()I
+	public final fun getVisibleDotCount ()I
+	public final fun getVisibleDotThreshold ()I
+	public final fun onPageScrolled (IF)V
+	public final fun reattach ()V
+	public final fun setAutoRtl (Z)V
+	public final fun setCurrentPosition (I)V
+	public final fun setDotColor (I)V
+	public final fun setDotCountc (I)V
+	public final fun setLooped (Z)V
+	public final fun setOrientation (I)V
+	public final fun setSelectedDotColor (I)V
+	public final fun setVisibleDotCount (I)V
+	public final fun setVisibleDotThreshold (I)V
+}
+
+public abstract interface annotation class com/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator$Orientation : java/lang/annotation/Annotation {
+}
+
+public abstract interface class com/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator$PagerAttacher {
+	public abstract fun attachToPager (Lcom/mercadolibre/android/andesui/carouselPageIndicator/ScrollingPagerIndicator;Ljava/lang/Object;)V
+	public abstract fun detachFromPager ()V
+}
+
 public final class com/mercadolibre/android/andesui/checkbox/AndesCheckbox : androidx/constraintlayout/widget/ConstraintLayout {
 	public static final field Companion Lcom/mercadolibre/android/andesui/checkbox/AndesCheckbox$Companion;
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
@@ -2216,28 +2259,6 @@ public final class com/mercadolibre/android/andesui/pageIndicator/CirclePagerInd
 public final class com/mercadolibre/android/andesui/pageIndicator/DpsKt {
 	public static final fun getDp (F)I
 	public static final fun getDp (I)I
-}
-
-public class com/mercadolibre/android/andesui/pageIndicator/PageIndicator : android/view/View, com/mercadolibre/android/andesui/pageIndicator/DotManager$TargetScrollListener {
-	public static final field Companion Lcom/mercadolibre/android/andesui/pageIndicator/PageIndicator$Companion;
-	public fun <init> (Landroid/content/Context;)V
-	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
-	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
-	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun attachTo (Landroidx/recyclerview/widget/RecyclerView;)V
-	public final fun attachTo (Landroidx/viewpager/widget/ViewPager;)V
-	public final fun getCount ()I
-	protected fun onDraw (Landroid/graphics/Canvas;)V
-	protected fun onMeasure (II)V
-	protected fun onRestoreInstanceState (Landroid/os/Parcelable;)V
-	protected fun onSaveInstanceState ()Landroid/os/Parcelable;
-	public fun scrollToTarget (I)V
-	public final fun setCount (I)V
-	public final fun swipeNext ()V
-	public final fun swipePrevious ()V
-}
-
-public final class com/mercadolibre/android/andesui/pageIndicator/PageIndicator$Companion {
 }
 
 public final class com/mercadolibre/android/andesui/progress/AndesProgressIndicatorIndeterminate : androidx/constraintlayout/widget/ConstraintLayout {

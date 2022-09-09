@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.carousel.accessibility.AndesCarouselAccessibilityDelegate
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrParser
 import com.mercadolibre.android.andesui.carousel.factory.AndesCarouselAttrs
@@ -21,8 +19,8 @@ import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOff
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselAutoplayOn
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselDelegate
 import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselLayoutManager
+import com.mercadolibre.android.andesui.carouselPageIndicator.ScrollingPagerIndicator
 import com.mercadolibre.android.andesui.databinding.AndesLayoutCarouselBinding
-import com.mercadolibre.android.andesui.pageIndicator.PageIndicator
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +35,7 @@ class AndesCarousel : ConstraintLayout {
         AndesLayoutCarouselBinding.inflate(LayoutInflater.from(context), this, true)
     }
     private var recyclerViewComponent: RecyclerView = binding.andesCarouselRecyclerview
-    private var pageIndicator: PageIndicator = binding.pageIndicator
+    private var pageIndicator: ScrollingPagerIndicator = binding.pageIndicator
     private var textViewComponent: TextView = binding.andesTextview
     private val accessibilityManager = context.getAccessibilityManager()
     private val viewManager: AndesCarouselLayoutManager by lazy {
@@ -361,7 +359,7 @@ class AndesCarousel : ConstraintLayout {
      */
     private fun setupPaginator(config: AndesCarouselConfiguration) {
         if (config.paginator) {
-            pageIndicator.attachTo(recyclerViewComponent)
+            pageIndicator.attachToRecyclerView(recyclerViewComponent)
         }
     }
 
