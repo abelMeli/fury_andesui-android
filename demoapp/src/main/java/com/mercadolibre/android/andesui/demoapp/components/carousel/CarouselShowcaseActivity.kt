@@ -160,6 +160,7 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         val carouselTitle = binding.carouselWithTitle
         val carouselPaginator = binding.carouselWithPaginator
         val carouselPaginatorAndTitle = binding.carouselWithPaginatorAndTitle
+        val carouselFreeWithPaginator = binding.carouselFreeWithPaginator
 
         snappedCarouselId = carouselSnapped.id
         freeCarouselId = carouselFree.id
@@ -168,13 +169,18 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         carouselTitle.delegate = this
         carouselPaginator.delegate = this
         carouselPaginatorAndTitle.delegate = this
+        carouselFreeWithPaginator.delegate = this
 
         carouselPaginatorAndTitle.title = "New title"
         carouselPaginatorAndTitle.usePaginator = true
 
-        carouselTitle.title = "Italia"
+        carouselTitle.title = "Title"
 
+        carouselPaginator.title = ""
         carouselPaginator.usePaginator = true
+
+        carouselFreeWithPaginator.title = ""
+        carouselFreeWithPaginator.usePaginator = true
 
         binding.andesuiDemoappAndesCarouselSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.CAROUSEL)
@@ -186,11 +192,31 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         CarouselModel(Color.BLUE, getString(R.string.andes_carousel_text)),
         CarouselModel(Color.GREEN, getString(R.string.andes_carousel_text)),
         CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
+        CarouselModel(Color.YELLOW, getString(R.string.andes_carousel_text)),
         CarouselModel(Color.RED, getString(R.string.andes_carousel_text)),
         CarouselModel(Color.TRANSPARENT, getString(R.string.andes_carousel_text))
     )
 
     private fun getDataSetFree() = listOf(
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
+        CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
         CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
         CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),
         CarouselModel(Color.TRANSPARENT, "${getString(R.string.andes_carousel_text)} ${getString(R.string.andes_carousel_text)}"),

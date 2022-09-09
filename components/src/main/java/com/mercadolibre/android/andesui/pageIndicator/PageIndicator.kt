@@ -7,8 +7,9 @@ import android.graphics.Paint
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.AnimationUtils
-import android.view.animation.DecelerateInterpolator
+import android.view.animation.BounceInterpolator
 import android.view.animation.Interpolator
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.pageIndicator.DotManager.TargetScrollListener
 import kotlin.math.max
 import kotlin.math.min
+
 
 open class PageIndicator @JvmOverloads constructor(
     context: Context,
@@ -106,7 +108,7 @@ open class PageIndicator @JvmOverloads constructor(
         animInterpolator = AnimationUtils.loadInterpolator(
             context, ta.getResourceId(
                 R.styleable.PageIndicator_piAnimInterpolator,
-                R.anim.pi_default_interpolator
+                R.anim.andes_dots_paginator_anim
             )
         )
         ta.recycle()
@@ -213,26 +215,33 @@ open class PageIndicator @JvmOverloads constructor(
             val (start, end) = getDrawingRange()
             (start until end).forEach { index ->
                 dotAnimators[index].cancel()
-                dotAnimators[index] = ValueAnimator.ofInt(dotSizes[index], it.dotSizeFor(it.dots[index]))
-                    .apply {
-                        duration = animDuration
-                        interpolator = DEFAULT_INTERPOLATOR
+
+                if (it.selectedIndexDots == index) {
+                    dotAnimators[index] = ValueAnimator.ofInt(dotSizes[index], it.dotSizeFor(it.dots[index])).apply {
+                        addUpdateListener { animation ->
+                            animation.duration = 1000
+                            animation.repeatCount = 2
+                            dotSizes[index] = animation.animatedValue as Int
+                            invalidate()
+                        }
+                    }
+                } else {
+                    dotAnimators[index] = ValueAnimator.ofInt(dotSizes[index], it.dotSizeFor(it.dots[index])).apply {
                         addUpdateListener { animation ->
                             dotSizes[index] = animation.animatedValue as Int
                             invalidate()
                         }
                     }
+                }
                 dotAnimators[index].start()
             }
         }
     }
 
+
     private fun getDrawingRange(): Pair<Int, Int> {
-        val start = max(0, (dotManager?.selectedIndex ?: 0) - MOST_VISIBLE_COUNT)
-        val end = min(
-            dotManager?.dots?.size ?: 0,
-            (dotManager?.selectedIndex ?: 0) + MOST_VISIBLE_COUNT
-        )
+        val start = max(0, (dotManager?.selectedIndexDots ?: 0) - MOST_VISIBLE_COUNT)
+        val end = min(dotManager?.dots?.size ?: 0, (dotManager?.selectedIndexDots ?: 0) + MOST_VISIBLE_COUNT)
         return Pair(start, end)
     }
 
@@ -245,8 +254,8 @@ open class PageIndicator @JvmOverloads constructor(
         private const val BYTE_1 = 1.toByte()
 
         private const val MOST_VISIBLE_COUNT = 5
-        private const val DEFAULT_ANIM_DURATION = 300
+        private const val DEFAULT_ANIM_DURATION = 200
 
-        private val DEFAULT_INTERPOLATOR = DecelerateInterpolator()
+        private val DEFAULT_INTERPOLATOR = BounceInterpolator()
     }
 }

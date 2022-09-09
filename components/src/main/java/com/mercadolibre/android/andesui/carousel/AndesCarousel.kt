@@ -343,12 +343,16 @@ class AndesCarousel : ConstraintLayout {
      */
     private fun setupTitle(config: AndesCarouselConfiguration) {
         if (config.title.isNullOrEmpty()) {
+            val padding = config.padding
             textViewComponent.visibility = GONE
+            recyclerViewComponent.setPadding(padding, 0, padding, 20)
+            movePaginatorCenterBottom()
         } else {
             textViewComponent.visibility = VISIBLE
             textViewComponent.text = config.title
             val padding = config.padding
             textViewComponent.setPadding(padding, 0, padding, 0)
+            movePaginatorUpRigth()
         }
     }
 
@@ -359,6 +363,19 @@ class AndesCarousel : ConstraintLayout {
         if (config.paginator) {
             pageIndicator.attachTo(recyclerViewComponent)
         }
+    }
+
+    private fun movePaginatorUpRigth() {
+        val paramsPaginator = pageIndicator.layoutParams as LayoutParams
+        paramsPaginator.verticalBias = 0.07f
+        pageIndicator.layoutParams = paramsPaginator
+    }
+
+    private fun movePaginatorCenterBottom() {
+        val params = pageIndicator.layoutParams as LayoutParams
+        params.verticalBias = 1.0f
+        params.horizontalBias = 0.50f
+        pageIndicator.layoutParams = params
     }
 
     /**
