@@ -73,7 +73,7 @@ internal class AnalyticsHelper {
             "/floatingmenu/dynamic",
             "/floatingmenu/static"
         ),
-        "ListShowcaseActivity" to arrayListOf("/list/dynamic", "/list/static"),
+        "ListShowcaseActivity" to arrayListOf("/list/dynamic", "/list/static", "/list/dynamicwithcustomcontent"),
         "MessageShowcaseActivity" to arrayListOf("/message/dynamic", "/message/static"),
         "ProgressShowcaseActivity" to arrayListOf("/progressindicator/static"),
         "LinearProgressShowcaseActivity" to arrayListOf(

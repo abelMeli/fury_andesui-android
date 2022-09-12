@@ -14,6 +14,7 @@ import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.Guideline
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
@@ -29,6 +30,7 @@ import com.mercadolibre.android.andesui.coachmark.model.AndesWalkthroughCoachmar
 import com.mercadolibre.android.andesui.coachmark.model.WalkthroughMessageModel
 import com.mercadolibre.android.andesui.coachmark.presenter.CoachmarkPresenter
 import com.mercadolibre.android.andesui.coachmark.presenter.CoachmarkViewInterface
+import com.mercadolibre.android.andesui.coachmark.utils.getAllViewsInScreen
 import com.mercadolibre.android.andesui.coachmark.view.CoachmarkOverlay
 
 @SuppressWarnings("TooManyFunctions")
@@ -330,7 +332,7 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
 
         coachmarkOverlayView.addRect(
                 cx,
-                cy - activity.resources.getDimension(R.dimen.andes_coachmark_scrolless_toolbar_status_bar).toInt() -
+                cy - getToolbarSize() -
                         getStatusBarSize(),
                 0,
                 0,
@@ -363,7 +365,7 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
         } else {
             coachmarkOverlayView.addRect(
                     rect.left,
-                    rect.top - activity.resources.getDimension(R.dimen.andes_coachmark_scrolless_toolbar_status_bar).toInt() -
+                    rect.top - getToolbarSize() -
                             getStatusBarSize(),
                     rect.width(),
                     rect.height(),
@@ -408,7 +410,18 @@ class CoachmarkScrollessView private constructor(builder: Builder) : CoachmarkVi
         return activity.resources.getDimensionPixelSize(R.dimen.andes_coachmark_footer_guide_line)
     }
 
-    override fun getToolbarSize() = (activity as? AppCompatActivity)?.supportActionBar?.height ?: 0
+    override fun getToolbarSize(): Int {
+        return if (isSupportActionBarShowing()) {
+            (activity as AppCompatActivity).supportActionBar!!.height
+        } else {
+            val toolbar = scanForToolbar()
+            toolbar?.height ?: 0
+        }
+    }
+
+    private fun isSupportActionBarShowing() = (activity as? AppCompatActivity)?.supportActionBar?.isShowing ?: false
+
+    private fun scanForToolbar() = activity.getAllViewsInScreen().find { it is Toolbar }
 
     override fun getTooltipMargin(): Int {
         return activity.resources.getDimensionPixelSize(R.dimen.andes_coachmark_walkthrought_margin)

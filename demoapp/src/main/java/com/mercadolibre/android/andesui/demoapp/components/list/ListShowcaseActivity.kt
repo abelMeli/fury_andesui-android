@@ -12,15 +12,16 @@ import com.mercadolibre.android.andesui.demoapp.commons.AndesPagerAdapter
 import com.mercadolibre.android.andesui.demoapp.commons.BaseActivity
 import com.mercadolibre.android.andesui.demoapp.commons.CustomViewPager
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicListBinding
+import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicListWithCustomViewBinding
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiStaticListBinding
 import com.mercadolibre.android.andesui.demoapp.utils.AndesSpecs
 import com.mercadolibre.android.andesui.demoapp.utils.launchSpecs
 import com.mercadolibre.android.andesui.list.AndesList
 import com.mercadolibre.android.andesui.list.AndesListViewItem
-import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
-import com.mercadolibre.android.andesui.list.AndesListViewItemChevron
 import com.mercadolibre.android.andesui.list.AndesListViewItemCheckBox
+import com.mercadolibre.android.andesui.list.AndesListViewItemChevron
 import com.mercadolibre.android.andesui.list.AndesListViewItemRadioButton
+import com.mercadolibre.android.andesui.list.AndesListViewItemSimple
 import com.mercadolibre.android.andesui.list.size.AndesListViewItemSize
 import com.mercadolibre.android.andesui.list.type.AndesListType
 import com.mercadolibre.android.andesui.list.utils.AndesListDelegate
@@ -33,10 +34,13 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
     private lateinit var viewPager: CustomViewPager
     private lateinit var andesListStatic: AndesList
     private lateinit var andesListDynamic: AndesList
+    private lateinit var andesListDynamicWithCustom: AndesList
 
     private var itemStaticSelected: Int = -1
     private var itemDynamicSelected: Int = -1
+    private var itemDynamicWithCustomSelected: Int = -1
     private var itemDynamicChecked: MutableList<Int> = mutableListOf()
+    private var itemDynamicWithCustomChecked: MutableList<Int> = mutableListOf()
     private var dynamicTitle: String = ITEM_TITLE
     private var dynamicSubtitle: String = ITEM_SUBTITLE
     private var dynamicMaxLines: Int = DEFAULT_TITLE_NUMBER_OF_LINES
@@ -50,6 +54,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
         const val ITEM_SUBTITLE = "Lorem ipsum dolor sit amet description"
         const val ANDES_LIST_STATIC = "AndesListStatic"
         const val ANDES_LIST_DYNAMIC = "AndesListDynamic"
+        const val ANDES_LIST_DYNAMIC_WITH_CUSTOM_VIEW = "AndesListDynamicWithCustomView"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,10 +69,13 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
 
     private fun initViewPager() {
         viewPager = baseBinding.andesuiViewpager
-        viewPager.adapter = AndesPagerAdapter(listOf(
+        viewPager.adapter = AndesPagerAdapter(
+            listOf(
                 AndesuiDynamicListBinding.inflate(layoutInflater).root,
-                AndesuiStaticListBinding.inflate(layoutInflater).root
-        ))
+                AndesuiStaticListBinding.inflate(layoutInflater).root,
+                AndesuiDynamicListWithCustomViewBinding.inflate(layoutInflater).root
+            )
+        )
     }
 
     private fun attachIndicator() {
@@ -78,6 +86,7 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
         val adapter = viewPager.adapter as AndesPagerAdapter
         addDynamicPage(adapter.views[0])
         addStaticPage(adapter.views[1])
+        addDynamicWithCustomViewPage(adapter.views[2])
     }
 
     @Suppress("LongMethod", "TooGenericExceptionCaught")
@@ -241,18 +250,100 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
         andesListStatic.delegate = this
     }
 
+    @Suppress("LongMethod", "TooGenericExceptionCaught")
+    private fun addDynamicWithCustomViewPage(container: View) {
+        val binding = AndesuiDynamicListWithCustomViewBinding.bind(container)
+
+        andesListDynamicWithCustom = binding.andesList
+        andesListDynamicWithCustom.tag = ANDES_LIST_DYNAMIC_WITH_CUSTOM_VIEW
+        andesListDynamicWithCustom.dividerItemEnabled = true
+        andesListDynamicWithCustom.delegate = this
+
+        andesListDynamicWithCustom.size = AndesListViewItemSize.SMALL
+        andesListDynamicWithCustom.type = AndesListType.SIMPLE
+        andesListDynamicWithCustom.refreshListAdapter()
+
+        val listSize = binding.listSizeSpinner
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.andes_list_size_spinner,
+            android.R.layout.simple_spinner_item
+        ).let { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            listSize.adapter = adapter
+        }
+
+        val listType = binding.listTypeSpinner
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.andes_list_type_spinner,
+            android.R.layout.simple_spinner_item
+        ).let { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            listType.adapter = adapter
+        }
+
+        val listAsset = binding.listAssetSpinner
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.andes_list_asset_spinner,
+            android.R.layout.simple_spinner_item
+        ).let { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            listAsset.adapter = adapter
+        }
+
+        binding.changeButton.setOnClickListener {
+            getAssetSelected(listAsset)
+            val type = getTypeSelected(listType)
+            val size = getSizeSelected(listSize)
+
+            andesListDynamicWithCustom.size = size
+            andesListDynamicWithCustom.type = type
+            andesListDynamicWithCustom.refreshListAdapter()
+        }
+
+        binding.clearButton.setOnClickListener {
+            listSize.setSelection(0)
+            listType.setSelection(0)
+            listAsset.setSelection(0)
+            avatar = null
+            icon = null
+
+            itemDynamicWithCustomSelected = -1
+
+            andesListDynamicWithCustom.size = AndesListViewItemSize.SMALL
+            andesListDynamicWithCustom.type = AndesListType.SIMPLE
+
+            andesListDynamicWithCustom.refreshListAdapter()
+        }
+    }
+
     override fun onItemClick(andesList: AndesList, position: Int) {
         Toast.makeText(applicationContext, "Position of item selected $position", Toast.LENGTH_SHORT).show()
         if (andesList.type == AndesListType.CHECK_BOX) {
-            if (itemDynamicChecked.contains(position)) itemDynamicChecked.remove(position) else itemDynamicChecked.add(position)
-            andesListDynamic.refreshListAdapter()
-        } else {
-            if (andesList.tag == andesListStatic.tag) {
-                itemStaticSelected = position
-                andesListStatic.refreshListAdapter()
-            } else {
-                itemDynamicSelected = position
+            if (andesList.tag == andesListDynamic.tag) {
+                if (itemDynamicChecked.contains(position)) itemDynamicChecked.remove(position) else itemDynamicChecked.add(position)
                 andesListDynamic.refreshListAdapter()
+            } else {
+                if (itemDynamicWithCustomChecked.contains(position)) itemDynamicWithCustomChecked.remove(position)
+                else itemDynamicWithCustomChecked.add(position)
+                andesListDynamicWithCustom.refreshListAdapter()
+            }
+        } else {
+            when (andesList.tag) {
+                andesListStatic.tag -> {
+                    itemStaticSelected = position
+                    andesListStatic.refreshListAdapter()
+                }
+                andesListDynamicWithCustom.tag -> {
+                    itemDynamicWithCustomSelected = position
+                    andesListDynamicWithCustom.refreshListAdapter()
+                }
+                else -> {
+                    itemDynamicSelected = position
+                    andesListDynamic.refreshListAdapter()
+                }
             }
         }
     }
@@ -270,6 +361,15 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
                     titleMaxLines = DEFAULT_TITLE_NUMBER_OF_LINES,
                     itemSelected = itemStaticSelected == position
                 )
+            } else if (andesList.tag == andesListDynamicWithCustom.tag) {
+                AndesListViewItemSimple(
+                    context = this,
+                    content = ContentCustomItem(this),
+                    size = andesList.size,
+                    icon = icon,
+                    avatar = avatar,
+                    itemSelected = itemStaticSelected == position
+                )
             } else {
                 AndesListViewItemSimple(
                     context = this,
@@ -282,36 +382,75 @@ class ListShowcaseActivity : BaseActivity(), AndesListDelegate {
                     itemSelected = itemDynamicSelected == position
                 )
             }
-            AndesListType.CHEVRON -> AndesListViewItemChevron(
-                context = this,
-                title = dynamicTitle,
-                subtitle = dynamicSubtitle,
-                size = andesList.size,
-                icon = icon,
-                avatar = avatar,
-                titleMaxLines = dynamicMaxLines,
-                itemSelected = itemDynamicSelected == position
-            )
-            AndesListType.CHECK_BOX -> AndesListViewItemCheckBox(
-                context = this,
-                title = dynamicTitle,
-                subtitle = dynamicSubtitle,
-                size = andesList.size,
-                icon = icon,
-                avatar = avatar,
-                titleMaxLines = dynamicMaxLines,
-                itemSelected = itemDynamicChecked.contains(position)
-            )
-            AndesListType.RADIO_BUTTON -> AndesListViewItemRadioButton(
-                context = this,
-                title = dynamicTitle,
-                subtitle = dynamicSubtitle,
-                size = andesList.size,
-                icon = icon,
-                avatar = avatar,
-                titleMaxLines = dynamicMaxLines,
-                itemSelected = itemDynamicSelected == position
-            )
+            AndesListType.CHEVRON -> {
+                if (andesList.tag == andesListDynamicWithCustom.tag) {
+                    AndesListViewItemChevron(
+                        context = this,
+                        content = ContentCustomItem(this),
+                        size = andesList.size,
+                        icon = icon,
+                        avatar = avatar,
+                        itemSelected = itemStaticSelected == position
+                    )
+                } else {
+                    AndesListViewItemChevron(
+                        context = this,
+                        title = dynamicTitle,
+                        subtitle = dynamicSubtitle,
+                        size = andesList.size,
+                        icon = icon,
+                        avatar = avatar,
+                        titleMaxLines = dynamicMaxLines,
+                        itemSelected = itemDynamicSelected == position
+                    )
+                }
+            }
+            AndesListType.CHECK_BOX -> {
+                if (andesList.tag == andesListDynamicWithCustom.tag) {
+                    AndesListViewItemCheckBox(
+                        context = this,
+                        content = ContentCustomItem(this),
+                        size = andesList.size,
+                        icon = icon,
+                        avatar = avatar,
+                        itemSelected = itemStaticSelected == position
+                    )
+                } else {
+                    AndesListViewItemCheckBox(
+                        context = this,
+                        title = dynamicTitle,
+                        subtitle = dynamicSubtitle,
+                        size = andesList.size,
+                        icon = icon,
+                        avatar = avatar,
+                        titleMaxLines = dynamicMaxLines,
+                        itemSelected = itemDynamicChecked.contains(position)
+                    )
+                }
+            }
+            AndesListType.RADIO_BUTTON -> {
+                if (andesList.tag == andesListDynamicWithCustom.tag) {
+                    AndesListViewItemRadioButton(
+                        context = this,
+                        content = ContentCustomItem(this),
+                        size = andesList.size,
+                        icon = icon,
+                        avatar = avatar,
+                        itemSelected = itemStaticSelected == position
+                    )
+                } else {
+                    AndesListViewItemRadioButton(
+                        context = this,
+                        title = dynamicTitle,
+                        subtitle = dynamicSubtitle,
+                        size = andesList.size,
+                        icon = icon,
+                        avatar = avatar,
+                        titleMaxLines = dynamicMaxLines,
+                        itemSelected = itemDynamicSelected == position
+                    )
+                }
+            }
             else -> AndesListViewItemSimple(
                 context = this,
                 title = dynamicTitle,
