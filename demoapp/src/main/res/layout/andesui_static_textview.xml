@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Style Examples"
-            app:andesTextViewStyle="titleL"
+            app:andesTextViewStyle="titleM"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Color Examples"
-            app:andesTextViewStyle="titleL"
+            app:andesTextViewStyle="titleM"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/static_page_textview_body_xs" />
@@ -221,7 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Range Examples"
-            app:andesTextViewStyle="titleL"
+            app:andesTextViewStyle="titleM"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/static_page_textview_color_positive" />
@@ -306,7 +306,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Multilink Example"
-            app:andesTextViewStyle="titleL"
+            app:andesTextViewStyle="titleM"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/static_page_textview_range_caution_bold_and_link" />
@@ -326,6 +326,40 @@
             app:layout_constraintTop_toBottomOf="@id/static_page_textview_multilink_example" />
 
         <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_moneyamount_example"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Text + MoneyAmount Example"
+            app:andesTextViewStyle="titleM"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_example_multiple_links" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_moneyamount_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_moneyamount_example" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/static_page_textview_moneyamount_semibold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_moneyamount_regular" />
+
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
             android:id="@+id/static_page_textview_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -334,7 +368,7 @@
             android:text="More"
             app:andesTextViewStyle="bodyS"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/static_page_textview_example_multiple_links" />
+            app:layout_constraintTop_toBottomOf="@id/static_page_textview_moneyamount_semibold" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/andesui_demoapp_andes_textview_specs_button"

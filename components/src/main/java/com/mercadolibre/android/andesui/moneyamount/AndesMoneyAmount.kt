@@ -3,8 +3,11 @@ package com.mercadolibre.android.andesui.moneyamount
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Spannable
+import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -258,7 +261,13 @@ class AndesMoneyAmount : ConstraintLayout, AndesMoneyAmountInfoProvider {
     private fun setupAmount(config: AndesMoneyAmountConfiguration) {
         binding.moneyAmountText.apply {
             setTextColor(config.currencyColor.colorInt(context))
-            typeface = context.getFontOrDefault(config.amountTypeface)
+            // Set font with a spannable in order to forward fontStyle to AndesTextView.
+            config.amountFormatted.setSpan(
+                StyleSpan(context.getFontOrDefault(config.amountTypeface).style),
+                0,
+                config.amountFormatted.length,
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+            )
             text = config.amountFormatted
         }
     }

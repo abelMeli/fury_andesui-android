@@ -1,3 +1,7 @@
+# v5.13.2
+## 🛠 Fixes
+- Fix AndesTextView with AndesMoneyAmount semibold | Author: [@eportasML](https://github.com/eportasML)
+
 # v5.13.1
 ## 🛠 Fixes
 - Fix in the toolbar measuring method for `AndesCoachmark` | Author: [@juanunzu](https://github.com/juanunzu)

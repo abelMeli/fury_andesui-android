@@ -152,6 +152,66 @@ class AndesTextViewTest {
     }
 
     @Test
+    fun `constructing by code with text, appending money amount semibold`() {
+        textView.apply {
+            clear()
+            append("text for testing")
+        }
+
+        moneyAmount.semiBold = true
+
+        textView.append(
+            moneyAmount,
+            R.color.andes_red_500.toAndesColor()
+        )
+
+        val hasBodyMoneyAmount = textView.text.getSpans().stream().anyMatch {
+            it is MoneyAmountUtils.CustomRelativeSizeSpan
+        }
+
+        val hasBodyMoneyAmountColor = textView.text.getSpans().stream().anyMatch {
+            it is ForegroundColorSpan
+        }
+
+        val styleSpans = textView.text.getSpans().filterIsInstance<StyleSpan>()
+
+        Assert.assertTrue(hasBodyMoneyAmount)
+        Assert.assertTrue(hasBodyMoneyAmountColor)
+        styleSpans.size assertEquals 1
+    }
+
+    @Test
+    fun `constructing by code with text, appending money amount semibold, appending text and bolds`() {
+        moneyAmount.semiBold = true
+        textView.apply {
+            clear()
+            append("text for testing ")
+            append(
+                moneyAmount,
+                R.color.andes_red_500.toAndesColor()
+            )
+            append(" bold")
+            bodyBolds = AndesBodyBolds(listOf(
+                AndesBodyBold(text.indexOf("bold"), text.length)
+            ))
+        }
+
+        val hasBodyMoneyAmount = textView.text.getSpans().stream().anyMatch {
+            it is MoneyAmountUtils.CustomRelativeSizeSpan
+        }
+
+        val hasBodyMoneyAmountColor = textView.text.getSpans().stream().anyMatch {
+            it is ForegroundColorSpan
+        }
+
+        val styleSpans = textView.text.getSpans().filterIsInstance<StyleSpan>()
+
+        Assert.assertTrue(hasBodyMoneyAmount)
+        Assert.assertTrue(hasBodyMoneyAmountColor)
+        styleSpans.size assertEquals 2
+    }
+
+    @Test
     fun `constructing by code with default, appending money amount`() {
         createDefaultText()
 
