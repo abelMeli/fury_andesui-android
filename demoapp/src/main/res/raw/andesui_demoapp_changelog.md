@@ -1,6 +1,8 @@
 # v5.13.2
 ## 🛠 Fixes
 - Fix AndesTextView with AndesMoneyAmount semibold | Author: [@eportasML](https://github.com/eportasML)
+## Extra
+- Added Github actions to the project | Author: [@eportasML](https://github.com/eportasML)
 
 # v5.13.1
 ## 🛠 Fixes
