@@ -1,6 +1,17 @@
+# v5.13.2
+## 🛠 Fixes
+- Fix AndesTextView with AndesMoneyAmount semibold | Author: [@eportasML](https://github.com/eportasML)
+## Extra
+- Added Github actions to the project | Author: [@eportasML](https://github.com/eportasML)
+
+# v5.13.1
+## 🛠 Fixes
+- Fix in the toolbar measuring method for `AndesCoachmark` | Author: [@juanunzu](https://github.com/juanunzu)
+
 # v5.13.0
 ## 🚀 Feature
 - Now the `AndesTextView` can be used as label for both `AndesTextfield` and `AndesAmountFieldSimple` components | Author: [@juanunzu](https://github.com/juanunzu)
+- Added custom content in `AndesList`
 - Added fix position in fullsize of `AndesTooltip` component | Author: [@yireyes](https://github.com/yireyes)
 
 # v5.12.0

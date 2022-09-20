@@ -3,6 +3,8 @@ package com.mercadolibre.android.andesui.list
 import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
@@ -155,6 +157,7 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.andes_list_item_asset))
         Assert.assertEquals(AndesThumbnailType.ICON, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(0, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
     }
 
     @Test
@@ -186,6 +189,46 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.andes_list_item_asset))
         Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(0, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
+    }
+
+    @Test
+    fun `AndesList list item with avatarType ImageCircle, content CustomView and no title`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemSimple(
+                    activity,
+                    avatar = drawable,
+                    avatarType = AndesThumbnailType.IMAGE_CIRCLE,
+                    content = View(andesList.context)
+                )
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.MEDIUM, AndesListType.SIMPLE)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val emptyString = ""
+        val firstItem =
+            andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.andes_list_item_asset))
+        Assert.assertEquals(emptyString, (firstItem?.findViewById(R.id.text_view_item_title) as TextView).text.toString())
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(1, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
     }
 
     @Test
@@ -216,6 +259,7 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.andes_thumbnail_chevron))
         Assert.assertEquals(AndesThumbnailType.ICON, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(0, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
     }
 
     @Test
@@ -247,6 +291,46 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.andes_thumbnail_chevron))
         Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(0, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
+    }
+
+    @Test
+    fun `AndesList type chevron with avatarType ImageCircle, content CustomView and no title`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemChevron(
+                    activity,
+                    avatar = drawable,
+                    avatarType = AndesThumbnailType.IMAGE_CIRCLE,
+                    content = View(andesList.context)
+                )
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.CHEVRON)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val emptyString = ""
+        val firstItem =
+            andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.andes_thumbnail_chevron))
+        Assert.assertEquals(emptyString, (firstItem?.findViewById(R.id.text_view_item_title) as TextView).text.toString())
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(1, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
     }
 
     @Test
@@ -323,6 +407,7 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.checkbox_item_selected))
         Assert.assertEquals(AndesThumbnailType.ICON, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(0, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
     }
 
     @Test
@@ -353,6 +438,45 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.checkbox_item_selected))
         Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(0, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
+    }
+
+    @Test
+    fun `AndesList type checkbox with avatarType ImageCircle, content CustomView and no title`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemCheckBox(
+                    activity,
+                    avatar = drawable,
+                    avatarType = AndesThumbnailType.IMAGE_CIRCLE,
+                    content = View(andesList.context)
+                )
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.CHECK_BOX)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val emptyString = ""
+        val firstItem = andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.checkbox_item_selected))
+        Assert.assertEquals(emptyString, (firstItem?.findViewById(R.id.text_view_item_title) as TextView).text.toString())
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(1, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
     }
 
     @Test
@@ -412,6 +536,45 @@ class AndesListTest {
         Assert.assertNotNull(firstItem)
         Assert.assertNotNull(firstItem?.findViewById(R.id.radio_button_item_selected))
         Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem?.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(0, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
+    }
+
+    @Test
+    fun `AndesList type radiobutton with avatarType ImageCircle, content CustomView and no title`() {
+        // GIVEN
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val andesListDelegate = object : AndesListDelegate {
+            override fun onItemClick(andesList: AndesList, position: Int) {
+                // no-op
+            }
+
+            override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
+                return AndesListViewItemRadioButton(
+                    activity,
+                    avatar = drawable,
+                    avatarType = AndesThumbnailType.IMAGE_CIRCLE,
+                    content = View(andesList.context)
+                )
+            }
+
+            override fun getDataSetSize(andesList: AndesList): Int = SIZE
+        }
+
+        val andesList = AndesList(activity, AndesListViewItemSize.SMALL, AndesListType.RADIO_BUTTON)
+        andesList.delegate = andesListDelegate
+
+        // WHEN
+        setContentToActivity(andesList)
+        startActivitty()
+
+        // THEN
+        val emptyString = ""
+        val firstItem = andesList.recyclerViewComponent.findViewHolderForAdapterPosition(0)?.itemView
+        Assert.assertNotNull(firstItem)
+        Assert.assertNotNull(firstItem?.findViewById(R.id.radio_button_item_selected))
+        Assert.assertEquals(emptyString, (firstItem?.findViewById(R.id.text_view_item_title) as TextView).text.toString())
+        Assert.assertEquals(AndesThumbnailType.IMAGE_CIRCLE, (firstItem.findViewById(R.id.andes_list_item_asset) as AndesThumbnail).type)
+        Assert.assertEquals(1, (firstItem.findViewById(R.id.custom_view_container) as FrameLayout).childCount)
     }
 
     @Test

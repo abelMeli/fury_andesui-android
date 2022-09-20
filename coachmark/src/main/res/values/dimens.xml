@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="andes_coachmark_toolbar_status_bar">80dp</dimen>
-    <dimen name="andes_coachmark_scrolless_toolbar_status_bar">56dp</dimen>
     <dimen name="andes_coachmark_toolbar">64dp</dimen>
     <dimen name="andes_coachmark_status_bar">26dp</dimen>
 

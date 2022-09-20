@@ -86,11 +86,9 @@ internal fun CharSequence?.toSpannableWithBolds(
     andesBodyBolds: AndesBodyBolds?
 ): CharSequence {
     val spannableString = this as? SpannableString ?: SpannableString(this)
-    val boldTypeface = context.getFontOrDefault(R.font.andes_font_semibold, Typeface.DEFAULT_BOLD)
     andesBodyBolds?.segments?.forEach { bodyBold ->
         if (bodyBold.isValidRange(spannableString)) {
-            val boldSpan = StyleSpan(boldTypeface.style)
-            spannableString.setSpan(boldSpan, bodyBold.startIndex, bodyBold.endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannableString.setSpan(AndesBoldSpan(context), bodyBold.startIndex, bodyBold.endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         } else {
             Log.d("AndesStringUtils", "Body bold range incorrect: " +
                     "${bodyBold.startIndex}, ${bodyBold.endIndex}")
@@ -127,9 +125,9 @@ internal fun CharSequence?.removeLinkSpans(): CharSequence {
  * Takes the original spannable string and removes the StyleSpans.
  * Use this method to clean old spans when passing a null bodyBolds object to the text.
  */
-internal fun CharSequence?.removeBoldSpans(): CharSequence {
+internal fun CharSequence?.removeAndesBoldSpans(): CharSequence {
     val spannableString = this as? SpannableString ?: SpannableString(this)
-    val spanList = spannableString.getSpans(0, spannableString.length, StyleSpan::class.java)
+    val spanList = spannableString.getSpans(0, spannableString.length, AndesBoldSpan::class.java)
     spanList.forEach {
         spannableString.removeSpan(it)
     }

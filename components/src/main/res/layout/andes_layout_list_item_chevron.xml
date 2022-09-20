@@ -100,6 +100,32 @@
             app:layout_constraintTop_toBottomOf="@+id/view_space_title_subtitle"
             tools:text="Row text description" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_title_space_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="text_view_item_title, view_space_title_subtitle, text_view_item_sub_title" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_space_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="view_space_title_subtitle, text_view_item_sub_title" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="text_view_item_title"/>
+        <FrameLayout
+            android:id="@+id/custom_view_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/andes_thumbnail_chevron"
+            app:layout_constraintStart_toEndOf="@+id/andesViewThumbnailSeparator"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/andes_thumbnail_chevron"
             android:layout_width="@dimen/andes_list_chevron_size_medium"

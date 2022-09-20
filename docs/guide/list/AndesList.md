@@ -47,17 +47,30 @@ At the moment we have 4 types of objects to return in the bind method, **AndesLi
 SomeActivity : AppCompatActivity(), AndesListDelegate {
 
     override fun bind(andesList: AndesList, view: View, position: Int): AndesListViewItem {
-        return  AndesListViewItemSimple(
-                        this,
-                        "Title",
-                        subtitle = "Subtitle",
-                        size = AndesListViewItemSize.MEDIUM,
-                        icon = ContextCompat.getDrawable(this, R.drawable.andes_envio_envio_24),
-                        avatar = ContextCompat.getDrawable(this, R.drawable.andes_otros_almanaque_20),
-                        avatarType = AndesThumbnailType.IMAGE_CIRCLE,
-                        titleMaxLines = 50,
-                        itemSelected = false
-                )
+        return  return if (position == 0) {
+            AndesListViewItemSimple(
+                this,
+                "Title",
+                subtitle = "Subtitle",
+                size = AndesListViewItemSize.MEDIUM,
+                icon = ContextCompat.getDrawable(this, R.drawable.andes_envio_envio_24),
+                avatar = ContextCompat.getDrawable(this, R.drawable.andes_otros_almanaque_20),
+                avatarType = AndesThumbnailType.IMAGE_CIRCLE,
+                titleMaxLines = 50,
+                itemSelected = false
+            )
+        } else {
+            val view: View = View(this)
+            AndesListViewItemSimple(
+                this,
+                itemDividerEnabled = false,
+                itemSelected = false,
+                size = AndesListViewItemSize.MEDIUM,
+                avatar = ContextCompat.getDrawable(this, R.drawable.andes_otros_almanaque_20),
+                avatarType = AndesThumbnailType.IMAGE_CIRCLE,
+                content = view
+            )
+        }
     }
 
     override fun getDataSetSize(andesList: AndesList): Int = someList.size()

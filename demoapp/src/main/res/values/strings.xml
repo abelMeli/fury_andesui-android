@@ -398,6 +398,7 @@
     <string name="andes_list_title" translatable="false">Title</string>
     <string name="andes_list_max_lines" translatable="false">Max. lines</string>
     <string name="andes_list_subtitle" translatable="false">Subtitle</string>
+    <string name="andes_list_with_custom_view" translatable="false">Andes List with custom view</string>
     <string-array name="andes_list_size_spinner" translatable="false">
         <item>Small</item>
         <item>Medium</item>
