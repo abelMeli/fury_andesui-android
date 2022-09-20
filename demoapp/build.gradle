@@ -84,21 +84,26 @@ dependencies {
     implementation libs.misc.constraintLayout 
     implementation libs.misc.appCompat 
     implementation libs.misc.material 
-    implementation libs.misc.coordinatorLayout 
+    implementation libs.misc.coordinatorLayout
     implementation (libs.meli.configurationMl.webkit) {
         exclude group: "com.google.android.gms"
+        exclude group: "com.mercadolibre.android.andesui", module: "components"
     }
     implementation (libs.meli.mlwebkitComponents) {
         exclude group: "com.google.android.gms"
+        exclude group: "com.mercadolibre.android.andesui", module: "components"
     }
     implementation (libs.meli.resourcesCore) {
         force true
+        exclude group: "com.mercadolibre.android.andesui", module: "components"
     }
     implementation (libs.meli.uicomponentsResourceProvider) {
         force true
+        exclude group: "com.mercadolibre.android.andesui", module: "components"
     }
     implementation (libs.meli.configurationMl.andes) {
         force true
+        exclude group: "com.mercadolibre.android.andesui", module: "components"
     }
 
     implementation libs.misc.fresco 
