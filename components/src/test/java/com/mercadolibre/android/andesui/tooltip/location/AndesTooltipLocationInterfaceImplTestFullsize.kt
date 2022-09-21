@@ -14,7 +14,7 @@ object AndesTooltipLocationInterfaceImplTestFullsize : AndesTooltipLocationInter
     override val bodyWindowWidth: Int
         get() = 20
     override val displaySizeX: Int
-        get() = 30
+        get() = 1080
     override val displaySizeY: Int
         get() = 40
     override val tooltipMeasuredWidth: Int
@@ -22,11 +22,11 @@ object AndesTooltipLocationInterfaceImplTestFullsize : AndesTooltipLocationInter
     override val tooltipMeasuredHeight: Int
         get() = 60
     override val arrowWidth: Int
-        get() = 70
+        get() = 63
     override val arrowHeight: Int
         get() = 80
     override val arrowBorder: Int
-        get() = 90
+        get() = 15
     override val arrowImageInnerPadding: Int
         get() = 11
     override val paddingWithArrowHorizontal: Int

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.tooltip.extensions.getViewPointOnScreen
 import com.mercadolibre.android.andesui.tooltip.location.*
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.nhaarman.mockitokotlin2.spy
@@ -84,6 +85,46 @@ class AndesTooltipSizeInterfaceTest {
 
         //THEN
         assertEquals(ArrowPositionId.LEFT, returnedArrowData.positionInSide)
+        assertEquals(expectedPoint, returnedArrowData.point)
+    }
+
+    @Test
+    fun `when getTooltipXOffForSize in FULL_SIZE then return positionFree`() {
+        //GIVE
+        val tooltipMeasures = spy(AndesTooltipLocationInterfaceImplTestFullsize)
+        val view = View(context)
+        val container = ConstraintLayout(context)
+        view.id = 4
+
+        with(view){
+            layoutParams = FrameLayout.LayoutParams(235,90)
+        }
+
+        container.addView(view)
+
+        ConstraintSet().apply {
+            clone(container)
+            connect(view.id,ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,0)
+            connect(view.id,ConstraintSet.END,ConstraintSet.PARENT_ID,ConstraintSet.END,0)
+            connect(view.id,ConstraintSet.START,ConstraintSet.PARENT_ID,ConstraintSet.START,
+                0)
+            connect(view.id,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM,
+                0)
+            applyTo(container)
+        }
+
+        setupActivityForTesting(container)
+        val mockView = spy(view)
+
+        val targetHalfXPoint = view.getViewPointOnScreen().x + (view.measuredWidth / 2)
+
+        //WHEN
+        val returnedArrowData = AndesTooltipSize.FULL_SIZE.type.getTooltipXOffForSize(mockView,
+            tooltipMeasures)
+        val expectedPoint = targetHalfXPoint - tooltipMeasures.arrowWidth / 2
+
+        //THEN
+        assertEquals(ArrowPositionId.FREE, returnedArrowData.positionInSide)
         assertEquals(expectedPoint, returnedArrowData.point)
     }
 
