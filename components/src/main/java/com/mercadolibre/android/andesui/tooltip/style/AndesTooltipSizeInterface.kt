@@ -130,14 +130,14 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
 
     override fun bodyContentMaxWidth(context: Context) = getDisplayMaxWidthForContent(context)
 
-    override fun tooltipMeasureWidth(context: Context, view: View) =  if(getValidateWidth(view.measuredWidth)) { view.measuredWidth  } else { getDisplayWidth(context) }
+    override fun tooltipMeasureWidth(context: Context, view: View) =  view.measuredWidth.takeIf{ getValidateWidth(it) } ?: getDisplayWidth(context)
 
     override fun getArrowPoint(
         arrowLocation: AndesTooltipArrowLocation,
         tooltipLocation: AndesTooltipLocationInterface,
         fixedArrowXPosition: Int
     ) = AndesTooltipArrowPoint(
-        x = if(getValidateWidth(tooltipLocation.tooltipMeasuredWidth)){ arrowLocation.getArrowPositionX(tooltipLocation) } else { fixedArrowXPosition.toFloat() },
+        x = arrowLocation.getArrowPositionX(tooltipLocation).takeIf { getValidateWidth(tooltipLocation.tooltipMeasuredWidth) } ?: fixedArrowXPosition.toFloat(),
         y = arrowLocation.getArrowPositionY(tooltipLocation)
     )
 
