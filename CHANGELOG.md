@@ -1,3 +1,7 @@
+# v6.0.0
+## Migrated
+- Migrated to target API 32 (Android 12)
+
 # v5.13.2
 ## 🛠 Fixes
 - Fix AndesTextView with AndesMoneyAmount semibold | Author: [@eportasML](https://github.com/eportasML)

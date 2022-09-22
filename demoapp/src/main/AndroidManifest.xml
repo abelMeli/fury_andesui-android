@@ -49,6 +49,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.A11yLandingActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
