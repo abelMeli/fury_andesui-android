@@ -1,3 +1,7 @@
+# v6.0.1
+## 🛠 Fixes
+- Fix crash in demoapp caused by an activity without the `exported` property 
+
 # v6.0.0
 ## Migrated
 - Migrated to target API 32 (Android 12)

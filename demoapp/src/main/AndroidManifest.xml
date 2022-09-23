@@ -754,6 +754,11 @@
                     android:scheme="andes" />
             </intent-filter>
         </activity>
+        <activity-alias
+            android:name="leakcanary.internal.activity.LeakLauncherActivity"
+            android:exported="true"
+            tools:node="merge"
+            android:targetActivity="leakcanary.internal.activity.LeakActivity" />
     </application>
 
 </manifest>
