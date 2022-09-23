@@ -109,8 +109,10 @@ internal object AndesTooltipConfigurationFactory {
     private fun resolveBackgroundColor(style: AndesTooltipStyle) = style.type.backgroundColor()
     private fun resolveTextColor(style: AndesTooltipStyle) = style.type.textColor()
     private fun resolveTitleSize(context: Context) = context.resources.getDimension(R.dimen.andes_message_title)
+    // Title max with must take into account the size of the dismiss button to avoid overlaping.
     private fun resolveTitleMaxWidth(context: Context, andesTooltipSize: AndesTooltipSize, dismissible: Boolean) =
-        andesTooltipSize.type.titleMaxWidth(context, dismissible)
+        andesTooltipSize.type.titleMaxWidth(context, dismissible) -
+            context.resources.getDimension(R.dimen.andes_tooltip_dismiss_size).toInt()
     private fun resolveBodySize(context: Context) = context.resources.getDimension(R.dimen.andes_message_body)
     private fun resolveTitleTypeface(style: AndesTooltipStyle, context: Context) = style.type.titleTypeface(context)
     private fun resolveBodyTypeface(style: AndesTooltipStyle, context: Context) = style.type.bodyTypeface(context)
