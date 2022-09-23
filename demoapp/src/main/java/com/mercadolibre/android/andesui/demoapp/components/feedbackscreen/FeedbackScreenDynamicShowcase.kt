@@ -54,6 +54,12 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
         }
     }
 
+    private val feedbackThumbnailText by lazy {
+        intent.extras?.getString(
+            FEEDBACK_THUMBNAIL_TEXT_INPUT
+        )
+    }
+
     private val feedbackButtonGroupQuantity by lazy {
         intent.extras?.getString(FEEDBACK_BUTTON_GROUP)
     }
@@ -196,6 +202,9 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
                 drawable,
                 AndesThumbnailBadgeType.ImageCircle
             )
+            FeedbackScreenDynamicPage.TEXT -> AndesFeedbackScreenAsset.TextThumbnail(
+                feedbackThumbnailText ?: ""
+            )
             FeedbackScreenDynamicPage.ILLUSTRATION -> getFeedbackIllustrationSize()
             FeedbackScreenDynamicPage.NONE -> null
             else -> null
@@ -249,7 +258,7 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
         private const val FEEDBACK_DESCRIPTION = "feedbackHeaderDescription"
         private const val FEEDBACK_HIGHLIGHT = "feedbackHeaderHighlight"
         private const val FEEDBACK_BUTTON_GROUP = "feedbackButtonGroup"
-
+        private const val FEEDBACK_THUMBNAIL_TEXT_INPUT = "feedbackThumbnailTextInput"
         private const val DEFAULT_HEADER_TEXT = "Default header text"
         private const val DEFAULT_HIGHLIGHT_TEXT = "Default highlighted text"
         private const val DEFAULT_DESCRIPTION_TEXT =
@@ -276,7 +285,8 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
             feedbackHeaderOverline: String?,
             feedbackHeaderDescription: String?,
             feedbackHeaderHighlight: String?,
-            feedbackButtonGroup: String
+            feedbackButtonGroup: String,
+            feedBackThumbnailTextInput: String?
         ) = Intent(context, FeedbackScreenDynamicShowcase::class.java).apply {
             putExtra(FEEDBACK_TYPE, feedbackTypeSelected)
             putExtra(FEEDBACK_COLOR, feedbackColorSelected)
@@ -290,6 +300,7 @@ class FeedbackScreenDynamicShowcase : AppCompatActivity() {
             putExtra(FEEDBACK_DESCRIPTION, feedbackHeaderDescription)
             putExtra(FEEDBACK_HIGHLIGHT, feedbackHeaderHighlight)
             putExtra(FEEDBACK_BUTTON_GROUP, feedbackButtonGroup)
+            putExtra(FEEDBACK_THUMBNAIL_TEXT_INPUT, feedBackThumbnailTextInput)
         }
     }
 }

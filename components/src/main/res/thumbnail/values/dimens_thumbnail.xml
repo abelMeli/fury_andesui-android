@@ -21,6 +21,26 @@
     <dimen name="andes_thumbnail_size_72">72dp</dimen>
     <dimen name="andes_thumbnail_size_80">80dp</dimen>
 
+    <dimen name="andes_thumbnail_text_size_11">11dp</dimen>
+    <dimen name="andes_thumbnail_text_size_14">14dp</dimen>
+    <dimen name="andes_thumbnail_text_size_16">16dp</dimen>
+    <dimen name="andes_thumbnail_text_size_20">20dp</dimen>
+    <dimen name="andes_thumbnail_text_size_24">24dp</dimen>
+    <dimen name="andes_thumbnail_text_size_28">28dp</dimen>
+    <dimen name="andes_thumbnail_text_size_32">32dp</dimen>
+    <dimen name="andes_thumbnail_text_size_36">36dp</dimen>
+
+    <dimen name="andes_thumbnail_text_width_20">20dp</dimen>
+    <dimen name="andes_thumbnail_text_width_28">28dp</dimen>
+    <dimen name="andes_thumbnail_text_width_32">32dp</dimen>
+    <dimen name="andes_thumbnail_text_width_36">36dp</dimen>
+    <dimen name="andes_thumbnail_text_width_44">44dp</dimen>
+    <dimen name="andes_thumbnail_text_width_52">52dp</dimen>
+    <dimen name="andes_thumbnail_text_width_60">60dp</dimen>
+    <dimen name="andes_thumbnail_text_width_64">64dp</dimen>
+
+
+
     <dimen name="andes_thumbnail_badge_outline_3">3dp</dimen>
     <dimen name="andes_thumbnail_badge_outline_2">2dp</dimen>
     <dimen name="andes_thumbnail_badge_dot_margin">1dp</dimen>

@@ -7,7 +7,7 @@ import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
 
 /**
- * Defines all style related properties that an [AndesThumbnail] needs to be drawn properly.
+ * Defines all style related properties that an AndesThumbnail needs to be drawn properly.
  * Those properties change depending on the style of the message.
  *
  */

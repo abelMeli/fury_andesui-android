@@ -12,6 +12,11 @@ sealed class AndesThumbnailBadgeType {
     object Icon : AndesThumbnailBadgeType()
 
     /**
+     * Will tint the [AndesThumbnail] and set a fit_content scale type to the text image.
+     */
+    object Text : AndesThumbnailBadgeType()
+
+    /**
      * Will not tint the [AndesThumbnail] and will set a center_crop scale type to the image.
      */
     object ImageCircle : AndesThumbnailBadgeType()
@@ -31,6 +36,7 @@ sealed class AndesThumbnailBadgeType {
         fun fromString(value: String): AndesThumbnailBadgeType {
             return when (value) {
                 Icon.javaClass.simpleName -> Icon
+                Text.javaClass.simpleName -> Text
                 else -> ImageCircle
             }
         }
@@ -43,6 +49,7 @@ sealed class AndesThumbnailBadgeType {
             Icon -> AndesIconThumbnailBadgeType
             ImageCircle -> AndesImageCircleThumbnailBadgeType
             FeedbackIcon -> AndesFeedbackIconThumbnailBadgeType
+            Text -> AndesTextThumbnailBadgeType
         }
     }
 }

@@ -121,6 +121,22 @@ class AndesFeedbackScreenCongratsHeaderViewTest {
         header.getThumbnail().image assertEquals R.drawable.andes_ui_placeholder_imagen_32
     }
 
+    @Test
+    fun `Text Thumbnail set correctly`() {
+        val header = AndesFeedbackScreenCongratsHeaderView(context)
+        val badgeType = AndesCongratsFeedbackScreenType
+
+        header.setupAssetComponent(
+            feedbackAsset = AndesFeedbackScreenAsset.TextThumbnail(
+                "AB"
+            ),
+            type = badgeType,
+            hasBody = true
+        )
+
+        header.getThumbnail().thumbnailType assertEquals AndesThumbnailBadgeType.Text
+    }
+
     private fun AndesFeedbackScreenCongratsHeaderView.getDescription() =
         findViewById<TextView>(R.id.andes_feedbackscreen_congrats_header_description)
 

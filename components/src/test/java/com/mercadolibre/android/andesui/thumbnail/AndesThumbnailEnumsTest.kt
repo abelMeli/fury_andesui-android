@@ -1,5 +1,7 @@
 package com.mercadolibre.android.andesui.thumbnail
 
+import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgePillSize
+import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
 import com.mercadolibre.android.andesui.utils.assertEquals
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
@@ -65,6 +67,19 @@ class AndesThumbnailEnumsTest {
     }
 
     @Test
+    fun `AndesThumbnailBadgeType fromString parse valid`() {
+        // WHEN
+        val icon = AndesThumbnailBadgeType.fromString("Icon")
+        val imageCircle = AndesThumbnailBadgeType.fromString("ImageCircle")
+        val text = AndesThumbnailBadgeType.fromString("Text")
+
+        // THEN
+        icon assertEquals AndesThumbnailBadgeType.Icon
+        imageCircle assertEquals AndesThumbnailBadgeType.ImageCircle
+        text assertEquals AndesThumbnailBadgeType.Text
+    }
+
+    @Test
     fun `AndesThumbnailType fromString parse invalid`() {
         // WHEN - THEN
         Assert.assertThrows(IllegalArgumentException::class.java) {
@@ -100,5 +115,23 @@ class AndesThumbnailEnumsTest {
         Assert.assertThrows(IllegalArgumentException::class.java) {
             AndesThumbnailSize.fromString("small")
         }
+    }
+
+    @Test
+    fun `AndesThumbnailPillSize fromString parse valid`() {
+        // WHEN
+        val size40 = AndesThumbnailBadgePillSize.fromString("size_40")
+        val size48 = AndesThumbnailBadgePillSize.fromString("size_48")
+        val size56 = AndesThumbnailBadgePillSize.fromString("size_56")
+        val size64 = AndesThumbnailBadgePillSize.fromString("size_64")
+        val size72 = AndesThumbnailBadgePillSize.fromString("size_72")
+        val size80 = AndesThumbnailBadgePillSize.fromString("size_80")
+
+        size40 assertEquals AndesThumbnailBadgePillSize.SIZE_40
+        size48 assertEquals AndesThumbnailBadgePillSize.SIZE_48
+        size56 assertEquals AndesThumbnailBadgePillSize.SIZE_56
+        size64 assertEquals AndesThumbnailBadgePillSize.SIZE_64
+        size72 assertEquals AndesThumbnailBadgePillSize.SIZE_72
+        size80 assertEquals AndesThumbnailBadgePillSize.SIZE_80
     }
 }

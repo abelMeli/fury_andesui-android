@@ -10,14 +10,16 @@ import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnail
 import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgeDotSize
 import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgePillSize
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
+import java.lang.IllegalArgumentException
 
 /**
  * The data class that contains the public components of the thumbnail.
  */
 internal data class AndesThumbnailBadgeAttrs(
-    val image: Drawable,
+    val image: Drawable?,
     val badge: AndesThumbnailBadgeComponent,
-    val thumbnailType: AndesThumbnailBadgeType
+    val thumbnailType: AndesThumbnailBadgeType,
+    val text: String = ""
 )
 
 /**
@@ -26,13 +28,17 @@ internal data class AndesThumbnailBadgeAttrs(
 internal object AndesThumbnailBadgeAttrsParser {
     private const val ANDES_THUMBNAILBADGE_TYPE_ICON = 2000
     private const val ANDES_THUMBNAILBADGE_TYPE_IMAGE_CIRCLE = 2001
+    private const val ANDES_THUMBNAILBADGE_TYPE_TEXT = 2002
+    private const val NO_THUMBNAILBADGE_TYPE =-1
 
     private const val ANDES_THUMBNAILBADGE_PILL = 3000
     private const val ANDES_THUMBNAILBADGE_ICON_PILL = 3001
     private const val ANDES_THUMBNAILBADGE_DOT = 3002
+    private const val NO_BADGE_COMPONENT =-1
 
     private const val ANDES_THUMBNAILBADGE_DOT_SIZE_24 = 6000
     private const val ANDES_THUMBNAILBADGE_DOT_SIZE_32 = 6001
+    private const val NO_DOT_SIZE = -1
 
     private const val ANDES_THUMBNAILBADGE_PILL_SIZE_40 = 6002
     private const val ANDES_THUMBNAILBADGE_PILL_SIZE_48 = 6003
@@ -40,38 +46,34 @@ internal object AndesThumbnailBadgeAttrsParser {
     private const val ANDES_THUMBNAILBADGE_PILL_SIZE_64 = 6005
     private const val ANDES_THUMBNAILBADGE_PILL_SIZE_72 = 6006
     private const val ANDES_THUMBNAILBADGE_PILL_SIZE_80 = 6007
+    private const val NO_PILL_SIZE =-1
 
     private const val ANDES_THUMBNAILBADGE_COMPONENT_HIGHLIGHT = 5000
     private const val ANDES_THUMBNAILBADGE_COMPONENT_SUCCESS = 5001
     private const val ANDES_THUMBNAILBADGE_COMPONENT_WARNING = 5002
     private const val ANDES_THUMBNAILBADGE_COMPONENT_ERROR = 5003
+    private const val NO_BADGE_TYPE =-1
+
 
     fun parse(context: Context, attr: AttributeSet?): AndesThumbnailBadgeAttrs {
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesThumbnailBadge)
-
         return AndesThumbnailBadgeAttrs(
-            image = getImage(typedArray),
+            image = getInputImage(typedArray),
             badge = getBadgeComponent(typedArray),
-            thumbnailType = getType(typedArray)
+            thumbnailType = getType(typedArray),
+            text = getInputText(typedArray)
         ).also { typedArray.recycle() }
     }
 
-    private fun getImage(typedArray: TypedArray): Drawable {
-        val image: Drawable
-        val imageParameter =
-            typedArray.getDrawable(R.styleable.AndesThumbnailBadge_andesThumbnailBadgeImage)
-        if (imageParameter == null) {
-            throw IllegalArgumentException("Wrong andesThumbnailBadgeImage attribute, check your layout")
-        } else {
-            image = imageParameter
-        }
-        return image
-    }
+    private fun getInputImage(typedArray: TypedArray): Drawable? =
+         typedArray.getDrawable(R.styleable.AndesThumbnailBadge_andesThumbnailBadgeImage)
+
+    private fun getInputText(typedArray: TypedArray): String =
+        typedArray.getString(R.styleable.AndesThumbnailBadge_andesThumbnailBadgeText) ?: ""
 
     private fun getBadgeComponent(typedArray: TypedArray): AndesThumbnailBadgeComponent =
         when (typedArray.getInt(
-            R.styleable.AndesThumbnailBadge_andesThumbnailBadgeComponent,
-            ANDES_THUMBNAILBADGE_ICON_PILL
+            R.styleable.AndesThumbnailBadge_andesThumbnailBadgeComponent, NO_BADGE_COMPONENT
         )) {
             ANDES_THUMBNAILBADGE_PILL -> getBadgePill(typedArray)
             ANDES_THUMBNAILBADGE_ICON_PILL -> getAndesBadgeIconPill(typedArray)
@@ -105,7 +107,7 @@ internal object AndesThumbnailBadgeAttrsParser {
     private fun getAndesBadgeDotSize(typedArray: TypedArray): AndesThumbnailBadgeDotSize =
         when (typedArray.getInt(
             R.styleable.AndesThumbnailBadge_andesThumbnailBadgeComponentDotSize,
-            ANDES_THUMBNAILBADGE_DOT_SIZE_24
+            NO_DOT_SIZE
         )) {
             ANDES_THUMBNAILBADGE_DOT_SIZE_24 -> AndesThumbnailBadgeDotSize.SIZE_24
             ANDES_THUMBNAILBADGE_DOT_SIZE_32 -> AndesThumbnailBadgeDotSize.SIZE_32
@@ -115,7 +117,7 @@ internal object AndesThumbnailBadgeAttrsParser {
     private fun getAndesBadgePillSize(typedArray: TypedArray): AndesThumbnailBadgePillSize =
         when (typedArray.getInt(
             R.styleable.AndesThumbnailBadge_andesThumbnailBadgeComponentPillSize,
-            ANDES_THUMBNAILBADGE_PILL_SIZE_64
+            NO_PILL_SIZE
         )) {
             ANDES_THUMBNAILBADGE_PILL_SIZE_40 -> AndesThumbnailBadgePillSize.SIZE_40
             ANDES_THUMBNAILBADGE_PILL_SIZE_48 -> AndesThumbnailBadgePillSize.SIZE_48
@@ -129,7 +131,7 @@ internal object AndesThumbnailBadgeAttrsParser {
     private fun getAndesBadgeType(typedArray: TypedArray): AndesBadgeIconType =
         when (typedArray.getInt(
             R.styleable.AndesThumbnailBadge_andesThumbnailBadgeComponentType,
-            ANDES_THUMBNAILBADGE_COMPONENT_HIGHLIGHT
+            NO_BADGE_TYPE
         )) {
             ANDES_THUMBNAILBADGE_COMPONENT_HIGHLIGHT -> AndesBadgeIconType.HIGHLIGHT
             ANDES_THUMBNAILBADGE_COMPONENT_SUCCESS -> AndesBadgeIconType.SUCCESS
@@ -138,13 +140,16 @@ internal object AndesThumbnailBadgeAttrsParser {
             else -> AndesBadgeIconType.HIGHLIGHT
         }
 
-    private fun getType(typedArray: TypedArray): AndesThumbnailBadgeType =
+    private fun getType(
+        typedArray: TypedArray
+    ): AndesThumbnailBadgeType =
         when (typedArray.getInt(
             R.styleable.AndesThumbnailBadge_andesThumbnailBadgeType,
-            ANDES_THUMBNAILBADGE_TYPE_ICON
+            NO_THUMBNAILBADGE_TYPE
         )) {
             ANDES_THUMBNAILBADGE_TYPE_ICON -> AndesThumbnailBadgeType.Icon
             ANDES_THUMBNAILBADGE_TYPE_IMAGE_CIRCLE -> AndesThumbnailBadgeType.ImageCircle
+            ANDES_THUMBNAILBADGE_TYPE_TEXT -> AndesThumbnailBadgeType.Text
             else -> AndesThumbnailBadgeType.Icon
         }
 }

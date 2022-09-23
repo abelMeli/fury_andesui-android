@@ -11,15 +11,16 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType.CENTER_CROP
-import android.widget.ImageView.ScaleType.FIT_CENTER
 import androidx.core.graphics.drawable.DrawableCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.AndesColor
+import com.mercadolibre.android.andesui.thumbnail.assetType.AndesThumbnailAssetType
 import com.mercadolibre.android.andesui.thumbnail.factory.AndesThumbnailAttrs
 import com.mercadolibre.android.andesui.thumbnail.factory.AndesThumbnailAttrsParser
 import com.mercadolibre.android.andesui.thumbnail.factory.AndesThumbnailConfiguration
 import com.mercadolibre.android.andesui.thumbnail.factory.AndesThumbnailConfigurationFactory
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
+import com.mercadolibre.android.andesui.thumbnail.shape.AndesThumbnailShape
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
@@ -52,19 +53,19 @@ class AndesThumbnail : FrameLayout {
         }
 
     /**
-     * Getter and setter for [image].
+     * Getter and setter for [image].This parameter only has effect on
+     *  ([AndesThumbnailAssetType.Icon], [AndesThumbnailAssetType.Image]).
      */
     var image: Drawable
-        get() = andesThumbnailAttrs.andesThumbnailImage
+        get() = imageFrame.drawable
         set(value) {
-            andesThumbnailAttrs = andesThumbnailAttrs.copy(andesThumbnailImage = value)
-            val config = createConfig()
-            setupImage(config)
+            assetType = assetType.createWith(value)
         }
 
     /**
      * Getter and setter for [type].
      */
+    @Deprecated("Use AssetType and thumbnailShape")
     var type: AndesThumbnailType
         get() = andesThumbnailAttrs.andesThumbnailType
         set(value) {
@@ -83,7 +84,7 @@ class AndesThumbnail : FrameLayout {
             andesThumbnailAttrs = andesThumbnailAttrs.copy(andesThumbnailSize = value)
             val config = createConfig()
             setupBackgroundSize(config.size, config.cornerRadius)
-            setupImageSize(config.iconSize)
+            setupFrameSize(config)
         }
 
     /**
@@ -100,8 +101,8 @@ class AndesThumbnail : FrameLayout {
 
     /**
      * Getter and setter for the image [scaleType]. This parameter only affects components with
-     * image type ([AndesThumbnailType.IMAGE_CIRCLE], [AndesThumbnailType.IMAGE_SQUARE]). For the
-     * [AndesThumbnailType.ICON] this setter will have no effect.
+     * image type ([AndesThumbnailAssetType.Image]). For the
+     * others this setter will have no effect.
      */
     var scaleType: ImageView.ScaleType
         get() = andesThumbnailAttrs.andesThumbnailScaleType
@@ -111,6 +112,28 @@ class AndesThumbnail : FrameLayout {
                 setupClipToOutline(it)
                 setupScaleType(it)
             }
+        }
+
+    /**
+     * Getter and setter for the [assetType].
+     */
+    var assetType: AndesThumbnailAssetType
+        get() = andesThumbnailAttrs.andesThumbnailAssetType
+        set(value) {
+            andesThumbnailAttrs = andesThumbnailAttrs.copy(andesThumbnailAssetType = value)
+            val config = createConfig()
+            setupBackground(config)
+            setupImage(config)
+        }
+
+    /**
+     * Getter and setter for the [thumbnailShape].
+     */
+    var thumbnailShape: AndesThumbnailShape
+        get() = andesThumbnailAttrs.andesThumbnailShape
+        set(value) {
+            andesThumbnailAttrs = andesThumbnailAttrs.copy(andesThumbnailShape = value)
+            setupBackground(createConfig())
         }
 
     private val imageFrame by lazy { findViewById<ImageView>(R.id.andes_thumbnail_image) }
@@ -126,7 +149,8 @@ class AndesThumbnail : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
     }
-
+    @Deprecated("Use constructor with assetType and shape" ,
+        ReplaceWith("AndesThumbnail(context, accentColor, assetType, thumbnailShape, hierarchy, size, state, scaleType"))
     @Suppress("LongParameterList")
     constructor(
         context: Context,
@@ -140,6 +164,7 @@ class AndesThumbnail : FrameLayout {
         initAttrs(accentColor, hierarchy, image, type, size, state, DEFAULT_SCALE_TYPE)
     }
 
+    @Deprecated("Use constructor with assetType and shape")
     @Suppress("LongParameterList")
     constructor(
         context: Context,
@@ -154,8 +179,25 @@ class AndesThumbnail : FrameLayout {
         initAttrs(accentColor, hierarchy, image, type, size, state, scaleType)
     }
 
+    /***
+     * This constructor generate a Thumbnail with shape and assetType as independent attributes.
+     */
+    @Suppress("LongParameterList")
+    constructor(
+        context: Context,
+        accentColor: AndesColor,
+        assetType: AndesThumbnailAssetType,
+        thumbnailShape: AndesThumbnailShape = AndesThumbnailShape.Circle,
+        hierarchy: AndesThumbnailHierarchy = AndesThumbnailHierarchy.DEFAULT,
+        size: AndesThumbnailSize = AndesThumbnailSize.SIZE_48,
+        state: AndesThumbnailState = AndesThumbnailState.ENABLED,
+        scaleType: ImageView.ScaleType = DEFAULT_SCALE_TYPE
+    ) : super(context) {
+        initAttrs(accentColor, hierarchy, size, state, assetType, thumbnailShape, scaleType)
+    }
+
     /**
-     * Sets the proper [config] for this thumbnail based on the [attrs] received via XML.
+     * Sets the proper configuration class for this thumbnail based on the [attrs] received via XML.
      *
      * @param attrs attributes from the XML.
      */
@@ -175,7 +217,27 @@ class AndesThumbnail : FrameLayout {
         state: AndesThumbnailState,
         scaleType: ImageView.ScaleType
     ) {
-        andesThumbnailAttrs = AndesThumbnailAttrs(accentColor, hierarchy, image, type, size, state, scaleType)
+        andesThumbnailAttrs = AndesThumbnailAttrs(
+            accentColor, hierarchy, type, size, state,
+            scaleType, type.toAssetType(image), type.toShape()
+        )
+        val config = AndesThumbnailConfigurationFactory.create(context, andesThumbnailAttrs)
+        setupComponents(config)
+    }
+
+    @Suppress("LongParameterList")
+    private fun initAttrs(
+        accentColor: AndesColor,
+        hierarchy: AndesThumbnailHierarchy,
+        size: AndesThumbnailSize,
+        state: AndesThumbnailState,
+        assetType: AndesThumbnailAssetType,
+        shape: AndesThumbnailShape,
+        scaleType: ImageView.ScaleType
+    ) {
+        andesThumbnailAttrs = AndesThumbnailAttrs(
+            accentColor, hierarchy, TYPE_DEFAULT, size, state, scaleType, assetType, shape
+        )
         val config = AndesThumbnailConfigurationFactory.create(context, andesThumbnailAttrs)
         setupComponents(config)
     }
@@ -186,11 +248,9 @@ class AndesThumbnail : FrameLayout {
      */
     private fun setupComponents(config: AndesThumbnailConfiguration) {
         initComponents()
-
         if (id == NO_ID) { // If this view has no id
             id = View.generateViewId()
         }
-
         setupBackground(config)
         setupImage(config)
     }
@@ -227,11 +287,10 @@ class AndesThumbnail : FrameLayout {
     private fun setupImage(config: AndesThumbnailConfiguration) {
         val unwrappedDrawable = config.image
         val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable)
-
         imageFrame.setImageDrawable(wrappedDrawable)
         setupClipToOutline(config)
         setupScaleType(config)
-        setupImageSize(config.iconSize)
+        setupFrameSize(config)
         setupImageColor(config)
     }
 
@@ -254,13 +313,16 @@ class AndesThumbnail : FrameLayout {
         DrawableCompat.setTintList(imageFrame.drawable, colorStateList)
     }
 
-    private fun setupImageSize(iconSize: Int) {
-        imageFrame.layoutParams = LayoutParams(iconSize, iconSize, Gravity.CENTER)
+    private fun setupFrameSize(config: AndesThumbnailConfiguration) {
+        imageFrame.layoutParams = LayoutParams(config.widthSize, config.heightSize, Gravity.CENTER)
     }
 
     private fun createConfig() = AndesThumbnailConfigurationFactory.create(context, andesThumbnailAttrs)
 
     private companion object {
         val DEFAULT_SCALE_TYPE = CENTER_CROP
+
+        // set the deprecated val type as default Icon
+        val TYPE_DEFAULT = AndesThumbnailType.ICON
     }
 }

@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.feedback.screen.type.AndesFeedbackScreenTypeInterface
@@ -15,12 +14,11 @@ import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnail
 import com.mercadolibre.android.andesui.thumbnail.badge.type.AndesThumbnailBadgeType
 
 internal interface AndesFeedbackScreenAssetInterface {
-    val image: Drawable
     fun getView(context: Context, type: AndesFeedbackScreenTypeInterface, hasBody: Boolean): View
 }
 
 internal class AndesThumbnailFeedbackScreenAsset(
-    override val image: Drawable,
+    private val image: Drawable,
     private val thumbnailBadgeType: AndesThumbnailBadgeType
 ) : AndesFeedbackScreenAssetInterface {
     override fun getView(context: Context, type: AndesFeedbackScreenTypeInterface, hasBody: Boolean): View {
@@ -52,7 +50,7 @@ internal class AndesThumbnailFeedbackScreenAsset(
 }
 
 internal class AndesIllustrationFeedbackScreenAsset(
-    override val image: Drawable,
+    private val image: Drawable,
     private val size: AndesFeedbackScreenIllustrationSize
 ) : AndesFeedbackScreenAssetInterface {
 
@@ -78,6 +76,37 @@ internal class AndesIllustrationFeedbackScreenAsset(
         resources.getDimensionPixelSize(R.dimen.andes_feedbackscreen_illustration_margin_top).takeIf {
             hasBody
         } ?: AssetsConstants.NO_MARGIN
+}
+
+internal class AndesThumbnailTextFeedbackScreenAsset(
+    private val text: String
+) : AndesFeedbackScreenAssetInterface {
+    override fun getView(context: Context, type: AndesFeedbackScreenTypeInterface, hasBody: Boolean): View {
+        return AndesThumbnailBadge(
+            context,
+            AndesThumbnailBadgeComponent.IconPill(
+                AndesBadgeIconType.HIGHLIGHT
+            ),
+            AndesThumbnailBadgeType.Text,
+            text
+
+        ).apply {
+            badgeComponent = AndesThumbnailBadgeComponent.FeedbackIconPill(
+                type.feedbackColor,
+                type.getThumbnailBadgeSize(hasBody)
+            )
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(
+                    AssetsConstants.NO_MARGIN,
+                    AssetsConstants.NO_MARGIN,
+                    AssetsConstants.NO_MARGIN,
+                    context.resources.getDimensionPixelSize(R.dimen.andes_feedbackscreen_thumbnail_margin_bottom))
+            }
+        }
+    }
 }
 
 /**

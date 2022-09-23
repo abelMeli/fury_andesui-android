@@ -1,6 +1,7 @@
 package com.mercadolibre.android.andesui.demoapp.components.thumbnail
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -8,12 +9,14 @@ import android.widget.Spinner
 import androidx.annotation.ArrayRes
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.Group
+import androidx.core.content.ContextCompat
 import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.demoapp.R
 import com.mercadolibre.android.andesui.demoapp.databinding.AndesuiDynamicThumbnailBadgeBinding
 import com.mercadolibre.android.andesui.demoapp.utils.Constants.EMPTY_STRING
 import com.mercadolibre.android.andesui.textfield.AndesTextfield
+import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
 import com.mercadolibre.android.andesui.thumbnail.badge.component.AndesThumbnailBadgeComponent
 import com.mercadolibre.android.andesui.thumbnail.badge.size.AndesThumbnailBadgeDotSize
@@ -36,35 +39,9 @@ class ThumbnailBadgeDynamicPage {
     private lateinit var thumbnailBadgeComponentSpinner: Spinner
     private lateinit var thumbnailTypeSpinner: Spinner
     private lateinit var thumbnailBadge: AndesThumbnailBadge
-
-    companion object {
-
-        private const val BADGE_COMPONENT_ICON_PILL = "Icon Pill"
-        private const val BADGE_COMPONENT_PILL = "Pill"
-        private const val BADGE_COMPONENT_DOT = "Dot"
-        private const val BADGE_COMPONENT_DEFAULT_POSITION = 0
-
-        private const val THUMBNAIL_BADGE_TYPE_ICON = "Icon"
-        private const val THUMBNAIL_BADGE_TYPE_IMAGE_CIRCLE = "Image Circle"
-        private const val THUMBNAIL_BADGE_TYPE_DEFAULT_POSITION = 0
-
-        private const val THUMBNAIL_BADGE_SIZE_24 = "Size 24"
-        private const val THUMBNAIL_BADGE_SIZE_32 = "Size 32"
-        private const val THUMBNAIL_BADGE_SIZE_40 = "Size 40"
-        private const val THUMBNAIL_BADGE_SIZE_48 = "Size 48"
-        private const val THUMBNAIL_BADGE_SIZE_56 = "Size 56"
-        private const val THUMBNAIL_BADGE_SIZE_64 = "Size 64"
-        private const val THUMBNAIL_BADGE_SIZE_72 = "Size 72"
-        private const val THUMBNAIL_BADGE_SIZE_80 = "Size 80"
-        private const val DEFAULT_DOT_SIZE_POSITION = 0
-        private const val DEFAULT_PILL_SIZE_POSITION = 3
-
-        private const val THUMBNAIL_BADGE_COLOR_HIGHLIGHT = "Highlight"
-        private const val THUMBNAIL_BADGE_COLOR_SUCCESS = "Success"
-        private const val THUMBNAIL_BADGE_COLOR_WARNING = "Warning"
-        private const val THUMBNAIL_BADGE_COLOR_ERROR = "Error"
-        private const val THUMBNAIL_BADGE_COLOR_DEFAULT_POSITION = 0
-    }
+    private lateinit var thumbnailTextInput : AndesTextfield
+    private lateinit var textGroup: Group
+    private lateinit var demoImage: Drawable
 
     /**
      * Function used to bind data to the container view.
@@ -74,6 +51,7 @@ class ThumbnailBadgeDynamicPage {
         setupSpinners(context)
         setupBadgeComponentGroups(context)
         setupActionButtons(context)
+        showTextInput()
     }
 
     private fun setupActionButtons(context: Context) {
@@ -82,6 +60,7 @@ class ThumbnailBadgeDynamicPage {
         }
 
         clearButton.setOnClickListener {
+
             thumbnailBadgeComponentSpinner.setSelection(BADGE_COMPONENT_DEFAULT_POSITION)
             setupBadgeComponentConfig(
                 context,
@@ -93,18 +72,32 @@ class ThumbnailBadgeDynamicPage {
             thumbnailTypeSpinner.setSelection(THUMBNAIL_BADGE_TYPE_DEFAULT_POSITION)
             thumbnailBadgePillTextStyleCaps.isChecked = true
             thumbnailBadgePillText.text = EMPTY_STRING
+            thumbnailTextInput.text = EMPTY_STRING
             updateComponent()
         }
     }
 
     private fun updateComponent() {
-        thumbnailBadge.thumbnailType = getThumbnailBadgeType()
+        val thumbnailType = getThumbnailBadgeType()
+        if (thumbnailType == AndesThumbnailBadgeType.Text) {
+            val inputText = thumbnailTextInput.text ?: ""
+            if (inputText.isBlank()) {
+                thumbnailTextInput.state = AndesTextfieldState.ERROR
+                thumbnailTextInput.helper = CAMPO_OBLIGATORIO
+                return
+            } else {
+                thumbnailTextInput.state = AndesTextfieldState.IDLE
+                thumbnailBadge.text = getText()
+            }
+        }
+        thumbnailBadge.thumbnailType = thumbnailType
         thumbnailBadge.badgeComponent = getThumbnailBadgeComponent()
     }
 
     private fun getThumbnailBadgeType() = when (thumbnailTypeSpinner.selectedItem) {
         THUMBNAIL_BADGE_TYPE_ICON -> AndesThumbnailBadgeType.Icon
         THUMBNAIL_BADGE_TYPE_IMAGE_CIRCLE -> AndesThumbnailBadgeType.ImageCircle
+        THUMBNAIL_BADGE_TYPE_TEXT -> AndesThumbnailBadgeType.Text
         else -> AndesThumbnailBadgeType.Icon
     }
 
@@ -153,6 +146,8 @@ class ThumbnailBadgeDynamicPage {
         else -> AndesBadgeIconType.HIGHLIGHT
     }
 
+    private fun getText() = thumbnailTextInput.text.toString()
+
     private fun setupBadgeComponentGroups(context: Context) {
         thumbnailBadgeComponentSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -190,6 +185,27 @@ class ThumbnailBadgeDynamicPage {
             }
     }
 
+    private fun showTextInput() {
+        thumbnailTypeSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (thumbnailTypeSpinner.selectedItem) {
+                        THUMBNAIL_BADGE_TYPE_ICON -> textGroup.visibility = View.GONE
+                        THUMBNAIL_BADGE_TYPE_IMAGE_CIRCLE -> textGroup.visibility = View.GONE
+                        THUMBNAIL_BADGE_TYPE_TEXT -> textGroup.visibility = View.VISIBLE
+                    }
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // no-op
+                }
+            }
+    }
+
     private fun setupBadgeComponentConfig(
         context: Context,
         pillConfigsVisibility: Int,
@@ -204,6 +220,7 @@ class ThumbnailBadgeDynamicPage {
                 sizesArray
             )
             spinner.setSelection(defaultPosition)
+
         }
     }
 
@@ -244,6 +261,9 @@ class ThumbnailBadgeDynamicPage {
         updateButton = binding.changeButton
         thumbnailBadgePillText = binding.thumbnailBadgePillText
         thumbnailBadgePillTextStyleCaps = binding.thumbnailBadgePillTextStyleSwitch
+        thumbnailTextInput = binding.thumbnailBadgeInitialsInput
+        textGroup = binding.thumbnailBadgeInitialGroup
+        demoImage = ContextCompat.getDrawable(container.context, R.drawable.andes_otros_almanaque_20)!!
     }
 
     private fun setupSpinnerComponent(context: Context, spinner: Spinner, @ArrayRes content: Int) {
@@ -256,4 +276,35 @@ class ThumbnailBadgeDynamicPage {
             spinner.adapter = adapter
         }
     }
+
+    companion object {
+        private const val BADGE_COMPONENT_ICON_PILL = "Icon Pill"
+        private const val BADGE_COMPONENT_PILL = "Pill"
+        private const val BADGE_COMPONENT_DOT = "Dot"
+        private const val BADGE_COMPONENT_DEFAULT_POSITION = 0
+
+        private const val THUMBNAIL_BADGE_TYPE_ICON = "Icon"
+        private const val THUMBNAIL_BADGE_TYPE_IMAGE_CIRCLE = "Image Circle"
+        private const val THUMBNAIL_BADGE_TYPE_TEXT = "Text"
+        private const val THUMBNAIL_BADGE_TYPE_DEFAULT_POSITION = 0
+
+        private const val THUMBNAIL_BADGE_SIZE_24 = "Size 24"
+        private const val THUMBNAIL_BADGE_SIZE_32 = "Size 32"
+        private const val THUMBNAIL_BADGE_SIZE_40 = "Size 40"
+        private const val THUMBNAIL_BADGE_SIZE_48 = "Size 48"
+        private const val THUMBNAIL_BADGE_SIZE_56 = "Size 56"
+        private const val THUMBNAIL_BADGE_SIZE_64 = "Size 64"
+        private const val THUMBNAIL_BADGE_SIZE_72 = "Size 72"
+        private const val THUMBNAIL_BADGE_SIZE_80 = "Size 80"
+        private const val DEFAULT_DOT_SIZE_POSITION = 0
+        private const val DEFAULT_PILL_SIZE_POSITION = 3
+
+        private const val THUMBNAIL_BADGE_COLOR_HIGHLIGHT = "Highlight"
+        private const val THUMBNAIL_BADGE_COLOR_SUCCESS = "Success"
+        private const val THUMBNAIL_BADGE_COLOR_WARNING = "Warning"
+        private const val THUMBNAIL_BADGE_COLOR_ERROR = "Error"
+        private const val THUMBNAIL_BADGE_COLOR_DEFAULT_POSITION = 0
+        private const val CAMPO_OBLIGATORIO = "Campo obligatorio"
+    }
+
 }

@@ -17,12 +17,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/andes_thumbnail_icon_size_16"
             android:layout_marginBottom="@dimen/andes_thumbnail_icon_size_16"
-            app:andesThumbnailAccentColor="@color/andes_accent_color_800"
-            app:andesThumbnailHierarchy="quiet"
-            app:andesThumbnailImage="@drawable/andes_otros_almanaque_20"
-            app:andesThumbnailSize="size_24"
+            app:andesThumbnailAccentColor="@color/andes_red_800"
+            app:andesThumbnailHierarchy="AndesDefault"
+            app:andesThumbnailSize="size_48"
             app:andesThumbnailState="disabled"
-            app:andesThumbnailType="icon" />
+            app:andesThumbnailText="AB"
+            app:andesThumbnailAssetType="text"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +40,8 @@
             app:andesThumbnailImage="@drawable/andes_otros_almanaque_20"
             app:andesThumbnailSize="size_48"
             app:andesThumbnailState="enabled"
-            app:andesThumbnailType="icon" />
+            app:andesThumbnailAssetType="icon"
+            app:andesThumbnailShape="square"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,10 +56,9 @@
             android:layout_marginBottom="@dimen/andes_thumbnail_icon_size_16"
             app:andesThumbnailAccentColor="@color/andes_red_800"
             app:andesThumbnailHierarchy="AndesDefault"
-            app:andesThumbnailImage="@drawable/andes_otros_almanaque_20"
+            app:andesThumbnailImage="@drawable/andes_envio_envio_24"
             app:andesThumbnailSize="size_64"
-            app:andesThumbnailState="enabled"
-            app:andesThumbnailType="icon" />
+            app:andesThumbnailState="enabled" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -116,6 +116,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/andes_thumbnail_description_image_square"
+            android:textSize="@dimen/description_text_size_thumbnail" />
+
+        <com.mercadolibre.android.andesui.thumbnail.AndesThumbnail
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/andes_thumbnail_icon_size_16"
+            android:layout_marginBottom="@dimen/andes_thumbnail_icon_size_16"
+            app:andesThumbnailAccentColor="@color/andes_red_800"
+            app:andesThumbnailHierarchy="AndesDefault"
+            app:andesThumbnailAssetType="text"
+            app:andesThumbnailText="AB"
+            app:andesThumbnailSize="size_64"
+            app:andesThumbnailState="enabled"
+            app:andesThumbnailShape="square"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/andes_thumbnail_description_image_circle_initials"
+            android:textSize="@dimen/description_text_size_thumbnail" />
+
+        <com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/andes_thumbnail_icon_size_16"
+            android:layout_marginBottom="@dimen/andes_thumbnail_icon_size_16"
+            app:andesThumbnailBadgeType="text"
+            app:andesThumbnailBadgeText="AB"
+            app:andesThumbnailBadgeComponentType="success"
+            app:andesThumbnailBadgeComponent="icon_pill"
+            app:andesThumbnailBadgeComponentPillSize="size_64"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_text_size_thumbnail_badge_icon_pill_initials"
+            android:textSize="@dimen/description_text_size_thumbnail" />
+
+        <com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/andes_thumbnail_icon_size_16"
+            android:layout_marginBottom="@dimen/andes_thumbnail_icon_size_16"
+            app:andesThumbnailBadgeType="text"
+            app:andesThumbnailBadgeText="AB"
+            app:andesThumbnailBadgeComponentType="error"
+            app:andesThumbnailBadgeComponent="dot"
+            app:andesThumbnailBadgeComponentDotSize="size_32"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_text_size_thumbnail_badge_dot_initials"
             android:textSize="@dimen/description_text_size_thumbnail" />
 
         <com.mercadolibre.android.andesui.thumbnail.AndesThumbnailBadge

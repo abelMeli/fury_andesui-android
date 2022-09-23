@@ -23,7 +23,7 @@ enum class AndesThumbnailBadgePillSize {
         /**
          * Retrieves a [AndesThumbnailBadgePillSize] from the given enum value in string.
          */
-        fun fromString(value: String): AndesThumbnailBadgePillSize = valueOf(value.toUpperCase(Locale.ROOT))
+        fun fromString(value: String): AndesThumbnailBadgePillSize = valueOf(value.uppercase(Locale.ROOT))
     }
 
     internal val size get() = getAndesThumbnailSize()
@@ -57,7 +57,7 @@ enum class AndesThumbnailBadgeDotSize {
         /**
          * Retrieves a [AndesThumbnailBadgeDotSize] from the given enum value in string.
          */
-        fun fromString(value: String): AndesThumbnailBadgeDotSize = valueOf(value.toUpperCase(Locale.ROOT))
+        fun fromString(value: String): AndesThumbnailBadgeDotSize = valueOf(value.uppercase(Locale.ROOT))
     }
 
     internal val size get() = getAndesThumbnailSize()

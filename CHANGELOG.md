@@ -1,6 +1,9 @@
 # v6.0.1
 ## 🛠 Fixes
 - Fix crash in demoapp caused by an activity without the `exported` property 
+## 🚀 Feature
+- Now the `AndesThumbnail` and `AndesThumbnailBadge` as a new text type that allow to create a Thumbnail with letters instead of an image | Author: [@MLcaro](https://github.com/MLcaro)
+- Added new attributes to  `AndesThumbnail` receives the shape and the asset type separately| Author: [@MLcaro](https://github.com/MLcaro)
 
 # v6.0.0
 ## Migrated
