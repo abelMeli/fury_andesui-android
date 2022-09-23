@@ -1,4 +1,4 @@
-# v6.0.1
+# v6.1.0
 ## 🛠 Fixes
 - Fix crash in demoapp caused by an activity without the `exported` property 
 ## 🚀 Feature
