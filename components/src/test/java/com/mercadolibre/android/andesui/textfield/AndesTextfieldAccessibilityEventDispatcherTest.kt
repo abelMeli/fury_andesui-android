@@ -41,7 +41,7 @@ class AndesTextfieldAccessibilityEventDispatcherTest {
     }
 
     @Test
-    fun `announceForAccessibility method is triggered when text reaches 80% and count is bigger than minimum`() {
+    fun `announceForAccessibility method is triggered when text reaches 80 percent and count is bigger than minimum`() {
         val counter = 50
         val text = "a string with 40 characters to test func"
         val announceText = "10 caracteres restantes"
@@ -57,7 +57,7 @@ class AndesTextfieldAccessibilityEventDispatcherTest {
     }
 
     @Test
-    fun `announceForAccessibility method is not triggered when text reaches 80% but counter is smaller than minimum`() {
+    fun `announceForAccessibility method is not triggered when text reaches 80 percent but counter is smaller than minimum`() {
         val counter = 19
         val text = "123456789012345678"
         val announceText = "10 caracteres restantes"
@@ -73,7 +73,7 @@ class AndesTextfieldAccessibilityEventDispatcherTest {
     }
 
     @Test
-    fun `announceForAccessibility is not triggered when text does not reach 80%`() {
+    fun `announceForAccessibility is not triggered when text does not reach 80 percent`() {
         val counter = 50
         val text = "string with 20 chars"
         val announceText = "10 caracteres restantes"
