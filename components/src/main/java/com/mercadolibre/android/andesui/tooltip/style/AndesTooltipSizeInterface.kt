@@ -15,6 +15,7 @@ import com.mercadolibre.android.andesui.tooltip.location.BottomAndesTooltipLocat
 import com.mercadolibre.android.andesui.tooltip.location.LeftAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.location.RightAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.location.TopAndesTooltipLocationConfig
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSizeDynamic.rightPositionInside
 import com.mercadolibre.android.andesui.utils.ScreenUtils
 
 /**
@@ -46,6 +47,14 @@ internal sealed class AndesTooltipSizeInterface {
         location: AndesTooltipLocation
     ): AndesTooltipLocationConfig
 
+     fun rightPositionInside(tooltip: AndesTooltipLocationInterface, targetWidth: Int): AndesTooltipArrowData{
+        return AndesTooltipArrowData(
+            positionInSide = ArrowPositionId.RIGHT,
+            point = -tooltip.tooltipMeasuredWidth + targetWidth / 2 + tooltip.arrowWidth / 2 +
+                    tooltip.arrowBorder + tooltip.paddingWithArrowHorizontal
+        )
+    }
+
     abstract fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData
 }
 
@@ -74,6 +83,7 @@ internal object AndesTooltipSizeDynamic : AndesTooltipSizeInterface() {
         AndesTooltipLocation.LEFT -> LeftAndesTooltipLocationConfig(tooltip)
         AndesTooltipLocation.RIGHT -> RightAndesTooltipLocationConfig(tooltip)
     }
+
 
     override fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
         val targetX = target.getViewPointOnScreen().x
@@ -106,11 +116,7 @@ internal object AndesTooltipSizeDynamic : AndesTooltipSizeInterface() {
                 )
             }
             else -> {
-                AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.RIGHT,
-                    point = -tooltip.tooltipMeasuredWidth + targetWidth / 2 + tooltip.arrowWidth / 2 +
-                            tooltip.arrowBorder + tooltip.paddingWithArrowHorizontal
-                )
+                rightPositionInside(tooltip,targetWidth)
             }
         }
     }
@@ -152,6 +158,7 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
     override fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
 
         ///// full text size////
+
         val targetHalfXPoint = target.getViewPointOnScreen().x + (target.measuredWidth / 2)
 
         val minor = getValidateWidth(tooltip.tooltipMeasuredWidth)
@@ -194,11 +201,7 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
                     )
                 }
                 else -> {
-                    AndesTooltipArrowData(
-                        positionInSide = ArrowPositionId.RIGHT,
-                        point = -tooltip.tooltipMeasuredWidth + target.measuredWidth / 2 + tooltip.arrowWidth / 2 +
-                                tooltip.arrowBorder + tooltip.paddingWithArrowHorizontal
-                    )
+                  rightPositionInside(tooltip, target.measuredWidth)
                 }
             }
 

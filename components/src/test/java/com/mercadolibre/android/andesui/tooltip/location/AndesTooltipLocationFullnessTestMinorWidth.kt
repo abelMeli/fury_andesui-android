@@ -6,7 +6,7 @@ import com.mercadolibre.android.andesui.tooltip.radius.RadiusLayout
 import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSize
 import com.nhaarman.mockitokotlin2.mock
 
-object  AndesTooltipLocationInterfaceImplTestFullsize : AndesTooltipLocationInterface {
+object AndesTooltipLocationFullnessTestMinorWidth : AndesTooltipLocationInterface {
     var andesTooltipSizeTest: AndesTooltipSize = AndesTooltipSize.FULL_SIZE
 
     override val bodyWindowHeight: Int
@@ -18,7 +18,7 @@ object  AndesTooltipLocationInterfaceImplTestFullsize : AndesTooltipLocationInte
     override val displaySizeY: Int
         get() = 40
     override val tooltipMeasuredWidth: Int
-        get() = 1080
+        get() = 257
     override val tooltipMeasuredHeight: Int
         get() = 60
     override val arrowWidth: Int
@@ -46,5 +46,3 @@ object  AndesTooltipLocationInterfaceImplTestFullsize : AndesTooltipLocationInte
         target.width + xOff + yOff
     }
 }
-
-

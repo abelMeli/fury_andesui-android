@@ -131,7 +131,7 @@ class AndesTooltipSizeInterfaceTest {
     @Test
     fun `when getTooltipXOffForSize in FULL_SIZE then return positionLeft_cut`() {
         //GIVE
-        val tooltipMeasures = spy(AndesTooltipLocationInterfaceImplTestFullsize_cut)
+        val tooltipMeasures = spy(AndesTooltipLocationFullnessTestMinorWidth)
         val view = View(context)
         val container = ConstraintLayout(context)
         view.id = 3
@@ -169,7 +169,7 @@ class AndesTooltipSizeInterfaceTest {
     @Test
     fun `when getTooltipXOffForSize in FULL_SIZE then return positionRight`() {
         //GIVE
-        val tooltipMeasures = spy(AndesTooltipLocationInterfaceImplTestFullsize_cut)
+        val tooltipMeasures = spy(AndesTooltipLocationFullnessTestMinorWidth)
         val view = View(context)
         val container = ConstraintLayout(context)
         view.id = 2
@@ -206,7 +206,7 @@ class AndesTooltipSizeInterfaceTest {
     @Test
     fun `when getTooltipXOffForSize in FULL_SIZE then return positionCenter`() {
         //GIVE
-        val tooltipMeasures = spy(AndesTooltipLocationInterfaceImplTestFullsize_cut)
+        val tooltipMeasures = spy(AndesTooltipLocationFullnessTestMinorWidth)
         val view = View(context)
         val container = ConstraintLayout(context)
         view.id = 1
