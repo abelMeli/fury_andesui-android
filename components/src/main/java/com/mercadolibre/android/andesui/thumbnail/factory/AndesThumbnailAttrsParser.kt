@@ -7,7 +7,9 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.AndesColor
+import com.mercadolibre.android.andesui.thumbnail.assetType.AndesThumbnailAssetType
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
+import com.mercadolibre.android.andesui.thumbnail.shape.AndesThumbnailShape
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
@@ -18,11 +20,13 @@ import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 internal data class AndesThumbnailAttrs(
     val andesThumbnailAccentColor: AndesColor,
     val andesThumbnailHierarchy: AndesThumbnailHierarchy,
-    val andesThumbnailImage: Drawable,
+    @Deprecated("Use andesThumbnailAssetType and andesThumbnailShape")
     val andesThumbnailType: AndesThumbnailType,
     val andesThumbnailSize: AndesThumbnailSize,
     val andesThumbnailState: AndesThumbnailState,
-    val andesThumbnailScaleType: ImageView.ScaleType
+    val andesThumbnailScaleType: ImageView.ScaleType,
+    val andesThumbnailAssetType: AndesThumbnailAssetType,
+    val andesThumbnailShape: AndesThumbnailShape
 )
 
 /**
@@ -63,24 +67,40 @@ internal object AndesThumbnailAttrsParser {
     private const val ANDES_THUMBNAIL_SCALE_TYPE_MATRIX = 5007
     private const val ANDES_THUMBNAIL_SCALE_NO_SCALE_TYPE = -1
 
+    private const val ANDES_THUMBNAIL_ASSET_ICON = 6000
+    private const val ANDES_THUMBNAIL_ASSET_IMAGE = 6001
+    private const val ANDES_THUMBNAIL_ASSET_TEXT = 6002
+    private const val NO_ASSET = -1
+
+    private const val ANDES_THUMBNAIL_CIRCLE = 7000
+    private const val ANDES_THUMBNAIL_SQUARE = 7001
+    private const val NO_SHAPE = -1
+
 
     fun parse(context: Context, attr: AttributeSet?): AndesThumbnailAttrs {
         val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesThumbnail)
-        val color = typedArray.getResourceId(R.styleable.AndesThumbnail_andesThumbnailAccentColor, 0)
-
+        val color =
+            typedArray.getResourceId(R.styleable.AndesThumbnail_andesThumbnailAccentColor, 0)
+        val inputText = getInputText(typedArray)
+        val inputImage = getInputImage(typedArray)
+        val type = getType(typedArray)
         return AndesThumbnailAttrs(
-                andesThumbnailHierarchy = getHierarchy(typedArray),
-                andesThumbnailType = getType(typedArray),
-                andesThumbnailSize = getSize(typedArray),
-                andesThumbnailState = getState(typedArray),
-                andesThumbnailAccentColor = AndesColor(color),
-                andesThumbnailImage = getImage(typedArray),
-                andesThumbnailScaleType = getScaleType(typedArray)
+            andesThumbnailHierarchy = getHierarchy(typedArray),
+            andesThumbnailType = type,
+            andesThumbnailSize = getSize(typedArray),
+            andesThumbnailState = getState(typedArray),
+            andesThumbnailAccentColor = AndesColor(color),
+            andesThumbnailScaleType = getScaleType(typedArray),
+            andesThumbnailAssetType = getAssetType(typedArray, type, inputImage, inputText),
+            andesThumbnailShape = getShape(typedArray)
         ).also { typedArray.recycle() }
     }
 
     private fun getScaleType(typedArray: TypedArray): ImageView.ScaleType {
-        return when (typedArray.getInt(R.styleable.AndesThumbnail_andesThumbnailScaleType, ANDES_THUMBNAIL_SCALE_NO_SCALE_TYPE)) {
+        return when (typedArray.getInt(
+            R.styleable.AndesThumbnail_andesThumbnailScaleType,
+            ANDES_THUMBNAIL_SCALE_NO_SCALE_TYPE
+        )) {
             ANDES_THUMBNAIL_SCALE_TYPE_CENTER -> ImageView.ScaleType.CENTER
             ANDES_THUMBNAIL_SCALE_TYPE_CENTER_CROP -> ImageView.ScaleType.CENTER_CROP
             ANDES_THUMBNAIL_SCALE_TYPE_CENTER_INSIDE -> ImageView.ScaleType.CENTER_INSIDE
@@ -93,16 +113,11 @@ internal object AndesThumbnailAttrsParser {
         }
     }
 
-    private fun getImage(typedArray: TypedArray): Drawable {
-        val image: Drawable
-        val imageParameter = typedArray.getDrawable(R.styleable.AndesThumbnail_andesThumbnailImage)
-        if (imageParameter == null) {
-            throw IllegalArgumentException("Wrong andesThumbnailImage passed, check your layout")
-        } else {
-            image = imageParameter
-        }
-        return image
-    }
+    private fun getInputImage(typedArray: TypedArray): Drawable?
+         = typedArray.getDrawable(R.styleable.AndesThumbnail_andesThumbnailImage)
+
+    private fun getInputText(typedArray: TypedArray): String =
+        typedArray.getString(R.styleable.AndesThumbnail_andesThumbnailText) ?: ""
 
     private fun getSize(typedArray: TypedArray): AndesThumbnailSize =
         when (typedArray.getInt(R.styleable.AndesThumbnail_andesThumbnailSize, NO_SIZE)) {
@@ -138,5 +153,43 @@ internal object AndesThumbnailAttrsParser {
             ANDES_THUMBNAIL_TYPE_IMAGE_CIRCLE -> AndesThumbnailType.IMAGE_CIRCLE
             ANDES_THUMBNAIL_TYPE_IMAGE_SQUARE -> AndesThumbnailType.IMAGE_SQUARE
             else -> AndesThumbnailType.ICON
+        }
+
+    private fun getAssetType(
+        typedArray: TypedArray,
+        type: AndesThumbnailType,
+        inputImage: Drawable?,
+        inputText: String
+    ): AndesThumbnailAssetType =
+        when (typedArray.getInt(R.styleable.AndesThumbnail_andesThumbnailAssetType, NO_ASSET)) {
+            ANDES_THUMBNAIL_ASSET_ICON -> AndesThumbnailAssetType.Icon(
+                inputImage
+                    ?: throw IllegalArgumentException("You need to provide an image to use this asset type")
+            )
+            ANDES_THUMBNAIL_ASSET_IMAGE -> AndesThumbnailAssetType.Image(
+                inputImage
+                    ?: throw IllegalArgumentException("You need to provide an image to use this asset type")
+            )
+            ANDES_THUMBNAIL_ASSET_TEXT -> AndesThumbnailAssetType.Text(
+                inputText.takeIf { it.isNotBlank() }
+                    ?: throw IllegalArgumentException("You need to provide a valid string to use this asset type")
+            )
+            else -> type.toAssetType(
+                inputImage
+                    ?: throw IllegalArgumentException("Wrong andesThumbnailImage passed, check your layout")
+            )
+        }
+
+    private fun getShape(typedArray: TypedArray): AndesThumbnailShape =
+        when (typedArray.getInt(R.styleable.AndesThumbnail_andesThumbnailShape, NO_SHAPE)) {
+            ANDES_THUMBNAIL_CIRCLE -> AndesThumbnailShape.Circle
+            ANDES_THUMBNAIL_SQUARE -> AndesThumbnailShape.Square
+            else ->
+                when (typedArray.getInt(R.styleable.AndesThumbnail_andesThumbnailType, NO_TYPE)) {
+                    ANDES_THUMBNAIL_TYPE_ICON -> AndesThumbnailShape.Circle
+                    ANDES_THUMBNAIL_TYPE_IMAGE_CIRCLE -> AndesThumbnailShape.Circle
+                    ANDES_THUMBNAIL_TYPE_IMAGE_SQUARE -> AndesThumbnailShape.Square
+                    else -> AndesThumbnailShape.Circle
+                }
         }
 }

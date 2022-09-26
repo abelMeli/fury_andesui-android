@@ -31,6 +31,8 @@
 
         <attr name="andesThumbnailImage" format="reference" />
 
+        <attr name="andesThumbnailText" format="string" />
+
         <attr name="andesThumbnailAccentColor" format="reference" />
 
         <attr name="andesThumbnailScaleType" format="enum">
@@ -43,12 +45,24 @@
             <enum name="fitXY" value="5006" />
             <enum name="matrix" value="5007" />
         </attr>
+
+        <attr name="andesThumbnailAssetType" format="enum">
+            <enum name="icon" value="6000" />
+            <enum name="image" value="6001" />
+            <enum name="text" value="6002" />
+        </attr>
+
+        <attr name="andesThumbnailShape" format="enum">
+            <enum name="circle" value="7000" />
+            <enum name="square" value="7001" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="AndesThumbnailBadge" tools:ignore="ResourceName">
         <attr name="andesThumbnailBadgeType" format="enum">
             <enum name="icon" value="2000" />
             <enum name="image_circle" value="2001" />
+            <enum name="text" value="2002" />
         </attr>
 
         <attr name="andesThumbnailBadgeComponent" format="enum">
@@ -82,6 +96,7 @@
         <attr name="andesThumbnailBadgePillDefaultTextStyle" format="boolean" />
 
         <attr name="andesThumbnailBadgeImage" format="reference" />
+        <attr name="andesThumbnailBadgeText" format="string"/>
 
     </declare-styleable>
 </resources>

@@ -34,6 +34,7 @@ class FeedbackScreenDynamicPage {
     private lateinit var closeButtonSwitch: AndesSwitch
     private lateinit var feedbackButtonGroupSpinner: Spinner
     private lateinit var feedbackIllustrationSizeSpinner: Spinner
+    private lateinit var feedbackThumbnailTextInput: AndesTextfield
 
     fun create(context: Context, container: View) {
         initComponents(container)
@@ -65,7 +66,8 @@ class FeedbackScreenDynamicPage {
                 feedbackHeaderOverline.text,
                 feedbackHeaderDescription.text,
                 feedbackHeaderHighlight.text,
-                feedbackButtonGroupSpinner.selectedItem as String
+                feedbackButtonGroupSpinner.selectedItem as String,
+                feedbackThumbnailTextInput.text
             ))
         }
     }
@@ -138,13 +140,30 @@ class FeedbackScreenDynamicPage {
                     id: Long
                 ) {
                     when (selectedItem) {
-                        NONE -> feedbackIllustrationSizeGroup.visibility = GONE
+                        NONE -> {
+                            feedbackThumbnailTextInput.visibility = GONE
+                            feedbackIllustrationSizeGroup.visibility = GONE
+                        }
 
-                        ICON -> feedbackIllustrationSizeGroup.visibility = GONE
+                        ICON -> {
+                            feedbackThumbnailTextInput.visibility = GONE
+                            feedbackIllustrationSizeGroup.visibility = GONE
+                        }
 
-                        IMAGE_CIRCLE -> feedbackIllustrationSizeGroup.visibility = GONE
+                        IMAGE_CIRCLE -> {
+                            feedbackThumbnailTextInput.visibility = GONE
+                            feedbackIllustrationSizeGroup.visibility = GONE
+                        }
 
-                        ILLUSTRATION -> feedbackIllustrationSizeGroup.visibility = VISIBLE
+                        TEXT -> {
+                            feedbackThumbnailTextInput.visibility = VISIBLE
+                            feedbackIllustrationSizeGroup.visibility = GONE
+                        }
+
+                        ILLUSTRATION -> {
+                            feedbackThumbnailTextInput.visibility = GONE
+                            feedbackIllustrationSizeGroup.visibility = VISIBLE
+                        }
                     }
                 }
 
@@ -170,6 +189,7 @@ class FeedbackScreenDynamicPage {
         feedbackBodyMocks = binding.feedbackscreenBodyContentText
         updateButton = binding.changeButton
         feedbackButtonGroupSpinner = binding.feedbackscreenButtongroupSpinner
+        feedbackThumbnailTextInput = binding.feedbackscreenThumbnailTextInput
     }
 
     private fun setupSpinnerComponent(context: Context, spinner: Spinner, @ArrayRes content: Int) {
@@ -194,7 +214,9 @@ class FeedbackScreenDynamicPage {
         const val NONE = "None"
         const val ICON = "Icon"
         const val IMAGE_CIRCLE = "Image Circle"
-        /**Spinner option for type of asset. */
+        /**Spinner option for type of asset thumbnail text. */
+        const val TEXT = "Thumbnail text"
+        /**Spinner option for type of asset illustration. */
         const val ILLUSTRATION = "Illustration"
         /**Spinner option for illustration size small. */
         const val ILLUSTRATION_80 = "Small (320x80)"

@@ -720,6 +720,8 @@ class AndesCarouselTest {
         val andesCarouselAttrs =  ReflectionHelpers.getField<AndesCarouselAttrs>(carousel, "andesCarouselAttrs")
         setupActivityForTesting(carousel)
         coroutinesTestRule.advanceTimeBy(3000)
+        // stops the carousel to stops the tests.
+        carousel.autoplay = false
 
         verify(recyclerViewMock, atLeastOnce())?.smoothScrollToPosition(eq(1))
         assertTrue(andesCarouselAttrs.andesCarouselAutoplay)
@@ -740,7 +742,10 @@ class AndesCarouselTest {
 
         setupActivityForTesting(carousel)
         carousel.delegate = andesCarouselDelegate
-        Thread.sleep(5000)
+
+        coroutinesTestRule.advanceTimeBy(3000)
+        carousel.autoplay = false
+        ReflectionHelpers.callInstanceMethod<AndesCarousel>(carousel, "onDetachedFromWindow")
 
         verify(recyclerViewMock, atLeastOnce())?.smoothScrollToPosition(eq(1))
         assertTrue(andesCarouselAttrs.andesCarouselAutoplay)
@@ -772,6 +777,27 @@ class AndesCarouselTest {
         assertTrue(andesCarouselAttrs.andesCarouselAutoplay)
         assertEquals(10, andesCarouselAttrs.andesCarouselAutoplaySpeed)
         AndesCarouselAutoplayOn.a11ySettingsValidate = tempSettings
+    }
+
+    @Test
+    @LooperMode(LooperMode.Mode.PAUSED)
+    fun `test created infinite carousel with autoplay, when onDettached, no error`() = runBlockingTest {
+        val getDataSetFree = getDataSetWithItems(2)
+        val andesCarouselDelegate = createDelegate(getDataSetFree)
+        val carousel = AndesCarousel(context, true, AndesCarouselMargin.NONE, INFINITE, STATIC, 10)
+        carousel.delegate = andesCarouselDelegate
+        val recyclerView = ReflectionHelpers.getField<RecyclerView>(carousel, "recyclerViewComponent")
+        val recyclerViewMock: RecyclerView = spy(recyclerView)
+        ReflectionHelpers.setField(carousel, "recyclerViewComponent", recyclerViewMock)
+        carousel.autoplay = true
+        val andesCarouselAttrs = ReflectionHelpers.getField<AndesCarouselAttrs>(carousel, "andesCarouselAttrs")
+        setupActivityForTesting(carousel)
+        coroutinesTestRule.advanceTimeBy(3000)
+        // When
+        ReflectionHelpers.callInstanceMethod<AndesCarousel>(carousel, "onDetachedFromWindow")
+
+        assertTrue(andesCarouselAttrs.andesCarouselAutoplay)
+        assertEquals(10, andesCarouselAttrs.andesCarouselAutoplaySpeed)
     }
 
     private fun getDataSetWithItems(count: Int): List<String> = MutableList(count) {"test"}

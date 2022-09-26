@@ -15,7 +15,6 @@ internal interface AndesCarouselAutoplayStrategy {
     fun execute(
         autoplayJob: Job?,
         config: AndesCarouselConfiguration,
-        componentCoroutineScope: CoroutineScope,
         recyclerView: RecyclerView,
         carouselSize: Int,
         isAccessibilityOn: () -> Boolean
@@ -35,7 +34,6 @@ internal object AndesCarouselAutoplayOn : AndesCarouselAutoplayStrategy {
     override fun execute(
         autoplayJob: Job?,
         config: AndesCarouselConfiguration,
-        componentCoroutineScope: CoroutineScope,
         recyclerView: RecyclerView,
         carouselSize: Int,
         isAccessibilityOn: () -> Boolean
@@ -43,7 +41,8 @@ internal object AndesCarouselAutoplayOn : AndesCarouselAutoplayStrategy {
         autoplayJob?.cancel()
         var autoplayPosition: Int
         val settingsEnabled = recyclerView.context.settingsEnabled(a11ySettingsValidate)
-        return componentCoroutineScope.launch {
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        return coroutineScope.launch {
             if (settingsEnabled && config.infinite) {
                 autoplayPosition = 0
                 while (autoplayPosition <= carouselSize && !isAccessibilityOn()) {
@@ -51,9 +50,7 @@ internal object AndesCarouselAutoplayOn : AndesCarouselAutoplayStrategy {
                     if (autoplayPosition >= carouselSize) {
                         autoplayPosition = 0
                     }
-                    withContext(Dispatchers.Main) {
-                        recyclerView.smoothScrollToPosition(autoplayPosition)
-                    }
+                    recyclerView.smoothScrollToPosition(autoplayPosition)
                     autoplayPosition += 1
                 }
             }
@@ -65,7 +62,6 @@ internal object AndesCarouselAutoplayOff : AndesCarouselAutoplayStrategy {
     override fun execute(
         autoplayJob: Job?,
         config: AndesCarouselConfiguration,
-        componentCoroutineScope: CoroutineScope,
         recyclerView: RecyclerView,
         carouselSize: Int,
         isAccessibilityOn: () -> Boolean

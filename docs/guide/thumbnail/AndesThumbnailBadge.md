@@ -42,6 +42,7 @@ Basic Sample XML
 | app:andesThumbnailBadgeComponentPillSize | Thumbnail display size in dp for pill and icon_pill badge: **size_40**, **size_48**, **size_56**, **size_64**, **size_72**, **size_80** |
 | app:andesThumbnailBadgePillText | Pill text content. |
 | app:andesThumbnailBadgePillDefaultTextStyle | Sets pill text in uppercase: **true**, **false**. Default value: **true** |
+| app:andesThumbnailBadgeText | Thumbnail text content. |
 
 <br/>
 
@@ -50,7 +51,7 @@ Basic Sample XML
 | --- |
 | AndesThumbnailBadge(context: Context, attrs: AttributeSet?)  |
 | AndesThumbnailBadge(context: Context, image: Drawable, badge: AndesThumbnailBadgeComponent, thumbnailType: AndesThumbnailBadgeType) |
-
+| AndesThumbnailBadge(context: Context, badge: AndesThumbnailBadgeComponent, thumbnailType: AndesThumbnailBadgeType, text: String) |
 <br/>
 
 ##### AndesThumbnailBadge(context: Context, image: Drawable, badgeComponent: AndesThumbnailBadgeComponent, thumbnailType: AndesThumbnailBadgeType)
@@ -60,6 +61,7 @@ Basic Sample XML
 | image | **Drawable**: thumbnail image content. |
 | badgeComponent | **[AndesThumbnailBadgeComponent](#andesthumbnailbadgecomponent)**: badge view to show over the thumbnail. |
 | type | **[AndesThumbnailBadgeType](#andesthumbnailbadgetype)**: thumbnail design type. Default value: AndesThumbnailBadgeType.Icon |
+| text | **String**: thumbnail text content. |
 
 <br/>
 
@@ -83,7 +85,7 @@ sealed class AndesThumbnailBadgeType
 | ----------- | ----------- |
 | Icon | Default rounded image with a tinted icon inside<br/><img src="resources/thumbnail/iconIconPillHighlight.png" height="48"/> |
 | ImageCircle | Rounded image without tint<br/><img src="resources/thumbnail/imageCircleIconPillHightlight.png" height="48"/> |
-
+| Text | Rounded thumbnail with initials inside <br/>|
 <br/>
 
 #### Functions

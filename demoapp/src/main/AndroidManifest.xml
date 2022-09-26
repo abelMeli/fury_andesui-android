@@ -49,6 +49,7 @@
         </activity>
         <activity
             android:name=".components.a11yplayground.A11yLandingActivity"
+            android:exported="true"
             android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -753,6 +754,11 @@
                     android:scheme="andes" />
             </intent-filter>
         </activity>
+        <activity-alias
+            android:name="leakcanary.internal.activity.LeakLauncherActivity"
+            android:exported="true"
+            tools:node="merge"
+            android:targetActivity="leakcanary.internal.activity.LeakActivity" />
     </application>
 
 </manifest>

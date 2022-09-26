@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Generic -->
     <string name="andes_message_title" translatable="false">Atention! 👇</string>
     <string name="title_description" translatable="false">Atention! 👇</string>
@@ -694,12 +694,17 @@
     <string name="andes_thumbnail_specs" translatable="false">Andes Thumbnail Specs 📘</string>
     <string name="andes_thumbnail_description" translatable="false">They are containers that specify images, logos and icons for complementary content and modified meaning. When grouped together, they improve the scannability of the information.</string>
     <string name="andes_thumbnail_state" translatable="false">State</string>
-    <string name="andes_thumbnail_description_24" translatable="false">Hierarchy: Quiet, Size: 24, State: Disabled, Type: Icon</string>
+    <string name="andes_thumbnail_asset_type" translatable="false">Thumbnail Type</string>
+    <string name="andes_thumbnail_scale_type" translatable="false">Scale type</string>
+    <string name="andes_thumbnail_shape" translatable="false">Shape</string>
+    <string name="andes_thumbnail_initials" translatable="false">Text</string>
+    <string name="andes_thumbnail_description_24" translatable="false">Hierarchy: Default, Size: 48, State: Disabled, Type: Initials</string>
     <string name="andes_thumbnail_description_48" translatable="false">Hierarchy: Loud, Size: 48, State: Enabled, Type: Icon</string>
     <string name="andes_thumbnail_description_64" translatable="false">Hierarchy: Default, Size: 64, State: Enabled, Type: Icon</string>
     <string name="andes_thumbnail_description_80" translatable="false">Hierarchy: Quiet, Size: 80, State: Enabled, Type: Icon</string>
     <string name="andes_thumbnail_description_image_circle" translatable="false">Hierarchy: Default, Size: 64, State: Enabled, Type: Image Circle</string>
-    <string name="andes_thumbnail_description_image_square" translatable="false">Hierarchy: Default, Size: 64, State: Enabled, Type: Image Square</string>
+    <string name="andes_thumbnail_description_image_square" translatable="false">Hierarchy: Default, Size: 64, State: Enabled, Type: Image, Shape: Square</string>
+    <string name="andes_thumbnail_description_image_circle_initials" translatable="false">Hierarchy: Default, Size: 64, State: Enabled, Type: Text, Shape: Square</string>
     <string-array name="andes_thumbnail_hierarchy_spinner" translatable="false">
         <item>Default</item>
         <item>Loud</item>
@@ -716,9 +721,29 @@
         <item>Size 80</item>
     </string-array>
     <string-array name="andes_thumbnail_type_spinner" translatable="false">
+        <item>None</item>
         <item>Icon</item>
         <item>Image Circle</item>
         <item>Image Square</item>
+    </string-array>
+    <string-array name="andes_thumbnail_asset_spinner" translatable="false">
+        <item>Icon</item>
+        <item>Image</item>
+        <item>Text</item>
+    </string-array>
+    <string-array name="andes_thumbnail_shape" translatable="false">
+        <item>Circle</item>
+        <item>Square</item>
+    </string-array>
+    <string-array name="andes_thumbnail_scale" translatable="false">
+        <item>center</item>
+        <item>fitXY</item>
+        <item>centerCrop</item>
+        <item>fitCenter</item>
+        <item>centerInside</item>
+        <item>fitEnd</item>
+        <item>fitStart</item>
+        <item>matrix</item>
     </string-array>
     <string-array name="andes_thumbnail_spinner" translatable="false">
         <item>With Thumbnail</item>
@@ -889,7 +914,9 @@
     <string name="andes_thumbnail_badge_pill_text" translatable="false">Pill text</string>
     <string name="andes_thumbnail_badge_pill_text_sample" translatable="false">9</string>
     <string name="description_text_size_thumbnail_badge_dot" translatable="false">BadgeComponent: Dot, Type: Image Circle, Size: 32, BadgeType: Error</string>
+    <string name="description_text_size_thumbnail_badge_dot_initials" translatable="false">BadgeComponent: Dot, Type: Image Circle, Size: 32, BadgeType: Error, with Text</string>
     <string name="description_text_size_thumbnail_badge_icon_pill" translatable="false">BadgeComponent: Icon Pill, Type: Icon, Size: 48, BadgeType: Highlight</string>
+    <string name="description_text_size_thumbnail_badge_icon_pill_initials" translatable="false">BadgeComponent: Icon Pill, Type: Text, Size: 48, BadgeType: Highlight</string>
     <string name="description_text_size_thumbnail_badge_pill" translatable="false">BadgeComponent: Pill, Type: Icon, Size: 56, BadgeType: Highlight</string>
 
     <string-array name="andes_timepicker_spinner_state" translatable="false">
@@ -906,6 +933,7 @@
     <string-array name="andes_thumbnail_badge_type_spinner" translatable="false">
         <item>Icon</item>
         <item>Image Circle</item>
+        <item>Text</item>
     </string-array>
 
     <string-array name="andes_thumbnail_badge_component_spinner" translatable="false">
@@ -1102,6 +1130,7 @@
     <string name="feedbackscreen_header_illustration_size_label" translatable="false">Illustration size</string>
     <string name="feedbackscreen_color" translatable="false">Feedback Color</string>
     <string name="feedbackscreen_header_title" translatable="false">Title</string>
+    <string name="feedbackscreen_thumbnail_text" translatable="false">Thumbnail text</string>
     <string name="feedbackscreen_header_overlined" translatable="false">Header With overline</string>
     <string name="feedbackscreen_header_overline" translatable="false">Overline</string>
     <string name="feedbackscreen_header_highlight" translatable="false">Highlight</string>
@@ -1122,12 +1151,14 @@
         <item>None</item>
         <item>Icon</item>
         <item>Image Circle</item>
+        <item>Thumbnail text</item>
         <item>Illustration</item>
     </string-array>
     <string-array name="feedbackscreen_header_thumbnail_spinner_Congrats" translatable="false">
         <item>None</item>
         <item>Icon</item>
         <item>Image Circle</item>
+        <item>Thumbnail text</item>
     </string-array>
     <string-array name="feedbackscreen_header_illustration_size" translatable="false">
         <item>Small (320x80)</item>

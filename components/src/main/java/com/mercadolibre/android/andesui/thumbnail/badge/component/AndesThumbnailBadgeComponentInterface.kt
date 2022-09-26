@@ -10,7 +10,6 @@ import com.mercadolibre.android.andesui.badge.AndesBadgeIconPill
 import com.mercadolibre.android.andesui.badge.AndesBadgePill
 import com.mercadolibre.android.andesui.badge.border.AndesBadgePillBorder
 import com.mercadolibre.android.andesui.badge.hierarchy.AndesBadgePillHierarchy
-import com.mercadolibre.android.andesui.badge.icontype.AndesBadgeIconType
 import com.mercadolibre.android.andesui.badge.size.AndesBadgePillSize
 import com.mercadolibre.android.andesui.badge.type.AndesBadgeType
 import com.mercadolibre.android.andesui.thumbnail.AndesThumbnail

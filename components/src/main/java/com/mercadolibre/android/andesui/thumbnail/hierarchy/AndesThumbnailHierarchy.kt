@@ -17,7 +17,11 @@ enum class AndesThumbnailHierarchy {
     LOUD;
 
     companion object {
-        fun fromString(value: String): AndesThumbnailHierarchy = valueOf(value.toUpperCase(Locale.ROOT))
+        /**
+         * Retrieves a [AndesThumbnailHierarchy] from the given enum value in string.
+         */
+        fun fromString(value: String): AndesThumbnailHierarchy =
+            valueOf(value.uppercase(Locale.ROOT))
     }
 
     internal val hierarchy get() = getAndesThumbnailHierarchy()
