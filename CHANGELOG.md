@@ -24,6 +24,7 @@
 ## 🚀 Feature
 - Now the `AndesTextView` can be used as label for both `AndesTextfield` and `AndesAmountFieldSimple` components | Author: [@juanunzu](https://github.com/juanunzu)
 - Added custom content in `AndesList`
+- Added fix position in fullsize of `AndesTooltip` component | Author: [@yireyes](https://github.com/yireyes)
 
 # v5.12.0
 ## 🚀 Feature

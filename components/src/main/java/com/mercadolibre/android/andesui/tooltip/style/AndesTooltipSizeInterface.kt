@@ -15,11 +15,15 @@ import com.mercadolibre.android.andesui.tooltip.location.BottomAndesTooltipLocat
 import com.mercadolibre.android.andesui.tooltip.location.LeftAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.location.RightAndesTooltipLocationConfig
 import com.mercadolibre.android.andesui.tooltip.location.TopAndesTooltipLocationConfig
+import com.mercadolibre.android.andesui.tooltip.style.AndesTooltipSizeDynamic.rightPositionInside
+import com.mercadolibre.android.andesui.utils.ScreenUtils
 
 /**
  * This class contains the different Types with styles for the specific Tooltip Size
  */
 internal sealed class AndesTooltipSizeInterface {
+
+    val padding = 16
 
     abstract fun titleMaxWidth(context: Context, isDismissible: Boolean): Int
 
@@ -42,6 +46,14 @@ internal sealed class AndesTooltipSizeInterface {
         tooltip: AndesTooltipLocationInterface,
         location: AndesTooltipLocation
     ): AndesTooltipLocationConfig
+
+     fun rightPositionInside(tooltip: AndesTooltipLocationInterface, targetWidth: Int): AndesTooltipArrowData{
+        return AndesTooltipArrowData(
+            positionInSide = ArrowPositionId.RIGHT,
+            point = -tooltip.tooltipMeasuredWidth + targetWidth / 2 + tooltip.arrowWidth / 2 +
+                    tooltip.arrowBorder + tooltip.paddingWithArrowHorizontal
+        )
+    }
 
     abstract fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData
 }
@@ -71,6 +83,7 @@ internal object AndesTooltipSizeDynamic : AndesTooltipSizeInterface() {
         AndesTooltipLocation.LEFT -> LeftAndesTooltipLocationConfig(tooltip)
         AndesTooltipLocation.RIGHT -> RightAndesTooltipLocationConfig(tooltip)
     }
+
 
     override fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
         val targetX = target.getViewPointOnScreen().x
@@ -103,11 +116,7 @@ internal object AndesTooltipSizeDynamic : AndesTooltipSizeInterface() {
                 )
             }
             else -> {
-                AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.RIGHT,
-                    point = -tooltip.tooltipMeasuredWidth + targetWidth / 2 + tooltip.arrowWidth / 2 +
-                            tooltip.arrowBorder + tooltip.paddingWithArrowHorizontal
-                )
+                rightPositionInside(tooltip,targetWidth)
             }
         }
     }
@@ -117,6 +126,7 @@ internal object AndesTooltipSizeDynamic : AndesTooltipSizeInterface() {
 }
 
 internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
+
     override fun titleMaxWidth(context: Context, isDismissible: Boolean) =
         if (isDismissible) {
             getDisplayMaxWidthForContent(context) - context.resources.getDimensionPixelOffset(R.dimen.andes_tooltip_arrow_width)
@@ -126,14 +136,14 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
 
     override fun bodyContentMaxWidth(context: Context) = getDisplayMaxWidthForContent(context)
 
-    override fun tooltipMeasureWidth(context: Context, view: View) = getDisplayWidth(context)
+    override fun tooltipMeasureWidth(context: Context, view: View) =  view.measuredWidth.takeIf{ getValidateWidth(it) } ?: getDisplayWidth(context)
 
     override fun getArrowPoint(
         arrowLocation: AndesTooltipArrowLocation,
         tooltipLocation: AndesTooltipLocationInterface,
         fixedArrowXPosition: Int
     ) = AndesTooltipArrowPoint(
-        x = fixedArrowXPosition.toFloat(),
+        x = arrowLocation.getArrowPositionX(tooltipLocation).takeIf { getValidateWidth(tooltipLocation.tooltipMeasuredWidth) } ?: fixedArrowXPosition.toFloat(),
         y = arrowLocation.getArrowPositionY(tooltipLocation)
     )
 
@@ -146,41 +156,88 @@ internal object AndesTooltipSizeFullSize : AndesTooltipSizeInterface() {
     }
 
     override fun getTooltipXOffForSize(target: View, tooltip: AndesTooltipLocationInterface): AndesTooltipArrowData {
+
+        ///// full text size////
+
         val targetHalfXPoint = target.getViewPointOnScreen().x + (target.measuredWidth / 2)
+
+        val minor = getValidateWidth(tooltip.tooltipMeasuredWidth)
 
         val minLeftSpace = tooltip.paddingWithArrowHorizontal + tooltip.arrowWidth / 2 + tooltip.arrowBorder
         val maxRightSpace = tooltip.tooltipMeasuredWidth - minLeftSpace
 
         val mayArrowLeft = targetHalfXPoint >= minLeftSpace
         val mayArrowRight = targetHalfXPoint <= maxRightSpace
-
         val targetIsBetweenLimits = mayArrowLeft && mayArrowRight
 
-        return when {
-            (targetIsBetweenLimits) -> {
-                AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.FREE,
-                    point = targetHalfXPoint - tooltip.arrowWidth / 2
-                )
+        ///// dynamic text /////
+
+        val tooltipWidth = tooltip.tooltipMeasuredWidth
+        val tooltipHalf = tooltipWidth / 2
+
+        val leftSpaceNeededForCenterArrow = targetHalfXPoint - tooltipHalf
+        val rightSpaceNeededForCenterArrow = targetHalfXPoint + tooltipHalf
+
+        val rightSpaceNeededForLeftArrow = tooltipWidth - tooltip.arrowWidth / 2 - tooltip.arrowBorder
+        val availableSpaceForLeftArrow = tooltip.displaySizeX - targetHalfXPoint
+
+        val canArrowCenter = leftSpaceNeededForCenterArrow > 0 && rightSpaceNeededForCenterArrow < tooltip.displaySizeX
+        val canArrowLeft = rightSpaceNeededForLeftArrow < availableSpaceForLeftArrow
+
+        if(minor) {
+
+            //dynamic text
+            return when {
+                (canArrowCenter) -> {
+                    AndesTooltipArrowData(
+                        positionInSide = ArrowPositionId.MIDDLE,
+                        point = ((target.measuredWidth / 2) - (tooltip.tooltipMeasuredWidth / 2))
+                    )
+                }
+                (canArrowLeft) -> {
+                    AndesTooltipArrowData(
+                        positionInSide = ArrowPositionId.LEFT,
+                        point = target.measuredWidth / 2 - tooltip.arrowWidth / 2 - tooltip.arrowBorder - tooltip.paddingWithArrowHorizontal
+                    )
+                }
+                else -> {
+                  rightPositionInside(tooltip, target.measuredWidth)
+                }
             }
-            (!mayArrowLeft) -> {
-                AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.LEFT,
-                    point = minLeftSpace - tooltip.paddingWithArrowHorizontal
-                )
-            }
-            else -> {
-                AndesTooltipArrowData(
-                    positionInSide = ArrowPositionId.RIGHT,
-                    point = maxRightSpace - tooltip.paddingWithArrowHorizontal
-                )
+
+        }else{
+
+            //fullsize screen
+            return when {
+                (targetIsBetweenLimits) -> {
+                    AndesTooltipArrowData(
+                        positionInSide = ArrowPositionId.FREE,
+                        point = targetHalfXPoint - tooltip.arrowWidth / 2
+                    )
+                }
+                (!mayArrowLeft) -> {
+                    AndesTooltipArrowData(
+                        positionInSide = ArrowPositionId.LEFT,
+                        point = minLeftSpace - tooltip.paddingWithArrowHorizontal
+                    )
+                }
+                else -> {
+                    AndesTooltipArrowData(
+                        positionInSide = ArrowPositionId.RIGHT,
+                        point = maxRightSpace - tooltip.paddingWithArrowHorizontal
+                    )
+                }
             }
         }
     }
+
+    private fun getValidateWidth(with: Int) =
+        with < (ScreenUtils.getScreenWidth() - padding * 2) - 100
 
     private fun getDisplayWidth(context: Context) =
         context.resources.displayMetrics.widthPixels
 
     private fun getDisplayMaxWidthForContent(context: Context) =
-        getDisplayWidth(context) - context.resources.getDimensionPixelSize(R.dimen.andes_tooltip_padding_with_arrow_horizontal) * 2
+        getDisplayWidth(context) - context.resources.
+        getDimensionPixelSize(R.dimen.andes_tooltip_padding_with_arrow_horizontal) * 2
 }
