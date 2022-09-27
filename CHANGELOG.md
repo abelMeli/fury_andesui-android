@@ -2,6 +2,8 @@
 ## 🛠 Fixes
 - Fix crash in demoapp caused by an activity without the `exported` property 
 - Fix Overlap between tooltip title and dismiss button when title text is large | Author: [@meligeo](https://github.com/meligeo)
+- Fix leak that makes carousel disappear when autoplay is activated | Author: [@meligeo](https://github.com/meligeo)
+
 ## 🚀 Feature
 - Now the `AndesThumbnail` and `AndesThumbnailBadge` as a new text type that allow to create a Thumbnail with letters instead of an image | Author: [@MLcaro](https://github.com/MLcaro)
 - Added new attributes to  `AndesThumbnail` receives the shape and the asset type separately| Author: [@MLcaro](https://github.com/MLcaro)
