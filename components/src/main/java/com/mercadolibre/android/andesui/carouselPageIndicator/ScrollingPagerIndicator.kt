@@ -39,7 +39,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
     private var visibleFramePosition = 0f
     private var visibleFrameWidth = 0f
     private var firstDotOffset = 0f
-    private lateinit var dotScale: SparseArray<Float>
+    private var dotScale: SparseArray<Float>? = null
     private var itemCount = 0
     private val paint: Paint
     private val colorEvaluator = ArgbEvaluator()
@@ -56,16 +56,45 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
     private var dotCountInitialized = false
 
     /**
-     * You should make indicator looped in your PagerAttacher implementation if your custom pager is looped too
-     * If pager has less items than visible_dot_count, indicator will work as usual;
-     * otherwise it will always be in infinite state.
+     * Sets dot count
      *
-     * @param looped true if pager is looped
+     * @param count new dot count
      */
-    fun setLooped(looped: Boolean) {
-        this.looped = looped
-        reattach()
-        invalidate()
+    private var dotCount: Int
+        get() = if (looped && itemCount > visibleDotCount) {
+            infiniteDotCount
+        } else {
+            itemCount
+        }
+        set(count) {
+            initDots(count)
+        }
+
+    init {
+        val attributes = context.obtainStyledAttributes(
+            attrs, R.styleable.ScrollingPagerIndicator, defStyleAttr, R.style.ScrollingPagerIndicator
+        )
+        dotColor = attributes.getColor(R.styleable.ScrollingPagerIndicator_spi_dotColor, 0)
+        selectedDotColor = attributes.getColor(R.styleable.ScrollingPagerIndicator_spi_dotSelectedColor, dotColor)
+        dotNormalSize = attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotSize, 0)
+        dotSelectedSize = attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotSelectedSize, 0)
+        val dotMinimumSize =
+            attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotMinimumSize, -1)
+        this.dotMinimumSize = if (dotMinimumSize <= dotNormalSize) dotMinimumSize else -1
+        spaceBetweenDotCenters =
+            attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotSpacing, 0) + dotNormalSize
+        looped = attributes.getBoolean(R.styleable.ScrollingPagerIndicator_spi_looped, false)
+        val visibleDotCount = attributes.getInt(R.styleable.ScrollingPagerIndicator_spi_visibleDotCount, 0)
+        setVisibleDotCount(visibleDotCount)
+        visibleDotThreshold = attributes.getInt(R.styleable.ScrollingPagerIndicator_spi_visibleDotThreshold, 2)
+        orientation = attributes.getInt(R.styleable.ScrollingPagerIndicator_spi_orientation, RecyclerView.HORIZONTAL)
+        attributes.recycle()
+        paint = Paint()
+        paint.isAntiAlias = true
+        if (isInEditMode) {
+            dotCount = visibleDotCount
+            onPageScrolled(visibleDotCount / 2, 0f)
+        }
     }
 
     /**
@@ -123,7 +152,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
      * @param visibleDotCount visible dot count
      * @throws IllegalStateException when pager is already attached
      */
-    fun setVisibleDotCount(visibleDotCount: Int) {
+    private fun setVisibleDotCount(visibleDotCount: Int) {
         require(visibleDotCount % 2 != 0) { "visibleDotCount must be odd" }
         this.visibleDotCount = visibleDotCount
         infiniteDotCount = visibleDotCount + 2
@@ -188,44 +217,10 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
      * Attaches indicator to RecyclerView. Use this method if current page of the recycler is centered.
      * All pages must have the same width.
      * Like this:
-     *
-     *
-     * +------------------------------+
-     * |---+  +----------------+  +---|
-     * |   |  |     current    |  |   |
-     * |   |  |      page      |  |   |
-     * |---+  +----------------+  +---|
-     * +------------------------------+
-     *
      * @param recyclerView recycler view to attach
      */
     fun attachToRecyclerView(recyclerView: RecyclerView) {
-        attachToPager<RecyclerView>(recyclerView, RecyclerViewAttacher())
-    }
-
-    /**
-     * Attaches indicator to RecyclerView. Use this method if current page of the recycler isn't centered.
-     * All pages must have the same width.
-     * Like this:
-     *
-     *
-     * +-|----------------------------+
-     * | +--------+  +--------+  +----|
-     * | | current|  |        |  |    |
-     * | |  page  |  |        |  |    |
-     * | +--------+  +--------+  +----|
-     * +-|----------------------------+
-     * | currentPageOffset
-     * |
-     *
-     * @param recyclerView      recycler view to attach
-     * @param currentPageOffset x coordinate of current view left corner/top relative to recycler view
-     */
-    fun attachToRecyclerView(recyclerView: RecyclerView, currentPageOffset: Int) {
-        attachToPager<RecyclerView>(
-            recyclerView,
-            RecyclerViewAttacher(currentPageOffset)
-        )
+        attachToPager(recyclerView, RecyclerViewAttacher())
     }
 
     /**
@@ -234,7 +229,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
      * @param pager    pager to attach
      * @param attacher helper which should setup this indicator to work with custom pager
      */
-    fun <T> attachToPager(pager: T, attacher: PagerAttacher<T>) {
+    private fun <T> attachToPager(pager: T, attacher: PagerAttacher<T>) {
         detachFromPager()
         attacher.attachToPager(this, pager)
         currentAttacher = attacher
@@ -247,7 +242,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
     /**
      * Detaches indicator from pager.
      */
-    fun detachFromPager() {
+    private fun detachFromPager() {
         if (currentAttacher != null) {
             currentAttacher!!.detachFromPager()
             currentAttacher = null
@@ -282,7 +277,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
             throw IndexOutOfBoundsException("page must be [0, adapter.getItemCount())")
         }
         if (!looped || itemCount <= visibleDotCount && itemCount > 1) {
-            dotScale.clear()
+            dotScale?.clear()
             if (orientation == LinearLayout.HORIZONTAL) {
                 scaleDotByOffset(page, offset)
                 if (page < itemCount - 1) {
@@ -325,18 +320,6 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
         adjustFramePosition(0f, position)
         updateScaleInIdleState(position)
     }
-
-    /**
-     * Sets Rtl direction availability when the view has Rtl direction.
-     * autoRtl is on by default.
-     *
-     * @param autoRtl false means rtl direction doesn't be apply even if view direction is Rtl.
-     */
-    fun setAutoRtl(autoRtl: Boolean) {
-        this.autoRtl = autoRtl
-        invalidate()
-    }
-
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         // Width
@@ -406,10 +389,9 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
             val dot = getDotOffsetAt(i)
             if (dot >= visibleFramePosition && dot < visibleFramePosition + visibleFrameWidth) {
                 var diameter: Float
-                var scale: Float
 
                 // Calculate scale according to current page position
-                scale = if (looped && itemCount > visibleDotCount) {
+                val scale: Float = if (looped && itemCount > visibleDotCount) {
                     val frameCenter = visibleFramePosition + visibleFrameWidth / 2
                     if (dot >= frameCenter - centerScaleDistance
                         && dot <= frameCenter
@@ -429,8 +411,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
 
                 // Additional scale for dots at corners
                 if (itemCount > visibleDotCount) {
-                    var currentScaleDistance: Float
-                    currentScaleDistance = if (!looped && (i == 0 || i == dotCount - 1)) {
+                    val currentScaleDistance: Float = if (!looped && (i == 0 || i == dotCount - 1)) {
                         smallScaleDistance
                     } else {
                         scaleDistance
@@ -480,8 +461,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
     }
 
     private val isRtl: Boolean
-        private get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
-            layoutDirection == LAYOUT_DIRECTION_RTL
+        get() = layoutDirection == LAYOUT_DIRECTION_RTL
 
     @ColorInt
     private fun calculateDotColor(dotScale: Float): Int {
@@ -490,8 +470,8 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
 
     private fun updateScaleInIdleState(currentPos: Int) {
         if (!looped || itemCount < visibleDotCount) {
-            dotScale!!.clear()
-            dotScale!!.put(currentPos, 1f)
+            dotScale?.clear()
+            dotScale?.put(currentPos, 1f)
             invalidate()
         }
     }
@@ -517,21 +497,6 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
         requestLayout()
         invalidate()
     }
-
-    /**
-     * Sets dot count
-     *
-     * @param count new dot count
-     */
-    private var dotCount: Int
-        private get() = if (looped && itemCount > visibleDotCount) {
-            infiniteDotCount
-        } else {
-            itemCount
-        }
-        set(count) {
-            initDots(count)
-        }
 
     private fun adjustFramePosition(offset: Float, pos: Int) {
         if (itemCount <= visibleDotCount) {
@@ -569,7 +534,7 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
     }
 
     private fun getDotScaleAt(index: Int): Float {
-        val scale = dotScale[index]
+        val scale = dotScale?.get(index)
         if (scale != null) {
             return scale
         }
@@ -578,65 +543,13 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
 
     private fun setDotScaleAt(index: Int, scale: Float) {
         if (scale == 0f) {
-            dotScale.remove(index)
+            dotScale?.remove(index)
         } else {
-            dotScale.put(index, scale)
+            dotScale?.put(index, scale)
         }
     }
 
-    fun setDotCountc(count: Int){
+    fun setDotCountc(count: Int) {
         initDots(count)
-    }
-
-    /**
-     * Interface for attaching to custom pagers.
-     *
-     * @param <T> custom pager's class
-    </T> */
-    interface PagerAttacher<T> {
-        /**
-         * Here you should add all needed callbacks to track pager's item count, position and offset
-         * You must call:
-         * [ScrollingPagerIndicator.setDotCount] - initially and after page selection,
-         * [ScrollingPagerIndicator.setCurrentPosition] - initially and after page selection,
-         * [ScrollingPagerIndicator.onPageScrolled] - in your pager callback to track scroll offset,
-         * [ScrollingPagerIndicator.reattach] - each time your adapter items change.
-         *
-         * @param indicator indicator
-         * @param pager     pager to attach
-         */
-        fun attachToPager(indicator: ScrollingPagerIndicator, pager: T)
-
-        /**
-         * Here you should unregister all callbacks previously added to pager and adapter
-         */
-        fun detachFromPager()
-    }
-
-    init {
-        val attributes = context.obtainStyledAttributes(
-            attrs, R.styleable.ScrollingPagerIndicator, defStyleAttr, R.style.ScrollingPagerIndicator
-        )
-        dotColor = attributes.getColor(R.styleable.ScrollingPagerIndicator_spi_dotColor, 0)
-        selectedDotColor = attributes.getColor(R.styleable.ScrollingPagerIndicator_spi_dotSelectedColor, dotColor)
-        dotNormalSize = attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotSize, 0)
-        dotSelectedSize = attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotSelectedSize, 0)
-        val dotMinimumSize =
-            attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotMinimumSize, -1)
-        this.dotMinimumSize = if (dotMinimumSize <= dotNormalSize) dotMinimumSize else -1
-        spaceBetweenDotCenters =
-            attributes.getDimensionPixelSize(R.styleable.ScrollingPagerIndicator_spi_dotSpacing, 0) + dotNormalSize
-        looped = attributes.getBoolean(R.styleable.ScrollingPagerIndicator_spi_looped, false)
-        val visibleDotCount = attributes.getInt(R.styleable.ScrollingPagerIndicator_spi_visibleDotCount, 0)
-        setVisibleDotCount(visibleDotCount)
-        visibleDotThreshold = attributes.getInt(R.styleable.ScrollingPagerIndicator_spi_visibleDotThreshold, 2)
-        orientation = attributes.getInt(R.styleable.ScrollingPagerIndicator_spi_orientation, RecyclerView.HORIZONTAL)
-        attributes.recycle()
-        paint = Paint()
-        paint.isAntiAlias = true
-        if (isInEditMode) {
-            dotCount = visibleDotCount
-            onPageScrolled(visibleDotCount / 2, 0f)
-        }
     }
 }

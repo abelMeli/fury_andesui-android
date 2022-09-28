@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 /**
- * @author Nikita Olifer
+ * @author Abel Aguilar
  * Attacher for RecyclerView.
  */
-class RecyclerViewAttacher : ScrollingPagerIndicator.PagerAttacher<RecyclerView> {
+class RecyclerViewAttacher : PagerAttacher<RecyclerView> {
     private lateinit var indicator: ScrollingPagerIndicator
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: LinearLayoutManager? = null
@@ -25,17 +25,9 @@ class RecyclerViewAttacher : ScrollingPagerIndicator.PagerAttacher<RecyclerView>
      * Default constructor. Use this if current page in recycler is centered.
      * All pages must have the same width.
      * Like this:
-     *
-     *
-     * +------------------------------+
-     * |---+  +----------------+  +---|
-     * |   |  |     current    |  |   |
-     * |   |  |      page      |  |   |
-     * |---+  +----------------+  +---|
-     * +------------------------------+
      */
     constructor() {
-        currentPageOffset = 0 // Unused when centered
+        currentPageOffset = 0
         centered = true
     }
 
@@ -43,17 +35,6 @@ class RecyclerViewAttacher : ScrollingPagerIndicator.PagerAttacher<RecyclerView>
      * Use this constructor if current page in recycler isn't centered.
      * All pages must have the same width.
      * Like this:
-     *
-     *
-     * +-|----------------------------+
-     * | +--------+  +--------+  +----|
-     * | | current|  |        |  |    |
-     * | |  page  |  |        |  |    |
-     * | +--------+  +--------+  +----|
-     * +-|----------------------------+
-     * | currentPageOffset
-     * |
-     *
      * @param currentPageOffset x coordinate of current view left corner/top relative to recycler view.
      */
     constructor(currentPageOffset: Int) {
