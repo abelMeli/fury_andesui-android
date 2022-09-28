@@ -34,103 +34,177 @@
             android:layout_marginTop="@dimen/button_margin_vertical_2x"
             android:layout_marginEnd="@dimen/margin_horizontal_thumbnail"
             app:andesThumbnailAccentColor="@color/andes_red_700"
+            app:andesThumbnailAssetType="icon"
+            app:andesThumbnailShape="circle"
             app:andesThumbnailHierarchy="loud"
             app:andesThumbnailImage="@drawable/andes_otros_almanaque_20"
             app:andesThumbnailSize="size_48"
             app:andesThumbnailState="enabled"
-            app:andesThumbnailType="icon"
+            app:andesThumbnailScaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/message"
             tools:visibility="visible" />
 
+
         <TextView
-            android:id="@+id/simpleTypeTextView"
+            android:id="@+id/asset_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/andes_badge_hierarchy"
+            android:text="@string/andes_thumbnail_asset_type"
             android:textColor="@color/andes_text_color_primary"
-            app:layout_constraintEnd_toStartOf="@+id/hierarchy_spinner"
+            app:layout_constraintEnd_toStartOf="@+id/asset_type_spinner"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/andes_thumbnail_icon" />
 
         <Spinner
+            android:id="@+id/asset_type_spinner"
+            android:layout_width="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/asset_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/asset_label"
+            app:layout_constraintTop_toTopOf="@+id/asset_label"  />
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/thumbnail_initials_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/andes_border"
+            android:inputType="text"
+            android:layout_marginTop="24dp"
+            app:andesTextfieldLabel="@string/andes_thumbnail_initials"
+            app:layout_constraintEnd_toEndOf="@id/state_switch"
+            app:layout_constraintStart_toStartOf="@id/asset_label"
+            app:layout_constraintTop_toBottomOf="@+id/asset_label"
+            tools:text="initials"/>
+
+        <TextView
+            android:id="@+id/simpleTypeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/andes_badge_hierarchy"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/hierarchy_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail_initials_input" />
+
+        <Spinner
             android:id="@+id/hierarchy_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/simpleTypeTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/simpleTypeTextView"
-            app:layout_constraintTop_toTopOf="@+id/simpleTypeTextView" />
+            app:layout_constraintTop_toTopOf="@+id/simpleTypeTextView"
+            app:layout_constraintBottom_toBottomOf="@id/simpleTypeTextView"/>
+
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/scale_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_thumbnail"
             android:layout_marginTop="24dp"
-            android:text="@string/andes_badge_type"
+            android:text="@string/andes_thumbnail_scale_type"
             android:textColor="@color/andes_text_color_primary"
-            app:layout_constraintEnd_toStartOf="@+id/simple_type_spinner"
+            app:layout_constraintEnd_toStartOf="@+id/scale_spinner"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/simpleTypeTextView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/simpleTypeTextView" />
 
         <Spinner
-            android:id="@+id/simple_type_spinner"
+            android:id="@+id/scale_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintEnd_toEndOf="@+id/hierarchy_spinner"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/scale_label"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView3" />
+            app:layout_constraintStart_toEndOf="@+id/scale_label"
+            app:layout_constraintTop_toTopOf="@+id/scale_label" />
+
+        <TextView
+            android:id="@+id/shape_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/andes_thumbnail_shape"
+            android:textColor="@color/andes_text_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/shape_spinner"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scale_label" />
+
+        <Spinner
+            android:id="@+id/shape_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/shape_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/shape_label"
+            app:layout_constraintTop_toTopOf="@+id/shape_label" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
             android:text="@string/andes_badge_size"
             android:textColor="@color/andes_text_color_primary"
             app:layout_constraintEnd_toStartOf="@+id/size_spinner"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shape_label" />
 
         <Spinner
             android:id="@+id/size_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_horizontal_thumbnail"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintEnd_toEndOf="@+id/simple_type_spinner"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="0dp"
             android:layout_height="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/andes_thumbnail_state"
             android:textColor="@color/andes_text_color_primary"
             app:layout_constraintEnd_toStartOf="@+id/state_switch"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/simpleTypeTextView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/state_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView6"
-            app:layout_constraintEnd_toEndOf="@+id/size_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView6" />
+
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/change_button"
@@ -138,14 +212,16 @@
             android:layout_height="46dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginStart="@dimen/margin_horizontal_thumbnail"
             android:layout_marginBottom="32dp"
             app:andesButtonHierarchy="loud"
             app:andesButtonSize="large"
             app:andesButtonText="@string/andes_message_showcase_change"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/clear_button"
-            app:layout_constraintStart_toStartOf="@+id/simpleTypeTextView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/clear_button"
@@ -155,7 +231,7 @@
             app:andesButtonSize="large"
             app:andesButtonText="@string/andesui_demoapp_clear_button"
             app:layout_constraintBottom_toBottomOf="@+id/change_button"
-            app:layout_constraintEnd_toEndOf="@+id/hierarchy_spinner"
+            app:layout_constraintEnd_toEndOf="@+id/state_switch"
             app:layout_constraintTop_toTopOf="@+id/change_button" />
 
         <androidx.constraintlayout.widget.Group
@@ -164,6 +240,27 @@
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="simpleTypeTextView,hierarchy_spinner,textView4,size_spinner"
             tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/initials_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="thumbnail_initials_input" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/scale_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="scale_label, scale_spinner" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/hierarchy_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="simpleTypeTextView, hierarchy_spinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

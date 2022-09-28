@@ -212,6 +212,34 @@ class AndesFeedbackScreenViewTest {
         }
     }
 
+    @Test
+    fun `FeedbackScreen Simple without body set Text Thumbnail`() {
+        val screenView = AndesFeedbackScreenView(
+            context = activity,
+            type = AndesFeedbackScreenType.Simple(
+                AndesFeedbackScreenColor.RED
+            ),
+            header = AndesFeedbackScreenHeader(
+                AndesFeedbackScreenText(
+                    "Title"
+                )
+            ),
+            body = null
+        )
+
+        startActivity(screenView)
+        screenView.setFeedbackScreenAsset(
+            AndesFeedbackScreenAsset.TextThumbnail(
+                "AB"
+            )
+        )
+
+        with(screenView.getThumbnailSimple()) {
+            thumbnailType assertEquals AndesThumbnailBadgeType.Text
+            badgeComponent.color assertEquals AndesBadgeType.ERROR
+        }
+    }
+
     private fun startActivity(view: View) {
         activity.setContentView(view)
         robolectricActivity.start().postCreate(null).resume().visible()

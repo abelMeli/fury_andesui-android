@@ -2,8 +2,10 @@ package com.mercadolibre.android.andesui.moneyamount
 
 import android.content.Context
 import android.graphics.Typeface
+import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.SpannedString
+import android.text.style.StyleSpan
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -188,7 +190,7 @@ class AndesMoneyAmountTest {
                 0,
                 moneyAmountText.text.length,
                 Any::class.java
-            ).size assertEquals 3 // three spans: amountsize + superscript + strike
+            ).size assertEquals 4 // three spans: amountsize + font style + superscript + strike
         }
     }
 
@@ -406,7 +408,7 @@ class AndesMoneyAmountTest {
         moneyAmount.semiBold = true
 
         // THEN
-        binding.moneyAmountText().typeface assertEquals Typeface.DEFAULT_BOLD
+        getFontSpanStyle(binding.moneyAmountText().text) assertEquals Typeface.DEFAULT_BOLD.style
     }
 
     @Test
@@ -421,11 +423,15 @@ class AndesMoneyAmountTest {
         val binding = AndesLayoutMoneyAmountBinding.bind(moneyAmount.getChildAt(0))
 
         // THEN
-        binding.moneyAmountText().typeface assertEquals Typeface.DEFAULT
+        getFontSpanStyle(binding.moneyAmountText().text) assertEquals Typeface.DEFAULT.style
     }
 
     fun AndesLayoutMoneyAmountBinding.moneyAmountText(): TextView =
         root.findViewById(R.id.money_amount_text)
+
+    private fun getFontSpanStyle(text: CharSequence): Int = (text as SpannedString).getSpans(
+        0,text.length, StyleSpan::class.java
+    )[0].style
 
     private fun setupTypeface() {
         mockkStatic("com.mercadolibre.android.andesui.typeface.FontKtxKt")

@@ -9,12 +9,15 @@ import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.color.toAndesColor
+import com.mercadolibre.android.andesui.thumbnail.assetType.AndesThumbnailAssetType
 import com.mercadolibre.android.andesui.thumbnail.hierarchy.AndesThumbnailHierarchy
+import com.mercadolibre.android.andesui.thumbnail.shape.AndesThumbnailShape
 import com.mercadolibre.android.andesui.thumbnail.size.AndesThumbnailSize
 import com.mercadolibre.android.andesui.thumbnail.state.AndesThumbnailState
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.assertEquals
+import com.mercadolibre.android.andesui.utils.assertNotEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
@@ -148,6 +151,7 @@ class AndesThumbnailTest {
         )
 
         thumbnail.scaleType assertEquals ImageView.ScaleType.FIT_START
+        thumbnail.state assertEquals AndesThumbnailState.ENABLED
     }
 
     @Test
@@ -165,7 +169,55 @@ class AndesThumbnailTest {
         )
 
         thumbnail.scaleType = FIT_END
-
+        thumbnail.state assertEquals AndesThumbnailState.ENABLED
         thumbnail.scaleType assertEquals FIT_END
+    }
+
+    @Test
+    fun `creating thumbnail of assetType text and setting an image`() {
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val thumbnail = AndesThumbnail(
+            context = context,
+            accentColor = R.color.andes_accent_color_500.toAndesColor(),
+            assetType = AndesThumbnailAssetType.Text("AB"),
+            thumbnailShape = AndesThumbnailShape.Circle,
+            hierarchy = AndesThumbnailHierarchy.QUIET,
+            size = AndesThumbnailSize.SIZE_56,
+            state = AndesThumbnailState.ENABLED,
+        )
+        //when is a thumbnail of assetType Text should not set an image
+        thumbnail.image = drawable
+        thumbnail.image assertNotEquals drawable
+        thumbnail.state assertEquals AndesThumbnailState.ENABLED
+    }
+
+    @Test
+    fun `creating thumbnail of assetType text, shape square and state disable`() {
+        val thumbnail = AndesThumbnail(
+            context = context,
+            hierarchy = AndesThumbnailHierarchy.QUIET,
+            accentColor = R.color.andes_accent_color_500.toAndesColor(),
+            state = AndesThumbnailState.DISABLED,
+            size = AndesThumbnailSize.SIZE_56,
+            assetType = AndesThumbnailAssetType.Text("AB"),
+            thumbnailShape = AndesThumbnailShape.Square
+        )
+        thumbnail.thumbnailShape assertEquals AndesThumbnailShape.Square
+        thumbnail.scaleType assertEquals ImageView.ScaleType.CENTER_CROP
+        thumbnail.state assertEquals AndesThumbnailState.DISABLED
+    }
+
+    @Test
+    fun `creating thumbnail with min arguments`() {
+        val thumbnail = AndesThumbnail(
+            context = context,
+            accentColor = R.color.andes_accent_color_500.toAndesColor(),
+            assetType = AndesThumbnailAssetType.Text("AB")
+        )
+
+        thumbnail.state assertEquals AndesThumbnailState.ENABLED
+        thumbnail.thumbnailShape assertEquals AndesThumbnailShape.Circle
+        thumbnail.size assertEquals AndesThumbnailSize.SIZE_48
+        thumbnail.hierarchy assertEquals AndesThumbnailHierarchy.DEFAULT
     }
 }

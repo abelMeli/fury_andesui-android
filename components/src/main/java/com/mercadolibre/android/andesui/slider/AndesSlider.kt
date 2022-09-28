@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -22,7 +21,6 @@ import com.mercadolibre.android.andesui.slider.factory.AndesSliderConfigurationF
 import com.mercadolibre.android.andesui.slider.state.AndesSliderState
 import com.mercadolibre.android.andesui.slider.steps.AndesSliderSteps
 import com.mercadolibre.android.andesui.slider.type.AndesSliderType
-import com.mercadolibre.android.andesui.textview.AndesTextView
 import com.mercadolibre.android.andesui.tooltip.extensions.visible
 
 /**
@@ -250,6 +248,7 @@ class AndesSlider : ConstraintLayout {
     private fun setupLimitsComponent(config: AndesSliderConfiguration) {
         binding.andesSlider.valueFrom = config.min
         binding.andesSlider.valueTo = config.max
+        binding.andesSlider.value = config.value
     }
 
     private fun setupStateComponent(config: AndesSliderConfiguration) {
@@ -284,17 +283,24 @@ class AndesSlider : ConstraintLayout {
                 )
                 resolveFormatter(slider.value)
                 binding.andesSliderLabelValue.visibility = VISIBLE
+                a11yEventDispatcher.notifyA11yChangedValue(
+                    this@AndesSlider,
+                    value,
+                    accessibilityContentSuffix
+                )
             }
         })
 
         binding.andesSlider.addOnChangeListener { _, value, _ ->
             this.value = value
             onValueChangeListener?.onValueChanged(value)
-            a11yEventDispatcher.notifyA11yChangedValue(
-                this@AndesSlider,
-                value,
-                accessibilityContentSuffix
-            )
+            if (binding.andesSlider.isPressed.not()) {
+                a11yEventDispatcher.notifyA11yChangedValue(
+                    this@AndesSlider,
+                    value,
+                    accessibilityContentSuffix
+                )
+            }
         }
     }
 

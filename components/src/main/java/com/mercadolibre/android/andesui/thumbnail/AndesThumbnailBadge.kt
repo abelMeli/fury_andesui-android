@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.mercadolibre.android.andesui.R
@@ -38,6 +39,7 @@ class AndesThumbnailBadge : ConstraintLayout {
             andesThumbnailBadgeAttrs = andesThumbnailBadgeAttrs.copy(badge = value)
             createConfig().let {
                 setupThumbnailSize(it)
+
                 setupThumbnailBadgeTint(it)
                 setupThumbnailOutline(it)
                 setupBadgeComponent(it)
@@ -46,14 +48,20 @@ class AndesThumbnailBadge : ConstraintLayout {
         }
 
     /**
-     * Getter and setter for [image].
+     * Getter and setter for [image]. If a image is setter to a ThumbnailBadge of type Text, the type
+     * will be change to Icon.
      */
     var image: Drawable
-        get() = andesThumbnailBadgeAttrs.image
+        get() = getDrawable()
         set(value) {
+            if (thumbnailType is AndesThumbnailBadgeType.Text) {
+                val defaultType = AndesThumbnailBadgeType.Icon
+                andesThumbnailBadgeAttrs =
+                    andesThumbnailBadgeAttrs.copy(thumbnailType = defaultType)
+            }
             andesThumbnailBadgeAttrs = andesThumbnailBadgeAttrs.copy(image = value)
             createConfig().let {
-                setupThumbnailImage(it)
+                setupAssetType(it)
                 setupThumbnailBadgeTint(it)
             }
         }
@@ -66,10 +74,22 @@ class AndesThumbnailBadge : ConstraintLayout {
         set(value) {
             andesThumbnailBadgeAttrs = andesThumbnailBadgeAttrs.copy(thumbnailType = value)
             createConfig().let {
-                setupThumbnailType(it)
-                setupThumbnailBadgeTint(it)
+                setupAssetType(it)
                 setupThumbnailBadgeVisibility(it)
             }
+        }
+
+    /**
+     * Getter and setter for the [text].
+     */
+    var text: String
+        get() = andesThumbnailBadgeAttrs.text
+        set(value) {
+            andesThumbnailBadgeAttrs =
+                andesThumbnailBadgeAttrs.copy(thumbnailType = AndesThumbnailBadgeType.Text)
+            andesThumbnailBadgeAttrs = andesThumbnailBadgeAttrs.copy(text = value)
+            setupAssetType(createConfig())
+
         }
 
     private constructor(context: Context) : super(context) {
@@ -89,6 +109,18 @@ class AndesThumbnailBadge : ConstraintLayout {
         initAttrs(image, badgeComponent, thumbnailType)
     }
 
+    /***
+     * This constructor allows to generate a ThumbnailBadge with letters instead of an image.
+     */
+    constructor(
+        context: Context,
+        badgeComponent: AndesThumbnailBadgeComponent,
+        thumbnailType: AndesThumbnailBadgeType,
+        text: String
+    ) : super(context) {
+        initAttrs(badgeComponent, thumbnailType, text)
+    }
+
     private fun initAttrs(attrs: AttributeSet?) {
         andesThumbnailBadgeAttrs = AndesThumbnailBadgeAttrsParser.parse(context, attrs)
         setupComponents(createConfig())
@@ -99,7 +131,18 @@ class AndesThumbnailBadge : ConstraintLayout {
         badgeComponent: AndesThumbnailBadgeComponent,
         thumbnailType: AndesThumbnailBadgeType
     ) {
-        andesThumbnailBadgeAttrs = AndesThumbnailBadgeAttrs(image, badgeComponent, thumbnailType)
+        andesThumbnailBadgeAttrs =
+            AndesThumbnailBadgeAttrs(image, badgeComponent, thumbnailType, EMPTY_TEXT)
+        setupComponents(createConfig())
+    }
+
+    private fun initAttrs(
+        badgeComponent: AndesThumbnailBadgeComponent,
+        thumbnailType: AndesThumbnailBadgeType,
+        text: String
+    ) {
+        andesThumbnailBadgeAttrs =
+            AndesThumbnailBadgeAttrs(null, badgeComponent, thumbnailType, text)
         setupComponents(createConfig())
     }
 
@@ -110,7 +153,6 @@ class AndesThumbnailBadge : ConstraintLayout {
     private fun setupComponents(config: AndesThumbnailBadgeConfiguration) {
         setupViewId()
         initComponents(config)
-
         setupThumbnailBadgeTint(config)
         setupThumbnailOutline(config)
         setupThumbnailBadgeVisibility(config)
@@ -131,12 +173,9 @@ class AndesThumbnailBadge : ConstraintLayout {
         createBadgeComponent(config)
     }
 
-    private fun setupThumbnailType(config: AndesThumbnailBadgeConfiguration) {
-        thumbnail.type = config.thumbnailType
-    }
-
-    private fun setupThumbnailImage(config: AndesThumbnailBadgeConfiguration) {
-        thumbnail.image = config.image
+    private fun setupAssetType(config: AndesThumbnailBadgeConfiguration) {
+        thumbnail.assetType = config.assetType
+        thumbnail.thumbnailShape = config.shape
     }
 
     private fun setupThumbnailSize(config: AndesThumbnailBadgeConfiguration) {
@@ -147,21 +186,24 @@ class AndesThumbnailBadge : ConstraintLayout {
         thumbnail.tintImage(config.thumbnailTintColor)
     }
 
+    private fun getDrawable(): Drawable =
+        findViewById<ImageView>(R.id.andes_thumbnail_image).drawable
+
     private fun initComponents(config: AndesThumbnailBadgeConfiguration) {
         thumbnail = AndesThumbnail(
             context,
             config.badgeColor.toAndesColor(),
+            config.assetType,
+            config.shape,
             AndesThumbnailHierarchy.DEFAULT,
-            config.image,
-            config.thumbnailType,
             config.thumbnailSize,
-            AndesThumbnailState.ENABLED
+            AndesThumbnailState.ENABLED,
+            ImageView.ScaleType.CENTER_CROP
         )
         addView(thumbnail)
 
         outlineView = View(context).apply { id = R.id.andes_thumbnail_badge_outline }
         addView(outlineView)
-
         createBadgeComponent(config)
     }
 
@@ -188,4 +230,9 @@ class AndesThumbnailBadge : ConstraintLayout {
 
     private fun createConfig() =
         AndesThumbnailBadgeConfigurationFactory.create(context, andesThumbnailBadgeAttrs)
+
+    private companion object {
+        // set the deprecated val type as default Icon
+        private const val EMPTY_TEXT = ""
+    }
 }

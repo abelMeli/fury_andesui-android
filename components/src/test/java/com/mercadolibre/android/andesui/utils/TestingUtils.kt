@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.text.SpannableString
+import android.text.Spanned
 import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import android.view.inputmethod.InputMethodManager
@@ -78,19 +78,19 @@ fun activateTalkbackForTest(context: Context) {
 }
 
 fun CharSequence?.hasSpans(): Boolean {
-    if (this !is SpannableString) return false
+    if (this !is Spanned) return false
     val spans = getSpans(0, length, CharacterStyle::class.java)
     return spans.isNotEmpty()
 }
 
 fun CharSequence?.getSpans(): List<CharacterStyle> {
-    if (this !is SpannableString) return emptyList()
+    if (this !is Spanned) return emptyList()
     val spans = getSpans(0, length, CharacterStyle::class.java)
     return spans.map { it }
 }
 
 internal fun CharSequence?.getClickableSpans(): List<ClickableSpanWithText> {
-    if (this !is SpannableString) return emptyList()
+    if (this !is Spanned) return emptyList()
     val spans = getSpans(0, length, ClickableSpanWithText::class.java)
     return spans.map { it }
 }

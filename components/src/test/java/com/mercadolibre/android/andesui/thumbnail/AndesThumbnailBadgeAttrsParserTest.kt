@@ -31,17 +31,6 @@ class AndesThumbnailBadgeAttrsParserTest {
         context = ApplicationProvider.getApplicationContext()
     }
 
-    @Test(expected = IllegalArgumentException::class)
-    fun `Can not build ThumbnailBadge without drawable`() {
-        // GIVEN
-        val attrs = Robolectric.buildAttributeSet().build()
-
-        // WHEN
-        AndesThumbnailBadgeAttrsParser.parse(context, attrs)
-
-        // THEN: expected IllegalArgumentException
-    }
-
     @Test
     fun `ThumbnailBadge default attributes`() {
         // GIVEN
@@ -54,7 +43,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
@@ -75,7 +64,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
@@ -96,7 +85,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
@@ -121,7 +110,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
@@ -143,7 +132,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.SUCCESS
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
@@ -165,7 +154,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
@@ -187,7 +176,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
@@ -210,7 +199,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.SUCCESS
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
@@ -233,7 +222,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
@@ -256,7 +245,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.ERROR
             assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
@@ -279,7 +268,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.SUCCESS
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
@@ -302,7 +291,7 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.Icon
             badge.color assertEquals AndesBadgeType.WARNING
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
@@ -324,10 +313,71 @@ class AndesThumbnailBadgeAttrsParserTest {
 
         // THEN
         with(thumbnailBadgeAttrs) {
-            image assertEquals R.drawable.andes_envio_envio_24
+            image!! assertEquals R.drawable.andes_envio_envio_24
             thumbnailType assertEquals AndesThumbnailBadgeType.ImageCircle
             badge.color assertEquals AndesBadgeType.HIGHLIGHT
             assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
+        }
+    }
+
+    @Test
+    fun `ThumbnailBadge Text, DOT`() {
+        // GIVEN
+        val attrs = buildAttributeSet {
+            addAttribute(R.attr.andesThumbnailBadgeComponent, "3002")
+            addAttribute(R.attr.andesThumbnailBadgeType, "2002")
+            addAttribute(R.attr.andesThumbnailBadgeText, "AB")
+        }
+
+        // WHEN
+        val thumbnailBadgeAttrs = AndesThumbnailBadgeAttrsParser.parse(context, attrs)
+
+        // THEN
+        with(thumbnailBadgeAttrs) {
+            thumbnailType assertEquals AndesThumbnailBadgeType.Text
+            badge.color assertEquals AndesBadgeType.HIGHLIGHT
+            assertTrue(badge is AndesThumbnailBadgeComponent.Dot)
+        }
+    }
+
+    @Test
+    fun `ThumbnailBadge Text, PILL`() {
+        // GIVEN
+        val attrs = buildAttributeSet {
+            addAttribute(R.attr.andesThumbnailBadgeComponent, "3000")
+            addAttribute(R.attr.andesThumbnailBadgeType, "2002")
+            addAttribute(R.attr.andesThumbnailBadgeText, "AB")
+            addAttribute(R.attr.andesThumbnailBadgeComponentType, "success")
+        }
+
+        // WHEN
+        val thumbnailBadgeAttrs = AndesThumbnailBadgeAttrsParser.parse(context, attrs)
+
+        // THEN
+        with(thumbnailBadgeAttrs) {
+            thumbnailType assertEquals AndesThumbnailBadgeType.Text
+            badge.color assertEquals AndesBadgeType.SUCCESS
+            assertTrue(badge is AndesThumbnailBadgeComponent.Pill)
+        }
+    }
+
+    @Test
+    fun `ThumbnailBadge Text, badge ICON PILL`() {
+        // GIVEN
+        val attrs = buildAttributeSet {
+            addAttribute(R.attr.andesThumbnailBadgeComponent, "3001")
+            addAttribute(R.attr.andesThumbnailBadgeType, "2002")
+            addAttribute(R.attr.andesThumbnailBadgeText, "AB")
+        }
+
+        // WHEN
+        val thumbnailBadgeAttrs = AndesThumbnailBadgeAttrsParser.parse(context, attrs)
+
+        // THEN
+        with(thumbnailBadgeAttrs) {
+            thumbnailType assertEquals AndesThumbnailBadgeType.Text
+            badge.color assertEquals AndesBadgeType.HIGHLIGHT
+            assertTrue(badge is AndesThumbnailBadgeComponent.IconPill)
         }
     }
 }

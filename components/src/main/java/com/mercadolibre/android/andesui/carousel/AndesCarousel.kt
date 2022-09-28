@@ -22,10 +22,7 @@ import com.mercadolibre.android.andesui.carousel.utils.AndesCarouselLayoutManage
 import com.mercadolibre.android.andesui.carouselPageIndicator.ScrollingPagerIndicator
 import com.mercadolibre.android.andesui.databinding.AndesLayoutCarouselBinding
 import com.mercadolibre.android.andesui.utils.getAccessibilityManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 
 @Suppress("TooManyFunctions")
 class AndesCarousel : ConstraintLayout {
@@ -46,9 +43,6 @@ class AndesCarousel : ConstraintLayout {
     private lateinit var andesCarouselDelegate: AndesCarouselDelegate
     private lateinit var marginItemDecoration: RecyclerView.ItemDecoration
     private lateinit var snapHelper: PagerSnapHelper
-    private val componentCoroutineScope: CoroutineScope by lazy {
-        CoroutineScope(Dispatchers.Default)
-    }
     private var autoplayJob: Job? = null
 
     /**
@@ -205,7 +199,7 @@ class AndesCarousel : ConstraintLayout {
     override fun onDetachedFromWindow() {
         recyclerViewComponent.clearOnScrollListeners()
         super.onDetachedFromWindow()
-        componentCoroutineScope.cancel()
+        autoplayJob?.cancel()
     }
 
     /**
@@ -330,7 +324,6 @@ class AndesCarousel : ConstraintLayout {
         autoplayJob = strategy.execute(
             autoplayJob,
             config,
-            componentCoroutineScope,
             recyclerViewComponent,
             recyclerViewComponent.adapter?.itemCount ?: 0
         ) { accessibilityManager.isEnabled }

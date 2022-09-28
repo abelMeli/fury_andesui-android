@@ -16,7 +16,10 @@ enum class AndesThumbnailState {
     ENABLED;
 
     companion object {
-        fun fromString(value: String): AndesThumbnailState = valueOf(value.toUpperCase(Locale.ROOT))
+        /**
+         * Retrieves a [AndesThumbnailState] from the given enum value in string.
+         */
+        fun fromString(value: String): AndesThumbnailState = valueOf(value.uppercase(Locale.ROOT))
     }
 
     internal val state get() = getAndesThumbnailState()

@@ -1,17 +1,20 @@
 package com.mercadolibre.android.andesui.utils
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.View
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.bullet.AndesBulletSpannable
 import com.mercadolibre.android.andesui.color.AndesColor
 import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
+import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
 internal fun setupSpannableBodyLink(
     context: Context,
@@ -87,3 +90,9 @@ internal fun setupSpannableBullet(
     )
 }
 
+/**
+ * Span that allows setting semibold style to the text it's attached to.
+ */
+internal class AndesBoldSpan(context: Context) : StyleSpan(
+    context.getFontOrDefault(R.font.andes_font_semibold, Typeface.DEFAULT_BOLD).style
+)

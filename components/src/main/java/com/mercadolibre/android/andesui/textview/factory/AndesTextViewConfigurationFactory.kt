@@ -9,7 +9,7 @@ import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 import com.mercadolibre.android.andesui.textview.color.AndesTextViewColorInterface
 import com.mercadolibre.android.andesui.textview.style.AndesTextViewStyle
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
-import com.mercadolibre.android.andesui.utils.removeBoldSpans
+import com.mercadolibre.android.andesui.utils.removeAndesBoldSpans
 import com.mercadolibre.android.andesui.utils.removeLinkSpans
 import com.mercadolibre.android.andesui.utils.toSpannableWithBolds
 import com.mercadolibre.android.andesui.utils.toSpannableWithLinks
@@ -70,7 +70,7 @@ internal object AndesTextViewConfigurationFactory {
         }
     }
 
-    private fun clearOldSpans(text: CharSequence?): CharSequence = text.removeBoldSpans().removeLinkSpans()
+    private fun clearOldSpans(text: CharSequence?): CharSequence = text.removeAndesBoldSpans().removeLinkSpans()
 
     private fun resolveSize(context: Context, style: AndesTextViewStyle): Float = style.style.getTextSize(context)
 

@@ -6,7 +6,7 @@ import android.view.View
 import com.mercadolibre.android.andesui.thumbnail.type.AndesThumbnailType
 
 /**
- * Defines all types related properties that an [AndesThumbnail] needs to be drawn properly.
+ * Defines all types related properties that an AndesThumbnail needs to be drawn properly.
  * Those properties change depending on the style of the thumbnail.
  */
 internal interface AndesThumbnailBadgeTypeInterface {
@@ -17,7 +17,7 @@ internal interface AndesThumbnailBadgeTypeInterface {
 
 internal object AndesIconThumbnailBadgeType : AndesThumbnailBadgeTypeInterface {
     override fun getThumbnailType() = AndesThumbnailType.ICON
-    override fun getTintColor(context: Context, color: Int): ColorStateList? =
+    override fun getTintColor(context: Context, color: Int): ColorStateList =
         ColorStateList.valueOf(color)
     override fun badgeVisibility(): Int = View.VISIBLE
 }
@@ -30,7 +30,14 @@ internal object AndesImageCircleThumbnailBadgeType : AndesThumbnailBadgeTypeInte
 
 internal object AndesFeedbackIconThumbnailBadgeType : AndesThumbnailBadgeTypeInterface {
     override fun getThumbnailType() = AndesThumbnailType.ICON
-    override fun getTintColor(context: Context, color: Int): ColorStateList? =
+    override fun getTintColor(context: Context, color: Int): ColorStateList =
         ColorStateList.valueOf(color)
     override fun badgeVisibility(): Int = View.GONE
+}
+
+internal object AndesTextThumbnailBadgeType : AndesThumbnailBadgeTypeInterface {
+    override fun getThumbnailType() = AndesThumbnailType.ICON
+    override fun getTintColor(context: Context, color: Int): ColorStateList =
+        ColorStateList.valueOf(color)
+    override fun badgeVisibility(): Int = View.VISIBLE
 }

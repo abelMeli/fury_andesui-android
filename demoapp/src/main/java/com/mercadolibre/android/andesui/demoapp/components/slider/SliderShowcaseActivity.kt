@@ -124,21 +124,28 @@ class SliderShowcaseActivity : BaseActivity() {
                 max.helper = null
             }
 
-            if (!value.text.isNullOrEmpty()) {
-                slider.value = value.text!!.toFloat()
-            }
-
             val state = when (hasAction.status) {
                 AndesSwitchStatus.CHECKED -> AndesSliderState.IDLE
                 else -> AndesSliderState.DISABLED
             }
 
+            val sliderSteps = sliderSteps(spinnerSteps.selectedItem as String)
+            if (sliderSteps != slider.steps) {
+                if (sliderSteps == AndesSliderSteps.None) {
+                    slider.value = 0f
+                } else {
+                    slider.value = (min.text ?: 0f) as Float
+                }
+            }
             slider.min = min.text!!.toFloat()
             slider.max = max.text!!.toFloat()
             slider.state = state
             slider.text = labelText.text
-            slider.steps = sliderSteps(spinnerSteps.selectedItem as String)
+            slider.steps = sliderSteps
             slider.type = sliderType(spinnerType.selectedItem as String)
+            if (!value.text.isNullOrEmpty()) {
+                slider.value = value.text!!.toFloat()
+            }
         }
 
         slider.setOnValueChangedListener(object : AndesSlider.OnValueChangedListener {

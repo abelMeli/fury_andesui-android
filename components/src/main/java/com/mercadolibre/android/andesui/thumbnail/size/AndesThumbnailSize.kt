@@ -22,7 +22,10 @@ enum class AndesThumbnailSize {
     SIZE_80;
 
     companion object {
-        fun fromString(value: String): AndesThumbnailSize = valueOf(value.toUpperCase(Locale.ROOT))
+        /**
+         * Retrieves a [AndesThumbnailSize] from the given enum value in string.
+         */
+        fun fromString(value: String): AndesThumbnailSize = valueOf(value.uppercase(Locale.ROOT))
     }
 
     internal val size get() = getAndesBadgeSize()

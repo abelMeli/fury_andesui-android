@@ -1165,6 +1165,17 @@ public final class com/mercadolibre/android/andesui/feedback/screen/header/Andes
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class com/mercadolibre/android/andesui/feedback/screen/header/AndesFeedbackScreenAsset$TextThumbnail : com/mercadolibre/android/andesui/feedback/screen/header/AndesFeedbackScreenAsset {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lcom/mercadolibre/android/andesui/feedback/screen/header/AndesFeedbackScreenAsset$TextThumbnail;
+	public static synthetic fun copy$default (Lcom/mercadolibre/android/andesui/feedback/screen/header/AndesFeedbackScreenAsset$TextThumbnail;Ljava/lang/String;ILjava/lang/Object;)Lcom/mercadolibre/android/andesui/feedback/screen/header/AndesFeedbackScreenAsset$TextThumbnail;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class com/mercadolibre/android/andesui/feedback/screen/header/AndesFeedbackScreenAsset$Thumbnail : com/mercadolibre/android/andesui/feedback/screen/header/AndesFeedbackScreenAsset {
 	public fun <init> (Landroid/graphics/drawable/Drawable;Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType;)V
 	public final fun component1 ()Landroid/graphics/drawable/Drawable;
@@ -3342,23 +3353,29 @@ public final class com/mercadolibre/android/andesui/textview/style/AndesTextView
 
 public final class com/mercadolibre/android/andesui/thumbnail/AndesThumbnail : android/widget/FrameLayout {
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Lcom/mercadolibre/android/andesui/color/AndesColor;Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType;Lcom/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape;Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;Landroid/widget/ImageView$ScaleType;)V
+	public synthetic fun <init> (Landroid/content/Context;Lcom/mercadolibre/android/andesui/color/AndesColor;Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType;Lcom/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape;Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;Landroid/widget/ImageView$ScaleType;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun <init> (Landroid/content/Context;Lcom/mercadolibre/android/andesui/color/AndesColor;Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;Landroid/graphics/drawable/Drawable;Lcom/mercadolibre/android/andesui/thumbnail/type/AndesThumbnailType;Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;)V
 	public synthetic fun <init> (Landroid/content/Context;Lcom/mercadolibre/android/andesui/color/AndesColor;Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;Landroid/graphics/drawable/Drawable;Lcom/mercadolibre/android/andesui/thumbnail/type/AndesThumbnailType;Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun <init> (Landroid/content/Context;Lcom/mercadolibre/android/andesui/color/AndesColor;Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;Landroid/graphics/drawable/Drawable;Lcom/mercadolibre/android/andesui/thumbnail/type/AndesThumbnailType;Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;Landroid/widget/ImageView$ScaleType;)V
 	public synthetic fun <init> (Landroid/content/Context;Lcom/mercadolibre/android/andesui/color/AndesColor;Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;Landroid/graphics/drawable/Drawable;Lcom/mercadolibre/android/andesui/thumbnail/type/AndesThumbnailType;Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;Landroid/widget/ImageView$ScaleType;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getAccentColor ()Lcom/mercadolibre/android/andesui/color/AndesColor;
+	public final fun getAssetType ()Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType;
 	public final fun getHierarchy ()Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;
 	public final fun getImage ()Landroid/graphics/drawable/Drawable;
 	public final fun getScaleType ()Landroid/widget/ImageView$ScaleType;
 	public final fun getSize ()Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;
 	public final fun getState ()Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;
+	public final fun getThumbnailShape ()Lcom/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape;
 	public final fun getType ()Lcom/mercadolibre/android/andesui/thumbnail/type/AndesThumbnailType;
 	public final fun setAccentColor (Lcom/mercadolibre/android/andesui/color/AndesColor;)V
+	public final fun setAssetType (Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType;)V
 	public final fun setHierarchy (Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;)V
 	public final fun setImage (Landroid/graphics/drawable/Drawable;)V
 	public final fun setScaleType (Landroid/widget/ImageView$ScaleType;)V
 	public final fun setSize (Lcom/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize;)V
 	public final fun setState (Lcom/mercadolibre/android/andesui/thumbnail/state/AndesThumbnailState;)V
+	public final fun setThumbnailShape (Lcom/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape;)V
 	public final fun setType (Lcom/mercadolibre/android/andesui/thumbnail/type/AndesThumbnailType;)V
 }
 
@@ -3366,12 +3383,52 @@ public final class com/mercadolibre/android/andesui/thumbnail/AndesThumbnailBadg
 	public fun <init> (Landroid/content/Context;Landroid/graphics/drawable/Drawable;Lcom/mercadolibre/android/andesui/thumbnail/badge/component/AndesThumbnailBadgeComponent;Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType;)V
 	public synthetic fun <init> (Landroid/content/Context;Landroid/graphics/drawable/Drawable;Lcom/mercadolibre/android/andesui/thumbnail/badge/component/AndesThumbnailBadgeComponent;Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Lcom/mercadolibre/android/andesui/thumbnail/badge/component/AndesThumbnailBadgeComponent;Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType;Ljava/lang/String;)V
 	public final fun getBadgeComponent ()Lcom/mercadolibre/android/andesui/thumbnail/badge/component/AndesThumbnailBadgeComponent;
 	public final fun getImage ()Landroid/graphics/drawable/Drawable;
+	public final fun getText ()Ljava/lang/String;
 	public final fun getThumbnailType ()Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType;
 	public final fun setBadgeComponent (Lcom/mercadolibre/android/andesui/thumbnail/badge/component/AndesThumbnailBadgeComponent;)V
 	public final fun setImage (Landroid/graphics/drawable/Drawable;)V
+	public final fun setText (Ljava/lang/String;)V
 	public final fun setThumbnailType (Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType;)V
+}
+
+public abstract class com/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType {
+	public synthetic fun <init> (Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetTypeInterface;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Icon : com/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType {
+	public fun <init> (Landroid/graphics/drawable/Drawable;)V
+	public final fun component1 ()Landroid/graphics/drawable/Drawable;
+	public final fun copy (Landroid/graphics/drawable/Drawable;)Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Icon;
+	public static synthetic fun copy$default (Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Icon;Landroid/graphics/drawable/Drawable;ILjava/lang/Object;)Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Icon;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getImage ()Landroid/graphics/drawable/Drawable;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Image : com/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType {
+	public fun <init> (Landroid/graphics/drawable/Drawable;)V
+	public final fun component1 ()Landroid/graphics/drawable/Drawable;
+	public final fun copy (Landroid/graphics/drawable/Drawable;)Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Image;
+	public static synthetic fun copy$default (Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Image;Landroid/graphics/drawable/Drawable;ILjava/lang/Object;)Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Image;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getImage ()Landroid/graphics/drawable/Drawable;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Text : com/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Text;
+	public static synthetic fun copy$default (Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Text;Ljava/lang/String;ILjava/lang/Object;)Lcom/mercadolibre/android/andesui/thumbnail/assetType/AndesThumbnailAssetType$Text;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract class com/mercadolibre/android/andesui/thumbnail/badge/component/AndesThumbnailBadgeComponent {
@@ -3442,6 +3499,10 @@ public final class com/mercadolibre/android/andesui/thumbnail/badge/type/AndesTh
 	public static final field INSTANCE Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType$ImageCircle;
 }
 
+public final class com/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType$Text : com/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType {
+	public static final field INSTANCE Lcom/mercadolibre/android/andesui/thumbnail/badge/type/AndesThumbnailBadgeType$Text;
+}
+
 public final class com/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy : java/lang/Enum {
 	public static final field Companion Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy$Companion;
 	public static final field DEFAULT Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;
@@ -3453,6 +3514,21 @@ public final class com/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThu
 
 public final class com/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy$Companion {
 	public final fun fromString (Ljava/lang/String;)Lcom/mercadolibre/android/andesui/thumbnail/hierarchy/AndesThumbnailHierarchy;
+}
+
+public abstract class com/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape {
+	public synthetic fun <init> (Lcom/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShapeInterface;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape$Circle : com/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape {
+	public static final field INSTANCE Lcom/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape$Circle;
+}
+
+public final class com/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape$Square : com/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape {
+	public static final field INSTANCE Lcom/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShape$Square;
+}
+
+public abstract interface class com/mercadolibre/android/andesui/thumbnail/shape/AndesThumbnailShapeInterface {
 }
 
 public final class com/mercadolibre/android/andesui/thumbnail/size/AndesThumbnailSize : java/lang/Enum {

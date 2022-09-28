@@ -122,6 +122,7 @@ sealed class AndesFeedbackScreenAsset
 | --------- | ------------- |
 | Thumbnail(val image: Drawable, val badgeType: AndesThumbnailBadgeType) | Gives a Thumbnail asset with the provided drawable and badge type |
 | Illustration(val image: Drawable, val size: AndesFeedbackScreenIllustrationSize) | Gives a Illustration asset with the provided drawable and size |
+| TextThumbnail(val text: String) | Gives a Thumbnail asset with letters instead of an image.
 <br/>
 
 ### [AndesFeedbackScreenType](#andesfeedbackscreentype)

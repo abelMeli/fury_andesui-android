@@ -99,6 +99,7 @@ class AndesSliderAttrsParserTest {
                 isTickVisible() assertEquals true
                 stepSize(0F, 100F) assertEquals 10F
             }
+            andesSliderSteps.type.getSteps() assertEquals 11
         }
     }
 

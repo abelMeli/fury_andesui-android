@@ -21,6 +21,12 @@ internal class AndesCarouselLayoutManager(
     var isInfinite: Boolean = false
     private var reachedRightLimit = false
     private var reachedLeftLimit = false
+    private val smoothScroller: LinearSmoothScroller = object : LinearSmoothScroller(context) {
+        override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
+            return this@AndesCarouselLayoutManager
+                .computeScrollVectorForPosition(targetPosition)
+        }
+    }
 
     override fun canScrollHorizontally() = true
 
@@ -157,12 +163,6 @@ internal class AndesCarouselLayoutManager(
     override fun smoothScrollToPosition(recyclerView: RecyclerView?, state: RecyclerView.State?, position: Int) {
         if (!isInfinite) {
             return super.smoothScrollToPosition(recyclerView, state, position)
-        }
-        val smoothScroller: LinearSmoothScroller = object : LinearSmoothScroller(recyclerView?.context) {
-            override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
-                return this@AndesCarouselLayoutManager
-                    .computeScrollVectorForPosition(targetPosition)
-            }
         }
         smoothScroller.targetPosition = position
         startSmoothScroll(smoothScroller)
