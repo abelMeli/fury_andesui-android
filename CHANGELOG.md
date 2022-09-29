@@ -1,3 +1,7 @@
+# v6.2.0
+## Extra
+- Github automations added for project management | Author: [@eportasML](https://github.com/eportasML)
+
 # v6.1.0
 ## 🛠 Fixes
 - Fix crash in demoapp caused by an activity without the `exported` property 

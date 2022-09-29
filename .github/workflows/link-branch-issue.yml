@@ -1,0 +1,35 @@
+name: '[Optional] Link branch with issue and project item'
+
+on: create
+
+jobs:
+  tag_created:
+    name: Get branch created issue number
+    if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get issue number
+        uses: ./.github/actions/get-issue/
+        with:
+          branch-name: ${{ github.event.ref }}
+        id: get_issue
+      - name: Get projectV2 item-id for issue
+        if: ${{ steps.get_issue.outputs.issue-number != -1 }}
+        uses: ./.github/actions/get-project-item/
+        with:
+          issue-number: ${{ steps.get_issue.outputs.issue-number }}
+          repository-owner: ${{ github.repository_owner }}
+          repository-name: ${{ github.event.repository.name }}
+          github-token: ${{ secrets.GH_PROJECT_TK }}
+        id: get-item-id
+      - name: Update item
+        if: ${{ steps.get_issue.outputs.issue-number != -1 }}
+        uses: titoportas/update-project-fields@v0.1.0
+        with:
+          project-url: https://github.com/users/titoportas/projects/3
+          github-token: ${{ secrets.GH_PROJECT_TK }}
+          item-id: ${{ steps.get-item-id.outputs.item-id }}
+          field-keys: Status
+          field-values: ✏️ WIP
+
