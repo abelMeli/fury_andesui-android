@@ -32,7 +32,7 @@ jobs:
         if: ${{ steps.get_issue.outputs.issue-number != -1 }}
         uses: titoportas/update-project-fields@v0.1.0
         with:
-          project-url: https://github.com/users/titoportas/projects/3
+          project-url: https://github.com/orgs/mercadolibre/projects/252
           github-token: ${{ secrets.GH_PROJECT_TK }}
           item-id: ${{ steps.get-item-id.outputs.item-id }} # Use the item-id output of the previous step
           field-keys: Status
