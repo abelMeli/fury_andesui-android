@@ -171,11 +171,21 @@ Defines the actions to perform on the close and button click.
 data class AndesFeedbackScreenActions
 ```
 ##### New constructor
+To create a feedback screen with a group of buttons with a callback for the close button.
 
 | Parameter | Description |
 | --------- | ------------- |
 | buttonGroup: [AndesButtonGroup](/buttongroup/AndesButtonGroup.md) | instance of the AndesButtonGroup component |
 | closeCallback: **View.OnClickListener?** | function to invoke when the close button is clicked. Default value is **null** |
+
+<br/>
+To create a feedback screen without buttons with a callback for the close button.
+<br/>
+<br/>
+
+| Parameter | Description |
+| --------- | ------------- |
+| closeCallback: **View.OnClickListener** | function to invoke when the close button is clicked. |
 
 <br/>
 

@@ -26,6 +26,9 @@ data class AndesFeedbackScreenActions
     val closeCallback: View.OnClickListener? = null
 ) {
     var buttonGroup: AndesButtonGroup? = null
+
+    constructor(closeCallback: View.OnClickListener) : this(null, closeCallback = closeCallback)
+
     constructor(buttonGroup: AndesButtonGroup, closeCallback: View.OnClickListener? = null) : this(closeCallback = closeCallback) {
         this.buttonGroup = buttonGroup
     }

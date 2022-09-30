@@ -1040,6 +1040,7 @@ public final class com/mercadolibre/android/andesui/feedback/screen/AndesFeedbac
 
 public final class com/mercadolibre/android/andesui/feedback/screen/actions/AndesFeedbackScreenActions {
 	public fun <init> ()V
+	public fun <init> (Landroid/view/View$OnClickListener;)V
 	public fun <init> (Lcom/mercadolibre/android/andesui/buttongroup/AndesButtonGroup;Landroid/view/View$OnClickListener;)V
 	public synthetic fun <init> (Lcom/mercadolibre/android/andesui/buttongroup/AndesButtonGroup;Landroid/view/View$OnClickListener;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun <init> (Lcom/mercadolibre/android/andesui/feedback/screen/actions/AndesFeedbackScreenButton;Landroid/view/View$OnClickListener;)V

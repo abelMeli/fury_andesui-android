@@ -1,10 +1,12 @@
 # v6.2.0
+## 🚀 Feature
+ - A new constructor is added to AndesFeedbackScreenActions to allow the creation of a FeedbackScreen without buttons. [@edgnavarro](https://github.com/edgnavarro)
 ## Extra
 - Github automations added for project management | Author: [@eportasML](https://github.com/eportasML)
 
 # v6.1.0
 ## 🛠 Fixes
-- Fix crash in demoapp caused by an activity without the `exported` property 
+- Fix crash in demoapp caused by an activity without the `exported` property
 - Fix Overlap between tooltip title and dismiss button when title text is large | Author: [@meligeo](https://github.com/meligeo)
 ## 🚀 Feature
 - Now the `AndesThumbnail` and `AndesThumbnailBadge` as a new text type that allow to create a Thumbnail with letters instead of an image | Author: [@MLcaro](https://github.com/MLcaro)
