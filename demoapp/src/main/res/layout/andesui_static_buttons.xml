@@ -26,7 +26,7 @@
             android:onClick="buttonClicked"
             app:andesButtonHierarchy="loud"
             app:andesButtonSize="large"
-            app:andesButtonText="@string/andes_button_loud_drawable" />
+            app:andesButtonText="@string/title_carousel" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:layout_width="wrap_content"

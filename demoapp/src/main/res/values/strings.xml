@@ -303,9 +303,11 @@
     <string name="andes_carousel_description" translatable="false">Groups and manipulates a horizontal sequence of content.</string>
     <string name="andes_carousel_margin" translatable="false">Margin</string>
     <string name="andes_carousel_center" translatable="false">Center</string>
+    <string name="andes_carousel_use_paginator" translatable="false">Use Paginator</string>
     <string name="andes_carousel_infinite" translatable="false">Infinite</string>
     <string name="andes_carousel_autoplay" translatable="false">Autoplay</string>
     <string name="andes_carousel_autoplay_speed" translatable="false">Autoplay Speed</string>
+    <string name="andes_carousel_title_hint" translatable="false">Title</string>
     <string-array name="andes_carousel_margin_spinner" translatable="false">
         <item>Default</item>
         <item>XSmall</item>
@@ -1273,6 +1275,12 @@
     <string name="andesui_demoapp_dynamic_inputstepper_max" translatable="false">Max</string>
     <string name="andesui_demoapp_dynamic_inputstepper_min" translatable="false">Min</string>
     <string name="andesui_demoapp_dynamic_inputstepper_mask" translatable="false">Mask</string>
+    <string name="carousel_with_paginator_and_title" translatable="false">Carousel with paginator and title</string>
+    <string name="carousel_with_only_title" translatable="false">Carousel with only title</string>
+    <string name="carousel_with_only_paginator" translatable="false">Carousel with only paginator</string>
+    <string name="carousel_free_with_paginator" translatable="false">Carousel free with paginator</string>
+    <string name="carousel_full_width" translatable="false">Carousel full width</string>
+    <string name="title_carousel" translatable="false">Title Carousel</string>
 
 
 </resources>

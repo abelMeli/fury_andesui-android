@@ -312,7 +312,7 @@ class AndesCarousel : ConstraintLayout {
         recyclerViewComponent.addItemDecoration(marginItemDecoration)
 
         val padding = config.padding
-        recyclerViewComponent.setPadding(padding, 50, padding, 0)
+        recyclerViewComponent.setPadding(padding, 0, padding, 0)
     }
 
     private fun setupAutoplay(config: AndesCarouselConfiguration) {
@@ -334,16 +334,12 @@ class AndesCarousel : ConstraintLayout {
      */
     private fun setupTitle(config: AndesCarouselConfiguration) {
         if (config.title.isNullOrEmpty()) {
-            val padding = config.padding
             textViewComponent.visibility = GONE
-            recyclerViewComponent.setPadding(padding, 0, padding, 20)
-            movePaginatorCenterBottom()
         } else {
             textViewComponent.visibility = VISIBLE
             textViewComponent.text = config.title
             val padding = config.padding
-            textViewComponent.setPadding(padding, 0, padding, 0)
-            movePaginatorUpRigth()
+            textViewComponent.setPadding(padding, 0, padding, 50)
         }
     }
 
@@ -351,21 +347,39 @@ class AndesCarousel : ConstraintLayout {
      * Gets data from the config and sets to the Paginator of this carousel.
      */
     private fun setupPaginator(config: AndesCarouselConfiguration) {
-        if (config.paginator) {
+        if (config.usePaginator) {
             pageIndicator.attachToRecyclerView(recyclerViewComponent)
+            val padding = config.padding
+
+            if (margin == AndesCarouselMargin.NONE && center) {
+                movePaginatorCenterBottomFullWith()
+                recyclerViewComponent.setPadding(padding, 0, padding, 0)
+            } else if (config.title.isNullOrEmpty()) {
+                movePaginatorCenterBottom()
+            } else {
+                movePaginatorUpRigth()
+            }
         }
     }
 
     private fun movePaginatorUpRigth() {
-        val paramsPaginator = pageIndicator.layoutParams as LayoutParams
-        paramsPaginator.verticalBias = 0.07f
-        pageIndicator.layoutParams = paramsPaginator
+        val params = pageIndicator.layoutParams as LayoutParams
+        params.verticalBias = 0.04f
+        params.horizontalBias = 1.0f
+        pageIndicator.layoutParams = params
     }
 
     private fun movePaginatorCenterBottom() {
         val params = pageIndicator.layoutParams as LayoutParams
         params.verticalBias = 1.0f
-        params.horizontalBias = 0.50f
+        params.horizontalBias = 0.52f
+        pageIndicator.layoutParams = params
+    }
+
+    private fun movePaginatorCenterBottomFullWith() {
+        val params = pageIndicator.layoutParams as LayoutParams
+        params.verticalBias = 0.85f
+        params.horizontalBias = 0.52f
         pageIndicator.layoutParams = params
     }
 

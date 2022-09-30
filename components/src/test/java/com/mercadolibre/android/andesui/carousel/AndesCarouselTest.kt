@@ -152,7 +152,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.XSMALL,
             FINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_xsmall).toInt())
@@ -171,7 +173,7 @@ class AndesCarouselTest {
         val andesCarouselDelegate = createDelegate(getDataSetFree)
         carousel.delegate = andesCarouselDelegate
 
-        var reflectionRecyclerView = ReflectionHelpers.getField<RecyclerView>(carousel, "recyclerViewComponent")
+        val reflectionRecyclerView = ReflectionHelpers.getField<RecyclerView>(carousel, "recyclerViewComponent")
         val outRect = Rect(-1,-1,-1,-1)
         val view = View(context)
         val state: RecyclerView.State = mock()
@@ -190,7 +192,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.SMALL,
             FINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_small).toInt())
@@ -228,7 +232,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.MEDIUM,
             FINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_medium).toInt())
@@ -266,7 +272,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.LARGE,
             FINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         Assert.assertEquals(config.padding, context.resources.getDimension(R.dimen.andes_carousel_recylcer_padding_large).toInt())
@@ -279,7 +287,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.NONE,
             FINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         Assert.assertEquals(config.center, true)
@@ -292,7 +302,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.NONE,
             FINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         Assert.assertEquals(config.center, false)
@@ -305,7 +317,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.NONE,
             FINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         assertFalse(config.infinite)
@@ -318,7 +332,9 @@ class AndesCarouselTest {
             AndesCarouselMargin.NONE,
             INFINITE,
             STATIC,
-            -1
+            -1,
+            TITLE,
+            USE_PAGINATOR
         )
         val config = configFactory.create(context, attrs)
         assertTrue(config.infinite)
@@ -831,6 +847,8 @@ class AndesCarouselTest {
         private const val INFINITE = true
         private const val STATIC = false
         private const val AUTOPLAY = true
+        private const val USE_PAGINATOR = true
+        private const val TITLE = "Title"
         private const val SIZE = 0
         private const val LAYOUT = 0
     }

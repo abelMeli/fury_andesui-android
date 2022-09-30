@@ -30,7 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/button_margin_vertical"
-            android:layout_marginBottom="@dimen/button_margin_vertical"
             android:text="@string/andes_carousel_centered" />
 
         <com.mercadolibre.android.andesui.carousel.AndesCarousel
@@ -40,63 +39,6 @@
             app:andesCarouselCenter="true"
             app:andesCarouselMargin="defaultMargin" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/button_margin_vertical"
-            android:layout_marginBottom="@dimen/button_margin_vertical"
-            android:text="Carousel with paginator and title" />
-
-        <com.mercadolibre.android.andesui.carousel.AndesCarousel
-            android:id="@+id/carousel_with_paginator_and_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:andesCarouselCenter="false"
-            app:andesCarouselMargin="defaultMargin" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/button_margin_vertical"
-            android:layout_marginBottom="@dimen/button_margin_vertical"
-            android:text="Carousel with only title" />
-
-        <com.mercadolibre.android.andesui.carousel.AndesCarousel
-            android:id="@+id/carousel_with_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:andesCarouselCenter="true"
-            app:andesCarouselMargin="defaultMargin"
-            app:andesCarouselTitle="New carousel" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/button_margin_vertical"
-            android:layout_marginBottom="@dimen/button_margin_vertical"
-            android:text="Carousel with only paginator" />
-
-        <com.mercadolibre.android.andesui.carousel.AndesCarousel
-            android:id="@+id/carousel_with_paginator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:andesCarouselCenter="true"
-            app:andesCarouselMargin="defaultMargin" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/button_margin_vertical"
-            android:text="Carousel free with paginator" />
-
-        <com.mercadolibre.android.andesui.carousel.AndesCarousel
-            android:id="@+id/carousel_free_with_paginator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:andesCarouselAutoplay="true"
-            app:andesCarouselCenter="false"
-            app:andesCarouselInfinite="true"
-            app:andesCarouselMargin="defaultMargin" />
 
         <LinearLayout
             android:layout_width="match_parent"

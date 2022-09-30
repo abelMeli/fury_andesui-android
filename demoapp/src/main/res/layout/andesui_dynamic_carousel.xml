@@ -23,6 +23,18 @@
             app:layout_constraintTop_toBottomOf="@+id/checkbox_infinite" />
 
         <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
+            android:id="@+id/checkbox_use_paginator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesCheckboxAlign="right"
+            app:andesCheckboxStatus="unselected"
+            app:andesCheckboxText="@string/andes_carousel_use_paginator"
+            app:layout_constraintEnd_toEndOf="@+id/margin_spinner"
+            app:layout_constraintStart_toStartOf="@+id/checkbox_enabled"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_centered" />
+
+        <com.mercadolibre.android.andesui.checkbox.AndesCheckbox
             android:id="@+id/checkbox_autoplay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,7 +56,7 @@
             app:andesCheckboxText="@string/andes_carousel_infinite"
             app:layout_constraintEnd_toEndOf="@+id/margin_spinner"
             app:layout_constraintStart_toStartOf="@+id/checkbox_enabled"
-            app:layout_constraintTop_toBottomOf="@+id/textfield_autoplay_speed" />
+            app:layout_constraintTop_toBottomOf="@+id/textfield_title" />
 
         <com.mercadolibre.android.andesui.textfield.AndesTextfield
             android:id="@+id/textfield_autoplay_speed"
@@ -57,6 +69,18 @@
             app:layout_constraintEnd_toEndOf="@+id/message"
             app:layout_constraintStart_toStartOf="@+id/message"
             app:layout_constraintTop_toBottomOf="@+id/checkbox_autoplay"/>
+
+
+        <com.mercadolibre.android.andesui.textfield.AndesTextfield
+            android:id="@+id/textfield_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesTextfieldPlaceholder="@string/andes_carousel_title_hint"
+            app:andesTextfieldRightContent="clear"
+            app:layout_constraintEnd_toEndOf="@+id/textfield_autoplay_speed"
+            app:layout_constraintStart_toStartOf="@+id/textfield_autoplay_speed"
+            app:layout_constraintTop_toBottomOf="@+id/textfield_autoplay_speed" />
 
         <com.mercadolibre.android.andesui.message.AndesMessage
             android:id="@+id/message"
@@ -149,8 +173,8 @@
             app:andesButtonHierarchy="loud"
             app:andesButtonSize="large"
             app:andesButtonText="@string/andesui_demoapp_scroll_button"
-            app:layout_constraintStart_toStartOf="@+id/checkbox_centered"
-            app:layout_constraintTop_toBottomOf="@+id/checkbox_centered" />
+            app:layout_constraintStart_toStartOf="@+id/checkbox_use_paginator"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_use_paginator" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/smooth_scroll_button"

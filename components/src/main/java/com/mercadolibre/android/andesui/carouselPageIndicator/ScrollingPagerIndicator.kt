@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.os.Build
 import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.View
@@ -15,10 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.android.andesui.R
 
-
-/**
- * @author Abel Aguilar
- */
 class ScrollingPagerIndicator @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -57,8 +52,6 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
 
     /**
      * Sets dot count
-     *
-     * @param count new dot count
      */
     private var dotCount: Int
         get() = if (looped && itemCount > visibleDotCount) {
@@ -298,13 +291,6 @@ class ScrollingPagerIndicator @JvmOverloads constructor(
         }
         invalidate()
     }
-
-    /**
-     * Sets dot count
-     *
-     * @param count new dot count
-     */
-
     /**
      * Sets currently selected position (according to your pager's adapter)
      *

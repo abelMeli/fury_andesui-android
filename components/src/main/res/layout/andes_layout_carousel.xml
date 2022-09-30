@@ -21,9 +21,9 @@
         android:id="@+id/andesTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titulo carousel"
+        android:text="@string/andesTitle_carousel"
         android:textColor="#000000"
-        android:textSize="22dp"
+        android:textSize="@dimen/andes_text_size_22"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,14 +34,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="20dp"
-        app:spi_dotSelectedColor="#009EE3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.04000002"
+        app:spi_dotSelectedColor="#009EE3"
+        app:spi_dotSpacing="5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

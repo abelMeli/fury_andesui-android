@@ -14,7 +14,7 @@ internal data class AndesCarouselConfiguration(
     val autoplay: Boolean,
     val autoplaySpeed: Long,
     val title: String?,
-    val paginator: Boolean
+    val usePaginator: Boolean
 )
 
 internal object AndesCarouselConfigurationFactory {
@@ -22,6 +22,7 @@ internal object AndesCarouselConfigurationFactory {
         val attrMargin = andesCarouselAttrs.andesCarouselMargin.margin
         val margin = resolveItemMargin(attrMargin, context)
         val itemDecoration = resolveItemDecoration(margin, andesCarouselAttrs.andesCarouselInfinite)
+
         return AndesCarouselConfiguration(
             padding = resolveRecyclerPadding(attrMargin, context),
             center = andesCarouselAttrs.andesCarouselCenter,
@@ -30,7 +31,7 @@ internal object AndesCarouselConfigurationFactory {
             autoplay = andesCarouselAttrs.andesCarouselAutoplay,
             autoplaySpeed = andesCarouselAttrs.andesCarouselAutoplaySpeed,
             title = andesCarouselAttrs.andesCarouselTitle,
-            paginator = andesCarouselAttrs.andesCarouselPaginator
+            usePaginator = andesCarouselAttrs.andesCarouselPaginator
         )
     }
 

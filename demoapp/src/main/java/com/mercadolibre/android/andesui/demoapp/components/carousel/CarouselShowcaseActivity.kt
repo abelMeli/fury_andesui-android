@@ -78,9 +78,11 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         val scrollEditText: AppCompatEditText = binding.scrollEditText
         val carousel = binding.andesCarousel
         val checkboxCentered = binding.checkboxCentered
+        val checkboxUsePaginator = binding.checkboxUsePaginator
         val checkboxInfinite = binding.checkboxInfinite
         val checkboxAutoplay = binding.checkboxAutoplay
         val textFieldAutoplaySpeed = binding.textfieldAutoplaySpeed
+        val textFieldTitle = binding.textfieldTitle
 
         dynamicCarouselId = carousel.id
         carousel.delegate = this
@@ -120,7 +122,9 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
             checkboxCentered.status = AndesCheckboxStatus.SELECTED
             checkboxInfinite.status = AndesCheckboxStatus.UNSELECTED
             checkboxAutoplay.status = AndesCheckboxStatus.UNSELECTED
+            checkboxUsePaginator.status = AndesCheckboxStatus.UNSELECTED
             textFieldAutoplaySpeed.text = ""
+            textFieldTitle.text = ""
             marginSpinner.setSelection(0)
             carousel.autoplay = false
             carousel.autoplaySpeed = 3000
@@ -137,12 +141,14 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
                 else -> AndesCarouselMargin.DEFAULT
             }
             carousel.center = checkboxCentered.status == AndesCheckboxStatus.SELECTED
+            carousel.usePaginator = checkboxUsePaginator.status == AndesCheckboxStatus.SELECTED
             carousel.margin = margin
             carousel.infinite = checkboxInfinite.status == AndesCheckboxStatus.SELECTED
             carousel.autoplay = checkboxAutoplay.status == AndesCheckboxStatus.SELECTED
             textFieldAutoplaySpeed.text?.toLongOrNull()?.let {
                 carousel.autoplaySpeed = it
             }
+            carousel.title = textFieldTitle.text.toString()
         }
 
         checkboxAutoplay.setupCallback {
@@ -157,30 +163,11 @@ class CarouselShowcaseActivity : BaseActivity(), AndesCarouselDelegate {
         val binding = AndesuiStaticCarouselBinding.bind(container)
         val carouselSnapped = binding.carouselSnapped
         val carouselFree = binding.carouselFree
-        val carouselTitle = binding.carouselWithTitle
-        val carouselPaginator = binding.carouselWithPaginator
-        val carouselPaginatorAndTitle = binding.carouselWithPaginatorAndTitle
-        val carouselFreeWithPaginator = binding.carouselFreeWithPaginator
 
         snappedCarouselId = carouselSnapped.id
         freeCarouselId = carouselFree.id
         carouselSnapped.delegate = this
         carouselFree.delegate = this
-        carouselTitle.delegate = this
-        carouselPaginator.delegate = this
-        carouselPaginatorAndTitle.delegate = this
-        carouselFreeWithPaginator.delegate = this
-
-        carouselPaginatorAndTitle.title = "New title"
-        carouselPaginatorAndTitle.usePaginator = true
-
-        carouselTitle.title = "Title"
-
-        carouselPaginator.title = ""
-        carouselPaginator.usePaginator = true
-
-        carouselFreeWithPaginator.title = ""
-        carouselFreeWithPaginator.usePaginator = true
 
         binding.andesuiDemoappAndesCarouselSpecsButton.setOnClickListener {
             launchSpecs(container.context, AndesSpecs.CAROUSEL)
