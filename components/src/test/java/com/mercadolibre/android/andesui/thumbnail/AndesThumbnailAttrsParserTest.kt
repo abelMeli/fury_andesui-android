@@ -312,4 +312,25 @@ class AndesThumbnailAttrsParserTest {
         assertThat(andesThumbnailAttrs.andesThumbnailAssetType is AndesThumbnailAssetType.Icon).isTrue
         andesThumbnailAttrs.andesThumbnailShape assertEquals AndesThumbnailShape.Circle
     }
+
+    @Test
+    fun ` type Icon set to Image_circle by code`() {
+
+        val attrs = buildAttributeSet {
+            addAttribute(R.attr.andesThumbnailHierarchy, "1002")
+            addAttribute(R.attr.andesThumbnailSize, "3000")
+            addAttribute(R.attr.andesThumbnailAccentColor, "@color/andes_test_color")
+            addAttribute(R.attr.andesThumbnailImage, "@drawable/andes_test_drawable")
+            addAttribute(R.attr.andesThumbnailType, "2000")
+        }
+
+        andesThumbnailAttrs = AndesThumbnailAttrsParser.parse(context, attrs)
+        val andesThumbnail = AndesThumbnail(context, attrs)
+        //after creating a xml thumbnail with type Icon, is change by code to Image_circle
+        andesThumbnail.type = AndesThumbnailType.IMAGE_CIRCLE
+
+        //then the asset type should change to Image and the shape keep as a circle
+        assertThat(andesThumbnail.assetType is AndesThumbnailAssetType.Image).isTrue
+        andesThumbnailAttrs.andesThumbnailShape assertEquals AndesThumbnailShape.Circle
+    }
 }
