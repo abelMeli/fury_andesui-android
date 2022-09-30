@@ -18,7 +18,8 @@ internal class AnalyticsHelper {
         "HeadingActivity" to "Heading",
         "ImportantForA11yActivity" to "ImportantForAccessibility",
         "NextFocusActivity" to "NextFocus",
-        "SemanticViewsActivity" to "SemanticViews"
+        "SemanticViewsActivity" to "SemanticViews",
+        "A11yCustomActionsActivity" to "CustomActions"
     )
 
     private val components = mapOf(

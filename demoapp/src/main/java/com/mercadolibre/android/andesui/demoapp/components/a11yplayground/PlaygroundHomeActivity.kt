@@ -57,6 +57,9 @@ class PlaygroundHomeActivity : AppCompatActivity() {
         binding.playgroundSemanticViews.setOnClickListener {
             startActivity(SafeIntent(this, "andes://playground/semanticviews"))
         }
+        binding.playgroundCustomActions.setOnClickListener {
+            startActivity(SafeIntent(this, "andes://playground/a11ycustomactions"))
+        }
     }
 
     private fun initActionBar() {
