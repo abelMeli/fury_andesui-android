@@ -674,6 +674,8 @@ class AndesTextfield : ConstraintLayout {
             val params = rightComponent.layoutParams as LayoutParams
             params.marginStart = config.rightComponentLeftMargin!!
             params.marginEnd = config.rightComponentRightMargin!!
+            params.topMargin = config.rightComponentTopMargin!!
+            params.verticalBias = config.rightComponentVerticalBias!!
             rightComponent.layoutParams = params
 
             rightComponent.visibility = View.VISIBLE

@@ -16,13 +16,7 @@ import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.color.toAndesColor
 import com.mercadolibre.android.andesui.color.toColor
 import com.mercadolibre.android.andesui.icons.IconProvider
-import com.mercadolibre.android.andesui.textfield.content.AndesClearTextfieldContent
-import com.mercadolibre.android.andesui.textfield.content.AndesIconTextfieldContent
-import com.mercadolibre.android.andesui.textfield.content.AndesPrefixTextfieldContent
-import com.mercadolibre.android.andesui.textfield.content.AndesSuffixTextfieldContent
-import com.mercadolibre.android.andesui.textfield.content.AndesTextfieldContentInterface
-import com.mercadolibre.android.andesui.textfield.content.AndesTooltipTextfieldContent
-import com.mercadolibre.android.andesui.textfield.content.AndesValidatedTextfieldContent
+import com.mercadolibre.android.andesui.textfield.content.*
 import com.mercadolibre.android.andesui.textfield.state.AndesTextfieldState
 import com.mercadolibre.android.andesui.utils.Constants.TEST_ANDROID_VERSION_CODE
 import com.mercadolibre.android.andesui.utils.buildColoredAndesBitmapDrawable
@@ -74,6 +68,8 @@ class AndesTextfieldContentInterfaceTest {
         )
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_suffix_right_margin).toInt(), contentInterface.rightMargin(context))
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(suffix)
+        assertEquals(0, contentInterface.topMargin(context))
+        assertEquals(0.5f, contentInterface.verticalBias(context))
     }
 
     @Test
@@ -89,6 +85,8 @@ class AndesTextfieldContentInterfaceTest {
         )
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_prefix_right_margin).toInt(), contentInterface.rightMargin(context))
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(prefix)
+        assertEquals(0, contentInterface.topMargin(context))
+        assertEquals(0.5f, contentInterface.verticalBias(context))
     }
 
     @Test
@@ -104,6 +102,8 @@ class AndesTextfieldContentInterfaceTest {
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_icon_right_margin).toInt(),
                 contentInterface.leftMargin(context, AndesTextfieldState.IDLE.state))
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(icon)
+        assertEquals(0, contentInterface.topMargin(context))
+        assertEquals(0.5f, contentInterface.verticalBias(context))
     }
 
     @Test
@@ -130,6 +130,8 @@ class AndesTextfieldContentInterfaceTest {
             contentInterface.leftMargin(context, AndesTextfieldState.IDLE.state)
         )
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(tooltip)
+        assertEquals(0, contentInterface.topMargin(context))
+        assertEquals(0.5f, contentInterface.verticalBias(context))
     }
 
     @Test
@@ -146,6 +148,8 @@ class AndesTextfieldContentInterfaceTest {
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_validated_right_margin).toInt(),
                 contentInterface.leftMargin(context, AndesTextfieldState.IDLE.state))
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(validated)
+        assertEquals(0, contentInterface.topMargin(context))
+        assertEquals(0.5f, contentInterface.verticalBias(context))
     }
 
     @Test
@@ -162,16 +166,20 @@ class AndesTextfieldContentInterfaceTest {
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_clear_right_margin).toInt(),
                 contentInterface.leftMargin(context, AndesTextfieldState.IDLE.state))
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(clear)
+        assertEquals(context.resources.getDimension(R.dimen.andes_textfield_clear_top_margin).toInt(), contentInterface.topMargin(context))
+        assertEquals(0.0f, contentInterface.verticalBias(context))
     }
 
     @Test
     fun `action content`() {
-        contentInterface = AndesClearTextfieldContent
+        contentInterface = AndesActionTextfieldContent
         val action = AndesButton(context, AndesButtonSize.MEDIUM, AndesButtonHierarchy.TRANSPARENT)
 
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_action_left_margin).toInt(), contentInterface.rightMargin(context))
         assertEquals(context.resources.getDimension(R.dimen.andes_textfield_action_right_margin).toInt(),
                 contentInterface.leftMargin(context, AndesTextfieldState.IDLE.state))
         assertThat(contentInterface.component(context)).isEqualToComparingOnlyGivenFields(action)
+        assertEquals(0, contentInterface.topMargin(context))
+        assertEquals(0.5f, contentInterface.verticalBias(context))
     }
 }

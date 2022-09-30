@@ -4,6 +4,8 @@
 - A new constructor is added to AndesFeedbackScreenActions to allow the creation of a FeedbackScreen without buttons. [@edgnavarro](https://github.com/edgnavarro)
 ## Extra
 - Github automations added for project management | Author: [@eportasML](https://github.com/eportasML)
+## 🛠 Fixes
+- Fix alignment of clear component inside a `AndesTextField` with multi lines| Author: [@MLcaro](https://github.com/MLcaro)
 
 # v6.1.0
 ## 🛠 Fixes

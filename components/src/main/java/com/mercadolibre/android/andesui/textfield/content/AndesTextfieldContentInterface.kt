@@ -29,6 +29,8 @@ internal sealed class AndesTextfieldContentInterface {
     abstract fun component(context: Context): View
     abstract fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int
     abstract fun rightMargin(context: Context): Int
+    abstract fun topMargin(context: Context): Int
+    abstract fun verticalBias(context: Context): Float
     open fun setContentDescription(context: Context, description: String?) = Unit
 }
 
@@ -38,6 +40,8 @@ internal object AndesSuffixTextfieldContent : AndesTextfieldContentInterface() {
     }
 
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_suffix_right_margin).toInt()
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context): Float= Const.MIDDLE_BIAS
 
     override fun component(context: Context): TextView {
         val suffix = TextView(context)
@@ -53,7 +57,8 @@ internal object AndesPrefixTextfieldContent : AndesTextfieldContentInterface() {
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int = state.leftMargin(context)
 
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_prefix_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context) : Float = Const.MIDDLE_BIAS
     override fun component(context: Context): TextView {
         val prefix = TextView(context)
         prefix.setTextColor(R.color.andes_text_color_secondary.toColor(context))
@@ -68,9 +73,9 @@ internal object AndesIconTextfieldContent : AndesTextfieldContentInterface() {
     private const val ICON_CONTENT_DESCRIPTION = "icon"
 
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int = state.leftMargin(context)
-
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_icon_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context):Float = Const.MIDDLE_BIAS
     override fun component(context: Context): SimpleDraweeView {
         val icon = SimpleDraweeView(context)
         icon.setImageDrawable(buildColoredAndesBitmapDrawable(
@@ -85,10 +90,10 @@ internal object AndesIconTextfieldContent : AndesTextfieldContentInterface() {
 internal object AndesTooltipTextfieldContent : AndesTextfieldContentInterface() {
     private var contentDescription: String? = null
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int = state.leftMargin(context)
-
     override fun rightMargin(context: Context): Int =
         context.resources.getDimension(R.dimen.andes_textfield_tooltip_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context): Float= Const.MIDDLE_BIAS
     override fun component(context: Context): View {
         val tooltip = SimpleDraweeView(context)
         tooltip.setImageDrawable(
@@ -113,9 +118,9 @@ internal object AndesValidatedTextfieldContent : AndesTextfieldContentInterface(
     private const val VALIDATED_CONTENT_DESCRIPTION = "validated"
 
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int = state.leftMargin(context)
-
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_validated_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context): Float= Const.MIDDLE_BIAS
     override fun component(context: Context): SimpleDraweeView {
         val validated = SimpleDraweeView(context)
         validated.setImageDrawable(buildColoredAndesBitmapDrawable(
@@ -135,7 +140,8 @@ internal object AndesClearTextfieldContent : AndesTextfieldContentInterface() {
     }
 
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_clear_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_clear_top_margin).toInt()
+    override fun verticalBias(context: Context): Float= Const.TOP_BIAS
     override fun component(context: Context): SimpleDraweeView {
         val clear = SimpleDraweeView(context)
         clear.setImageDrawable(buildColoredAndesBitmapDrawable(
@@ -154,7 +160,8 @@ internal object AndesActionTextfieldContent : AndesTextfieldContentInterface() {
     }
 
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_action_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context): Float= Const.MIDDLE_BIAS
     override fun component(context: Context): AndesButton {
         return AndesButton(context, AndesButtonSize.MEDIUM, AndesButtonHierarchy.TRANSPARENT)
     }
@@ -162,9 +169,9 @@ internal object AndesActionTextfieldContent : AndesTextfieldContentInterface() {
 
 internal object AndesIndeterminateTextfieldContent : AndesTextfieldContentInterface() {
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int = state.leftMargin(context)
-
     override fun rightMargin(context: Context): Int = context.resources.getDimension(R.dimen.andes_textfield_indeterminate_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context): Float= Const.MIDDLE_BIAS
     override fun component(context: Context): View {
         return AndesProgressIndicatorIndeterminate(context)
     }
@@ -173,11 +180,18 @@ internal object AndesIndeterminateTextfieldContent : AndesTextfieldContentInterf
 internal object AndesCheckboxTextfieldContent : AndesTextfieldContentInterface() {
     override fun leftMargin(context: Context, state: AndesTextfieldStateInterface): Int =
             context.resources.getDimension(R.dimen.andes_textfield_checkbox_left_margin).toInt()
-
     override fun rightMargin(context: Context): Int =
             context.resources.getDimension(R.dimen.andes_textfield_checkbox_right_margin).toInt()
-
+    override fun topMargin(context: Context): Int = Const.NO_MARGIN
+    override fun verticalBias(context: Context): Float= Const.MIDDLE_BIAS
     override fun component(context: Context): AndesCheckbox {
         return AndesCheckbox(context, "", AndesCheckboxAlign.RIGHT)
     }
 }
+internal object Const{
+    const val NO_MARGIN = 0
+    const val TOP_BIAS = 0.0f
+    const val MIDDLE_BIAS = 0.5f
+}
+
+
