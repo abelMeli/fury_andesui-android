@@ -151,6 +151,13 @@
     <string name="andes_demoapp_playground_asv_tv_second" translatable="false">In this case, we present three views who share meaning but are separated and not configured to be displayead as semantic views.</string>
     <string name="andes_demoapp_playground_asv_tv_third" translatable="false">Now, the same views as semantic views.</string>
     <string name="andes_demoapp_playground_asv_layout_first" translatable="false">Top app. More than five thousand downloads.</string>
+    <string name="andes_demoapp_playground_aca_title" translatable="false">Accessibility Custom Actions</string>
+    <string name="andes_demoapp_playground_title_custom_actions" translatable="false">A11y Custom Actions</string>
+    <string name="andes_demoapp_playground_aca_body" translatable="false">When using complex components with several actions, we can unify this actions into the main container.</string>
+    <string name="andes_demoapp_playground_aca_p0" translatable="false">This setup is particularly useful when dealing with components with few text and several actions. The idea behind this is to reduce the navigation elements into a single focusable view with all the information and all the available actions concentrated.</string>
+    <string name="andes_demoapp_playground_aca_p0_1" translatable="false">This concept is closely tied to the concept of "semantic view". Feel free to check the section again.</string>
+    <string name="andes_demoapp_playground_aca_p1" translatable="false">In this example we have a card representing an item. We can perform three actions over it: mark it as favorite, add it to a cart or ask for more info.</string>
+    <string name="andes_demoapp_playground_aca_p2" translatable="false">The component on the left shows a regular navigation with all the internal components separated, wile the other is edited to form a semantic view with all the available actions added as custom accessibility actions.</string>
 
 
     <!-- Andes Badge -->

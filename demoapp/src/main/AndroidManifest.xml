@@ -759,6 +759,23 @@
             android:exported="true"
             tools:node="merge"
             android:targetActivity="leakcanary.internal.activity.LeakActivity" />
+
+        <activity
+            android:name=".components.a11yplayground.A11yCustomActionsActivity"
+            android:exported="true"
+            android:parentActivityName=".components.a11yplayground.PlaygroundHomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="playground"
+                    android:path="/a11ycustomactions"
+                    android:scheme="andes" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,3 +1,13 @@
+# v6.2.0
+## 🚀 Feature
+- New entry in the A11y Playground: Accessibility Custom Actions | Author: [@juanunzu](https://github.com/juanunzu)
+- A new constructor is added to AndesFeedbackScreenActions to allow the creation of a FeedbackScreen without buttons. [@edgnavarro](https://github.com/edgnavarro)
+## Extra
+- Github automations added for project management | Author: [@eportasML](https://github.com/eportasML)
+## 🛠 Fixes
+- Fix alignment of clear component inside a `AndesTextField` with multi lines| Author: [@MLcaro](https://github.com/MLcaro)
+- Fix in type setter for `AndesThumbnail` | Author: [@MLcaro](https://github.com/MLcaro)
+
 # v6.1.0
 ## 🛠 Fixes
 - Fix crash in demoapp caused by an activity without the `exported` property 

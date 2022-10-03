@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:foreground="@drawable/card_border"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_iv"
+            android:layout_width="88dp"
+            android:layout_height="90dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/item_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Item title"
+            app:andesTextViewStyle="bodyS"
+            app:layout_constraintStart_toStartOf="@id/item_iv"
+            app:layout_constraintTop_toBottomOf="@id/item_iv" />
+
+        <com.mercadolibre.android.andesui.textview.AndesTextView
+            android:id="@+id/item_tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Item subtitle"
+            app:andesTextViewStyle="bodyXs"
+            app:andesTextViewTextColor="positive"
+            app:layout_constraintStart_toStartOf="@id/item_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_title" />
+
+        <ImageView
+            android:id="@+id/item_iv_favorite"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Add to favorites"
+            android:src="@drawable/ic_favorite_on"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/item_iv"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_subtitle"
+            app:tint="@color/andes_accent_color" />
+
+        <ImageView
+            android:id="@+id/item_iv_cart"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Add to cart"
+            android:src="@drawable/andes_navegacion_carrito_idle_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_iv_info"
+            app:layout_constraintStart_toEndOf="@id/item_iv_favorite"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_subtitle"
+            app:tint="@color/andes_accent_color" />
+
+        <ImageView
+            android:id="@+id/item_iv_info"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="More info"
+            android:src="@drawable/ic_info_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_iv_cart"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_subtitle"
+            app:tint="@color/andes_accent_color" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

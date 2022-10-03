@@ -35,7 +35,9 @@ internal data class AndesTextfieldConfiguration(
     val leftComponentRightMargin: Int? = null,
     val rightComponentLeftMargin: Int? = null,
     val rightComponentRightMargin: Int? = null,
-    val maxLines: Int? = 1
+    val maxLines: Int? = 1,
+    val rightComponentTopMargin: Int? = 1,
+    val rightComponentVerticalBias: Float? = null
 )
 
 @Suppress("TooManyFunctions")
@@ -79,7 +81,9 @@ internal object AndesTextfieldConfigurationFactory {
                     rightContent?.rightContent
                 ),
                 rightComponentRightMargin = resolveRightComponentRightMargin(context, rightContent?.rightContent),
-                maxLines = maxLines
+                rightComponentTopMargin = resolveRightComponentTopMargin(context, rightContent?.rightContent),
+                maxLines = maxLines,
+                rightComponentVerticalBias = resolveRightComponentVerticalBias(context, rightContent?.rightContent)
             )
         }
     }
@@ -152,6 +156,17 @@ internal object AndesTextfieldConfigurationFactory {
         context: Context,
         rightContent: AndesTextfieldContentInterface?
     ): Int? = rightContent?.rightMargin(context)
+
+    private fun resolveRightComponentTopMargin(
+        context: Context,
+        rightContent: AndesTextfieldContentInterface?
+    ): Int? = rightContent?.topMargin(context)
+
+    private fun resolveRightComponentVerticalBias(
+        context: Context,
+        rightContent: AndesTextfieldContentInterface?
+    ): Float? = rightContent?.verticalBias(context)
+
     private fun resolveHelper(
         state: AndesTextfieldStateInterface,
         helper: String?

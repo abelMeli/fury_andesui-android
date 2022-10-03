@@ -1,0 +1,29 @@
+name: 'Get issue by branch'
+description: 'Retrives issue number from branch name'
+inputs:
+  branch-name:
+    description: 'Branch name like: [fix/feature]/[issue-number]-[name]'
+    required: true
+outputs:
+  issue-number:
+    description: "Issue number"
+    value: ${{ steps.branch-name.outputs.issue-number }}
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        regex='(fix|feature)\/([^0-9]*-([0-9]+)|([0-9]+)-[^0-9]*)'
+        result=$(
+          [[ ${{ inputs.branch-name }} =~ $regex ]] && echo $(
+            if [[ ! -z ${BASH_REMATCH[3]} ]]; then 
+                echo ${BASH_REMATCH[3]}
+            elif [[ ! -z ${BASH_REMATCH[4]} ]]; then
+                echo ${BASH_REMATCH[4]}
+            else
+                echo -1
+            fi
+          ) || echo -1
+        )
+        echo "::set-output name=issue-number::$result"
+      id: branch-name
+      shell: bash

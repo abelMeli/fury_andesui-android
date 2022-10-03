@@ -37,6 +37,7 @@
 
     <dimen name="andes_textfield_clear_left_margin">8dp</dimen>
     <dimen name="andes_textfield_clear_right_margin">8dp</dimen>
+    <dimen name="andes_textfield_clear_top_margin">13dp</dimen>
 
     <dimen name="andes_textfield_action_left_margin">8dp</dimen>
     <dimen name="andes_textfield_action_right_margin">8dp</dimen>

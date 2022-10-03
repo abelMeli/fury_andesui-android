@@ -220,4 +220,25 @@ class AndesThumbnailTest {
         thumbnail.size assertEquals AndesThumbnailSize.SIZE_48
         thumbnail.hierarchy assertEquals AndesThumbnailHierarchy.DEFAULT
     }
+
+    @Test
+    fun `creating thumbnail of assetType Icon, shape square and set a type Image_circle`() {
+        val drawable = ContextCompat.getDrawable(context, R.drawable.andes_envio_envio_24)!!
+        val thumbnail = AndesThumbnail(
+            context = context,
+            hierarchy = AndesThumbnailHierarchy.QUIET,
+            accentColor = R.color.andes_accent_color_500.toAndesColor(),
+            state = AndesThumbnailState.DISABLED,
+            size = AndesThumbnailSize.SIZE_56,
+            assetType = AndesThumbnailAssetType.Icon(drawable),
+            thumbnailShape = AndesThumbnailShape.Square
+        )
+        //using the deprecated attribute type to change to image_circle
+        thumbnail.type = AndesThumbnailType.IMAGE_CIRCLE
+
+        //then change the assetType and the shape
+        thumbnail.thumbnailShape assertEquals AndesThumbnailShape.Circle
+        thumbnail.assetType assertEquals AndesThumbnailAssetType.Image(drawable)
+    }
+
 }

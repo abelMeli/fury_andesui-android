@@ -1,4 +1,4 @@
-name: Create and/or Update edited issues to project
+name: 'Create and/or Update edited issues to project'
 
 on:
   issues:
@@ -20,6 +20,6 @@ jobs:
         with:
           project-url: https://github.com/orgs/mercadolibre/projects/252
           github-token: ${{ secrets.GH_PROJECT_TK }}
-          item-id: ${{ steps.add-project.outputs.itemId }} # Use the item-id output of the previous step
-          field-keys: Squad,Quarter,Status
-          field-values: Andes,Backlog,🔵 TODO
+          item-id: ${{ steps.add-project.outputs.itemId }}
+          field-keys: Squad,Status
+          field-values: Andes,🔵 TODO

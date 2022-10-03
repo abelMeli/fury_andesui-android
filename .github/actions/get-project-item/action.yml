@@ -1,0 +1,40 @@
+name: 'Get project item by issue number'
+description: 'Retrives project item id by issue number'
+inputs:
+  issue-number:
+    description: 'Issue number'
+    required: true
+  repository-owner:
+    description: 'Repository owner'
+    required: true
+  repository-name:
+    description: 'Repository name'
+    required: true
+  github-token:
+    description: 'Github project token'
+    required: true
+outputs:
+  item-id:
+    description: "Project item id"
+    value: ${{ steps.get_project_item.outputs.item-id }}
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        projectId=$(gh api graphql -F owner=${{ inputs.repository-owner }} -F name=${{ inputs.repository-name }} -F issue_number=${{ inputs.issue-number }} -f query='
+          query($name: String!, $owner: String!, $issue_number: Int!) {
+            repository(owner: $owner, name: $name) {
+                issue(number: $issue_number) {
+                    projectItems(first: 1) {
+                        nodes {
+                            id
+                        }
+                    }
+                }
+            }
+        }' --jq '.data.repository.issue.projectItems.nodes[0].id')
+        echo "::set-output name=item-id::$projectId"
+      id: get_project_item
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
